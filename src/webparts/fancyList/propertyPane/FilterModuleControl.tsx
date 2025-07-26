@@ -225,17 +225,6 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
             />
           </div>
 
-          {/* 5. Show Filter Divider Toggle */}
-          <div style={{ marginBottom: 16 }}>
-            <Toggle
-              label="Show Filter Divider"
-              checked={settings.showDivider}
-              onText="On"
-              offText="Off"
-              onChange={(_, checked) => handlePropertyChange('showDivider', checked)}
-            />
-          </div>
-
           {/* 6. Filter Background Type Dropdown */}
           <div style={{ marginBottom: 16 }}>
             <Dropdown
@@ -386,7 +375,16 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
             </>
           )}
 
-
+          {/* 10. Show Filter Divider Toggle */}
+          <div style={{ marginBottom: 16 }}>
+            <Toggle
+              label="Show Filter Divider"
+              checked={settings.showDivider}
+              onText="On"
+              offText="Off"
+              onChange={(_, checked) => handlePropertyChange('showDivider', checked)}
+            />
+          </div>
 
     </div>
   );
