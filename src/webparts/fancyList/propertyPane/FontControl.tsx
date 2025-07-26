@@ -52,11 +52,11 @@ const iconButtonStyles = (active: boolean) => ({
     color: active ? '#0078d4' : '#323130',
     borderRadius: 4,
     border: active ? '1px solid #0078d4' : '1px solid transparent',
-    marginRight: 2,
-    fontWeight: '600', // changed from 600 to '600'
-    fontSize: 18,
-    width: 32,
-    height: 32,
+    marginRight: 1,
+    fontWeight: '600',
+    fontSize: 14,
+    width: 24,
+    height: 24,
   },
   rootHovered: {
     background: '#e5f1fb',
@@ -101,7 +101,7 @@ export const FontControl: React.FC<FontControlProps> = ({ fontFamily, fontSize, 
       <div style={{ 
         display: 'flex', 
         alignItems: 'center', 
-        gap: '8px',
+        gap: '4px',
         flexWrap: 'nowrap'
       }}>
         {/* Font Family Dropdown */}
@@ -113,7 +113,7 @@ export const FontControl: React.FC<FontControlProps> = ({ fontFamily, fontSize, 
           onChange={(_, option) => onChange({ fontFamily: option!.key as string })}
           onRenderOption={renderFontOption}
           onRenderTitle={renderFontTitle}
-          styles={{ root: { minWidth: 140, flex: '1 1 auto' } }}
+          styles={{ root: { minWidth: 120, flex: '1 1 auto' } }}
         />
         
         {/* Formatting Buttons */}
@@ -165,7 +165,7 @@ export const FontControl: React.FC<FontControlProps> = ({ fontFamily, fontSize, 
           options={FONT_SIZES}
           selectedKey={fontSize || '24px'}
           onChange={(_, option) => onChange({ fontSize: option!.key as string })}
-          styles={{ root: { width: 120, flex: '0 0 auto' } }}
+          styles={{ root: { width: 100, flex: '0 0 auto' } }}
         />
       </div>
     </div>
