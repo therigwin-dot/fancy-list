@@ -43,12 +43,19 @@ export const ColorPickerControl: React.FC<ColorPickerControlProps> = ({ color, f
           {label}
         </label>
       )}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+        <IconButton
+          iconProps={{ iconName: 'Color' }}
+          title="Click to open color picker"
+          ariaLabel="Open color picker"
+          onClick={() => setPickerVisible(v => !v)}
+          disabled={disabled}
+        />
         <TextField
           value={currentColor}
           onChange={handleHexChange}
           disabled={disabled}
-          styles={{ root: { width: 100 } }}
+          styles={{ root: { width: 70 } }}
           placeholder="#RRGGBB"
           title="Type a hex color code (e.g., #ff0000 for red)"
         />
@@ -56,13 +63,6 @@ export const ColorPickerControl: React.FC<ColorPickerControlProps> = ({ color, f
           style={{ width: 24, height: 24, borderRadius: 4, border: '1px solid #ccc', background: currentColor }}
           aria-label="Current color preview"
           title="Current color preview"
-        />
-        <IconButton
-          iconProps={{ iconName: 'Color' }}
-          title="Click to open color picker"
-          ariaLabel="Open color picker"
-          onClick={() => setPickerVisible(v => !v)}
-          disabled={disabled}
         />
       </div>
       {pickerVisible && (
