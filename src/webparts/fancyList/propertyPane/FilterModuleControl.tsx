@@ -408,9 +408,11 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
               text="Reset Filter Formatting" 
               onClick={() => {
                 // Reset all filter settings to defaults
-                handlePropertyChange('font.family', DEFAULTS_CONFIG.filterSettings.font.family);
-                handlePropertyChange('font.size', DEFAULTS_CONFIG.filterSettings.font.size);
-                handlePropertyChange('font.formatting', DEFAULTS_CONFIG.filterSettings.font.formatting);
+                handleFontChange({
+                  fontFamily: DEFAULTS_CONFIG.filterSettings.font.family,
+                  fontSize: DEFAULTS_CONFIG.filterSettings.font.size,
+                  formatting: DEFAULTS_CONFIG.filterSettings.font.formatting
+                });
                 handlePropertyChange('activeColors.background', DEFAULTS_CONFIG.filterSettings.activeColors.background);
                 handlePropertyChange('activeColors.font', DEFAULTS_CONFIG.filterSettings.activeColors.font);
                 handlePropertyChange('inactiveColors.background', DEFAULTS_CONFIG.filterSettings.inactiveColors.background);
