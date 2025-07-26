@@ -17,6 +17,7 @@ import { IFancyListProps } from './components/IFancyListProps';
 import DEFAULTS_CONFIG from './DEFAULTS_CONFIG';
 import { TitleConfiguration } from './propertyPane/TitleConfiguration';
 import { FilterModuleControl } from './propertyPane/FilterModuleControl';
+import { SectionModuleControl } from './propertyPane/SectionModuleControl';
 
 
 export interface IFancyListWebPartProps {
@@ -45,6 +46,9 @@ export interface IFancyListWebPartProps {
   showTitleDivider: boolean;
   titleSettings: TitleSettings;
   filterSettings: FilterSettings;
+  categorySectionSettings: SectionSettings;
+  subjectSectionSettings: SectionSettings;
+  descriptionSectionSettings: SectionSettings;
   context: WebPartContext;
 }
 
@@ -106,6 +110,38 @@ export interface FilterSettings {
     gradientAlpha2: number;
   };
   showDivider: boolean;
+}
+
+export interface SectionSettings {
+  sectionType: 'category' | 'subject' | 'description';
+  resetButtonText: string;
+  description: string;
+  font: {
+    family: string;
+    size: string;
+    color: string;
+    formatting: { bold: boolean; italic: boolean; underline: boolean; strikethrough: boolean; };
+  };
+  background: {
+    type: 'solid' | 'gradient' | 'image';
+    color: string;
+    alpha: number;
+    image: string;
+    imageAlpha: number;
+    gradientDirection: string;
+    gradientColor1: string;
+    gradientAlpha1: number;
+    gradientColor2: string;
+    gradientAlpha2: number;
+  };
+  shape: 'square' | 'rounded' | 'pill';
+  showDivider: boolean;
+  iconSettings: {
+    enabled: boolean;
+    iconPosition: 'left' | 'right';
+    collapsedIcon: string;
+    expandedIcon: string;
+  };
 }
 
 export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWebPartProps> {
@@ -719,34 +755,27 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
             }
           ]
         },
-        // Page 4: Category Section Configuration (Placeholder)
+        // Page 4: Category Section Configuration
         {
-          header: {
-            description: 'Category Section Configuration - Coming Soon'
-          },
           groups: [
             {
-              groupName: 'Category Section Settings',
               groupFields: [
                 {
                   type: 1, // PropertyPaneFieldType.Custom
-                  targetProperty: 'categoryPlaceholder',
+                  targetProperty: 'categorySectionConfiguration',
                   properties: {
-                    key: 'categoryPlaceholder',
+                    key: 'categorySectionConfiguration',
                     onRender: (elem: HTMLElement, ctx: unknown, changeCallback?: () => void) => {
                       ReactDom.render(
-                        React.createElement('div', {
-                          style: { 
-                            fontSize: '14px',
-                            color: '#666',
-                            marginBottom: '16px',
-                            lineHeight: '1.4',
-                            padding: '16px',
-                            backgroundColor: '#f8f9fa',
-                            borderRadius: '4px',
-                            border: '1px solid #e1dfdd'
+                        React.createElement(SectionModuleControl, {
+                          sectionType: 'category',
+                          sectionSettings: this.properties.categorySectionSettings || DEFAULTS_CONFIG.categorySectionSettings,
+                          onChange: (settings: SectionSettings) => {
+                            this.properties.categorySectionSettings = settings;
+                            if (changeCallback) changeCallback();
+                            this.context.propertyPane.refresh();
                           }
-                        }, 'Category Section Configuration - This page will be updated with interactive controls for styling Category sections. Currently using default styling.'),
+                        }),
                         elem
                       );
                     },
@@ -759,34 +788,27 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
             }
           ]
         },
-        // Page 5: Subject Section Configuration (Placeholder)
+        // Page 5: Subject Section Configuration
         {
-          header: {
-            description: 'Subject Section Configuration - Coming Soon'
-          },
           groups: [
             {
-              groupName: 'Subject Section Settings',
               groupFields: [
                 {
                   type: 1, // PropertyPaneFieldType.Custom
-                  targetProperty: 'subjectPlaceholder',
+                  targetProperty: 'subjectSectionConfiguration',
                   properties: {
-                    key: 'subjectPlaceholder',
+                    key: 'subjectSectionConfiguration',
                     onRender: (elem: HTMLElement, ctx: unknown, changeCallback?: () => void) => {
                       ReactDom.render(
-                        React.createElement('div', {
-                          style: { 
-                            fontSize: '14px',
-                            color: '#666',
-                            marginBottom: '16px',
-                            lineHeight: '1.4',
-                            padding: '16px',
-                            backgroundColor: '#f8f9fa',
-                            borderRadius: '4px',
-                            border: '1px solid #e1dfdd'
+                        React.createElement(SectionModuleControl, {
+                          sectionType: 'subject',
+                          sectionSettings: this.properties.subjectSectionSettings || DEFAULTS_CONFIG.subjectSectionSettings,
+                          onChange: (settings: SectionSettings) => {
+                            this.properties.subjectSectionSettings = settings;
+                            if (changeCallback) changeCallback();
+                            this.context.propertyPane.refresh();
                           }
-                        }, 'Subject Section Configuration - This page will be updated with interactive controls for styling Subject sections. Currently using default styling.'),
+                        }),
                         elem
                       );
                     },
@@ -799,34 +821,27 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
             }
           ]
         },
-        // Page 6: Description Section Configuration (Placeholder)
+        // Page 6: Description Section Configuration
         {
-          header: {
-            description: 'Description Section Configuration - Coming Soon'
-          },
           groups: [
             {
-              groupName: 'Description Section Settings',
               groupFields: [
                 {
                   type: 1, // PropertyPaneFieldType.Custom
-                  targetProperty: 'descriptionPlaceholder',
+                  targetProperty: 'descriptionSectionConfiguration',
                   properties: {
-                    key: 'descriptionPlaceholder',
+                    key: 'descriptionSectionConfiguration',
                     onRender: (elem: HTMLElement, ctx: unknown, changeCallback?: () => void) => {
                       ReactDom.render(
-                        React.createElement('div', {
-                          style: { 
-                            fontSize: '14px',
-                            color: '#666',
-                            marginBottom: '16px',
-                            lineHeight: '1.4',
-                            padding: '16px',
-                            backgroundColor: '#f8f9fa',
-                            borderRadius: '4px',
-                            border: '1px solid #e1dfdd'
+                        React.createElement(SectionModuleControl, {
+                          sectionType: 'description',
+                          sectionSettings: this.properties.descriptionSectionSettings || DEFAULTS_CONFIG.descriptionSectionSettings,
+                          onChange: (settings: SectionSettings) => {
+                            this.properties.descriptionSectionSettings = settings;
+                            if (changeCallback) changeCallback();
+                            this.context.propertyPane.refresh();
                           }
-                        }, 'Description Section Configuration - This page will be updated with interactive controls for styling Description sections. Currently using default styling.'),
+                        }),
                         elem
                       );
                     },

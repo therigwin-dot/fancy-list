@@ -74,9 +74,10 @@ export const DEFAULTS_CONFIG = {
   } as FilterSettings,
 
   // Page 4: Category Section Settings
-  categorySettings: {
+  categorySectionSettings: {
+    sectionType: 'category' as const,
     resetButtonText: "Reset Category Formatting",
-    description: "Customize the appearance of category sections including font, colors, spacing, and background settings.",
+    description: "Customize the appearance of category sections including font, colors, shape, and background settings.",
     font: {
       family: 'Segoe UI',
       size: '18px',
@@ -95,18 +96,21 @@ export const DEFAULTS_CONFIG = {
       gradientColor2: '#e1dfdd',
       gradientAlpha2: 0.6
     },
-    spacing: {
-      padding: '12px',
-      margin: '8px 0',
-      borderRadius: '4px'
-    },
-    showDivider: true
+    shape: 'rounded' as const,
+    showDivider: true,
+    iconSettings: {
+      enabled: true,
+      iconPosition: 'left' as const,
+      collapsedIcon: '▶',
+      expandedIcon: '▼'
+    }
   },
 
   // Page 5: Subject Section Settings
-  subjectSettings: {
+  subjectSectionSettings: {
+    sectionType: 'subject' as const,
     resetButtonText: "Reset Subject Formatting",
-    description: "Customize the appearance of subject sections including font, colors, spacing, and background settings.",
+    description: "Customize the appearance of subject sections including font, colors, shape, and background settings.",
     font: {
       family: 'Segoe UI',
       size: '16px',
@@ -125,18 +129,21 @@ export const DEFAULTS_CONFIG = {
       gradientColor2: '#f3f2f1',
       gradientAlpha2: 0.3
     },
-    spacing: {
-      padding: '8px',
-      margin: '4px 0',
-      borderRadius: '2px'
-    },
-    showDivider: false
+    shape: 'rounded' as const,
+    showDivider: false,
+    iconSettings: {
+      enabled: true,
+      iconPosition: 'left' as const,
+      collapsedIcon: '▶',
+      expandedIcon: '▼'
+    }
   },
 
   // Page 6: Description Section Settings
-  descriptionSettings: {
+  descriptionSectionSettings: {
+    sectionType: 'description' as const,
     resetButtonText: "Reset Description Formatting",
-    description: "Customize the appearance of description sections including font, colors, spacing, and background settings.",
+    description: "Customize the appearance of description sections including font, colors, shape, and background settings.",
     font: {
       family: 'Segoe UI',
       size: '14px',
@@ -155,12 +162,14 @@ export const DEFAULTS_CONFIG = {
       gradientColor2: '#faf9f8',
       gradientAlpha2: 0.5
     },
-    spacing: {
-      padding: '12px',
-      margin: '8px 0',
-      borderRadius: '4px'
-    },
-    showDivider: true
+    shape: 'rounded' as const,
+    showDivider: true,
+    iconSettings: {
+      enabled: true,
+      iconPosition: 'left' as const,
+      collapsedIcon: '▶',
+      expandedIcon: '▼'
+    }
   },
 
   // Page 7: About Information

@@ -92,7 +92,8 @@ Control → Configuration Module → WebPart Properties
 
 ### **Backup Location & Naming Convention**
 **Primary Backup Location**: `/Volumes/BigBoy/ProjectBackUps/Work/`  
-**Git Backup Location**: `/Volumes/BigBoy/ProjectBackUps/Work/FancyList-Backup/`  
+**Local Git Repository**: `/opt/cursor-projects/FancyList/` (with `.git` folder)  
+**External Git Archive**: `/Volumes/BigBoy/ProjectBackUps/Work/FancyList-Backup/`  
 **Naming Convention**: `ProjectName_BackupTag_DateTimeofBackup`
 
 ### **Current Backup Tags & Inventory**
@@ -106,18 +107,24 @@ Control → Configuration Module → WebPart Properties
 | `Page1Done` | 20250726_004428 | Page 1 Enhanced | ✅ Complete | Enhanced Page 1 implementation |
 | `BackgroundPickerComplete` | 20250726 | Background Module | ✅ Complete | Advanced background controls |
 | `FilterModule_Complete` | 20250726_033003 | Filter Module | ✅ Complete | Complete FilterModuleControl implementation |
+| `DocumentationUpdated` | 20250726_104426 | Documentation | ✅ Complete | Updated backup documentation and Git backup moved |
 
-### **Git Backup Repository**
-**Location**: `/Volumes/BigBoy/ProjectBackUps/Work/FancyList-Backup/`  
-**Purpose**: Version-controlled backup with complete commit history  
-**Last Commit**: `758f17d` - "feat: Modular FontControl with formatting, font preview, and correct bold logic for Title"  
+### **Backup Strategy**
+**Local Git Repository**: `/opt/cursor-projects/FancyList/` (with `.git` folder)  
+**Purpose**: Primary version control with complete commit history  
 **Status**: ✅ Active Git repository with full development history  
+
+**External Git Archive**: `/Volumes/BigBoy/ProjectBackUps/Work/FancyList-Backup/`  
+**Purpose**: Secondary Git repository for additional backup  
+**Status**: ✅ Mirror of local repository  
+
+**External Backups**: `/Volumes/BigBoy/ProjectBackUps/Work/FancyList_*_*`  
+**Purpose**: Timestamped snapshots of complete project state  
 **Key Features**: 
-- Complete commit history from project inception
-- Modular FontControl implementation
-- Background picker with solid/gradient/image modes
-- Object-oriented UI controls architecture
-- All development milestones preserved
+- Complete project snapshots with all files
+- Timestamped naming convention
+- Independent of Git history
+- Quick restore capability
 
 ### **Primary Reference Backup**
 **Location**: `/Volumes/BigBoy/ProjectBackUps/Work/FancyList_CompareSlate_20250725`  
@@ -422,9 +429,11 @@ Page 6 currently displays placeholder information. Will be implemented using Sec
 - **Reset Functionality**: Object-specific reset with user content preservation
 
 ### **Planned Pattern (Pages 4-6 - SectionModuleControl):**
-- **Object Structure**: Will use SectionSettings objects
+- **Object Structure**: Will use SectionSettings objects with sectionType property
 - **Modular Controls**: Will use SectionModuleControl with embedded controls
-- **Consistent Architecture**: Will follow same pattern as Pages 2-3
+- **Reusable Architecture**: Single control handles Category, Subject, and Description sections
+- **Section Type Identification**: Uses sectionType: 'category' | 'subject' | 'description'
+- **Consistent Controls**: Same controls for all three section types
 - **Reset Functionality**: Will include object-specific reset
 
 ### **Placeholder Pattern (Pages 4-6 - Current):**
@@ -610,6 +619,118 @@ Complete Pages 4-6 implementation using SectionModuleControl:
 
 ---
 
+### **SectionModuleControl** (`src/webparts/fancyList/propertyPane/SectionModuleControl.tsx`)
+
+**Purpose:** Reusable section configuration control for Category, Subject, and Description sections
+
+**Interface:** `SectionModuleControlProps`
+```typescript
+{
+  sectionType: 'category' | 'subject' | 'description';  // Section type identifier
+  sectionSettings: SectionSettings;                      // Current section settings
+  onChange: (settings: SectionSettings) => void;         // Change handler
+  label?: string;                                        // Optional display label
+}
+```
+
+**SectionSettings Interface:**
+```typescript
+{
+  sectionType: 'category' | 'subject' | 'description';  // Section type identifier
+  resetButtonText: string;                               // Reset button text
+  description: string;                                   // Section description
+  font: {                                               // Font configuration
+    family: string;
+    size: string;
+    color: string;
+    formatting: { bold: boolean; italic: boolean; underline: boolean; strikethrough: boolean; };
+  };
+  background: {                                         // Background configuration
+    type: 'solid' | 'gradient' | 'image';
+    color: string;
+    alpha: number;
+    image: string;
+    imageAlpha: number;
+    gradientDirection: string;
+    gradientColor1: string;
+    gradientAlpha1: number;
+    gradientColor2: string;
+    gradientAlpha2: number;
+  };
+  shape: 'square' | 'rounded' | 'pill';                // Section shape
+  showDivider: boolean;                                 // Show section divider
+  iconSettings: {                                       // Icon configuration
+    enabled: boolean;
+    iconPosition: 'left' | 'right';
+    collapsedIcon: string;
+    expandedIcon: string;
+  };
+}
+```
+
+**Internal Components:**
+- **PropertyPaneLabel**: For section description
+- **FontControl** (embedded): For font configuration
+- **ColorPickerControl** (embedded): For font color
+- **ShapePickerControl** (embedded): For section shape
+- **PropertyPaneDropdown**: For background type selection
+- **ColorPickerControl** (embedded): For background colors
+- **PropertyPaneSlider**: For transparency/alpha values
+- **PropertyPaneTextField**: For image URLs
+- **PropertyPaneToggle**: For divider toggle
+- **IconControl** (embedded): For expand/collapse icon configuration
+- **Reset Button**: For resetting all settings to defaults
+
+**Features:**
+- **Reusable Architecture**: Single control handles 3 different section types
+- **Section Type Identification**: Uses sectionType property to determine behavior
+- **Context-Aware Defaults**: Different defaults based on section type
+- **Embedded sub-controls for modularity**
+- **Object-based settings structure**
+- **Reset functionality preserving user content**
+
+**Usage Pattern:**
+```typescript
+// Category Section
+<SectionModuleControl
+  sectionType="category"
+  sectionSettings={props.categorySectionSettings}
+  onChange={handleCategorySettingsChange}
+  label="Category Configuration"
+/>
+
+// Subject Section
+<SectionModuleControl
+  sectionType="subject"
+  sectionSettings={props.subjectSectionSettings}
+  onChange={handleSubjectSettingsChange}
+  label="Subject Configuration"
+/>
+
+// Description Section
+<SectionModuleControl
+  sectionType="description"
+  sectionSettings={props.descriptionSectionSettings}
+  onChange={handleDescriptionSettingsChange}
+  label="Description Configuration"
+/>
+```
+
+**Connected to Pages:**
+- **Page 4**: Category Section Configuration
+- **Page 5**: Subject Section Configuration
+- **Page 6**: Description Section Configuration
+
+**Embedded Controls:**
+- **FontControl**: For font settings
+- **ColorPickerControl**: For color settings
+- **PropertyPaneDropdown**: For type selection
+- **PropertyPaneSlider**: For transparency
+- **PropertyPaneTextField**: For text, URLs, and spacing
+- **PropertyPaneToggle**: For boolean options
+
+---
+
 ### **ColorPickerControl** (`src/webparts/fancyList/propertyPane/ColorPickerControl.tsx`)
 
 **Purpose:** Reusable color selection component with hex input and visual picker
@@ -722,10 +843,12 @@ Complete Pages 4-6 implementation using SectionModuleControl:
 
 ### **Level 2: Composite Controls**
 - **FontControl**: Combines font family, size, and formatting
+- **IconControl**: Combines expand/collapse icon configuration
 
 ### **Level 3: Module Controls**
 - **TitleModuleControl**: Combines all title section controls
 - **FilterModuleControl**: Combines all filter section controls
+- **SectionModuleControl**: Combines all section controls (Category, Subject, Description)
 
 ### **Level 4: Page Configuration**
 - **Property Pane Pages**: Combine multiple controls for complete page functionality
@@ -745,6 +868,7 @@ Complete Pages 4-6 implementation using SectionModuleControl:
 | FontControl | ❌ | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ |
 | TitleModuleControl | ❌ | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | FilterModuleControl | ❌ | ❌ | ✅ | ❌ | ❌ | ❌ | ❌ |
+| IconControl | ❌ | ❌ | ❌ | 📋 | 📋 | 📋 | ❌ |
 | SectionModuleControl | ❌ | ❌ | ❌ | 📋 | 📋 | 📋 | ❌ |
 
 **Legend:**
@@ -767,6 +891,8 @@ Complete Pages 4-6 implementation using SectionModuleControl:
    - Prop-based sectionType: 'category' | 'subject' | 'description'
    - Embedded controls: FontControl, ColorPickerControl, background controls
    - Reset button with context-aware functionality
+   - **Unique Architecture**: Single control handles 3 different section types
+   - **Section Type Identification**: Uses sectionType property to determine behavior
 
 2. **Update DEFAULTS_CONFIG for Section Settings**
    - categorySectionSettings defaults

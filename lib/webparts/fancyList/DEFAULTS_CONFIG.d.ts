@@ -10,7 +10,8 @@ export declare const DEFAULTS_CONFIG: {
     };
     titleSettings: TitleSettings;
     filterSettings: FilterSettings;
-    categorySettings: {
+    categorySectionSettings: {
+        sectionType: "category";
         resetButtonText: string;
         description: string;
         font: {
@@ -36,14 +37,17 @@ export declare const DEFAULTS_CONFIG: {
             gradientColor2: string;
             gradientAlpha2: number;
         };
-        spacing: {
-            padding: string;
-            margin: string;
-            borderRadius: string;
-        };
+        shape: "rounded";
         showDivider: boolean;
+        iconSettings: {
+            enabled: boolean;
+            iconPosition: "left";
+            collapsedIcon: string;
+            expandedIcon: string;
+        };
     };
-    subjectSettings: {
+    subjectSectionSettings: {
+        sectionType: "subject";
         resetButtonText: string;
         description: string;
         font: {
@@ -69,14 +73,17 @@ export declare const DEFAULTS_CONFIG: {
             gradientColor2: string;
             gradientAlpha2: number;
         };
-        spacing: {
-            padding: string;
-            margin: string;
-            borderRadius: string;
-        };
+        shape: "rounded";
         showDivider: boolean;
+        iconSettings: {
+            enabled: boolean;
+            iconPosition: "left";
+            collapsedIcon: string;
+            expandedIcon: string;
+        };
     };
-    descriptionSettings: {
+    descriptionSectionSettings: {
+        sectionType: "description";
         resetButtonText: string;
         description: string;
         font: {
@@ -102,12 +109,14 @@ export declare const DEFAULTS_CONFIG: {
             gradientColor2: string;
             gradientAlpha2: number;
         };
-        spacing: {
-            padding: string;
-            margin: string;
-            borderRadius: string;
-        };
+        shape: "rounded";
         showDivider: boolean;
+        iconSettings: {
+            enabled: boolean;
+            iconPosition: "left";
+            collapsedIcon: string;
+            expandedIcon: string;
+        };
     };
     aboutInfo: {
         version: string;

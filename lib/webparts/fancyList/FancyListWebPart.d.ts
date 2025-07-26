@@ -33,6 +33,9 @@ export interface IFancyListWebPartProps {
     showTitleDivider: boolean;
     titleSettings: TitleSettings;
     filterSettings: FilterSettings;
+    categorySectionSettings: SectionSettings;
+    subjectSectionSettings: SectionSettings;
+    descriptionSectionSettings: SectionSettings;
     context: WebPartContext;
 }
 export interface TitleSettings {
@@ -102,6 +105,42 @@ export interface FilterSettings {
         gradientAlpha2: number;
     };
     showDivider: boolean;
+}
+export interface SectionSettings {
+    sectionType: 'category' | 'subject' | 'description';
+    resetButtonText: string;
+    description: string;
+    font: {
+        family: string;
+        size: string;
+        color: string;
+        formatting: {
+            bold: boolean;
+            italic: boolean;
+            underline: boolean;
+            strikethrough: boolean;
+        };
+    };
+    background: {
+        type: 'solid' | 'gradient' | 'image';
+        color: string;
+        alpha: number;
+        image: string;
+        imageAlpha: number;
+        gradientDirection: string;
+        gradientColor1: string;
+        gradientAlpha1: number;
+        gradientColor2: string;
+        gradientAlpha2: number;
+    };
+    shape: 'square' | 'rounded' | 'pill';
+    showDivider: boolean;
+    iconSettings: {
+        enabled: boolean;
+        iconPosition: 'left' | 'right';
+        collapsedIcon: string;
+        expandedIcon: string;
+    };
 }
 export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWebPartProps> {
     private _isDarkTheme;

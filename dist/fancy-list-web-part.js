@@ -120,9 +120,10 @@ var DEFAULTS_CONFIG = {
         showDivider: false
     },
     // Page 4: Category Section Settings
-    categorySettings: {
+    categorySectionSettings: {
+        sectionType: 'category',
         resetButtonText: "Reset Category Formatting",
-        description: "Customize the appearance of category sections including font, colors, spacing, and background settings.",
+        description: "Customize the appearance of category sections including font, colors, shape, and background settings.",
         font: {
             family: 'Segoe UI',
             size: '18px',
@@ -141,17 +142,20 @@ var DEFAULTS_CONFIG = {
             gradientColor2: '#e1dfdd',
             gradientAlpha2: 0.6
         },
-        spacing: {
-            padding: '12px',
-            margin: '8px 0',
-            borderRadius: '4px'
-        },
-        showDivider: true
+        shape: 'rounded',
+        showDivider: true,
+        iconSettings: {
+            enabled: true,
+            iconPosition: 'left',
+            collapsedIcon: '▶',
+            expandedIcon: '▼'
+        }
     },
     // Page 5: Subject Section Settings
-    subjectSettings: {
+    subjectSectionSettings: {
+        sectionType: 'subject',
         resetButtonText: "Reset Subject Formatting",
-        description: "Customize the appearance of subject sections including font, colors, spacing, and background settings.",
+        description: "Customize the appearance of subject sections including font, colors, shape, and background settings.",
         font: {
             family: 'Segoe UI',
             size: '16px',
@@ -170,17 +174,20 @@ var DEFAULTS_CONFIG = {
             gradientColor2: '#f3f2f1',
             gradientAlpha2: 0.3
         },
-        spacing: {
-            padding: '8px',
-            margin: '4px 0',
-            borderRadius: '2px'
-        },
-        showDivider: false
+        shape: 'rounded',
+        showDivider: false,
+        iconSettings: {
+            enabled: true,
+            iconPosition: 'left',
+            collapsedIcon: '▶',
+            expandedIcon: '▼'
+        }
     },
     // Page 6: Description Section Settings
-    descriptionSettings: {
+    descriptionSectionSettings: {
+        sectionType: 'description',
         resetButtonText: "Reset Description Formatting",
-        description: "Customize the appearance of description sections including font, colors, spacing, and background settings.",
+        description: "Customize the appearance of description sections including font, colors, shape, and background settings.",
         font: {
             family: 'Segoe UI',
             size: '14px',
@@ -199,12 +206,14 @@ var DEFAULTS_CONFIG = {
             gradientColor2: '#faf9f8',
             gradientAlpha2: 0.5
         },
-        spacing: {
-            padding: '12px',
-            margin: '8px 0',
-            borderRadius: '4px'
-        },
-        showDivider: true
+        shape: 'rounded',
+        showDivider: true,
+        iconSettings: {
+            enabled: true,
+            iconPosition: 'left',
+            collapsedIcon: '▶',
+            expandedIcon: '▼'
+        }
     },
     // Page 7: About Information
     aboutInfo: {
@@ -870,6 +879,69 @@ var FontControl = function (_a) {
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_4__.IconButton, { iconProps: { iconName: 'Strikethrough' }, title: "Strikethrough", ariaLabel: "Strikethrough", checked: !!formatting.strikethrough, styles: iconButtonStyles(!!formatting.strikethrough), onClick: function () { return handleFormattingChange('strikethrough', !formatting.strikethrough); } })),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_5__.Dropdown, { label: undefined, ariaLabel: "Font Size", options: FONT_SIZES, selectedKey: fontSize || '24px', onChange: function (_, option) { return onChange({ fontSize: option.key }); }, styles: { root: { width: 140, marginLeft: 8 } } })),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_5__.Dropdown, { label: undefined, ariaLabel: "Font Family", options: FONT_FAMILIES, selectedKey: fontFamily || 'Segoe UI', onChange: function (_, option) { return onChange({ fontFamily: option.key }); }, onRenderOption: renderFontOption, onRenderTitle: renderFontTitle, styles: { root: { maxWidth: 260 } } })));
+};
+
+
+/***/ }),
+
+/***/ 8195:
+/*!*********************************************************************!*\
+  !*** ./lib/webparts/fancyList/propertyPane/SectionModuleControl.js ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   SectionModuleControl: () => (/* binding */ SectionModuleControl)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ 5959);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fluentui/react/lib/Button */ 9425);
+
+
+var SectionModuleControl = function (_a) {
+    var sectionType = _a.sectionType, sectionSettings = _a.sectionSettings, onChange = _a.onChange, label = _a.label;
+    var handleReset = function () {
+        // TODO: Implement reset functionality
+        console.log("Reset ".concat(sectionType, " settings"));
+    };
+    var getSectionTitle = function () {
+        switch (sectionType) {
+            case 'category': return 'Category Section Configuration';
+            case 'subject': return 'Subject Section Configuration';
+            case 'description': return 'Description Section Configuration';
+            default: return 'Section Configuration';
+        }
+    };
+    var getSectionDescription = function () {
+        return sectionSettings.description;
+    };
+    return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                fontSize: '16px',
+                fontWeight: '600',
+                color: '#323130',
+                marginBottom: '12px'
+            } }, getSectionTitle()),
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                fontSize: '14px',
+                color: '#666',
+                lineHeight: '1.4',
+                marginBottom: '16px'
+            } }, getSectionDescription()),
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                padding: '16px',
+                backgroundColor: '#f3f2f1',
+                borderRadius: '4px',
+                border: '1px dashed #c8c6c4',
+                textAlign: 'center',
+                color: '#666',
+                fontSize: '14px'
+            } },
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: '8px' } }, "\uD83D\uDD27 Controls coming soon..."),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { fontSize: '12px' } }, "Font, Color, Background, Shape, and Icon controls will be implemented here")),
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginTop: 16 } },
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_1__.PrimaryButton, { text: sectionSettings.resetButtonText, onClick: handleReset, disabled: true }))));
 };
 
 
@@ -30633,6 +30705,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./DEFAULTS_CONFIG */ 7702);
 /* harmony import */ var _propertyPane_TitleConfiguration__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./propertyPane/TitleConfiguration */ 2867);
 /* harmony import */ var _propertyPane_FilterModuleControl__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./propertyPane/FilterModuleControl */ 2696);
+/* harmony import */ var _propertyPane_SectionModuleControl__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./propertyPane/SectionModuleControl */ 8195);
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -30695,6 +30768,7 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+
 
 
 
@@ -31363,33 +31437,27 @@ var FancyListWebPart = /** @class */ (function (_super) {
                         }
                     ]
                 },
-                // Page 4: Category Section Configuration (Placeholder)
+                // Page 4: Category Section Configuration
                 {
-                    header: {
-                        description: 'Category Section Configuration - Coming Soon'
-                    },
                     groups: [
                         {
-                            groupName: 'Category Section Settings',
                             groupFields: [
                                 {
                                     type: 1, // PropertyPaneFieldType.Custom
-                                    targetProperty: 'categoryPlaceholder',
+                                    targetProperty: 'categorySectionConfiguration',
                                     properties: {
-                                        key: 'categoryPlaceholder',
+                                        key: 'categorySectionConfiguration',
                                         onRender: function (elem, ctx, changeCallback) {
-                                            react_dom__WEBPACK_IMPORTED_MODULE_1__.render(react__WEBPACK_IMPORTED_MODULE_0__.createElement('div', {
-                                                style: {
-                                                    fontSize: '14px',
-                                                    color: '#666',
-                                                    marginBottom: '16px',
-                                                    lineHeight: '1.4',
-                                                    padding: '16px',
-                                                    backgroundColor: '#f8f9fa',
-                                                    borderRadius: '4px',
-                                                    border: '1px solid #e1dfdd'
+                                            react_dom__WEBPACK_IMPORTED_MODULE_1__.render(react__WEBPACK_IMPORTED_MODULE_0__.createElement(_propertyPane_SectionModuleControl__WEBPACK_IMPORTED_MODULE_11__.SectionModuleControl, {
+                                                sectionType: 'category',
+                                                sectionSettings: _this.properties.categorySectionSettings || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings,
+                                                onChange: function (settings) {
+                                                    _this.properties.categorySectionSettings = settings;
+                                                    if (changeCallback)
+                                                        changeCallback();
+                                                    _this.context.propertyPane.refresh();
                                                 }
-                                            }, 'Category Section Configuration - This page will be updated with interactive controls for styling Category sections. Currently using default styling.'), elem);
+                                            }), elem);
                                         },
                                         onDispose: function (elem) {
                                             react_dom__WEBPACK_IMPORTED_MODULE_1__.unmountComponentAtNode(elem);
@@ -31400,33 +31468,27 @@ var FancyListWebPart = /** @class */ (function (_super) {
                         }
                     ]
                 },
-                // Page 5: Subject Section Configuration (Placeholder)
+                // Page 5: Subject Section Configuration
                 {
-                    header: {
-                        description: 'Subject Section Configuration - Coming Soon'
-                    },
                     groups: [
                         {
-                            groupName: 'Subject Section Settings',
                             groupFields: [
                                 {
                                     type: 1, // PropertyPaneFieldType.Custom
-                                    targetProperty: 'subjectPlaceholder',
+                                    targetProperty: 'subjectSectionConfiguration',
                                     properties: {
-                                        key: 'subjectPlaceholder',
+                                        key: 'subjectSectionConfiguration',
                                         onRender: function (elem, ctx, changeCallback) {
-                                            react_dom__WEBPACK_IMPORTED_MODULE_1__.render(react__WEBPACK_IMPORTED_MODULE_0__.createElement('div', {
-                                                style: {
-                                                    fontSize: '14px',
-                                                    color: '#666',
-                                                    marginBottom: '16px',
-                                                    lineHeight: '1.4',
-                                                    padding: '16px',
-                                                    backgroundColor: '#f8f9fa',
-                                                    borderRadius: '4px',
-                                                    border: '1px solid #e1dfdd'
+                                            react_dom__WEBPACK_IMPORTED_MODULE_1__.render(react__WEBPACK_IMPORTED_MODULE_0__.createElement(_propertyPane_SectionModuleControl__WEBPACK_IMPORTED_MODULE_11__.SectionModuleControl, {
+                                                sectionType: 'subject',
+                                                sectionSettings: _this.properties.subjectSectionSettings || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].subjectSectionSettings,
+                                                onChange: function (settings) {
+                                                    _this.properties.subjectSectionSettings = settings;
+                                                    if (changeCallback)
+                                                        changeCallback();
+                                                    _this.context.propertyPane.refresh();
                                                 }
-                                            }, 'Subject Section Configuration - This page will be updated with interactive controls for styling Subject sections. Currently using default styling.'), elem);
+                                            }), elem);
                                         },
                                         onDispose: function (elem) {
                                             react_dom__WEBPACK_IMPORTED_MODULE_1__.unmountComponentAtNode(elem);
@@ -31437,33 +31499,27 @@ var FancyListWebPart = /** @class */ (function (_super) {
                         }
                     ]
                 },
-                // Page 6: Description Section Configuration (Placeholder)
+                // Page 6: Description Section Configuration
                 {
-                    header: {
-                        description: 'Description Section Configuration - Coming Soon'
-                    },
                     groups: [
                         {
-                            groupName: 'Description Section Settings',
                             groupFields: [
                                 {
                                     type: 1, // PropertyPaneFieldType.Custom
-                                    targetProperty: 'descriptionPlaceholder',
+                                    targetProperty: 'descriptionSectionConfiguration',
                                     properties: {
-                                        key: 'descriptionPlaceholder',
+                                        key: 'descriptionSectionConfiguration',
                                         onRender: function (elem, ctx, changeCallback) {
-                                            react_dom__WEBPACK_IMPORTED_MODULE_1__.render(react__WEBPACK_IMPORTED_MODULE_0__.createElement('div', {
-                                                style: {
-                                                    fontSize: '14px',
-                                                    color: '#666',
-                                                    marginBottom: '16px',
-                                                    lineHeight: '1.4',
-                                                    padding: '16px',
-                                                    backgroundColor: '#f8f9fa',
-                                                    borderRadius: '4px',
-                                                    border: '1px solid #e1dfdd'
+                                            react_dom__WEBPACK_IMPORTED_MODULE_1__.render(react__WEBPACK_IMPORTED_MODULE_0__.createElement(_propertyPane_SectionModuleControl__WEBPACK_IMPORTED_MODULE_11__.SectionModuleControl, {
+                                                sectionType: 'description',
+                                                sectionSettings: _this.properties.descriptionSectionSettings || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].descriptionSectionSettings,
+                                                onChange: function (settings) {
+                                                    _this.properties.descriptionSectionSettings = settings;
+                                                    if (changeCallback)
+                                                        changeCallback();
+                                                    _this.context.propertyPane.refresh();
                                                 }
-                                            }, 'Description Section Configuration - This page will be updated with interactive controls for styling Description sections. Currently using default styling.'), elem);
+                                            }), elem);
                                         },
                                         onDispose: function (elem) {
                                             react_dom__WEBPACK_IMPORTED_MODULE_1__.unmountComponentAtNode(elem);
