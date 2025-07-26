@@ -884,6 +884,282 @@ var FontControl = function (_a) {
 
 /***/ }),
 
+/***/ 8189:
+/*!************************************************************!*\
+  !*** ./lib/webparts/fancyList/propertyPane/IconControl.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   IconControl: () => (/* binding */ IconControl)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ 5959);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _fluentui_react_lib_Toggle__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fluentui/react/lib/Toggle */ 6264);
+/* harmony import */ var _fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fluentui/react/lib/Dropdown */ 2042);
+/* harmony import */ var _fluentui_react_lib_ComboBox__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @fluentui/react/lib/ComboBox */ 3898);
+/* harmony import */ var _fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @fluentui/react/lib/Button */ 4533);
+/* harmony import */ var _fluentui_react_lib_Modal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @fluentui/react/lib/Modal */ 6702);
+/* harmony import */ var _fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @fluentui/react/lib/Button */ 5613);
+var __assign = (undefined && undefined.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+
+
+
+
+
+
+
+var IconControl = function (_a) {
+    var _b = _a.label, label = _b === void 0 ? 'Icon Configuration' : _b, settings = _a.settings, onChange = _a.onChange;
+    var _c = react__WEBPACK_IMPORTED_MODULE_0__.useState(false), showEmojiPicker = _c[0], setShowEmojiPicker = _c[1];
+    var _d = react__WEBPACK_IMPORTED_MODULE_0__.useState(null), emojiPickerTarget = _d[0], setEmojiPickerTarget = _d[1];
+    var _e = react__WEBPACK_IMPORTED_MODULE_0__.useState('arrows'), activeTab = _e[0], setActiveTab = _e[1];
+    var _f = react__WEBPACK_IMPORTED_MODULE_0__.useState(''), searchTerm = _f[0], setSearchTerm = _f[1];
+    var handlePropertyChange = function (property, value) {
+        var _a;
+        var newSettings = __assign(__assign({}, settings), (_a = {}, _a[property] = value, _a));
+        onChange(newSettings);
+    };
+    var positionOptions = [
+        { key: 'left', text: 'Left' },
+        { key: 'right', text: 'Right' }
+    ];
+    // Icon pairing mapping for auto-pairing behavior
+    var iconPairs = {
+        '▶️': '🔽', // Standard emoji
+        '▶': '▼', // Standard text
+        '+': '-', // Plus/Minus text
+        '➕': '➖', // Plus/Minus emoji
+        '📁': '📂', // Folder closed/open
+        '📂': '📁', // Folder open/closed
+        '😐': '😊', // Straight/smiling face
+        '🔽': '▶️', // Reverse mapping
+        '▼': '▶', // Reverse mapping
+        '-': '+', // Reverse mapping
+        '➖': '➕', // Reverse mapping
+        '😊': '😐' // Reverse mapping
+    };
+    // Predefined icon options for collapsed state
+    var collapsedIconOptions = [
+        { key: '▶️', text: '▶️ Standard' },
+        { key: '▶', text: '▶ Standard (Text)' },
+        { key: '+', text: '+ Plus' },
+        { key: '➕', text: '➕ Plus (Emoji)' },
+        { key: '📁', text: '📁 Folder' },
+        { key: '📂', text: '📂 Folder (Open)' },
+        { key: '😐', text: '😐 Straight Face' }
+    ];
+    // Predefined icon options for expanded state
+    var expandedIconOptions = [
+        { key: '🔽', text: '🔽 Standard' },
+        { key: '▼', text: '▼ Standard (Text)' },
+        { key: '-', text: '- Minus' },
+        { key: '➖', text: '➖ Minus (Emoji)' },
+        { key: '📂', text: '📂 Folder (Open)' },
+        { key: '📁', text: '📁 Folder (Closed)' },
+        { key: '😊', text: '😊 Smiling Face' }
+    ];
+    // Auto-pairing function
+    var handleCollapsedIconChange = function (newCollapsedIcon) {
+        var pairedExpandedIcon = iconPairs[newCollapsedIcon] || settings.expandedIcon;
+        var newSettings = __assign(__assign({}, settings), { collapsedIcon: newCollapsedIcon, expandedIcon: pairedExpandedIcon });
+        onChange(newSettings);
+    };
+    // Emoji picker functions
+    var openEmojiPicker = function (target) {
+        setEmojiPickerTarget(target);
+        setShowEmojiPicker(true);
+    };
+    // Emoji categories
+    var emojiCategories = {
+        arrows: {
+            name: 'Arrows',
+            emojis: ['▶️', '🔽', '▶', '▼', '➡️', '⬅️', '⬆️', '⬇️', '↗️', '↘️', '↙️', '↖️', '↔️', '↕️', '⏩', '⏪', '⏫', '⏬']
+        },
+        symbols: {
+            name: 'Symbols',
+            emojis: ['+', '-', '➕', '➖', '✖️', '➗', '✔️', '❌', '⚠️', 'ℹ️', '❓', '❗', '💯', '💢', '💤', '💥', '💦', '💨']
+        },
+        objects: {
+            name: 'Objects',
+            emojis: ['📁', '📂', '📄', '📋', '📝', '📌', '📍', '🔗', '🔒', '🔓', '🔑', '🔐', '💡', '🔋', '🔌', '📱', '💻', '🖥️']
+        },
+        faces: {
+            name: 'Faces',
+            emojis: ['😐', '😊', '😀', '😃', '😄', '😁', '😆', '😅', '😂', '🤣', '😉', '😌', '😍', '🥰', '😘', '😋', '😎', '🤩']
+        },
+        nature: {
+            name: 'Nature',
+            emojis: ['🌱', '🌿', '🍀', '🌺', '🌸', '🌼', '🌻', '🌹', '🌷', '🌙', '⭐', '🌟', '✨', '💫', '⚡', '🔥', '💧', '🌊']
+        }
+    };
+    var selectEmoji = function (emoji) {
+        if (emojiPickerTarget === 'collapsed') {
+            handleCollapsedIconChange(emoji);
+        }
+        else if (emojiPickerTarget === 'expanded') {
+            handlePropertyChange('expandedIcon', emoji);
+        }
+        closeEmojiPicker();
+    };
+    var closeEmojiPicker = function () {
+        setShowEmojiPicker(false);
+        setEmojiPickerTarget(null);
+        setActiveTab('arrows');
+        setSearchTerm('');
+    };
+    // Filter emojis based on search term
+    var getFilteredEmojis = function () {
+        var _a;
+        var categoryEmojis = ((_a = emojiCategories[activeTab]) === null || _a === void 0 ? void 0 : _a.emojis) || [];
+        if (!searchTerm)
+            return categoryEmojis;
+        return categoryEmojis.filter(function (emoji) {
+            return emoji.toLowerCase().includes(searchTerm.toLowerCase());
+        });
+    };
+    return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                fontSize: '14px',
+                fontWeight: '600',
+                color: '#323130',
+                marginBottom: '12px'
+            } }, label),
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                fontSize: '12px',
+                color: '#666',
+                lineHeight: '1.4',
+                marginBottom: '16px'
+            } }, "Configure expand/collapse icons for this section. Choose from predefined options or enter custom text."),
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Toggle__WEBPACK_IMPORTED_MODULE_1__.Toggle, { label: "Enable Icons", checked: settings.enabled, onText: "On", offText: "Off", onChange: function (_, checked) { return handlePropertyChange('enabled', checked); } })),
+        settings.enabled && (react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null,
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_2__.Dropdown, { label: "Icon Position", options: positionOptions, selectedKey: settings.iconPosition, onChange: function (_, option) { return handlePropertyChange('iconPosition', option === null || option === void 0 ? void 0 : option.key); } })),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { display: 'flex', alignItems: 'flex-end', gap: '8px' } },
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { flex: 1 } },
+                        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_ComboBox__WEBPACK_IMPORTED_MODULE_3__.ComboBox, { label: "Collapsed Icon", options: collapsedIconOptions, text: settings.collapsedIcon, allowFreeform: true, autoComplete: "on", onChange: function (_, option, __, text) {
+                                if (option) {
+                                    handleCollapsedIconChange(option.key);
+                                }
+                                else if (text !== undefined) {
+                                    handleCollapsedIconChange(text);
+                                }
+                            } })),
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_4__.IconButton, { iconProps: { iconName: 'Emoji2' }, title: "Open emoji picker", onClick: function () { return openEmojiPicker('collapsed'); }, style: { marginBottom: '8px' } }))),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { display: 'flex', alignItems: 'flex-end', gap: '8px' } },
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { flex: 1 } },
+                        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_ComboBox__WEBPACK_IMPORTED_MODULE_3__.ComboBox, { label: "Expanded Icon", options: expandedIconOptions, text: settings.expandedIcon, allowFreeform: true, autoComplete: "on", onChange: function (_, option, __, text) {
+                                if (option) {
+                                    handlePropertyChange('expandedIcon', option.key);
+                                }
+                                else if (text !== undefined) {
+                                    handlePropertyChange('expandedIcon', text);
+                                }
+                            } })),
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_4__.IconButton, { iconProps: { iconName: 'Emoji2' }, title: "Open emoji picker", onClick: function () { return openEmojiPicker('expanded'); }, style: { marginBottom: '8px' } }))))),
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Modal__WEBPACK_IMPORTED_MODULE_5__.Modal, { isOpen: showEmojiPicker, onDismiss: closeEmojiPicker, isBlocking: false, containerClassName: "emoji-picker-modal" },
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                    padding: '24px',
+                    backgroundColor: 'white',
+                    borderRadius: '8px',
+                    maxWidth: '500px',
+                    maxHeight: '600px',
+                    overflow: 'auto'
+                } },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                        fontSize: '18px',
+                        fontWeight: '600',
+                        marginBottom: '16px',
+                        color: '#323130'
+                    } },
+                    "Select Emoji for ",
+                    emojiPickerTarget === 'collapsed' ? 'Collapsed' : 'Expanded',
+                    " Icon"),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: '16px' } },
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", { type: "text", placeholder: "Search emojis...", value: searchTerm, onChange: function (e) { return setSearchTerm(e.target.value); }, style: {
+                            width: '100%',
+                            padding: '8px 12px',
+                            border: '1px solid #e1dfdd',
+                            borderRadius: '4px',
+                            fontSize: '14px',
+                            outline: 'none'
+                        }, onFocus: function (e) { return e.target.style.borderColor = '#0078d4'; }, onBlur: function (e) { return e.target.style.borderColor = '#e1dfdd'; } })),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                        display: 'flex',
+                        marginBottom: '16px',
+                        borderBottom: '1px solid #e1dfdd'
+                    } }, Object.keys(emojiCategories).map(function (key) {
+                    var category = emojiCategories[key];
+                    return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { key: key, onClick: function () { return setActiveTab(key); }, style: {
+                            padding: '8px 16px',
+                            border: 'none',
+                            backgroundColor: activeTab === key ? '#0078d4' : 'transparent',
+                            color: activeTab === key ? 'white' : '#323130',
+                            cursor: 'pointer',
+                            fontSize: '14px',
+                            fontWeight: activeTab === key ? '600' : '400',
+                            borderBottom: activeTab === key ? '2px solid #0078d4' : '2px solid transparent'
+                        } }, category.name));
+                })),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(8, 1fr)',
+                        gap: '8px',
+                        marginBottom: '16px',
+                        minHeight: '200px'
+                    } }, getFilteredEmojis().map(function (emoji, index) { return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { key: index, onClick: function () { return selectEmoji(emoji); }, style: {
+                        fontSize: '20px',
+                        padding: '8px',
+                        border: '1px solid #e1dfdd',
+                        borderRadius: '4px',
+                        backgroundColor: 'white',
+                        cursor: 'pointer',
+                        transition: 'all 0.2s ease',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        minHeight: '36px'
+                    }, onMouseEnter: function (e) {
+                        e.currentTarget.style.backgroundColor = '#f3f2f1';
+                        e.currentTarget.style.borderColor = '#c8c6c4';
+                    }, onMouseLeave: function (e) {
+                        e.currentTarget.style.backgroundColor = 'white';
+                        e.currentTarget.style.borderColor = '#e1dfdd';
+                    } }, emoji)); })),
+                getFilteredEmojis().length === 0 && searchTerm && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                        textAlign: 'center',
+                        color: '#666',
+                        fontSize: '14px',
+                        padding: '20px'
+                    } },
+                    "No emojis found matching \"",
+                    searchTerm,
+                    "\"")),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                        display: 'flex',
+                        justifyContent: 'flex-end',
+                        gap: '8px'
+                    } },
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_6__.DefaultButton, { text: "Cancel", onClick: closeEmojiPicker }))))));
+};
+
+
+/***/ }),
+
 /***/ 8195:
 /*!*********************************************************************!*\
   !*** ./lib/webparts/fancyList/propertyPane/SectionModuleControl.js ***!
@@ -896,14 +1172,46 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ 5959);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fluentui/react/lib/Button */ 9425);
+/* harmony import */ var _fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @fluentui/react/lib/Button */ 9425);
+/* harmony import */ var _IconControl__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./IconControl */ 8189);
+/* harmony import */ var _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../DEFAULTS_CONFIG */ 7702);
+var __assign = (undefined && undefined.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+
+
 
 
 var SectionModuleControl = function (_a) {
     var sectionType = _a.sectionType, sectionSettings = _a.sectionSettings, onChange = _a.onChange, label = _a.label;
     var handleReset = function () {
-        // TODO: Implement reset functionality
-        console.log("Reset ".concat(sectionType, " settings"));
+        // Get the default settings for this section type
+        var defaultSettings;
+        switch (sectionType) {
+            case 'category':
+                defaultSettings = _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_2__["default"].categorySectionSettings;
+                break;
+            case 'subject':
+                defaultSettings = _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_2__["default"].subjectSectionSettings;
+                break;
+            case 'description':
+                defaultSettings = _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_2__["default"].descriptionSectionSettings;
+                break;
+            default:
+                console.error("Unknown section type: ".concat(sectionType));
+                return;
+        }
+        // Reset to default settings
+        onChange(defaultSettings);
+        console.log("Reset ".concat(sectionType, " settings to defaults"));
     };
     var getSectionTitle = function () {
         switch (sectionType) {
@@ -929,6 +1237,11 @@ var SectionModuleControl = function (_a) {
                 lineHeight: '1.4',
                 marginBottom: '16px'
             } }, getSectionDescription()),
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_IconControl__WEBPACK_IMPORTED_MODULE_1__.IconControl, { label: "Expand/Collapse Icons", settings: sectionSettings.iconSettings, onChange: function (iconSettings) {
+                    var newSettings = __assign(__assign({}, sectionSettings), { iconSettings: iconSettings });
+                    onChange(newSettings);
+                } })),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
                 padding: '16px',
                 backgroundColor: '#f3f2f1',
@@ -938,10 +1251,10 @@ var SectionModuleControl = function (_a) {
                 color: '#666',
                 fontSize: '14px'
             } },
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: '8px' } }, "\uD83D\uDD27 Controls coming soon..."),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { fontSize: '12px' } }, "Font, Color, Background, Shape, and Icon controls will be implemented here")),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: '8px' } }, "\uD83D\uDD27 Additional controls coming soon..."),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { fontSize: '12px' } }, "Font, Color, Background, and Shape controls will be implemented here")),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginTop: 16 } },
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_1__.PrimaryButton, { text: sectionSettings.resetButtonText, onClick: handleReset, disabled: true }))));
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_3__.PrimaryButton, { text: sectionSettings.resetButtonText, onClick: handleReset, disabled: false }))));
 };
 
 
@@ -1316,6 +1629,42 @@ var getActiveElement = function (doc) {
     }
     return ae;
 };
+
+
+/***/ }),
+
+/***/ 8377:
+/*!*****************************************************************!*\
+  !*** ./node_modules/@fluentui/dom-utilities/lib/getChildren.js ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   getChildren: () => (/* binding */ getChildren)
+/* harmony export */ });
+/* harmony import */ var _isVirtualElement__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./isVirtualElement */ 6441);
+
+/**
+ * Gets the elements which are child elements of the given element.
+ * If `allowVirtualChildren` is `true`, this method enumerates virtual child elements
+ * after the original children.
+ * @param parent - The element to get the children of.
+ * @param allowVirtualChildren - true if the method should enumerate virtual child elements.
+ */
+function getChildren(parent, allowVirtualChildren) {
+    if (allowVirtualChildren === void 0) { allowVirtualChildren = true; }
+    var children = [];
+    if (parent) {
+        for (var i = 0; i < parent.children.length; i++) {
+            children.push(parent.children.item(i));
+        }
+        if (allowVirtualChildren && (0,_isVirtualElement__WEBPACK_IMPORTED_MODULE_0__.isVirtualElement)(parent)) {
+            children.push.apply(children, parent._virtual.children);
+        }
+    }
+    return children;
+}
 
 
 /***/ }),
@@ -4571,6 +4920,45 @@ function useAsync() {
 
 /***/ }),
 
+/***/ 4824:
+/*!**************************************************************!*\
+  !*** ./node_modules/@fluentui/react-hooks/lib/useBoolean.js ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   useBoolean: () => (/* binding */ useBoolean)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ 5959);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _useConst__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./useConst */ 5559);
+
+
+/**
+ * Hook to store a value and generate callbacks for setting the value to true or false.
+ * The identity of the callbacks will always stay the same.
+ *
+ * @param initialState - Initial value
+ * @returns Array with the current value and an object containing the updater callbacks.
+ */
+function useBoolean(initialState) {
+    var _a = react__WEBPACK_IMPORTED_MODULE_0__.useState(initialState), value = _a[0], setValue = _a[1];
+    var setTrue = (0,_useConst__WEBPACK_IMPORTED_MODULE_1__.useConst)(function () { return function () {
+        setValue(true);
+    }; });
+    var setFalse = (0,_useConst__WEBPACK_IMPORTED_MODULE_1__.useConst)(function () { return function () {
+        setValue(false);
+    }; });
+    var toggle = (0,_useConst__WEBPACK_IMPORTED_MODULE_1__.useConst)(function () { return function () {
+        setValue(function (currentValue) { return !currentValue; });
+    }; });
+    return [value, { setTrue: setTrue, setFalse: setFalse, toggle: toggle }];
+}
+
+
+/***/ }),
+
 /***/ 5559:
 /*!************************************************************!*\
   !*** ./node_modules/@fluentui/react-hooks/lib/useConst.js ***!
@@ -5219,6 +5607,373 @@ var DirectionalHint = {
      */
     rightBottomEdge: 13,
 };
+
+
+/***/ }),
+
+/***/ 472:
+/*!**************************************************************************!*\
+  !*** ./node_modules/@fluentui/react/lib/components/Autofill/Autofill.js ***!
+  \**************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Autofill: () => (/* binding */ Autofill)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 196);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ 5959);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Utilities__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Utilities */ 2553);
+/* harmony import */ var _Utilities__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../Utilities */ 9524);
+/* harmony import */ var _Utilities__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../Utilities */ 2477);
+/* harmony import */ var _Utilities__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../Utilities */ 3211);
+/* harmony import */ var _Utilities__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../Utilities */ 481);
+/* harmony import */ var _Utilities__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../Utilities */ 7974);
+/* harmony import */ var _fluentui_react_window_provider__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @fluentui/react-window-provider */ 6130);
+
+
+
+
+var SELECTION_FORWARD = 'forward';
+var SELECTION_BACKWARD = 'backward';
+/**
+ * {@docCategory Autofill}
+ */
+var Autofill = /** @class */ (function (_super) {
+    (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__extends)(Autofill, _super);
+    function Autofill(props) {
+        var _this = _super.call(this, props) || this;
+        _this._inputElement = react__WEBPACK_IMPORTED_MODULE_0__.createRef();
+        _this._autoFillEnabled = true;
+        // Composition events are used when the character/text requires several keystrokes to be completed.
+        // Some examples of this are mobile text input and languages like Japanese or Arabic.
+        // Find out more at https://developer.mozilla.org/en-US/docs/Web/Events/compositionstart
+        _this._onCompositionStart = function (ev) {
+            _this.setState({ isComposing: true });
+            _this._autoFillEnabled = false;
+        };
+        // Composition events are used when the character/text requires several keystrokes to be completed.
+        // Some examples of this are mobile text input and languages like Japanese or Arabic.
+        // Find out more at https://developer.mozilla.org/en-US/docs/Web/Events/compositionstart
+        _this._onCompositionUpdate = function () {
+            if ((0,_Utilities__WEBPACK_IMPORTED_MODULE_2__.isIE11)()) {
+                _this._updateValue(_this._getCurrentInputValue(), true);
+            }
+        };
+        // Composition events are used when the character/text requires several keystrokes to be completed.
+        // Some examples of this are mobile text input and languages like Japanese or Arabic.
+        // Find out more at https://developer.mozilla.org/en-US/docs/Web/Events/compositionstart
+        _this._onCompositionEnd = function (ev) {
+            var inputValue = _this._getCurrentInputValue();
+            _this._tryEnableAutofill(inputValue, _this.value, false, true);
+            _this.setState({ isComposing: false });
+            // Due to timing, this needs to be async, otherwise no text will be selected.
+            _this._async.setTimeout(function () {
+                // it's technically possible that the value of isComposing is reset during this timeout,
+                // so explicitly trigger this with composing=true here, since it is supposed to be the
+                // update for composition end
+                _this._updateValue(_this._getCurrentInputValue(), false);
+            }, 0);
+        };
+        _this._onClick = function () {
+            if (_this.value && _this.value !== '' && _this._autoFillEnabled) {
+                _this._autoFillEnabled = false;
+            }
+        };
+        _this._onKeyDown = function (ev) {
+            if (_this.props.onKeyDown) {
+                _this.props.onKeyDown(ev);
+            }
+            // If the event is actively being composed, then don't alert autofill.
+            // Right now typing does not have isComposing, once that has been fixed any should be removed.
+            if (!ev.nativeEvent.isComposing) {
+                // eslint-disable-next-line @typescript-eslint/no-deprecated
+                switch (ev.which) {
+                    case _Utilities__WEBPACK_IMPORTED_MODULE_3__.KeyCodes.backspace:
+                        _this._autoFillEnabled = false;
+                        break;
+                    case _Utilities__WEBPACK_IMPORTED_MODULE_3__.KeyCodes.left:
+                    case _Utilities__WEBPACK_IMPORTED_MODULE_3__.KeyCodes.right:
+                        if (_this._autoFillEnabled) {
+                            _this.setState(function (prev) { return ({
+                                inputValue: _this.props.suggestedDisplayValue || prev.inputValue,
+                            }); });
+                            _this._autoFillEnabled = false;
+                        }
+                        break;
+                    default:
+                        if (!_this._autoFillEnabled) {
+                            // eslint-disable-next-line @typescript-eslint/no-deprecated
+                            if (_this.props.enableAutofillOnKeyPress.indexOf(ev.which) !== -1) {
+                                _this._autoFillEnabled = true;
+                            }
+                        }
+                        break;
+                }
+            }
+        };
+        _this._onInputChanged = function (ev) {
+            var value = _this._getCurrentInputValue(ev);
+            if (!_this.state.isComposing) {
+                _this._tryEnableAutofill(value, _this.value, ev.nativeEvent.isComposing);
+            }
+            // If it is not IE11 and currently composing, update the value
+            if (!((0,_Utilities__WEBPACK_IMPORTED_MODULE_2__.isIE11)() && _this.state.isComposing)) {
+                var nativeEventComposing = ev.nativeEvent.isComposing;
+                var isComposing = nativeEventComposing === undefined ? _this.state.isComposing : nativeEventComposing;
+                _this._updateValue(value, isComposing);
+            }
+        };
+        _this._onChanged = function () {
+            // Swallow this event, we don't care about it
+            // We must provide it because React PropTypes marks it as required, but onInput serves the correct purpose
+            return;
+        };
+        /**
+         * Updates the current input value as well as getting a new display value.
+         * @param newValue - The new value from the input
+         */
+        _this._updateValue = function (newValue, composing) {
+            // Only proceed if the value is nonempty and is different from the old value
+            // This is to work around the fact that, in IE 11, inputs with a placeholder fire an onInput event on focus
+            if (!newValue && newValue === _this.value) {
+                return;
+            }
+            // eslint-disable-next-line @typescript-eslint/no-deprecated
+            var _a = _this.props, onInputChange = _a.onInputChange, onInputValueChange = _a.onInputValueChange;
+            if (onInputChange) {
+                newValue = (onInputChange === null || onInputChange === void 0 ? void 0 : onInputChange(newValue, composing)) || '';
+            }
+            _this.setState({ inputValue: newValue }, function () { return onInputValueChange === null || onInputValueChange === void 0 ? void 0 : onInputValueChange(newValue, composing); });
+        };
+        (0,_Utilities__WEBPACK_IMPORTED_MODULE_4__.initializeComponentRef)(_this);
+        _this._async = new _Utilities__WEBPACK_IMPORTED_MODULE_5__.Async(_this);
+        _this.state = {
+            inputValue: props.defaultVisibleValue || '',
+            isComposing: false,
+        };
+        return _this;
+    }
+    Autofill.getDerivedStateFromProps = function (props, state) {
+        // eslint-disable-next-line @typescript-eslint/no-deprecated
+        if (props.updateValueInWillReceiveProps) {
+            // eslint-disable-next-line @typescript-eslint/no-deprecated
+            var updatedInputValue = props.updateValueInWillReceiveProps();
+            // Don't update if we have a null value or the value isn't changing
+            // the value should still update if an empty string is passed in
+            if (updatedInputValue !== null && updatedInputValue !== state.inputValue && !state.isComposing) {
+                return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)({}, state), { inputValue: updatedInputValue });
+            }
+        }
+        return null;
+    };
+    Object.defineProperty(Autofill.prototype, "cursorLocation", {
+        get: function () {
+            if (this._inputElement.current) {
+                var inputElement = this._inputElement.current;
+                if (inputElement.selectionDirection !== SELECTION_FORWARD) {
+                    return inputElement.selectionEnd;
+                }
+                else {
+                    return inputElement.selectionStart;
+                }
+            }
+            else {
+                return -1;
+            }
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Autofill.prototype, "isValueSelected", {
+        get: function () {
+            return Boolean(this.inputElement && this.inputElement.selectionStart !== this.inputElement.selectionEnd);
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Autofill.prototype, "value", {
+        get: function () {
+            return this._getControlledValue() || this.state.inputValue || '';
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Autofill.prototype, "selectionStart", {
+        get: function () {
+            return this._inputElement.current ? this._inputElement.current.selectionStart : -1;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Autofill.prototype, "selectionEnd", {
+        get: function () {
+            return this._inputElement.current ? this._inputElement.current.selectionEnd : -1;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Autofill.prototype, "inputElement", {
+        get: function () {
+            return this._inputElement.current;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Autofill.prototype.componentDidUpdate = function (_, _1, cursor) {
+        var _a;
+        var _b = this.props, suggestedDisplayValue = _b.suggestedDisplayValue, shouldSelectFullInputValueInComponentDidUpdate = _b.shouldSelectFullInputValueInComponentDidUpdate, preventValueSelection = _b.preventValueSelection;
+        var differenceIndex = 0;
+        if (preventValueSelection) {
+            return;
+        }
+        var document = ((_a = this.context) === null || _a === void 0 ? void 0 : _a.window.document) || (0,_Utilities__WEBPACK_IMPORTED_MODULE_6__.getDocument)(this._inputElement.current);
+        var isFocused = this._inputElement.current && this._inputElement.current === (document === null || document === void 0 ? void 0 : document.activeElement);
+        if (isFocused &&
+            this._autoFillEnabled &&
+            this.value &&
+            suggestedDisplayValue &&
+            _doesTextStartWith(suggestedDisplayValue, this.value)) {
+            var shouldSelectFullRange = false;
+            if (shouldSelectFullInputValueInComponentDidUpdate) {
+                shouldSelectFullRange = shouldSelectFullInputValueInComponentDidUpdate();
+            }
+            if (shouldSelectFullRange) {
+                this._inputElement.current.setSelectionRange(0, suggestedDisplayValue.length, SELECTION_BACKWARD);
+            }
+            else {
+                while (differenceIndex < this.value.length &&
+                    this.value[differenceIndex].toLocaleLowerCase() === suggestedDisplayValue[differenceIndex].toLocaleLowerCase()) {
+                    differenceIndex++;
+                }
+                if (differenceIndex > 0) {
+                    this._inputElement.current.setSelectionRange(differenceIndex, suggestedDisplayValue.length, SELECTION_BACKWARD);
+                }
+            }
+        }
+        else if (this._inputElement.current) {
+            if (cursor !== null && !this._autoFillEnabled && !this.state.isComposing) {
+                this._inputElement.current.setSelectionRange(cursor.start, cursor.end, cursor.dir);
+            }
+        }
+    };
+    Autofill.prototype.componentWillUnmount = function () {
+        this._async.dispose();
+    };
+    // eslint-disable-next-line @typescript-eslint/no-deprecated
+    Autofill.prototype.render = function () {
+        var nativeProps = (0,_Utilities__WEBPACK_IMPORTED_MODULE_7__.getNativeProps)(this.props, _Utilities__WEBPACK_IMPORTED_MODULE_7__.inputProperties);
+        var style = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)({}, this.props.style), { fontFamily: 'inherit' });
+        return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)({ autoCapitalize: "off", autoComplete: "off", "aria-autocomplete": 'both' }, nativeProps, { style: style, ref: this._inputElement, value: this._getDisplayValue(), onCompositionStart: this._onCompositionStart, onCompositionUpdate: this._onCompositionUpdate, onCompositionEnd: this._onCompositionEnd, 
+            // TODO (Fabric 8?) - switch to calling only onChange. See notes in TextField._onInputChange.
+            onChange: this._onChanged, onInput: this._onInputChanged, onKeyDown: this._onKeyDown, onClick: this.props.onClick ? this.props.onClick : this._onClick, "data-lpignore": true })));
+    };
+    Autofill.prototype.focus = function () {
+        this._inputElement.current && this._inputElement.current.focus();
+    };
+    Autofill.prototype.clear = function () {
+        this._autoFillEnabled = true;
+        this._updateValue('', false);
+        this._inputElement.current && this._inputElement.current.setSelectionRange(0, 0);
+    };
+    Autofill.prototype.getSnapshotBeforeUpdate = function () {
+        var _a, _b;
+        var inel = this._inputElement.current;
+        if (inel && inel.selectionStart !== this.value.length) {
+            return {
+                start: (_a = inel.selectionStart) !== null && _a !== void 0 ? _a : inel.value.length,
+                end: (_b = inel.selectionEnd) !== null && _b !== void 0 ? _b : inel.value.length,
+                dir: inel.selectionDirection || 'backward' || 0,
+            };
+        }
+        return null;
+    };
+    Autofill.prototype._getCurrentInputValue = function (ev) {
+        if (ev && ev.target && ev.target.value) {
+            return ev.target.value;
+        }
+        else if (this.inputElement && this.inputElement.value) {
+            return this.inputElement.value;
+        }
+        else {
+            return '';
+        }
+    };
+    /**
+     * Attempts to enable autofill. Whether or not autofill is enabled depends on the input value,
+     * whether or not any text is selected, and only if the new input value is longer than the old input value.
+     * Autofill should never be set to true if the value is composing. Once compositionEnd is called, then
+     * it should be completed.
+     * See https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent for more information on composition.
+     * @param newValue - new input value
+     * @param oldValue - old input value
+     * @param isComposing - if true then the text is actively being composed and it has not completed.
+     * @param isComposed - if the text is a composed text value.
+     */
+    Autofill.prototype._tryEnableAutofill = function (newValue, oldValue, isComposing, isComposed) {
+        if (!isComposing &&
+            newValue &&
+            this._inputElement.current &&
+            this._inputElement.current.selectionStart === newValue.length &&
+            !this._autoFillEnabled &&
+            (newValue.length > oldValue.length || isComposed)) {
+            this._autoFillEnabled = true;
+        }
+    };
+    Autofill.prototype._getDisplayValue = function () {
+        if (this._autoFillEnabled) {
+            return _getDisplayValue(this.value, this.props.suggestedDisplayValue);
+        }
+        return this.value;
+    };
+    Autofill.prototype._getControlledValue = function () {
+        var value = this.props.value;
+        if (value === undefined || typeof value === 'string') {
+            return value;
+        }
+        // eslint-disable-next-line no-console
+        console.warn("props.value of Autofill should be a string, but it is ".concat(value, " with type of ").concat(typeof value));
+        return value.toString();
+    };
+    Autofill.defaultProps = {
+        enableAutofillOnKeyPress: [_Utilities__WEBPACK_IMPORTED_MODULE_3__.KeyCodes.down, _Utilities__WEBPACK_IMPORTED_MODULE_3__.KeyCodes.up],
+    };
+    // need to check WindowContext to get the provided document
+    Autofill.contextType = _fluentui_react_window_provider__WEBPACK_IMPORTED_MODULE_8__.WindowContext;
+    return Autofill;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component));
+
+/**
+ * Returns a string that should be used as the display value.
+ * It evaluates this based on whether or not the suggested value starts with the input value
+ * and whether or not autofill is enabled.
+ * @param inputValue - the value that the input currently has.
+ * @param suggestedDisplayValue - the possible full value
+ */
+function _getDisplayValue(inputValue, suggestedDisplayValue) {
+    var displayValue = inputValue;
+    if (suggestedDisplayValue && inputValue && _doesTextStartWith(suggestedDisplayValue, displayValue)) {
+        displayValue = suggestedDisplayValue;
+    }
+    return displayValue;
+}
+function _doesTextStartWith(text, startWith) {
+    if (!text || !startWith) {
+        return false;
+    }
+    if (true) {
+        for (var _i = 0, _a = [text, startWith]; _i < _a.length; _i++) {
+            var val = _a[_i];
+            if (typeof val !== 'string') {
+                throw new Error("".concat(Autofill.name
+                // eslint-disable-next-line @fluentui/max-len
+                , " received non-string value \"").concat(val, "\" of type ").concat(typeof val, " from either input's value or suggestedDisplayValue"));
+            }
+        }
+    }
+    return text.toLocaleLowerCase().indexOf(startWith.toLocaleLowerCase()) === 0;
+}
 
 
 /***/ }),
@@ -9335,6 +10090,2460 @@ var getStyles = function (props) {
         ],
     };
 };
+
+
+/***/ }),
+
+/***/ 3270:
+/*!*************************************************************************************!*\
+  !*** ./node_modules/@fluentui/react/lib/components/ComboBox/ComboBox.classNames.js ***!
+  \*************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   getClassNames: () => (/* binding */ getClassNames),
+/* harmony export */   getComboBoxOptionClassNames: () => (/* binding */ getComboBoxOptionClassNames)
+/* harmony export */ });
+/* harmony import */ var _Utilities__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Utilities */ 5659);
+/* harmony import */ var _Styling__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Styling */ 8455);
+
+
+var getClassNames = (0,_Utilities__WEBPACK_IMPORTED_MODULE_0__.memoizeFunction)(function (styles, className, isOpen, disabled, required, focused, allowFreeForm, hasErrorMessage) {
+    // const mergeStyles = mergeStylesShadow(styles.__shadowConfig__);
+    return {
+        container: (0,_Styling__WEBPACK_IMPORTED_MODULE_1__.mergeStyles)(styles.__shadowConfig__, 'ms-ComboBox-container', className, styles.container),
+        label: (0,_Styling__WEBPACK_IMPORTED_MODULE_1__.mergeStyles)(styles.__shadowConfig__, styles.label, disabled && styles.labelDisabled),
+        root: (0,_Styling__WEBPACK_IMPORTED_MODULE_1__.mergeStyles)(styles.__shadowConfig__, 'ms-ComboBox', hasErrorMessage ? styles.rootError : isOpen && 'is-open', required && 'is-required', styles.root, !allowFreeForm && styles.rootDisallowFreeForm, hasErrorMessage && !focused ? styles.rootError : !disabled && focused && styles.rootFocused, !disabled && {
+            selectors: {
+                ':hover': hasErrorMessage ? styles.rootError : !isOpen && !focused && styles.rootHovered,
+                ':active': hasErrorMessage ? styles.rootError : styles.rootPressed,
+                ':focus': hasErrorMessage ? styles.rootError : styles.rootFocused,
+            },
+        }, disabled && ['is-disabled', styles.rootDisabled]),
+        input: (0,_Styling__WEBPACK_IMPORTED_MODULE_1__.mergeStyles)(styles.__shadowConfig__, 'ms-ComboBox-Input', styles.input, disabled && styles.inputDisabled),
+        errorMessage: (0,_Styling__WEBPACK_IMPORTED_MODULE_1__.mergeStyles)(styles.__shadowConfig__, styles.errorMessage),
+        callout: (0,_Styling__WEBPACK_IMPORTED_MODULE_1__.mergeStyles)(styles.__shadowConfig__, 'ms-ComboBox-callout', styles.callout),
+        optionsContainerWrapper: (0,_Styling__WEBPACK_IMPORTED_MODULE_1__.mergeStyles)(styles.__shadowConfig__, 'ms-ComboBox-optionsContainerWrapper', styles.optionsContainerWrapper),
+        optionsContainer: (0,_Styling__WEBPACK_IMPORTED_MODULE_1__.mergeStyles)(styles.__shadowConfig__, 'ms-ComboBox-optionsContainer', styles.optionsContainer),
+        header: (0,_Styling__WEBPACK_IMPORTED_MODULE_1__.mergeStyles)(styles.__shadowConfig__, 'ms-ComboBox-header', styles.header),
+        divider: (0,_Styling__WEBPACK_IMPORTED_MODULE_1__.mergeStyles)(styles.__shadowConfig__, 'ms-ComboBox-divider', styles.divider),
+        screenReaderText: (0,_Styling__WEBPACK_IMPORTED_MODULE_1__.mergeStyles)(styles.__shadowConfig__, styles.screenReaderText),
+    };
+});
+var getComboBoxOptionClassNames = (0,_Utilities__WEBPACK_IMPORTED_MODULE_0__.memoizeFunction)(function (styles) {
+    return {
+        optionText: (0,_Styling__WEBPACK_IMPORTED_MODULE_1__.mergeStyles)(styles.__shadowConfig__, 'ms-ComboBox-optionText', styles.optionText),
+        root: (0,_Styling__WEBPACK_IMPORTED_MODULE_1__.mergeStyles)(styles.__shadowConfig__, 'ms-ComboBox-option', styles.root, {
+            selectors: {
+                ':hover': styles.rootHovered,
+                ':focus': styles.rootFocused,
+                ':active': styles.rootPressed,
+            },
+        }),
+        optionTextWrapper: (0,_Styling__WEBPACK_IMPORTED_MODULE_1__.mergeStyles)(styles.__shadowConfig__, styles.optionTextWrapper),
+    };
+});
+
+
+/***/ }),
+
+/***/ 3898:
+/*!**************************************************************************!*\
+  !*** ./node_modules/@fluentui/react/lib/components/ComboBox/ComboBox.js ***!
+  \**************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   ComboBox: () => (/* binding */ ComboBox)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 196);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ 5959);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Autofill__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../Autofill */ 472);
+/* harmony import */ var _Utilities__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Utilities */ 6924);
+/* harmony import */ var _Utilities__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../Utilities */ 4751);
+/* harmony import */ var _Utilities__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../Utilities */ 3703);
+/* harmony import */ var _Utilities__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../Utilities */ 5486);
+/* harmony import */ var _Utilities__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../Utilities */ 6463);
+/* harmony import */ var _Utilities__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../Utilities */ 8972);
+/* harmony import */ var _Utilities__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../../Utilities */ 9524);
+/* harmony import */ var _Utilities__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../../Utilities */ 6859);
+/* harmony import */ var _Utilities__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../../Utilities */ 7459);
+/* harmony import */ var _Utilities__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../../Utilities */ 2477);
+/* harmony import */ var _Utilities__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../../Utilities */ 3211);
+/* harmony import */ var _Utilities__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ../../Utilities */ 1424);
+/* harmony import */ var _Utilities__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ../../Utilities */ 5285);
+/* harmony import */ var _Utilities__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ../../Utilities */ 8370);
+/* harmony import */ var _Utilities__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ../../Utilities */ 7974);
+/* harmony import */ var _Utilities__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ../../Utilities */ 5004);
+/* harmony import */ var _Utilities__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ../../Utilities */ 7158);
+/* harmony import */ var _Callout__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../Callout */ 6650);
+/* harmony import */ var _Callout__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../Callout */ 9861);
+/* harmony import */ var _Checkbox__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../../Checkbox */ 8650);
+/* harmony import */ var _ComboBox_styles__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./ComboBox.styles */ 4604);
+/* harmony import */ var _ComboBox_classNames__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./ComboBox.classNames */ 3270);
+/* harmony import */ var _Label__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../Label */ 3166);
+/* harmony import */ var _SelectableOption__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../SelectableOption */ 99);
+/* harmony import */ var _SelectableOption__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ../../SelectableOption */ 2552);
+/* harmony import */ var _Button__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../Button */ 4533);
+/* harmony import */ var _Button__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../Button */ 8293);
+/* harmony import */ var _fluentui_react_hooks__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @fluentui/react-hooks */ 544);
+/* harmony import */ var _fluentui_utilities__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @fluentui/utilities */ 8377);
+/* harmony import */ var _fluentui_react_window_provider__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! @fluentui/react-window-provider */ 6130);
+/* harmony import */ var _utilities_dom__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../utilities/dom */ 4707);
+
+
+
+
+
+
+
+
+
+
+// eslint-disable-next-line @typescript-eslint/no-deprecated
+
+
+
+
+
+var SearchDirection;
+(function (SearchDirection) {
+    SearchDirection[SearchDirection["backward"] = -1] = "backward";
+    SearchDirection[SearchDirection["none"] = 0] = "none";
+    SearchDirection[SearchDirection["forward"] = 1] = "forward";
+})(SearchDirection || (SearchDirection = {}));
+var HoverStatus;
+(function (HoverStatus) {
+    /** Used when the user was hovering and has since moused out of the menu items */
+    HoverStatus[HoverStatus["clearAll"] = -2] = "clearAll";
+    /** Default "normal" state, when no hover has happened or a hover is in progress */
+    HoverStatus[HoverStatus["default"] = -1] = "default";
+})(HoverStatus || (HoverStatus = {}));
+var ScrollIdleDelay = 250; /* ms */
+var TouchIdleDelay = 500; /* ms */
+/**
+ * This is used to clear any pending autocomplete text (used when autocomplete is true and
+ * allowFreeform is false)
+ */
+var ReadOnlyPendingAutoCompleteTimeout = 1000; /* ms */
+/**
+ * Internal component that is used to wrap all ComboBox options.
+ * This is used to customize when we want to re-render components,
+ * so we don't re-render every option every time render is executed.
+ */
+var ComboBoxOptionWrapper = react__WEBPACK_IMPORTED_MODULE_0__.memo(function (_a) {
+    var render = _a.render;
+    return render();
+}, function (_a, _b) {
+    var oldRender = _a.render, oldProps = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__rest)(_a, ["render"]);
+    var newRender = _b.render, newProps = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__rest)(_b, ["render"]);
+    // The render function will always be different, so we ignore that prop
+    return (0,_Utilities__WEBPACK_IMPORTED_MODULE_2__.shallowCompare)(oldProps, newProps);
+});
+var COMPONENT_NAME = 'ComboBox';
+var DEFAULT_PROPS = {
+    options: [],
+    allowFreeform: false,
+    allowParentArrowNavigation: false,
+    autoComplete: 'on',
+    buttonIconProps: { iconName: 'ChevronDown' },
+};
+function useOptionsState(_a) {
+    var options = _a.options, defaultSelectedKey = _a.defaultSelectedKey, selectedKey = _a.selectedKey;
+    /** The currently selected indices */
+    var _b = react__WEBPACK_IMPORTED_MODULE_0__.useState(function () {
+        return getSelectedIndices(options, buildDefaultSelectedKeys(defaultSelectedKey, selectedKey));
+    }), selectedIndices = _b[0], setSelectedIndices = _b[1];
+    /** The options currently available for the callout */
+    var _c = react__WEBPACK_IMPORTED_MODULE_0__.useState(options), currentOptions = _c[0], setCurrentOptions = _c[1];
+    /** This value is used for the autocomplete hint value */
+    var _d = react__WEBPACK_IMPORTED_MODULE_0__.useState(), suggestedDisplayValue = _d[0], setSuggestedDisplayValue = _d[1];
+    react__WEBPACK_IMPORTED_MODULE_0__.useEffect(function () {
+        if (selectedKey !== undefined) {
+            var selectedKeys = buildSelectedKeys(selectedKey);
+            var indices = getSelectedIndices(options, selectedKeys);
+            setSelectedIndices(indices);
+        }
+        setCurrentOptions(options);
+    }, [options, selectedKey]);
+    react__WEBPACK_IMPORTED_MODULE_0__.useEffect(function () {
+        if (selectedKey === null) {
+            setSuggestedDisplayValue(undefined);
+        }
+    }, [selectedKey]);
+    return [
+        selectedIndices,
+        setSelectedIndices,
+        currentOptions,
+        setCurrentOptions,
+        suggestedDisplayValue,
+        setSuggestedDisplayValue,
+    ];
+}
+var ComboBox = react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(function (propsWithoutDefaults, forwardedRef) {
+    var _a = (0,_Utilities__WEBPACK_IMPORTED_MODULE_3__.getPropsWithDefaults)(DEFAULT_PROPS, propsWithoutDefaults), ref = _a.ref, props = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__rest)(_a, ["ref"]);
+    var rootRef = react__WEBPACK_IMPORTED_MODULE_0__.useRef(null);
+    var mergedRootRef = (0,_fluentui_react_hooks__WEBPACK_IMPORTED_MODULE_4__.useMergedRefs)(rootRef, forwardedRef);
+    var _b = useOptionsState(props), selectedIndices = _b[0], setSelectedIndices = _b[1], currentOptions = _b[2], setCurrentOptions = _b[3], suggestedDisplayValue = _b[4], setSuggestedDisplayValue = _b[5];
+    return (react__WEBPACK_IMPORTED_MODULE_0__.createElement(ComboBoxInternal, (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)({}, props, { hoisted: {
+            mergedRootRef: mergedRootRef,
+            rootRef: rootRef,
+            selectedIndices: selectedIndices,
+            setSelectedIndices: setSelectedIndices,
+            currentOptions: currentOptions,
+            setCurrentOptions: setCurrentOptions,
+            suggestedDisplayValue: suggestedDisplayValue,
+            setSuggestedDisplayValue: setSuggestedDisplayValue,
+        } })));
+});
+ComboBox.displayName = COMPONENT_NAME;
+/**
+ * Depth-first search to find the first descendant element where the match function returns true.
+ * @param element - element to start searching at
+ * @param match - the function that determines if the element is a match
+ * @returns the matched element or null no match was found
+ */
+function findFirstDescendant(element, match) {
+    var children = (0,_fluentui_utilities__WEBPACK_IMPORTED_MODULE_5__.getChildren)(element);
+    // For loop is used because forEach cannot be stopped.
+    for (var index = 0; index < children.length; index++) {
+        var child = children[index];
+        if (match(child)) {
+            return child;
+        }
+        var candidate = findFirstDescendant(child, match);
+        if (candidate) {
+            return candidate;
+        }
+    }
+    return null;
+}
+var ComboBoxInternal = /** @class */ (function (_super) {
+    (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__extends)(ComboBoxInternal, _super);
+    function ComboBoxInternal(props) {
+        var _this = _super.call(this, props) || this;
+        /** The input aspect of the combo box */
+        _this._autofill = react__WEBPACK_IMPORTED_MODULE_0__.createRef();
+        /** The wrapping div of the input and button */
+        _this._comboBoxWrapper = react__WEBPACK_IMPORTED_MODULE_0__.createRef();
+        /** The callout element */
+        _this._comboBoxMenu = react__WEBPACK_IMPORTED_MODULE_0__.createRef();
+        /** The menu item element that is currently selected */
+        _this._selectedElement = react__WEBPACK_IMPORTED_MODULE_0__.createRef();
+        // props to prevent dismiss on scroll/resize immediately after opening
+        _this._overrideScrollDismiss = false;
+        /**
+         * {@inheritdoc}
+         */
+        _this.focus = function (shouldOpenOnFocus, useFocusAsync) {
+            if (_this.props.disabled) {
+                return;
+            }
+            if (_this._autofill.current) {
+                if (useFocusAsync) {
+                    (0,_Utilities__WEBPACK_IMPORTED_MODULE_6__.focusAsync)(_this._autofill.current);
+                }
+                else {
+                    _this._autofill.current.focus();
+                }
+                if (shouldOpenOnFocus) {
+                    _this.setState({
+                        isOpen: true,
+                    });
+                }
+            }
+            // Programmatically setting focus means that there is nothing else that needs to be done
+            // Focus is now contained
+            if (!_this._hasFocus()) {
+                _this.setState({ focusState: 'focused' });
+            }
+        };
+        /**
+         * Close menu callout if it is open
+         */
+        _this.dismissMenu = function () {
+            var isOpen = _this.state.isOpen;
+            isOpen && _this.setState({ isOpen: false });
+        };
+        /**
+         * componentWillReceiveProps handler for the auto fill component
+         * Checks/updates the input value to set, if needed
+         * @param defaultVisibleValue - the defaultVisibleValue that got passed
+         *  in to the auto fill's componentWillReceiveProps
+         * @returns - the updated value to set, if needed
+         */
+        _this._onUpdateValueInAutofillWillReceiveProps = function () {
+            var comboBox = _this._autofill.current;
+            if (!comboBox) {
+                return null;
+            }
+            if (comboBox.value === null || comboBox.value === undefined) {
+                return null;
+            }
+            return normalizeToString(_this._currentVisibleValue);
+        };
+        _this._renderComboBoxWrapper = function (multiselectAccessibleText, errorMessageId) {
+            var _a = _this.props, label = _a.label, disabled = _a.disabled, ariaLabel = _a.ariaLabel, _b = _a.ariaDescribedBy, ariaDescribedBy = _b === void 0 ? _this.props['aria-describedby'] : _b, required = _a.required, errorMessage = _a.errorMessage, buttonIconProps = _a.buttonIconProps, isButtonAriaHidden = _a.isButtonAriaHidden, title = _a.title, placeholderProp = _a.placeholder, tabIndex = _a.tabIndex, autofill = _a.autofill, iconButtonProps = _a.iconButtonProps, suggestedDisplayValue = _a.hoisted.suggestedDisplayValue;
+            var _c = _this.state, ariaActiveDescendantValue = _c.ariaActiveDescendantValue, isOpen = _c.isOpen;
+            // If the combo box has focus, is multiselect, and has a display string, then use that placeholder
+            // so that the selected items don't appear to vanish. This is not ideal but it's the only reasonable way
+            // to correct the behavior where the input is cleared so the user can type. If a full refactor is done, then this
+            // should be removed and the multiselect combo box should behave like a picker.
+            var placeholder = _this._hasFocus() && _this.props.multiSelect && multiselectAccessibleText
+                ? multiselectAccessibleText
+                : placeholderProp;
+            var labelledBy = [_this.props['aria-labelledby'], label && _this._id + '-label'].join(' ').trim();
+            var labelProps = {
+                'aria-labelledby': labelledBy ? labelledBy : undefined,
+                'aria-label': ariaLabel && !label ? ariaLabel : undefined,
+            };
+            var hasErrorMessage = errorMessage && errorMessage.length > 0 ? true : false;
+            return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { "data-ktp-target": true, ref: _this._comboBoxWrapper, id: _this._id + 'wrapper', className: _this._classNames.root, "aria-owns": isOpen ? _this._id + '-list' : undefined },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Autofill__WEBPACK_IMPORTED_MODULE_7__.Autofill, (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)({ "data-ktp-execute-target": true, "data-is-interactable": !disabled, componentRef: _this._autofill, id: _this._id + '-input', className: _this._classNames.input, type: "text", onFocus: _this._onFocus, onBlur: _this._onBlur, onKeyDown: _this._onInputKeyDown, onKeyUp: _this._onInputKeyUp, onClick: _this._onAutofillClick, onTouchStart: _this._onTouchStart, onInputValueChange: _this._onInputChange, "aria-expanded": isOpen, "aria-autocomplete": _this._getAriaAutoCompleteValue(), role: "combobox", readOnly: disabled }, labelProps, { "aria-describedby": errorMessage !== undefined ? (0,_Utilities__WEBPACK_IMPORTED_MODULE_8__.mergeAriaAttributeValues)(ariaDescribedBy, errorMessageId) : ariaDescribedBy, "aria-activedescendant": ariaActiveDescendantValue, "aria-required": required, "aria-disabled": disabled, "aria-invalid": hasErrorMessage, "aria-controls": isOpen ? _this._id + '-list' : undefined, spellCheck: false, defaultVisibleValue: _this._currentVisibleValue, suggestedDisplayValue: suggestedDisplayValue, 
+                    // eslint-disable-next-line @typescript-eslint/no-deprecated
+                    updateValueInWillReceiveProps: _this._onUpdateValueInAutofillWillReceiveProps, shouldSelectFullInputValueInComponentDidUpdate: _this._onShouldSelectFullInputValueInAutofillComponentDidUpdate, title: title, preventValueSelection: !_this._hasFocus(), placeholder: placeholder, tabIndex: disabled ? -1 : tabIndex }, autofill)),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Button__WEBPACK_IMPORTED_MODULE_9__.IconButton, (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)({ className: 'ms-ComboBox-CaretDown-button', styles: _this._getCaretButtonStyles(), role: isButtonAriaHidden ? 'presentation' : undefined, "aria-hidden": isButtonAriaHidden }, (!isButtonAriaHidden ? labelProps : undefined), { "data-is-focusable": false, tabIndex: -1, onClick: _this._onComboBoxClick, onBlur: _this._onBlur, iconProps: buttonIconProps, disabled: disabled, checked: isOpen }, iconButtonProps))));
+        };
+        /**
+         * componentDidUpdate handler for the auto fill component
+         *
+         * @param defaultVisibleValue - the current defaultVisibleValue in the auto fill's componentDidUpdate
+         * @param suggestedDisplayValue - the current suggestedDisplayValue in the auto fill's componentDidUpdate
+         * @returns - should the full value of the input be selected?
+         * True if the defaultVisibleValue equals the suggestedDisplayValue, false otherwise
+         */
+        _this._onShouldSelectFullInputValueInAutofillComponentDidUpdate = function () {
+            return _this._currentVisibleValue === _this.props.hoisted.suggestedDisplayValue;
+        };
+        /**
+         * Get the correct value to pass to the input
+         * to show to the user based off of the current props and state
+         * @returns the value to pass to the input
+         */
+        _this._getVisibleValue = function () {
+            var _a = _this.props, text = _a.text, allowFreeform = _a.allowFreeform, allowFreeInput = _a.allowFreeInput, autoComplete = _a.autoComplete, _b = _a.hoisted, suggestedDisplayValue = _b.suggestedDisplayValue, selectedIndices = _b.selectedIndices, currentOptions = _b.currentOptions;
+            var _c = _this.state, currentPendingValueValidIndex = _c.currentPendingValueValidIndex, currentPendingValue = _c.currentPendingValue, isOpen = _c.isOpen;
+            var currentPendingIndexValid = indexWithinBounds(currentOptions, currentPendingValueValidIndex);
+            // If the user passed is a value prop, use that
+            // unless we are open and have a valid current pending index
+            if (!(isOpen && currentPendingIndexValid) &&
+                (text || text === '') &&
+                (currentPendingValue === null || currentPendingValue === undefined)) {
+                return text;
+            }
+            if (_this.props.multiSelect) {
+                // Multi-select
+                if (_this._hasFocus()) {
+                    var index = -1;
+                    if (autoComplete === 'on' && currentPendingIndexValid) {
+                        index = currentPendingValueValidIndex;
+                    }
+                    return _this._getPendingString(currentPendingValue, currentOptions, index);
+                }
+                else {
+                    return _this._getMultiselectDisplayString(selectedIndices, currentOptions, suggestedDisplayValue);
+                }
+            }
+            else {
+                // Single-select
+                var index = _this._getFirstSelectedIndex();
+                if (allowFreeform || allowFreeInput) {
+                    // If we are allowing freeform/free input and autocomplete is also true
+                    // and we've got a pending value that matches an option, remember
+                    // the matched option's index
+                    if (autoComplete === 'on' && currentPendingIndexValid) {
+                        index = currentPendingValueValidIndex;
+                    }
+                    // Since we are allowing freeform, if there is currently a pending value, use that
+                    // otherwise use the index determined above (falling back to '' if we did not get a valid index)
+                    return _this._getPendingString(currentPendingValue, currentOptions, index);
+                }
+                else {
+                    // If we are not allowing freeform and have a valid index that matches the pending value,
+                    // we know we will need some version of the pending value
+                    if (currentPendingIndexValid && autoComplete === 'on') {
+                        // If autoComplete is on, return the raw pending value, otherwise remember
+                        // the matched option's index
+                        index = currentPendingValueValidIndex;
+                        return normalizeToString(currentPendingValue);
+                    }
+                    else if (!_this.state.isOpen && currentPendingValue) {
+                        return indexWithinBounds(currentOptions, index)
+                            ? currentPendingValue
+                            : normalizeToString(suggestedDisplayValue);
+                    }
+                    else {
+                        return indexWithinBounds(currentOptions, index)
+                            ? getPreviewText(currentOptions[index])
+                            : normalizeToString(suggestedDisplayValue);
+                    }
+                }
+            }
+        };
+        /**
+         * Handler for typing changes on the input
+         * @param updatedValue - the newly changed value
+         */
+        _this._onInputChange = function (updatedValue) {
+            if (_this.props.disabled) {
+                _this._handleInputWhenDisabled(null /* event */);
+                return;
+            }
+            if (_this.props.onInputValueChange) {
+                _this.props.onInputValueChange(updatedValue);
+            }
+            _this.props.allowFreeform || _this.props.allowFreeInput
+                ? _this._processInputChangeWithFreeform(updatedValue)
+                : _this._processInputChangeWithoutFreeform(updatedValue);
+        };
+        /**
+         * Focus (and select) the content of the input
+         * and set the focused state
+         */
+        _this._onFocus = function () {
+            var _a, _b;
+            (_b = (_a = _this._autofill.current) === null || _a === void 0 ? void 0 : _a.inputElement) === null || _b === void 0 ? void 0 : _b.select();
+            if (!_this._hasFocus()) {
+                _this.setState({ focusState: 'focusing' });
+            }
+        };
+        /**
+         * Callback issued when the options should be resolved, if they have been updated or
+         * if they need to be passed in the first time. This only does work if an onResolveOptions
+         * callback was passed in
+         */
+        _this._onResolveOptions = function () {
+            if (_this.props.onResolveOptions) {
+                // get the options
+                var newOptions_1 = _this.props.onResolveOptions((0,tslib__WEBPACK_IMPORTED_MODULE_1__.__spreadArray)([], _this.props.hoisted.currentOptions, true));
+                // Check to see if the returned value is an array, if it is update the state
+                // If the returned value is not an array then check to see if it's a promise or PromiseLike.
+                // If it is then resolve it asynchronously.
+                if (Array.isArray(newOptions_1)) {
+                    _this.props.hoisted.setCurrentOptions(newOptions_1);
+                }
+                else if (newOptions_1 && newOptions_1.then) {
+                    // Ensure that the promise will only use the callback if it was the most recent one
+                    // and update the state when the promise returns
+                    _this._currentPromise = newOptions_1;
+                    newOptions_1.then(function (newOptionsFromPromise) {
+                        if (newOptions_1 === _this._currentPromise) {
+                            _this.props.hoisted.setCurrentOptions(newOptionsFromPromise);
+                        }
+                    });
+                }
+            }
+        };
+        /**
+         * OnBlur handler. Set the focused state to false
+         * and submit any pending value
+         */
+        // eslint-disable-next-line @typescript-eslint/no-deprecated
+        _this._onBlur = function (event) {
+            var _a, _b;
+            var doc = (0,_utilities_dom__WEBPACK_IMPORTED_MODULE_10__.getDocumentEx)(_this.context);
+            // Do nothing if the blur is coming from something
+            // inside the comboBox root or the comboBox menu since
+            // it we are not really blurring from the whole comboBox
+            var relatedTarget = event.relatedTarget;
+            if (event.relatedTarget === null) {
+                // In IE11, due to lack of support, event.relatedTarget is always
+                // null making every onBlur call to be "outside" of the ComboBox
+                // even when it's not. Using document.activeElement is another way
+                // for us to be able to get what the relatedTarget without relying
+                // on the event
+                relatedTarget = doc === null || doc === void 0 ? void 0 : doc.activeElement;
+            }
+            if (relatedTarget) {
+                var isBlurFromComboBoxTitle = (_a = _this.props.hoisted.rootRef.current) === null || _a === void 0 ? void 0 : _a.contains(relatedTarget);
+                var isBlurFromComboBoxMenu = (_b = _this._comboBoxMenu.current) === null || _b === void 0 ? void 0 : _b.contains(relatedTarget);
+                var isBlurFromComboBoxMenuAncestor = _this._comboBoxMenu.current &&
+                    (0,_Utilities__WEBPACK_IMPORTED_MODULE_11__.findElementRecursive)(_this._comboBoxMenu.current, function (element) { return element === relatedTarget; }, doc);
+                if (isBlurFromComboBoxTitle || isBlurFromComboBoxMenu || isBlurFromComboBoxMenuAncestor) {
+                    if (isBlurFromComboBoxMenuAncestor &&
+                        _this._hasFocus() &&
+                        (!_this.props.multiSelect || _this.props.allowFreeform)) {
+                        _this._submitPendingValue(event);
+                    }
+                    event.preventDefault();
+                    event.stopPropagation();
+                    return;
+                }
+            }
+            if (_this._hasFocus()) {
+                _this.setState({ focusState: 'none' });
+                if (!_this.props.multiSelect || _this.props.allowFreeform) {
+                    _this._submitPendingValue(event);
+                }
+            }
+        };
+        // Render Callout container and pass in list
+        // eslint-disable-next-line @typescript-eslint/no-deprecated
+        _this._onRenderContainer = function (props, defaultRender) {
+            var onRenderList = props.onRenderList, calloutProps = props.calloutProps, dropdownWidth = props.dropdownWidth, dropdownMaxWidth = props.dropdownMaxWidth, _a = props.onRenderUpperContent, onRenderUpperContent = _a === void 0 ? _this._onRenderUpperContent : _a, _b = props.onRenderLowerContent, onRenderLowerContent = _b === void 0 ? _this._onRenderLowerContent : _b, useComboBoxAsMenuWidth = props.useComboBoxAsMenuWidth, persistMenu = props.persistMenu, _c = props.shouldRestoreFocus, shouldRestoreFocus = _c === void 0 ? true : _c;
+            var isOpen = _this.state.isOpen;
+            var id = _this._id;
+            var comboBoxMenuWidth = useComboBoxAsMenuWidth && _this._comboBoxWrapper.current
+                ? _this._comboBoxWrapper.current.clientWidth + 2
+                : undefined;
+            return (react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Callout__WEBPACK_IMPORTED_MODULE_12__.Callout, (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)({ isBeakVisible: false, gapSpace: 0, doNotLayer: false, directionalHint: _Callout__WEBPACK_IMPORTED_MODULE_13__.DirectionalHint.bottomLeftEdge, directionalHintFixed: false }, calloutProps, { onLayerMounted: _this._onLayerMounted, className: (0,_Utilities__WEBPACK_IMPORTED_MODULE_14__.css)(_this._classNames.callout, calloutProps === null || calloutProps === void 0 ? void 0 : calloutProps.className), target: _this._comboBoxWrapper.current, onDismiss: _this._onDismiss, onMouseDown: _this._onCalloutMouseDown, onScroll: _this._onScroll, setInitialFocus: false, calloutWidth: useComboBoxAsMenuWidth && _this._comboBoxWrapper.current
+                    ? comboBoxMenuWidth && comboBoxMenuWidth
+                    : dropdownWidth, calloutMaxWidth: dropdownMaxWidth ? dropdownMaxWidth : comboBoxMenuWidth, hidden: persistMenu ? !isOpen : undefined, 
+                // eslint-disable-next-line @typescript-eslint/no-deprecated
+                shouldRestoreFocus: shouldRestoreFocus, 
+                // eslint-disable-next-line react/jsx-no-bind
+                preventDismissOnEvent: function (ev) { return _this._preventDismissOnScrollOrResize(ev); } }),
+                onRenderUpperContent(_this.props, _this._onRenderUpperContent),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _this._classNames.optionsContainerWrapper, ref: _this._comboBoxMenu }, onRenderList === null || onRenderList === void 0 ? void 0 : onRenderList((0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)({}, props), { id: id }), _this._onRenderList)),
+                onRenderLowerContent(_this.props, _this._onRenderLowerContent)));
+        };
+        _this._onLayerMounted = function () {
+            _this._onCalloutLayerMounted();
+            // need to call this again here to get the correct scroll parent dimensions
+            // when the callout is first opened
+            _this._async.setTimeout(function () {
+                _this._scrollIntoView();
+            }, 0);
+            if (_this.props.calloutProps && _this.props.calloutProps.onLayerMounted) {
+                _this.props.calloutProps.onLayerMounted();
+            }
+        };
+        // eslint-disable-next-line @typescript-eslint/no-deprecated
+        _this._onRenderLabel = function (onRenderLabelProps) {
+            var _a = onRenderLabelProps.props, label = _a.label, disabled = _a.disabled, required = _a.required;
+            if (label) {
+                return (react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Label__WEBPACK_IMPORTED_MODULE_15__.Label, { id: _this._id + '-label', disabled: disabled, required: required, className: _this._classNames.label },
+                    label,
+                    onRenderLabelProps.multiselectAccessibleText && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", { className: _this._classNames.screenReaderText }, onRenderLabelProps.multiselectAccessibleText))));
+            }
+            return null;
+        };
+        // Render List of items
+        // eslint-disable-next-line @typescript-eslint/no-deprecated
+        _this._onRenderList = function (props) {
+            var _a = props.onRenderItem, onRenderItem = _a === void 0 ? _this._onRenderItem : _a, label = props.label, ariaLabel = props.ariaLabel, multiSelect = props.multiSelect;
+            // eslint-disable-next-line @typescript-eslint/no-deprecated
+            var queue = { items: [] };
+            // eslint-disable-next-line @typescript-eslint/no-deprecated
+            var renderedList = [];
+            var emptyQueue = function () {
+                var newGroup = queue.id
+                    ? [
+                        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { role: "group", key: queue.id, "aria-labelledby": queue.id }, queue.items),
+                    ]
+                    : queue.items;
+                renderedList = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__spreadArray)((0,tslib__WEBPACK_IMPORTED_MODULE_1__.__spreadArray)([], renderedList, true), newGroup, true);
+                // Flush items and id
+                queue = { items: [] };
+            };
+            var placeRenderedOptionIntoQueue = function (item, index) {
+                /*
+                  Case Header
+                    empty queue if it's not already empty
+                    ensure unique ID for header and set queue ID
+                    push header into queue
+                  Case Divider
+                    push divider into queue if not first item
+                    empty queue if not already empty
+                  Default
+                    push item into queue
+                */
+                switch (item.itemType) {
+                    case _SelectableOption__WEBPACK_IMPORTED_MODULE_16__.SelectableOptionMenuItemType.Header:
+                        queue.items.length > 0 && emptyQueue();
+                        var id_1 = _this._id + item.key;
+                        queue.items.push(onRenderItem((0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)({ id: id_1 }, item), { index: index }), _this._onRenderItem));
+                        queue.id = id_1;
+                        break;
+                    case _SelectableOption__WEBPACK_IMPORTED_MODULE_16__.SelectableOptionMenuItemType.Divider:
+                        index > 0 && queue.items.push(onRenderItem((0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)({}, item), { index: index }), _this._onRenderItem));
+                        queue.items.length > 0 && emptyQueue();
+                        break;
+                    default:
+                        queue.items.push(onRenderItem((0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)({}, item), { index: index }), _this._onRenderItem));
+                }
+            };
+            // Place options into the queue. Queue will be emptied anytime a Header or Divider is encountered
+            props.options.forEach(function (item, index) {
+                placeRenderedOptionIntoQueue(item, index);
+            });
+            // Push remaining items into all renderedList
+            queue.items.length > 0 && emptyQueue();
+            var id = _this._id;
+            return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { id: id + '-list', className: _this._classNames.optionsContainer, "aria-labelledby": label && id + '-label', "aria-label": ariaLabel && !label ? ariaLabel : undefined, "aria-multiselectable": multiSelect ? 'true' : undefined, role: "listbox" }, renderedList));
+        };
+        // Render items
+        // eslint-disable-next-line @typescript-eslint/no-deprecated
+        _this._onRenderItem = function (item) {
+            switch (item.itemType) {
+                case _SelectableOption__WEBPACK_IMPORTED_MODULE_16__.SelectableOptionMenuItemType.Divider:
+                    return _this._renderSeparator(item);
+                case _SelectableOption__WEBPACK_IMPORTED_MODULE_16__.SelectableOptionMenuItemType.Header:
+                    return _this._renderHeader(item);
+                default:
+                    return _this._renderOption(item);
+            }
+        };
+        // Default _onRenderLowerContent function returns nothing
+        _this._onRenderLowerContent = function () {
+            return null;
+        };
+        // Default _onRenderUpperContent function returns nothing
+        _this._onRenderUpperContent = function () {
+            return null;
+        };
+        // eslint-disable-next-line @typescript-eslint/no-deprecated
+        _this._renderOption = function (item) {
+            var _a;
+            var _b = _this.props.onRenderOption, onRenderOption = _b === void 0 ? _this._onRenderOptionContent : _b;
+            var id = (_a = item.id) !== null && _a !== void 0 ? _a : _this._id + '-list' + item.index;
+            var isSelected = _this._isOptionSelected(item.index);
+            var isChecked = _this._isOptionChecked(item.index);
+            var isIndeterminate = _this._isOptionIndeterminate(item.index);
+            var optionStyles = _this._getCurrentOptionStyles(item);
+            var optionClassNames = (0,_ComboBox_classNames__WEBPACK_IMPORTED_MODULE_17__.getComboBoxOptionClassNames)(optionStyles);
+            var title = item.title;
+            var getOptionComponent = function () {
+                return !_this.props.multiSelect ? (react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Button__WEBPACK_IMPORTED_MODULE_18__.CommandButton, { id: id, key: item.key, "data-index": item.index, styles: optionStyles, checked: isSelected, className: 'ms-ComboBox-option', onClick: _this._onItemClick(item), 
+                    // eslint-disable-next-line react/jsx-no-bind
+                    onMouseEnter: _this._onOptionMouseEnter.bind(_this, item.index), 
+                    // eslint-disable-next-line react/jsx-no-bind
+                    onMouseMove: _this._onOptionMouseMove.bind(_this, item.index), onMouseLeave: _this._onOptionMouseLeave, role: "option", "aria-selected": isSelected ? 'true' : 'false', ariaLabel: item.ariaLabel, disabled: item.disabled, title: title }, react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", { className: optionClassNames.optionTextWrapper, ref: isSelected ? _this._selectedElement : undefined }, onRenderOption(item, _this._onRenderOptionContent)))) : (react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Checkbox__WEBPACK_IMPORTED_MODULE_19__.Checkbox, { id: id, ariaLabel: item.ariaLabel, ariaLabelledBy: item.ariaLabel ? undefined : id + '-label', key: item.key, styles: optionStyles, className: 'ms-ComboBox-option', onChange: _this._onItemClick(item), label: item.text, checked: isChecked, indeterminate: isIndeterminate, title: title, disabled: item.disabled, 
+                    // eslint-disable-next-line react/jsx-no-bind
+                    onRenderLabel: _this._renderCheckboxLabel.bind(_this, (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)({}, item), { id: id + '-label' })), inputProps: (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)({ 
+                        // aria-selected should only be applied to checked items, not hovered items
+                        'aria-selected': isChecked ? 'true' : 'false', role: 'option' }, {
+                        'data-index': item.index,
+                        'data-is-focusable': true,
+                    }) }));
+            };
+            return (react__WEBPACK_IMPORTED_MODULE_0__.createElement(ComboBoxOptionWrapper, { key: item.key, index: item.index, disabled: item.disabled, isSelected: isSelected, isChecked: isChecked, isIndeterminate: isIndeterminate, text: item.text, 
+                // eslint-disable-next-line react/jsx-no-bind
+                render: getOptionComponent, data: item.data }));
+        };
+        /**
+         * Mouse clicks to headers, dividers and scrollbar should not make input lose focus
+         */
+        _this._onCalloutMouseDown = function (ev) {
+            ev.preventDefault();
+        };
+        /**
+         * Scroll handler for the callout to make sure the mouse events
+         * for updating focus are not interacting during scroll
+         */
+        _this._onScroll = function () {
+            var _a;
+            if (!_this._isScrollIdle && _this._scrollIdleTimeoutId !== undefined) {
+                _this._async.clearTimeout(_this._scrollIdleTimeoutId);
+                _this._scrollIdleTimeoutId = undefined;
+            }
+            else {
+                _this._isScrollIdle = false;
+            }
+            if ((_a = _this.props.calloutProps) === null || _a === void 0 ? void 0 : _a.onScroll) {
+                _this.props.calloutProps.onScroll();
+            }
+            _this._scrollIdleTimeoutId = _this._async.setTimeout(function () {
+                _this._isScrollIdle = true;
+            }, ScrollIdleDelay);
+        };
+        // eslint-disable-next-line @typescript-eslint/no-deprecated
+        _this._onRenderOptionContent = function (item) {
+            var optionClassNames = (0,_ComboBox_classNames__WEBPACK_IMPORTED_MODULE_17__.getComboBoxOptionClassNames)(_this._getCurrentOptionStyles(item));
+            return react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", { className: optionClassNames.optionText }, item.text);
+        };
+        /*
+         * Render content of a multiselect item label.
+         * Text within the label is aria-hidden, to prevent duplicate input/label exposure
+         */
+        // eslint-disable-next-line @typescript-eslint/no-deprecated
+        _this._onRenderMultiselectOptionContent = function (item) {
+            var optionClassNames = (0,_ComboBox_classNames__WEBPACK_IMPORTED_MODULE_17__.getComboBoxOptionClassNames)(_this._getCurrentOptionStyles(item));
+            return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", { id: item.id, "aria-hidden": "true", className: optionClassNames.optionText }, item.text));
+        };
+        /**
+         * Handles dismissing (cancelling) the menu
+         */
+        _this._onDismiss = function () {
+            var onMenuDismiss = _this.props.onMenuDismiss;
+            if (onMenuDismiss) {
+                onMenuDismiss();
+            }
+            // In persistMode we need to simulate callout layer mount
+            // since that only happens once. We do it on dismiss since
+            // it works either way.
+            if (_this.props.persistMenu) {
+                _this._onCalloutLayerMounted();
+            }
+            // close the menu
+            _this._setOpenStateAndFocusOnClose(false /* isOpen */, false /* focusInputAfterClose */);
+            // reset the selected index
+            // to the last value state
+            _this._resetSelectedIndex();
+        };
+        _this._onAfterClearPendingInfo = function () {
+            _this._processingClearPendingInfo = false;
+        };
+        /**
+         * Handle keydown on the input
+         * @param ev - The keyboard event that was fired
+         */
+        _this._onInputKeyDown = function (ev) {
+            var _a = _this.props, disabled = _a.disabled, allowFreeform = _a.allowFreeform, allowFreeInput = _a.allowFreeInput, allowParentArrowNavigation = _a.allowParentArrowNavigation, autoComplete = _a.autoComplete, currentOptions = _a.hoisted.currentOptions;
+            var _b = _this.state, isOpen = _b.isOpen, currentPendingValueValidIndexOnHover = _b.currentPendingValueValidIndexOnHover;
+            // Take note if we are processing an alt (option) or meta (command) keydown.
+            // See comment in _onInputKeyUp for reasoning.
+            _this._lastKeyDownWasAltOrMeta = isAltOrMeta(ev);
+            if (disabled) {
+                _this._handleInputWhenDisabled(ev);
+                return;
+            }
+            var index = _this._getPendingSelectedIndex(false /* includeCurrentPendingValue */);
+            // eslint-disable-next-line @typescript-eslint/no-deprecated
+            switch (ev.which) {
+                case _Utilities__WEBPACK_IMPORTED_MODULE_20__.KeyCodes.enter:
+                    if (_this._autofill.current && _this._autofill.current.inputElement) {
+                        _this._autofill.current.inputElement.select();
+                    }
+                    _this._submitPendingValue(ev);
+                    if (_this.props.multiSelect && isOpen) {
+                        _this.setState({
+                            currentPendingValueValidIndex: index,
+                        });
+                    }
+                    else {
+                        // On enter submit the pending value
+                        if (isOpen ||
+                            ((!allowFreeform ||
+                                _this.state.currentPendingValue === undefined ||
+                                _this.state.currentPendingValue === null ||
+                                _this.state.currentPendingValue.length <= 0) &&
+                                _this.state.currentPendingValueValidIndex < 0)) {
+                            // if we are open or
+                            // if we are not allowing freeform or
+                            // our we have no pending value
+                            // and no valid pending index
+                            // flip the open state
+                            _this.setState({
+                                isOpen: !isOpen,
+                            });
+                        }
+                    }
+                    break;
+                case _Utilities__WEBPACK_IMPORTED_MODULE_20__.KeyCodes.tab:
+                    // On enter submit the pending value
+                    if (!_this.props.multiSelect) {
+                        _this._submitPendingValue(ev);
+                    }
+                    // If we are not allowing freeform
+                    // or the combo box is open, flip the open state
+                    if (isOpen) {
+                        _this._setOpenStateAndFocusOnClose(!isOpen, false /* focusInputAfterClose */);
+                    }
+                    // Allow TAB to propagate
+                    return;
+                case _Utilities__WEBPACK_IMPORTED_MODULE_20__.KeyCodes.escape:
+                    // reset the selected index
+                    _this._resetSelectedIndex();
+                    // Close the menu if opened
+                    if (isOpen) {
+                        _this.setState({
+                            isOpen: false,
+                        });
+                    }
+                    else {
+                        return;
+                    }
+                    break;
+                case _Utilities__WEBPACK_IMPORTED_MODULE_20__.KeyCodes.up:
+                    // if we are in clearAll state (e.g. the user as hovering
+                    // and has since mousedOut of the menu items),
+                    // go to the last index
+                    if (currentPendingValueValidIndexOnHover === HoverStatus.clearAll) {
+                        index = _this.props.hoisted.currentOptions.length;
+                    }
+                    if (ev.altKey || ev.metaKey) {
+                        // Close the menu if it is open and break so
+                        // that the event get stopPropagation and prevent default.
+                        // Otherwise, we need to let the event continue to propagate
+                        if (isOpen) {
+                            _this._setOpenStateAndFocusOnClose(!isOpen, true /* focusInputAfterClose */);
+                            break;
+                        }
+                        return;
+                    }
+                    // do not scroll page
+                    ev.preventDefault();
+                    // Go to the previous option
+                    _this._setPendingInfoFromIndexAndDirection(index, SearchDirection.backward);
+                    break;
+                case _Utilities__WEBPACK_IMPORTED_MODULE_20__.KeyCodes.down:
+                    // Expand the combo box on ALT + DownArrow
+                    if (ev.altKey || ev.metaKey) {
+                        _this._setOpenStateAndFocusOnClose(true /* isOpen */, true /* focusInputAfterClose */);
+                    }
+                    else {
+                        // if we are in clearAll state (e.g. the user as hovering
+                        // and has since mousedOut of the menu items),
+                        // go to the first index
+                        if (currentPendingValueValidIndexOnHover === HoverStatus.clearAll) {
+                            index = -1;
+                        }
+                        // do not scroll page
+                        ev.preventDefault();
+                        // Got to the next option
+                        _this._setPendingInfoFromIndexAndDirection(index, SearchDirection.forward);
+                    }
+                    break;
+                case _Utilities__WEBPACK_IMPORTED_MODULE_20__.KeyCodes.home:
+                case _Utilities__WEBPACK_IMPORTED_MODULE_20__.KeyCodes.end:
+                    if (allowFreeform || allowFreeInput) {
+                        return;
+                    }
+                    // Set the initial values to respond to HOME
+                    // which goes to the first selectable option
+                    index = -1;
+                    var directionToSearch = SearchDirection.forward;
+                    // If end, update the values to respond to END
+                    // which goes to the last selectable option
+                    // eslint-disable-next-line @typescript-eslint/no-deprecated
+                    if (ev.which === _Utilities__WEBPACK_IMPORTED_MODULE_20__.KeyCodes.end) {
+                        index = currentOptions.length;
+                        directionToSearch = SearchDirection.backward;
+                    }
+                    _this._setPendingInfoFromIndexAndDirection(index, directionToSearch);
+                    break;
+                /* eslint-disable no-fallthrough */
+                case _Utilities__WEBPACK_IMPORTED_MODULE_20__.KeyCodes.space:
+                    // event handled in _onComboBoxKeyUp
+                    if (!allowFreeform && !allowFreeInput && autoComplete === 'off') {
+                        break;
+                    }
+                default:
+                    /* eslint-enable no-fallthrough */
+                    // are we processing a function key? if so bail out
+                    // eslint-disable-next-line @typescript-eslint/no-deprecated
+                    if (ev.which >= 112 /* F1 */ && ev.which <= 123 /* F12 */) {
+                        return;
+                    }
+                    // If we get here and we got either and ALT key
+                    // or meta key, let the event propagate
+                    // eslint-disable-next-line @typescript-eslint/no-deprecated
+                    if (ev.keyCode === _Utilities__WEBPACK_IMPORTED_MODULE_20__.KeyCodes.alt || ev.key === 'Meta' /* && isOpen */) {
+                        return;
+                    }
+                    // eslint-disable-next-line @typescript-eslint/no-deprecated
+                    if (allowParentArrowNavigation && (ev.keyCode === _Utilities__WEBPACK_IMPORTED_MODULE_20__.KeyCodes.left || ev.keyCode === _Utilities__WEBPACK_IMPORTED_MODULE_20__.KeyCodes.right)) {
+                        return;
+                    }
+                    // If we are not allowing freeform or free input and
+                    // allowing autoComplete, handle the input here
+                    if (!allowFreeform && !allowFreeInput && autoComplete === 'on') {
+                        _this._onInputChange(ev.key);
+                        break;
+                    }
+                    // allow the key to propagate by default
+                    return;
+            }
+            ev.stopPropagation();
+            ev.preventDefault();
+        };
+        /**
+         * Handle keyup on the input
+         * @param ev - the keyboard event that was fired
+         */
+        _this._onInputKeyUp = function (ev) {
+            var _a = _this.props, disabled = _a.disabled, allowFreeform = _a.allowFreeform, allowFreeInput = _a.allowFreeInput, autoComplete = _a.autoComplete;
+            var isOpen = _this.state.isOpen;
+            // We close the menu on key up only if ALL of the following are true:
+            // - Most recent key down was alt or meta (command)
+            // - The alt/meta key down was NOT followed by some other key (such as down/up arrow to
+            //   expand/collapse the menu)
+            // - We're not on a Mac (or iOS)
+            // This is because on Windows, pressing alt moves focus to the application menu bar or similar,
+            // closing any open context menus. There is not a similar behavior on Macs.
+            var keyPressIsAltOrMetaAlone = _this._lastKeyDownWasAltOrMeta && isAltOrMeta(ev);
+            _this._lastKeyDownWasAltOrMeta = false;
+            var shouldHandleKey = keyPressIsAltOrMetaAlone && !((0,_Utilities__WEBPACK_IMPORTED_MODULE_21__.isMac)() || (0,_Utilities__WEBPACK_IMPORTED_MODULE_22__.isIOS)());
+            if (disabled) {
+                _this._handleInputWhenDisabled(ev);
+                return;
+            }
+            // eslint-disable-next-line @typescript-eslint/no-deprecated
+            switch (ev.which) {
+                case _Utilities__WEBPACK_IMPORTED_MODULE_20__.KeyCodes.space:
+                    // If we are not allowing freeform or free input, and autoComplete is off
+                    // make space expand/collapse the combo box
+                    // and allow the event to propagate
+                    if (!allowFreeform && !allowFreeInput && autoComplete === 'off') {
+                        _this._setOpenStateAndFocusOnClose(!isOpen, !!isOpen);
+                    }
+                    return;
+                default:
+                    if (shouldHandleKey && isOpen) {
+                        _this._setOpenStateAndFocusOnClose(!isOpen, true /* focusInputAfterClose */);
+                    }
+                    else {
+                        if (_this.state.focusState === 'focusing' && _this.props.openOnKeyboardFocus) {
+                            _this.setState({ isOpen: true });
+                        }
+                        if (_this.state.focusState !== 'focused') {
+                            _this.setState({ focusState: 'focused' });
+                        }
+                    }
+                    return;
+            }
+        };
+        _this._onOptionMouseLeave = function () {
+            if (_this._shouldIgnoreMouseEvent()) {
+                return;
+            }
+            // Ignore the event in persistMenu mode if the callout has
+            // closed. This is to avoid clearing the visuals on item click.
+            if (_this.props.persistMenu && !_this.state.isOpen) {
+                return;
+            }
+            _this.setState({
+                currentPendingValueValidIndexOnHover: HoverStatus.clearAll,
+            });
+        };
+        /**
+         * Click handler for the button of the combo box and the input when not allowing freeform.
+         * This toggles the expand/collapse state of the combo box (if enabled).
+         */
+        _this._onComboBoxClick = function () {
+            var disabled = _this.props.disabled;
+            var isOpen = _this.state.isOpen;
+            if (!disabled) {
+                _this._setOpenStateAndFocusOnClose(!isOpen, false /* focusInputAfterClose */);
+                _this.setState({ focusState: 'focused' });
+            }
+        };
+        /**
+         * Click handler for the autofill.
+         */
+        _this._onAutofillClick = function () {
+            var _a = _this.props, disabled = _a.disabled, allowFreeform = _a.allowFreeform;
+            if (allowFreeform && !disabled) {
+                _this.focus(_this.state.isOpen || _this._processingTouch);
+            }
+            else {
+                _this._onComboBoxClick();
+            }
+        };
+        _this._onTouchStart = function () {
+            if (_this._comboBoxWrapper.current && !('onpointerdown' in _this._comboBoxWrapper)) {
+                _this._handleTouchAndPointerEvent();
+            }
+        };
+        _this._onPointerDown = function (ev) {
+            if (ev.pointerType === 'touch') {
+                _this._handleTouchAndPointerEvent();
+                ev.preventDefault();
+                ev.stopImmediatePropagation();
+            }
+        };
+        (0,_Utilities__WEBPACK_IMPORTED_MODULE_23__.initializeComponentRef)(_this);
+        _this._async = new _Utilities__WEBPACK_IMPORTED_MODULE_24__.Async(_this);
+        _this._events = new _Utilities__WEBPACK_IMPORTED_MODULE_25__.EventGroup(_this);
+        (0,_Utilities__WEBPACK_IMPORTED_MODULE_26__.warnMutuallyExclusive)(COMPONENT_NAME, props, {
+            defaultSelectedKey: 'selectedKey',
+            text: 'defaultSelectedKey',
+            selectedKey: 'value',
+            dropdownWidth: 'useComboBoxAsMenuWidth',
+            ariaLabel: 'label',
+        });
+        _this._id = props.id || (0,_Utilities__WEBPACK_IMPORTED_MODULE_27__.getId)('ComboBox');
+        _this._isScrollIdle = true;
+        _this._processingTouch = false;
+        _this._gotMouseMove = false;
+        _this._processingClearPendingInfo = false;
+        _this.state = {
+            isOpen: false,
+            focusState: 'none',
+            currentPendingValueValidIndex: -1,
+            currentPendingValue: undefined,
+            currentPendingValueValidIndexOnHover: HoverStatus.default,
+        };
+        return _this;
+    }
+    Object.defineProperty(ComboBoxInternal.prototype, "selectedOptions", {
+        /**
+         * All selected options
+         */
+        get: function () {
+            var _a = this.props.hoisted, currentOptions = _a.currentOptions, selectedIndices = _a.selectedIndices;
+            return (0,_SelectableOption__WEBPACK_IMPORTED_MODULE_28__.getAllSelectedOptions)(currentOptions, selectedIndices);
+        },
+        enumerable: false,
+        configurable: true
+    });
+    ComboBoxInternal.prototype.componentDidMount = function () {
+        if (this._comboBoxWrapper.current && !this.props.disabled) {
+            // hook up resolving the options if needed on focus
+            this._events.on(this._comboBoxWrapper.current, 'focus', this._onResolveOptions, true);
+            if ('onpointerdown' in this._comboBoxWrapper.current) {
+                // For ComboBoxes, touching anywhere in the combo box should drop the dropdown, including the input element.
+                // This gives more hit target space for touch environments. We're setting the onpointerdown here, because React
+                // does not support Pointer events yet.
+                this._events.on(this._comboBoxWrapper.current, 'pointerdown', this._onPointerDown, true);
+            }
+        }
+    };
+    ComboBoxInternal.prototype.componentDidUpdate = function (prevProps, prevState) {
+        var _this = this;
+        var _a, _b, _c;
+        var _d = this.props, allowFreeform = _d.allowFreeform, allowFreeInput = _d.allowFreeInput, text = _d.text, onMenuOpen = _d.onMenuOpen, onMenuDismissed = _d.onMenuDismissed, _e = _d.hoisted, currentOptions = _e.currentOptions, selectedIndices = _e.selectedIndices;
+        var _f = this.state, currentPendingValue = _f.currentPendingValue, currentPendingValueValidIndex = _f.currentPendingValueValidIndex, isOpen = _f.isOpen;
+        // If we are newly open or are open and the pending valid index changed,
+        // make sure the currently selected/pending option is scrolled into view
+        if (isOpen && (!prevState.isOpen || prevState.currentPendingValueValidIndex !== currentPendingValueValidIndex)) {
+            // Need this timeout so that the selectedElement ref is correctly updated
+            this._async.setTimeout(function () { return _this._scrollIntoView(); }, 0);
+        }
+        var doc = (0,_utilities_dom__WEBPACK_IMPORTED_MODULE_10__.getDocumentEx)(this.context);
+        // if an action is taken that put focus in the ComboBox
+        // and If we are open or we are just closed, shouldFocusAfterClose is set,
+        // but we are not the activeElement set focus on the input
+        if (this._hasFocus() &&
+            (isOpen ||
+                (prevState.isOpen &&
+                    !isOpen &&
+                    this._focusInputAfterClose &&
+                    this._autofill.current &&
+                    (doc === null || doc === void 0 ? void 0 : doc.activeElement) !== this._autofill.current.inputElement))) {
+            this.focus(undefined /*shouldOpenOnFocus*/, true /*useFocusAsync*/);
+        }
+        // If we should focusAfterClose AND
+        //   just opened/closed the menu OR
+        //   are focused AND
+        //     updated the selectedIndex with the menu closed OR
+        //     are not allowing freeform or free input OR
+        //     the value changed
+        // we need to set selection
+        if (this._focusInputAfterClose &&
+            ((prevState.isOpen && !isOpen) ||
+                (this._hasFocus() &&
+                    ((!isOpen &&
+                        !this.props.multiSelect &&
+                        prevProps.hoisted.selectedIndices &&
+                        selectedIndices &&
+                        prevProps.hoisted.selectedIndices[0] !== selectedIndices[0]) ||
+                        (!allowFreeform && !allowFreeInput) ||
+                        text !== prevProps.text)))) {
+            this._onFocus();
+        }
+        this._notifyPendingValueChanged(prevState);
+        if (isOpen && !prevState.isOpen) {
+            // handle dismiss buffer after suggestions are opened
+            this._overrideScrollDismiss = true;
+            this._async.clearTimeout(this._overrideScrollDimissTimeout);
+            this._overrideScrollDimissTimeout = this._async.setTimeout(function () {
+                _this._overrideScrollDismiss = false;
+            }, 100);
+            onMenuOpen === null || onMenuOpen === void 0 ? void 0 : onMenuOpen();
+        }
+        if (!isOpen && prevState.isOpen && onMenuDismissed) {
+            onMenuDismissed();
+        }
+        var newCurrentPendingValueValidIndex = currentPendingValueValidIndex;
+        var options = currentOptions.map(function (item, index) { return ((0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)({}, item), { index: index })); });
+        // If currentOptions differs from the previous currentOptions we need to update the currentPendingValueValidIndex
+        // otherwise, it will be out of sync with the currentOptions. This can happen when the options are filtered.
+        if (!(0,_Utilities__WEBPACK_IMPORTED_MODULE_2__.shallowCompare)(prevProps.hoisted.currentOptions, currentOptions) && currentPendingValue) {
+            newCurrentPendingValueValidIndex =
+                this.props.allowFreeform || this.props.allowFreeInput
+                    ? this._processInputChangeWithFreeform(currentPendingValue)
+                    : this._updateAutocompleteIndexWithoutFreeform(currentPendingValue);
+        }
+        var descendantText = undefined;
+        if (isOpen && this._hasFocus() && newCurrentPendingValueValidIndex !== -1) {
+            descendantText =
+                (_a = options[newCurrentPendingValueValidIndex].id) !== null && _a !== void 0 ? _a : this._id + '-list' + newCurrentPendingValueValidIndex;
+        }
+        else if (isOpen && selectedIndices.length) {
+            descendantText = (_c = (_b = options[selectedIndices[0]]) === null || _b === void 0 ? void 0 : _b.id) !== null && _c !== void 0 ? _c : this._id + '-list' + selectedIndices[0];
+        }
+        if (descendantText !== this.state.ariaActiveDescendantValue) {
+            this.setState({
+                ariaActiveDescendantValue: descendantText,
+            });
+        }
+    };
+    ComboBoxInternal.prototype.componentWillUnmount = function () {
+        this._async.dispose();
+        this._events.dispose();
+    };
+    // Primary Render
+    // eslint-disable-next-line @typescript-eslint/no-deprecated
+    ComboBoxInternal.prototype.render = function () {
+        var id = this._id;
+        var errorMessageId = id + '-error';
+        var _a = this.props, className = _a.className, disabled = _a.disabled, required = _a.required, errorMessage = _a.errorMessage, _b = _a.onRenderContainer, onRenderContainer = _b === void 0 ? this._onRenderContainer : _b, _c = _a.onRenderLabel, onRenderLabel = _c === void 0 ? this._onRenderLabel : _c, _d = _a.onRenderList, onRenderList = _d === void 0 ? this._onRenderList : _d, _e = _a.onRenderItem, onRenderItem = _e === void 0 ? this._onRenderItem : _e, _f = _a.onRenderOption, onRenderOption = _f === void 0 ? this._onRenderOptionContent : _f, allowFreeform = _a.allowFreeform, customStyles = _a.styles, theme = _a.theme, persistMenu = _a.persistMenu, multiSelect = _a.multiSelect, _g = _a.hoisted, suggestedDisplayValue = _g.suggestedDisplayValue, selectedIndices = _g.selectedIndices, currentOptions = _g.currentOptions;
+        var isOpen = this.state.isOpen;
+        this._currentVisibleValue = this._getVisibleValue();
+        // Single select is already accessible since the whole text is selected
+        // when focus enters the input. Since multiselect appears to clear the input
+        // it needs special accessible text
+        var multiselectAccessibleText = multiSelect
+            ? this._getMultiselectDisplayString(selectedIndices, currentOptions, suggestedDisplayValue)
+            : undefined;
+        var divProps = (0,_Utilities__WEBPACK_IMPORTED_MODULE_29__.getNativeProps)(this.props, _Utilities__WEBPACK_IMPORTED_MODULE_29__.divProperties, [
+            'onChange',
+            'value',
+            'aria-describedby',
+            'aria-labelledby',
+        ]);
+        var hasErrorMessage = errorMessage && errorMessage.length > 0 ? true : false;
+        this._classNames = this.props.getClassNames
+            ? this.props.getClassNames(theme, !!isOpen, !!disabled, !!required, !!this._hasFocus(), !!allowFreeform, !!hasErrorMessage, className)
+            : (0,_ComboBox_classNames__WEBPACK_IMPORTED_MODULE_17__.getClassNames)((0,_ComboBox_styles__WEBPACK_IMPORTED_MODULE_30__.getStyles)(theme, customStyles), className, !!isOpen, !!disabled, !!required, !!this._hasFocus(), !!allowFreeform, !!hasErrorMessage);
+        var comboBoxWrapper = this._renderComboBoxWrapper(multiselectAccessibleText, errorMessageId);
+        return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)({}, divProps, { ref: this.props.hoisted.mergedRootRef, className: this._classNames.container }),
+            onRenderLabel({ props: this.props, multiselectAccessibleText: multiselectAccessibleText }, this._onRenderLabel),
+            comboBoxWrapper,
+            (persistMenu || isOpen) &&
+                onRenderContainer((0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)({}, this.props), { onRenderList: onRenderList, onRenderItem: onRenderItem, onRenderOption: onRenderOption, options: currentOptions.map(function (item, index) { return ((0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)({}, item), { index: index })); }), onDismiss: this._onDismiss }), this._onRenderContainer),
+            hasErrorMessage && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { role: "alert", id: errorMessageId, className: this._classNames.errorMessage }, errorMessage))));
+    };
+    ComboBoxInternal.prototype._getPendingString = function (currentPendingValue, currentOptions, index) {
+        return currentPendingValue !== null && currentPendingValue !== undefined
+            ? currentPendingValue
+            : indexWithinBounds(currentOptions, index)
+                ? getPreviewText(currentOptions[index])
+                : '';
+    };
+    /**
+     * Returns a string that concatenates all of the selected values
+     * for multiselect combo box.
+     */
+    ComboBoxInternal.prototype._getMultiselectDisplayString = function (selectedIndices, currentOptions, suggestedDisplayValue) {
+        var displayValues = [];
+        for (var idx = 0; selectedIndices && idx < selectedIndices.length; idx++) {
+            var index = selectedIndices[idx];
+            if (currentOptions[index].itemType !== _SelectableOption__WEBPACK_IMPORTED_MODULE_16__.SelectableOptionMenuItemType.SelectAll) {
+                displayValues.push(indexWithinBounds(currentOptions, index)
+                    ? currentOptions[index].text
+                    : normalizeToString(suggestedDisplayValue));
+            }
+        }
+        var _a = this.props.multiSelectDelimiter, multiSelectDelimiter = _a === void 0 ? ', ' : _a;
+        return displayValues.join(multiSelectDelimiter);
+    };
+    /**
+     * Do not dismiss if the window resizes or scrolls within 100ms of opening
+     * This prevents the Android issue where pickers immediately dismiss on open, because the keyboard appears
+     * @param ev - the event triggering the dismiss check
+     * @returns a boolean indicating whether the callout dismissal should be prevented
+     */
+    ComboBoxInternal.prototype._preventDismissOnScrollOrResize = function (ev) {
+        // default to passed-in preventDismiss
+        var calloutProps = this.props.calloutProps;
+        if (calloutProps === null || calloutProps === void 0 ? void 0 : calloutProps.preventDismissOnEvent) {
+            return calloutProps.preventDismissOnEvent(ev);
+        }
+        if (this._overrideScrollDismiss && (ev.type === 'scroll' || ev.type === 'resize')) {
+            return true;
+        }
+        return false;
+    };
+    /**
+     * Process the new input's new value when the combo box allows freeform entry
+     * @param updatedValue - the input's newly changed value
+     * @returns the index of the matched option, -1 if no match was found
+     */
+    ComboBoxInternal.prototype._processInputChangeWithFreeform = function (updatedValue) {
+        var _this = this;
+        var currentOptions = this.props.hoisted.currentOptions;
+        var newCurrentPendingValueValidIndex = -1;
+        // if the new value is empty, see if we have an exact match and then set the pending info
+        if (updatedValue === '') {
+            var items = currentOptions
+                .map(function (item, index) { return ((0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)({}, item), { index: index })); })
+                .filter(function (option) { return isNormalOption(option) && !option.disabled && getPreviewText(option) === updatedValue; });
+            // if we found a match remember the index
+            if (items.length === 1) {
+                newCurrentPendingValueValidIndex = items[0].index;
+            }
+            this._setPendingInfo(updatedValue, newCurrentPendingValueValidIndex, updatedValue);
+            return newCurrentPendingValueValidIndex;
+        }
+        // Remember the original value and then make the value lowercase for comparison
+        var originalUpdatedValue = updatedValue;
+        // Make the value lowercase for comparison if caseSensitive is false
+        updatedValue = this._adjustForCaseSensitivity(updatedValue);
+        var newSuggestedDisplayValue = '';
+        // If autoComplete is on, attempt to find a match from the available options
+        if (this.props.autoComplete === 'on') {
+            // If autoComplete is on, attempt to find a match where the text of an option starts with the updated value
+            var items = currentOptions
+                .map(function (item, index) { return ((0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)({}, item), { index: index })); })
+                .filter(function (option) {
+                return isNormalOption(option) &&
+                    !option.disabled &&
+                    _this._adjustForCaseSensitivity(getPreviewText(option)).indexOf(updatedValue) === 0;
+            });
+            if (items.length > 0) {
+                // use ariaLabel as the value when the option is set
+                var text = getPreviewText(items[0]);
+                // If the user typed out the complete option text, we don't need any suggested display text anymore
+                newSuggestedDisplayValue = this._adjustForCaseSensitivity(text) !== updatedValue ? text : '';
+                // remember the index of the match we found
+                newCurrentPendingValueValidIndex = items[0].index;
+            }
+        }
+        else {
+            // If autoComplete is off, attempt to find a match only when the value is exactly equal to the text of an option
+            var items = currentOptions
+                .map(function (item, index) { return ((0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)({}, item), { index: index })); })
+                .filter(function (option) {
+                return isNormalOption(option) &&
+                    !option.disabled &&
+                    _this._adjustForCaseSensitivity(getPreviewText(option)) === updatedValue;
+            });
+            // if we found a match remember the index
+            if (items.length === 1) {
+                newCurrentPendingValueValidIndex = items[0].index;
+            }
+        }
+        // Set the updated state
+        this._setPendingInfo(originalUpdatedValue, newCurrentPendingValueValidIndex, newSuggestedDisplayValue);
+        return newCurrentPendingValueValidIndex;
+    };
+    /**
+     * Process the new input's new value when the combo box does not allow freeform entry
+     * @param updatedValue - the input's newly changed value
+     * @returns the index of the matched option
+     */
+    ComboBoxInternal.prototype._processInputChangeWithoutFreeform = function (updatedValue) {
+        var _this = this;
+        var _a = this.state, currentPendingValue = _a.currentPendingValue, currentPendingValueValidIndex = _a.currentPendingValueValidIndex;
+        if (this.props.autoComplete === 'on') {
+            // If autoComplete is on while allow freeform is off,
+            // we will remember the key press and build up a string to attempt to match
+            // as long as characters are typed within a the timeout span of each other,
+            // otherwise we will clear the string and start building a new one on the next keypress.
+            // Also, only do this processing if we have a non-empty value
+            if (updatedValue !== '') {
+                // If we have a pending autocomplete clearing task,
+                // we know that the user is typing with key press happening
+                // within the timeout of each other so remove the clearing task
+                // and continue building the pending value with the updated value
+                if (this._autoCompleteTimeout) {
+                    this._async.clearTimeout(this._autoCompleteTimeout);
+                    this._autoCompleteTimeout = undefined;
+                    updatedValue = normalizeToString(currentPendingValue) + updatedValue;
+                }
+                var matchingIndex = this._updateAutocompleteIndexWithoutFreeform(updatedValue);
+                // Schedule a timeout to clear the pending value after the timeout span
+                this._autoCompleteTimeout = this._async.setTimeout(function () {
+                    _this._autoCompleteTimeout = undefined;
+                }, ReadOnlyPendingAutoCompleteTimeout);
+                return matchingIndex;
+            }
+        }
+        // If we get here, autoComplete is off.
+        // Remember we are not allowing freeform, so at this point, if we have a pending valid value index
+        // use that; otherwise use the selectedIndex
+        var index = currentPendingValueValidIndex >= 0 ? currentPendingValueValidIndex : this._getFirstSelectedIndex();
+        // Since we are not allowing freeform, we need to
+        // set both the pending and suggested values/index
+        // to allow us to select all content in the input to
+        // give the illusion that we are readonly (e.g. freeform off)
+        this._setPendingInfoFromIndex(index);
+        return index;
+    };
+    ComboBoxInternal.prototype._updateAutocompleteIndexWithoutFreeform = function (updatedValue) {
+        var _this = this;
+        var currentOptions = this.props.hoisted.currentOptions;
+        var originalUpdatedValue = updatedValue;
+        updatedValue = this._adjustForCaseSensitivity(updatedValue);
+        // If autoComplete is on, attempt to find a match where the text of an option starts with the updated value
+        var items = currentOptions
+            .map(function (item, i) { return ((0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)({}, item), { index: i })); })
+            .filter(function (option) {
+            return isNormalOption(option) &&
+                !option.disabled &&
+                _this._adjustForCaseSensitivity(option.text).indexOf(updatedValue) === 0;
+        });
+        // If we found a match, update the state
+        if (items.length > 0) {
+            this._setPendingInfo(originalUpdatedValue, items[0].index, getPreviewText(items[0]));
+            return items[0].index;
+        }
+        return -1;
+    };
+    ComboBoxInternal.prototype._getFirstSelectedIndex = function () {
+        var selectedIndices = this.props.hoisted.selectedIndices;
+        return (selectedIndices === null || selectedIndices === void 0 ? void 0 : selectedIndices.length) ? selectedIndices[0] : -1;
+    };
+    /**
+     * Walk along the options starting at the index, stepping by the delta (positive or negative)
+     * looking for the next valid selectable index (e.g. skipping headings and dividers)
+     * @param index - the index to get the next selectable index from
+     * @param delta - optional delta to step by when finding the next index, defaults to 0
+     * @returns - the next valid selectable index. If the new index is outside of the bounds,
+     * it will snap to the edge of the options array. If delta == 0 and the given index is not selectable
+     */
+    ComboBoxInternal.prototype._getNextSelectableIndex = function (index, searchDirection) {
+        var currentOptions = this.props.hoisted.currentOptions;
+        var newIndex = index + searchDirection;
+        newIndex = Math.max(0, Math.min(currentOptions.length - 1, newIndex));
+        if (!indexWithinBounds(currentOptions, newIndex)) {
+            return -1;
+        }
+        var option = currentOptions[newIndex];
+        if (!isSelectableOption(option) || option.hidden === true) {
+            // Should we continue looking for an index to select?
+            if (searchDirection !== SearchDirection.none &&
+                ((newIndex > 0 && searchDirection < SearchDirection.none) ||
+                    (newIndex >= 0 && newIndex < currentOptions.length && searchDirection > SearchDirection.none))) {
+                newIndex = this._getNextSelectableIndex(newIndex, searchDirection);
+            }
+            else {
+                // If we cannot perform a useful search just return the index we were given
+                return index;
+            }
+        }
+        // We have the next valid selectable index, return it
+        return newIndex;
+    };
+    /**
+     * Set the selected index. Note, this is
+     * the "real" selected index, not the pending selected index
+     * @param index - the index to set (or the index to set from if a search direction is provided)
+     * @param searchDirection - the direction to search along the options from the given index
+     */
+    ComboBoxInternal.prototype._setSelectedIndex = function (index, submitPendingValueEvent, searchDirection) {
+        if (searchDirection === void 0) { searchDirection = SearchDirection.none; }
+        var _a = this.props, onChange = _a.onChange, onPendingValueChanged = _a.onPendingValueChanged, _b = _a.hoisted, initialIndices = _b.selectedIndices, currentOptions = _b.currentOptions;
+        // Clone currentOptions and selectedIndices so we don't mutate state
+        var selectedIndices = initialIndices ? initialIndices.slice() : [];
+        var changedOptions = currentOptions.slice();
+        // Find the next selectable index, if searchDirection is none
+        // we will get our starting index back
+        index = this._getNextSelectableIndex(index, searchDirection);
+        if (!indexWithinBounds(currentOptions, index)) {
+            return;
+        }
+        // Are we at a new index? If so, update the state, otherwise
+        // there is nothing to do
+        if (this.props.multiSelect ||
+            selectedIndices.length < 1 ||
+            (selectedIndices.length === 1 && selectedIndices[0] !== index)) {
+            var option = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)({}, currentOptions[index]);
+            // if option doesn't existing, or option is disabled, we noop
+            if (!option || option.disabled) {
+                return;
+            }
+            if (this.props.multiSelect) {
+                // Setting the initial state of option.selected in Multi-select combo box by checking the
+                // selectedIndices array and overriding the undefined issue
+                option.selected = option.selected !== undefined ? !option.selected : selectedIndices.indexOf(index) < 0;
+                // handle changing all options if SelectAll is changed
+                if (option.itemType === _SelectableOption__WEBPACK_IMPORTED_MODULE_16__.SelectableOptionMenuItemType.SelectAll) {
+                    selectedIndices = [];
+                    // if select all is set to checked, push all selectable option indices
+                    if (option.selected) {
+                        currentOptions.forEach(function (currentOption, i) {
+                            if (!currentOption.disabled && isSelectableOption(currentOption)) {
+                                selectedIndices.push(i);
+                                changedOptions[i] = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)({}, currentOption), { selected: true });
+                            }
+                        });
+                    }
+                    // otherwise un-check all options
+                    else {
+                        changedOptions = currentOptions.map(function (currentOption) { return ((0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)({}, currentOption), { selected: false })); });
+                    }
+                }
+                // otherwise update the individual option
+                else {
+                    if (option.selected && selectedIndices.indexOf(index) < 0) {
+                        selectedIndices.push(index);
+                    }
+                    else if (!option.selected && selectedIndices.indexOf(index) >= 0) {
+                        selectedIndices = selectedIndices.filter(function (value) { return value !== index; });
+                    }
+                    changedOptions[index] = option;
+                    // If SelectAll exists and another option was toggled, update the SelectAll option's state
+                    var selectAllOption = changedOptions.filter(function (o) { return o.itemType === _SelectableOption__WEBPACK_IMPORTED_MODULE_16__.SelectableOptionMenuItemType.SelectAll; })[0];
+                    if (selectAllOption) {
+                        var selectAllState = this._isSelectAllChecked(selectedIndices);
+                        var selectAllIndex_1 = changedOptions.indexOf(selectAllOption);
+                        if (selectAllState) {
+                            selectedIndices.push(selectAllIndex_1);
+                            changedOptions[selectAllIndex_1] = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)({}, selectAllOption), { selected: true });
+                        }
+                        else {
+                            selectedIndices = selectedIndices.filter(function (value) { return value !== selectAllIndex_1; });
+                            changedOptions[selectAllIndex_1] = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)({}, selectAllOption), { selected: false });
+                        }
+                    }
+                }
+            }
+            else {
+                selectedIndices[0] = index;
+            }
+            submitPendingValueEvent.persist();
+            // Only setState if combo box is uncontrolled.
+            if (this.props.selectedKey || this.props.selectedKey === null) {
+                // If combo box value is changed, revert preview first
+                if (this._hasPendingValue && onPendingValueChanged) {
+                    onPendingValueChanged();
+                    this._hasPendingValue = false;
+                }
+            }
+            else {
+                this.props.hoisted.setSelectedIndices(selectedIndices);
+                this.props.hoisted.setCurrentOptions(changedOptions);
+                // If ComboBox value is changed, revert preview first
+                if (this._hasPendingValue && onPendingValueChanged) {
+                    onPendingValueChanged();
+                    this._hasPendingValue = false;
+                }
+            }
+            // Call onChange after state is updated
+            if (onChange) {
+                onChange(submitPendingValueEvent, option, index, getPreviewText(option));
+            }
+        }
+        if (this.props.multiSelect && this.state.isOpen) {
+            return;
+        }
+        // clear all of the pending info
+        this._clearPendingInfo();
+    };
+    /**
+     * Submit a pending value if there is one
+     */
+    ComboBoxInternal.prototype._submitPendingValue = function (submitPendingValueEvent) {
+        var _a;
+        var _b = this.props, onChange = _b.onChange, allowFreeform = _b.allowFreeform, autoComplete = _b.autoComplete, multiSelect = _b.multiSelect, hoisted = _b.hoisted;
+        var currentOptions = hoisted.currentOptions;
+        var _c = this.state, currentPendingValue = _c.currentPendingValue, currentPendingValueValidIndex = _c.currentPendingValueValidIndex, currentPendingValueValidIndexOnHover = _c.currentPendingValueValidIndexOnHover;
+        var selectedIndices = this.props.hoisted.selectedIndices;
+        // Do not submit any pending value if we
+        // have already initiated clearing the pending info
+        if (this._processingClearPendingInfo) {
+            return;
+        }
+        // If we allow freeform we need to handle that
+        if (allowFreeform) {
+            // if currentPendingValue is null or undefined the user did not submit anything
+            // (not even empty because we would have stored that as the pending value)
+            if (currentPendingValue === null || currentPendingValue === undefined) {
+                // if a user did not type anything they may just hovered over an item
+                if (currentPendingValueValidIndexOnHover >= 0) {
+                    this._setSelectedIndex(currentPendingValueValidIndexOnHover, submitPendingValueEvent);
+                    this._clearPendingInfo();
+                }
+                return;
+            }
+            // Check to see if the user typed an exact match
+            if (indexWithinBounds(currentOptions, currentPendingValueValidIndex)) {
+                var pendingOptionText = this._adjustForCaseSensitivity(getPreviewText(currentOptions[currentPendingValueValidIndex]));
+                var autofill = this._autofill.current;
+                // By exact match, that means: our pending value is the same as the pending option text OR
+                // the pending option starts with the pending value and we have an "autoComplete" selection
+                // where the total length is equal to pending option length OR
+                // the live value in the underlying input matches the pending option; update the state
+                var adjustedCurrentPendingValue = this._adjustForCaseSensitivity(currentPendingValue);
+                if (adjustedCurrentPendingValue === pendingOptionText ||
+                    (autoComplete &&
+                        pendingOptionText.indexOf(adjustedCurrentPendingValue) === 0 &&
+                        (autofill === null || autofill === void 0 ? void 0 : autofill.isValueSelected) &&
+                        currentPendingValue.length + (autofill.selectionEnd - autofill.selectionStart) ===
+                            pendingOptionText.length) ||
+                    (((_a = autofill === null || autofill === void 0 ? void 0 : autofill.inputElement) === null || _a === void 0 ? void 0 : _a.value) !== undefined &&
+                        this._adjustForCaseSensitivity(autofill.inputElement.value) === pendingOptionText)) {
+                    this._setSelectedIndex(currentPendingValueValidIndex, submitPendingValueEvent);
+                    if (multiSelect && this.state.isOpen) {
+                        return;
+                    }
+                    this._clearPendingInfo();
+                    return;
+                }
+            }
+            if (onChange) {
+                if (onChange) {
+                    // trigger onChange to clear value
+                    onChange(submitPendingValueEvent, undefined, undefined, currentPendingValue);
+                }
+            }
+            else {
+                // If we are not controlled, create a new selected option
+                var newOption = {
+                    key: currentPendingValue || (0,_Utilities__WEBPACK_IMPORTED_MODULE_27__.getId)(),
+                    text: normalizeToString(currentPendingValue),
+                };
+                // If it's multiselect, set selected state to true
+                if (multiSelect) {
+                    newOption.selected = true;
+                }
+                var newOptions = currentOptions.concat([newOption]);
+                if (selectedIndices) {
+                    if (!multiSelect) {
+                        selectedIndices = [];
+                    }
+                    selectedIndices.push(newOptions.length - 1);
+                }
+                hoisted.setCurrentOptions(newOptions);
+                hoisted.setSelectedIndices(selectedIndices);
+            }
+        }
+        else if (currentPendingValueValidIndex >= 0) {
+            // Since we are not allowing freeform, we must have a matching
+            // to be able to update state
+            this._setSelectedIndex(currentPendingValueValidIndex, submitPendingValueEvent);
+        }
+        else if (currentPendingValueValidIndexOnHover >= 0) {
+            // If all else failed and we were hovering over an item, select it
+            this._setSelectedIndex(currentPendingValueValidIndexOnHover, submitPendingValueEvent);
+        }
+        // Finally, clear the pending info
+        this._clearPendingInfo();
+    };
+    ComboBoxInternal.prototype._onCalloutLayerMounted = function () {
+        // In persistMenu mode _onLayerMounted is only called once for the lifetime
+        // of the component. Any functionality required for callout "on mount" can
+        // go here so that we can also call it again during callout dismissal to reset
+        // object state.
+        this._gotMouseMove = false;
+    };
+    // Render separator
+    // eslint-disable-next-line @typescript-eslint/no-deprecated
+    ComboBoxInternal.prototype._renderSeparator = function (item) {
+        var index = item.index, key = item.key;
+        if (index && index > 0) {
+            return react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { role: "presentation", key: key, className: this._classNames.divider });
+        }
+        return null;
+    };
+    // eslint-disable-next-line @typescript-eslint/no-deprecated
+    ComboBoxInternal.prototype._renderHeader = function (item) {
+        var _a = this.props.onRenderOption, onRenderOption = _a === void 0 ? this._onRenderOptionContent : _a;
+        return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { id: item.id, key: item.key, className: this._classNames.header }, onRenderOption(item, this._onRenderOptionContent)));
+    };
+    // eslint-disable-next-line @typescript-eslint/no-deprecated
+    ComboBoxInternal.prototype._renderCheckboxLabel = function (item) {
+        var _a = this.props.onRenderOption, onRenderOption = _a === void 0 ? this._onRenderMultiselectOptionContent : _a;
+        return onRenderOption(item, this._onRenderMultiselectOptionContent);
+    };
+    /**
+     * If we are coming from a mouseOut:
+     * there is no visible selected option.
+     *
+     * Else if We are hovering over an item:
+     * that gets the selected look.
+     *
+     * Else:
+     * Use the current valid pending index if it exists OR
+     * we do not have a valid index and we currently have a pending input value,
+     * otherwise use the selected index
+     * */
+    ComboBoxInternal.prototype._isOptionHighlighted = function (index) {
+        var currentPendingValueValidIndexOnHover = this.state.currentPendingValueValidIndexOnHover;
+        // If the hover state is set to clearAll, don't show a selected index.
+        // Note, this happens when the user moused out of the menu items
+        if (currentPendingValueValidIndexOnHover === HoverStatus.clearAll) {
+            return false;
+        }
+        return currentPendingValueValidIndexOnHover >= 0
+            ? currentPendingValueValidIndexOnHover === index
+            : this._isOptionSelected(index);
+    };
+    ComboBoxInternal.prototype._isOptionSelected = function (index) {
+        return this._getPendingSelectedIndex(true /* includePendingValue */) === index;
+    };
+    ComboBoxInternal.prototype._isOptionChecked = function (index) {
+        if (this.props.multiSelect && index !== undefined && this.props.hoisted.selectedIndices) {
+            var idxOfSelectedIndex = -1;
+            idxOfSelectedIndex = this.props.hoisted.selectedIndices.indexOf(index);
+            return idxOfSelectedIndex >= 0;
+        }
+        return false;
+    };
+    ComboBoxInternal.prototype._isOptionIndeterminate = function (index) {
+        var _a = this.props, multiSelect = _a.multiSelect, hoisted = _a.hoisted;
+        if (multiSelect && index !== undefined && hoisted.selectedIndices && hoisted.currentOptions) {
+            var option = hoisted.currentOptions[index];
+            if (option && option.itemType === _SelectableOption__WEBPACK_IMPORTED_MODULE_16__.SelectableOptionMenuItemType.SelectAll) {
+                return hoisted.selectedIndices.length > 0 && !this._isSelectAllChecked();
+            }
+        }
+        return false;
+    };
+    ComboBoxInternal.prototype._isSelectAllChecked = function (testIndices) {
+        var _a = this.props, multiSelect = _a.multiSelect, hoisted = _a.hoisted;
+        var selectAllOption = hoisted.currentOptions.find(function (option) { return option.itemType === _SelectableOption__WEBPACK_IMPORTED_MODULE_16__.SelectableOptionMenuItemType.SelectAll; });
+        var selectedIndices = testIndices || hoisted.selectedIndices;
+        if (!multiSelect || !selectedIndices || !selectAllOption) {
+            return false;
+        }
+        // start by not including the select all option itself
+        var selectAllIndex = hoisted.currentOptions.indexOf(selectAllOption);
+        var compareSelectedIndices = selectedIndices.filter(function (value) { return value !== selectAllIndex; });
+        // get array of selectable options, excluding disabled options, headers, and dividers
+        var selectableOptions = hoisted.currentOptions.filter(function (option) {
+            return !option.disabled && option.itemType !== _SelectableOption__WEBPACK_IMPORTED_MODULE_16__.SelectableOptionMenuItemType.SelectAll && isSelectableOption(option);
+        });
+        return compareSelectedIndices.length === selectableOptions.length;
+    };
+    /**
+     * Gets the pending selected index taking into account valueValidIndex and selectedIndex
+     * @param includeCurrentPendingValue - Should we include the currentPendingValue when
+     * finding the index
+     */
+    ComboBoxInternal.prototype._getPendingSelectedIndex = function (includeCurrentPendingValue) {
+        var _a = this.state, currentPendingValueValidIndex = _a.currentPendingValueValidIndex, currentPendingValue = _a.currentPendingValue;
+        return currentPendingValueValidIndex >= 0 ||
+            (includeCurrentPendingValue && currentPendingValue !== null && currentPendingValue !== undefined)
+            ? currentPendingValueValidIndex
+            : this.props.multiSelect
+                ? -1
+                : this._getFirstSelectedIndex();
+    };
+    /**
+     * Scroll the selected element into view
+     */
+    ComboBoxInternal.prototype._scrollIntoView = function () {
+        var _a = this.props, onScrollToItem = _a.onScrollToItem, scrollSelectedToTop = _a.scrollSelectedToTop;
+        var currentPendingSelectedIndex = this._getPendingSelectedIndex(true);
+        if (onScrollToItem) {
+            // Use the custom scroll handler
+            onScrollToItem(currentPendingSelectedIndex >= 0 ? currentPendingSelectedIndex : this._getFirstSelectedIndex());
+            return;
+        }
+        var scrollToElement = this._selectedElement.current;
+        // in multi-select there are multiple selected elements, so we use the pending select index
+        // to locate the option to scroll to.
+        if (this.props.multiSelect && this._comboBoxMenu.current) {
+            scrollToElement = findFirstDescendant(this._comboBoxMenu.current, function (element) {
+                var _a;
+                return ((_a = element.dataset) === null || _a === void 0 ? void 0 : _a.index) === currentPendingSelectedIndex.toString();
+            });
+        }
+        if (scrollToElement && scrollToElement.offsetParent) {
+            var alignToTop = true;
+            // We are using refs, scroll the ref into view
+            if (this._comboBoxMenu.current && this._comboBoxMenu.current.offsetParent) {
+                var scrollableParent = this._comboBoxMenu.current.offsetParent;
+                var selectedElement = scrollToElement.offsetParent;
+                var _b = selectedElement, offsetHeight = _b.offsetHeight, offsetTop = _b.offsetTop;
+                var _c = scrollableParent, parentOffsetHeight = _c.offsetHeight, scrollTop = _c.scrollTop;
+                var isAbove = offsetTop < scrollTop;
+                var isBelow = offsetTop + offsetHeight > scrollTop + parentOffsetHeight;
+                if (isAbove || scrollSelectedToTop) {
+                    alignToTop = false;
+                    scrollableParent.scrollTo(0, offsetTop);
+                }
+                else if (isBelow) {
+                    scrollableParent.scrollTo(0, offsetTop - parentOffsetHeight + offsetHeight);
+                }
+            }
+            // if _comboboxMenu doesn't exist, fall back to scrollIntoView
+            else {
+                scrollToElement.offsetParent.scrollIntoView(alignToTop);
+            }
+        }
+    };
+    /**
+     * Click handler for the menu items
+     * to select the item and also close the menu
+     * @param index - the index of the item that was clicked
+     */
+    ComboBoxInternal.prototype._onItemClick = function (item) {
+        var _this = this;
+        var onItemClick = this.props.onItemClick;
+        var index = item.index;
+        return function (ev) {
+            // only close the callout when it's in single-select mode
+            if (!_this.props.multiSelect) {
+                // ensure that focus returns to the input, not the button
+                _this._autofill.current && _this._autofill.current.focus();
+                _this.setState({
+                    isOpen: false,
+                });
+            }
+            // Continue processing the click only after
+            // performing menu close / control focus(inner working)
+            onItemClick && onItemClick(ev, item, index);
+            _this._setSelectedIndex(index, ev);
+        };
+    };
+    /**
+     * Reset the selected index by clearing the
+     * input (of any pending text), clearing the pending state,
+     * and setting the suggested display value to the last
+     * selected state text
+     */
+    ComboBoxInternal.prototype._resetSelectedIndex = function () {
+        var currentOptions = this.props.hoisted.currentOptions;
+        this._clearPendingInfo();
+        var selectedIndex = this._getFirstSelectedIndex();
+        if (selectedIndex > 0 && selectedIndex < currentOptions.length) {
+            this.props.hoisted.setSuggestedDisplayValue(currentOptions[selectedIndex].text);
+        }
+        else if (this.props.text) {
+            // If we had a value initially, restore it
+            this.props.hoisted.setSuggestedDisplayValue(this.props.text);
+        }
+    };
+    /**
+     * Clears the pending info state
+     */
+    ComboBoxInternal.prototype._clearPendingInfo = function () {
+        this._processingClearPendingInfo = true;
+        this.props.hoisted.setSuggestedDisplayValue(undefined);
+        this.setState({
+            currentPendingValue: undefined,
+            currentPendingValueValidIndex: -1,
+            currentPendingValueValidIndexOnHover: HoverStatus.default,
+        }, this._onAfterClearPendingInfo);
+    };
+    /**
+     * Set the pending info
+     * @param currentPendingValue - new pending value to set
+     * @param currentPendingValueValidIndex - new pending value index to set
+     * @param suggestedDisplayValue - new suggest display value to set
+     */
+    ComboBoxInternal.prototype._setPendingInfo = function (currentPendingValue, currentPendingValueValidIndex, suggestedDisplayValue) {
+        if (currentPendingValueValidIndex === void 0) { currentPendingValueValidIndex = -1; }
+        if (this._processingClearPendingInfo) {
+            return;
+        }
+        this.props.hoisted.setSuggestedDisplayValue(suggestedDisplayValue);
+        this.setState({
+            currentPendingValue: normalizeToString(currentPendingValue),
+            currentPendingValueValidIndex: currentPendingValueValidIndex,
+            currentPendingValueValidIndexOnHover: HoverStatus.default,
+        });
+    };
+    /**
+     * Set the pending info from the given index
+     * @param index - the index to set the pending info from
+     */
+    ComboBoxInternal.prototype._setPendingInfoFromIndex = function (index) {
+        var currentOptions = this.props.hoisted.currentOptions;
+        if (index >= 0 && index < currentOptions.length) {
+            var option = currentOptions[index];
+            this._setPendingInfo(getPreviewText(option), index, getPreviewText(option));
+        }
+        else {
+            this._clearPendingInfo();
+        }
+    };
+    /**
+     * Sets the pending info for the combo box
+     * @param index - the index to search from
+     * @param searchDirection - the direction to search
+     */
+    ComboBoxInternal.prototype._setPendingInfoFromIndexAndDirection = function (index, searchDirection) {
+        var currentOptions = this.props.hoisted.currentOptions;
+        // update index to allow content to wrap
+        if (searchDirection === SearchDirection.forward && index >= currentOptions.length - 1) {
+            index = -1;
+        }
+        else if (searchDirection === SearchDirection.backward && index <= 0) {
+            index = currentOptions.length;
+        }
+        // get the next "valid" index
+        var indexUpdate = this._getNextSelectableIndex(index, searchDirection);
+        // if the two indices are equal we didn't move and
+        // we should attempt to get  get the first/last "valid" index to use
+        // (Note, this takes care of the potential cases where the first/last
+        // item is not focusable), otherwise use the updated index
+        if (index === indexUpdate) {
+            if (searchDirection === SearchDirection.forward) {
+                index = this._getNextSelectableIndex(-1, searchDirection);
+            }
+            else if (searchDirection === SearchDirection.backward) {
+                index = this._getNextSelectableIndex(currentOptions.length, searchDirection);
+            }
+        }
+        else {
+            index = indexUpdate;
+        }
+        if (indexWithinBounds(currentOptions, index)) {
+            this._setPendingInfoFromIndex(index);
+        }
+    };
+    ComboBoxInternal.prototype._notifyPendingValueChanged = function (prevState) {
+        var onPendingValueChanged = this.props.onPendingValueChanged;
+        if (!onPendingValueChanged) {
+            return;
+        }
+        var currentOptions = this.props.hoisted.currentOptions;
+        var _a = this.state, currentPendingValue = _a.currentPendingValue, currentPendingValueValidIndex = _a.currentPendingValueValidIndex, currentPendingValueValidIndexOnHover = _a.currentPendingValueValidIndexOnHover;
+        var newPendingIndex = undefined;
+        var newPendingValue = undefined;
+        if (currentPendingValueValidIndexOnHover !== prevState.currentPendingValueValidIndexOnHover &&
+            indexWithinBounds(currentOptions, currentPendingValueValidIndexOnHover)) {
+            // Set new pending index if hover index was changed
+            newPendingIndex = currentPendingValueValidIndexOnHover;
+        }
+        else if (currentPendingValueValidIndex !== prevState.currentPendingValueValidIndex &&
+            indexWithinBounds(currentOptions, currentPendingValueValidIndex)) {
+            // Set new pending index if currentPendingValueValidIndex was changed
+            newPendingIndex = currentPendingValueValidIndex;
+        }
+        else if (currentPendingValue !== prevState.currentPendingValue) {
+            // Set pendingValue in the case it was changed and no index was changed
+            newPendingValue = currentPendingValue;
+        }
+        // Notify when there is a new pending index/value. Also, if there is a pending value, it needs to send undefined.
+        if (newPendingIndex !== undefined || newPendingValue !== undefined || this._hasPendingValue) {
+            onPendingValueChanged(newPendingIndex !== undefined ? currentOptions[newPendingIndex] : undefined, newPendingIndex, newPendingValue);
+            this._hasPendingValue = newPendingIndex !== undefined || newPendingValue !== undefined;
+        }
+    };
+    /**
+     * Sets the isOpen state and updates focusInputAfterClose
+     */
+    ComboBoxInternal.prototype._setOpenStateAndFocusOnClose = function (isOpen, focusInputAfterClose) {
+        this._focusInputAfterClose = focusInputAfterClose;
+        this.setState({ isOpen: isOpen });
+    };
+    ComboBoxInternal.prototype._onOptionMouseEnter = function (index) {
+        if (this._shouldIgnoreMouseEvent()) {
+            return;
+        }
+        this.setState({
+            currentPendingValueValidIndexOnHover: index,
+        });
+    };
+    ComboBoxInternal.prototype._onOptionMouseMove = function (index) {
+        this._gotMouseMove = true;
+        if (!this._isScrollIdle || this.state.currentPendingValueValidIndexOnHover === index) {
+            return;
+        }
+        this.setState({
+            currentPendingValueValidIndexOnHover: index,
+        });
+    };
+    ComboBoxInternal.prototype._shouldIgnoreMouseEvent = function () {
+        return !this._isScrollIdle || !this._gotMouseMove;
+    };
+    /**
+     * Handle dismissing the menu and eating the required key event when disabled
+     * @param ev - the keyboard event that was fired
+     */
+    ComboBoxInternal.prototype._handleInputWhenDisabled = function (ev) {
+        // If we are disabled, close the menu (if needed)
+        // and eat all keystrokes other than TAB or ESC
+        if (this.props.disabled) {
+            if (this.state.isOpen) {
+                this.setState({ isOpen: false });
+            }
+            // When disabled stop propagation and prevent default
+            // of the event unless we have a tab, escape, or function key
+            if (ev !== null &&
+                // eslint-disable-next-line @typescript-eslint/no-deprecated
+                ev.which !== _Utilities__WEBPACK_IMPORTED_MODULE_20__.KeyCodes.tab &&
+                // eslint-disable-next-line @typescript-eslint/no-deprecated
+                ev.which !== _Utilities__WEBPACK_IMPORTED_MODULE_20__.KeyCodes.escape &&
+                // eslint-disable-next-line @typescript-eslint/no-deprecated
+                (ev.which < 112 /* F1 */ || ev.which > 123) /* F12 */) {
+                ev.stopPropagation();
+                ev.preventDefault();
+            }
+        }
+    };
+    ComboBoxInternal.prototype._handleTouchAndPointerEvent = function () {
+        var _this = this;
+        // If we already have an existing timeout from a previous touch and pointer event
+        // cancel that timeout so we can set a nwe one.
+        if (this._lastTouchTimeoutId !== undefined) {
+            this._async.clearTimeout(this._lastTouchTimeoutId);
+            this._lastTouchTimeoutId = undefined;
+        }
+        this._processingTouch = true;
+        this._lastTouchTimeoutId = this._async.setTimeout(function () {
+            _this._processingTouch = false;
+            _this._lastTouchTimeoutId = undefined;
+        }, TouchIdleDelay);
+    };
+    /**
+     * Get the styles for the current option.
+     * @param item - Item props for the current option
+     */
+    ComboBoxInternal.prototype._getCaretButtonStyles = function () {
+        var customCaretDownButtonStyles = this.props.caretDownButtonStyles;
+        return (0,_ComboBox_styles__WEBPACK_IMPORTED_MODULE_30__.getCaretDownButtonStyles)(this.props.theme, customCaretDownButtonStyles);
+    };
+    /**
+     * Get the styles for the current option.
+     * @param item - Item props for the current option
+     */
+    ComboBoxInternal.prototype._getCurrentOptionStyles = function (item) {
+        var _a;
+        var customStylesForAllOptions = this.props.comboBoxOptionStyles;
+        var customStylesForCurrentOption = item.styles;
+        var optionStyles = (0,_ComboBox_styles__WEBPACK_IMPORTED_MODULE_30__.getOptionStyles)(this.props.theme, customStylesForAllOptions, customStylesForCurrentOption, this._isPendingOption(item), item.hidden, this._isOptionHighlighted(item.index));
+        // TODO: fix this for multi-window scenarios
+        optionStyles.__shadowConfig__ = (_a = this.props.styles) === null || _a === void 0 ? void 0 : _a.__shadowConfig__;
+        return optionStyles;
+    };
+    /**
+     * Get the aria autocomplete value for the combo box
+     * @returns 'inline' if auto-complete automatically dynamic, 'both' if we have a list of possible values to pick from
+     * and can dynamically populate input, and 'list' if auto-complete is not enabled as selection is the only option.
+     * Ideally, this should be 'none' if auto-complete is not enabled, but there is a known bug in Edge
+     * where the callout may appear over the combo box if this attribute is set to 'none'
+     */
+    ComboBoxInternal.prototype._getAriaAutoCompleteValue = function () {
+        var autoComplete = !this.props.disabled && this.props.autoComplete === 'on';
+        return autoComplete ? (this.props.allowFreeform ? 'inline' : 'both') : 'list';
+    };
+    ComboBoxInternal.prototype._isPendingOption = function (item) {
+        return item && item.index === this.state.currentPendingValueValidIndex;
+    };
+    /**
+     * Returns true if the component has some kind of focus. If it's either focusing or if it's focused
+     */
+    ComboBoxInternal.prototype._hasFocus = function () {
+        return this.state.focusState !== 'none';
+    };
+    ComboBoxInternal.prototype._adjustForCaseSensitivity = function (text) {
+        return this.props.caseSensitive ? text : text.toLowerCase();
+    };
+    ComboBoxInternal.contextType = _fluentui_react_window_provider__WEBPACK_IMPORTED_MODULE_31__.WindowContext;
+    ComboBoxInternal = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([
+        (0,_Utilities__WEBPACK_IMPORTED_MODULE_32__.customizable)('ComboBox', ['theme', 'styles'], true)
+    ], ComboBoxInternal);
+    return ComboBoxInternal;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component));
+/**
+ * Get the indices of the options that are marked as selected
+ * @param options - the combo box options
+ * @param selectedKeys - the known selected keys to find
+ * @returns - an array of the indices of the selected options, empty array if nothing is selected
+ */
+function getSelectedIndices(options, selectedKeys) {
+    if (!options || !selectedKeys) {
+        return [];
+    }
+    var selectedIndices = {};
+    options.forEach(function (option, index) {
+        if (option.selected) {
+            selectedIndices[index] = true;
+        }
+    });
+    var _loop_1 = function (selectedKey) {
+        var index = (0,_Utilities__WEBPACK_IMPORTED_MODULE_33__.findIndex)(options, function (option) { return option.key === selectedKey; });
+        if (index > -1) {
+            selectedIndices[index] = true;
+        }
+    };
+    for (var _i = 0, selectedKeys_1 = selectedKeys; _i < selectedKeys_1.length; _i++) {
+        var selectedKey = selectedKeys_1[_i];
+        _loop_1(selectedKey);
+    }
+    return Object.keys(selectedIndices).map(Number).sort();
+}
+/**
+ * Given default selected key(s) and selected key(s), return the selected keys(s).
+ * When default selected key(s) are available, they take precedence and return them instead of selected key(s).
+ *
+ * @returns No matter what specific types the input parameters are, always return an array of
+ *  either strings or numbers instead of primitive type.  This normalization makes caller's logic easier.
+ */
+function buildDefaultSelectedKeys(defaultSelectedKey, selectedKey) {
+    var selectedKeys = buildSelectedKeys(defaultSelectedKey);
+    if (selectedKeys.length) {
+        return selectedKeys;
+    }
+    return buildSelectedKeys(selectedKey);
+}
+function buildSelectedKeys(selectedKey) {
+    if (selectedKey === undefined) {
+        return [];
+    }
+    // need to cast here so typescript does not complain
+    return (selectedKey instanceof Array ? selectedKey : [selectedKey]);
+}
+function normalizeToString(value) {
+    return value || '';
+}
+/**
+ * Is the index within the bounds of the array?
+ * @param options - options to check if the index is valid for
+ * @param index - the index to check
+ * @returns - true if the index is valid for the given options, false otherwise
+ */
+function indexWithinBounds(options, index) {
+    return !!options && index >= 0 && index < options.length;
+}
+/** Whether this is a normal option, not a header or divider or select all. */
+function isNormalOption(option) {
+    return (option.itemType !== _SelectableOption__WEBPACK_IMPORTED_MODULE_16__.SelectableOptionMenuItemType.Header &&
+        option.itemType !== _SelectableOption__WEBPACK_IMPORTED_MODULE_16__.SelectableOptionMenuItemType.Divider &&
+        option.itemType !== _SelectableOption__WEBPACK_IMPORTED_MODULE_16__.SelectableOptionMenuItemType.SelectAll);
+}
+/** Whether this is a selectable option, not a header or divider. */
+function isSelectableOption(option) {
+    return (option.itemType !== _SelectableOption__WEBPACK_IMPORTED_MODULE_16__.SelectableOptionMenuItemType.Header && option.itemType !== _SelectableOption__WEBPACK_IMPORTED_MODULE_16__.SelectableOptionMenuItemType.Divider);
+}
+/**
+ * For scenarios where the option's `text` prop contains embedded styles, we use the option's
+ * `ariaLabel` value as the text in the input and for autocomplete matching. We know to use this
+ * when the `useAriaLabelAsText` prop is set to true.
+ */
+function getPreviewText(item) {
+    return item.useAriaLabelAsText && item.ariaLabel ? item.ariaLabel : item.text;
+}
+/**
+ * Returns true if the key for the event is alt (Mac option) or meta (Mac command).
+ */
+function isAltOrMeta(ev) {
+    // eslint-disable-next-line @typescript-eslint/no-deprecated
+    return ev.which === _Utilities__WEBPACK_IMPORTED_MODULE_20__.KeyCodes.alt || ev.key === 'Meta';
+}
+
+
+/***/ }),
+
+/***/ 4604:
+/*!*********************************************************************************!*\
+  !*** ./node_modules/@fluentui/react/lib/components/ComboBox/ComboBox.styles.js ***!
+  \*********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   getCaretDownButtonStyles: () => (/* binding */ getCaretDownButtonStyles),
+/* harmony export */   getOptionStyles: () => (/* binding */ getOptionStyles),
+/* harmony export */   getStyles: () => (/* binding */ getStyles)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 196);
+/* harmony import */ var _Styling__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Styling */ 8455);
+/* harmony import */ var _Utilities__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Utilities */ 5659);
+var _a, _b;
+
+
+
+var ComboBoxHeight = 32;
+var ComboBoxLineHeight = 30;
+var ComboBoxCaretDownWidth = 32;
+var ComboBoxOptionHeight = 36;
+var getDisabledStyles = (0,_Utilities__WEBPACK_IMPORTED_MODULE_0__.memoizeFunction)(function (theme) {
+    var _a;
+    var semanticColors = theme.semanticColors;
+    return {
+        backgroundColor: semanticColors.disabledBackground,
+        color: semanticColors.disabledText,
+        cursor: 'default',
+        selectors: (_a = {
+                ':after': {
+                    borderColor: semanticColors.disabledBackground,
+                }
+            },
+            _a[_Styling__WEBPACK_IMPORTED_MODULE_1__.HighContrastSelector] = {
+                color: 'GrayText',
+                selectors: {
+                    ':after': {
+                        borderColor: 'GrayText',
+                    },
+                },
+            },
+            _a),
+    };
+});
+var listOptionHighContrastStyles = {
+    selectors: (_a = {},
+        _a[_Styling__WEBPACK_IMPORTED_MODULE_1__.HighContrastSelector] = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__assign)({ backgroundColor: 'Highlight', borderColor: 'Highlight', color: 'HighlightText' }, (0,_Styling__WEBPACK_IMPORTED_MODULE_1__.getHighContrastNoAdjustStyle)()),
+        _a),
+};
+var inputHighContrastStyles = {
+    selectors: (_b = {},
+        _b[_Styling__WEBPACK_IMPORTED_MODULE_1__.HighContrastSelector] = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__assign)({ color: 'WindowText', backgroundColor: 'Window' }, (0,_Styling__WEBPACK_IMPORTED_MODULE_1__.getHighContrastNoAdjustStyle)()),
+        _b),
+};
+var getOptionStyles = (0,_Utilities__WEBPACK_IMPORTED_MODULE_0__.memoizeFunction)(function (theme, customStylesForAllOptions, customOptionStylesForCurrentOption, isPending, isHidden, isSelected) {
+    var _a;
+    var palette = theme.palette, semanticColors = theme.semanticColors;
+    var option = {
+        textHoveredColor: semanticColors.menuItemTextHovered,
+        textSelectedColor: palette.neutralDark,
+        textDisabledColor: semanticColors.disabledText,
+        backgroundHoveredColor: semanticColors.menuItemBackgroundHovered,
+        backgroundPressedColor: semanticColors.menuItemBackgroundPressed,
+    };
+    var optionStyles = {
+        root: [
+            theme.fonts.medium,
+            {
+                backgroundColor: isPending ? option.backgroundHoveredColor : 'transparent',
+                boxSizing: 'border-box',
+                cursor: 'pointer',
+                display: isHidden ? 'none' : 'block',
+                width: '100%',
+                height: 'auto',
+                minHeight: ComboBoxOptionHeight,
+                lineHeight: '20px',
+                padding: '0 8px',
+                position: 'relative',
+                borderWidth: '1px',
+                borderStyle: 'solid',
+                borderColor: 'transparent',
+                borderRadius: 0,
+                wordWrap: 'break-word',
+                overflowWrap: 'break-word',
+                textAlign: 'left',
+                selectors: (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_2__.__assign)((_a = {}, _a[_Styling__WEBPACK_IMPORTED_MODULE_1__.HighContrastSelector] = {
+                    border: 'none',
+                    borderColor: 'Background',
+                }, _a), (!isHidden && {
+                    '&.ms-Checkbox': {
+                        display: 'flex',
+                        alignItems: 'center',
+                    },
+                })), { '&.ms-Button--command:hover:active': {
+                        backgroundColor: option.backgroundPressedColor,
+                    }, '.ms-Checkbox-label': {
+                        width: '100%',
+                    } }),
+            },
+            isSelected
+                ? [
+                    {
+                        backgroundColor: 'transparent',
+                        color: option.textSelectedColor,
+                        selectors: {
+                            ':hover': [
+                                {
+                                    backgroundColor: option.backgroundHoveredColor,
+                                },
+                                listOptionHighContrastStyles,
+                            ],
+                        },
+                    },
+                    (0,_Styling__WEBPACK_IMPORTED_MODULE_1__.getFocusStyle)(theme, { inset: -1, isFocusedOnly: false }),
+                    listOptionHighContrastStyles,
+                ]
+                : [],
+        ],
+        rootHovered: {
+            backgroundColor: option.backgroundHoveredColor,
+            color: option.textHoveredColor,
+        },
+        rootFocused: {
+            backgroundColor: option.backgroundHoveredColor,
+        },
+        rootDisabled: {
+            color: option.textDisabledColor,
+            cursor: 'default',
+        },
+        optionText: {
+            overflow: 'hidden',
+            whiteSpace: 'nowrap',
+            textOverflow: 'ellipsis',
+            minWidth: '0px',
+            maxWidth: '100%',
+            wordWrap: 'break-word',
+            overflowWrap: 'break-word',
+            display: 'inline-block',
+        },
+        optionTextWrapper: {
+            maxWidth: '100%',
+            display: 'flex',
+            alignItems: 'center',
+        },
+    };
+    return (0,_Styling__WEBPACK_IMPORTED_MODULE_1__.concatStyleSets)(optionStyles, customStylesForAllOptions, customOptionStylesForCurrentOption);
+});
+var getCaretDownButtonStyles = (0,_Utilities__WEBPACK_IMPORTED_MODULE_0__.memoizeFunction)(function (theme, customStyles) {
+    var _a, _b;
+    var semanticColors = theme.semanticColors, fonts = theme.fonts;
+    var caret = {
+        buttonTextColor: semanticColors.bodySubtext,
+        buttonTextHoveredCheckedColor: semanticColors.buttonTextChecked,
+        buttonBackgroundHoveredColor: semanticColors.listItemBackgroundHovered,
+        buttonBackgroundCheckedColor: semanticColors.listItemBackgroundChecked,
+        buttonBackgroundCheckedHoveredColor: semanticColors.listItemBackgroundCheckedHovered,
+    };
+    var buttonHighContrastStyles = {
+        selectors: (_a = {},
+            _a[_Styling__WEBPACK_IMPORTED_MODULE_1__.HighContrastSelector] = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__assign)({ backgroundColor: 'Highlight', borderColor: 'Highlight', color: 'HighlightText' }, (0,_Styling__WEBPACK_IMPORTED_MODULE_1__.getHighContrastNoAdjustStyle)()),
+            _a),
+    };
+    var styles = {
+        root: {
+            color: caret.buttonTextColor,
+            fontSize: fonts.small.fontSize,
+            position: 'absolute',
+            top: 0,
+            height: '100%',
+            lineHeight: ComboBoxLineHeight,
+            width: ComboBoxCaretDownWidth,
+            textAlign: 'center',
+            cursor: 'default',
+            selectors: (_b = {},
+                _b[_Styling__WEBPACK_IMPORTED_MODULE_1__.HighContrastSelector] = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__assign)({ backgroundColor: 'ButtonFace', borderColor: 'ButtonText', color: 'ButtonText' }, (0,_Styling__WEBPACK_IMPORTED_MODULE_1__.getHighContrastNoAdjustStyle)()),
+                _b),
+        },
+        icon: {
+            fontSize: fonts.small.fontSize,
+        },
+        rootHovered: [
+            {
+                backgroundColor: caret.buttonBackgroundHoveredColor,
+                color: caret.buttonTextHoveredCheckedColor,
+                cursor: 'pointer',
+            },
+            buttonHighContrastStyles,
+        ],
+        rootPressed: [
+            {
+                backgroundColor: caret.buttonBackgroundCheckedColor,
+                color: caret.buttonTextHoveredCheckedColor,
+            },
+            buttonHighContrastStyles,
+        ],
+        rootChecked: [
+            {
+                backgroundColor: caret.buttonBackgroundCheckedColor,
+                color: caret.buttonTextHoveredCheckedColor,
+            },
+            buttonHighContrastStyles,
+        ],
+        rootCheckedHovered: [
+            {
+                backgroundColor: caret.buttonBackgroundCheckedHoveredColor,
+                color: caret.buttonTextHoveredCheckedColor,
+            },
+            buttonHighContrastStyles,
+        ],
+        rootDisabled: [
+            getDisabledStyles(theme),
+            {
+                position: 'absolute',
+            },
+        ],
+    };
+    return (0,_Styling__WEBPACK_IMPORTED_MODULE_1__.concatStyleSets)(styles, customStyles);
+});
+var getStyles = (0,_Utilities__WEBPACK_IMPORTED_MODULE_0__.memoizeFunction)(function (theme, customStyles, comboBoxOptionWidth) {
+    var _a, _b, _c, _d, _e, _f;
+    var semanticColors = theme.semanticColors, fonts = theme.fonts, effects = theme.effects;
+    var root = {
+        textColor: semanticColors.inputText,
+        borderColor: semanticColors.inputBorder,
+        borderHoveredColor: semanticColors.inputBorderHovered,
+        borderPressedColor: semanticColors.inputFocusBorderAlt,
+        borderFocusedColor: semanticColors.inputFocusBorderAlt,
+        backgroundColor: semanticColors.inputBackground,
+        erroredColor: semanticColors.errorText,
+    };
+    var option = {
+        headerTextColor: semanticColors.menuHeader,
+        dividerBorderColor: semanticColors.bodyDivider,
+    };
+    // placeholder style variables
+    var placeholderHighContrastStyles = {
+        selectors: (_a = {},
+            _a[_Styling__WEBPACK_IMPORTED_MODULE_1__.HighContrastSelector] = {
+                color: 'GrayText',
+            },
+            _a),
+    };
+    var placeholderStyles = [
+        {
+            color: semanticColors.inputPlaceholderText,
+        },
+        placeholderHighContrastStyles,
+    ];
+    var placeholderStylesHovered = [
+        {
+            color: semanticColors.inputTextHovered,
+        },
+        placeholderHighContrastStyles,
+    ];
+    var disabledPlaceholderStyles = [
+        {
+            color: semanticColors.disabledText,
+        },
+        placeholderHighContrastStyles,
+    ];
+    var ComboBoxRootHighContrastFocused = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_2__.__assign)({ color: 'HighlightText', backgroundColor: 'Window' }, (0,_Styling__WEBPACK_IMPORTED_MODULE_1__.getHighContrastNoAdjustStyle)()), { selectors: {
+            ':after': {
+                borderColor: 'Highlight',
+            },
+        } });
+    var focusBorderStyles = (0,_Styling__WEBPACK_IMPORTED_MODULE_1__.getInputFocusStyle)(root.borderPressedColor, effects.roundedCorner2, 'border', 0);
+    var styles = {
+        container: {},
+        label: {},
+        labelDisabled: {},
+        root: [
+            theme.fonts.medium,
+            {
+                boxShadow: 'none',
+                marginLeft: '0',
+                paddingRight: ComboBoxCaretDownWidth,
+                paddingLeft: 9,
+                color: root.textColor,
+                position: 'relative',
+                outline: '0',
+                userSelect: 'none',
+                backgroundColor: root.backgroundColor,
+                cursor: 'text',
+                display: 'block',
+                height: ComboBoxHeight,
+                whiteSpace: 'nowrap',
+                textOverflow: 'ellipsis',
+                boxSizing: 'border-box', // Border-box matches Dropdown and TextField
+                selectors: {
+                    '.ms-Label': {
+                        display: 'inline-block',
+                        marginBottom: '8px',
+                    },
+                    '&.is-open': {
+                        selectors: (_b = {},
+                            _b[_Styling__WEBPACK_IMPORTED_MODULE_1__.HighContrastSelector] = ComboBoxRootHighContrastFocused,
+                            _b),
+                    },
+                    // setting border using pseudo-element here in order to
+                    // prevent chevron button to overlap ComboBox border under certain resolutions
+                    ':after': {
+                        pointerEvents: 'none',
+                        content: "''",
+                        position: 'absolute',
+                        left: 0,
+                        top: 0,
+                        bottom: 0,
+                        right: 0,
+                        borderWidth: '1px',
+                        borderStyle: 'solid',
+                        borderColor: root.borderColor,
+                        borderRadius: effects.roundedCorner2,
+                    },
+                },
+            },
+        ],
+        rootHovered: {
+            selectors: (_c = {
+                    ':after': {
+                        borderColor: root.borderHoveredColor,
+                    },
+                    '.ms-ComboBox-Input': [
+                        {
+                            color: semanticColors.inputTextHovered,
+                        },
+                        (0,_Styling__WEBPACK_IMPORTED_MODULE_1__.getPlaceholderStyles)(placeholderStylesHovered),
+                        inputHighContrastStyles,
+                    ]
+                },
+                _c[_Styling__WEBPACK_IMPORTED_MODULE_1__.HighContrastSelector] = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_2__.__assign)({ color: 'HighlightText', backgroundColor: 'Window' }, (0,_Styling__WEBPACK_IMPORTED_MODULE_1__.getHighContrastNoAdjustStyle)()), { selectors: {
+                        ':after': {
+                            borderColor: 'Highlight',
+                        },
+                    } }),
+                _c),
+        },
+        rootPressed: [
+            {
+                position: 'relative',
+                selectors: (_d = {},
+                    _d[_Styling__WEBPACK_IMPORTED_MODULE_1__.HighContrastSelector] = ComboBoxRootHighContrastFocused,
+                    _d),
+            },
+        ],
+        rootFocused: [
+            {
+                selectors: (_e = {
+                        '.ms-ComboBox-Input': [
+                            {
+                                color: semanticColors.inputTextHovered,
+                            },
+                            inputHighContrastStyles,
+                        ]
+                    },
+                    _e[_Styling__WEBPACK_IMPORTED_MODULE_1__.HighContrastSelector] = ComboBoxRootHighContrastFocused,
+                    _e),
+            },
+            focusBorderStyles,
+        ],
+        rootDisabled: getDisabledStyles(theme),
+        rootError: {
+            selectors: {
+                ':after': {
+                    borderColor: root.erroredColor,
+                },
+                ':hover:after': {
+                    borderColor: semanticColors.inputBorderHovered,
+                },
+            },
+        },
+        rootDisallowFreeForm: {},
+        input: [
+            (0,_Styling__WEBPACK_IMPORTED_MODULE_1__.getPlaceholderStyles)(placeholderStyles),
+            {
+                backgroundColor: root.backgroundColor,
+                color: root.textColor,
+                boxSizing: 'border-box',
+                width: '100%',
+                height: '100%',
+                borderStyle: 'none',
+                outline: 'none',
+                font: 'inherit',
+                textOverflow: 'ellipsis',
+                padding: '0',
+                selectors: {
+                    '::-ms-clear': {
+                        display: 'none',
+                    },
+                },
+            },
+            inputHighContrastStyles,
+        ],
+        inputDisabled: [getDisabledStyles(theme), (0,_Styling__WEBPACK_IMPORTED_MODULE_1__.getPlaceholderStyles)(disabledPlaceholderStyles)],
+        errorMessage: [
+            theme.fonts.small,
+            {
+                color: root.erroredColor,
+                marginTop: '5px',
+            },
+        ],
+        callout: {
+            boxShadow: effects.elevation8,
+        },
+        optionsContainerWrapper: {
+            width: comboBoxOptionWidth,
+        },
+        optionsContainer: {
+            display: 'block',
+        },
+        screenReaderText: _Styling__WEBPACK_IMPORTED_MODULE_1__.hiddenContentStyle,
+        header: [
+            fonts.medium,
+            {
+                fontWeight: _Styling__WEBPACK_IMPORTED_MODULE_1__.FontWeights.semibold,
+                color: option.headerTextColor,
+                backgroundColor: 'none',
+                borderStyle: 'none',
+                height: ComboBoxOptionHeight,
+                lineHeight: ComboBoxOptionHeight,
+                cursor: 'default',
+                padding: '0 8px',
+                userSelect: 'none',
+                textAlign: 'left',
+                selectors: (_f = {},
+                    _f[_Styling__WEBPACK_IMPORTED_MODULE_1__.HighContrastSelector] = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__assign)({ color: 'GrayText' }, (0,_Styling__WEBPACK_IMPORTED_MODULE_1__.getHighContrastNoAdjustStyle)()),
+                    _f),
+            },
+        ],
+        divider: {
+            height: 1,
+            backgroundColor: option.dividerBorderColor,
+        },
+    };
+    return (0,_Styling__WEBPACK_IMPORTED_MODULE_1__.concatStyleSets)(styles, customStyles);
+});
 
 
 /***/ }),
@@ -15204,6 +18413,521 @@ var getStyles = function (props) {
 
 /***/ }),
 
+/***/ 1011:
+/*!*************************************************************************!*\
+  !*** ./node_modules/@fluentui/react/lib/components/Modal/Modal.base.js ***!
+  \*************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   ModalBase: () => (/* binding */ ModalBase)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! tslib */ 196);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ 5959);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Utilities__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Utilities */ 3583);
+/* harmony import */ var _Utilities__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Utilities */ 4751);
+/* harmony import */ var _Utilities__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../Utilities */ 1424);
+/* harmony import */ var _Utilities__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../Utilities */ 2594);
+/* harmony import */ var _Utilities__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../Utilities */ 9524);
+/* harmony import */ var _Utilities__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../Utilities */ 2419);
+/* harmony import */ var _Utilities__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../Utilities */ 8972);
+/* harmony import */ var _FocusTrapZone__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../FocusTrapZone */ 3634);
+/* harmony import */ var _Modal_styles__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./Modal.styles */ 5656);
+/* harmony import */ var _Overlay__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../../Overlay */ 1518);
+/* harmony import */ var _Layer__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../../Layer */ 9686);
+/* harmony import */ var _Popup__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../../Popup */ 4218);
+/* harmony import */ var _ResponsiveMode__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../ResponsiveMode */ 5774);
+/* harmony import */ var _ResponsiveMode__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../../ResponsiveMode */ 3629);
+/* harmony import */ var _common_DirectionalHint__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../../common/DirectionalHint */ 9861);
+/* harmony import */ var _Icon__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../../Icon */ 2394);
+/* harmony import */ var _utilities_DraggableZone_index__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ../../utilities/DraggableZone/index */ 792);
+/* harmony import */ var _fluentui_react_window_provider__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @fluentui/react-window-provider */ 6130);
+/* harmony import */ var _fluentui_react_hooks__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @fluentui/react-hooks */ 544);
+/* harmony import */ var _fluentui_react_hooks__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @fluentui/react-hooks */ 8555);
+/* harmony import */ var _fluentui_react_hooks__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @fluentui/react-hooks */ 7461);
+/* harmony import */ var _fluentui_react_hooks__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @fluentui/react-hooks */ 4824);
+/* harmony import */ var _fluentui_react_hooks__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @fluentui/react-hooks */ 5559);
+/* harmony import */ var _fluentui_react_hooks__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @fluentui/react-hooks */ 732);
+/* harmony import */ var _fluentui_react_hooks__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! @fluentui/react-hooks */ 2295);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var ZERO = { x: 0, y: 0 };
+var DEFAULT_PROPS = {
+    isOpen: false,
+    isDarkOverlay: true,
+    className: '',
+    containerClassName: '',
+    enableAriaHiddenSiblings: true,
+};
+var getClassNames = (0,_Utilities__WEBPACK_IMPORTED_MODULE_1__.classNamesFunction)();
+var getMoveDelta = function (ev) {
+    var delta = 10;
+    if (ev.shiftKey) {
+        if (!ev.ctrlKey) {
+            delta = 50;
+        }
+    }
+    else if (ev.ctrlKey) {
+        delta = 1;
+    }
+    return delta;
+};
+var useComponentRef = function (props, focusTrapZone) {
+    react__WEBPACK_IMPORTED_MODULE_0__.useImperativeHandle(props.componentRef, function () { return ({
+        focus: function () {
+            if (focusTrapZone.current) {
+                focusTrapZone.current.focus();
+            }
+        },
+    }); }, [focusTrapZone]);
+};
+var ModalBase = react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(function (propsWithoutDefaults, ref) {
+    var _a, _b, _c, _d, _e;
+    var props = (0,_Utilities__WEBPACK_IMPORTED_MODULE_2__.getPropsWithDefaults)(DEFAULT_PROPS, propsWithoutDefaults);
+    var allowTouchBodyScroll = props.allowTouchBodyScroll, className = props.className, children = props.children, containerClassName = props.containerClassName, scrollableContentClassName = props.scrollableContentClassName, elementToFocusOnDismiss = props.elementToFocusOnDismiss, firstFocusableSelector = props.firstFocusableSelector, focusTrapZoneProps = props.focusTrapZoneProps, forceFocusInsideTrap = props.forceFocusInsideTrap, 
+    // eslint-disable-next-line @typescript-eslint/no-deprecated
+    _f = props.disableRestoreFocus, 
+    // eslint-disable-next-line @typescript-eslint/no-deprecated
+    disableRestoreFocus = _f === void 0 ? props.ignoreExternalFocusing : _f, isBlocking = props.isBlocking, isAlert = props.isAlert, isClickableOutsideFocusTrap = props.isClickableOutsideFocusTrap, isDarkOverlay = props.isDarkOverlay, onDismiss = props.onDismiss, layerProps = props.layerProps, overlay = props.overlay, isOpen = props.isOpen, titleAriaId = props.titleAriaId, styles = props.styles, subtitleAriaId = props.subtitleAriaId, theme = props.theme, topOffsetFixed = props.topOffsetFixed, responsiveMode = props.responsiveMode, 
+    // eslint-disable-next-line @typescript-eslint/no-deprecated
+    onLayerDidMount = props.onLayerDidMount, isModeless = props.isModeless, dragOptions = props.dragOptions, onDismissed = props.onDismissed, 
+    // eslint-disable-next-line @typescript-eslint/no-deprecated
+    enableAriaHiddenSiblings = props.enableAriaHiddenSiblings, popupProps = props.popupProps;
+    var rootRef = react__WEBPACK_IMPORTED_MODULE_0__.useRef(null);
+    var focusTrapZone = react__WEBPACK_IMPORTED_MODULE_0__.useRef(null);
+    var focusTrapZoneRef = (0,_fluentui_react_hooks__WEBPACK_IMPORTED_MODULE_3__.useMergedRefs)(focusTrapZone, focusTrapZoneProps === null || focusTrapZoneProps === void 0 ? void 0 : focusTrapZoneProps.componentRef);
+    var focusTrapZoneElm = react__WEBPACK_IMPORTED_MODULE_0__.useRef(null);
+    var mergedRef = (0,_fluentui_react_hooks__WEBPACK_IMPORTED_MODULE_3__.useMergedRefs)(rootRef, ref);
+    var modalResponsiveMode = (0,_ResponsiveMode__WEBPACK_IMPORTED_MODULE_4__.useResponsiveMode)(mergedRef);
+    var focusTrapZoneId = (0,_fluentui_react_hooks__WEBPACK_IMPORTED_MODULE_5__.useId)('ModalFocusTrapZone', focusTrapZoneProps === null || focusTrapZoneProps === void 0 ? void 0 : focusTrapZoneProps.id);
+    var win = (0,_fluentui_react_window_provider__WEBPACK_IMPORTED_MODULE_6__.useWindow)();
+    var _g = (0,_fluentui_react_hooks__WEBPACK_IMPORTED_MODULE_7__.useSetTimeout)(), setTimeout = _g.setTimeout, clearTimeout = _g.clearTimeout;
+    var _h = react__WEBPACK_IMPORTED_MODULE_0__.useState(isOpen), isModalOpen = _h[0], setIsModalOpen = _h[1];
+    var _j = react__WEBPACK_IMPORTED_MODULE_0__.useState(isOpen), isVisible = _j[0], setIsVisible = _j[1];
+    var _k = react__WEBPACK_IMPORTED_MODULE_0__.useState(ZERO), coordinates = _k[0], setCoordinates = _k[1];
+    var _l = react__WEBPACK_IMPORTED_MODULE_0__.useState(), modalRectangleTop = _l[0], setModalRectangleTop = _l[1];
+    var _m = (0,_fluentui_react_hooks__WEBPACK_IMPORTED_MODULE_8__.useBoolean)(false), isModalMenuOpen = _m[0], _o = _m[1], toggleModalMenuOpen = _o.toggle, setModalMenuClose = _o.setFalse;
+    var internalState = (0,_fluentui_react_hooks__WEBPACK_IMPORTED_MODULE_9__.useConst)(function () { return ({
+        onModalCloseTimer: 0,
+        allowTouchBodyScroll: allowTouchBodyScroll,
+        scrollableContent: null,
+        lastSetCoordinates: ZERO,
+        events: new _Utilities__WEBPACK_IMPORTED_MODULE_10__.EventGroup({}),
+    }); });
+    var keepInBounds = (dragOptions || {}).keepInBounds;
+    var isAlertRole = isAlert !== null && isAlert !== void 0 ? isAlert : (isBlocking && !isModeless);
+    var layerClassName = layerProps === undefined ? '' : layerProps.className;
+    var classNames = getClassNames(styles, {
+        theme: theme,
+        className: className,
+        containerClassName: containerClassName,
+        scrollableContentClassName: scrollableContentClassName,
+        isOpen: isOpen,
+        isVisible: isVisible,
+        hasBeenOpened: internalState.hasBeenOpened,
+        modalRectangleTop: modalRectangleTop,
+        topOffsetFixed: topOffsetFixed,
+        isModeless: isModeless,
+        layerClassName: layerClassName,
+        windowInnerHeight: win === null || win === void 0 ? void 0 : win.innerHeight,
+        isDefaultDragHandle: dragOptions && !dragOptions.dragHandleSelector,
+    });
+    var mergedLayerProps = (0,tslib__WEBPACK_IMPORTED_MODULE_11__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_11__.__assign)({ eventBubblingEnabled: false }, layerProps), { onLayerDidMount: layerProps && layerProps.onLayerDidMount ? layerProps.onLayerDidMount : onLayerDidMount, insertFirst: (layerProps === null || layerProps === void 0 ? void 0 : layerProps.insertFirst) || isModeless, className: classNames.layer });
+    // Allow the user to scroll within the modal but not on the body
+    var allowScrollOnModal = react__WEBPACK_IMPORTED_MODULE_0__.useCallback(function (elt) {
+        if (elt) {
+            if (internalState.allowTouchBodyScroll) {
+                (0,_Utilities__WEBPACK_IMPORTED_MODULE_12__.allowOverscrollOnElement)(elt, internalState.events);
+            }
+            else {
+                (0,_Utilities__WEBPACK_IMPORTED_MODULE_12__.allowScrollOnElement)(elt, internalState.events);
+            }
+        }
+        else {
+            internalState.events.off(internalState.scrollableContent);
+        }
+        internalState.scrollableContent = elt;
+    }, [internalState]);
+    var registerInitialModalPosition = function () {
+        var dialogMain = focusTrapZoneElm.current;
+        var modalRectangle = dialogMain === null || dialogMain === void 0 ? void 0 : dialogMain.getBoundingClientRect();
+        if (modalRectangle) {
+            if (topOffsetFixed) {
+                setModalRectangleTop(modalRectangle.top);
+            }
+            if (keepInBounds) {
+                // x/y are unavailable in IE, so use the equivalent left/top
+                internalState.minPosition = { x: -modalRectangle.left, y: -modalRectangle.top };
+                internalState.maxPosition = { x: modalRectangle.left, y: modalRectangle.top };
+            }
+        }
+    };
+    /**
+     * Clamps an axis to a specified min and max position.
+     *
+     * @param axis A string that represents the axis (x/y).
+     * @param position The position on the axis.
+     */
+    var getClampedAxis = react__WEBPACK_IMPORTED_MODULE_0__.useCallback(function (axis, position) {
+        var minPosition = internalState.minPosition, maxPosition = internalState.maxPosition;
+        if (keepInBounds && minPosition && maxPosition) {
+            position = Math.max(minPosition[axis], position);
+            position = Math.min(maxPosition[axis], position);
+        }
+        return position;
+    }, [keepInBounds, internalState]);
+    var handleModalClose = function () {
+        var _a;
+        internalState.lastSetCoordinates = ZERO;
+        setModalMenuClose();
+        internalState.isInKeyboardMoveMode = false;
+        setIsModalOpen(false);
+        setCoordinates(ZERO);
+        (_a = internalState.disposeOnKeyUp) === null || _a === void 0 ? void 0 : _a.call(internalState);
+        onDismissed === null || onDismissed === void 0 ? void 0 : onDismissed();
+    };
+    var handleDragStart = react__WEBPACK_IMPORTED_MODULE_0__.useCallback(function () {
+        setModalMenuClose();
+        internalState.isInKeyboardMoveMode = false;
+    }, [internalState, setModalMenuClose]);
+    var handleDrag = react__WEBPACK_IMPORTED_MODULE_0__.useCallback(function (ev, dragData) {
+        setCoordinates(function (prevValue) { return ({
+            x: getClampedAxis('x', prevValue.x + dragData.delta.x),
+            y: getClampedAxis('y', prevValue.y + dragData.delta.y),
+        }); });
+    }, [getClampedAxis]);
+    var handleDragStop = react__WEBPACK_IMPORTED_MODULE_0__.useCallback(function () {
+        if (focusTrapZone.current) {
+            focusTrapZone.current.focus();
+        }
+    }, []);
+    var handleEnterKeyboardMoveMode = function () {
+        // We need a global handleKeyDown event when we are in the move mode so that we can
+        // handle the key presses and the components inside the modal do not get the events
+        var handleKeyDown = function (ev) {
+            // eslint-disable-next-line @typescript-eslint/no-deprecated
+            if (ev.altKey && ev.ctrlKey && ev.keyCode === _Utilities__WEBPACK_IMPORTED_MODULE_13__.KeyCodes.space) {
+                // CTRL + ALT + SPACE is handled during keyUp
+                ev.preventDefault();
+                ev.stopPropagation();
+                return;
+            }
+            // eslint-disable-next-line @typescript-eslint/no-deprecated
+            var newLocal = ev.altKey || ev.keyCode === _Utilities__WEBPACK_IMPORTED_MODULE_13__.KeyCodes.escape;
+            if (isModalMenuOpen && newLocal) {
+                setModalMenuClose();
+            }
+            // eslint-disable-next-line @typescript-eslint/no-deprecated
+            if (internalState.isInKeyboardMoveMode && (ev.keyCode === _Utilities__WEBPACK_IMPORTED_MODULE_13__.KeyCodes.escape || ev.keyCode === _Utilities__WEBPACK_IMPORTED_MODULE_13__.KeyCodes.enter)) {
+                internalState.isInKeyboardMoveMode = false;
+                ev.preventDefault();
+                ev.stopPropagation();
+            }
+            if (internalState.isInKeyboardMoveMode) {
+                var handledEvent = true;
+                var delta_1 = getMoveDelta(ev);
+                // eslint-disable-next-line @typescript-eslint/no-deprecated
+                switch (ev.keyCode) {
+                    /* eslint-disable no-fallthrough */
+                    case _Utilities__WEBPACK_IMPORTED_MODULE_13__.KeyCodes.escape:
+                        setCoordinates(internalState.lastSetCoordinates);
+                    case _Utilities__WEBPACK_IMPORTED_MODULE_13__.KeyCodes.enter: {
+                        // TODO: determine if fallthrough was intentional
+                        /* eslint-enable no-fallthrough */
+                        internalState.lastSetCoordinates = ZERO;
+                        // setIsInKeyboardMoveMode(false);
+                        break;
+                    }
+                    case _Utilities__WEBPACK_IMPORTED_MODULE_13__.KeyCodes.up: {
+                        setCoordinates(function (prevValue) { return ({ x: prevValue.x, y: getClampedAxis('y', prevValue.y - delta_1) }); });
+                        break;
+                    }
+                    case _Utilities__WEBPACK_IMPORTED_MODULE_13__.KeyCodes.down: {
+                        setCoordinates(function (prevValue) { return ({ x: prevValue.x, y: getClampedAxis('y', prevValue.y + delta_1) }); });
+                        break;
+                    }
+                    case _Utilities__WEBPACK_IMPORTED_MODULE_13__.KeyCodes.left: {
+                        setCoordinates(function (prevValue) { return ({ x: getClampedAxis('x', prevValue.x - delta_1), y: prevValue.y }); });
+                        break;
+                    }
+                    case _Utilities__WEBPACK_IMPORTED_MODULE_13__.KeyCodes.right: {
+                        setCoordinates(function (prevValue) { return ({ x: getClampedAxis('x', prevValue.x + delta_1), y: prevValue.y }); });
+                        break;
+                    }
+                    default: {
+                        handledEvent = false;
+                    }
+                }
+                if (handledEvent) {
+                    ev.preventDefault();
+                    ev.stopPropagation();
+                }
+            }
+        };
+        internalState.lastSetCoordinates = coordinates;
+        setModalMenuClose();
+        internalState.isInKeyboardMoveMode = true;
+        internalState.events.on(win, 'keydown', handleKeyDown, true /* useCapture */);
+        internalState.disposeOnKeyDown = function () {
+            internalState.events.off(win, 'keydown', handleKeyDown, true /* useCapture */);
+            internalState.disposeOnKeyDown = undefined;
+        };
+    };
+    var handleExitKeyboardMoveMode = function (ev) {
+        var _a, _b;
+        (_a = focusTrapZoneProps === null || focusTrapZoneProps === void 0 ? void 0 : focusTrapZoneProps.onBlur) === null || _a === void 0 ? void 0 : _a.call(focusTrapZoneProps, ev);
+        internalState.lastSetCoordinates = ZERO;
+        internalState.isInKeyboardMoveMode = false;
+        (_b = internalState.disposeOnKeyDown) === null || _b === void 0 ? void 0 : _b.call(internalState);
+    };
+    var registerForKeyUp = function () {
+        var handleKeyUp = function (ev) {
+            // Needs to handle the CTRL + ALT + SPACE key during keyup due to FireFox bug:
+            // https://bugzilla.mozilla.org/show_bug.cgi?id=1220143
+            // eslint-disable-next-line @typescript-eslint/no-deprecated
+            if (ev.altKey && ev.ctrlKey && ev.keyCode === _Utilities__WEBPACK_IMPORTED_MODULE_13__.KeyCodes.space) {
+                if ((0,_Utilities__WEBPACK_IMPORTED_MODULE_14__.elementContains)(internalState.scrollableContent, ev.target)) {
+                    toggleModalMenuOpen();
+                    ev.preventDefault();
+                    ev.stopPropagation();
+                }
+            }
+        };
+        if (!internalState.disposeOnKeyUp) {
+            internalState.events.on(win, 'keyup', handleKeyUp, true /* useCapture */);
+            internalState.disposeOnKeyUp = function () {
+                internalState.events.off(win, 'keyup', handleKeyUp, true /* useCapture */);
+                internalState.disposeOnKeyUp = undefined;
+            };
+        }
+    };
+    react__WEBPACK_IMPORTED_MODULE_0__.useEffect(function () {
+        clearTimeout(internalState.onModalCloseTimer);
+        // Opening the dialog
+        if (isOpen) {
+            // This must be done after the modal content has rendered
+            requestAnimationFrame(function () { return setTimeout(registerInitialModalPosition, 0); });
+            setIsModalOpen(true);
+            // Add a keyUp handler for all key up events once the dialog is open.
+            if (dragOptions) {
+                registerForKeyUp();
+            }
+            internalState.hasBeenOpened = true;
+            setIsVisible(true);
+        }
+        // Closing the dialog
+        if (!isOpen && isModalOpen) {
+            internalState.onModalCloseTimer = setTimeout(handleModalClose, parseFloat(_Modal_styles__WEBPACK_IMPORTED_MODULE_15__.animationDuration) * 1000);
+            setIsVisible(false);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps -- should only run if isModalOpen or isOpen mutates.
+    }, [isModalOpen, isOpen]);
+    (0,_fluentui_react_hooks__WEBPACK_IMPORTED_MODULE_16__.useUnmount)(function () {
+        internalState.events.dispose();
+        if (internalState.onModalCloseTimer) {
+            clearTimeout(internalState.onModalCloseTimer);
+            internalState.onModalCloseTimer = 0;
+        }
+    });
+    useComponentRef(props, focusTrapZone);
+    useDebugWarnings(props);
+    var modalContent = (react__WEBPACK_IMPORTED_MODULE_0__.createElement(_FocusTrapZone__WEBPACK_IMPORTED_MODULE_17__.FocusTrapZone, (0,tslib__WEBPACK_IMPORTED_MODULE_11__.__assign)({}, focusTrapZoneProps, { id: focusTrapZoneId, ref: focusTrapZoneElm, componentRef: focusTrapZoneRef, className: (0,_Utilities__WEBPACK_IMPORTED_MODULE_18__.css)(classNames.main, focusTrapZoneProps === null || focusTrapZoneProps === void 0 ? void 0 : focusTrapZoneProps.className), elementToFocusOnDismiss: (_a = focusTrapZoneProps === null || focusTrapZoneProps === void 0 ? void 0 : focusTrapZoneProps.elementToFocusOnDismiss) !== null && _a !== void 0 ? _a : elementToFocusOnDismiss, isClickableOutsideFocusTrap: (_b = focusTrapZoneProps === null || focusTrapZoneProps === void 0 ? void 0 : focusTrapZoneProps.isClickableOutsideFocusTrap) !== null && _b !== void 0 ? _b : (isModeless || isClickableOutsideFocusTrap || !isBlocking), disableRestoreFocus: (_c = focusTrapZoneProps === null || focusTrapZoneProps === void 0 ? void 0 : focusTrapZoneProps.disableRestoreFocus) !== null && _c !== void 0 ? _c : disableRestoreFocus, forceFocusInsideTrap: ((_d = focusTrapZoneProps === null || focusTrapZoneProps === void 0 ? void 0 : focusTrapZoneProps.forceFocusInsideTrap) !== null && _d !== void 0 ? _d : forceFocusInsideTrap) && !isModeless, 
+        // eslint-disable-next-line @typescript-eslint/no-deprecated
+        firstFocusableSelector: (focusTrapZoneProps === null || focusTrapZoneProps === void 0 ? void 0 : focusTrapZoneProps.firstFocusableSelector) || firstFocusableSelector, focusPreviouslyFocusedInnerElement: (_e = focusTrapZoneProps === null || focusTrapZoneProps === void 0 ? void 0 : focusTrapZoneProps.focusPreviouslyFocusedInnerElement) !== null && _e !== void 0 ? _e : true, onBlur: internalState.isInKeyboardMoveMode ? handleExitKeyboardMoveMode : undefined }),
+        dragOptions && internalState.isInKeyboardMoveMode && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: classNames.keyboardMoveIconContainer }, dragOptions.keyboardMoveIconProps ? (react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Icon__WEBPACK_IMPORTED_MODULE_19__.Icon, (0,tslib__WEBPACK_IMPORTED_MODULE_11__.__assign)({}, dragOptions.keyboardMoveIconProps))) : (react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Icon__WEBPACK_IMPORTED_MODULE_19__.Icon, { iconName: "move", className: classNames.keyboardMoveIcon })))),
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { ref: allowScrollOnModal, className: classNames.scrollableContent, "data-is-scrollable": true },
+            dragOptions && isModalMenuOpen && (react__WEBPACK_IMPORTED_MODULE_0__.createElement(dragOptions.menu, { items: [
+                    { key: 'move', text: dragOptions.moveMenuItemText, onClick: handleEnterKeyboardMoveMode },
+                    { key: 'close', text: dragOptions.closeMenuItemText, onClick: handleModalClose },
+                ], onDismiss: setModalMenuClose, alignTargetEdge: true, coverTarget: true, directionalHint: _common_DirectionalHint__WEBPACK_IMPORTED_MODULE_20__.DirectionalHint.topLeftEdge, directionalHintFixed: true, shouldFocusOnMount: true, target: internalState.scrollableContent })),
+            children)));
+    return ((isModalOpen && modalResponsiveMode >= (responsiveMode || _ResponsiveMode__WEBPACK_IMPORTED_MODULE_21__.ResponsiveMode.small) && (react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Layer__WEBPACK_IMPORTED_MODULE_22__.Layer, (0,tslib__WEBPACK_IMPORTED_MODULE_11__.__assign)({ ref: mergedRef }, mergedLayerProps),
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Popup__WEBPACK_IMPORTED_MODULE_23__.Popup, (0,tslib__WEBPACK_IMPORTED_MODULE_11__.__assign)({ role: isAlertRole ? 'alertdialog' : 'dialog', ariaLabelledBy: titleAriaId, ariaDescribedBy: subtitleAriaId, onDismiss: onDismiss, 
+            // eslint-disable-next-line @typescript-eslint/no-deprecated
+            shouldRestoreFocus: !disableRestoreFocus, 
+            // Modeless modals shouldn't hide siblings.
+            // Popup will automatically handle this based on the aria-modal setting.
+            // eslint-disable-next-line @typescript-eslint/no-deprecated
+            enableAriaHiddenSiblings: enableAriaHiddenSiblings, "aria-modal": !isModeless }, popupProps),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: classNames.root, role: !isModeless ? 'document' : undefined },
+                !isModeless && (react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Overlay__WEBPACK_IMPORTED_MODULE_24__.Overlay, (0,tslib__WEBPACK_IMPORTED_MODULE_11__.__assign)({ "aria-hidden": true, isDarkThemed: isDarkOverlay, onClick: isBlocking ? undefined : onDismiss, allowTouchBodyScroll: allowTouchBodyScroll }, overlay))),
+                dragOptions ? (react__WEBPACK_IMPORTED_MODULE_0__.createElement(_utilities_DraggableZone_index__WEBPACK_IMPORTED_MODULE_25__.DraggableZone, { handleSelector: dragOptions.dragHandleSelector || "#".concat(focusTrapZoneId), preventDragSelector: "button", onStart: handleDragStart, onDragChange: handleDrag, onStop: handleDragStop, position: coordinates }, modalContent)) : (modalContent)))))) ||
+        null);
+});
+ModalBase.displayName = 'Modal';
+function useDebugWarnings(props) {
+    if (true) {
+        // eslint-disable-next-line react-hooks/rules-of-hooks -- build-time conditional
+        (0,_fluentui_react_hooks__WEBPACK_IMPORTED_MODULE_26__.useWarnings)({
+            name: 'Modal',
+            props: props,
+            deprecations: { onLayerDidMount: 'layerProps.onLayerDidMount' },
+        });
+    }
+}
+
+
+/***/ }),
+
+/***/ 6702:
+/*!********************************************************************!*\
+  !*** ./node_modules/@fluentui/react/lib/components/Modal/Modal.js ***!
+  \********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Modal: () => (/* binding */ Modal)
+/* harmony export */ });
+/* harmony import */ var _Utilities__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Utilities */ 5336);
+/* harmony import */ var _Modal_base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Modal.base */ 1011);
+/* harmony import */ var _Modal_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Modal.styles */ 5656);
+
+
+
+var Modal = (0,_Utilities__WEBPACK_IMPORTED_MODULE_0__.styled)(_Modal_base__WEBPACK_IMPORTED_MODULE_1__.ModalBase, _Modal_styles__WEBPACK_IMPORTED_MODULE_2__.getStyles, undefined, {
+    scope: 'Modal',
+    fields: ['theme', 'styles', 'enableAriaHiddenSiblings'],
+});
+Modal.displayName = 'Modal';
+
+
+/***/ }),
+
+/***/ 5656:
+/*!***************************************************************************!*\
+  !*** ./node_modules/@fluentui/react/lib/components/Modal/Modal.styles.js ***!
+  \***************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   animationDuration: () => (/* binding */ animationDuration),
+/* harmony export */   getStyles: () => (/* binding */ getStyles)
+/* harmony export */ });
+/* harmony import */ var _Styling__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Styling */ 8455);
+
+var animationDuration = _Styling__WEBPACK_IMPORTED_MODULE_0__.AnimationVariables.durationValue2;
+var globalClassNames = {
+    root: 'ms-Modal',
+    main: 'ms-Dialog-main',
+    scrollableContent: 'ms-Modal-scrollableContent',
+    isOpen: 'is-open',
+    layer: 'ms-Modal-Layer',
+};
+var getStyles = function (props) {
+    var _a;
+    var className = props.className, containerClassName = props.containerClassName, scrollableContentClassName = props.scrollableContentClassName, isOpen = props.isOpen, isVisible = props.isVisible, hasBeenOpened = props.hasBeenOpened, modalRectangleTop = props.modalRectangleTop, theme = props.theme, topOffsetFixed = props.topOffsetFixed, isModeless = props.isModeless, layerClassName = props.layerClassName, isDefaultDragHandle = props.isDefaultDragHandle, windowInnerHeight = props.windowInnerHeight;
+    var palette = theme.palette, effects = theme.effects, fonts = theme.fonts;
+    var classNames = (0,_Styling__WEBPACK_IMPORTED_MODULE_0__.getGlobalClassNames)(globalClassNames, theme);
+    return {
+        root: [
+            classNames.root,
+            fonts.medium,
+            {
+                backgroundColor: 'transparent',
+                position: 'fixed',
+                height: '100%',
+                width: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                opacity: 0,
+                pointerEvents: 'none',
+                transition: "opacity ".concat(animationDuration),
+            },
+            topOffsetFixed &&
+                typeof modalRectangleTop === 'number' &&
+                hasBeenOpened && {
+                alignItems: 'flex-start',
+            },
+            isOpen && classNames.isOpen,
+            isVisible && {
+                opacity: 1,
+            },
+            isVisible &&
+                !isModeless && {
+                pointerEvents: 'auto',
+            },
+            className,
+        ],
+        main: [
+            classNames.main,
+            {
+                boxShadow: effects.elevation64,
+                borderRadius: effects.roundedCorner2,
+                backgroundColor: palette.white,
+                boxSizing: 'border-box',
+                position: 'relative',
+                textAlign: 'left',
+                outline: '3px solid transparent',
+                maxHeight: 'calc(100% - 32px)',
+                maxWidth: 'calc(100% - 32px)',
+                minHeight: '176px',
+                minWidth: '288px',
+                overflowY: 'auto',
+                zIndex: isModeless ? _Styling__WEBPACK_IMPORTED_MODULE_0__.ZIndexes.Layer : undefined,
+            },
+            isModeless && {
+                pointerEvents: 'auto',
+            },
+            topOffsetFixed &&
+                typeof modalRectangleTop === 'number' &&
+                hasBeenOpened && {
+                top: modalRectangleTop,
+            },
+            isDefaultDragHandle && {
+                cursor: 'move',
+            },
+            containerClassName,
+        ],
+        scrollableContent: [
+            classNames.scrollableContent,
+            {
+                overflowY: 'auto',
+                flexGrow: 1,
+                maxHeight: '100vh',
+                selectors: (_a = {},
+                    _a['@supports (-webkit-overflow-scrolling: touch)'] = {
+                        maxHeight: windowInnerHeight,
+                    },
+                    _a),
+            },
+            scrollableContentClassName,
+        ],
+        layer: isModeless && [layerClassName, classNames.layer, { pointerEvents: 'none' }],
+        keyboardMoveIconContainer: {
+            position: 'absolute',
+            display: 'flex',
+            justifyContent: 'center',
+            width: '100%',
+            padding: '3px 0px',
+        },
+        keyboardMoveIcon: {
+            // eslint-disable-next-line @typescript-eslint/no-deprecated
+            fontSize: fonts.xLargePlus.fontSize,
+            width: '24px',
+        },
+    };
+};
+
+
+/***/ }),
+
 /***/ 6131:
 /*!*****************************************************************************!*\
   !*** ./node_modules/@fluentui/react/lib/components/Overlay/Overlay.base.js ***!
@@ -19563,6 +23287,331 @@ var TooltipOverflowMode;
      */
     TooltipOverflowMode[TooltipOverflowMode["Self"] = 1] = "Self";
 })(TooltipOverflowMode || (TooltipOverflowMode = {}));
+
+
+/***/ }),
+
+/***/ 792:
+/*!***********************************************************************************!*\
+  !*** ./node_modules/@fluentui/react/lib/utilities/DraggableZone/DraggableZone.js ***!
+  \***********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   DraggableZone: () => (/* binding */ DraggableZone)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 196);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ 5959);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _DraggableZone_styles__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./DraggableZone.styles */ 4082);
+/* harmony import */ var _Utilities__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../Utilities */ 5947);
+/* harmony import */ var _fluentui_react_window_provider__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @fluentui/react-window-provider */ 6130);
+/* harmony import */ var _dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../dom */ 4707);
+
+
+
+
+
+
+var eventMapping = {
+    touch: {
+        start: 'touchstart',
+        move: 'touchmove',
+        stop: 'touchend',
+    },
+    mouse: {
+        start: 'mousedown',
+        move: 'mousemove',
+        stop: 'mouseup',
+    },
+};
+var DraggableZone = /** @class */ (function (_super) {
+    (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__extends)(DraggableZone, _super);
+    function DraggableZone(props) {
+        var _this = _super.call(this, props) || this;
+        _this._currentEventType = eventMapping.mouse;
+        _this._events = [];
+        _this._onMouseDown = function (event) {
+            var onMouseDown = react__WEBPACK_IMPORTED_MODULE_0__.Children.only(_this.props.children).props.onMouseDown;
+            if (onMouseDown) {
+                onMouseDown(event);
+            }
+            _this._currentEventType = eventMapping.mouse;
+            return _this._onDragStart(event);
+        };
+        _this._onMouseUp = function (event) {
+            var onMouseUp = react__WEBPACK_IMPORTED_MODULE_0__.Children.only(_this.props.children).props.onMouseUp;
+            if (onMouseUp) {
+                onMouseUp(event);
+            }
+            _this._currentEventType = eventMapping.mouse;
+            return _this._onDragStop(event);
+        };
+        _this._onTouchStart = function (event) {
+            var onTouchStart = react__WEBPACK_IMPORTED_MODULE_0__.Children.only(_this.props.children).props.onTouchStart;
+            if (onTouchStart) {
+                onTouchStart(event);
+            }
+            _this._currentEventType = eventMapping.touch;
+            return _this._onDragStart(event);
+        };
+        _this._onTouchEnd = function (event) {
+            var onTouchEnd = react__WEBPACK_IMPORTED_MODULE_0__.Children.only(_this.props.children).props.onTouchEnd;
+            if (onTouchEnd) {
+                onTouchEnd(event);
+            }
+            _this._currentEventType = eventMapping.touch;
+            _this._onDragStop(event);
+        };
+        _this._onDragStart = function (event) {
+            // Only handle left click for dragging
+            if (typeof event.button === 'number' && event.button !== 0) {
+                return false;
+            }
+            // If the target doesn't match the handleSelector OR
+            // if the target does match the preventDragSelector, bail out
+            if ((_this.props.handleSelector && !_this._matchesSelector(event.target, _this.props.handleSelector)) ||
+                (_this.props.preventDragSelector &&
+                    _this._matchesSelector(event.target, _this.props.preventDragSelector))) {
+                return;
+            }
+            // Remember the touch identifier if this is a touch event so we can
+            // distinguish between individual touches in multitouch scenarios
+            // by remembering which touch point we were given
+            _this._touchId = _this._getTouchId(event);
+            var position = _this._getControlPosition(event);
+            if (position === undefined) {
+                return;
+            }
+            var dragData = _this._createDragDataFromPosition(position);
+            _this.props.onStart && _this.props.onStart(event, dragData);
+            _this.setState({
+                isDragging: true,
+                lastPosition: position,
+            });
+            // hook up the appropriate mouse/touch events to the body to ensure
+            // smooth dragging
+            var doc = (0,_dom__WEBPACK_IMPORTED_MODULE_2__.getDocumentEx)(_this.context);
+            _this._events = [
+                (0,_Utilities__WEBPACK_IMPORTED_MODULE_3__.on)(doc.body, _this._currentEventType.move, _this._onDrag, true /* use capture phase */),
+                (0,_Utilities__WEBPACK_IMPORTED_MODULE_3__.on)(doc.body, _this._currentEventType.stop, _this._onDragStop, true /* use capture phase */),
+            ];
+        };
+        _this._onDrag = function (event) {
+            // Prevent scrolling on mobile devices
+            if (event.type === 'touchmove') {
+                event.preventDefault();
+            }
+            var position = _this._getControlPosition(event);
+            if (!position) {
+                return;
+            }
+            // create the updated drag data from the position data
+            var updatedData = _this._createUpdatedDragData(_this._createDragDataFromPosition(position));
+            var updatedPosition = updatedData.position;
+            _this.props.onDragChange && _this.props.onDragChange(event, updatedData);
+            _this.setState({
+                position: updatedPosition,
+                lastPosition: position,
+            });
+        };
+        _this._onDragStop = function (event) {
+            if (!_this.state.isDragging) {
+                return;
+            }
+            var position = _this._getControlPosition(event);
+            if (!position) {
+                return;
+            }
+            var baseDragData = _this._createDragDataFromPosition(position);
+            // Set dragging to false and reset the lastPosition
+            _this.setState({
+                isDragging: false,
+                lastPosition: undefined,
+            });
+            _this.props.onStop && _this.props.onStop(event, baseDragData);
+            if (_this.props.position) {
+                _this.setState({
+                    position: _this.props.position,
+                });
+            }
+            // Remove event handlers
+            _this._events.forEach(function (dispose) { return dispose(); });
+        };
+        _this.state = {
+            isDragging: false,
+            position: _this.props.position || { x: 0, y: 0 },
+            lastPosition: undefined,
+        };
+        return _this;
+    }
+    DraggableZone.prototype.componentDidUpdate = function (prevProps) {
+        if (this.props.position && (!prevProps.position || this.props.position !== prevProps.position)) {
+            this.setState({ position: this.props.position });
+        }
+    };
+    DraggableZone.prototype.componentWillUnmount = function () {
+        this._events.forEach(function (dispose) { return dispose(); });
+    };
+    DraggableZone.prototype.render = function () {
+        var child = react__WEBPACK_IMPORTED_MODULE_0__.Children.only(this.props.children);
+        var props = child.props;
+        var position = this.props.position;
+        var _a = this.state, statePosition = _a.position, isDragging = _a.isDragging;
+        var x = statePosition.x;
+        var y = statePosition.y;
+        if (position && !isDragging) {
+            x = position.x;
+            y = position.y;
+        }
+        return react__WEBPACK_IMPORTED_MODULE_0__.cloneElement(child, {
+            style: (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)({}, props.style), { transform: "translate(".concat(x, "px, ").concat(y, "px)") }),
+            className: (0,_DraggableZone_styles__WEBPACK_IMPORTED_MODULE_4__.getClassNames)(props.className, this.state.isDragging).root,
+            onMouseDown: this._onMouseDown,
+            onMouseUp: this._onMouseUp,
+            onTouchStart: this._onTouchStart,
+            onTouchEnd: this._onTouchEnd,
+        });
+    };
+    /**
+     * Get the control position based off the event that fired
+     * @param event - The event to get offsets from
+     */
+    DraggableZone.prototype._getControlPosition = function (event) {
+        var touchObj = this._getActiveTouch(event);
+        // did we get the right touch?
+        if (this._touchId !== undefined && !touchObj) {
+            return undefined;
+        }
+        var eventToGetOffset = touchObj || event;
+        return {
+            x: eventToGetOffset.clientX,
+            y: eventToGetOffset.clientY,
+        };
+    };
+    /**
+     * Get the active touch point that we have saved from the event's TouchList
+     * @param event - The event used to get the TouchList for the active touch point
+     */
+    DraggableZone.prototype._getActiveTouch = function (event) {
+        return ((event.targetTouches && this._findTouchInTouchList(event.targetTouches)) ||
+            (event.changedTouches && this._findTouchInTouchList(event.changedTouches)));
+    };
+    /**
+     * Get the initial touch identifier associated with the given event
+     * @param event - The event that contains the TouchList
+     */
+    DraggableZone.prototype._getTouchId = function (event) {
+        var touch = (event.targetTouches && event.targetTouches[0]) || (event.changedTouches && event.changedTouches[0]);
+        if (touch) {
+            return touch.identifier;
+        }
+    };
+    /**
+     * Returns if an element (or any of the element's parents) match the given selector
+     */
+    DraggableZone.prototype._matchesSelector = function (element, selector) {
+        var _a;
+        if (!element || element === ((_a = (0,_dom__WEBPACK_IMPORTED_MODULE_2__.getDocumentEx)(this.context)) === null || _a === void 0 ? void 0 : _a.body)) {
+            return false;
+        }
+        var matchesSelectorFn = 
+        // eslint-disable-next-line @typescript-eslint/no-deprecated
+        element.matches || element.webkitMatchesSelector || element.msMatchesSelector; /* for IE */
+        if (!matchesSelectorFn) {
+            return false;
+        }
+        return matchesSelectorFn.call(element, selector) || this._matchesSelector(element.parentElement, selector);
+    };
+    /**
+     * Attempts to find the Touch that matches the identifier  we stored in dragStart
+     * @param touchList The TouchList to look for the stored identifier from dragStart
+     */
+    DraggableZone.prototype._findTouchInTouchList = function (touchList) {
+        if (this._touchId === undefined) {
+            return;
+        }
+        for (var i = 0; i < touchList.length; i++) {
+            if (touchList[i].identifier === this._touchId) {
+                return touchList[i];
+            }
+        }
+        return undefined;
+    };
+    /**
+     * Create DragData based off of the last known position and the new position passed in
+     * @param position The new position as part of the drag
+     */
+    DraggableZone.prototype._createDragDataFromPosition = function (position) {
+        var lastPosition = this.state.lastPosition;
+        // If we have no lastPosition, use the given position
+        // for last position
+        if (lastPosition === undefined) {
+            return {
+                delta: { x: 0, y: 0 },
+                lastPosition: position,
+                position: position,
+            };
+        }
+        return {
+            delta: {
+                x: position.x - lastPosition.x,
+                y: position.y - lastPosition.y,
+            },
+            lastPosition: lastPosition,
+            position: position,
+        };
+    };
+    /**
+     * Creates an updated DragData based off the current position and given baseDragData
+     * @param baseDragData The base DragData (from _createDragDataFromPosition) used to calculate the updated positions
+     */
+    DraggableZone.prototype._createUpdatedDragData = function (baseDragData) {
+        var position = this.state.position;
+        return {
+            position: {
+                x: position.x + baseDragData.delta.x,
+                y: position.y + baseDragData.delta.y,
+            },
+            delta: baseDragData.delta,
+            lastPosition: position,
+        };
+    };
+    DraggableZone.contextType = _fluentui_react_window_provider__WEBPACK_IMPORTED_MODULE_5__.WindowContext;
+    return DraggableZone;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component));
+
+
+
+/***/ }),
+
+/***/ 4082:
+/*!******************************************************************************************!*\
+  !*** ./node_modules/@fluentui/react/lib/utilities/DraggableZone/DraggableZone.styles.js ***!
+  \******************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   getClassNames: () => (/* binding */ getClassNames)
+/* harmony export */ });
+/* harmony import */ var _Utilities__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Utilities */ 5659);
+/* harmony import */ var _Styling__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Styling */ 8455);
+
+
+var getClassNames = (0,_Utilities__WEBPACK_IMPORTED_MODULE_0__.memoizeFunction)(function (className, isDragging) {
+    return {
+        root: (0,_Styling__WEBPACK_IMPORTED_MODULE_1__.mergeStyles)(className, isDragging && {
+            touchAction: 'none',
+            selectors: {
+                '& *': {
+                    userSelect: 'none',
+                },
+            },
+        }),
+    };
+});
 
 
 /***/ }),
