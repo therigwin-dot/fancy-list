@@ -1577,8 +1577,8 @@ var TitleConfiguration = function (_a) {
                 gap: '8px',
                 marginBottom: 16
             } },
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__.ColorPickerControl, { color: settings.font.color, field: "titleColor", label: "", onChange: function (field, newColor) { return handlePropertyChange('font.color', newColor); } }),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_5__.TextField, { value: settings.webPartTitle, onChange: function (_, newValue) { return handlePropertyChange('webPartTitle', newValue || ''); }, placeholder: "Enter title text", styles: { root: { flex: '1 1 auto' } } })),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_5__.TextField, { value: settings.webPartTitle, onChange: function (_, newValue) { return handlePropertyChange('webPartTitle', newValue || ''); }, placeholder: "Enter title text", styles: { root: { flex: '1 1 auto' } } }),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__.ColorPickerControl, { color: settings.font.color, field: "titleColor", label: "", onChange: function (field, newColor) { return handlePropertyChange('font.color', newColor); } })),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
                 backgroundColor: '#f3f2f1',
                 padding: '12px',

@@ -169,17 +169,17 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
         gap: '8px',
         marginBottom: 16 
       }}>
-        <ColorPickerControl
-          color={settings.font.color}
-          field="titleColor"
-          label=""
-          onChange={(field: string, newColor: string) => handlePropertyChange('font.color', newColor)}
-        />
         <TextField
           value={settings.webPartTitle}
           onChange={(_, newValue) => handlePropertyChange('webPartTitle', newValue || '')}
           placeholder="Enter title text"
           styles={{ root: { flex: '1 1 auto' } }}
+        />
+        <ColorPickerControl
+          color={settings.font.color}
+          field="titleColor"
+          label=""
+          onChange={(field: string, newColor: string) => handlePropertyChange('font.color', newColor)}
         />
       </div>
 
