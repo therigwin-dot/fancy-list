@@ -187,22 +187,28 @@ export const SectionModuleControl: React.FC<SectionModuleControlProps> = ({
 
       {/* 2. Auto Expand and Show Divider Toggles - Hide for Description */}
       {sectionType !== 'description' && (
-        <div style={{ display: 'flex', gap: '16px', marginBottom: 16 }}>
-          <Toggle
-            label="Auto Expand"
-            checked={sectionSettings.autoExpand}
-            onText="On"
-            offText="Off"
-            onChange={(_, checked) => handlePropertyChange('autoExpand', checked)}
-          />
-          <Toggle
-            label="Show Divider"
-            checked={sectionSettings.showDivider}
-            onText="On"
-            offText="Off"
-            onChange={(_, checked) => handlePropertyChange('showDivider', checked)}
-          />
-        </div>
+        <>
+          <div style={{ marginBottom: 16 }}>
+            <Toggle
+              label="Auto Expand"
+              inlineLabel={true}
+              checked={sectionSettings.autoExpand}
+              onText="On"
+              offText="Off"
+              onChange={(_, checked) => handlePropertyChange('autoExpand', checked)}
+            />
+          </div>
+          <div style={{ marginBottom: 16 }}>
+            <Toggle
+              label="Show Divider"
+              inlineLabel={true}
+              checked={sectionSettings.showDivider}
+              onText="On"
+              offText="Off"
+              onChange={(_, checked) => handlePropertyChange('showDivider', checked)}
+            />
+          </div>
+        </>
       )}
 
       {/* 3. Font Control */}

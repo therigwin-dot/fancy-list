@@ -201,9 +201,10 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
       </div>
 
       {/* 5. Show Divider Toggle */}
-      <div style={{ display: 'flex', gap: '16px', marginBottom: 16 }}>
+      <div style={{ marginBottom: 16 }}>
         <Toggle
           label="Title Divider"
+          inlineLabel={true}
           checked={settings.showDivider}
           onText="On"
           offText="Off"

@@ -148,9 +148,10 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
       </div>
 
       {/* 1. Enabled Toggle */}
-      <div style={{ display: 'flex', gap: '16px', marginBottom: 16 }}>
+      <div style={{ marginBottom: 16 }}>
         <Toggle
           label="Enabled"
+          inlineLabel={true}
           checked={enabled}
           onText="On"
           offText="Off"
@@ -392,9 +393,10 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
           )}
 
           {/* 10. Show Filter Divider Toggle */}
-          <div style={{ display: 'flex', gap: '16px', marginBottom: 16 }}>
+          <div style={{ marginBottom: 16 }}>
             <Toggle
               label="Filter Divider"
+              inlineLabel={true}
               checked={settings.showDivider}
               onText="On"
               offText="Off"
