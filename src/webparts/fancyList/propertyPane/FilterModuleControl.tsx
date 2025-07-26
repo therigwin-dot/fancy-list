@@ -3,6 +3,7 @@ import { TextField } from '@fluentui/react/lib/TextField';
 import { Toggle } from '@fluentui/react/lib/Toggle';
 import { Dropdown, IDropdownOption } from '@fluentui/react/lib/Dropdown';
 import { Slider } from '@fluentui/react/lib/Slider';
+import { PrimaryButton } from '@fluentui/react/lib/Button';
 
 import { FontControl } from './FontControl';
 import { ColorPickerControl } from './ColorPickerControl';
@@ -159,6 +160,9 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
         />
       </div>
 
+      {/* Conditional rendering for all other controls when enabled */}
+      {enabled && (
+        <>
           {/* 2. Filter Font Control */}
           <div style={{ marginBottom: 16 }}>
             <FontControl
@@ -397,6 +401,18 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
               onChange={(_, checked) => handlePropertyChange('showDivider', checked)}
             />
           </div>
+
+          {/* 11. Reset Button */}
+          <div style={{ marginTop: 16 }}>
+            <PrimaryButton 
+              text="Reset Filter Formatting" 
+              onClick={() => {
+                // Does nothing - will implement after testing
+              }} 
+            />
+          </div>
+        </>
+      )}
 
     </div>
   );
