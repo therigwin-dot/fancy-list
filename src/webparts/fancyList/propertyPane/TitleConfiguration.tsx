@@ -94,14 +94,11 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
   ];
 
   const gradientDirectionOptions: IDropdownOption[] = [
-    { key: 'to right', text: 'To Right' },
-    { key: 'to left', text: 'To Left' },
-    { key: 'to bottom', text: 'To Bottom' },
-    { key: 'to top', text: 'To Top' },
-    { key: 'to bottom right', text: 'To Bottom Right' },
-    { key: 'to bottom left', text: 'To Bottom Left' },
-    { key: 'to top right', text: 'To Top Right' },
-    { key: 'to top left', text: 'To Top Left' }
+    { key: 'to bottom', text: 'Top to Bottom' },
+    { key: 'to right', text: 'Left to Right' },
+    { key: 'to bottom right', text: 'Top Left to Bottom Right' },
+    { key: 'to bottom left', text: 'Top Right to Bottom Left' },
+    { key: 'radial', text: 'Radial' }
   ];
 
   const handleSwapColors = () => {
