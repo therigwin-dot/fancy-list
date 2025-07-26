@@ -830,7 +830,7 @@ var iconButtonStyles = function (active) { return ({
         color: active ? '#0078d4' : '#323130',
         borderRadius: 4,
         border: active ? '1px solid #0078d4' : '1px solid transparent',
-        marginRight: 1,
+        marginRight: 0,
         fontWeight: '600',
         fontSize: 14,
         width: 24,
@@ -873,7 +873,7 @@ var FontControl = function (_a) {
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
                 display: 'flex',
                 alignItems: 'center',
-                gap: '4px',
+                gap: '2px',
                 flexWrap: 'nowrap'
             } },
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_1__.Dropdown, { label: undefined, ariaLabel: "Font Family", options: FONT_FAMILIES, selectedKey: fontFamily || 'inherit', onChange: function (_, option) { return onChange({ fontFamily: option.key }); }, onRenderOption: renderFontOption, onRenderTitle: renderFontTitle, styles: { root: { minWidth: 120, flex: '1 1 auto' } } }),

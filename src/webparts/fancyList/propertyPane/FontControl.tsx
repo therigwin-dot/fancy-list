@@ -52,7 +52,7 @@ const iconButtonStyles = (active: boolean) => ({
     color: active ? '#0078d4' : '#323130',
     borderRadius: 4,
     border: active ? '1px solid #0078d4' : '1px solid transparent',
-    marginRight: 1,
+    marginRight: 0,
     fontWeight: '600',
     fontSize: 14,
     width: 24,
@@ -101,7 +101,7 @@ export const FontControl: React.FC<FontControlProps> = ({ fontFamily, fontSize, 
       <div style={{ 
         display: 'flex', 
         alignItems: 'center', 
-        gap: '4px',
+        gap: '2px',
         flexWrap: 'nowrap'
       }}>
         {/* Font Family Dropdown */}
