@@ -62,7 +62,7 @@ var DEFAULTS_CONFIG = {
     // Page 2: Title Settings
     titleSettings: {
         resetButtonText: "Reset Title Formatting",
-        description: 'Customize the web parts title text, font, color, and background settings. Use the reset button to put the default look and feel back in place. Use the Back and Next buttons to switch to a different configuration page.',
+        description: 'Customize the web parts title text, font, color, background, and shape settings. Use the reset button to put the default look and feel back in place. Use the Back and Next buttons to switch to a different configuration page.',
         webPartTitle: 'Fancy List',
         font: {
             family: 'Segoe UI',
@@ -82,6 +82,7 @@ var DEFAULTS_CONFIG = {
             gradientColor2: '#0f46d1',
             gradientAlpha2: 0
         },
+        shape: 'rounded',
         showDivider: false
     },
     // Page 3: Filter Settings
@@ -1525,7 +1526,6 @@ var FancyListWebPart = /** @class */ (function (_super) {
                 {
                     groups: [
                         {
-                            groupName: 'Title Section Settings',
                             groupFields: [
                                 {
                                     type: 1, // PropertyPaneFieldType.Custom

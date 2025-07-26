@@ -500,7 +500,6 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
         {
           groups: [
             {
-              groupName: 'Title Section Settings',
               groupFields: [
                 {
                   type: 1, // PropertyPaneFieldType.Custom

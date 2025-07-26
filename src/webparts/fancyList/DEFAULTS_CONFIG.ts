@@ -14,7 +14,7 @@ export const DEFAULTS_CONFIG = {
   // Page 2: Title Settings
   titleSettings: {
     resetButtonText: "Reset Title Formatting",
-    description: 'Customize the web parts title text, font, color, and background settings. Use the reset button to put the default look and feel back in place. Use the Back and Next buttons to switch to a different configuration page.',
+    description: 'Customize the web parts title text, font, color, background, and shape settings. Use the reset button to put the default look and feel back in place. Use the Back and Next buttons to switch to a different configuration page.',
     webPartTitle: 'Fancy List',
     font: {
       family: 'Segoe UI',
@@ -34,6 +34,7 @@ export const DEFAULTS_CONFIG = {
       gradientColor2: '#0f46d1',
       gradientAlpha2: 0
     },
+    shape: 'rounded' as const,
     showDivider: false
   } as TitleSettings,
 
