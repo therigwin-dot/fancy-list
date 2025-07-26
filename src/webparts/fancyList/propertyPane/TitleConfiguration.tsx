@@ -212,12 +212,12 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
         {/* Background Header with Type Dropdown */}
         <div style={{ 
           display: 'flex', 
-          alignItems: 'center', 
+          alignItems: 'flex-start', 
           gap: '8px',
           marginBottom: '12px'
         }}>
           <div style={{
-            fontSize: '14px',
+            fontSize: '16px',
             fontWeight: '600',
             color: '#323130'
           }}>
@@ -234,35 +234,14 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
 
         {/* 7. Solid Background Controls */}
         {settings.backgroundType === 'solid' && (
-          <>
-            <div style={{ marginBottom: 16 }}>
-              <ColorPickerControl
-                color={settings.backgroundColor}
-                field="backgroundColor"
-                label=""
-                onChange={(field: string, newColor: string) => handlePropertyChange('backgroundColor', newColor)}
-              />
-            </div>
-            <div style={{ marginBottom: 16 }}>
-              <label style={{
-                fontSize: '14px',
-                fontWeight: '600',
-                color: '#323130',
-                marginBottom: '8px',
-                display: 'block'
-              }}>
-                Transparency
-              </label>
-              <Slider
-                min={0}
-                max={100}
-                value={settings.backgroundAlpha}
-                onChange={(value) => handlePropertyChange('backgroundAlpha', value)}
-                showValue={true}
-                valueFormat={(value) => `${value}%`}
-              />
-            </div>
-          </>
+          <div style={{ marginBottom: 16 }}>
+            <ColorPickerControl
+              color={settings.backgroundColor}
+              field="backgroundColor"
+              label=""
+              onChange={(field: string, newColor: string) => handlePropertyChange('backgroundColor', newColor)}
+            />
+          </div>
         )}
 
               {/* 8. Gradient Background Controls */}
@@ -309,68 +288,61 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
                 onChange={(field: string, newColor: string) => handlePropertyChange('gradientColor2', newColor)}
               />
             </div>
-            <div style={{ marginBottom: 16 }}>
-              <label style={{
-                fontSize: '14px',
-                fontWeight: '600',
-                color: '#323130',
-                marginBottom: '8px',
-                display: 'block'
-              }}>
-                Transparency
-              </label>
-              <Slider
-                min={0}
-                max={100}
-                value={settings.gradientAlpha}
-                onChange={(value) => handlePropertyChange('gradientAlpha', value)}
-                showValue={true}
-                valueFormat={(value) => `${value}%`}
-              />
-            </div>
           </>
         )}
 
               {/* 9. Image Background Controls */}
         {settings.backgroundType === 'image' && (
-          <>
-            <div style={{ marginBottom: 16 }}>
-              <label style={{
-                fontSize: '14px',
-                fontWeight: '600',
-                color: '#323130',
-                marginBottom: '8px',
-                display: 'block'
-              }}>
-                URL
-              </label>
-              <TextField
-                value={settings.imageUrl}
-                onChange={(_, newValue) => handlePropertyChange('imageUrl', newValue || '')}
-                placeholder="Enter image URL"
-              />
-            </div>
-            <div style={{ marginBottom: 16 }}>
-              <label style={{
-                fontSize: '14px',
-                fontWeight: '600',
-                color: '#323130',
-                marginBottom: '8px',
-                display: 'block'
-              }}>
-                Transparency
-              </label>
-              <Slider
-                min={0}
-                max={100}
-                value={settings.imageAlpha}
-                onChange={(value) => handlePropertyChange('imageAlpha', value)}
-                showValue={true}
-                valueFormat={(value) => `${value}%`}
-              />
-            </div>
-          </>
+          <div style={{ marginBottom: 16 }}>
+            <label style={{
+              fontSize: '14px',
+              fontWeight: '600',
+              color: '#323130',
+              marginBottom: '8px',
+              display: 'block'
+            }}>
+              URL
+            </label>
+            <TextField
+              value={settings.imageUrl}
+              onChange={(_, newValue) => handlePropertyChange('imageUrl', newValue || '')}
+              placeholder="Enter image URL"
+            />
+          </div>
         )}
+
+        {/* Unified Transparency Slider - Always Shown */}
+        <div style={{ marginBottom: 16 }}>
+          <label style={{
+            fontSize: '14px',
+            fontWeight: '600',
+            color: '#323130',
+            marginBottom: '8px',
+            display: 'block'
+          }}>
+            Transparency
+          </label>
+          <Slider
+            min={0}
+            max={100}
+            value={
+              settings.backgroundType === 'solid' ? settings.backgroundAlpha :
+              settings.backgroundType === 'gradient' ? settings.gradientAlpha :
+              settings.imageAlpha
+            }
+            onChange={(value) => {
+              if (settings.backgroundType === 'solid') {
+                handlePropertyChange('backgroundAlpha', value);
+              } else if (settings.backgroundType === 'gradient') {
+                handlePropertyChange('gradientAlpha', value);
+              } else {
+                handlePropertyChange('imageAlpha', value);
+              }
+            }}
+            showValue={true}
+            valueFormat={(value) => `${value}%`}
+          />
+        </div>
       </div>
 
       {/* Reset Button */}
