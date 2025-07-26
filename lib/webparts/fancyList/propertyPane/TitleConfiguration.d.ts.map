@@ -1,0 +1,1 @@
+{"version":3,"file":"TitleConfiguration.d.ts","sourceRoot":"","sources":["../../../../src/webparts/fancyList/propertyPane/TitleConfiguration.tsx"],"names":[],"mappings":"AAAA,OAAO,KAAK,KAAK,MAAM,OAAO,CAAC;AAE/B,MAAM,WAAW,uBAAuB;IACtC,KAAK,CAAC,EAAE,MAAM,CAAC;CAChB;AAED,eAAO,MAAM,kBAAkB,EAAE,KAAK,CAAC,EAAE,CAAC,uBAAuB,CAwBhE,CAAC"}

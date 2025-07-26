@@ -469,6 +469,39 @@ var styles = {
 
 /***/ }),
 
+/***/ 867:
+/*!*******************************************************************!*\
+  !*** ./lib/webparts/fancyList/propertyPane/TitleConfiguration.js ***!
+  \*******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   TitleConfiguration: () => (/* binding */ TitleConfiguration)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ 959);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+var TitleConfiguration = function (_a) {
+    var label = _a.label;
+    return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                fontSize: '16px',
+                fontWeight: '600',
+                color: '#323130',
+                marginBottom: '12px'
+            } }, "Title Configuration"),
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                fontSize: '14px',
+                color: '#666',
+                lineHeight: '1.4',
+                marginBottom: '16px'
+            } }, "Customize the web parts title text, font, color, background, and shape settings. Use the reset button to put the default look and feel back in place. Use the Back and Next buttons to switch to a different configuration page.")));
+};
+
+
+/***/ }),
+
 /***/ 323:
 /*!***********************************************************************************************************!*\
   !*** ./node_modules/@microsoft/sp-css-loader/node_modules/@microsoft/load-themed-styles/lib-es6/index.js ***!
@@ -988,6 +1021,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var FancyListWebPartStrings__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(FancyListWebPartStrings__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _components_FancyList__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/FancyList */ 769);
 /* harmony import */ var _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./DEFAULTS_CONFIG */ 702);
+/* harmony import */ var _propertyPane_TitleConfiguration__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./propertyPane/TitleConfiguration */ 867);
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -1039,6 +1073,7 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+
 
 
 
@@ -1486,33 +1521,21 @@ var FancyListWebPart = /** @class */ (function (_super) {
                         }
                     ]
                 },
-                // Page 2: Title Section Configuration (Placeholder)
+                // Page 2: Title Section Configuration (TitleConfiguration Module)
                 {
-                    header: {
-                        description: 'Title Section Configuration - Coming Soon'
-                    },
                     groups: [
                         {
                             groupName: 'Title Section Settings',
                             groupFields: [
                                 {
                                     type: 1, // PropertyPaneFieldType.Custom
-                                    targetProperty: 'titlePlaceholder',
+                                    targetProperty: 'titleConfiguration',
                                     properties: {
-                                        key: 'titlePlaceholder',
+                                        key: 'titleConfiguration',
                                         onRender: function (elem, ctx, changeCallback) {
-                                            react_dom__WEBPACK_IMPORTED_MODULE_1__.render(react__WEBPACK_IMPORTED_MODULE_0__.createElement('div', {
-                                                style: {
-                                                    fontSize: '14px',
-                                                    color: '#666',
-                                                    marginBottom: '16px',
-                                                    lineHeight: '1.4',
-                                                    padding: '16px',
-                                                    backgroundColor: '#f8f9fa',
-                                                    borderRadius: '4px',
-                                                    border: '1px solid #e1dfdd'
-                                                }
-                                            }, 'Title Section Configuration - This page will be updated with interactive controls for styling the title section. Currently using default styling.'), elem);
+                                            react_dom__WEBPACK_IMPORTED_MODULE_1__.render(react__WEBPACK_IMPORTED_MODULE_0__.createElement(_propertyPane_TitleConfiguration__WEBPACK_IMPORTED_MODULE_9__.TitleConfiguration, {
+                                                label: 'Title Configuration'
+                                            }), elem);
                                         },
                                         onDispose: function (elem) {
                                             react_dom__WEBPACK_IMPORTED_MODULE_1__.unmountComponentAtNode(elem);

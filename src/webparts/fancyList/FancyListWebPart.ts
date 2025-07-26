@@ -15,6 +15,7 @@ import * as strings from 'FancyListWebPartStrings';
 import FancyList from './components/FancyList';
 import { IFancyListProps } from './components/IFancyListProps';
 import DEFAULTS_CONFIG from './DEFAULTS_CONFIG';
+import { TitleConfiguration } from './propertyPane/TitleConfiguration';
 
 
 export interface IFancyListWebPartProps {
@@ -495,34 +496,22 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
             }
           ]
         },
-        // Page 2: Title Section Configuration (Placeholder)
+        // Page 2: Title Section Configuration (TitleConfiguration Module)
         {
-          header: {
-            description: 'Title Section Configuration - Coming Soon'
-          },
           groups: [
             {
               groupName: 'Title Section Settings',
               groupFields: [
                 {
                   type: 1, // PropertyPaneFieldType.Custom
-                  targetProperty: 'titlePlaceholder',
+                  targetProperty: 'titleConfiguration',
                   properties: {
-                    key: 'titlePlaceholder',
+                    key: 'titleConfiguration',
                     onRender: (elem: HTMLElement, ctx: unknown, changeCallback?: () => void) => {
                       ReactDom.render(
-                        React.createElement('div', {
-                          style: { 
-                            fontSize: '14px',
-                            color: '#666',
-                            marginBottom: '16px',
-                            lineHeight: '1.4',
-                            padding: '16px',
-                            backgroundColor: '#f8f9fa',
-                            borderRadius: '4px',
-                            border: '1px solid #e1dfdd'
-                          }
-                        }, 'Title Section Configuration - This page will be updated with interactive controls for styling the title section. Currently using default styling.'),
+                        React.createElement(TitleConfiguration, {
+                          label: 'Title Configuration'
+                        }),
                         elem
                       );
                     },
