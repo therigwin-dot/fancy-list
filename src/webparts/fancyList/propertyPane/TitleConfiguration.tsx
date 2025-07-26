@@ -109,6 +109,17 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
     handlePropertyChange('gradientColor2', tempColor);
   };
 
+  const getGradientPreview = (direction: string, color1: string, color2: string): string => {
+    switch(direction) {
+      case 'to bottom': return `linear-gradient(to bottom, ${color1}, ${color2})`;
+      case 'left-right': return `linear-gradient(to right, ${color1}, ${color2})`;
+      case 'to bottom right': return `linear-gradient(to bottom right, ${color1}, ${color2})`;
+      case 'to bottom left': return `linear-gradient(to bottom left, ${color1}, ${color2})`;
+      case 'radial': return `radial-gradient(circle, ${color1}, ${color2})`;
+      default: return `linear-gradient(to right, ${color1}, ${color2})`;
+    }
+  };
+
   const handleReset = () => {
     // Do NOT reset webPartTitle (preserve current title text) per design
     handlePropertyChange('shape', DEFAULTS_CONFIG.titleSettings.shape);
@@ -236,7 +247,12 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
                 onChange={(_, option) => handlePropertyChange('gradientDirection', option?.key)}
               />
             </div>
-            <div style={{ marginBottom: 8 }}>
+            <div style={{ 
+              display: 'flex', 
+              alignItems: 'center', 
+              gap: '8px',
+              marginBottom: 8 
+            }}>
               <button
                 type="button"
                 onClick={handleSwapColors}
@@ -252,6 +268,16 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
               >
                 Swap Colors
               </button>
+              <div
+                style={{
+                  width: '190px',
+                  height: '32px',
+                  borderRadius: '4px',
+                  border: '1px solid #ccc',
+                  background: getGradientPreview(settings.gradientDirection, '#ffffff', '#000000')
+                }}
+                title="Gradient direction preview (white to black)"
+              />
             </div>
             <div style={{ 
               display: 'flex', 

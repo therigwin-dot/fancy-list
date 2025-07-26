@@ -1536,6 +1536,16 @@ var TitleConfiguration = function (_a) {
         handlePropertyChange('gradientColor1', settings.gradientColor2);
         handlePropertyChange('gradientColor2', tempColor);
     };
+    var getGradientPreview = function (direction, color1, color2) {
+        switch (direction) {
+            case 'to bottom': return "linear-gradient(to bottom, ".concat(color1, ", ").concat(color2, ")");
+            case 'left-right': return "linear-gradient(to right, ".concat(color1, ", ").concat(color2, ")");
+            case 'to bottom right': return "linear-gradient(to bottom right, ".concat(color1, ", ").concat(color2, ")");
+            case 'to bottom left': return "linear-gradient(to bottom left, ".concat(color1, ", ").concat(color2, ")");
+            case 'radial': return "radial-gradient(circle, ".concat(color1, ", ").concat(color2, ")");
+            default: return "linear-gradient(to right, ".concat(color1, ", ").concat(color2, ")");
+        }
+    };
     var handleReset = function () {
         // Do NOT reset webPartTitle (preserve current title text) per design
         handlePropertyChange('shape', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.shape);
@@ -1602,7 +1612,12 @@ var TitleConfiguration = function (_a) {
             settings.backgroundType === 'gradient' && (react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null,
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
                     react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_6__.Dropdown, { label: "Direction", options: gradientDirectionOptions, selectedKey: settings.gradientDirection, onChange: function (_, option) { return handlePropertyChange('gradientDirection', option === null || option === void 0 ? void 0 : option.key); } })),
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 8 } },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                        marginBottom: 8
+                    } },
                     react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { type: "button", onClick: handleSwapColors, style: {
                             padding: '4px 8px',
                             border: '1px solid #0078d4',
@@ -1611,7 +1626,14 @@ var TitleConfiguration = function (_a) {
                             color: '#0078d4',
                             cursor: 'pointer',
                             fontSize: '12px'
-                        } }, "Swap Colors")),
+                        } }, "Swap Colors"),
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                            width: '190px',
+                            height: '32px',
+                            borderRadius: '4px',
+                            border: '1px solid #ccc',
+                            background: getGradientPreview(settings.gradientDirection, '#ffffff', '#000000')
+                        }, title: "Gradient direction preview (white to black)" })),
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
                         display: 'flex',
                         alignItems: 'center',
