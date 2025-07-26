@@ -145,9 +145,20 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
         {DEFAULTS_CONFIG.filterSettings.description}
       </div>
 
+      {/* 1. Enabled Toggle */}
+      <div style={{ marginBottom: 16 }}>
+        <Toggle
+          label="Enabled"
+          checked={true}
+          onText="On"
+          offText="Off"
+          onChange={(_, checked) => {
+            // Does nothing - just toggles on and off
+          }}
+        />
+      </div>
 
-
-          {/* 1. Filter Font Control */}
+          {/* 2. Filter Font Control */}
           <div style={{ marginBottom: 16 }}>
             <FontControl
               label="Filter Font"
@@ -158,7 +169,7 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
             />
           </div>
 
-          {/* 2. Active Filter Colors */}
+          {/* 3. Active Filter Colors */}
           <div style={{ marginBottom: 16 }}>
             <label style={{
               fontSize: '14px',
@@ -187,7 +198,7 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
             </div>
           </div>
 
-          {/* 3. Inactive Filter Colors */}
+          {/* 4. Inactive Filter Colors */}
           <div style={{ marginBottom: 16 }}>
             <label style={{
               fontSize: '14px',
@@ -216,7 +227,7 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
             </div>
           </div>
 
-          {/* 4. Filter Shape Control */}
+          {/* 5. Filter Shape Control */}
           <div style={{ marginBottom: 16 }}>
             <ShapePickerControl
               value={settings.shape}
