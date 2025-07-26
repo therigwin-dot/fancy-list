@@ -615,14 +615,12 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
                       ReactDom.render(
                         React.createElement(FilterModuleControl, {
                           label: 'Filter Configuration',
-                          settings: {
-                            enableFilters: this.properties.filterSettings?.enableFilters || DEFAULTS_CONFIG.filterSettings.enableFilters,
-                            showAllCategories: this.properties.filterSettings?.showAllCategories || DEFAULTS_CONFIG.filterSettings.showAllCategories,
-                            font: {
-                              family: this.properties.filterSettings?.font.family || DEFAULTS_CONFIG.filterSettings.font.family,
-                              size: this.properties.filterSettings?.font.size || DEFAULTS_CONFIG.filterSettings.font.size,
-                              formatting: this.properties.filterSettings?.font.formatting || DEFAULTS_CONFIG.filterSettings.font.formatting
-                            },
+                                                      settings: {
+                              font: {
+                                family: this.properties.filterSettings?.font.family || DEFAULTS_CONFIG.filterSettings.font.family,
+                                size: this.properties.filterSettings?.font.size || DEFAULTS_CONFIG.filterSettings.font.size,
+                                formatting: this.properties.filterSettings?.font.formatting || DEFAULTS_CONFIG.filterSettings.font.formatting
+                              },
                             activeColors: {
                               background: this.properties.filterSettings?.activeColors.background || DEFAULTS_CONFIG.filterSettings.activeColors.background,
                               font: this.properties.filterSettings?.activeColors.font || DEFAULTS_CONFIG.filterSettings.activeColors.font
@@ -650,12 +648,6 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
                             }
                             
                             switch (propertyPath) {
-                              case 'enableFilters':
-                                this.properties.filterSettings.enableFilters = newValue;
-                                break;
-                              case 'showAllCategories':
-                                this.properties.filterSettings.showAllCategories = newValue;
-                                break;
                               case 'shape':
                                 this.properties.filterSettings.shape = newValue;
                                 break;

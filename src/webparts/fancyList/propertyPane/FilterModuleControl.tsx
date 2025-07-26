@@ -12,8 +12,6 @@ import DEFAULTS_CONFIG from '../DEFAULTS_CONFIG';
 export interface FilterModuleControlProps {
   label?: string;
   settings?: {
-    enableFilters: boolean;
-    showAllCategories: boolean;
     font: {
       family: string;
       size: string;
@@ -50,8 +48,6 @@ export interface FilterModuleControlProps {
 export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({ 
   label, 
   settings = {
-    enableFilters: true,
-    showAllCategories: true,
     font: {
       family: 'Segoe UI',
       size: '12px',
@@ -149,35 +145,9 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
         {DEFAULTS_CONFIG.filterSettings.description}
       </div>
 
-      {/* 1. Enable Filters Toggle */}
-      <div style={{ marginBottom: 16 }}>
-        <Toggle
-          label="Enable Filters"
-          checked={settings.enableFilters}
-          onText="On"
-          offText="Off"
-          onChange={(_, checked) => {
-            console.log('Enable Filters toggle changed:', checked);
-            handlePropertyChange('enableFilters', checked);
-          }}
-        />
-      </div>
 
-      {/* Conditional rendering for all other controls when filters are enabled */}
-      {settings.enableFilters && (
-        <>
-          {/* 2. Show All Categories Toggle */}
-          <div style={{ marginBottom: 16 }}>
-            <Toggle
-              label="Show 'All' Category Option"
-              checked={settings.showAllCategories}
-              onText="On"
-              offText="Off"
-              onChange={(_, checked) => handlePropertyChange('showAllCategories', checked)}
-            />
-          </div>
 
-          {/* 3. Filter Font Control */}
+          {/* 1. Filter Font Control */}
           <div style={{ marginBottom: 16 }}>
             <FontControl
               label="Filter Font"
@@ -188,7 +158,7 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
             />
           </div>
 
-          {/* 4. Active Filter Colors */}
+          {/* 2. Active Filter Colors */}
           <div style={{ marginBottom: 16 }}>
             <label style={{
               fontSize: '14px',
@@ -217,7 +187,7 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
             </div>
           </div>
 
-          {/* 5. Inactive Filter Colors */}
+          {/* 3. Inactive Filter Colors */}
           <div style={{ marginBottom: 16 }}>
             <label style={{
               fontSize: '14px',
@@ -246,7 +216,7 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
             </div>
           </div>
 
-          {/* 6. Filter Shape Control */}
+          {/* 4. Filter Shape Control */}
           <div style={{ marginBottom: 16 }}>
             <ShapePickerControl
               value={settings.shape}
@@ -255,7 +225,7 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
             />
           </div>
 
-          {/* 7. Show Filter Divider Toggle */}
+          {/* 5. Show Filter Divider Toggle */}
           <div style={{ marginBottom: 16 }}>
             <Toggle
               label="Show Filter Divider"
@@ -266,7 +236,7 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
             />
           </div>
 
-          {/* 8. Filter Background Type Dropdown */}
+          {/* 6. Filter Background Type Dropdown */}
           <div style={{ marginBottom: 16 }}>
             <Dropdown
               label="Filter Background Type"
@@ -276,7 +246,7 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
             />
           </div>
 
-          {/* 9. Solid Background Controls */}
+          {/* 7. Solid Background Controls */}
           {settings.backgroundType === 'solid' && (
             <>
               <div style={{ marginBottom: 16 }}>
@@ -309,7 +279,7 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
             </>
           )}
 
-          {/* 10. Gradient Background Controls */}
+          {/* 8. Gradient Background Controls */}
           {settings.backgroundType === 'gradient' && (
             <>
               <div style={{ marginBottom: 16 }}>
@@ -375,7 +345,7 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
             </>
           )}
 
-          {/* 11. Image Background Controls */}
+          {/* 9. Image Background Controls */}
           {settings.backgroundType === 'image' && (
             <>
               <div style={{ marginBottom: 16 }}>
@@ -417,8 +387,7 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
           )}
 
 
-        </>
-      )}
+
     </div>
   );
 }; 
