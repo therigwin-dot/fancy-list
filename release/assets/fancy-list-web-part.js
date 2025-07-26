@@ -744,7 +744,25 @@ var FilterModuleControl = function (_a) {
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Toggle__WEBPACK_IMPORTED_MODULE_5__.Toggle, { label: "Show Filter Divider", checked: settings.showDivider, onText: "On", offText: "Off", onChange: function (_, checked) { return handlePropertyChange('showDivider', checked); } })),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginTop: 16 } },
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_9__.PrimaryButton, { text: "Reset Filter Formatting", onClick: function () {
-                        // Does nothing - will implement after testing
+                        // Reset all filter settings to defaults
+                        handlePropertyChange('font.family', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.font.family);
+                        handlePropertyChange('font.size', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.font.size);
+                        handlePropertyChange('font.formatting', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.font.formatting);
+                        handlePropertyChange('activeColors.background', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.activeColors.background);
+                        handlePropertyChange('activeColors.font', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.activeColors.font);
+                        handlePropertyChange('inactiveColors.background', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.inactiveColors.background);
+                        handlePropertyChange('inactiveColors.font', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.inactiveColors.font);
+                        handlePropertyChange('shape', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.shape);
+                        handlePropertyChange('showDivider', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.showDivider);
+                        handlePropertyChange('backgroundType', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.background.type);
+                        handlePropertyChange('backgroundColor', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.background.color);
+                        handlePropertyChange('backgroundAlpha', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.background.alpha);
+                        handlePropertyChange('gradientDirection', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.background.gradientDirection);
+                        handlePropertyChange('gradientColor1', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.background.gradientColor1);
+                        handlePropertyChange('gradientColor2', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.background.gradientColor2);
+                        handlePropertyChange('gradientAlpha', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.background.gradientAlpha1);
+                        handlePropertyChange('imageUrl', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.background.image);
+                        handlePropertyChange('imageAlpha', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.background.imageAlpha);
                     } }))))));
 };
 

@@ -407,7 +407,25 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
             <PrimaryButton 
               text="Reset Filter Formatting" 
               onClick={() => {
-                // Does nothing - will implement after testing
+                // Reset all filter settings to defaults
+                handlePropertyChange('font.family', DEFAULTS_CONFIG.filterSettings.font.family);
+                handlePropertyChange('font.size', DEFAULTS_CONFIG.filterSettings.font.size);
+                handlePropertyChange('font.formatting', DEFAULTS_CONFIG.filterSettings.font.formatting);
+                handlePropertyChange('activeColors.background', DEFAULTS_CONFIG.filterSettings.activeColors.background);
+                handlePropertyChange('activeColors.font', DEFAULTS_CONFIG.filterSettings.activeColors.font);
+                handlePropertyChange('inactiveColors.background', DEFAULTS_CONFIG.filterSettings.inactiveColors.background);
+                handlePropertyChange('inactiveColors.font', DEFAULTS_CONFIG.filterSettings.inactiveColors.font);
+                handlePropertyChange('shape', DEFAULTS_CONFIG.filterSettings.shape);
+                handlePropertyChange('showDivider', DEFAULTS_CONFIG.filterSettings.showDivider);
+                handlePropertyChange('backgroundType', DEFAULTS_CONFIG.filterSettings.background.type);
+                handlePropertyChange('backgroundColor', DEFAULTS_CONFIG.filterSettings.background.color);
+                handlePropertyChange('backgroundAlpha', DEFAULTS_CONFIG.filterSettings.background.alpha);
+                handlePropertyChange('gradientDirection', DEFAULTS_CONFIG.filterSettings.background.gradientDirection);
+                handlePropertyChange('gradientColor1', DEFAULTS_CONFIG.filterSettings.background.gradientColor1);
+                handlePropertyChange('gradientColor2', DEFAULTS_CONFIG.filterSettings.background.gradientColor2);
+                handlePropertyChange('gradientAlpha', DEFAULTS_CONFIG.filterSettings.background.gradientAlpha1);
+                handlePropertyChange('imageUrl', DEFAULTS_CONFIG.filterSettings.background.image);
+                handlePropertyChange('imageAlpha', DEFAULTS_CONFIG.filterSettings.background.imageAlpha);
               }} 
             />
           </div>
