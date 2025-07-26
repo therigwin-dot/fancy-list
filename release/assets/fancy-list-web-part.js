@@ -1546,13 +1546,6 @@ var TitleConfiguration = function (_a) {
                 marginBottom: '16px'
             } }, "Customize the web parts title text, font, color, background, and shape settings. Use the reset button to put the default look and feel back in place. Use the Back and Next buttons to switch to a different configuration page."),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: {
-                    fontSize: '14px',
-                    fontWeight: '600',
-                    color: '#323130',
-                    marginBottom: '8px',
-                    display: 'block'
-                } }, "Title Text"),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_5__.TextField, { value: settings.webPartTitle, onChange: function (_, newValue) { return handlePropertyChange('webPartTitle', newValue || ''); }, placeholder: "Enter title text" })),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ShapePickerControl__WEBPACK_IMPORTED_MODULE_3__.ShapePickerControl, { value: settings.shape, label: "", onChange: function (newShape) { return handlePropertyChange('shape', newShape); } })),

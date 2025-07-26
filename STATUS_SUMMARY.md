@@ -27,6 +27,7 @@
 - **Code Changes**: Git backup happens BEFORE making actual code changes
 - **Documentation Changes**: Make changes FIRST, then Git backup, then code changes
 - **Exception**: Documentation-only changes can be backed up after the change
+- **Quick Changes**: No backup needed if we have a good restore point and just want immediate effect
 - **Purpose**: Provides clear restore points for reverting code changes if needed
 
 ## 🎯 **CURRENT STATUS (July 2025)**

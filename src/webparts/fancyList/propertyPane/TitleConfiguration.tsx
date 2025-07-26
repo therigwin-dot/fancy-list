@@ -154,15 +154,6 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
 
       {/* 1. Title Text Control */}
       <div style={{ marginBottom: 16 }}>
-        <label style={{
-          fontSize: '14px',
-          fontWeight: '600',
-          color: '#323130',
-          marginBottom: '8px',
-          display: 'block'
-        }}>
-          Title Text
-        </label>
         <TextField
           value={settings.webPartTitle}
           onChange={(_, newValue) => handlePropertyChange('webPartTitle', newValue || '')}
