@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { BackgroundPickerControl } from './BackgroundPickerControl';
 
 export interface TitleConfigurationProps {
   label?: string;
@@ -25,6 +26,17 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({ label })
         marginBottom: '16px'
       }}>
         Customize the web parts title text, font, color, background, and shape settings. Use the reset button to put the default look and feel back in place. Use the Back and Next buttons to switch to a different configuration page.
+      </div>
+
+      {/* Title Background Control */}
+      <div style={{ marginBottom: 16 }}>
+        <BackgroundPickerControl
+          label="Title Background"
+          selectedKey="solid"
+          onPropertyChange={(propertyPath: string, newValue: string | number) => {
+            console.log('Background property changed:', propertyPath, newValue);
+          }}
+        />
       </div>
     </div>
   );
