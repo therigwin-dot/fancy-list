@@ -3,12 +3,13 @@ import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
 import {
   type IPropertyPaneConfiguration,
-  PropertyPaneToggle,
-  PropertyPaneDropdown
+  PropertyPaneDropdown,
+  PropertyPaneLabel
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import { IReadonlyTheme } from '@microsoft/sp-component-base';
 import { SPHttpClient } from '@microsoft/sp-http';
+import { WebPartContext } from '@microsoft/sp-webpart-base';
 
 import * as strings from 'FancyListWebPartStrings';
 import FancyList from './components/FancyList';
@@ -21,6 +22,85 @@ export interface IFancyListWebPartProps {
   descriptionField: string;
   showAllCategories: boolean;
   defaultExpanded: boolean;
+  // Additional properties for the 7-page framework
+  webPartTitle: string;
+  webPartTitleColor: string;
+  webPartTitleFont: string;
+  webPartTitleFontSize: string;
+  webPartTitleFormatting: { bold: boolean; italic: boolean; underline: boolean; strikethrough: boolean };
+  webPartTitleBackgroundType: 'solid' | 'gradient' | 'image';
+  webPartTitleBackgroundColor: string;
+  webPartTitleBackgroundAlpha: number;
+  webPartTitleBackgroundImage: string;
+  webPartTitleBackgroundImageAlpha: number;
+  webPartTitleBackgroundGradientDirection: string;
+  webPartTitleBackgroundGradientColor1: string;
+  webPartTitleBackgroundGradientAlpha1: number;
+  webPartTitleBackgroundGradientColor2: string;
+  webPartTitleBackgroundGradientAlpha2: number;
+  showTitleDivider: boolean;
+  titleSettings: TitleSettings;
+  filterSettings: FilterSettings;
+  context: WebPartContext;
+}
+
+export interface TitleSettings {
+  resetButtonText: string;
+  description: string;
+  webPartTitle: string;
+  font: {
+    family: string;
+    size: string;
+    color: string;
+    formatting: { bold: boolean; italic: boolean; underline: boolean; strikethrough: boolean; };
+  };
+  background: {
+    type: 'solid' | 'gradient' | 'image';
+    color: string;
+    alpha: number;
+    image: string;
+    imageAlpha: number;
+    gradientDirection: string;
+    gradientColor1: string;
+    gradientAlpha1: number;
+    gradientColor2: string;
+    gradientAlpha2: number;
+  };
+  showDivider: boolean;
+}
+
+export interface FilterSettings {
+  resetButtonText: string;
+  description: string;
+  enableFilters: boolean;
+  showAllCategories: boolean;
+  font: {
+    family: string;
+    size: string;
+    formatting: { bold: boolean; italic: boolean; underline: boolean; strikethrough: boolean; };
+  };
+  activeColors: {
+    background: string;
+    font: string;
+  };
+  inactiveColors: {
+    background: string;
+    font: string;
+  };
+  shape: 'square' | 'rounded' | 'pill';
+  background: {
+    type: 'solid' | 'gradient' | 'image';
+    color: string;
+    alpha: number;
+    image: string;
+    imageAlpha: number;
+    gradientDirection: string;
+    gradientColor1: string;
+    gradientAlpha1: number;
+    gradientColor2: string;
+    gradientAlpha2: number;
+  };
+  showDivider: boolean;
 }
 
 export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWebPartProps> {
@@ -34,6 +114,14 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
   private _fieldsLoadedForList: string = '';
   private _loadingLists: boolean = false;
   private _loadingFields: boolean = false;
+
+  // Testing defaults for Page 1
+  private readonly TESTING_DEFAULTS = {
+    selectedListId: 'Site Pages',
+    categoryField: 'Title',
+    subjectField: 'Title',
+    descriptionField: 'Title'
+  };
 
   public render(): void {
     const element: React.ReactElement<IFancyListProps> = React.createElement(
@@ -76,7 +164,7 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
     }
   }
 
-  public async onPropertyPaneFieldChanged(propertyPath: string): Promise<void> {
+  public async onPropertyPaneFieldChanged(propertyPath: string, oldValue: unknown, newValue: unknown): Promise<void> {
     if (propertyPath === 'selectedListId') {
       // Clear field selections and reload fields
       this.properties.categoryField = '';
@@ -98,9 +186,6 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
     } else if (propertyPath === 'subjectField') {
       // Clear description when subject changes
       this.properties.descriptionField = '';
-      this.context.propertyPane.refresh();
-    } else if (propertyPath === 'defaultExpanded') {
-      // Refresh the web part when expand setting changes
       this.context.propertyPane.refresh();
     }
   }
@@ -233,16 +318,38 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
   }
 
   protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
+    const WEBPART_VERSION = '1.0.0.0'; // Keep in sync with package-solution.json
     return {
       pages: [
+        // Page 1: List Configuration
         {
-          header: {
-            description: strings.PropertyPaneDescription
-          },
           groups: [
             {
-              groupName: strings.BasicGroupName,
+              groupName: 'List Configuration',
               groupFields: [
+                {
+                  type: 1, // PropertyPaneFieldType.Custom
+                  targetProperty: 'listConfigurationDescription',
+                  properties: {
+                    key: 'listConfigurationDescription',
+                    onRender: (elem: HTMLElement, ctx: unknown, changeCallback?: () => void) => {
+                      ReactDom.render(
+                        React.createElement('div', {
+                          style: { 
+                            fontSize: '14px',
+                            color: '#666',
+                            marginBottom: '16px',
+                            lineHeight: '1.4'
+                          }
+                        }, 'Select a SharePoint List or Document Library. Then using the drop downs first pick a Category. This is the top level and is Filterable. Next pick your Subject. This is quick description field. Finally pick a Description. This field can be multiline and include rich html components from the list or document library you select.'),
+                        elem
+                      );
+                    },
+                    onDispose: (elem: HTMLElement) => {
+                      ReactDom.unmountComponentAtNode(elem);
+                    }
+                  }
+                },
                 PropertyPaneDropdown('selectedListId', {
                   label: 'Select List or Library',
                   options: this._lists.length ? this._lists : [{ key: '', text: this._loadingLists ? 'Loading...' : 'No lists found' }],
@@ -266,15 +373,368 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
                   selectedKey: this.properties.descriptionField,
                   disabled: !this.properties.selectedListId || !this.properties.categoryField || !this.properties.subjectField
                 }),
-                PropertyPaneToggle('showAllCategories', {
-                  label: 'Show "All" Category Option',
-                  onText: 'On',
-                  offText: 'Off'
+                {
+                  type: 1, // PropertyPaneFieldType.Custom
+                  targetProperty: 'page1Buttons',
+                  properties: {
+                    key: 'page1Buttons',
+                    onRender: (elem: HTMLElement, ctx: unknown, changeCallback?: () => void) => {
+                      ReactDom.render(
+                        React.createElement('div', {
+                          style: { 
+                            marginTop: '16px', 
+                            padding: '8px', 
+                            borderTop: '1px solid #e1dfdd',
+                            textAlign: 'center' as const
+                          }
+                        }, [
+                          React.createElement('button', {
+                            key: 'testDefaultsBtn',
+                            style: {
+                              backgroundColor: '#0078d4',
+                              color: 'white',
+                              border: 'none',
+                              padding: '8px 16px',
+                              borderRadius: '4px',
+                              cursor: 'pointer',
+                              fontSize: '14px',
+                              fontWeight: '600',
+                              marginRight: '8px'
+                            },
+                            onClick: async () => {
+                              // Set test defaults one by one
+                              this.properties.selectedListId = this.TESTING_DEFAULTS.selectedListId;
+                              if (changeCallback) changeCallback();
+                              this.context.propertyPane.refresh();
+                              
+                              // Wait longer for the list to load, then load fields and set category field
+                              setTimeout(async () => {
+                                try {
+                                  // Load fields for the selected list
+                                  this._fields = await this._loadFields(this.TESTING_DEFAULTS.selectedListId);
+                                  this._fieldsLoadedForList = this.TESTING_DEFAULTS.selectedListId;
+                                  console.log('Loaded fields:', this._fields);
+                                  console.log('Looking for description field:', this.TESTING_DEFAULTS.descriptionField);
+                                  
+                                  // Set category field
+                                  this.properties.categoryField = this.TESTING_DEFAULTS.categoryField;
+                                  if (changeCallback) changeCallback();
+                                  this.context.propertyPane.refresh();
+                                  
+                                  // Wait longer, then set subject field
+                                  setTimeout(async () => {
+                                    this.properties.subjectField = this.TESTING_DEFAULTS.subjectField;
+                                    if (changeCallback) changeCallback();
+                                    this.context.propertyPane.refresh();
+                                    
+                                    // Wait longer, then set description field
+                                    setTimeout(() => {
+                                      console.log('Setting description field to:', this.TESTING_DEFAULTS.descriptionField);
+                                      this.properties.descriptionField = this.TESTING_DEFAULTS.descriptionField;
+                                      if (changeCallback) changeCallback();
+                                      this.context.propertyPane.refresh();
+                                      
+                                      // Force another refresh after a short delay to ensure the value is set
+                                      setTimeout(() => {
+                                        console.log('Final refresh to ensure description field is set');
+                                        this.context.propertyPane.refresh();
+                                      }, 500);
+                                    }, 2000);
+                                  }, 2000);
+                                } catch (error) {
+                                  console.error('Error loading fields:', error);
+                                }
+                              }, 2000);
+                            }
+                          }, 'Test Defaults')
+                        ]),
+                        elem
+                      );
+                    },
+                    onDispose: (elem: HTMLElement) => {
+                      ReactDom.unmountComponentAtNode(elem);
+                    }
+                  }
+                },
+                {
+                  type: 1, // PropertyPaneFieldType.Custom
+                  targetProperty: 'pageNavigation',
+                  properties: {
+                    key: 'pageNavigation',
+                    onRender: (elem: HTMLElement, ctx: unknown, changeCallback?: () => void) => {
+                      ReactDom.render(
+                        React.createElement('div', {
+                          style: { 
+                            marginTop: '16px', 
+                            padding: '8px', 
+                            borderTop: '1px solid #e1dfdd',
+                            fontSize: '14px',
+                            color: '#323130'
+                          }
+                        }, [
+                          React.createElement('div', { key: 'navTitle', style: { fontWeight: '600', marginBottom: '8px' } }, 'Page Navigation:'),
+                          React.createElement('div', { key: 'page1', style: { marginBottom: '4px' } }, 'Page 1 - List Selection and Configuration'),
+                          React.createElement('div', { key: 'page2', style: { marginBottom: '4px' } }, 'Page 2 - Title Configuration'),
+                          React.createElement('div', { key: 'page3', style: { marginBottom: '4px' } }, 'Page 3 - Filter Configuration'),
+                          React.createElement('div', { key: 'page4', style: { marginBottom: '4px' } }, 'Page 4 - Category Look and Feel'),
+                          React.createElement('div', { key: 'page5', style: { marginBottom: '4px' } }, 'Page 5 - Subject Look and Feel'),
+                          React.createElement('div', { key: 'page6', style: { marginBottom: '4px' } }, 'Page 6 - Description Look and Feel'),
+                          React.createElement('div', { key: 'page7', style: { marginBottom: '4px' } }, 'Page 7 - About')
+                        ]),
+                        elem
+                      );
+                    },
+                    onDispose: (elem: HTMLElement) => {
+                      ReactDom.unmountComponentAtNode(elem);
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        // Page 2: Title Section Configuration (Placeholder)
+        {
+          header: {
+            description: 'Title Section Configuration - Coming Soon'
+          },
+          groups: [
+            {
+              groupName: 'Title Section Settings',
+              groupFields: [
+                {
+                  type: 1, // PropertyPaneFieldType.Custom
+                  targetProperty: 'titlePlaceholder',
+                  properties: {
+                    key: 'titlePlaceholder',
+                    onRender: (elem: HTMLElement, ctx: unknown, changeCallback?: () => void) => {
+                      ReactDom.render(
+                        React.createElement('div', {
+                          style: { 
+                            fontSize: '14px',
+                            color: '#666',
+                            marginBottom: '16px',
+                            lineHeight: '1.4',
+                            padding: '16px',
+                            backgroundColor: '#f8f9fa',
+                            borderRadius: '4px',
+                            border: '1px solid #e1dfdd'
+                          }
+                        }, 'Title Section Configuration - This page will be updated with interactive controls for styling the title section. Currently using default styling.'),
+                        elem
+                      );
+                    },
+                    onDispose: (elem: HTMLElement) => {
+                      ReactDom.unmountComponentAtNode(elem);
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        // Page 3: Filter Buttons Configuration (Placeholder)
+        {
+          header: {
+            description: 'Filter Buttons Configuration - Coming Soon'
+          },
+          groups: [
+            {
+              groupName: 'Filter Section Settings',
+              groupFields: [
+                {
+                  type: 1, // PropertyPaneFieldType.Custom
+                  targetProperty: 'filterPlaceholder',
+                  properties: {
+                    key: 'filterPlaceholder',
+                    onRender: (elem: HTMLElement, ctx: unknown, changeCallback?: () => void) => {
+                      ReactDom.render(
+                        React.createElement('div', {
+                          style: { 
+                            fontSize: '14px',
+                            color: '#666',
+                            marginBottom: '16px',
+                            lineHeight: '1.4',
+                            padding: '16px',
+                            backgroundColor: '#f8f9fa',
+                            borderRadius: '4px',
+                            border: '1px solid #e1dfdd'
+                          }
+                        }, 'Filter Buttons Configuration - This page will be updated with interactive controls for styling filter buttons. Currently using default styling.'),
+                        elem
+                      );
+                    },
+                    onDispose: (elem: HTMLElement) => {
+                      ReactDom.unmountComponentAtNode(elem);
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        // Page 4: Category Section Configuration (Placeholder)
+        {
+          header: {
+            description: 'Category Section Configuration - Coming Soon'
+          },
+          groups: [
+            {
+              groupName: 'Category Section Settings',
+              groupFields: [
+                {
+                  type: 1, // PropertyPaneFieldType.Custom
+                  targetProperty: 'categoryPlaceholder',
+                  properties: {
+                    key: 'categoryPlaceholder',
+                    onRender: (elem: HTMLElement, ctx: unknown, changeCallback?: () => void) => {
+                      ReactDom.render(
+                        React.createElement('div', {
+                          style: { 
+                            fontSize: '14px',
+                            color: '#666',
+                            marginBottom: '16px',
+                            lineHeight: '1.4',
+                            padding: '16px',
+                            backgroundColor: '#f8f9fa',
+                            borderRadius: '4px',
+                            border: '1px solid #e1dfdd'
+                          }
+                        }, 'Category Section Configuration - This page will be updated with interactive controls for styling Category sections. Currently using default styling.'),
+                        elem
+                      );
+                    },
+                    onDispose: (elem: HTMLElement) => {
+                      ReactDom.unmountComponentAtNode(elem);
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        // Page 5: Subject Section Configuration (Placeholder)
+        {
+          header: {
+            description: 'Subject Section Configuration - Coming Soon'
+          },
+          groups: [
+            {
+              groupName: 'Subject Section Settings',
+              groupFields: [
+                {
+                  type: 1, // PropertyPaneFieldType.Custom
+                  targetProperty: 'subjectPlaceholder',
+                  properties: {
+                    key: 'subjectPlaceholder',
+                    onRender: (elem: HTMLElement, ctx: unknown, changeCallback?: () => void) => {
+                      ReactDom.render(
+                        React.createElement('div', {
+                          style: { 
+                            fontSize: '14px',
+                            color: '#666',
+                            marginBottom: '16px',
+                            lineHeight: '1.4',
+                            padding: '16px',
+                            backgroundColor: '#f8f9fa',
+                            borderRadius: '4px',
+                            border: '1px solid #e1dfdd'
+                          }
+                        }, 'Subject Section Configuration - This page will be updated with interactive controls for styling Subject sections. Currently using default styling.'),
+                        elem
+                      );
+                    },
+                    onDispose: (elem: HTMLElement) => {
+                      ReactDom.unmountComponentAtNode(elem);
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        // Page 6: Description Section Configuration (Placeholder)
+        {
+          header: {
+            description: 'Description Section Configuration - Coming Soon'
+          },
+          groups: [
+            {
+              groupName: 'Description Section Settings',
+              groupFields: [
+                {
+                  type: 1, // PropertyPaneFieldType.Custom
+                  targetProperty: 'descriptionPlaceholder',
+                  properties: {
+                    key: 'descriptionPlaceholder',
+                    onRender: (elem: HTMLElement, ctx: unknown, changeCallback?: () => void) => {
+                      ReactDom.render(
+                        React.createElement('div', {
+                          style: { 
+                            fontSize: '14px',
+                            color: '#666',
+                            marginBottom: '16px',
+                            lineHeight: '1.4',
+                            padding: '16px',
+                            backgroundColor: '#f8f9fa',
+                            borderRadius: '4px',
+                            border: '1px solid #e1dfdd'
+                          }
+                        }, 'Description Section Configuration - This page will be updated with interactive controls for styling Description sections. Currently using default styling.'),
+                        elem
+                      );
+                    },
+                    onDispose: (elem: HTMLElement) => {
+                      ReactDom.unmountComponentAtNode(elem);
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        // Page 7: About
+        {
+          header: {
+            description: 'About the Fancy List Web Part'
+          },
+          groups: [
+            {
+              groupName: 'Version Information',
+              groupFields: [
+                PropertyPaneLabel('version', {
+                  text: `Version: ${WEBPART_VERSION}`
                 }),
-                PropertyPaneToggle('defaultExpanded', {
-                  label: 'Expand Panels by Default',
-                  onText: 'On',
-                  offText: 'Off'
+                PropertyPaneLabel('description', {
+                  text: 'Beta Basic Version - Display items from any SharePoint list or library with category filtering and collapsible panels'
+                })
+              ]
+            },
+            {
+              groupName: 'User Story',
+              groupFields: [
+                PropertyPaneLabel('userStory', {
+                  text: 'As a site owner, I want to configure a custom web part that displays items from any SharePoint list or document library with comprehensive styling options including customizable collapse/expand icons and intelligent document attachment support, so that I can organize content by categories and present subjects with rich descriptions and associated files in an engaging, collapsible layout that adapts to my site\'s theme or custom styling preferences.'
+                })
+              ]
+            },
+            {
+              groupName: 'Features',
+              groupFields: [
+                PropertyPaneLabel('features1', {
+                  text: '• Category filtering with collapsible panels'
+                }),
+                PropertyPaneLabel('features2', {
+                  text: '• Only Individual Elements mode for styling (all other modes removed)'
+                }),
+                PropertyPaneLabel('features3', {
+                  text: '• Intelligent document attachment support'
+                }),
+                PropertyPaneLabel('features4', {
+                  text: '• Responsive design with theme integration'
+                }),
+                PropertyPaneLabel('features5', {
+                  text: '• Customizable icons and styling options'
                 })
               ]
             }

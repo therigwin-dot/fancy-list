@@ -3,6 +3,44 @@
 ## Overview
 This document provides a complete mapping of all configuration settings across all pages of the Fancy List Web Part. Each page is documented with detailed charts showing the relationship between render variables, configuration variables, default values, and the control modules used.
 
+## 📚 Reference Code Sources
+
+### External Backup Reference
+**Location**: `/Volumes/BigBoy/ProjectBackUps/Work/FancyList_CompareSlate_20250725`  
+**Purpose**: Contains the most advanced implementation from our previous development efforts. This backup includes:
+- Working implementations of complex modules
+- Advanced control patterns and architectures
+- Reference code for recreating modules
+- Proven working solutions for challenging features
+
+**Available Modules in Compare Backup:**
+- **BackgroundPickerControl.tsx** - Advanced background configuration (solid, gradient, image)
+- **ColorPickerControl.tsx** - Color selection with hex input and visual picker
+- **FilterModuleControl.tsx** - Complete filter module with object-oriented architecture
+- **FontControl.tsx** - Comprehensive font configuration control
+- **PropertyPaneHexColorPicker.tsx** - Hex color picker component
+- **ShapePickerControl.tsx** - Shape selection control
+- **TitleModuleControl.tsx** - Title module with object-oriented architecture
+
+**Usage**: When recreating modules, reference this backup for:
+- Working control implementations
+- Advanced property pane patterns
+- Complex state management solutions
+- UI/UX patterns that were successfully implemented
+- Object-oriented module architectures
+- Complete working implementations of complex features
+
+### Current Working Modules
+- **ColorPickerControl.tsx** - Working color picker implementation
+- **FontControl.tsx** - Working font control implementation  
+- **TitleModuleControl.tsx** - Working title module implementation
+- **FilterModuleControl.tsx** - Working filter module implementation
+
+### Documentation References
+- **MASTER_CONFIGURATION.md** - Complete interface definitions and usage patterns
+- **FANCYLIST_CLEAN_SLATE_PLAN.md** - Implementation roadmap and goals
+- **FANCYLIST_IMPLEMENTATION_PLAN.md** - Detailed implementation strategy
+
 ---
 
 ## Page 1: List Selection & Configuration

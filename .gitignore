@@ -1,0 +1,5 @@
+node_modules
+node_modules
+
+# Exclude Git folder from Time Machine backups and other operations
+.git/
