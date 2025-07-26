@@ -109,7 +109,7 @@ export const FontControl: React.FC<FontControlProps> = ({ fontFamily, fontSize, 
           label={undefined}
           ariaLabel="Font Family"
           options={FONT_FAMILIES}
-          selectedKey={fontFamily || 'Segoe UI'}
+          selectedKey={fontFamily || 'inherit'}
           onChange={(_, option) => onChange({ fontFamily: option!.key as string })}
           onRenderOption={renderFontOption}
           onRenderTitle={renderFontTitle}

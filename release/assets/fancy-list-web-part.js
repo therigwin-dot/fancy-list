@@ -65,7 +65,7 @@ var DEFAULTS_CONFIG = {
         description: 'Customize the web parts title text, font, color, background, and shape settings. Use the reset button to put the default look and feel back in place. Use the Back and Next buttons to switch to a different configuration page.',
         webPartTitle: 'Fancy List',
         font: {
-            family: 'Segoe UI',
+            family: 'inherit',
             size: '24px',
             color: '#323130',
             formatting: { bold: false, italic: false, underline: false, strikethrough: false }
@@ -92,7 +92,7 @@ var DEFAULTS_CONFIG = {
         enableFilters: true,
         showAllCategories: true,
         font: {
-            family: 'Segoe UI',
+            family: 'inherit',
             size: '12px',
             formatting: { bold: false, italic: false, underline: false, strikethrough: false }
         },
@@ -125,7 +125,7 @@ var DEFAULTS_CONFIG = {
         resetButtonText: "Reset Category Formatting",
         description: "Customize the appearance of category sections including font, colors, shape, background, and icon settings.",
         font: {
-            family: 'Segoe UI',
+            family: 'inherit',
             size: '18px',
             color: '#323130',
             formatting: { bold: true, italic: false, underline: false, strikethrough: false }
@@ -159,7 +159,7 @@ var DEFAULTS_CONFIG = {
         resetButtonText: "Reset Subject Formatting",
         description: "Customize the appearance of subject sections including font, colors, shape, background, and icon settings.",
         font: {
-            family: 'Segoe UI',
+            family: 'inherit',
             size: '16px',
             color: '#323130',
             formatting: { bold: false, italic: false, underline: false, strikethrough: false }
@@ -193,7 +193,7 @@ var DEFAULTS_CONFIG = {
         resetButtonText: "Reset Description Formatting",
         description: "Customize the appearance of description sections including font, colors, shape, and background settings.",
         font: {
-            family: 'Segoe UI',
+            family: 'inherit',
             size: '14px',
             color: '#605e5c',
             formatting: { bold: false, italic: false, underline: false, strikethrough: false }
@@ -876,7 +876,7 @@ var FontControl = function (_a) {
                 gap: '4px',
                 flexWrap: 'nowrap'
             } },
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_1__.Dropdown, { label: undefined, ariaLabel: "Font Family", options: FONT_FAMILIES, selectedKey: fontFamily || 'Segoe UI', onChange: function (_, option) { return onChange({ fontFamily: option.key }); }, onRenderOption: renderFontOption, onRenderTitle: renderFontTitle, styles: { root: { minWidth: 120, flex: '1 1 auto' } } }),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_1__.Dropdown, { label: undefined, ariaLabel: "Font Family", options: FONT_FAMILIES, selectedKey: fontFamily || 'inherit', onChange: function (_, option) { return onChange({ fontFamily: option.key }); }, onRenderOption: renderFontOption, onRenderTitle: renderFontTitle, styles: { root: { minWidth: 120, flex: '1 1 auto' } } }),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_2__.TooltipHost, { content: "Bold" },
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_3__.IconButton, { iconProps: { iconName: 'Bold' }, title: "Bold", ariaLabel: "Bold", checked: !!formatting.bold, styles: iconButtonStyles(!!formatting.bold), onClick: function () { return handleFormattingChange('bold', !formatting.bold); } })),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_2__.TooltipHost, { content: "Italic" },

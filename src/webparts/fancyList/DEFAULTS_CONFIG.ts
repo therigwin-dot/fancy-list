@@ -17,7 +17,7 @@ export const DEFAULTS_CONFIG = {
     description: 'Customize the web parts title text, font, color, background, and shape settings. Use the reset button to put the default look and feel back in place. Use the Back and Next buttons to switch to a different configuration page.',
     webPartTitle: 'Fancy List',
     font: {
-      family: 'Segoe UI',
+      family: 'inherit',
       size: '24px',
       color: '#323130',
       formatting: { bold: false, italic: false, underline: false, strikethrough: false }
@@ -45,7 +45,7 @@ export const DEFAULTS_CONFIG = {
     enableFilters: true,
     showAllCategories: true,
     font: {
-      family: 'Segoe UI',
+      family: 'inherit',
       size: '12px',
       formatting: { bold: false, italic: false, underline: false, strikethrough: false }
     },
@@ -79,7 +79,7 @@ export const DEFAULTS_CONFIG = {
     resetButtonText: "Reset Category Formatting",
     description: "Customize the appearance of category sections including font, colors, shape, background, and icon settings.",
     font: {
-      family: 'Segoe UI',
+      family: 'inherit',
       size: '18px',
       color: '#323130',
       formatting: { bold: true, italic: false, underline: false, strikethrough: false }
@@ -114,7 +114,7 @@ export const DEFAULTS_CONFIG = {
     resetButtonText: "Reset Subject Formatting",
     description: "Customize the appearance of subject sections including font, colors, shape, background, and icon settings.",
     font: {
-      family: 'Segoe UI',
+      family: 'inherit',
       size: '16px',
       color: '#323130',
       formatting: { bold: false, italic: false, underline: false, strikethrough: false }
@@ -149,7 +149,7 @@ export const DEFAULTS_CONFIG = {
     resetButtonText: "Reset Description Formatting",
     description: "Customize the appearance of description sections including font, colors, shape, and background settings.",
     font: {
-      family: 'Segoe UI',
+      family: 'inherit',
       size: '14px',
       color: '#605e5c',
       formatting: { bold: false, italic: false, underline: false, strikethrough: false }
