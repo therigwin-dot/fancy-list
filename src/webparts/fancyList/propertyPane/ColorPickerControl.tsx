@@ -19,6 +19,23 @@ export const ColorPickerControl: React.FC<ColorPickerControlProps> = ({ color, f
     setCurrentColor(color || '#ffffff');
   }, [color]);
 
+  // Calculate contrasting text color based on background brightness
+  const getContrastColor = (hexColor: string): string => {
+    // Remove # if present
+    const hex = hexColor.replace('#', '');
+    
+    // Convert to RGB
+    const r = parseInt(hex.substr(0, 2), 16);
+    const g = parseInt(hex.substr(2, 2), 16);
+    const b = parseInt(hex.substr(4, 2), 16);
+    
+    // Calculate luminance (perceived brightness)
+    const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+    
+    // Return white for dark backgrounds, black for light backgrounds
+    return luminance > 0.5 ? '#000000' : '#ffffff';
+  };
+
   const handleHexChange = (e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, newValue?: string): void => {
     if (!newValue) return;
     setCurrentColor(newValue);
@@ -55,14 +72,21 @@ export const ColorPickerControl: React.FC<ColorPickerControlProps> = ({ color, f
           value={currentColor}
           onChange={handleHexChange}
           disabled={disabled}
-          styles={{ root: { width: 70 } }}
+          styles={{ 
+            root: { 
+              width: 95,
+              backgroundColor: currentColor,
+              borderRadius: 4,
+              border: '1px solid #ccc'
+            },
+            field: {
+              color: getContrastColor(currentColor),
+              fontWeight: '600',
+              fontSize: '12px'
+            }
+          }}
           placeholder="#RRGGBB"
           title="Type a hex color code (e.g., #ff0000 for red)"
-        />
-        <div
-          style={{ width: 24, height: 24, borderRadius: 4, border: '1px solid #ccc', background: currentColor }}
-          aria-label="Current color preview"
-          title="Current color preview"
         />
       </div>
       {pickerVisible && (

@@ -511,6 +511,19 @@ var ColorPickerControl = function (_a) {
     react__WEBPACK_IMPORTED_MODULE_0__.useEffect(function () {
         setCurrentColor(color || '#ffffff');
     }, [color]);
+    // Calculate contrasting text color based on background brightness
+    var getContrastColor = function (hexColor) {
+        // Remove # if present
+        var hex = hexColor.replace('#', '');
+        // Convert to RGB
+        var r = parseInt(hex.substr(0, 2), 16);
+        var g = parseInt(hex.substr(2, 2), 16);
+        var b = parseInt(hex.substr(4, 2), 16);
+        // Calculate luminance (perceived brightness)
+        var luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+        // Return white for dark backgrounds, black for light backgrounds
+        return luminance > 0.5 ? '#000000' : '#ffffff';
+    };
     var handleHexChange = function (e, newValue) {
         if (!newValue)
             return;
@@ -531,8 +544,19 @@ var ColorPickerControl = function (_a) {
             } }, label)),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { display: 'flex', alignItems: 'center', gap: 1 } },
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_1__.IconButton, { iconProps: { iconName: 'Color' }, title: "Click to open color picker", ariaLabel: "Open color picker", onClick: function () { return setPickerVisible(function (v) { return !v; }); }, disabled: disabled }),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_2__.TextField, { value: currentColor, onChange: handleHexChange, disabled: disabled, styles: { root: { width: 70 } }, placeholder: "#RRGGBB", title: "Type a hex color code (e.g., #ff0000 for red)" }),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { width: 24, height: 24, borderRadius: 4, border: '1px solid #ccc', background: currentColor }, "aria-label": "Current color preview", title: "Current color preview" })),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_2__.TextField, { value: currentColor, onChange: handleHexChange, disabled: disabled, styles: {
+                    root: {
+                        width: 95,
+                        backgroundColor: currentColor,
+                        borderRadius: 4,
+                        border: '1px solid #ccc'
+                    },
+                    field: {
+                        color: getContrastColor(currentColor),
+                        fontWeight: '600',
+                        fontSize: '12px'
+                    }
+                }, placeholder: "#RRGGBB", title: "Type a hex color code (e.g., #ff0000 for red)" })),
         pickerVisible && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginTop: 8, zIndex: 1000, position: 'relative' } },
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_3__.ColorPicker, { color: currentColor, onChange: handleColorChange, alphaType: "none", showPreview: true, strings: {
                     hex: 'Hex',
