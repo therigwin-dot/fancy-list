@@ -669,7 +669,7 @@ var FilterModuleControl = function (_a) {
                 } })),
         enabled && (react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null,
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_FontControl__WEBPACK_IMPORTED_MODULE_1__.FontControl, { label: "Filter Font", fontFamily: settings.font.family, fontSize: settings.font.size, formatting: settings.font.formatting, onChange: handleFontChange })),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_FontControl__WEBPACK_IMPORTED_MODULE_1__.FontControl, { fontFamily: settings.font.family, fontSize: settings.font.size, formatting: settings.font.formatting, onChange: handleFontChange })),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: {
                         fontSize: '14px',
@@ -1557,7 +1557,7 @@ var TitleConfiguration = function (_a) {
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ShapePickerControl__WEBPACK_IMPORTED_MODULE_3__.ShapePickerControl, { value: settings.shape, label: "Title Shape", onChange: function (newShape) { return handlePropertyChange('shape', newShape); } })),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_FontControl__WEBPACK_IMPORTED_MODULE_1__.FontControl, { label: "Title Font", fontFamily: settings.font.family, fontSize: settings.font.size, formatting: settings.font.formatting, onChange: handleFontChange })),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_FontControl__WEBPACK_IMPORTED_MODULE_1__.FontControl, { fontFamily: settings.font.family, fontSize: settings.font.size, formatting: settings.font.formatting, onChange: handleFontChange })),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__.ColorPickerControl, { color: settings.font.color, field: "titleColor", label: "Title Color", onChange: function (field, newColor) { return handlePropertyChange('font.color', newColor); } })),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },

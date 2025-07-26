@@ -167,7 +167,6 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
           {/* 2. Filter Font Control */}
           <div style={{ marginBottom: 16 }}>
             <FontControl
-              label="Filter Font"
               fontFamily={settings.font.family}
               fontSize={settings.font.size}
               formatting={settings.font.formatting}

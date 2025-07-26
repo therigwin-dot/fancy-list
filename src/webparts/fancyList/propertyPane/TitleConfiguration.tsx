@@ -182,7 +182,6 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
       {/* 3. Title Font Control */}
       <div style={{ marginBottom: 16 }}>
         <FontControl
-          label="Title Font"
           fontFamily={settings.font.family}
           fontSize={settings.font.size}
           formatting={settings.font.formatting}
