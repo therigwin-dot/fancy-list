@@ -532,13 +532,7 @@ var ColorPickerControl = function (_a) {
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { display: 'flex', alignItems: 'center', gap: 8 } },
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_1__.TextField, { value: currentColor, onChange: handleHexChange, disabled: disabled, styles: { root: { width: 100 } }, placeholder: "#RRGGBB", title: "Type a hex color code (e.g., #ff0000 for red)" }),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { width: 24, height: 24, borderRadius: 4, border: '1px solid #ccc', background: currentColor }, "aria-label": "Current color preview", title: "Current color preview" }),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_2__.IconButton, { iconProps: { iconName: 'Color' }, title: "Click to open color picker", ariaLabel: "Open color picker", onClick: function () { return setPickerVisible(function (v) { return !v; }); }, disabled: disabled }),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_2__.IconButton, { iconProps: { iconName: 'Help' }, title: "You can type a hex code, use the color picker, or use any 3rd party color picker tool (e.g., MS Powertoys Color Picker).", ariaLabel: "Help with color picker", onClick: function () {
-                    window.open('https://www.bing.com/search?q=PowerToys+Color+Picker', '_blank');
-                }, styles: {
-                    root: { minWidth: 'auto', width: 20, height: 20, padding: 0, fontSize: 12 },
-                    icon: { fontSize: 12 }
-                } })),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_2__.IconButton, { iconProps: { iconName: 'Color' }, title: "Click to open color picker", ariaLabel: "Open color picker", onClick: function () { return setPickerVisible(function (v) { return !v; }); }, disabled: disabled })),
         pickerVisible && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginTop: 8, zIndex: 1000, position: 'relative' } },
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_3__.ColorPicker, { color: currentColor, onChange: handleColorChange, alphaType: "none", showPreview: true, strings: {
                     hex: 'Hex',

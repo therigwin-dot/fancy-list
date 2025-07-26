@@ -64,18 +64,6 @@ export const ColorPickerControl: React.FC<ColorPickerControlProps> = ({ color, f
           onClick={() => setPickerVisible(v => !v)}
           disabled={disabled}
         />
-        <IconButton
-          iconProps={{ iconName: 'Help' }}
-          title="You can type a hex code, use the color picker, or use any 3rd party color picker tool (e.g., MS Powertoys Color Picker)."
-          ariaLabel="Help with color picker"
-          onClick={() => {
-            window.open('https://www.bing.com/search?q=PowerToys+Color+Picker', '_blank');
-          }}
-          styles={{
-            root: { minWidth: 'auto', width: 20, height: 20, padding: 0, fontSize: 12 },
-            icon: { fontSize: 12 }
-          }}
-        />
       </div>
       {pickerVisible && (
         <div style={{ marginTop: 8, zIndex: 1000, position: 'relative' }}>
