@@ -23,6 +23,12 @@
 - **Last Commit**: `758f17d` - Modular FontControl implementation
 - **Purpose**: Version-controlled backup with full development history
 
+### **Git Backup Rules**
+- **Code Changes**: Git backup happens BEFORE making actual code changes
+- **Documentation Changes**: Make changes FIRST, then Git backup, then code changes
+- **Exception**: Documentation-only changes can be backed up after the change
+- **Purpose**: Provides clear restore points for reverting code changes if needed
+
 ## 🎯 **CURRENT STATUS (July 2025)**
 
 ### **✅ COMPLETED ACHIEVEMENTS**

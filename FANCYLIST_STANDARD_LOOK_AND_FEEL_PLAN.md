@@ -145,9 +145,17 @@ Standardize the visual design and user experience across all property pane contr
 
 1. **Review and approve this plan**
 2. **Begin Phase 1: Toggle Control Standardization**
-3. **Create backup after each phase**
+3. **Create backup BEFORE each phase (Git backup rules)**
 4. **Test each phase thoroughly**
 5. **Document final standards for future development**
+
+## 📋 **BACKUP RULES**
+
+### **Git Backup Workflow**
+- **Code Changes**: Git backup happens BEFORE making actual code changes
+- **Documentation Changes**: Make changes FIRST, then Git backup, then code changes
+- **Exception**: Documentation-only changes can be backed up after the change
+- **Purpose**: Provides clear restore points for reverting code changes if needed
 
 ---
 
