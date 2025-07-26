@@ -46,7 +46,7 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
     backgroundType: 'solid',
     backgroundColor: '#ffffff',
     backgroundAlpha: 100,
-    gradientDirection: 'to right',
+    gradientDirection: 'left-right',
     gradientColor1: '#0078d4',
     gradientColor2: '#ffffff',
     gradientAlpha: 100,
@@ -95,7 +95,7 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
 
   const gradientDirectionOptions: IDropdownOption[] = [
     { key: 'to bottom', text: 'Top to Bottom' },
-    { key: 'to right', text: 'Left to Right' },
+    { key: 'left-right', text: 'Left to Right' },
     { key: 'to bottom right', text: 'Top Left to Bottom Right' },
     { key: 'to bottom left', text: 'Top Right to Bottom Left' },
     { key: 'radial', text: 'Radial' }
