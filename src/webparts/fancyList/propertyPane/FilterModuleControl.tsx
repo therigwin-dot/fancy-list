@@ -3,7 +3,7 @@ import { TextField } from '@fluentui/react/lib/TextField';
 import { Toggle } from '@fluentui/react/lib/Toggle';
 import { Dropdown, IDropdownOption } from '@fluentui/react/lib/Dropdown';
 import { Slider } from '@fluentui/react/lib/Slider';
-import { PrimaryButton } from '@fluentui/react/lib/Button';
+
 import { FontControl } from './FontControl';
 import { ColorPickerControl } from './ColorPickerControl';
 import { ShapePickerControl, ShapeOption } from './ShapePickerControl';
@@ -125,31 +125,7 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
     handlePropertyChange('gradientColor2', tempColor);
   };
 
-  const handleReset = () => {
-    // Reset all filter settings to defaults
-    handlePropertyChange('enableFilters', DEFAULTS_CONFIG.filterSettings.enableFilters);
-    handlePropertyChange('showAllCategories', DEFAULTS_CONFIG.filterSettings.showAllCategories);
-    handlePropertyChange('shape', DEFAULTS_CONFIG.filterSettings.shape);
-    handlePropertyChange('showDivider', DEFAULTS_CONFIG.filterSettings.showDivider);
-    handlePropertyChange('backgroundType', DEFAULTS_CONFIG.filterSettings.background.type);
-    handlePropertyChange('backgroundColor', DEFAULTS_CONFIG.filterSettings.background.color);
-    handlePropertyChange('backgroundAlpha', DEFAULTS_CONFIG.filterSettings.background.alpha);
-    handlePropertyChange('gradientDirection', DEFAULTS_CONFIG.filterSettings.background.gradientDirection);
-    handlePropertyChange('gradientColor1', DEFAULTS_CONFIG.filterSettings.background.gradientColor1);
-    handlePropertyChange('gradientColor2', DEFAULTS_CONFIG.filterSettings.background.gradientColor2);
-    handlePropertyChange('gradientAlpha', DEFAULTS_CONFIG.filterSettings.background.gradientAlpha1);
-    handlePropertyChange('imageUrl', DEFAULTS_CONFIG.filterSettings.background.image);
-    handlePropertyChange('imageAlpha', DEFAULTS_CONFIG.filterSettings.background.imageAlpha);
-    handleFontChange({
-      fontFamily: DEFAULTS_CONFIG.filterSettings.font.family,
-      fontSize: DEFAULTS_CONFIG.filterSettings.font.size,
-      formatting: DEFAULTS_CONFIG.filterSettings.font.formatting
-    });
-    handlePropertyChange('activeColors.background', DEFAULTS_CONFIG.filterSettings.activeColors.background);
-    handlePropertyChange('activeColors.font', DEFAULTS_CONFIG.filterSettings.activeColors.font);
-    handlePropertyChange('inactiveColors.background', DEFAULTS_CONFIG.filterSettings.inactiveColors.background);
-    handlePropertyChange('inactiveColors.font', DEFAULTS_CONFIG.filterSettings.inactiveColors.font);
-  };
+
 
   return (
     <div style={{ marginBottom: 16 }}>
@@ -180,7 +156,10 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
           checked={settings.enableFilters}
           onText="On"
           offText="Off"
-          onChange={(_, checked) => handlePropertyChange('enableFilters', checked)}
+          onChange={(_, checked) => {
+            console.log('Enable Filters toggle changed:', checked);
+            handlePropertyChange('enableFilters', checked);
+          }}
         />
       </div>
 
@@ -437,10 +416,7 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
             </>
           )}
 
-          {/* Reset Button */}
-          <div style={{ marginTop: 16 }}>
-            <PrimaryButton text={DEFAULTS_CONFIG.filterSettings.resetButtonText} onClick={handleReset} />
-          </div>
+
         </>
       )}
     </div>

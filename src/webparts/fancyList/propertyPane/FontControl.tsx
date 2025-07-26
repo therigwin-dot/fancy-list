@@ -36,6 +36,8 @@ const FONT_FAMILIES: IDropdownOption[] = [
 ];
 
 const FONT_SIZES: IDropdownOption[] = [
+  { key: '12px', text: '12px (Small)' },
+  { key: '14px', text: '14px (Small Medium)' },
   { key: '16px', text: '16px (Medium)' },
   { key: '18px', text: '18px (Large)' },
   { key: '20px', text: '20px (Extra Large)' },
