@@ -162,22 +162,24 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
         />
       </div>
 
-      {/* 2. Color Control */}
-      <div style={{ marginBottom: 16 }}>
+      {/* 2. Color and Text Controls */}
+      <div style={{ 
+        display: 'flex', 
+        alignItems: 'center', 
+        gap: '8px',
+        marginBottom: 16 
+      }}>
         <ColorPickerControl
           color={settings.font.color}
           field="titleColor"
           label=""
           onChange={(field: string, newColor: string) => handlePropertyChange('font.color', newColor)}
         />
-      </div>
-
-      {/* 3. Title Text Control */}
-      <div style={{ marginBottom: 16 }}>
         <TextField
           value={settings.webPartTitle}
           onChange={(_, newValue) => handlePropertyChange('webPartTitle', newValue || '')}
           placeholder="Enter title text"
+          styles={{ root: { flex: '1 1 auto' } }}
         />
       </div>
 

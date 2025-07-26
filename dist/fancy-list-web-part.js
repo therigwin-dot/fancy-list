@@ -1571,10 +1571,14 @@ var TitleConfiguration = function (_a) {
             } }, "Customize the web parts title text, font, color, background, and shape settings. Use the reset button to put the default look and feel back in place. Use the Back and Next buttons to switch to a different configuration page."),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_FontControl__WEBPACK_IMPORTED_MODULE_1__.FontControl, { fontFamily: settings.font.family, fontSize: settings.font.size, formatting: settings.font.formatting, onChange: handleFontChange })),
-        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__.ColorPickerControl, { color: settings.font.color, field: "titleColor", label: "", onChange: function (field, newColor) { return handlePropertyChange('font.color', newColor); } })),
-        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_5__.TextField, { value: settings.webPartTitle, onChange: function (_, newValue) { return handlePropertyChange('webPartTitle', newValue || ''); }, placeholder: "Enter title text" })),
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                marginBottom: 16
+            } },
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__.ColorPickerControl, { color: settings.font.color, field: "titleColor", label: "", onChange: function (field, newColor) { return handlePropertyChange('font.color', newColor); } }),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_5__.TextField, { value: settings.webPartTitle, onChange: function (_, newValue) { return handlePropertyChange('webPartTitle', newValue || ''); }, placeholder: "Enter title text", styles: { root: { flex: '1 1 auto' } } })),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
                 backgroundColor: '#f3f2f1',
                 padding: '12px',
@@ -34296,6 +34300,26 @@ var FancyListWebPart = /** @class */ (function (_super) {
                         {
                             groupName: 'List Configuration',
                             groupFields: [
+                                {
+                                    type: 1, // PropertyPaneFieldType.Custom
+                                    targetProperty: 'page1Header',
+                                    properties: {
+                                        key: 'page1Header',
+                                        onRender: function (elem, ctx, changeCallback) {
+                                            react_dom__WEBPACK_IMPORTED_MODULE_1__.render(react__WEBPACK_IMPORTED_MODULE_0__.createElement('div', {
+                                                style: {
+                                                    fontSize: '16px',
+                                                    fontWeight: '600',
+                                                    color: '#323130',
+                                                    marginBottom: '12px'
+                                                }
+                                            }, 'List Configuration'), elem);
+                                        },
+                                        onDispose: function (elem) {
+                                            react_dom__WEBPACK_IMPORTED_MODULE_1__.unmountComponentAtNode(elem);
+                                        }
+                                    }
+                                },
                                 {
                                     type: 1, // PropertyPaneFieldType.Custom
                                     targetProperty: 'listConfigurationDescription',

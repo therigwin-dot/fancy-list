@@ -371,6 +371,29 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
               groupFields: [
                 {
                   type: 1, // PropertyPaneFieldType.Custom
+                  targetProperty: 'page1Header',
+                  properties: {
+                    key: 'page1Header',
+                    onRender: (elem: HTMLElement, ctx: unknown, changeCallback?: () => void) => {
+                      ReactDom.render(
+                        React.createElement('div', {
+                          style: { 
+                            fontSize: '16px',
+                            fontWeight: '600',
+                            color: '#323130',
+                            marginBottom: '12px'
+                          }
+                        }, 'List Configuration'),
+                        elem
+                      );
+                    },
+                    onDispose: (elem: HTMLElement) => {
+                      ReactDom.unmountComponentAtNode(elem);
+                    }
+                  }
+                },
+                {
+                  type: 1, // PropertyPaneFieldType.Custom
                   targetProperty: 'listConfigurationDescription',
                   properties: {
                     key: 'listConfigurationDescription',
