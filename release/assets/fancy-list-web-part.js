@@ -1573,7 +1573,7 @@ var TitleConfiguration = function (_a) {
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_FontControl__WEBPACK_IMPORTED_MODULE_1__.FontControl, { fontFamily: settings.font.family, fontSize: settings.font.size, formatting: settings.font.formatting, onChange: handleFontChange })),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
                 display: 'flex',
-                alignItems: 'center',
+                alignItems: 'flex-start',
                 gap: '8px',
                 marginBottom: 16
             } },
@@ -1602,15 +1602,7 @@ var TitleConfiguration = function (_a) {
             settings.backgroundType === 'gradient' && (react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null,
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
                     react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_6__.Dropdown, { label: "Direction", options: gradientDirectionOptions, selectedKey: settings.gradientDirection, onChange: function (_, option) { return handlePropertyChange('gradientDirection', option === null || option === void 0 ? void 0 : option.key); } })),
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '8px',
-                        marginBottom: 16
-                    } },
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__.ColorPickerControl, { color: settings.gradientColor1, field: "gradientColor1", label: "", onChange: function (field, newColor) { return handlePropertyChange('gradientColor1', newColor); } }),
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__.ColorPickerControl, { color: settings.gradientColor2, field: "gradientColor2", label: "", onChange: function (field, newColor) { return handlePropertyChange('gradientColor2', newColor); } })),
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 8 } },
                     react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { type: "button", onClick: handleSwapColors, style: {
                             padding: '4px 8px',
                             border: '1px solid #0078d4',
@@ -1619,7 +1611,15 @@ var TitleConfiguration = function (_a) {
                             color: '#0078d4',
                             cursor: 'pointer',
                             fontSize: '12px'
-                        } }, "Swap Colors")))),
+                        } }, "Swap Colors")),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                        marginBottom: 16
+                    } },
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__.ColorPickerControl, { color: settings.gradientColor1, field: "gradientColor1", label: "", onChange: function (field, newColor) { return handlePropertyChange('gradientColor1', newColor); } }),
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__.ColorPickerControl, { color: settings.gradientColor2, field: "gradientColor2", label: "", onChange: function (field, newColor) { return handlePropertyChange('gradientColor2', newColor); } })))),
             settings.backgroundType === 'image' && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: {
                         fontSize: '14px',

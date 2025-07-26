@@ -165,7 +165,7 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
       {/* 2. Color and Text Controls */}
       <div style={{ 
         display: 'flex', 
-        alignItems: 'center', 
+        alignItems: 'flex-start', 
         gap: '8px',
         marginBottom: 16 
       }}>
@@ -236,6 +236,23 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
                 onChange={(_, option) => handlePropertyChange('gradientDirection', option?.key)}
               />
             </div>
+            <div style={{ marginBottom: 8 }}>
+              <button
+                type="button"
+                onClick={handleSwapColors}
+                style={{
+                  padding: '4px 8px',
+                  border: '1px solid #0078d4',
+                  borderRadius: '4px',
+                  background: '#e5f1fb',
+                  color: '#0078d4',
+                  cursor: 'pointer',
+                  fontSize: '12px'
+                }}
+              >
+                Swap Colors
+              </button>
+            </div>
             <div style={{ 
               display: 'flex', 
               alignItems: 'center', 
@@ -254,23 +271,6 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
                 label=""
                 onChange={(field: string, newColor: string) => handlePropertyChange('gradientColor2', newColor)}
               />
-            </div>
-            <div style={{ marginBottom: 16 }}>
-              <button
-                type="button"
-                onClick={handleSwapColors}
-                style={{
-                  padding: '4px 8px',
-                  border: '1px solid #0078d4',
-                  borderRadius: '4px',
-                  background: '#e5f1fb',
-                  color: '#0078d4',
-                  cursor: 'pointer',
-                  fontSize: '12px'
-                }}
-              >
-                Swap Colors
-              </button>
             </div>
           </>
         )}
