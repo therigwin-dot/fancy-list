@@ -14,6 +14,7 @@ import { WebPartContext } from '@microsoft/sp-webpart-base';
 import * as strings from 'FancyListWebPartStrings';
 import FancyList from './components/FancyList';
 import { IFancyListProps } from './components/IFancyListProps';
+import DEFAULTS_CONFIG from './DEFAULTS_CONFIG';
 
 export interface IFancyListWebPartProps {
   selectedListId: string;
@@ -117,10 +118,10 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
 
   // Testing defaults for Page 1
   private readonly TESTING_DEFAULTS = {
-    selectedListId: 'Site Pages',
-    categoryField: 'Title',
+    selectedListId: 'Events',
+    categoryField: 'Location',
     subjectField: 'Title',
-    descriptionField: 'Title'
+    descriptionField: 'Description'
   };
 
   public render(): void {
@@ -318,7 +319,6 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
   }
 
   protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
-    const WEBPART_VERSION = '1.0.0.0'; // Keep in sync with package-solution.json
     return {
       pages: [
         // Page 1: List Configuration
@@ -703,10 +703,10 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
               groupName: 'Version Information',
               groupFields: [
                 PropertyPaneLabel('version', {
-                  text: `Version: ${WEBPART_VERSION}`
+                  text: `Version: ${DEFAULTS_CONFIG.aboutInfo.version}`
                 }),
                 PropertyPaneLabel('description', {
-                  text: 'Beta Basic Version - Display items from any SharePoint list or library with category filtering and collapsible panels'
+                  text: DEFAULTS_CONFIG.aboutInfo.description
                 })
               ]
             },
@@ -714,7 +714,7 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
               groupName: 'User Story',
               groupFields: [
                 PropertyPaneLabel('userStory', {
-                  text: 'As a site owner, I want to configure a custom web part that displays items from any SharePoint list or document library with comprehensive styling options including customizable collapse/expand icons and intelligent document attachment support, so that I can organize content by categories and present subjects with rich descriptions and associated files in an engaging, collapsible layout that adapts to my site\'s theme or custom styling preferences.'
+                  text: DEFAULTS_CONFIG.aboutInfo.userStory
                 })
               ]
             },
@@ -722,19 +722,19 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
               groupName: 'Features',
               groupFields: [
                 PropertyPaneLabel('features1', {
-                  text: '• Category filtering with collapsible panels'
+                  text: `• ${DEFAULTS_CONFIG.aboutInfo.features[0]}`
                 }),
                 PropertyPaneLabel('features2', {
-                  text: '• Only Individual Elements mode for styling (all other modes removed)'
+                  text: `• ${DEFAULTS_CONFIG.aboutInfo.features[1]}`
                 }),
                 PropertyPaneLabel('features3', {
-                  text: '• Intelligent document attachment support'
+                  text: `• ${DEFAULTS_CONFIG.aboutInfo.features[2]}`
                 }),
                 PropertyPaneLabel('features4', {
-                  text: '• Responsive design with theme integration'
+                  text: `• ${DEFAULTS_CONFIG.aboutInfo.features[3]}`
                 }),
                 PropertyPaneLabel('features5', {
-                  text: '• Customizable icons and styling options'
+                  text: `• ${DEFAULTS_CONFIG.aboutInfo.features[4]}`
                 })
               ]
             }

@@ -53,6 +53,18 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
       this.setState({ items: [], categories: [], error: 'Please select a list in the web part properties.' });
       return;
     }
+    if (!this.props.categoryField) {
+      this.setState({ items: [], categories: [], error: 'Please select a Category field in the web part properties.' });
+      return;
+    }
+    if (!this.props.subjectField) {
+      this.setState({ items: [], categories: [], error: 'Please select a Subject field in the web part properties.' });
+      return;
+    }
+    if (!this.props.descriptionField) {
+      this.setState({ items: [], categories: [], error: 'Please select a Description field in the web part properties.' });
+      return;
+    }
 
     this.setState({ loading: true, error: '' });
 
