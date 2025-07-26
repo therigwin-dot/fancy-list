@@ -194,73 +194,23 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
             />
           </div>
 
-          {/* 3. Active Font Color Control */}
-          <div style={{ marginBottom: 8 }}>
-            <ColorPickerControl
-              color={settings.activeColors.font}
-              field="activeFont"
-              label="Active Font Color"
-              onChange={(field: string, newColor: string) => handlePropertyChange('activeColors.font', newColor)}
-            />
-          </div>
-
-          {/* 4. Inactive Font Color Control */}
-          <div style={{ marginBottom: 16 }}>
-            <ColorPickerControl
-              color={settings.inactiveColors.font}
-              field="inactiveFont"
-              label="Inactive Font Color"
-              onChange={(field: string, newColor: string) => handlePropertyChange('inactiveColors.font', newColor)}
-            />
-          </div>
-
-          {/* 5. Fill Header */}
-          <div style={{
-            fontSize: '16px',
-            fontWeight: '600',
-            color: '#323130',
-            marginBottom: '12px'
-          }}>
-            Fill
-          </div>
-
-          {/* 6. Active Background Color Control */}
-          <div style={{ marginBottom: 8 }}>
-            <ColorPickerControl
-              color={settings.activeColors.background}
-              field="activeBackground"
-              label="Active Background Color"
-              onChange={(field: string, newColor: string) => handlePropertyChange('activeColors.background', newColor)}
-            />
-          </div>
-
-          {/* 7. Inactive Background Color Control */}
-          <div style={{ marginBottom: 16 }}>
-            <ColorPickerControl
-              color={settings.inactiveColors.background}
-              field="inactiveBackground"
-              label="Inactive Background Color"
-              onChange={(field: string, newColor: string) => handlePropertyChange('inactiveColors.background', newColor)}
-            />
-          </div>
-
-          {/* 8. Button Header */}
-          <div style={{
-            fontSize: '16px',
-            fontWeight: '600',
-            color: '#323130',
-            marginBottom: '12px'
-          }}>
-            Button
-          </div>
-
-          {/* 9. Gray Box Container */}
+          {/* 3. Button Gray Box Container */}
           <div style={{ 
             backgroundColor: '#f3f2f1', 
             padding: '12px', 
             borderRadius: '4px',
             marginBottom: 16 
           }}>
+            {/* Button Header */}
+            <div style={{
+              fontSize: '16px',
+              fontWeight: '600',
+              color: '#323130',
+              marginBottom: '12px'
+            }}>
+              Button
+            </div>
+
             {/* Text Controls */}
             <div style={{ marginBottom: 16 }}>
               <label style={{
@@ -344,7 +294,7 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
             </div>
           </div>
 
-          {/* 10. Background Controls Container */}
+          {/* 4. Background Controls Container */}
           <div style={{ 
             backgroundColor: '#f3f2f1', 
             padding: '12px', 
@@ -374,7 +324,7 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
               />
             </div>
 
-            {/* 11. Solid Background Controls */}
+            {/* 5. Solid Background Controls */}
             {settings.backgroundType === 'solid' && (
               <div style={{ marginBottom: 16 }}>
                 <ColorPickerControl
@@ -386,7 +336,7 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
               </div>
             )}
 
-            {/* 12. Gradient Background Controls */}
+            {/* 6. Gradient Background Controls */}
             {settings.backgroundType === 'gradient' && (
               <>
                 <div style={{ marginBottom: 16 }}>
@@ -451,7 +401,7 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
               </>
             )}
 
-            {/* 13. Image Background Controls */}
+            {/* 7. Image Background Controls */}
             {settings.backgroundType === 'image' && (
               <div style={{ marginBottom: 16 }}>
                 <label style={{
@@ -504,7 +454,7 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
               />
             </div>
 
-            {/* 14. Background Shape Control */}
+            {/* 8. Background Shape Control */}
             <div style={{ marginBottom: 0 }}>
               <label style={{
                 fontSize: '14px',
@@ -523,7 +473,7 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
             </div>
           </div>
 
-          {/* 15. Divider Toggle */}
+          {/* 9. Divider Toggle */}
           <div style={{ marginBottom: 16 }}>
             <Toggle
               label="Divider"
@@ -535,7 +485,7 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
             />
           </div>
 
-          {/* 16. Reset Button */}
+          {/* 10. Reset Button */}
           <div style={{ marginTop: 16 }}>
             <PrimaryButton 
               text="Reset Filter Formatting" 

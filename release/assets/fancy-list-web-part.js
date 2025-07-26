@@ -713,32 +713,18 @@ var FilterModuleControl = function (_a) {
         enabled && (react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null,
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement(_FontControl__WEBPACK_IMPORTED_MODULE_1__.FontControl, { fontFamily: settings.font.family, fontSize: settings.font.size, formatting: settings.font.formatting, onChange: handleFontChange })),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 8 } },
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__.ColorPickerControl, { color: settings.activeColors.font, field: "activeFont", label: "Active Font Color", onChange: function (field, newColor) { return handlePropertyChange('activeColors.font', newColor); } })),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__.ColorPickerControl, { color: settings.inactiveColors.font, field: "inactiveFont", label: "Inactive Font Color", onChange: function (field, newColor) { return handlePropertyChange('inactiveColors.font', newColor); } })),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
-                    fontSize: '16px',
-                    fontWeight: '600',
-                    color: '#323130',
-                    marginBottom: '12px'
-                } }, "Fill"),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 8 } },
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__.ColorPickerControl, { color: settings.activeColors.background, field: "activeBackground", label: "Active Background Color", onChange: function (field, newColor) { return handlePropertyChange('activeColors.background', newColor); } })),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__.ColorPickerControl, { color: settings.inactiveColors.background, field: "inactiveBackground", label: "Inactive Background Color", onChange: function (field, newColor) { return handlePropertyChange('inactiveColors.background', newColor); } })),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
-                    fontSize: '16px',
-                    fontWeight: '600',
-                    color: '#323130',
-                    marginBottom: '12px'
-                } }, "Button"),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
                     backgroundColor: '#f3f2f1',
                     padding: '12px',
                     borderRadius: '4px',
                     marginBottom: 16
                 } },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                        fontSize: '16px',
+                        fontWeight: '600',
+                        color: '#323130',
+                        marginBottom: '12px'
+                    } }, "Button"),
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
                     react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: {
                             fontSize: '14px',
