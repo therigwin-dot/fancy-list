@@ -592,10 +592,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ 5959);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @fluentui/react/lib/TextField */ 7102);
+/* harmony import */ var _fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @fluentui/react/lib/TextField */ 7102);
 /* harmony import */ var _fluentui_react_lib_Toggle__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @fluentui/react/lib/Toggle */ 6264);
 /* harmony import */ var _fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @fluentui/react/lib/Dropdown */ 2042);
-/* harmony import */ var _fluentui_react_lib_Slider__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @fluentui/react/lib/Slider */ 1798);
+/* harmony import */ var _fluentui_react_lib_Slider__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @fluentui/react/lib/Slider */ 1798);
 /* harmony import */ var _fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @fluentui/react/lib/Button */ 9425);
 /* harmony import */ var _FontControl__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FontControl */ 8177);
 /* harmony import */ var _ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ColorPickerControl */ 9193);
@@ -644,6 +644,8 @@ var FilterModuleControl = function (_a) {
         imageAlpha: 0
     } : _b, onPropertyChange = _a.onPropertyChange;
     var _c = react__WEBPACK_IMPORTED_MODULE_0__.useState(true), enabled = _c[0], setEnabled = _c[1];
+    var _d = react__WEBPACK_IMPORTED_MODULE_0__.useState('#ffffff'), previewColor1 = _d[0], setPreviewColor1 = _d[1];
+    var _e = react__WEBPACK_IMPORTED_MODULE_0__.useState('#000000'), previewColor2 = _e[0], setPreviewColor2 = _e[1];
     var handlePropertyChange = function (propertyPath, newValue) {
         if (onPropertyChange) {
             onPropertyChange(propertyPath, newValue);
@@ -670,9 +672,24 @@ var FilterModuleControl = function (_a) {
         { key: 'radial', text: 'Radial' }
     ];
     var handleSwapColors = function () {
+        // Swap actual gradient colors
         var tempColor = settings.gradientColor1;
         handlePropertyChange('gradientColor1', settings.gradientColor2);
         handlePropertyChange('gradientColor2', tempColor);
+        // Swap preview colors
+        var tempPreview = previewColor1;
+        setPreviewColor1(previewColor2);
+        setPreviewColor2(tempPreview);
+    };
+    var getGradientPreview = function (direction, color1, color2) {
+        switch (direction) {
+            case 'to bottom': return "linear-gradient(to bottom, ".concat(color1, ", ").concat(color2, ")");
+            case 'left-right': return "linear-gradient(to right, ".concat(color1, ", ").concat(color2, ")");
+            case 'to bottom right': return "linear-gradient(to bottom right, ".concat(color1, ", ").concat(color2, ")");
+            case 'to bottom left': return "linear-gradient(to bottom left, ".concat(color1, ", ").concat(color2, ")");
+            case 'radial': return "radial-gradient(circle, ".concat(color1, ", ").concat(color2, ")");
+            default: return "linear-gradient(to right, ".concat(color1, ", ").concat(color2, ")");
+        }
     };
     return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
@@ -720,11 +737,68 @@ var FilterModuleControl = function (_a) {
                     react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__.ColorPickerControl, { color: settings.inactiveColors.font, field: "inactiveFont", label: "Inactive Font Color", onChange: function (field, newColor) { return handlePropertyChange('inactiveColors.font', newColor); } }))),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ShapePickerControl__WEBPACK_IMPORTED_MODULE_3__.ShapePickerControl, { value: settings.shape, label: "Filter Shape", onChange: function (newShape) { return handlePropertyChange('shape', newShape); } })),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_6__.Dropdown, { label: "Filter Background Type", options: backgroundTypeOptions, selectedKey: settings.backgroundType, onChange: function (_, option) { return handlePropertyChange('backgroundType', option === null || option === void 0 ? void 0 : option.key); } })),
-            settings.backgroundType === 'solid' && (react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null,
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__.ColorPickerControl, { color: settings.backgroundColor, field: "backgroundColor", label: "Filter Background Color", onChange: function (field, newColor) { return handlePropertyChange('backgroundColor', newColor); } })),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                    backgroundColor: '#f3f2f1',
+                    padding: '12px',
+                    borderRadius: '4px',
+                    marginBottom: 16
+                } },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                        display: 'flex',
+                        alignItems: 'flex-start',
+                        gap: '8px',
+                        marginBottom: '12px'
+                    } },
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                            fontSize: '16px',
+                            fontWeight: '600',
+                            color: '#323130'
+                        } }, "Background"),
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_6__.Dropdown, { label: "", options: backgroundTypeOptions, selectedKey: settings.backgroundType, onChange: function (_, option) { return handlePropertyChange('backgroundType', option === null || option === void 0 ? void 0 : option.key); }, styles: { root: { minWidth: 120 } } })),
+                settings.backgroundType === 'solid' && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__.ColorPickerControl, { color: settings.backgroundColor, field: "backgroundColor", label: "", onChange: function (field, newColor) { return handlePropertyChange('backgroundColor', newColor); } }))),
+                settings.backgroundType === 'gradient' && (react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null,
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
+                        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_6__.Dropdown, { label: "Direction", options: gradientDirectionOptions, selectedKey: settings.gradientDirection, onChange: function (_, option) { return handlePropertyChange('gradientDirection', option === null || option === void 0 ? void 0 : option.key); } })),
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '8px',
+                            marginBottom: 8
+                        } },
+                        react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { type: "button", onClick: handleSwapColors, style: {
+                                padding: '4px 8px',
+                                border: '1px solid #0078d4',
+                                borderRadius: '4px',
+                                background: '#e5f1fb',
+                                color: '#0078d4',
+                                cursor: 'pointer',
+                                fontSize: '12px'
+                            } }, "Swap Colors"),
+                        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                                width: '190px',
+                                height: '32px',
+                                borderRadius: '4px',
+                                border: '1px solid #ccc',
+                                background: getGradientPreview(settings.gradientDirection, previewColor1, previewColor2)
+                            }, title: "Gradient direction preview (click Swap Colors to reverse)" })),
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '8px',
+                            marginBottom: 16
+                        } },
+                        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__.ColorPickerControl, { color: settings.gradientColor1, field: "gradientColor1", label: "", onChange: function (field, newColor) { return handlePropertyChange('gradientColor1', newColor); } }),
+                        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__.ColorPickerControl, { color: settings.gradientColor2, field: "gradientColor2", label: "", onChange: function (field, newColor) { return handlePropertyChange('gradientColor2', newColor); } })))),
+                settings.backgroundType === 'image' && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: {
+                            fontSize: '14px',
+                            fontWeight: '600',
+                            color: '#323130',
+                            marginBottom: '8px',
+                            display: 'block'
+                        } }, "URL"),
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_7__.TextField, { value: settings.imageUrl, onChange: function (_, newValue) { return handlePropertyChange('imageUrl', newValue || ''); }, placeholder: "Enter image URL" }))),
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
                     react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: {
                             fontSize: '14px',
@@ -732,53 +806,20 @@ var FilterModuleControl = function (_a) {
                             color: '#323130',
                             marginBottom: '8px',
                             display: 'block'
-                        } }, "Filter Background Transparency"),
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Slider__WEBPACK_IMPORTED_MODULE_7__.Slider, { min: 0, max: 100, value: settings.backgroundAlpha, onChange: function (value) { return handlePropertyChange('backgroundAlpha', value); }, showValue: true, valueFormat: function (value) { return "".concat(value, "%"); } })))),
-            settings.backgroundType === 'gradient' && (react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null,
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_6__.Dropdown, { label: "Gradient Direction", options: gradientDirectionOptions, selectedKey: settings.gradientDirection, onChange: function (_, option) { return handlePropertyChange('gradientDirection', option === null || option === void 0 ? void 0 : option.key); } })),
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 8 } },
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { type: "button", onClick: handleSwapColors, style: {
-                            padding: '4px 8px',
-                            border: '1px solid #0078d4',
-                            borderRadius: '4px',
-                            background: '#e5f1fb',
-                            color: '#0078d4',
-                            cursor: 'pointer',
-                            fontSize: '12px'
-                        } }, "Swap Colors")),
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__.ColorPickerControl, { color: settings.gradientColor1, field: "gradientColor1", label: "Gradient Color 1", onChange: function (field, newColor) { return handlePropertyChange('gradientColor1', newColor); } })),
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__.ColorPickerControl, { color: settings.gradientColor2, field: "gradientColor2", label: "Gradient Color 2", onChange: function (field, newColor) { return handlePropertyChange('gradientColor2', newColor); } })),
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: {
-                            fontSize: '14px',
-                            fontWeight: '600',
-                            color: '#323130',
-                            marginBottom: '8px',
-                            display: 'block'
-                        } }, "Gradient Transparency"),
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Slider__WEBPACK_IMPORTED_MODULE_7__.Slider, { min: 0, max: 100, value: settings.gradientAlpha, onChange: function (value) { return handlePropertyChange('gradientAlpha', value); }, showValue: true, valueFormat: function (value) { return "".concat(value, "%"); } })))),
-            settings.backgroundType === 'image' && (react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null,
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: {
-                            fontSize: '14px',
-                            fontWeight: '600',
-                            color: '#323130',
-                            marginBottom: '8px',
-                            display: 'block'
-                        } }, "Image URL"),
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_8__.TextField, { value: settings.imageUrl, onChange: function (_, newValue) { return handlePropertyChange('imageUrl', newValue || ''); }, placeholder: "Enter image URL" })),
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: {
-                            fontSize: '14px',
-                            fontWeight: '600',
-                            color: '#323130',
-                            marginBottom: '8px',
-                            display: 'block'
-                        } }, "Image Transparency"),
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Slider__WEBPACK_IMPORTED_MODULE_7__.Slider, { min: 0, max: 100, value: settings.imageAlpha, onChange: function (value) { return handlePropertyChange('imageAlpha', value); }, showValue: true, valueFormat: function (value) { return "".concat(value, "%"); } })))),
+                        } }, "Transparency"),
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Slider__WEBPACK_IMPORTED_MODULE_8__.Slider, { min: 0, max: 100, value: settings.backgroundType === 'solid' ? settings.backgroundAlpha :
+                            settings.backgroundType === 'gradient' ? settings.gradientAlpha :
+                                settings.imageAlpha, onChange: function (value) {
+                            if (settings.backgroundType === 'solid') {
+                                handlePropertyChange('backgroundAlpha', value);
+                            }
+                            else if (settings.backgroundType === 'gradient') {
+                                handlePropertyChange('gradientAlpha', value);
+                            }
+                            else {
+                                handlePropertyChange('imageAlpha', value);
+                            }
+                        }, showValue: true, valueFormat: function (value) { return "".concat(value, "%"); } }))),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Toggle__WEBPACK_IMPORTED_MODULE_5__.Toggle, { label: "Filter Divider", inlineLabel: true, checked: settings.showDivider, onText: "On", offText: "Off", onChange: function (_, checked) { return handlePropertyChange('showDivider', checked); } })),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginTop: 16 } },
@@ -1205,8 +1246,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @fluentui/react/lib/Button */ 9425);
 /* harmony import */ var _fluentui_react_lib_Toggle__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @fluentui/react/lib/Toggle */ 6264);
 /* harmony import */ var _fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @fluentui/react/lib/Dropdown */ 2042);
-/* harmony import */ var _fluentui_react_lib_Slider__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @fluentui/react/lib/Slider */ 1798);
-/* harmony import */ var _fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @fluentui/react/lib/TextField */ 7102);
+/* harmony import */ var _fluentui_react_lib_Slider__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @fluentui/react/lib/Slider */ 1798);
+/* harmony import */ var _fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @fluentui/react/lib/TextField */ 7102);
 /* harmony import */ var _IconControl__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./IconControl */ 8189);
 /* harmony import */ var _ShapePickerControl__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ShapePickerControl */ 4439);
 /* harmony import */ var _FontControl__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./FontControl */ 8177);
@@ -1236,6 +1277,8 @@ var __assign = (undefined && undefined.__assign) || function () {
 
 var SectionModuleControl = function (_a) {
     var sectionType = _a.sectionType, sectionSettings = _a.sectionSettings, onChange = _a.onChange, label = _a.label;
+    var _b = react__WEBPACK_IMPORTED_MODULE_0__.useState('#ffffff'), previewColor1 = _b[0], setPreviewColor1 = _b[1];
+    var _c = react__WEBPACK_IMPORTED_MODULE_0__.useState('#000000'), previewColor2 = _c[0], setPreviewColor2 = _c[1];
     var handleReset = function () {
         // Get the default settings for this section type
         var defaultSettings;
@@ -1290,11 +1333,26 @@ var SectionModuleControl = function (_a) {
         onChange(newSettings);
     };
     var handleSwapColors = function () {
+        // Swap actual gradient colors
         var newSettings = __assign({}, sectionSettings);
         var tempColor = newSettings.background.gradientColor1;
         newSettings.background.gradientColor1 = newSettings.background.gradientColor2;
         newSettings.background.gradientColor2 = tempColor;
         onChange(newSettings);
+        // Swap preview colors
+        var tempPreview = previewColor1;
+        setPreviewColor1(previewColor2);
+        setPreviewColor2(tempPreview);
+    };
+    var getGradientPreview = function (direction, color1, color2) {
+        switch (direction) {
+            case 'to bottom': return "linear-gradient(to bottom, ".concat(color1, ", ").concat(color2, ")");
+            case 'left-right': return "linear-gradient(to right, ".concat(color1, ", ").concat(color2, ")");
+            case 'to bottom right': return "linear-gradient(to bottom right, ".concat(color1, ", ").concat(color2, ")");
+            case 'to bottom left': return "linear-gradient(to bottom left, ".concat(color1, ", ").concat(color2, ")");
+            case 'radial': return "radial-gradient(circle, ".concat(color1, ", ").concat(color2, ")");
+            default: return "linear-gradient(to right, ".concat(color1, ", ").concat(color2, ")");
+        }
     };
     var backgroundTypeOptions = [
         { key: 'solid', text: 'Solid' },
@@ -1335,11 +1393,68 @@ var SectionModuleControl = function (_a) {
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_FontControl__WEBPACK_IMPORTED_MODULE_3__.FontControl, { label: "", fontFamily: sectionSettings.font.family, fontSize: sectionSettings.font.size, formatting: sectionSettings.font.formatting, onChange: handleFontChange })),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_4__.ColorPickerControl, { color: sectionSettings.font.color, field: "fontColor", label: "", onChange: function (field, newColor) { return handlePropertyChange('font.color', newColor); } })),
-        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_7__.Dropdown, { label: "Background Type", options: backgroundTypeOptions, selectedKey: sectionSettings.background.type, onChange: function (_, option) { return handlePropertyChange('background.type', option === null || option === void 0 ? void 0 : option.key); } })),
-        sectionSettings.background.type === 'solid' && (react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null,
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_4__.ColorPickerControl, { color: sectionSettings.background.color, field: "backgroundColor", label: "Background Color", onChange: function (field, newColor) { return handlePropertyChange('background.color', newColor); } })),
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                backgroundColor: '#f3f2f1',
+                padding: '12px',
+                borderRadius: '4px',
+                marginBottom: 16
+            } },
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                    display: 'flex',
+                    alignItems: 'flex-start',
+                    gap: '8px',
+                    marginBottom: '12px'
+                } },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                        fontSize: '16px',
+                        fontWeight: '600',
+                        color: '#323130'
+                    } }, "Background"),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_7__.Dropdown, { label: "", options: backgroundTypeOptions, selectedKey: sectionSettings.background.type, onChange: function (_, option) { return handlePropertyChange('background.type', option === null || option === void 0 ? void 0 : option.key); }, styles: { root: { minWidth: 120 } } })),
+            sectionSettings.background.type === 'solid' && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_4__.ColorPickerControl, { color: sectionSettings.background.color, field: "backgroundColor", label: "", onChange: function (field, newColor) { return handlePropertyChange('background.color', newColor); } }))),
+            sectionSettings.background.type === 'gradient' && (react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null,
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_7__.Dropdown, { label: "Direction", options: gradientDirectionOptions, selectedKey: sectionSettings.background.gradientDirection, onChange: function (_, option) { return handlePropertyChange('background.gradientDirection', option === null || option === void 0 ? void 0 : option.key); } })),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                        marginBottom: 8
+                    } },
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { type: "button", onClick: handleSwapColors, style: {
+                            padding: '4px 8px',
+                            border: '1px solid #0078d4',
+                            borderRadius: '4px',
+                            background: '#e5f1fb',
+                            color: '#0078d4',
+                            cursor: 'pointer',
+                            fontSize: '12px'
+                        } }, "Swap Colors"),
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                            width: '190px',
+                            height: '32px',
+                            borderRadius: '4px',
+                            border: '1px solid #ccc',
+                            background: getGradientPreview(sectionSettings.background.gradientDirection, previewColor1, previewColor2)
+                        }, title: "Gradient direction preview (click Swap Colors to reverse)" })),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                        marginBottom: 16
+                    } },
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_4__.ColorPickerControl, { color: sectionSettings.background.gradientColor1, field: "gradientColor1", label: "", onChange: function (field, newColor) { return handlePropertyChange('background.gradientColor1', newColor); } }),
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_4__.ColorPickerControl, { color: sectionSettings.background.gradientColor2, field: "gradientColor2", label: "", onChange: function (field, newColor) { return handlePropertyChange('background.gradientColor2', newColor); } })))),
+            sectionSettings.background.type === 'image' && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: {
+                        fontSize: '14px',
+                        fontWeight: '600',
+                        color: '#323130',
+                        marginBottom: '8px',
+                        display: 'block'
+                    } }, "URL"),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_8__.TextField, { value: sectionSettings.background.image, onChange: function (_, newValue) { return handlePropertyChange('background.image', newValue || ''); }, placeholder: "Enter image URL" }))),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: {
                         fontSize: '14px',
@@ -1347,53 +1462,20 @@ var SectionModuleControl = function (_a) {
                         color: '#323130',
                         marginBottom: '8px',
                         display: 'block'
-                    } }, "Background Transparency"),
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Slider__WEBPACK_IMPORTED_MODULE_8__.Slider, { min: 0, max: 100, value: sectionSettings.background.alpha, onChange: function (value) { return handlePropertyChange('background.alpha', value); }, showValue: true, valueFormat: function (value) { return "".concat(value, "%"); } })))),
-        sectionSettings.background.type === 'gradient' && (react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null,
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_7__.Dropdown, { label: "Gradient Direction", options: gradientDirectionOptions, selectedKey: sectionSettings.background.gradientDirection, onChange: function (_, option) { return handlePropertyChange('background.gradientDirection', option === null || option === void 0 ? void 0 : option.key); } })),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 8 } },
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { type: "button", onClick: handleSwapColors, style: {
-                        padding: '4px 8px',
-                        border: '1px solid #0078d4',
-                        borderRadius: '4px',
-                        background: '#e5f1fb',
-                        color: '#0078d4',
-                        cursor: 'pointer',
-                        fontSize: '12px'
-                    } }, "Swap Colors")),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_4__.ColorPickerControl, { color: sectionSettings.background.gradientColor1, field: "gradientColor1", label: "Gradient Color 1", onChange: function (field, newColor) { return handlePropertyChange('background.gradientColor1', newColor); } })),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_4__.ColorPickerControl, { color: sectionSettings.background.gradientColor2, field: "gradientColor2", label: "Gradient Color 2", onChange: function (field, newColor) { return handlePropertyChange('background.gradientColor2', newColor); } })),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: {
-                        fontSize: '14px',
-                        fontWeight: '600',
-                        color: '#323130',
-                        marginBottom: '8px',
-                        display: 'block'
-                    } }, "Gradient Transparency"),
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Slider__WEBPACK_IMPORTED_MODULE_8__.Slider, { min: 0, max: 100, value: sectionSettings.background.gradientAlpha1, onChange: function (value) { return handlePropertyChange('background.gradientAlpha1', value); }, showValue: true, valueFormat: function (value) { return "".concat(value, "%"); } })))),
-        sectionSettings.background.type === 'image' && (react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null,
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: {
-                        fontSize: '14px',
-                        fontWeight: '600',
-                        color: '#323130',
-                        marginBottom: '8px',
-                        display: 'block'
-                    } }, "Image URL"),
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_9__.TextField, { value: sectionSettings.background.image, onChange: function (_, newValue) { return handlePropertyChange('background.image', newValue || ''); }, placeholder: "Enter image URL" })),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: {
-                        fontSize: '14px',
-                        fontWeight: '600',
-                        color: '#323130',
-                        marginBottom: '8px',
-                        display: 'block'
-                    } }, "Image Transparency"),
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Slider__WEBPACK_IMPORTED_MODULE_8__.Slider, { min: 0, max: 100, value: sectionSettings.background.imageAlpha, onChange: function (value) { return handlePropertyChange('background.imageAlpha', value); }, showValue: true, valueFormat: function (value) { return "".concat(value, "%"); } })))),
+                    } }, "Transparency"),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Slider__WEBPACK_IMPORTED_MODULE_9__.Slider, { min: 0, max: 100, value: sectionSettings.background.type === 'solid' ? sectionSettings.background.alpha :
+                        sectionSettings.background.type === 'gradient' ? sectionSettings.background.gradientAlpha1 :
+                            sectionSettings.background.imageAlpha, onChange: function (value) {
+                        if (sectionSettings.background.type === 'solid') {
+                            handlePropertyChange('background.alpha', value);
+                        }
+                        else if (sectionSettings.background.type === 'gradient') {
+                            handlePropertyChange('background.gradientAlpha1', value);
+                        }
+                        else {
+                            handlePropertyChange('background.imageAlpha', value);
+                        }
+                    }, showValue: true, valueFormat: function (value) { return "".concat(value, "%"); } }))),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ShapePickerControl__WEBPACK_IMPORTED_MODULE_2__.ShapePickerControl, { label: "Shape", value: sectionSettings.shape, onChange: function (shape) { return handlePropertyChange('shape', shape); } })),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
