@@ -1,0 +1,113 @@
+@import '~@fluentui/react/dist/sass/References.scss';
+
+.fancyList {
+  padding: 1em;
+  color: var(--bodyText, #323130);
+  background: var(--background, #fff);
+  font-family: $ms-font-family-fallbacks;
+}
+
+.categoryFilters {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 0.5em;
+  margin-bottom: 1em;
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid var(--neutralLight, #edebe9);
+}
+
+.categoryPill {
+  display: inline-block;
+  padding: 0.4em 1.2em;
+  border-radius: 999px;
+  border: 1px solid var(--neutralLight, #edebe9);
+  background: var(--neutralLighter, #f3f2f1);
+  color: var(--bodyText, #323130);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border 0.2s;
+  outline: none;
+  &:hover, &:focus {
+    background: var(--themeLighter, #e5f1fb);
+    border-color: var(--themePrimary, #0078d4);
+    color: var(--themePrimary, #0078d4);
+  }
+  &.active {
+    background: var(--themePrimary, #0078d4);
+    color: var(--white, #fff);
+    border-color: var(--themePrimary, #0078d4);
+  }
+}
+
+.itemsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7em;
+}
+
+.itemPanel {
+  border-radius: 6px;
+  border: 1px solid var(--neutralLight, #edebe9);
+  background: var(--white, #fff);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  overflow: hidden;
+}
+
+.itemHeader {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 1em;
+  text-align: left;
+  font-size: 1.1em;
+  font-weight: 600;
+  color: var(--bodyText, #323130);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  outline: none;
+  transition: background 0.2s;
+  &:hover, &:focus {
+    background: var(--neutralLighter, #f3f2f1);
+  }
+}
+
+.itemSubject {
+  flex: 1 1 auto;
+}
+
+.expandIcon {
+  font-size: 1.3em;
+  margin-left: 1em;
+  color: var(--themePrimary, #0078d4);
+}
+
+.itemContent {
+  padding: 1em;
+  background: var(--neutralLighter, #f3f2f1);
+  border-top: 1px solid var(--neutralLight, #edebe9);
+}
+
+.itemDescription {
+  font-size: 1em;
+  color: var(--bodyText, #323130);
+}
+
+.loading, .error {
+  text-align: center;
+  padding: 2em 0;
+  color: var(--themePrimary, #0078d4);
+  font-size: 1.1em;
+}
+
+@media (max-width: 600px) {
+  .categoryFilters {
+    gap: 0.2em;
+    font-size: 0.95em;
+  }
+  .itemHeader, .itemContent {
+    padding: 0.7em;
+  }
+}

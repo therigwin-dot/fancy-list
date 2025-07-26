@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "fancy-list-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/fancyList/FancyListWebPart.js",
+          "manifest": "./src/webparts/fancyList/FancyListWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "FancyListWebPartStrings": "lib/webparts/fancyList/loc/{locale}.js"
+  }
+}
