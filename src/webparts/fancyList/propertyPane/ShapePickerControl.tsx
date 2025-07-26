@@ -18,7 +18,17 @@ const shapeOptions: { key: ShapeOption; text: string }[] = [
 export const ShapePickerControl: React.FC<ShapePickerControlProps> = ({ value, label, onChange, disabled }) => {
   return (
     <div style={{ marginBottom: 12 }}>
-      {label && <label style={{ display: 'block', fontWeight: 600, marginBottom: 4 }}>{label}</label>}
+      {label && (
+        <label style={{ 
+          fontSize: '14px',
+          fontWeight: '600',
+          color: '#323130',
+          marginBottom: '8px',
+          display: 'block'
+        }}>
+          {label}
+        </label>
+      )}
       <div style={{ display: 'flex', gap: 8 }}>
         {shapeOptions.map(option => (
           <button

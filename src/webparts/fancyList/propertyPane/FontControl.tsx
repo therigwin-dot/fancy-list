@@ -86,7 +86,21 @@ export const FontControl: React.FC<FontControlProps> = ({ fontFamily, fontSize, 
 
   return (
     <Stack tokens={{ childrenGap: 8 }} style={{ marginBottom: 16 }}>
-      {label && <Text variant="mediumPlus" styles={{ root: { fontWeight: 600, marginBottom: 4 } }}>{label}</Text>}
+      {label && (
+        <Text 
+          variant="mediumPlus" 
+          styles={{ 
+            root: { 
+              fontSize: '14px',
+              fontWeight: '600',
+              color: '#323130',
+              marginBottom: '8px'
+            } 
+          }}
+        >
+          {label}
+        </Text>
+      )}
       <Stack horizontal verticalAlign="center" tokens={{ childrenGap: 4 }}>
         <TooltipHost content="Bold">
           <IconButton

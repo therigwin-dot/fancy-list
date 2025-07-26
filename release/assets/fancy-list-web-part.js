@@ -507,7 +507,13 @@ var ColorPickerControl = function (_a) {
         onChange(field, newColor.str);
     };
     return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 12 } },
-        react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: { fontWeight: 600 } }, label),
+        label && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: {
+                fontSize: '14px',
+                fontWeight: '600',
+                color: '#323130',
+                marginBottom: '8px',
+                display: 'block'
+            } }, label)),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { display: 'flex', alignItems: 'center', gap: 8 } },
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_1__.TextField, { value: currentColor, onChange: handleHexChange, disabled: disabled, styles: { root: { width: 100 } }, placeholder: "#RRGGBB", title: "Type a hex color code (e.g., #ff0000 for red)" }),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { width: 24, height: 24, borderRadius: 4, border: '1px solid #ccc', background: currentColor }, "aria-label": "Current color preview", title: "Current color preview" }),
@@ -613,7 +619,14 @@ var FontControl = function (_a) {
         return renderFontOption(options[0]);
     }
     return (react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_1__.Stack, { tokens: { childrenGap: 8 }, style: { marginBottom: 16 } },
-        label && react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_2__.Text, { variant: "mediumPlus", styles: { root: { fontWeight: 600, marginBottom: 4 } } }, label),
+        label && (react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_2__.Text, { variant: "mediumPlus", styles: {
+                root: {
+                    fontSize: '14px',
+                    fontWeight: '600',
+                    color: '#323130',
+                    marginBottom: '8px'
+                }
+            } }, label)),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_1__.Stack, { horizontal: true, verticalAlign: "center", tokens: { childrenGap: 4 } },
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_3__.TooltipHost, { content: "Bold" },
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_4__.IconButton, { iconProps: { iconName: 'Bold' }, title: "Bold", ariaLabel: "Bold", checked: !!formatting.bold, styles: iconButtonStyles(!!formatting.bold), onClick: function () { return handleFormattingChange('bold', !formatting.bold); } })),
@@ -651,7 +664,13 @@ var shapeOptions = [
 var ShapePickerControl = function (_a) {
     var value = _a.value, label = _a.label, onChange = _a.onChange, disabled = _a.disabled;
     return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 12 } },
-        label && react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: { display: 'block', fontWeight: 600, marginBottom: 4 } }, label),
+        label && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: {
+                fontSize: '14px',
+                fontWeight: '600',
+                color: '#323130',
+                marginBottom: '8px',
+                display: 'block'
+            } }, label)),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { display: 'flex', gap: 8 } }, shapeOptions.map(function (option) { return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { key: option.key, type: "button", disabled: disabled, style: {
                 padding: '0.5em 1.2em',
                 border: value === option.key ? '2px solid #0078d4' : '1px solid #ccc',
@@ -718,14 +737,6 @@ var TitleConfiguration = function (_a) {
         if (fields.formatting)
             handlePropertyChange('font.formatting', fields.formatting);
     };
-    // Unified label styling for all controls
-    var controlLabelStyle = {
-        fontSize: '14px',
-        fontWeight: '600',
-        color: '#323130',
-        marginBottom: '8px',
-        display: 'block'
-    };
     return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
                 fontSize: '16px',
@@ -740,18 +751,20 @@ var TitleConfiguration = function (_a) {
                 marginBottom: '16px'
             } }, "Customize the web parts title text, font, color, background, and shape settings. Use the reset button to put the default look and feel back in place. Use the Back and Next buttons to switch to a different configuration page."),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: controlLabelStyle }, "Title Text"),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: {
+                    fontSize: '14px',
+                    fontWeight: '600',
+                    color: '#323130',
+                    marginBottom: '8px',
+                    display: 'block'
+                } }, "Title Text"),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_4__.TextField, { value: settings.webPartTitle, onChange: function (_, newValue) { return handlePropertyChange('webPartTitle', newValue || ''); }, placeholder: "Enter title text" })),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: controlLabelStyle }, "Title Shape"),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ShapePickerControl__WEBPACK_IMPORTED_MODULE_3__.ShapePickerControl, { value: settings.shape, onChange: function (newShape) { return handlePropertyChange('shape', newShape); } })),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ShapePickerControl__WEBPACK_IMPORTED_MODULE_3__.ShapePickerControl, { value: settings.shape, label: "Title Shape", onChange: function (newShape) { return handlePropertyChange('shape', newShape); } })),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: controlLabelStyle }, "Title Font"),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_FontControl__WEBPACK_IMPORTED_MODULE_1__.FontControl, { fontFamily: settings.font.family, fontSize: settings.font.size, formatting: settings.font.formatting, onChange: handleFontChange })),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_FontControl__WEBPACK_IMPORTED_MODULE_1__.FontControl, { label: "Title Font", fontFamily: settings.font.family, fontSize: settings.font.size, formatting: settings.font.formatting, onChange: handleFontChange })),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: controlLabelStyle }, "Title Color"),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__.ColorPickerControl, { color: settings.font.color, field: "titleColor", label: "" // Empty label since we're using our own label
-                , onChange: function (field, newColor) { return handlePropertyChange('font.color', newColor); } }))));
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__.ColorPickerControl, { color: settings.font.color, field: "titleColor", label: "Title Color", onChange: function (field, newColor) { return handlePropertyChange('font.color', newColor); } }))));
 };
 
 

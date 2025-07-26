@@ -32,7 +32,17 @@ export const ColorPickerControl: React.FC<ColorPickerControlProps> = ({ color, f
 
   return (
     <div style={{ marginBottom: 12 }}>
-      <label style={{ fontWeight: 600 }}>{label}</label>
+      {label && (
+        <label style={{ 
+          fontSize: '14px',
+          fontWeight: '600',
+          color: '#323130',
+          marginBottom: '8px',
+          display: 'block'
+        }}>
+          {label}
+        </label>
+      )}
       <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
         <TextField
           value={currentColor}
