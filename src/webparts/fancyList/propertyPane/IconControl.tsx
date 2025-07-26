@@ -144,26 +144,6 @@ export const IconControl: React.FC<IconControlProps> = ({
 
   return (
     <div style={{ marginBottom: 16 }}>
-      {/* Bold Header */}
-      <div style={{
-        fontSize: '14px',
-        fontWeight: '600',
-        color: '#323130',
-        marginBottom: '12px'
-      }}>
-        {label}
-      </div>
-
-      {/* Help Description Text */}
-      <div style={{
-        fontSize: '12px',
-        color: '#666',
-        lineHeight: '1.4',
-        marginBottom: '16px'
-      }}>
-        Configure expand/collapse icons for this section. Choose from predefined options or enter custom text.
-      </div>
-
       {/* Line 1: Enable Icons */}
       <div style={{ marginBottom: '12px' }}>
         <Toggle

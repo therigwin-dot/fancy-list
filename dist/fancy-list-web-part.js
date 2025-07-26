@@ -1024,18 +1024,6 @@ var IconControl = function (_a) {
         });
     };
     return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
-                fontSize: '14px',
-                fontWeight: '600',
-                color: '#323130',
-                marginBottom: '12px'
-            } }, label),
-        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
-                fontSize: '12px',
-                color: '#666',
-                lineHeight: '1.4',
-                marginBottom: '16px'
-            } }, "Configure expand/collapse icons for this section. Choose from predefined options or enter custom text."),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: '12px' } },
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Toggle__WEBPACK_IMPORTED_MODULE_1__.Toggle, { label: "Enable Icons", inlineLabel: true, checked: settings.enabled, onText: "On", offText: "Off", onChange: function (_, checked) { return handlePropertyChange('enabled', checked); } })),
         settings.enabled && (react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null,
