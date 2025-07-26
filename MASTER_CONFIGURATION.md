@@ -14,9 +14,10 @@ The Fancy List Web Part implements a 7-page property pane configuration framewor
 - Test Defaults button with automatic field population
 - Comprehensive error handling for missing selections
 
-**Page 2: Title Section Configuration** (Placeholder)
+**Page 2: Title Section Configuration** 🔄 **IN PROGRESS**
 - Title text, font, color, and background customization
-- Coming Soon - Will use TitleModuleControl architecture
+- Using simplified control architecture (independent controls, not composite modules)
+- Background controls: Type dropdown + mode-specific controls (color, transparency, etc.)
 
 **Page 3: Filter Buttons Configuration** (Placeholder)
 - Filter enable/disable, colors, fonts, and styling
@@ -39,9 +40,49 @@ The Fancy List Web Part implements a 7-page property pane configuration framewor
 - User story and feature descriptions
 - Static content from DEFAULTS_CONFIG
 
-## 📚 Reference Code Sources
+## 🎯 **Architectural Design Pattern**
 
-### External Backup Reference
+### **Control Module Design Philosophy**
+**Decision**: Use independent controls instead of composite modules for better maintainability and cleaner property mapping.
+
+**Why This Approach:**
+- ✅ **Cleaner Property Mapping**: Each control maps directly to settings without nested complexity
+- ✅ **Easier Debugging**: Property changes flow directly: `Control → Configuration Module → WebPart`
+- ✅ **Better Maintainability**: No nested property mapping complexity
+- ✅ **Consistent Architecture**: All controls work the same way
+- ✅ **Follows Design Pattern**: Each control is independent and maps directly to settings
+
+**Example Structure:**
+```typescript
+// Instead of composite BackgroundPickerControl:
+<BackgroundPickerControl /> // Complex nested controls
+
+// Use independent controls:
+<Dropdown label="Background Type" />
+{backgroundType === 'solid' && (
+  <ColorPickerControl label="Background Color" />
+  <Slider label="Transparency" />
+)}
+{backgroundType === 'gradient' && (
+  <Dropdown label="Direction" />
+  <ColorPickerControl label="Color 1" />
+  <ColorPickerControl label="Color 2" />
+  <Slider label="Transparency" />
+)}
+```
+
+### **Property Change Flow**
+```
+Control → Configuration Module → WebPart Properties
+```
+
+**Benefits:**
+- Direct property mapping
+- Easy to debug
+- Consistent across all modules
+- No nested complexity
+
+## 📚 Reference Code Sources
 **Location**: `/Volumes/BigBoy/ProjectBackUps/Work/FancyList_CompareSlate_20250725`  
 **Purpose**: Contains the most advanced implementation from our previous development efforts. This backup includes:
 - Working implementations of complex modules

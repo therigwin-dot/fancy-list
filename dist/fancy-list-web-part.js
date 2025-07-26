@@ -470,100 +470,6 @@ var styles = {
 
 /***/ }),
 
-/***/ 4056:
-/*!************************************************************************!*\
-  !*** ./lib/webparts/fancyList/propertyPane/BackgroundPickerControl.js ***!
-  \************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   BackgroundPickerControl: () => (/* binding */ BackgroundPickerControl),
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ 5959);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fluentui/react/lib/Dropdown */ 2042);
-/* harmony import */ var _fluentui_react_lib_Slider__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @fluentui/react/lib/Slider */ 1798);
-/* harmony import */ var _fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @fluentui/react/lib/TextField */ 7102);
-/* harmony import */ var _ColorPickerControl__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ColorPickerControl */ 9193);
-
-
-
-
-
-var BackgroundPickerControl = function (props) {
-    var backgroundTypeOptions = [
-        { key: 'solid', text: 'Solid Color' },
-        { key: 'gradient', text: 'Gradient' },
-        { key: 'image', text: 'Image' }
-    ];
-    var gradientDirectionOptions = [
-        { key: 'left-right', text: 'Left to Right' },
-        { key: 'top-bottom', text: 'Top to Bottom' },
-        { key: 'diagonal', text: 'Diagonal' },
-        { key: 'radial', text: 'Radial' }
-    ];
-    var handleBackgroundTypeChange = function (event, option) {
-        if (option) {
-            props.onPropertyChange('backgroundType', option.key);
-        }
-    };
-    var handleGradientDirectionChange = function (event, option) {
-        if (option) {
-            props.onPropertyChange('gradientDirection', option.key);
-        }
-    };
-    return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 12 } },
-        react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: { fontWeight: 600 } }, props.label),
-        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_2__.Dropdown, { options: backgroundTypeOptions, selectedKey: props.selectedKey, onChange: handleBackgroundTypeChange, disabled: props.disabled, styles: { root: { marginTop: 4, marginBottom: 16 } } }),
-        props.selectedKey === 'solid' && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", { style: { margin: '8px 0', fontSize: '14px', fontWeight: '600' } }, "Solid Background"),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_1__.ColorPickerControl, { color: props.solidBackgroundColor || '#ffffff', field: "solidBackgroundColor", label: "Background Color", onChange: props.onPropertyChange, disabled: props.disabled }),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginTop: 8 } },
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: { fontWeight: 600, fontSize: '12px' } }, "Transparency"),
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Slider__WEBPACK_IMPORTED_MODULE_3__.Slider, { min: 0, max: 100, step: 1, value: props.solidBackgroundAlpha || 0, onChange: function (value) { return props.onPropertyChange('solidBackgroundAlpha', value); }, disabled: props.disabled, styles: { root: { marginTop: 4 } } })))),
-        props.selectedKey === 'gradient' && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", { style: { margin: '8px 0', fontSize: '14px', fontWeight: '600' } }, "Gradient Background"),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 8 } },
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: { fontWeight: 600, fontSize: '12px' } }, "Direction"),
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_2__.Dropdown, { options: gradientDirectionOptions, selectedKey: props.gradientDirection || 'left-right', onChange: handleGradientDirectionChange, disabled: props.disabled, styles: { root: { marginTop: 4 } } })),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { type: "button", onClick: function () {
-                    var tempColor1 = props.gradientColor1 || '#ffffff';
-                    var tempColor2 = props.gradientColor2 || '#0f46d1';
-                    props.onPropertyChange('gradientColor1', tempColor2);
-                    props.onPropertyChange('gradientColor2', tempColor1);
-                }, style: {
-                    backgroundColor: '#0078d4',
-                    color: 'white',
-                    border: 'none',
-                    padding: '6px 12px',
-                    borderRadius: '4px',
-                    cursor: 'pointer',
-                    fontSize: '12px',
-                    fontWeight: '500',
-                    marginBottom: '8px',
-                    marginTop: '8px'
-                }, disabled: props.disabled }, "Swap Colors"),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_1__.ColorPickerControl, { color: props.gradientColor1 || '#ffffff', field: "gradientColor1", label: "Color 1", onChange: props.onPropertyChange, disabled: props.disabled }),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_1__.ColorPickerControl, { color: props.gradientColor2 || '#0f46d1', field: "gradientColor2", label: "Color 2", onChange: props.onPropertyChange, disabled: props.disabled }),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginTop: 8 } },
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: { fontWeight: 600, fontSize: '12px' } }, "Transparency"),
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Slider__WEBPACK_IMPORTED_MODULE_3__.Slider, { min: 0, max: 100, step: 1, value: props.gradientAlpha || 0, onChange: function (value) { return props.onPropertyChange('gradientAlpha', value); }, disabled: props.disabled, styles: { root: { marginTop: 4 } } })))),
-        props.selectedKey === 'image' && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", { style: { margin: '8px 0', fontSize: '14px', fontWeight: '600' } }, "Image Background"),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 8 } },
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: { fontWeight: 600, fontSize: '12px' } }, "Image URL"),
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_4__.TextField, { value: props.imageUrl || '', onChange: function (e, newValue) { return props.onPropertyChange('imageUrl', newValue || ''); }, disabled: props.disabled, styles: { root: { marginTop: 4 } }, placeholder: "Enter image URL" })),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginTop: 8 } },
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: { fontWeight: 600, fontSize: '12px' } }, "Transparency"),
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Slider__WEBPACK_IMPORTED_MODULE_3__.Slider, { min: 0, max: 100, step: 1, value: props.imageAlpha || 0, onChange: function (value) { return props.onPropertyChange('imageAlpha', value); }, disabled: props.disabled, styles: { root: { marginTop: 4 } } }))))));
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (BackgroundPickerControl);
-
-
-/***/ }),
-
 /***/ 9193:
 /*!*******************************************************************!*\
   !*** ./lib/webparts/fancyList/propertyPane/ColorPickerControl.js ***!
@@ -629,6 +535,139 @@ var ColorPickerControl = function (_a) {
 
 /***/ }),
 
+/***/ 8177:
+/*!************************************************************!*\
+  !*** ./lib/webparts/fancyList/propertyPane/FontControl.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   FontControl: () => (/* binding */ FontControl)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ 5959);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _fluentui_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fluentui/react */ 1314);
+/* harmony import */ var _fluentui_react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fluentui/react */ 2674);
+/* harmony import */ var _fluentui_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @fluentui/react */ 1880);
+/* harmony import */ var _fluentui_react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @fluentui/react */ 4533);
+/* harmony import */ var _fluentui_react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @fluentui/react */ 2042);
+
+
+var FONT_FAMILIES = [
+    { key: 'Segoe UI', text: 'Segoe UI', data: { font: 'Segoe UI' } },
+    { key: 'Arial', text: 'Arial', data: { font: 'Arial' } },
+    { key: 'Calibri', text: 'Calibri', data: { font: 'Calibri' } },
+    { key: 'Times New Roman', text: 'Times New Roman', data: { font: 'Times New Roman' } },
+    { key: 'Verdana', text: 'Verdana', data: { font: 'Verdana' } },
+    { key: 'Tahoma', text: 'Tahoma', data: { font: 'Tahoma' } },
+    { key: 'Courier New', text: 'Courier New', data: { font: 'Courier New' } },
+    { key: 'Georgia', text: 'Georgia', data: { font: 'Georgia' } },
+    { key: 'inherit', text: 'Inherit (default)', data: { font: 'inherit' } }
+];
+var FONT_SIZES = [
+    { key: '16px', text: '16px (Medium)' },
+    { key: '18px', text: '18px (Large)' },
+    { key: '20px', text: '20px (Extra Large)' },
+    { key: '24px', text: '24px (Title)' },
+    { key: '28px', text: '28px (Heading)' },
+    { key: '32px', text: '32px (Large Heading)' }
+];
+var iconButtonStyles = function (active) { return ({
+    root: {
+        background: active ? '#e5f1fb' : 'transparent',
+        color: active ? '#0078d4' : '#323130',
+        borderRadius: 4,
+        border: active ? '1px solid #0078d4' : '1px solid transparent',
+        marginRight: 2,
+        fontWeight: '600', // changed from 600 to '600'
+        fontSize: 18,
+        width: 32,
+        height: 32,
+    },
+    rootHovered: {
+        background: '#e5f1fb',
+        color: '#0078d4',
+        border: '1px solid #0078d4',
+    }
+}); };
+var FontControl = function (_a) {
+    var fontFamily = _a.fontFamily, fontSize = _a.fontSize, formatting = _a.formatting, onChange = _a.onChange, label = _a.label;
+    var handleFormattingChange = function (key, value) {
+        onChange({ formatting: {
+                bold: key === 'bold' ? value : !!formatting.bold,
+                italic: key === 'italic' ? value : !!formatting.italic,
+                underline: key === 'underline' ? value : !!formatting.underline,
+                strikethrough: key === 'strikethrough' ? value : !!formatting.strikethrough
+            } });
+    };
+    function renderFontOption(option) {
+        var _a;
+        if (!option)
+            return react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null);
+        return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", { style: { fontFamily: ((_a = option.data) === null || _a === void 0 ? void 0 : _a.font) || option.text } }, option.text));
+    }
+    function renderFontTitle(options) {
+        if (!options || options.length === 0)
+            return react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null);
+        return renderFontOption(options[0]);
+    }
+    return (react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_1__.Stack, { tokens: { childrenGap: 8 }, style: { marginBottom: 16 } },
+        label && react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_2__.Text, { variant: "mediumPlus", styles: { root: { fontWeight: 600, marginBottom: 4 } } }, label),
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_1__.Stack, { horizontal: true, verticalAlign: "center", tokens: { childrenGap: 4 } },
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_3__.TooltipHost, { content: "Bold" },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_4__.IconButton, { iconProps: { iconName: 'Bold' }, title: "Bold", ariaLabel: "Bold", checked: !!formatting.bold, styles: iconButtonStyles(!!formatting.bold), onClick: function () { return handleFormattingChange('bold', !formatting.bold); } })),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_3__.TooltipHost, { content: "Italic" },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_4__.IconButton, { iconProps: { iconName: 'Italic' }, title: "Italic", ariaLabel: "Italic", checked: !!formatting.italic, styles: iconButtonStyles(!!formatting.italic), onClick: function () { return handleFormattingChange('italic', !formatting.italic); } })),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_3__.TooltipHost, { content: "Underline" },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_4__.IconButton, { iconProps: { iconName: 'Underline' }, title: "Underline", ariaLabel: "Underline", checked: !!formatting.underline, styles: iconButtonStyles(!!formatting.underline), onClick: function () { return handleFormattingChange('underline', !formatting.underline); } })),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_3__.TooltipHost, { content: "Strikethrough" },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_4__.IconButton, { iconProps: { iconName: 'Strikethrough' }, title: "Strikethrough", ariaLabel: "Strikethrough", checked: !!formatting.strikethrough, styles: iconButtonStyles(!!formatting.strikethrough), onClick: function () { return handleFormattingChange('strikethrough', !formatting.strikethrough); } })),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_5__.Dropdown, { label: undefined, ariaLabel: "Font Size", options: FONT_SIZES, selectedKey: fontSize || '24px', onChange: function (_, option) { return onChange({ fontSize: option.key }); }, styles: { root: { width: 140, marginLeft: 8 } } })),
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_5__.Dropdown, { label: undefined, ariaLabel: "Font Family", options: FONT_FAMILIES, selectedKey: fontFamily || 'Segoe UI', onChange: function (_, option) { return onChange({ fontFamily: option.key }); }, onRenderOption: renderFontOption, onRenderTitle: renderFontTitle, styles: { root: { maxWidth: 260 } } })));
+};
+
+
+/***/ }),
+
+/***/ 4439:
+/*!*******************************************************************!*\
+  !*** ./lib/webparts/fancyList/propertyPane/ShapePickerControl.js ***!
+  \*******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   ShapePickerControl: () => (/* binding */ ShapePickerControl)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ 5959);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+var shapeOptions = [
+    { key: 'square', text: 'Square' },
+    { key: 'rounded', text: 'Rounded' },
+    { key: 'pill', text: 'Pill' }
+];
+var ShapePickerControl = function (_a) {
+    var value = _a.value, label = _a.label, onChange = _a.onChange, disabled = _a.disabled;
+    return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 12 } },
+        label && react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: { display: 'block', fontWeight: 600, marginBottom: 4 } }, label),
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { display: 'flex', gap: 8 } }, shapeOptions.map(function (option) { return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { key: option.key, type: "button", disabled: disabled, style: {
+                padding: '0.5em 1.2em',
+                border: value === option.key ? '2px solid #0078d4' : '1px solid #ccc',
+                borderRadius: option.key === 'square' ? 0 : option.key === 'rounded' ? 8 : 999,
+                background: value === option.key ? '#e5f1fb' : '#fff',
+                color: '#323130',
+                fontWeight: 500,
+                cursor: disabled ? 'not-allowed' : 'pointer',
+                outline: value === option.key ? '2px solid #0078d4' : 'none',
+                minWidth: 60
+            }, "aria-pressed": value === option.key, onClick: function () { return !disabled && onChange(option.key); } }, option.text)); }))));
+};
+
+
+/***/ }),
+
 /***/ 2867:
 /*!*******************************************************************!*\
   !*** ./lib/webparts/fancyList/propertyPane/TitleConfiguration.js ***!
@@ -641,11 +680,44 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ 5959);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _BackgroundPickerControl__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BackgroundPickerControl */ 4056);
+/* harmony import */ var _fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @fluentui/react/lib/TextField */ 7102);
+/* harmony import */ var _FontControl__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FontControl */ 8177);
+/* harmony import */ var _ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ColorPickerControl */ 9193);
+/* harmony import */ var _ShapePickerControl__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ShapePickerControl */ 4439);
+
+
+
 
 
 var TitleConfiguration = function (_a) {
-    var label = _a.label;
+    var label = _a.label, _b = _a.settings, settings = _b === void 0 ? {
+        webPartTitle: 'Fancy List',
+        shape: 'rounded',
+        font: {
+            family: 'Segoe UI',
+            size: '24px',
+            formatting: {
+                bold: false,
+                italic: false,
+                underline: false,
+                strikethrough: false
+            },
+            color: '#323130'
+        }
+    } : _b, onPropertyChange = _a.onPropertyChange;
+    var handlePropertyChange = function (propertyPath, newValue) {
+        if (onPropertyChange) {
+            onPropertyChange(propertyPath, newValue);
+        }
+    };
+    var handleFontChange = function (fields) {
+        if (fields.fontFamily)
+            handlePropertyChange('font.family', fields.fontFamily);
+        if (fields.fontSize)
+            handlePropertyChange('font.size', fields.fontSize);
+        if (fields.formatting)
+            handlePropertyChange('font.formatting', fields.formatting);
+    };
     return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
                 fontSize: '16px',
@@ -660,9 +732,13 @@ var TitleConfiguration = function (_a) {
                 marginBottom: '16px'
             } }, "Customize the web parts title text, font, color, background, and shape settings. Use the reset button to put the default look and feel back in place. Use the Back and Next buttons to switch to a different configuration page."),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_BackgroundPickerControl__WEBPACK_IMPORTED_MODULE_1__.BackgroundPickerControl, { label: "Title Background", selectedKey: "solid", onPropertyChange: function (propertyPath, newValue) {
-                    console.log('Background property changed:', propertyPath, newValue);
-                } }))));
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_4__.TextField, { label: "Title Text", value: settings.webPartTitle, onChange: function (_, newValue) { return handlePropertyChange('webPartTitle', newValue || ''); }, placeholder: "Enter title text" })),
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ShapePickerControl__WEBPACK_IMPORTED_MODULE_3__.ShapePickerControl, { value: settings.shape, label: "Title Shape", onChange: function (newShape) { return handlePropertyChange('shape', newShape); } })),
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_FontControl__WEBPACK_IMPORTED_MODULE_1__.FontControl, { label: "Title Font", fontFamily: settings.font.family, fontSize: settings.font.size, formatting: settings.font.formatting, onChange: handleFontChange })),
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__.ColorPickerControl, { label: "Title Color", color: settings.font.color, field: "titleColor", onChange: function (field, newColor) { return handlePropertyChange('font.color', newColor); } }))));
 };
 
 
@@ -1008,6 +1084,356 @@ function setVirtualParent(child, parent) {
         virtualParent._virtual.children.push(virtualChild);
     }
 }
+
+
+/***/ }),
+
+/***/ 903:
+/*!*************************************************************************!*\
+  !*** ./node_modules/@fluentui/foundation-legacy/lib/createComponent.js ***!
+  \*************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   createComponent: () => (/* binding */ createComponent)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 196);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ 5959);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fluentui/style-utilities */ 8455);
+/* harmony import */ var _fluentui_utilities__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fluentui/utilities */ 7072);
+/* harmony import */ var _fluentui_utilities__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @fluentui/utilities */ 2818);
+/* harmony import */ var _slots__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./slots */ 7001);
+/* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./utilities */ 3676);
+
+
+
+
+
+
+/**
+ * Assembles a higher order component based on the following: styles, theme, view, and state.
+ * Imposes a separation of concern and centralizes styling processing to increase ease of use and robustness
+ * in how components use and apply styling and theming.
+ *
+ * Automatically merges and applies themes and styles with theme / styleprops having the highest priority.
+ * State component, if provided, is passed in props for processing. Props from state / user are automatically processed
+ * and styled before finally being passed to view.
+ *
+ * State components should contain all stateful behavior and should not generate any JSX, but rather simply call
+ * the view prop.
+ *
+ * Views should simply be stateless pure functions that receive all props needed for rendering their output.
+ *
+ * State component is optional. If state is not provided, created component is essentially a functional
+ * stateless component.
+ *
+ * @param options - component Component options. See IComponentOptions for more detail.
+ */
+function createComponent(view, options) {
+    if (options === void 0) { options = {}; }
+    var _a = options.factoryOptions, factoryOptions = _a === void 0 ? {} : _a;
+    var defaultProp = factoryOptions.defaultProp;
+    var ResultComponent = function (componentProps) {
+        var settings = _getCustomizations(options.displayName, react__WEBPACK_IMPORTED_MODULE_0__.useContext(_fluentui_utilities__WEBPACK_IMPORTED_MODULE_2__.CustomizerContext), options.fields);
+        var stateReducer = options.state;
+        if (stateReducer) {
+            // Don't assume state will return all props, so spread useState result over component props.
+            componentProps = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_3__.__assign)({}, componentProps), stateReducer(componentProps));
+        }
+        var theme = componentProps.theme || settings.theme;
+        var tokens = _resolveTokens(componentProps, theme, options.tokens, settings.tokens, componentProps.tokens);
+        var styles = _resolveStyles(componentProps, theme, tokens, options.styles, settings.styles, componentProps.styles);
+        var viewProps = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_3__.__assign)({}, componentProps), { styles: styles, tokens: tokens, _defaultStyles: styles, theme: theme });
+        return view(viewProps);
+    };
+    ResultComponent.displayName = options.displayName || view.name;
+    // If a shorthand prop is defined, create a factory for the component.
+    // TODO: This shouldn't be a concern of createComponent.. factoryOptions should just be forwarded.
+    //       Need to weigh creating default factories on component creation vs. memoizing them on use in slots.tsx.
+    if (defaultProp) {
+        ResultComponent.create = (0,_slots__WEBPACK_IMPORTED_MODULE_4__.createFactory)(ResultComponent, { defaultProp: defaultProp });
+    }
+    (0,_utilities__WEBPACK_IMPORTED_MODULE_5__.assign)(ResultComponent, options.statics);
+    // Later versions of TypeSript should allow us to merge objects in a type safe way and avoid this cast.
+    return ResultComponent;
+}
+/**
+ * Resolve all styles functions with both props and tokens and flatten results along with all styles objects.
+ */
+function _resolveStyles(props, theme, tokens) {
+    var allStyles = [];
+    for (var _i = 3; _i < arguments.length; _i++) {
+        allStyles[_i - 3] = arguments[_i];
+    }
+    return _fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_1__.concatStyleSets.apply(void 0, allStyles.map(function (styles) {
+        return typeof styles === 'function' ? styles(props, theme, tokens) : styles;
+    }));
+}
+/**
+ * Resolve all tokens functions with props flatten results along with all tokens objects.
+ */
+function _resolveTokens(props, theme) {
+    var allTokens = [];
+    for (var _i = 2; _i < arguments.length; _i++) {
+        allTokens[_i - 2] = arguments[_i];
+    }
+    var tokens = {};
+    for (var _a = 0, allTokens_1 = allTokens; _a < allTokens_1.length; _a++) {
+        var currentTokens = allTokens_1[_a];
+        if (currentTokens) {
+            // TODO: why is this cast needed? TS seems to think there is a (TToken | Function) union from somewhere.
+            currentTokens =
+                typeof currentTokens === 'function'
+                    ? currentTokens(props, theme)
+                    : currentTokens;
+            if (Array.isArray(currentTokens)) {
+                currentTokens = _resolveTokens.apply(void 0, (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__spreadArray)([props, theme], currentTokens, false));
+            }
+            (0,_utilities__WEBPACK_IMPORTED_MODULE_5__.assign)(tokens, currentTokens);
+        }
+    }
+    return tokens;
+}
+/**
+ * Helper function for calling Customizations.getSettings falling back to default fields.
+ *
+ * @param displayName Displayable name for component.
+ * @param context React context passed to component containing contextual settings.
+ * @param fields Optional list of properties to grab from global store and context.
+ */
+function _getCustomizations(displayName, context, fields) {
+    // TODO: do we want field props? should fields be part of IComponent and used here?
+    // TODO: should we centrally define DefaultFields? (not exported from styling)
+    // TODO: tie this array to ICustomizationProps, such that each array element is keyof ICustomizationProps
+    var DefaultFields = ['theme', 'styles', 'tokens'];
+    return _fluentui_utilities__WEBPACK_IMPORTED_MODULE_6__.Customizations.getSettings(fields || DefaultFields, displayName, context.customizations);
+}
+
+
+/***/ }),
+
+/***/ 7001:
+/*!***************************************************************!*\
+  !*** ./node_modules/@fluentui/foundation-legacy/lib/slots.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   createFactory: () => (/* binding */ createFactory),
+/* harmony export */   getSlots: () => (/* binding */ getSlots),
+/* harmony export */   withSlots: () => (/* binding */ withSlots)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 196);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ 5959);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _fluentui_merge_styles__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @fluentui/merge-styles */ 3574);
+/* harmony import */ var _fluentui_utilities__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fluentui/utilities */ 5659);
+/* harmony import */ var _fluentui_utilities__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @fluentui/utilities */ 6657);
+/* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./utilities */ 3676);
+
+
+
+
+
+/**
+ * This function is required for any module that uses slots.
+ *
+ * This function is a slot resolver that automatically evaluates slot functions to generate React elements.
+ * A byproduct of this resolver is that it removes slots from the React hierarchy by bypassing React.createElement.
+ *
+ * To use this function on a per-file basis, use the jsx directive targeting withSlots.
+ * This directive must be the FIRST LINE in the file to work correctly.
+ * Usage of this pragma also requires withSlots import statement.
+ *
+ * See React.createElement
+ */
+// Can't use typeof on React.createElement since it's overloaded. Approximate createElement's signature for now
+// and widen as needed.
+function withSlots(type, props) {
+    var children = [];
+    for (var _i = 2; _i < arguments.length; _i++) {
+        children[_i - 2] = arguments[_i];
+    }
+    var slotType = type;
+    if (slotType.isSlot) {
+        // Since we are bypassing createElement, use React.Children.toArray to make sure children are
+        // properly assigned keys.
+        // TODO: should this be mutating? does React mutate children subprop with createElement?
+        // TODO: will toArray clobber existing keys?
+        // TODO: React generates warnings because it doesn't detect hidden member _store that is set in createElement.
+        //        Even children passed to createElement without keys don't generate this warning.
+        //        Is there a better way to prevent slots from appearing in hierarchy? toArray doesn't address root issue.
+        children = react__WEBPACK_IMPORTED_MODULE_0__.Children.toArray(children);
+        // TODO: There is something weird going on here with children embedded in props vs. rest args.
+        // Comment out these lines to see. Make sure this function is doing the right things.
+        if (children.length === 0) {
+            return slotType(props);
+        }
+        return slotType((0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)({}, props), { children: children }));
+    }
+    else {
+        // TODO: Are there some cases where children should NOT be spread? Also, spreading reraises perf question.
+        //        Children had to be spread to avoid breaking KeytipData in Toggle.view:
+        //        react-dom.development.js:18931 Uncaught TypeError: children is not a function
+        //        Without spread, function child is a child array of one element
+        // TODO: is there a reason this can't be:
+        // return React.createElement.apply(this, arguments);
+        return react__WEBPACK_IMPORTED_MODULE_0__.createElement.apply(react__WEBPACK_IMPORTED_MODULE_0__, (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__spreadArray)([type, props], children, false));
+    }
+}
+/**
+ * This function creates factories that render ouput depending on the user ISlotProp props passed in.
+ * @param DefaultComponent - Base component to render when not overridden by user props.
+ * @param options - Factory options, including defaultProp value for shorthand prop mapping.
+ * @returns ISlotFactory function used for rendering slots.
+ */
+function createFactory(DefaultComponent, options) {
+    if (options === void 0) { options = {}; }
+    var _a = options.defaultProp, defaultProp = _a === void 0 ? 'children' : _a;
+    var result = function (componentProps, userProps, userSlotOptions, defaultStyles, theme) {
+        // If they passed in raw JSX, just return that.
+        if (react__WEBPACK_IMPORTED_MODULE_0__.isValidElement(userProps)) {
+            return userProps;
+        }
+        var flattenedUserProps = _translateShorthand(defaultProp, userProps);
+        var finalProps = _constructFinalProps(defaultStyles, theme, componentProps, flattenedUserProps);
+        if (userSlotOptions) {
+            if (userSlotOptions.component) {
+                // TODO: Remove cast if possible. This cast is needed because TS errors on the intrinsic portion of ReactType.
+                // return <userSlotOptions.component {...finalProps} />;
+                var UserComponent = userSlotOptions.component;
+                return react__WEBPACK_IMPORTED_MODULE_0__.createElement(UserComponent, (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)({}, finalProps));
+            }
+            if (userSlotOptions.render) {
+                return userSlotOptions.render(finalProps, DefaultComponent);
+            }
+        }
+        return react__WEBPACK_IMPORTED_MODULE_0__.createElement(DefaultComponent, (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)({}, finalProps));
+    };
+    return result;
+}
+/**
+ * Default factory for components without explicit factories.
+ */
+var defaultFactory = (0,_fluentui_utilities__WEBPACK_IMPORTED_MODULE_2__.memoizeFunction)(function (type) { return createFactory(type); });
+/**
+ * This function generates slots that can be used in JSX given a definition of slots and their corresponding types.
+ * @param userProps - Props as pass to component.
+ * @param slots - Slot definition object defining the default slot component for each slot.
+ * @returns A set of created slots that components can render in JSX.
+ */
+function getSlots(userProps, slots) {
+    var result = {};
+    // userProps already has default props mixed in by createComponent. Recast here to gain typing for this function.
+    var mixedProps = userProps;
+    var _loop_1 = function (name_1) {
+        if (slots.hasOwnProperty(name_1)) {
+            // This closure method requires the use of withSlots to prevent unnecessary rerenders. This is because React
+            // detects each closure as a different component (since it is a new instance) from the previous one and then
+            // forces a rerender of the entire slot subtree. For now, the only way to avoid this is to use withSlots, which
+            // bypasses the call to React.createElement.
+            var slot = function (componentProps) {
+                var args = [];
+                for (var _i = 1; _i < arguments.length; _i++) {
+                    args[_i - 1] = arguments[_i];
+                }
+                if (args.length > 0) {
+                    // If React.createElement is being incorrectly used with slots, there will be additional arguments.
+                    // We can detect these additional arguments and error on their presence.
+                    throw new Error('Any module using getSlots must use withSlots. Please see withSlots javadoc for more info.');
+                }
+                // TODO: having TS infer types here seems to cause infinite loop.
+                //   use explicit types or casting to preserve typing if possible.
+                // TODO: this should be a lookup on TProps property instead of being TProps directly, which is probably
+                //   causing the infinite loop
+                return _renderSlot(slots[name_1], 
+                // TODO: this cast to any is hiding a relationship issue between the first two args
+                componentProps, mixedProps[name_1], mixedProps.slots && mixedProps.slots[name_1], 
+                // _defaultStyles should always be present, but a check for existence is added to make view tests
+                // easier to use.
+                mixedProps._defaultStyles && mixedProps._defaultStyles[name_1], mixedProps.theme);
+            };
+            slot.isSlot = true;
+            result[name_1] = slot;
+        }
+    };
+    for (var name_1 in slots) {
+        _loop_1(name_1);
+    }
+    return result;
+}
+/**
+ * Helper function that translates shorthand as needed.
+ * @param defaultProp
+ * @param slotProps
+ */
+function _translateShorthand(defaultProp, slotProps) {
+    var _a;
+    var transformedProps;
+    if (typeof slotProps === 'string' || typeof slotProps === 'number' || typeof slotProps === 'boolean') {
+        transformedProps = (_a = {},
+            _a[defaultProp] = slotProps,
+            _a);
+    }
+    else {
+        transformedProps = slotProps;
+    }
+    return transformedProps;
+}
+/**
+ * Helper function that constructs final styles and props given a series of props ordered by increasing priority.
+ */
+function _constructFinalProps(defaultStyles, theme) {
+    var allProps = [];
+    for (var _i = 2; _i < arguments.length; _i++) {
+        allProps[_i - 2] = arguments[_i];
+    }
+    var finalProps = {};
+    var classNames = [];
+    for (var _a = 0, allProps_1 = allProps; _a < allProps_1.length; _a++) {
+        var props = allProps_1[_a];
+        classNames.push(props && props.className);
+        (0,_utilities__WEBPACK_IMPORTED_MODULE_3__.assign)(finalProps, props);
+    }
+    finalProps.className = (0,_fluentui_merge_styles__WEBPACK_IMPORTED_MODULE_4__.mergeCss)([defaultStyles, classNames], { rtl: (0,_fluentui_utilities__WEBPACK_IMPORTED_MODULE_5__.getRTL)(theme) });
+    return finalProps;
+}
+/**
+ * Render a slot given component and user props. Uses component factory if available, otherwise falls back
+ * to default factory.
+ * @param ComponentType Factory component type.
+ * @param componentProps The properties passed into slot from within the component.
+ * @param userProps The user properties passed in from outside of the component.
+ */
+function _renderSlot(ComponentType, componentProps, userProps, slotOptions, defaultStyles, theme) {
+    if (ComponentType.create !== undefined) {
+        return ComponentType.create(componentProps, userProps, slotOptions, defaultStyles);
+    }
+    else {
+        // TODO: need to resolve typing / generic issues passing through memoizeFunction. for now, cast to 'unknown'
+        return defaultFactory(ComponentType)(componentProps, userProps, slotOptions, defaultStyles, theme);
+    }
+}
+
+
+/***/ }),
+
+/***/ 3676:
+/*!*******************************************************************!*\
+  !*** ./node_modules/@fluentui/foundation-legacy/lib/utilities.js ***!
+  \*******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   assign: () => (/* binding */ assign)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ 196);
+
+var assign = tslib__WEBPACK_IMPORTED_MODULE_0__.__assign;
 
 
 /***/ }),
@@ -3983,53 +4409,6 @@ function usePrevious(value) {
     });
     return ref.current;
 }
-
-
-/***/ }),
-
-/***/ 7461:
-/*!*****************************************************************!*\
-  !*** ./node_modules/@fluentui/react-hooks/lib/useSetTimeout.js ***!
-  \*****************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   useSetTimeout: () => (/* binding */ useSetTimeout)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ 5959);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _useConst__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./useConst */ 5559);
-
-
-/**
- *  Returns a wrapper function for `setTimeout` which automatically handles disposal.
- */
-var useSetTimeout = function () {
-    var timeoutIds = (0,_useConst__WEBPACK_IMPORTED_MODULE_1__.useConst)({});
-    // Cleanup function.
-    react__WEBPACK_IMPORTED_MODULE_0__.useEffect(function () { return function () {
-        for (var _i = 0, _a = Object.keys(timeoutIds); _i < _a.length; _i++) {
-            var id = _a[_i];
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            clearTimeout(id);
-        }
-    }; }, 
-    // useConst ensures this will never change, but react-hooks/exhaustive-deps doesn't know that
-    [timeoutIds]);
-    // Return wrapper which will auto cleanup.
-    return (0,_useConst__WEBPACK_IMPORTED_MODULE_1__.useConst)({
-        setTimeout: function (func, duration) {
-            var id = setTimeout(func, duration);
-            timeoutIds[id] = 1;
-            return id;
-        },
-        clearTimeout: function (id) {
-            delete timeoutIds[id];
-            clearTimeout(id);
-        },
-    });
-};
 
 
 /***/ }),
@@ -7644,7 +8023,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Utilities__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../Utilities */ 5336);
 /* harmony import */ var _ColorRectangle_base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ColorRectangle.base */ 1631);
-/* harmony import */ var _ColorRectangle_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ColorRectangle.styles */ 9876);
+/* harmony import */ var _ColorRectangle_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ColorRectangle.styles */ 7495);
 
 
 
@@ -7653,7 +8032,7 @@ var ColorRectangle = (0,_Utilities__WEBPACK_IMPORTED_MODULE_0__.styled)(_ColorRe
 
 /***/ }),
 
-/***/ 9876:
+/***/ 7495:
 /*!*********************************************************************************************************!*\
   !*** ./node_modules/@fluentui/react/lib/components/ColorPicker/ColorRectangle/ColorRectangle.styles.js ***!
   \*********************************************************************************************************/
@@ -15086,767 +15465,594 @@ Popup.displayName = 'Popup';
 
 /***/ }),
 
-/***/ 2347:
+/***/ 1314:
+/*!********************************************************************!*\
+  !*** ./node_modules/@fluentui/react/lib/components/Stack/Stack.js ***!
+  \********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Stack: () => (/* binding */ Stack),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 196);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ 5959);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _fluentui_foundation_legacy__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @fluentui/foundation-legacy */ 7001);
+/* harmony import */ var _fluentui_foundation_legacy__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @fluentui/foundation-legacy */ 903);
+/* harmony import */ var _fluentui_react_hooks__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @fluentui/react-hooks */ 8555);
+/* harmony import */ var _Utilities__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Utilities */ 6549);
+/* harmony import */ var _Utilities__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../Utilities */ 7974);
+/* harmony import */ var _Utilities__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../Utilities */ 8972);
+/* harmony import */ var _Stack_styles__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Stack.styles */ 5796);
+/* harmony import */ var _StackItem_StackItem__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./StackItem/StackItem */ 8037);
+
+/** @jsxRuntime classic */
+/** @jsx withSlots */
+
+
+
+
+
+
+var StackView = function (props) {
+    var _a = props.as, RootType = _a === void 0 ? 'div' : _a, _b = props.disableShrink, disableShrink = _b === void 0 ? false : _b, 
+    // eslint-disable-next-line @typescript-eslint/no-deprecated
+    _c = props.doNotRenderFalsyValues, 
+    // eslint-disable-next-line @typescript-eslint/no-deprecated
+    doNotRenderFalsyValues = _c === void 0 ? false : _c, _d = props.enableScopedSelectors, enableScopedSelectors = _d === void 0 ? false : _d, wrap = props.wrap, rest = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__rest)(props, ["as", "disableShrink", "doNotRenderFalsyValues", "enableScopedSelectors", "wrap"]);
+    (0,_Utilities__WEBPACK_IMPORTED_MODULE_2__.warnDeprecations)('Stack', props, {
+        gap: 'tokens.childrenGap',
+        maxHeight: 'tokens.maxHeight',
+        maxWidth: 'tokens.maxWidth',
+        padding: 'tokens.padding',
+    });
+    var stackInnerId = (0,_fluentui_react_hooks__WEBPACK_IMPORTED_MODULE_3__.useId)('stack-inner');
+    var stackChildren = _processStackChildren(props.children, {
+        disableShrink: disableShrink,
+        enableScopedSelectors: enableScopedSelectors,
+        doNotRenderFalsyValues: doNotRenderFalsyValues,
+    });
+    var nativeProps = (0,_Utilities__WEBPACK_IMPORTED_MODULE_4__.getNativeProps)(rest, _Utilities__WEBPACK_IMPORTED_MODULE_4__.htmlElementProperties);
+    var Slots = (0,_fluentui_foundation_legacy__WEBPACK_IMPORTED_MODULE_5__.getSlots)(props, {
+        root: RootType,
+        inner: 'div',
+    });
+    if (wrap) {
+        return ((0,_fluentui_foundation_legacy__WEBPACK_IMPORTED_MODULE_5__.withSlots)(Slots.root, (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)({}, nativeProps),
+            (0,_fluentui_foundation_legacy__WEBPACK_IMPORTED_MODULE_5__.withSlots)(Slots.inner, { key: stackInnerId }, stackChildren)));
+    }
+    return (0,_fluentui_foundation_legacy__WEBPACK_IMPORTED_MODULE_5__.withSlots)(Slots.root, (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)({}, nativeProps), stackChildren);
+};
+function _processStackChildren(children, _a) {
+    var disableShrink = _a.disableShrink, enableScopedSelectors = _a.enableScopedSelectors, doNotRenderFalsyValues = _a.doNotRenderFalsyValues;
+    var childrenArray = react__WEBPACK_IMPORTED_MODULE_0__.Children.toArray(children);
+    childrenArray = react__WEBPACK_IMPORTED_MODULE_0__.Children.map(childrenArray, function (child) {
+        if (!child) {
+            return doNotRenderFalsyValues ? null : child;
+        }
+        // We need to allow children that aren't falsy values, but not valid elements since they could be
+        // a string like <Stack>{'sample string'}</Stack>
+        if (!react__WEBPACK_IMPORTED_MODULE_0__.isValidElement(child)) {
+            return child;
+        }
+        if (child.type === react__WEBPACK_IMPORTED_MODULE_0__.Fragment) {
+            return child.props.children
+                ? _processStackChildren(child.props.children, { disableShrink: disableShrink, enableScopedSelectors: enableScopedSelectors, doNotRenderFalsyValues: doNotRenderFalsyValues })
+                : null;
+        }
+        var childAsReactElement = child;
+        var defaultItemProps = {};
+        if (_isStackItem(child)) {
+            defaultItemProps = { shrink: !disableShrink };
+        }
+        var childClassName = childAsReactElement.props.className;
+        return react__WEBPACK_IMPORTED_MODULE_0__.cloneElement(childAsReactElement, (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)({}, defaultItemProps), childAsReactElement.props), (childClassName && { className: childClassName })), (enableScopedSelectors && { className: (0,_Utilities__WEBPACK_IMPORTED_MODULE_6__.css)(_Stack_styles__WEBPACK_IMPORTED_MODULE_7__.GlobalClassNames.child, childClassName) })));
+    });
+    return childrenArray;
+}
+function _isStackItem(item) {
+    // In theory, we should be able to just check item.type === StackItem.
+    // However, under certain unclear circumstances (see https://github.com/microsoft/fluentui/issues/10785),
+    // the object identity is different despite the function implementation being the same.
+    return (!!item &&
+        typeof item === 'object' &&
+        !!item.type &&
+        // StackItem is generated by createComponent, so we need to check its displayName instead of name
+        item.type.displayName === _StackItem_StackItem__WEBPACK_IMPORTED_MODULE_8__.StackItem.displayName);
+}
+var StackStatics = {
+    Item: _StackItem_StackItem__WEBPACK_IMPORTED_MODULE_8__.StackItem,
+};
+var Stack = (0,_fluentui_foundation_legacy__WEBPACK_IMPORTED_MODULE_9__.createComponent)(StackView, {
+    displayName: 'Stack',
+    styles: _Stack_styles__WEBPACK_IMPORTED_MODULE_7__.styles,
+    statics: StackStatics,
+});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Stack);
+
+
+/***/ }),
+
+/***/ 5796:
 /*!***************************************************************************!*\
-  !*** ./node_modules/@fluentui/react/lib/components/Slider/Slider.base.js ***!
+  !*** ./node_modules/@fluentui/react/lib/components/Stack/Stack.styles.js ***!
   \***************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   SliderBase: () => (/* binding */ SliderBase)
+/* harmony export */   GlobalClassNames: () => (/* binding */ GlobalClassNames),
+/* harmony export */   styles: () => (/* binding */ styles)
 /* harmony export */ });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 196);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ 5959);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _fluentui_react_hooks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fluentui/react-hooks */ 2295);
-/* harmony import */ var _fluentui_utilities__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @fluentui/utilities */ 5123);
-/* harmony import */ var _Label_Label__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Label/Label */ 3166);
-/* harmony import */ var _useSlider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./useSlider */ 957);
+/* harmony import */ var _Styling__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Styling */ 8455);
+/* harmony import */ var _StackItem_StackItem_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./StackItem/StackItem.styles */ 2497);
+/* harmony import */ var _StackUtils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./StackUtils */ 2293);
 
 
 
 
-
-
-var COMPONENT_NAME = 'SliderBase';
-var SliderBase = react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(function (props, ref) {
-    var slotProps = (0,_useSlider__WEBPACK_IMPORTED_MODULE_1__.useSlider)(props, ref);
-    if (true) {
-        // eslint-disable-next-line react-hooks/rules-of-hooks -- build-time conditional
-        (0,_fluentui_react_hooks__WEBPACK_IMPORTED_MODULE_2__.useWarnings)({
-            name: COMPONENT_NAME,
-            props: props,
-            mutuallyExclusive: { value: 'defaultValue' },
-        });
-    }
-    return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__assign)({}, slotProps.root),
-        slotProps && react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Label_Label__WEBPACK_IMPORTED_MODULE_4__.Label, (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__assign)({}, slotProps.label)),
-        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__assign)({}, slotProps.container),
-            props.ranged &&
-                (props.vertical
-                    ? slotProps.valueLabel && react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Label_Label__WEBPACK_IMPORTED_MODULE_4__.Label, (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__assign)({}, slotProps.valueLabel))
-                    : slotProps.lowerValueLabel && react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Label_Label__WEBPACK_IMPORTED_MODULE_4__.Label, (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__assign)({}, slotProps.lowerValueLabel))),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__assign)({}, slotProps.sliderBox),
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__assign)({}, slotProps.sliderLine),
-                    props.ranged && react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__assign)({}, slotProps.lowerValueThumb)),
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__assign)({}, slotProps.thumb)),
-                    slotProps.zeroTick && react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__assign)({}, slotProps.zeroTick)),
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__assign)({}, slotProps.bottomInactiveTrack)),
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__assign)({}, slotProps.activeTrack)),
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__assign)({}, slotProps.topInactiveTrack)))),
-            props.ranged && props.vertical
-                ? slotProps.lowerValueLabel && react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Label_Label__WEBPACK_IMPORTED_MODULE_4__.Label, (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__assign)({}, slotProps.lowerValueLabel))
-                : slotProps.valueLabel && react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Label_Label__WEBPACK_IMPORTED_MODULE_4__.Label, (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__assign)({}, slotProps.valueLabel))),
-        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_utilities__WEBPACK_IMPORTED_MODULE_5__.FocusRects, null)));
-});
-SliderBase.displayName = COMPONENT_NAME;
-
-
-/***/ }),
-
-/***/ 1798:
-/*!**********************************************************************!*\
-  !*** ./node_modules/@fluentui/react/lib/components/Slider/Slider.js ***!
-  \**********************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   Slider: () => (/* binding */ Slider)
-/* harmony export */ });
-/* harmony import */ var _fluentui_utilities__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @fluentui/utilities */ 5336);
-/* harmony import */ var _Slider_base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Slider.base */ 2347);
-/* harmony import */ var _Slider_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Slider.styles */ 7632);
-
-
-
-var Slider = (0,_fluentui_utilities__WEBPACK_IMPORTED_MODULE_0__.styled)(_Slider_base__WEBPACK_IMPORTED_MODULE_1__.SliderBase, _Slider_styles__WEBPACK_IMPORTED_MODULE_2__.getStyles, undefined, {
-    scope: 'Slider',
-});
-
-
-/***/ }),
-
-/***/ 7632:
-/*!*****************************************************************************!*\
-  !*** ./node_modules/@fluentui/react/lib/components/Slider/Slider.styles.js ***!
-  \*****************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   getStyles: () => (/* binding */ getStyles)
-/* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 196);
-/* harmony import */ var _fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @fluentui/style-utilities */ 8455);
-/* harmony import */ var _fluentui_utilities__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fluentui/utilities */ 6657);
-
-
-
-var GlobalClassNames = {
-    root: 'ms-Slider',
-    enabled: 'ms-Slider-enabled',
-    disabled: 'ms-Slider-disabled',
-    row: 'ms-Slider-row',
-    column: 'ms-Slider-column',
-    container: 'ms-Slider-container',
-    slideBox: 'ms-Slider-slideBox',
-    line: 'ms-Slider-line',
-    thumb: 'ms-Slider-thumb',
-    activeSection: 'ms-Slider-active',
-    inactiveSection: 'ms-Slider-inactive',
-    valueLabel: 'ms-Slider-value',
-    showValue: 'ms-Slider-showValue',
-    showTransitions: 'ms-Slider-showTransitions',
-    zeroTick: 'ms-Slider-zeroTick',
+var nameMap = {
+    start: 'flex-start',
+    end: 'flex-end',
 };
-var getStyles = function (props) {
+var GlobalClassNames = {
+    root: 'ms-Stack',
+    inner: 'ms-Stack-inner',
+    child: 'ms-Stack-child',
+};
+var styles = function (props, theme, tokens) {
     var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o;
-    var className = props.className, titleLabelClassName = props.titleLabelClassName, theme = props.theme, vertical = props.vertical, disabled = props.disabled, showTransitions = props.showTransitions, showValue = props.showValue, ranged = props.ranged;
-    var semanticColors = theme.semanticColors, palette = theme.palette;
-    var classNames = (0,_fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__.getGlobalClassNames)(GlobalClassNames, theme);
-    /** Tokens:
-     *   The word "active" in the token refers to the selected section of the slider
-     *   The word "inactive" in the token refers to the unselected section of the slider */
-    var pressedActiveSectionColor = semanticColors.inputBackgroundCheckedHovered;
-    var hoveredActiveSectionColor = semanticColors.inputBackgroundChecked;
-    var hoveredPressedinactiveSectionColor = palette.neutralSecondaryAlt;
-    var restActiveSectionColor = palette.neutralPrimary;
-    var restInactiveSectionColor = palette.neutralSecondaryAlt;
-    var disabledActiveSectionColor = semanticColors.disabledText;
-    var disabledInactiveSectionColor = semanticColors.disabledBackground;
-    var thumbBackgroundColor = semanticColors.inputBackground;
-    var thumbBorderColor = semanticColors.smallInputBorder;
-    var thumbDisabledBorderColor = semanticColors.disabledBorder;
-    var slideBoxActiveSectionStyles = !disabled && {
-        backgroundColor: pressedActiveSectionColor,
-        selectors: (_a = {},
-            _a[_fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__.HighContrastSelector] = {
-                backgroundColor: 'Highlight',
-            },
-            _a),
+    var className = props.className, disableShrink = props.disableShrink, enableScopedSelectors = props.enableScopedSelectors, grow = props.grow, horizontal = props.horizontal, horizontalAlign = props.horizontalAlign, reversed = props.reversed, verticalAlign = props.verticalAlign, verticalFill = props.verticalFill, wrap = props.wrap;
+    var classNames = (0,_Styling__WEBPACK_IMPORTED_MODULE_0__.getGlobalClassNames)(GlobalClassNames, theme);
+    /*  eslint-disable @typescript-eslint/no-deprecated */
+    var childrenGap = tokens && tokens.childrenGap ? tokens.childrenGap : props.gap;
+    var maxHeight = tokens && tokens.maxHeight ? tokens.maxHeight : props.maxHeight;
+    var maxWidth = tokens && tokens.maxWidth ? tokens.maxWidth : props.maxWidth;
+    var padding = tokens && tokens.padding ? tokens.padding : props.padding;
+    /* eslint-enable @typescript-eslint/no-deprecated */
+    var _p = (0,_StackUtils__WEBPACK_IMPORTED_MODULE_1__.parseGap)(childrenGap, theme), rowGap = _p.rowGap, columnGap = _p.columnGap;
+    var horizontalMargin = "".concat(-0.5 * columnGap.value).concat(columnGap.unit);
+    var verticalMargin = "".concat(-0.5 * rowGap.value).concat(rowGap.unit);
+    // styles to be applied to all direct children regardless of wrap or direction
+    var childStyles = {
+        textOverflow: 'ellipsis',
     };
-    var slideBoxInactiveSectionStyles = !disabled && {
-        backgroundColor: hoveredPressedinactiveSectionColor,
-        selectors: (_b = {},
-            _b[_fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__.HighContrastSelector] = {
-                borderColor: 'Highlight',
-            },
-            _b),
-    };
-    var slideHoverSectionStyles = !disabled && {
-        backgroundColor: hoveredActiveSectionColor,
-        selectors: (_c = {},
-            _c[_fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__.HighContrastSelector] = {
-                backgroundColor: 'Highlight',
-            },
-            _c),
-    };
-    var slideBoxActiveThumbStyles = !disabled && {
-        border: "2px solid ".concat(pressedActiveSectionColor),
-        selectors: (_d = {},
-            _d[_fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__.HighContrastSelector] = {
-                borderColor: 'Highlight',
-            },
-            _d),
-    };
-    var slideBoxActiveZeroTickStyles = !props.disabled && {
-        backgroundColor: semanticColors.inputPlaceholderBackgroundChecked,
-        selectors: (_e = {},
-            _e[_fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__.HighContrastSelector] = {
-                backgroundColor: 'Highlight',
-            },
-            _e),
-    };
-    return {
-        root: (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__spreadArray)((0,tslib__WEBPACK_IMPORTED_MODULE_1__.__spreadArray)((0,tslib__WEBPACK_IMPORTED_MODULE_1__.__spreadArray)((0,tslib__WEBPACK_IMPORTED_MODULE_1__.__spreadArray)((0,tslib__WEBPACK_IMPORTED_MODULE_1__.__spreadArray)([
-            classNames.root,
-            theme.fonts.medium,
-            {
-                userSelect: 'none',
-            },
-            vertical && {
-                marginRight: 8,
-            }
-        ], [!disabled ? classNames.enabled : undefined], false), [disabled ? classNames.disabled : undefined], false), [!vertical ? classNames.row : undefined], false), [vertical ? classNames.column : undefined], false), [
-            className,
-        ], false),
-        titleLabel: [
-            {
-                padding: 0,
-            },
-            titleLabelClassName,
-        ],
-        container: [
-            classNames.container,
-            {
-                display: 'flex',
-                flexWrap: 'nowrap',
-                alignItems: 'center',
-            },
-            vertical && {
-                flexDirection: 'column',
-                height: '100%',
-                textAlign: 'center',
-                margin: '8px 0',
-            },
-        ],
-        slideBox: (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__spreadArray)((0,tslib__WEBPACK_IMPORTED_MODULE_1__.__spreadArray)([
-            classNames.slideBox,
-            !ranged && (0,_fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__.getFocusStyle)(theme),
-            {
-                background: 'transparent',
-                border: 'none',
-                flexGrow: 1,
-                lineHeight: 28,
-                display: 'flex',
-                alignItems: 'center',
-                selectors: (_f = {},
-                    _f[":active .".concat(classNames.activeSection)] = slideBoxActiveSectionStyles,
-                    _f[":hover .".concat(classNames.activeSection)] = slideHoverSectionStyles,
-                    _f[":active .".concat(classNames.inactiveSection)] = slideBoxInactiveSectionStyles,
-                    _f[":hover .".concat(classNames.inactiveSection)] = slideBoxInactiveSectionStyles,
-                    _f[":active .".concat(classNames.thumb)] = slideBoxActiveThumbStyles,
-                    _f[":hover .".concat(classNames.thumb)] = slideBoxActiveThumbStyles,
-                    _f[":active .".concat(classNames.zeroTick)] = slideBoxActiveZeroTickStyles,
-                    _f[":hover .".concat(classNames.zeroTick)] = slideBoxActiveZeroTickStyles,
-                    _f[_fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__.HighContrastSelector] = {
-                        forcedColorAdjust: 'none',
-                    },
-                    _f),
-            },
-            vertical
-                ? {
-                    height: '100%',
-                    width: 28,
-                    padding: '8px 0', // Make room for thumb at bottom of line
-                }
-                : {
-                    height: 28,
+    var childSelector = '> ' + (enableScopedSelectors ? '.' + GlobalClassNames.child : '*');
+    var disableShrinkStyles = (_a = {},
+        // flexShrink styles are applied by the StackItem
+        _a["".concat(childSelector, ":not(.").concat(_StackItem_StackItem_styles__WEBPACK_IMPORTED_MODULE_2__.GlobalClassNames.root, ")")] = {
+            flexShrink: 0,
+        },
+        _a);
+    if (wrap) {
+        return {
+            root: [
+                classNames.root,
+                {
+                    flexWrap: 'wrap',
+                    maxWidth: maxWidth,
+                    maxHeight: maxHeight,
                     width: 'auto',
-                    padding: '0 8px', // Make room for thumb at ends of line
-                }
-        ], [showValue ? classNames.showValue : undefined], false), [showTransitions ? classNames.showTransitions : undefined], false),
-        thumb: [
-            classNames.thumb,
-            ranged && (0,_fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__.getFocusStyle)(theme, { inset: -4 }),
-            {
-                borderWidth: 2,
-                borderStyle: 'solid',
-                borderColor: thumbBorderColor,
-                borderRadius: 10,
-                boxSizing: 'border-box',
-                background: thumbBackgroundColor,
-                display: 'block',
-                width: 16,
-                height: 16,
-                position: 'absolute',
-            },
-            vertical
-                ? {
-                    left: -6,
-                    margin: '0 auto',
-                    transform: 'translateY(8px)',
-                }
-                : {
-                    top: -6,
-                    transform: (0,_fluentui_utilities__WEBPACK_IMPORTED_MODULE_2__.getRTL)(theme) ? 'translateX(50%)' : 'translateX(-50%)',
+                    overflow: 'visible',
+                    height: '100%',
                 },
-            showTransitions && {
-                transition: "left ".concat(_fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__.AnimationVariables.durationValue3, " ").concat(_fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__.AnimationVariables.easeFunction1),
-            },
-            disabled && {
-                borderColor: thumbDisabledBorderColor,
-                selectors: (_g = {},
-                    _g[_fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__.HighContrastSelector] = {
-                        borderColor: 'GrayText',
+                horizontalAlign && (_b = {},
+                    _b[horizontal ? 'justifyContent' : 'alignItems'] = nameMap[horizontalAlign] || horizontalAlign,
+                    _b),
+                verticalAlign && (_c = {},
+                    _c[horizontal ? 'alignItems' : 'justifyContent'] = nameMap[verticalAlign] || verticalAlign,
+                    _c),
+                className,
+                {
+                    // not allowed to be overridden by className
+                    // since this is necessary in order to prevent collapsing margins
+                    display: 'flex',
+                },
+                horizontal && {
+                    height: verticalFill ? '100%' : 'auto',
+                },
+            ],
+            inner: [
+                classNames.inner,
+                (_d = {
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        marginLeft: horizontalMargin,
+                        marginRight: horizontalMargin,
+                        marginTop: verticalMargin,
+                        marginBottom: verticalMargin,
+                        overflow: 'visible',
+                        boxSizing: 'border-box',
+                        padding: (0,_StackUtils__WEBPACK_IMPORTED_MODULE_1__.parsePadding)(padding, theme),
+                        // avoid unnecessary calc() calls if horizontal gap is 0
+                        width: columnGap.value === 0 ? '100%' : "calc(100% + ".concat(columnGap.value).concat(columnGap.unit, ")"),
+                        maxWidth: '100vw'
+                    },
+                    _d[childSelector] = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__assign)({ margin: "".concat(0.5 * rowGap.value).concat(rowGap.unit, " ").concat(0.5 * columnGap.value).concat(columnGap.unit) }, childStyles),
+                    _d),
+                disableShrink && disableShrinkStyles,
+                horizontalAlign && (_e = {},
+                    _e[horizontal ? 'justifyContent' : 'alignItems'] = nameMap[horizontalAlign] || horizontalAlign,
+                    _e),
+                verticalAlign && (_f = {},
+                    _f[horizontal ? 'alignItems' : 'justifyContent'] = nameMap[verticalAlign] || verticalAlign,
+                    _f),
+                horizontal && (_g = {
+                        flexDirection: reversed ? 'row-reverse' : 'row',
+                        // avoid unnecessary calc() calls if vertical gap is 0
+                        height: rowGap.value === 0 ? '100%' : "calc(100% + ".concat(rowGap.value).concat(rowGap.unit, ")")
+                    },
+                    _g[childSelector] = {
+                        maxWidth: columnGap.value === 0 ? '100%' : "calc(100% - ".concat(columnGap.value).concat(columnGap.unit, ")"),
                     },
                     _g),
-            },
-        ],
-        line: [
-            classNames.line,
-            {
-                display: 'flex',
-                position: 'relative',
-            },
-            vertical
-                ? {
-                    height: '100%',
-                    width: 4,
-                    margin: '0 auto',
-                    flexDirection: 'column-reverse',
-                }
-                : {
-                    width: '100%',
-                },
-        ],
-        lineContainer: [
-            {
-                borderRadius: 4,
-                boxSizing: 'border-box',
-            },
-            vertical
-                ? {
-                    width: 4,
-                    height: '100%',
-                }
-                : {
-                    height: 4,
-                    width: '100%',
-                },
-        ],
-        activeSection: [
-            classNames.activeSection,
-            {
-                background: restActiveSectionColor,
-                selectors: (_h = {},
-                    _h[_fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__.HighContrastSelector] = {
-                        backgroundColor: 'WindowText',
+                !horizontal && (_h = {
+                        flexDirection: reversed ? 'column-reverse' : 'column',
+                        height: "calc(100% + ".concat(rowGap.value).concat(rowGap.unit, ")")
+                    },
+                    _h[childSelector] = {
+                        maxHeight: rowGap.value === 0 ? '100%' : "calc(100% - ".concat(rowGap.value).concat(rowGap.unit, ")"),
                     },
                     _h),
-            },
-            showTransitions && {
-                transition: "width ".concat(_fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__.AnimationVariables.durationValue3, " ").concat(_fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__.AnimationVariables.easeFunction1),
-            },
-            disabled && {
-                background: disabledActiveSectionColor,
-                selectors: (_j = {},
-                    _j[_fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__.HighContrastSelector] = {
-                        backgroundColor: 'GrayText',
-                        borderColor: 'GrayText',
-                    },
-                    _j),
-            },
-        ],
-        inactiveSection: [
-            classNames.inactiveSection,
-            {
-                background: restInactiveSectionColor,
-                selectors: (_k = {},
-                    _k[_fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__.HighContrastSelector] = {
-                        border: '1px solid WindowText',
-                    },
-                    _k),
-            },
-            showTransitions && {
-                transition: "width ".concat(_fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__.AnimationVariables.durationValue3, " ").concat(_fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__.AnimationVariables.easeFunction1),
-            },
-            disabled && {
-                background: disabledInactiveSectionColor,
-                selectors: (_l = {},
-                    _l[_fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__.HighContrastSelector] = {
-                        borderColor: 'GrayText',
-                    },
-                    _l),
-            },
-        ],
-        zeroTick: [
-            classNames.zeroTick,
-            {
-                position: 'absolute',
-                background: semanticColors.disabledBorder,
-                selectors: (_m = {},
-                    _m[_fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__.HighContrastSelector] = {
-                        backgroundColor: 'WindowText',
-                    },
-                    _m),
-            },
-            props.disabled && {
-                background: semanticColors.disabledBackground,
-                selectors: (_o = {},
-                    _o[_fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__.HighContrastSelector] = {
-                        backgroundColor: 'GrayText',
-                    },
-                    _o),
-            },
-            props.vertical
-                ? {
-                    width: '16px',
-                    height: '1px',
-                    transform: (0,_fluentui_utilities__WEBPACK_IMPORTED_MODULE_2__.getRTL)(theme) ? 'translateX(6px)' : 'translateX(-6px)',
-                }
-                : {
-                    width: '1px',
-                    height: '16px',
-                    transform: 'translateY(-6px)',
+            ],
+        };
+    }
+    return {
+        root: [
+            classNames.root,
+            (_j = {
+                    display: 'flex',
+                    flexDirection: horizontal ? (reversed ? 'row-reverse' : 'row') : reversed ? 'column-reverse' : 'column',
+                    flexWrap: 'nowrap',
+                    width: 'auto',
+                    height: verticalFill ? '100%' : 'auto',
+                    maxWidth: maxWidth,
+                    maxHeight: maxHeight,
+                    padding: (0,_StackUtils__WEBPACK_IMPORTED_MODULE_1__.parsePadding)(padding, theme),
+                    boxSizing: 'border-box'
                 },
-        ],
-        valueLabel: [
-            classNames.valueLabel,
-            {
-                flexShrink: 1,
-                width: 30,
-                lineHeight: '1', // using a string here meaning it's relative to the size of the font
+                _j[childSelector] = childStyles,
+                _j),
+            disableShrink && disableShrinkStyles,
+            grow && {
+                flexGrow: grow === true ? 1 : grow,
             },
-            vertical
-                ? {
-                    margin: '0 auto',
-                    whiteSpace: 'nowrap',
-                    width: 40,
-                }
-                : {
-                    margin: '0 8px',
-                    whiteSpace: 'nowrap',
-                    width: 40,
+            horizontalAlign && (_k = {},
+                _k[horizontal ? 'justifyContent' : 'alignItems'] = nameMap[horizontalAlign] || horizontalAlign,
+                _k),
+            verticalAlign && (_l = {},
+                _l[horizontal ? 'alignItems' : 'justifyContent'] = nameMap[verticalAlign] || verticalAlign,
+                _l),
+            horizontal &&
+                columnGap.value > 0 && (_m = {},
+                // apply gap margin to every direct child except the first direct child if the direction is not reversed,
+                // and the last direct one if it is
+                _m[reversed ? "".concat(childSelector, ":not(:last-child)") : "".concat(childSelector, ":not(:first-child)")] = {
+                    marginLeft: "".concat(columnGap.value).concat(columnGap.unit),
                 },
+                _m),
+            !horizontal &&
+                rowGap.value > 0 && (_o = {},
+                // apply gap margin to every direct child except the first direct child if the direction is not reversed,
+                // and the last direct one if it is
+                _o[reversed ? "".concat(childSelector, ":not(:last-child)") : "".concat(childSelector, ":not(:first-child)")] = {
+                    marginTop: "".concat(rowGap.value).concat(rowGap.unit),
+                },
+                _o),
+            className,
         ],
+        // TODO: this cast may be hiding some potential issues with styling and name
+        //        lookups and should be removed
     };
 };
 
 
 /***/ }),
 
-/***/ 957:
+/***/ 8037:
+/*!**********************************************************************************!*\
+  !*** ./node_modules/@fluentui/react/lib/components/Stack/StackItem/StackItem.js ***!
+  \**********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   StackItem: () => (/* binding */ StackItem),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 196);
+/* harmony import */ var _fluentui_foundation_legacy__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fluentui/foundation-legacy */ 7001);
+/* harmony import */ var _fluentui_foundation_legacy__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @fluentui/foundation-legacy */ 903);
+/* harmony import */ var _Utilities__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../Utilities */ 7974);
+/* harmony import */ var _StackItem_styles__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./StackItem.styles */ 2497);
+
+
+
+
+var StackItemView = function (props) {
+    var children = props.children;
+    var nativeProps = (0,_Utilities__WEBPACK_IMPORTED_MODULE_0__.getNativeProps)(props, _Utilities__WEBPACK_IMPORTED_MODULE_0__.htmlElementProperties);
+    // eslint-disable-next-line eqeqeq
+    if (children == null) {
+        return null;
+    }
+    var Slots = (0,_fluentui_foundation_legacy__WEBPACK_IMPORTED_MODULE_1__.getSlots)(props, {
+        root: 'div',
+    });
+    return (0,_fluentui_foundation_legacy__WEBPACK_IMPORTED_MODULE_1__.withSlots)(Slots.root, (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__assign)({}, nativeProps), children);
+};
+var StackItem = (0,_fluentui_foundation_legacy__WEBPACK_IMPORTED_MODULE_3__.createComponent)(StackItemView, {
+    displayName: 'StackItem',
+    styles: _StackItem_styles__WEBPACK_IMPORTED_MODULE_4__.StackItemStyles,
+});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (StackItem);
+
+
+/***/ }),
+
+/***/ 2497:
+/*!*****************************************************************************************!*\
+  !*** ./node_modules/@fluentui/react/lib/components/Stack/StackItem/StackItem.styles.js ***!
+  \*****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   GlobalClassNames: () => (/* binding */ GlobalClassNames),
+/* harmony export */   StackItemStyles: () => (/* binding */ StackItemStyles)
+/* harmony export */ });
+/* harmony import */ var _Styling__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../Styling */ 8455);
+
+var GlobalClassNames = {
+    root: 'ms-StackItem',
+};
+var alignMap = {
+    start: 'flex-start',
+    end: 'flex-end',
+};
+var StackItemStyles = function (props, theme, tokens) {
+    var grow = props.grow, shrink = props.shrink, disableShrink = props.disableShrink, align = props.align, verticalFill = props.verticalFill, order = props.order, className = props.className, _a = props.basis, basis = _a === void 0 ? 'auto' : _a;
+    var classNames = (0,_Styling__WEBPACK_IMPORTED_MODULE_0__.getGlobalClassNames)(GlobalClassNames, theme);
+    return {
+        root: [
+            theme.fonts.medium,
+            classNames.root,
+            {
+                flexBasis: basis,
+                margin: tokens.margin,
+                padding: tokens.padding,
+                height: verticalFill ? '100%' : 'auto',
+                width: 'auto',
+            },
+            grow && {
+                flexGrow: grow === true ? 1 : grow,
+            },
+            (disableShrink || (!grow && !shrink)) && {
+                flexShrink: 0,
+            },
+            shrink &&
+                !disableShrink && {
+                flexShrink: 1,
+            },
+            align && {
+                alignSelf: alignMap[align] || align,
+            },
+            order && {
+                order: order,
+            },
+            className,
+        ],
+        // TODO: this cast may be hiding some potential issues with styling and name
+        //        lookups and should be removed
+    };
+};
+
+
+/***/ }),
+
+/***/ 2293:
 /*!*************************************************************************!*\
-  !*** ./node_modules/@fluentui/react/lib/components/Slider/useSlider.js ***!
+  !*** ./node_modules/@fluentui/react/lib/components/Stack/StackUtils.js ***!
   \*************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   ONKEYDOWN_TIMEOUT_DURATION: () => (/* binding */ ONKEYDOWN_TIMEOUT_DURATION),
-/* harmony export */   useSlider: () => (/* binding */ useSlider)
+/* harmony export */   parseGap: () => (/* binding */ parseGap),
+/* harmony export */   parsePadding: () => (/* binding */ parsePadding)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! tslib */ 196);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ 5959);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _fluentui_react_hooks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fluentui/react-hooks */ 7461);
-/* harmony import */ var _fluentui_react_hooks__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @fluentui/react-hooks */ 6228);
-/* harmony import */ var _fluentui_react_hooks__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @fluentui/react-hooks */ 5559);
-/* harmony import */ var _fluentui_react_hooks__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @fluentui/react-hooks */ 8555);
-/* harmony import */ var _fluentui_utilities__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fluentui/utilities */ 3583);
-/* harmony import */ var _fluentui_utilities__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @fluentui/utilities */ 6657);
-/* harmony import */ var _fluentui_utilities__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @fluentui/utilities */ 9524);
-/* harmony import */ var _fluentui_utilities__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @fluentui/utilities */ 5947);
-/* harmony import */ var _fluentui_utilities__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @fluentui/utilities */ 8972);
-/* harmony import */ var _fluentui_utilities__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @fluentui/utilities */ 7974);
-/* harmony import */ var _utilities_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utilities/dom */ 4707);
-
-
-
-
-
-var ONKEYDOWN_TIMEOUT_DURATION = 1000;
-var getClassNames = (0,_fluentui_utilities__WEBPACK_IMPORTED_MODULE_1__.classNamesFunction)();
-var getSlotStyleFn = function (sty) {
-    return function (value) {
-        var _a;
-        return _a = {},
-            _a[sty] = "".concat(value, "%"),
-            _a;
-    };
+// Helper function that converts a themed spacing key (if given) to the corresponding themed spacing value.
+var _getThemedSpacing = function (space, theme) {
+    if (theme.spacing.hasOwnProperty(space)) {
+        return theme.spacing[space];
+    }
+    return space;
 };
-var getPercent = function (value, sliderMin, sliderMax) {
-    return sliderMax === sliderMin ? 0 : ((value - sliderMin) / (sliderMax - sliderMin)) * 100;
-};
-var useComponentRef = function (props, sliderBoxRef, value, range) {
-    react__WEBPACK_IMPORTED_MODULE_0__.useImperativeHandle(props.componentRef, function () { return ({
-        get value() {
-            return value;
-        },
-        get range() {
-            return range;
-        },
-        focus: function () {
-            var _a;
-            (_a = sliderBoxRef.current) === null || _a === void 0 ? void 0 : _a.focus();
-        },
-    }); }, [range, sliderBoxRef, value]);
-};
-var useSlider = function (props, ref) {
-    var _a = props.step, step = _a === void 0 ? 1 : _a, className = props.className, _b = props.disabled, disabled = _b === void 0 ? false : _b, label = props.label, _c = props.max, max = _c === void 0 ? 10 : _c, _d = props.min, min = _d === void 0 ? 0 : _d, _e = props.showValue, showValue = _e === void 0 ? true : _e, _f = props.buttonProps, buttonProps = _f === void 0 ? {} : _f, _g = props.vertical, vertical = _g === void 0 ? false : _g, snapToStep = props.snapToStep, valueFormat = props.valueFormat, styles = props.styles, theme = props.theme, originFromZero = props.originFromZero, ariaLabelledBy = props["aria-labelledby"], _h = props.ariaLabel, ariaLabel = _h === void 0 ? props['aria-label'] : _h, ranged = props.ranged, onChange = props.onChange, onChanged = props.onChanged;
-    var disposables = react__WEBPACK_IMPORTED_MODULE_0__.useRef([]);
-    var _j = (0,_fluentui_react_hooks__WEBPACK_IMPORTED_MODULE_2__.useSetTimeout)(), setTimeout = _j.setTimeout, clearTimeout = _j.clearTimeout;
-    var sliderLine = react__WEBPACK_IMPORTED_MODULE_0__.useRef(null);
-    var win = (0,_utilities_dom__WEBPACK_IMPORTED_MODULE_3__.useWindowEx)();
-    // Casting here is necessary because useControllableValue expects the event for the change callback
-    // to extend React.SyntheticEvent, when in fact for Slider, the event could be either a React event
-    // or a native browser event depending on the context.
-    var _k = (0,_fluentui_react_hooks__WEBPACK_IMPORTED_MODULE_4__.useControllableValue)(props.value, props.defaultValue, function (ev, v) {
-        return onChange === null || onChange === void 0 ? void 0 : onChange(v, ranged ? [internalState.latestLowerValue, v] : undefined, ev);
-    }), unclampedValue = _k[0], setValue = _k[1];
-    var _l = (0,_fluentui_react_hooks__WEBPACK_IMPORTED_MODULE_4__.useControllableValue)(props.lowerValue, props.defaultLowerValue, function (ev, lv) { return onChange === null || onChange === void 0 ? void 0 : onChange(internalState.latestValue, [lv, internalState.latestValue], ev); }), unclampedLowerValue = _l[0], setLowerValue = _l[1];
-    // Ensure that value is always a number and is clamped by min/max.
-    var value = Math.max(min, Math.min(max, unclampedValue || 0));
-    var lowerValue = Math.max(min, Math.min(value, unclampedLowerValue || 0));
-    var internalState = (0,_fluentui_react_hooks__WEBPACK_IMPORTED_MODULE_5__.useConst)({
-        onKeyDownTimer: -1,
-        isAdjustingLowerValue: false,
-        latestValue: value,
-        latestLowerValue: lowerValue,
-    });
-    // On each render, update this saved value used by callbacks. (This should be safe even if render
-    // is called multiple times, because an event handler or timeout callback will only run once.)
-    internalState.latestValue = value;
-    internalState.latestLowerValue = lowerValue;
-    var id = (0,_fluentui_react_hooks__WEBPACK_IMPORTED_MODULE_6__.useId)('Slider', props.id || (buttonProps === null || buttonProps === void 0 ? void 0 : buttonProps.id));
-    var classNames = getClassNames(styles, {
-        className: className,
-        disabled: disabled,
-        vertical: vertical,
-        showTransitions: !snapToStep && !internalState.isBetweenSteps,
-        showValue: showValue,
-        ranged: ranged,
-        theme: theme,
-    });
-    var steps = (max - min) / step;
-    var clearOnKeyDownTimer = function () {
-        clearTimeout(internalState.onKeyDownTimer);
-        internalState.onKeyDownTimer = -1;
-    };
-    var setOnKeyDownTimer = function (event) {
-        clearOnKeyDownTimer();
-        if (onChanged) {
-            internalState.onKeyDownTimer = setTimeout(function () {
-                onChanged(event, internalState.latestValue, ranged ? [internalState.latestLowerValue, internalState.latestValue] : undefined);
-            }, ONKEYDOWN_TIMEOUT_DURATION);
-        }
-    };
-    var getAriaValueText = function (valueProps) {
-        var ariaValueText = props.ariaValueText;
-        if (valueProps !== undefined) {
-            return ariaValueText ? ariaValueText(valueProps) : valueProps.toString();
-        }
-        return undefined;
-    };
-    /**
-     * Update `value` or `lowerValue`, including clamping between min/max and rounding to
-     * appropriate precision.
-     * @param newValue - New current value of the slider, possibly rounded to a whole step.
-     * @param newUnroundedValue - Like `newValue` but without the rounding to a step. If this is
-     * provided and not equal to `newValue`, `internalState.isBetweenSteps` will be set, which
-     * may cause thumb movement animations to be disabled.
-     */
-    var updateValue = function (ev, newValue, newUnroundedValue) {
-        newValue = Math.min(max, Math.max(min, newValue));
-        newUnroundedValue = newUnroundedValue !== undefined ? Math.min(max, Math.max(min, newUnroundedValue)) : undefined;
-        var numDec = 0;
-        if (isFinite(step)) {
-            while (Math.round(step * Math.pow(10, numDec)) / Math.pow(10, numDec) !== step) {
-                numDec++;
-            }
-        }
-        // Make sure value has correct number of decimal places based on number of decimals in step
-        var roundedValue = parseFloat(newValue.toFixed(numDec));
-        internalState.isBetweenSteps = newUnroundedValue !== undefined && newUnroundedValue !== roundedValue;
-        if (ranged) {
-            // decided which thumb value to change
-            if (internalState.isAdjustingLowerValue &&
-                (originFromZero ? roundedValue <= 0 : roundedValue <= internalState.latestValue)) {
-                setLowerValue(roundedValue, ev);
-            }
-            else if (!internalState.isAdjustingLowerValue &&
-                (originFromZero ? roundedValue >= 0 : roundedValue >= internalState.latestLowerValue)) {
-                setValue(roundedValue, ev);
-            }
-        }
-        else {
-            setValue(roundedValue, ev);
-        }
-    };
-    var onKeyDown = function (event) {
-        var newCurrentValue = internalState.isAdjustingLowerValue
-            ? internalState.latestLowerValue
-            : internalState.latestValue;
-        var diff = 0;
-        // eslint-disable-next-line @typescript-eslint/no-deprecated
-        switch (event.which) {
-            case (0,_fluentui_utilities__WEBPACK_IMPORTED_MODULE_7__.getRTLSafeKeyCode)(_fluentui_utilities__WEBPACK_IMPORTED_MODULE_8__.KeyCodes.left, props.theme):
-            case _fluentui_utilities__WEBPACK_IMPORTED_MODULE_8__.KeyCodes.down:
-                diff = -step;
-                clearOnKeyDownTimer();
-                setOnKeyDownTimer(event);
-                break;
-            case (0,_fluentui_utilities__WEBPACK_IMPORTED_MODULE_7__.getRTLSafeKeyCode)(_fluentui_utilities__WEBPACK_IMPORTED_MODULE_8__.KeyCodes.right, props.theme):
-            case _fluentui_utilities__WEBPACK_IMPORTED_MODULE_8__.KeyCodes.up:
-                diff = step;
-                clearOnKeyDownTimer();
-                setOnKeyDownTimer(event);
-                break;
-            case _fluentui_utilities__WEBPACK_IMPORTED_MODULE_8__.KeyCodes.home:
-                newCurrentValue = min;
-                clearOnKeyDownTimer();
-                setOnKeyDownTimer(event);
-                break;
-            case _fluentui_utilities__WEBPACK_IMPORTED_MODULE_8__.KeyCodes.end:
-                newCurrentValue = max;
-                clearOnKeyDownTimer();
-                setOnKeyDownTimer(event);
-                break;
-            default:
-                return;
-        }
-        updateValue(event, newCurrentValue + diff);
-        event.preventDefault();
-        event.stopPropagation();
-    };
-    var getPosition = function (event, verticalProp) {
-        var currentPosition = 0;
-        switch (event.type) {
-            case 'mousedown':
-            case 'mousemove':
-                currentPosition = !verticalProp ? event.clientX : event.clientY;
-                break;
-            case 'touchstart':
-            case 'touchmove':
-                currentPosition = !verticalProp
-                    ? event.touches[0].clientX
-                    : event.touches[0].clientY;
-                break;
-        }
-        return currentPosition;
-    };
-    var calculateCurrentSteps = function (event) {
-        // eslint-disable-next-line @typescript-eslint/no-deprecated
-        var sliderPositionRect = sliderLine.current.getBoundingClientRect();
-        var sliderLength = !props.vertical ? sliderPositionRect.width : sliderPositionRect.height;
-        var stepLength = sliderLength / steps;
-        var currentSteps;
-        var distance;
-        if (!props.vertical) {
-            var left = getPosition(event, props.vertical);
-            distance = (0,_fluentui_utilities__WEBPACK_IMPORTED_MODULE_7__.getRTL)(props.theme) ? sliderPositionRect.right - left : left - sliderPositionRect.left;
-            currentSteps = distance / stepLength;
-        }
-        else {
-            var bottom = getPosition(event, props.vertical);
-            distance = sliderPositionRect.bottom - bottom;
-            currentSteps = distance / stepLength;
-        }
-        return currentSteps;
-    };
-    var onMouseMoveOrTouchMove = function (event, suppressEventCancelation) {
-        var currentSteps = calculateCurrentSteps(event);
-        var newUnroundedValue = min + step * currentSteps;
-        var newCurrentValue = min + step * Math.round(currentSteps);
-        updateValue(event, newCurrentValue, newUnroundedValue);
-        if (!suppressEventCancelation) {
-            event.preventDefault();
-            event.stopPropagation();
-        }
-    };
-    var onMouseDownOrTouchStart = function (event) {
-        if (ranged) {
-            var currentSteps = calculateCurrentSteps(event);
-            var newValue = min + step * currentSteps;
-            internalState.isAdjustingLowerValue =
-                newValue <= internalState.latestLowerValue ||
-                    newValue - internalState.latestLowerValue <= internalState.latestValue - newValue;
-        }
-        // safe to use `win!` since it can only be called on the client
-        if (event.type === 'mousedown') {
-            disposables.current.push((0,_fluentui_utilities__WEBPACK_IMPORTED_MODULE_9__.on)(win, 'mousemove', onMouseMoveOrTouchMove, true), (0,_fluentui_utilities__WEBPACK_IMPORTED_MODULE_9__.on)(win, 'mouseup', onMouseUpOrTouchEnd, true));
-        }
-        else if (event.type === 'touchstart') {
-            disposables.current.push((0,_fluentui_utilities__WEBPACK_IMPORTED_MODULE_9__.on)(win, 'touchmove', onMouseMoveOrTouchMove, true), (0,_fluentui_utilities__WEBPACK_IMPORTED_MODULE_9__.on)(win, 'touchend', onMouseUpOrTouchEnd, true));
-        }
-        onMouseMoveOrTouchMove(event, true);
-    };
-    var onMouseUpOrTouchEnd = function (event) {
-        // Done adjusting, so clear this value
-        internalState.isBetweenSteps = undefined;
-        onChanged === null || onChanged === void 0 ? void 0 : onChanged(event, internalState.latestValue, ranged ? [internalState.latestLowerValue, internalState.latestValue] : undefined);
-        disposeListeners();
-    };
-    var onThumbFocus = function (event) {
-        internalState.isAdjustingLowerValue = event.target === lowerValueThumbRef.current;
-    };
-    var disposeListeners = react__WEBPACK_IMPORTED_MODULE_0__.useCallback(function () {
-        disposables.current.forEach(function (dispose) { return dispose(); });
-        disposables.current = [];
-    }, []);
-    react__WEBPACK_IMPORTED_MODULE_0__.useEffect(function () { return disposeListeners; }, [disposeListeners]);
-    var lowerValueThumbRef = react__WEBPACK_IMPORTED_MODULE_0__.useRef(null);
-    var thumbRef = react__WEBPACK_IMPORTED_MODULE_0__.useRef(null);
-    var sliderBoxRef = react__WEBPACK_IMPORTED_MODULE_0__.useRef(null);
-    useComponentRef(props, sliderBoxRef, value, ranged ? [lowerValue, value] : undefined);
-    var getPositionStyles = getSlotStyleFn(vertical ? 'bottom' : (0,_fluentui_utilities__WEBPACK_IMPORTED_MODULE_7__.getRTL)(props.theme) ? 'right' : 'left');
-    var getTrackStyles = getSlotStyleFn(vertical ? 'height' : 'width');
-    var originValue = originFromZero ? 0 : min;
-    var valuePercent = getPercent(value, min, max);
-    var lowerValuePercent = getPercent(lowerValue, min, max);
-    var originPercentOfLine = getPercent(originValue, min, max);
-    var activeSectionWidth = ranged ? valuePercent - lowerValuePercent : Math.abs(originPercentOfLine - valuePercent);
-    var topSectionWidth = Math.min(100 - valuePercent, 100 - originPercentOfLine);
-    var bottomSectionWidth = ranged ? lowerValuePercent : Math.min(valuePercent, originPercentOfLine);
-    var rootProps = {
-        className: classNames.root,
-        ref: ref,
-    };
-    var labelProps = {
-        className: classNames.titleLabel,
-        children: label,
-        disabled: disabled,
-        htmlFor: ariaLabel ? undefined : id,
-    };
-    var valueLabelProps = showValue
-        ? {
-            className: classNames.valueLabel,
-            children: valueFormat ? valueFormat(value) : value,
-            disabled: disabled,
-            htmlFor: disabled ? id : undefined,
-        }
-        : undefined;
-    var lowerValueLabelProps = ranged && showValue
-        ? {
-            className: classNames.valueLabel,
-            children: valueFormat ? valueFormat(lowerValue) : lowerValue,
-            disabled: disabled,
-        }
-        : undefined;
-    var zeroTickProps = originFromZero
-        ? {
-            className: classNames.zeroTick,
-            style: getPositionStyles(originPercentOfLine),
-        }
-        : undefined;
-    var trackActiveProps = {
-        className: (0,_fluentui_utilities__WEBPACK_IMPORTED_MODULE_10__.css)(classNames.lineContainer, classNames.activeSection),
-        style: getTrackStyles(activeSectionWidth),
-    };
-    var trackTopInactiveProps = {
-        className: (0,_fluentui_utilities__WEBPACK_IMPORTED_MODULE_10__.css)(classNames.lineContainer, classNames.inactiveSection),
-        style: getTrackStyles(topSectionWidth),
-    };
-    var trackBottomInactiveProps = {
-        className: (0,_fluentui_utilities__WEBPACK_IMPORTED_MODULE_10__.css)(classNames.lineContainer, classNames.inactiveSection),
-        style: getTrackStyles(bottomSectionWidth),
-    };
-    var sliderProps = (0,tslib__WEBPACK_IMPORTED_MODULE_11__.__assign)({ 'aria-disabled': disabled, role: 'slider', tabIndex: disabled ? undefined : 0 }, { 'data-is-focusable': !disabled });
-    var sliderBoxProps = (0,tslib__WEBPACK_IMPORTED_MODULE_11__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_11__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_11__.__assign)({ id: id, className: (0,_fluentui_utilities__WEBPACK_IMPORTED_MODULE_10__.css)(classNames.slideBox, buttonProps.className), ref: sliderBoxRef }, (!disabled && {
-        onMouseDown: onMouseDownOrTouchStart,
-        onTouchStart: onMouseDownOrTouchStart,
-        onKeyDown: onKeyDown,
-    })), (buttonProps &&
-        (0,_fluentui_utilities__WEBPACK_IMPORTED_MODULE_12__.getNativeProps)(buttonProps, _fluentui_utilities__WEBPACK_IMPORTED_MODULE_12__.divProperties, ['id', 'className']))), (!ranged && (0,tslib__WEBPACK_IMPORTED_MODULE_11__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_11__.__assign)({}, sliderProps), { 'aria-valuemin': min, 'aria-valuemax': max, 'aria-valuenow': value, 'aria-valuetext': getAriaValueText(value), 'aria-label': ariaLabel || label, 'aria-labelledby': ariaLabelledBy })));
-    var onFocusProp = disabled ? {} : { onFocus: onThumbFocus };
-    var thumbProps = (0,tslib__WEBPACK_IMPORTED_MODULE_11__.__assign)({ ref: thumbRef, className: classNames.thumb, style: getPositionStyles(valuePercent) }, (ranged && (0,tslib__WEBPACK_IMPORTED_MODULE_11__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_11__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_11__.__assign)({}, sliderProps), onFocusProp), { id: "max-".concat(id), 'aria-valuemin': lowerValue, 'aria-valuemax': max, 'aria-valuenow': value, 'aria-valuetext': getAriaValueText(value), 'aria-label': "max ".concat(ariaLabel || label) })));
-    var lowerValueThumbProps = ranged
-        ? (0,tslib__WEBPACK_IMPORTED_MODULE_11__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_11__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_11__.__assign)({ ref: lowerValueThumbRef, className: classNames.thumb, style: getPositionStyles(lowerValuePercent) }, sliderProps), onFocusProp), { id: "min-".concat(id), 'aria-valuemin': min, 'aria-valuemax': value, 'aria-valuenow': lowerValue, 'aria-valuetext': getAriaValueText(lowerValue), 'aria-label': "min ".concat(ariaLabel || label) }) : undefined;
-    var containerProps = {
-        className: classNames.container,
-    };
-    var sliderLineProps = {
-        ref: sliderLine,
-        className: classNames.line,
-    };
+// Helper function that takes a gap as a string and converts it into a { value, unit } representation.
+var _getValueUnitGap = function (gap) {
+    var numericalPart = parseFloat(gap);
+    var numericalValue = isNaN(numericalPart) ? 0 : numericalPart;
+    var numericalString = isNaN(numericalPart) ? '' : numericalPart.toString();
+    var unitPart = gap.substring(numericalString.toString().length);
     return {
-        root: rootProps,
-        label: labelProps,
-        sliderBox: sliderBoxProps,
-        container: containerProps,
-        valueLabel: valueLabelProps,
-        lowerValueLabel: lowerValueLabelProps,
-        thumb: thumbProps,
-        lowerValueThumb: lowerValueThumbProps,
-        zeroTick: zeroTickProps,
-        activeTrack: trackActiveProps,
-        topInactiveTrack: trackTopInactiveProps,
-        bottomInactiveTrack: trackBottomInactiveProps,
-        sliderLine: sliderLineProps,
+        value: numericalValue,
+        unit: unitPart || 'px',
     };
+};
+/**
+ * Takes in a gap size in either a CSS-style format (e.g. 10 or "10px")
+ *  or a key of a themed spacing value (e.g. "s1").
+ * Returns the separate numerical value of the padding (e.g. 10)
+ *  and the CSS unit (e.g. "px").
+ */
+var parseGap = function (gap, theme) {
+    if (gap === undefined || gap === '') {
+        return {
+            rowGap: {
+                value: 0,
+                unit: 'px',
+            },
+            columnGap: {
+                value: 0,
+                unit: 'px',
+            },
+        };
+    }
+    if (typeof gap === 'number') {
+        return {
+            rowGap: {
+                value: gap,
+                unit: 'px',
+            },
+            columnGap: {
+                value: gap,
+                unit: 'px',
+            },
+        };
+    }
+    var splitGap = gap.split(' ');
+    // If the array has more than two values, then return 0px.
+    if (splitGap.length > 2) {
+        return {
+            rowGap: {
+                value: 0,
+                unit: 'px',
+            },
+            columnGap: {
+                value: 0,
+                unit: 'px',
+            },
+        };
+    }
+    // If the array has two values, then parse each one.
+    if (splitGap.length === 2) {
+        return {
+            rowGap: _getValueUnitGap(_getThemedSpacing(splitGap[0], theme)),
+            columnGap: _getValueUnitGap(_getThemedSpacing(splitGap[1], theme)),
+        };
+    }
+    // Else, parse the numerical value and pass it as both the vertical and horizontal gap.
+    var calculatedGap = _getValueUnitGap(_getThemedSpacing(gap, theme));
+    return {
+        rowGap: calculatedGap,
+        columnGap: calculatedGap,
+    };
+};
+/**
+ * Takes in a padding in a CSS-style format (e.g. 10, "10px", "10px 10px", etc.)
+ *  where the separate padding values can also be the key of a themed spacing value
+ *  (e.g. "s1 m", "10px l1 20px l2", etc.).
+ * Returns a CSS-style padding.
+ */
+var parsePadding = function (padding, theme) {
+    if (padding === undefined || typeof padding === 'number' || padding === '') {
+        return padding;
+    }
+    var paddingValues = padding.split(' ');
+    if (paddingValues.length < 2) {
+        return _getThemedSpacing(padding, theme);
+    }
+    return paddingValues.reduce(function (padding1, padding2) {
+        return _getThemedSpacing(padding1, theme) + ' ' + _getThemedSpacing(padding2, theme);
+    });
+};
+
+
+/***/ }),
+
+/***/ 2674:
+/*!******************************************************************!*\
+  !*** ./node_modules/@fluentui/react/lib/components/Text/Text.js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Text: () => (/* binding */ Text),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _fluentui_foundation_legacy__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @fluentui/foundation-legacy */ 903);
+/* harmony import */ var _Text_view__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Text.view */ 2943);
+/* harmony import */ var _Text_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Text.styles */ 9876);
+
+
+
+var Text = (0,_fluentui_foundation_legacy__WEBPACK_IMPORTED_MODULE_0__.createComponent)(_Text_view__WEBPACK_IMPORTED_MODULE_1__.TextView, {
+    displayName: 'Text',
+    styles: _Text_styles__WEBPACK_IMPORTED_MODULE_2__.TextStyles,
+});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Text);
+
+
+/***/ }),
+
+/***/ 9876:
+/*!*************************************************************************!*\
+  !*** ./node_modules/@fluentui/react/lib/components/Text/Text.styles.js ***!
+  \*************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   TextStyles: () => (/* binding */ TextStyles)
+/* harmony export */ });
+var TextStyles = function (props, theme) {
+    var as = props.as, className = props.className, block = props.block, nowrap = props.nowrap, variant = props.variant;
+    var fonts = theme.fonts, semanticColors = theme.semanticColors;
+    var variantObject = fonts[variant || 'medium'];
+    return {
+        root: [
+            variantObject,
+            {
+                color: variantObject.color || semanticColors.bodyText,
+                display: block ? (as === 'td' ? 'table-cell' : 'block') : 'inline',
+                mozOsxFontSmoothing: variantObject.MozOsxFontSmoothing,
+                webkitFontSmoothing: variantObject.WebkitFontSmoothing,
+            },
+            nowrap && {
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+            },
+            className,
+        ],
+    };
+};
+
+
+/***/ }),
+
+/***/ 2943:
+/*!***********************************************************************!*\
+  !*** ./node_modules/@fluentui/react/lib/components/Text/Text.view.js ***!
+  \***********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   TextView: () => (/* binding */ TextView)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ 196);
+/* harmony import */ var _fluentui_foundation_legacy__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fluentui/foundation-legacy */ 7001);
+/* harmony import */ var _Utilities__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Utilities */ 7974);
+
+/** @jsxRuntime classic */
+/** @jsx withSlots */
+
+
+var TextView = function (props) {
+    // eslint-disable-next-line eqeqeq
+    if (props.children == null) {
+        return null;
+    }
+    var block = props.block, className = props.className, _a = props.as, RootType = _a === void 0 ? 'span' : _a, variant = props.variant, nowrap = props.nowrap, rest = (0,tslib__WEBPACK_IMPORTED_MODULE_0__.__rest)(props, ["block", "className", "as", "variant", "nowrap"]);
+    var Slots = (0,_fluentui_foundation_legacy__WEBPACK_IMPORTED_MODULE_1__.getSlots)(props, {
+        root: RootType,
+    });
+    return (0,_fluentui_foundation_legacy__WEBPACK_IMPORTED_MODULE_1__.withSlots)(Slots.root, (0,tslib__WEBPACK_IMPORTED_MODULE_0__.__assign)({}, (0,_Utilities__WEBPACK_IMPORTED_MODULE_2__.getNativeProps)(rest, _Utilities__WEBPACK_IMPORTED_MODULE_2__.htmlElementProperties)));
 };
 
 
@@ -28473,6 +28679,17 @@ var __extends = (undefined && undefined.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __assign = (undefined && undefined.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -28968,8 +29185,47 @@ var FancyListWebPart = /** @class */ (function (_super) {
                                     properties: {
                                         key: 'titleConfiguration',
                                         onRender: function (elem, ctx, changeCallback) {
+                                            var _a;
                                             react_dom__WEBPACK_IMPORTED_MODULE_1__.render(react__WEBPACK_IMPORTED_MODULE_0__.createElement(_propertyPane_TitleConfiguration__WEBPACK_IMPORTED_MODULE_9__.TitleConfiguration, {
-                                                label: 'Title Configuration'
+                                                label: 'Title Configuration',
+                                                settings: {
+                                                    webPartTitle: _this.properties.webPartTitle || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.webPartTitle,
+                                                    shape: ((_a = _this.properties.titleSettings) === null || _a === void 0 ? void 0 : _a.shape) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.shape,
+                                                    font: {
+                                                        family: _this.properties.webPartTitleFont || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.font.family,
+                                                        size: _this.properties.webPartTitleFontSize || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.font.size,
+                                                        formatting: _this.properties.webPartTitleFormatting || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.font.formatting,
+                                                        color: _this.properties.webPartTitleColor || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.font.color
+                                                    }
+                                                },
+                                                onPropertyChange: function (propertyPath, newValue) {
+                                                    // Handle property changes and update the web part properties
+                                                    switch (propertyPath) {
+                                                        case 'webPartTitle':
+                                                            _this.properties.webPartTitle = newValue;
+                                                            break;
+                                                        case 'shape':
+                                                            if (!_this.properties.titleSettings)
+                                                                _this.properties.titleSettings = __assign({}, _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings);
+                                                            _this.properties.titleSettings.shape = newValue;
+                                                            break;
+                                                        case 'font.family':
+                                                            _this.properties.webPartTitleFont = newValue;
+                                                            break;
+                                                        case 'font.size':
+                                                            _this.properties.webPartTitleFontSize = newValue;
+                                                            break;
+                                                        case 'font.formatting':
+                                                            _this.properties.webPartTitleFormatting = newValue;
+                                                            break;
+                                                        case 'font.color':
+                                                            _this.properties.webPartTitleColor = newValue;
+                                                            break;
+                                                    }
+                                                    if (changeCallback)
+                                                        changeCallback();
+                                                    _this.context.propertyPane.refresh();
+                                                }
                                             }), elem);
                                         },
                                         onDispose: function (elem) {

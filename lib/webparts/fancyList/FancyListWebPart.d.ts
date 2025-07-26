@@ -62,6 +62,7 @@ export interface TitleSettings {
         gradientColor2: string;
         gradientAlpha2: number;
     };
+    shape: 'square' | 'rounded' | 'pill';
     showDivider: boolean;
 }
 export interface FilterSettings {

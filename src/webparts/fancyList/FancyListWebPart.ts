@@ -69,6 +69,7 @@ export interface TitleSettings {
     gradientColor2: string;
     gradientAlpha2: number;
   };
+  shape: 'square' | 'rounded' | 'pill';
   showDivider: boolean;
 }
 
@@ -509,7 +510,43 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
                     onRender: (elem: HTMLElement, ctx: unknown, changeCallback?: () => void) => {
                       ReactDom.render(
                         React.createElement(TitleConfiguration, {
-                          label: 'Title Configuration'
+                          label: 'Title Configuration',
+                          settings: {
+                            webPartTitle: this.properties.webPartTitle || DEFAULTS_CONFIG.titleSettings.webPartTitle,
+                            shape: this.properties.titleSettings?.shape || DEFAULTS_CONFIG.titleSettings.shape,
+                            font: {
+                              family: this.properties.webPartTitleFont || DEFAULTS_CONFIG.titleSettings.font.family,
+                              size: this.properties.webPartTitleFontSize || DEFAULTS_CONFIG.titleSettings.font.size,
+                              formatting: this.properties.webPartTitleFormatting || DEFAULTS_CONFIG.titleSettings.font.formatting,
+                              color: this.properties.webPartTitleColor || DEFAULTS_CONFIG.titleSettings.font.color
+                            }
+                          },
+                          onPropertyChange: (propertyPath: string, newValue: any) => {
+                            // Handle property changes and update the web part properties
+                            switch (propertyPath) {
+                              case 'webPartTitle':
+                                this.properties.webPartTitle = newValue;
+                                break;
+                              case 'shape':
+                                if (!this.properties.titleSettings) this.properties.titleSettings = { ...DEFAULTS_CONFIG.titleSettings };
+                                this.properties.titleSettings.shape = newValue;
+                                break;
+                              case 'font.family':
+                                this.properties.webPartTitleFont = newValue;
+                                break;
+                              case 'font.size':
+                                this.properties.webPartTitleFontSize = newValue;
+                                break;
+                              case 'font.formatting':
+                                this.properties.webPartTitleFormatting = newValue;
+                                break;
+                              case 'font.color':
+                                this.properties.webPartTitleColor = newValue;
+                                break;
+                            }
+                            if (changeCallback) changeCallback();
+                            this.context.propertyPane.refresh();
+                          }
                         }),
                         elem
                       );
