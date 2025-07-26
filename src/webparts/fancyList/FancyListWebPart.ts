@@ -97,6 +97,7 @@ export interface FilterSettings {
     font: string;
   };
   shape: 'square' | 'rounded' | 'pill';
+  backgroundShape: 'square' | 'rounded' | 'pill';
   background: {
     type: 'solid' | 'gradient' | 'image';
     color: string;
@@ -691,6 +692,7 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
                               font: this.properties.filterSettings?.inactiveColors.font || DEFAULTS_CONFIG.filterSettings.inactiveColors.font
                             },
                             shape: this.properties.filterSettings?.shape || DEFAULTS_CONFIG.filterSettings.shape,
+                            backgroundShape: this.properties.filterSettings?.backgroundShape || DEFAULTS_CONFIG.filterSettings.backgroundShape,
                             showDivider: this.properties.filterSettings?.showDivider || DEFAULTS_CONFIG.filterSettings.showDivider,
                             backgroundType: this.properties.filterSettings?.background.type || DEFAULTS_CONFIG.filterSettings.background.type,
                             backgroundColor: this.properties.filterSettings?.background.color || DEFAULTS_CONFIG.filterSettings.background.color,
@@ -711,6 +713,9 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
                             switch (propertyPath) {
                               case 'shape':
                                 this.properties.filterSettings.shape = newValue;
+                                break;
+                              case 'backgroundShape':
+                                this.properties.filterSettings.backgroundShape = newValue;
                                 break;
                               case 'showDivider':
                                 this.properties.filterSettings.showDivider = newValue;

@@ -92,6 +92,7 @@ export interface FilterSettings {
         font: string;
     };
     shape: 'square' | 'rounded' | 'pill';
+    backgroundShape: 'square' | 'rounded' | 'pill';
     background: {
         type: 'solid' | 'gradient' | 'image';
         color: string;

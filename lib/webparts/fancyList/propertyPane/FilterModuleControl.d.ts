@@ -32,6 +32,7 @@ export interface FilterModuleControlProps {
         gradientAlpha: number;
         imageUrl: string;
         imageAlpha: number;
+        backgroundShape: ShapeOption;
     };
     onPropertyChange?: (propertyPath: string, newValue: any) => void;
 }

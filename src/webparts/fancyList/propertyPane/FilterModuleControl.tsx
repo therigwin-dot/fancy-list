@@ -42,6 +42,7 @@ export interface FilterModuleControlProps {
     gradientAlpha: number;
     imageUrl: string;
     imageAlpha: number;
+    backgroundShape: ShapeOption;
   };
   onPropertyChange?: (propertyPath: string, newValue: any) => void;
 }
@@ -77,13 +78,15 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
     gradientColor2: '#0f46d1',
     gradientAlpha: 0,
     imageUrl: '',
-    imageAlpha: 0
+    imageAlpha: 0,
+    backgroundShape: 'pill'
   },
   onPropertyChange 
 }) => {
   const [enabled, setEnabled] = React.useState(true);
   const [previewColor1, setPreviewColor1] = React.useState<string>('#ffffff');
   const [previewColor2, setPreviewColor2] = React.useState<string>('#000000');
+  
   const handlePropertyChange = (propertyPath: string, newValue: any) => {
     if (onPropertyChange) {
       onPropertyChange(propertyPath, newValue);
@@ -142,8 +145,6 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
     }
   };
 
-
-
   return (
     <div style={{ marginBottom: 16 }}>
       {/* Bold Header */}
@@ -183,7 +184,7 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
       {/* Conditional rendering for all other controls when enabled */}
       {enabled && (
         <>
-          {/* 2. Filter Font Control */}
+          {/* 2. Font Control */}
           <div style={{ marginBottom: 16 }}>
             <FontControl
               fontFamily={settings.font.family}
@@ -193,74 +194,157 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
             />
           </div>
 
-          {/* 3. Active Filter Colors */}
-          <div style={{ marginBottom: 16 }}>
-            <label style={{
-              fontSize: '14px',
-              fontWeight: '600',
-              color: '#323130',
-              marginBottom: '8px',
-              display: 'block'
-            }}>
-              Active Filter Colors
-            </label>
-            <div style={{ marginBottom: 8 }}>
-              <ColorPickerControl
-                color={settings.activeColors.background}
-                field="activeBackground"
-                label="Active Background Color"
-                onChange={(field: string, newColor: string) => handlePropertyChange('activeColors.background', newColor)}
-              />
-            </div>
-            <div style={{ marginBottom: 8 }}>
-              <ColorPickerControl
-                color={settings.activeColors.font}
-                field="activeFont"
-                label="Active Font Color"
-                onChange={(field: string, newColor: string) => handlePropertyChange('activeColors.font', newColor)}
-              />
-            </div>
-          </div>
-
-          {/* 4. Inactive Filter Colors */}
-          <div style={{ marginBottom: 16 }}>
-            <label style={{
-              fontSize: '14px',
-              fontWeight: '600',
-              color: '#323130',
-              marginBottom: '8px',
-              display: 'block'
-            }}>
-              Inactive Filter Colors
-            </label>
-            <div style={{ marginBottom: 8 }}>
-              <ColorPickerControl
-                color={settings.inactiveColors.background}
-                field="inactiveBackground"
-                label="Inactive Background Color"
-                onChange={(field: string, newColor: string) => handlePropertyChange('inactiveColors.background', newColor)}
-              />
-            </div>
-            <div style={{ marginBottom: 8 }}>
-              <ColorPickerControl
-                color={settings.inactiveColors.font}
-                field="inactiveFont"
-                label="Inactive Font Color"
-                onChange={(field: string, newColor: string) => handlePropertyChange('inactiveColors.font', newColor)}
-              />
-            </div>
-          </div>
-
-          {/* 5. Filter Shape Control */}
-          <div style={{ marginBottom: 16 }}>
-            <ShapePickerControl
-              value={settings.shape}
-              label="Filter Shape"
-              onChange={(newShape) => handlePropertyChange('shape', newShape)}
+          {/* 3. Active Font Color Control */}
+          <div style={{ marginBottom: 8 }}>
+            <ColorPickerControl
+              color={settings.activeColors.font}
+              field="activeFont"
+              label="Active Font Color"
+              onChange={(field: string, newColor: string) => handlePropertyChange('activeColors.font', newColor)}
             />
           </div>
 
-          {/* 6. Background Controls Container */}
+          {/* 4. Inactive Font Color Control */}
+          <div style={{ marginBottom: 16 }}>
+            <ColorPickerControl
+              color={settings.inactiveColors.font}
+              field="inactiveFont"
+              label="Inactive Font Color"
+              onChange={(field: string, newColor: string) => handlePropertyChange('inactiveColors.font', newColor)}
+            />
+          </div>
+
+          {/* 5. Fill Header */}
+          <div style={{
+            fontSize: '16px',
+            fontWeight: '600',
+            color: '#323130',
+            marginBottom: '12px'
+          }}>
+            Fill
+          </div>
+
+          {/* 6. Active Background Color Control */}
+          <div style={{ marginBottom: 8 }}>
+            <ColorPickerControl
+              color={settings.activeColors.background}
+              field="activeBackground"
+              label="Active Background Color"
+              onChange={(field: string, newColor: string) => handlePropertyChange('activeColors.background', newColor)}
+            />
+          </div>
+
+          {/* 7. Inactive Background Color Control */}
+          <div style={{ marginBottom: 16 }}>
+            <ColorPickerControl
+              color={settings.inactiveColors.background}
+              field="inactiveBackground"
+              label="Inactive Background Color"
+              onChange={(field: string, newColor: string) => handlePropertyChange('inactiveColors.background', newColor)}
+            />
+          </div>
+
+          {/* 8. Button Header */}
+          <div style={{
+            fontSize: '16px',
+            fontWeight: '600',
+            color: '#323130',
+            marginBottom: '12px'
+          }}>
+            Button
+          </div>
+
+          {/* 9. Gray Box Container */}
+          <div style={{ 
+            backgroundColor: '#f3f2f1', 
+            padding: '12px', 
+            borderRadius: '4px',
+            marginBottom: 16 
+          }}>
+            {/* Text Controls */}
+            <div style={{ marginBottom: 16 }}>
+              <label style={{
+                fontSize: '14px',
+                fontWeight: '600',
+                color: '#323130',
+                marginBottom: '8px',
+                display: 'block'
+              }}>
+                Text Controls
+              </label>
+              <FontControl
+                fontFamily={settings.font.family}
+                fontSize={settings.font.size}
+                formatting={settings.font.formatting}
+                onChange={handleFontChange}
+              />
+            </div>
+
+            {/* Color Controls */}
+            <div style={{ marginBottom: 16 }}>
+              <label style={{
+                fontSize: '14px',
+                fontWeight: '600',
+                color: '#323130',
+                marginBottom: '8px',
+                display: 'block'
+              }}>
+                Color Controls
+              </label>
+              <div style={{ marginBottom: 8 }}>
+                <ColorPickerControl
+                  color={settings.activeColors.font}
+                  field="activeFont"
+                  label="Active Font Color"
+                  onChange={(field: string, newColor: string) => handlePropertyChange('activeColors.font', newColor)}
+                />
+              </div>
+              <div style={{ marginBottom: 8 }}>
+                <ColorPickerControl
+                  color={settings.inactiveColors.font}
+                  field="inactiveFont"
+                  label="Inactive Font Color"
+                  onChange={(field: string, newColor: string) => handlePropertyChange('inactiveColors.font', newColor)}
+                />
+              </div>
+              <div style={{ marginBottom: 8 }}>
+                <ColorPickerControl
+                  color={settings.activeColors.background}
+                  field="activeBackground"
+                  label="Active Background Color"
+                  onChange={(field: string, newColor: string) => handlePropertyChange('activeColors.background', newColor)}
+                />
+              </div>
+              <div style={{ marginBottom: 8 }}>
+                <ColorPickerControl
+                  color={settings.inactiveColors.background}
+                  field="inactiveBackground"
+                  label="Inactive Background Color"
+                  onChange={(field: string, newColor: string) => handlePropertyChange('inactiveColors.background', newColor)}
+                />
+              </div>
+            </div>
+
+            {/* Shape Control */}
+            <div style={{ marginBottom: 0 }}>
+              <label style={{
+                fontSize: '14px',
+                fontWeight: '600',
+                color: '#323130',
+                marginBottom: '8px',
+                display: 'block'
+              }}>
+                Shape Control
+              </label>
+              <ShapePickerControl
+                value={settings.shape}
+                label="Filter Shape"
+                onChange={(newShape) => handlePropertyChange('shape', newShape)}
+              />
+            </div>
+          </div>
+
+          {/* 10. Background Controls Container */}
           <div style={{ 
             backgroundColor: '#f3f2f1', 
             padding: '12px', 
@@ -290,7 +374,7 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
               />
             </div>
 
-            {/* 7. Solid Background Controls */}
+            {/* 11. Solid Background Controls */}
             {settings.backgroundType === 'solid' && (
               <div style={{ marginBottom: 16 }}>
                 <ColorPickerControl
@@ -302,7 +386,7 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
               </div>
             )}
 
-                      {/* 8. Gradient Background Controls */}
+            {/* 12. Gradient Background Controls */}
             {settings.backgroundType === 'gradient' && (
               <>
                 <div style={{ marginBottom: 16 }}>
@@ -367,7 +451,7 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
               </>
             )}
 
-                      {/* 9. Image Background Controls */}
+            {/* 13. Image Background Controls */}
             {settings.backgroundType === 'image' && (
               <div style={{ marginBottom: 16 }}>
                 <label style={{
@@ -385,7 +469,7 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
                   placeholder="Enter image URL"
                 />
               </div>
-                        )}
+            )}
 
             {/* Unified Transparency Slider */}
             <div style={{ marginBottom: 16 }}>
@@ -419,12 +503,30 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
                 valueFormat={(value) => `${value}%`}
               />
             </div>
+
+            {/* 14. Background Shape Control */}
+            <div style={{ marginBottom: 0 }}>
+              <label style={{
+                fontSize: '14px',
+                fontWeight: '600',
+                color: '#323130',
+                marginBottom: '8px',
+                display: 'block'
+              }}>
+                Background Shape
+              </label>
+              <ShapePickerControl
+                value={settings.backgroundShape}
+                label="Background Shape"
+                onChange={(newShape) => handlePropertyChange('backgroundShape', newShape)}
+              />
+            </div>
           </div>
 
-          {/* 10. Show Filter Divider Toggle */}
+          {/* 15. Divider Toggle */}
           <div style={{ marginBottom: 16 }}>
             <Toggle
-              label="Filter Divider"
+              label="Divider"
               inlineLabel={true}
               checked={settings.showDivider}
               onText="On"
@@ -433,7 +535,7 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
             />
           </div>
 
-          {/* 11. Reset Button */}
+          {/* 16. Reset Button */}
           <div style={{ marginTop: 16 }}>
             <PrimaryButton 
               text="Reset Filter Formatting" 
@@ -459,6 +561,7 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
                 handlePropertyChange('gradientAlpha', DEFAULTS_CONFIG.filterSettings.background.gradientAlpha1);
                 handlePropertyChange('imageUrl', DEFAULTS_CONFIG.filterSettings.background.image);
                 handlePropertyChange('imageAlpha', DEFAULTS_CONFIG.filterSettings.background.imageAlpha);
+                handlePropertyChange('backgroundShape', DEFAULTS_CONFIG.filterSettings.backgroundShape || 'pill');
               }} 
             />
           </div>

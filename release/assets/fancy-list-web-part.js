@@ -105,6 +105,7 @@ var DEFAULTS_CONFIG = {
             font: '#323130'
         },
         shape: 'pill',
+        backgroundShape: 'pill',
         background: {
             type: 'solid',
             color: '#ffffff',
@@ -641,7 +642,8 @@ var FilterModuleControl = function (_a) {
         gradientColor2: '#0f46d1',
         gradientAlpha: 0,
         imageUrl: '',
-        imageAlpha: 0
+        imageAlpha: 0,
+        backgroundShape: 'pill'
     } : _b, onPropertyChange = _a.onPropertyChange;
     var _c = react__WEBPACK_IMPORTED_MODULE_0__.useState(true), enabled = _c[0], setEnabled = _c[1];
     var _d = react__WEBPACK_IMPORTED_MODULE_0__.useState('#ffffff'), previewColor1 = _d[0], setPreviewColor1 = _d[1];
@@ -711,32 +713,66 @@ var FilterModuleControl = function (_a) {
         enabled && (react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null,
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement(_FontControl__WEBPACK_IMPORTED_MODULE_1__.FontControl, { fontFamily: settings.font.family, fontSize: settings.font.size, formatting: settings.font.formatting, onChange: handleFontChange })),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 8 } },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__.ColorPickerControl, { color: settings.activeColors.font, field: "activeFont", label: "Active Font Color", onChange: function (field, newColor) { return handlePropertyChange('activeColors.font', newColor); } })),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: {
-                        fontSize: '14px',
-                        fontWeight: '600',
-                        color: '#323130',
-                        marginBottom: '8px',
-                        display: 'block'
-                    } }, "Active Filter Colors"),
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 8 } },
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__.ColorPickerControl, { color: settings.activeColors.background, field: "activeBackground", label: "Active Background Color", onChange: function (field, newColor) { return handlePropertyChange('activeColors.background', newColor); } })),
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 8 } },
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__.ColorPickerControl, { color: settings.activeColors.font, field: "activeFont", label: "Active Font Color", onChange: function (field, newColor) { return handlePropertyChange('activeColors.font', newColor); } }))),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__.ColorPickerControl, { color: settings.inactiveColors.font, field: "inactiveFont", label: "Inactive Font Color", onChange: function (field, newColor) { return handlePropertyChange('inactiveColors.font', newColor); } })),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                    fontSize: '16px',
+                    fontWeight: '600',
+                    color: '#323130',
+                    marginBottom: '12px'
+                } }, "Fill"),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 8 } },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__.ColorPickerControl, { color: settings.activeColors.background, field: "activeBackground", label: "Active Background Color", onChange: function (field, newColor) { return handlePropertyChange('activeColors.background', newColor); } })),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: {
-                        fontSize: '14px',
-                        fontWeight: '600',
-                        color: '#323130',
-                        marginBottom: '8px',
-                        display: 'block'
-                    } }, "Inactive Filter Colors"),
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 8 } },
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__.ColorPickerControl, { color: settings.inactiveColors.background, field: "inactiveBackground", label: "Inactive Background Color", onChange: function (field, newColor) { return handlePropertyChange('inactiveColors.background', newColor); } })),
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 8 } },
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__.ColorPickerControl, { color: settings.inactiveColors.font, field: "inactiveFont", label: "Inactive Font Color", onChange: function (field, newColor) { return handlePropertyChange('inactiveColors.font', newColor); } }))),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ShapePickerControl__WEBPACK_IMPORTED_MODULE_3__.ShapePickerControl, { value: settings.shape, label: "Filter Shape", onChange: function (newShape) { return handlePropertyChange('shape', newShape); } })),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__.ColorPickerControl, { color: settings.inactiveColors.background, field: "inactiveBackground", label: "Inactive Background Color", onChange: function (field, newColor) { return handlePropertyChange('inactiveColors.background', newColor); } })),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                    fontSize: '16px',
+                    fontWeight: '600',
+                    color: '#323130',
+                    marginBottom: '12px'
+                } }, "Button"),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                    backgroundColor: '#f3f2f1',
+                    padding: '12px',
+                    borderRadius: '4px',
+                    marginBottom: 16
+                } },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: {
+                            fontSize: '14px',
+                            fontWeight: '600',
+                            color: '#323130',
+                            marginBottom: '8px',
+                            display: 'block'
+                        } }, "Text Controls"),
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_FontControl__WEBPACK_IMPORTED_MODULE_1__.FontControl, { fontFamily: settings.font.family, fontSize: settings.font.size, formatting: settings.font.formatting, onChange: handleFontChange })),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: {
+                            fontSize: '14px',
+                            fontWeight: '600',
+                            color: '#323130',
+                            marginBottom: '8px',
+                            display: 'block'
+                        } }, "Color Controls"),
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 8 } },
+                        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__.ColorPickerControl, { color: settings.activeColors.font, field: "activeFont", label: "Active Font Color", onChange: function (field, newColor) { return handlePropertyChange('activeColors.font', newColor); } })),
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 8 } },
+                        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__.ColorPickerControl, { color: settings.inactiveColors.font, field: "inactiveFont", label: "Inactive Font Color", onChange: function (field, newColor) { return handlePropertyChange('inactiveColors.font', newColor); } })),
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 8 } },
+                        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__.ColorPickerControl, { color: settings.activeColors.background, field: "activeBackground", label: "Active Background Color", onChange: function (field, newColor) { return handlePropertyChange('activeColors.background', newColor); } })),
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 8 } },
+                        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__.ColorPickerControl, { color: settings.inactiveColors.background, field: "inactiveBackground", label: "Inactive Background Color", onChange: function (field, newColor) { return handlePropertyChange('inactiveColors.background', newColor); } }))),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 0 } },
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: {
+                            fontSize: '14px',
+                            fontWeight: '600',
+                            color: '#323130',
+                            marginBottom: '8px',
+                            display: 'block'
+                        } }, "Shape Control"),
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ShapePickerControl__WEBPACK_IMPORTED_MODULE_3__.ShapePickerControl, { value: settings.shape, label: "Filter Shape", onChange: function (newShape) { return handlePropertyChange('shape', newShape); } }))),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
                     backgroundColor: '#f3f2f1',
                     padding: '12px',
@@ -819,9 +855,18 @@ var FilterModuleControl = function (_a) {
                             else {
                                 handlePropertyChange('imageAlpha', value);
                             }
-                        }, showValue: true, valueFormat: function (value) { return "".concat(value, "%"); } }))),
+                        }, showValue: true, valueFormat: function (value) { return "".concat(value, "%"); } })),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 0 } },
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: {
+                            fontSize: '14px',
+                            fontWeight: '600',
+                            color: '#323130',
+                            marginBottom: '8px',
+                            display: 'block'
+                        } }, "Background Shape"),
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ShapePickerControl__WEBPACK_IMPORTED_MODULE_3__.ShapePickerControl, { value: settings.backgroundShape, label: "Background Shape", onChange: function (newShape) { return handlePropertyChange('backgroundShape', newShape); } }))),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Toggle__WEBPACK_IMPORTED_MODULE_5__.Toggle, { label: "Filter Divider", inlineLabel: true, checked: settings.showDivider, onText: "On", offText: "Off", onChange: function (_, checked) { return handlePropertyChange('showDivider', checked); } })),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Toggle__WEBPACK_IMPORTED_MODULE_5__.Toggle, { label: "Divider", inlineLabel: true, checked: settings.showDivider, onText: "On", offText: "Off", onChange: function (_, checked) { return handlePropertyChange('showDivider', checked); } })),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginTop: 16 } },
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_9__.PrimaryButton, { text: "Reset Filter Formatting", onClick: function () {
                         // Reset all filter settings to defaults
@@ -845,6 +890,7 @@ var FilterModuleControl = function (_a) {
                         handlePropertyChange('gradientAlpha', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.background.gradientAlpha1);
                         handlePropertyChange('imageUrl', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.background.image);
                         handlePropertyChange('imageAlpha', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.background.imageAlpha);
+                        handlePropertyChange('backgroundShape', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.backgroundShape || 'pill');
                     } }))))));
 };
 
@@ -34741,7 +34787,7 @@ var FancyListWebPart = /** @class */ (function (_super) {
                                     properties: {
                                         key: 'filterConfiguration',
                                         onRender: function (elem, ctx, changeCallback) {
-                                            var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t;
+                                            var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u;
                                             react_dom__WEBPACK_IMPORTED_MODULE_1__.render(react__WEBPACK_IMPORTED_MODULE_0__.createElement(_propertyPane_FilterModuleControl__WEBPACK_IMPORTED_MODULE_10__.FilterModuleControl, {
                                                 label: 'Filter Configuration',
                                                 settings: {
@@ -34759,16 +34805,17 @@ var FancyListWebPart = /** @class */ (function (_super) {
                                                         font: ((_g = _this.properties.filterSettings) === null || _g === void 0 ? void 0 : _g.inactiveColors.font) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.inactiveColors.font
                                                     },
                                                     shape: ((_h = _this.properties.filterSettings) === null || _h === void 0 ? void 0 : _h.shape) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.shape,
-                                                    showDivider: ((_j = _this.properties.filterSettings) === null || _j === void 0 ? void 0 : _j.showDivider) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.showDivider,
-                                                    backgroundType: ((_k = _this.properties.filterSettings) === null || _k === void 0 ? void 0 : _k.background.type) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.type,
-                                                    backgroundColor: ((_l = _this.properties.filterSettings) === null || _l === void 0 ? void 0 : _l.background.color) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.color,
-                                                    backgroundAlpha: ((_m = _this.properties.filterSettings) === null || _m === void 0 ? void 0 : _m.background.alpha) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.alpha,
-                                                    gradientDirection: ((_o = _this.properties.filterSettings) === null || _o === void 0 ? void 0 : _o.background.gradientDirection) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientDirection,
-                                                    gradientColor1: ((_p = _this.properties.filterSettings) === null || _p === void 0 ? void 0 : _p.background.gradientColor1) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientColor1,
-                                                    gradientColor2: ((_q = _this.properties.filterSettings) === null || _q === void 0 ? void 0 : _q.background.gradientColor2) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientColor2,
-                                                    gradientAlpha: ((_r = _this.properties.filterSettings) === null || _r === void 0 ? void 0 : _r.background.gradientAlpha1) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientAlpha1,
-                                                    imageUrl: ((_s = _this.properties.filterSettings) === null || _s === void 0 ? void 0 : _s.background.image) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.image,
-                                                    imageAlpha: ((_t = _this.properties.filterSettings) === null || _t === void 0 ? void 0 : _t.background.imageAlpha) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.imageAlpha
+                                                    backgroundShape: ((_j = _this.properties.filterSettings) === null || _j === void 0 ? void 0 : _j.backgroundShape) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.backgroundShape,
+                                                    showDivider: ((_k = _this.properties.filterSettings) === null || _k === void 0 ? void 0 : _k.showDivider) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.showDivider,
+                                                    backgroundType: ((_l = _this.properties.filterSettings) === null || _l === void 0 ? void 0 : _l.background.type) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.type,
+                                                    backgroundColor: ((_m = _this.properties.filterSettings) === null || _m === void 0 ? void 0 : _m.background.color) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.color,
+                                                    backgroundAlpha: ((_o = _this.properties.filterSettings) === null || _o === void 0 ? void 0 : _o.background.alpha) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.alpha,
+                                                    gradientDirection: ((_p = _this.properties.filterSettings) === null || _p === void 0 ? void 0 : _p.background.gradientDirection) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientDirection,
+                                                    gradientColor1: ((_q = _this.properties.filterSettings) === null || _q === void 0 ? void 0 : _q.background.gradientColor1) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientColor1,
+                                                    gradientColor2: ((_r = _this.properties.filterSettings) === null || _r === void 0 ? void 0 : _r.background.gradientColor2) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientColor2,
+                                                    gradientAlpha: ((_s = _this.properties.filterSettings) === null || _s === void 0 ? void 0 : _s.background.gradientAlpha1) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientAlpha1,
+                                                    imageUrl: ((_t = _this.properties.filterSettings) === null || _t === void 0 ? void 0 : _t.background.image) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.image,
+                                                    imageAlpha: ((_u = _this.properties.filterSettings) === null || _u === void 0 ? void 0 : _u.background.imageAlpha) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.imageAlpha
                                                 },
                                                 onPropertyChange: function (propertyPath, newValue) {
                                                     // Handle property changes and update the web part properties
@@ -34778,6 +34825,9 @@ var FancyListWebPart = /** @class */ (function (_super) {
                                                     switch (propertyPath) {
                                                         case 'shape':
                                                             _this.properties.filterSettings.shape = newValue;
+                                                            break;
+                                                        case 'backgroundShape':
+                                                            _this.properties.filterSettings.backgroundShape = newValue;
                                                             break;
                                                         case 'showDivider':
                                                             _this.properties.filterSettings.showDivider = newValue;
