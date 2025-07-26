@@ -547,14 +547,20 @@ var ColorPickerControl = function (_a) {
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_2__.TextField, { value: currentColor, onChange: handleHexChange, disabled: disabled, styles: {
                     root: {
                         width: 95,
-                        backgroundColor: currentColor,
                         borderRadius: 4,
                         border: '1px solid #ccc'
                     },
                     field: {
+                        backgroundColor: currentColor,
                         color: getContrastColor(currentColor),
                         fontWeight: '600',
-                        fontSize: '12px'
+                        fontSize: '12px',
+                        border: 'none',
+                        outline: 'none'
+                    },
+                    fieldGroup: {
+                        backgroundColor: currentColor,
+                        border: 'none'
                     }
                 }, placeholder: "#RRGGBB", title: "Type a hex color code (e.g., #ff0000 for red)" })),
         pickerVisible && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginTop: 8, zIndex: 1000, position: 'relative' } },

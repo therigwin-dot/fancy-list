@@ -117,5 +117,29 @@ Fancy List now supports only Individual Elements mode for styling. All other mod
   - "Auto Expand" (for auto-expansion features)
   - "Show Divider" (for general divider toggles)
 
+### ColorPickerControl Styling Reference
+- **Purpose:** Enhanced color picker with combined hex input and color preview.
+- **Standard Implementation:**
+  ```jsx
+  <ColorPickerControl
+    color={colorValue}
+    field="fieldName"
+    label=""
+    onChange={(field, newColor) => handleColorChange(newColor)}
+  />
+  ```
+- **Features:**
+  - **Combined Input**: Hex input field with color as background
+  - **Dynamic Text Color**: Automatically calculates contrasting text color based on background brightness
+  - **Luminance Algorithm**: Uses industry-standard formula (0.299R + 0.587G + 0.114B) for perceived brightness
+  - **Compact Layout**: Color picker icon on left, combined input field
+  - **Real-time Preview**: Background color updates as you type or pick colors
+- **Technical Details:**
+  - **Width**: 95px for optimal display
+  - **Text Styling**: Bold (600 weight), 12px font size
+  - **Border**: 1px solid #ccc with 4px border radius
+  - **Spacing**: 1px gap between icon and input
+- **Usage:** All color picker controls use this enhanced styling for consistent, intuitive color selection.
+
 ### Design Principle
 - **Object-Oriented:** Each control is focused, reusable, and maintains separation of concerns. This enables maintainability, testability, and easy integration across the web part.

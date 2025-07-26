@@ -75,14 +75,20 @@ export const ColorPickerControl: React.FC<ColorPickerControlProps> = ({ color, f
           styles={{ 
             root: { 
               width: 95,
-              backgroundColor: currentColor,
               borderRadius: 4,
               border: '1px solid #ccc'
             },
             field: {
+              backgroundColor: currentColor,
               color: getContrastColor(currentColor),
               fontWeight: '600',
-              fontSize: '12px'
+              fontSize: '12px',
+              border: 'none',
+              outline: 'none'
+            },
+            fieldGroup: {
+              backgroundColor: currentColor,
+              border: 'none'
             }
           }}
           placeholder="#RRGGBB"
