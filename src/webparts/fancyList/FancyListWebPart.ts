@@ -16,6 +16,7 @@ import FancyList from './components/FancyList';
 import { IFancyListProps } from './components/IFancyListProps';
 import DEFAULTS_CONFIG from './DEFAULTS_CONFIG';
 
+
 export interface IFancyListWebPartProps {
   selectedListId: string;
   categoryField: string;
@@ -373,6 +374,7 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
                   selectedKey: this.properties.descriptionField,
                   disabled: !this.properties.selectedListId || !this.properties.categoryField || !this.properties.subjectField
                 }),
+
                 {
                   type: 1, // PropertyPaneFieldType.Custom
                   targetProperty: 'page1Buttons',
