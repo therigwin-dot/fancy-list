@@ -141,5 +141,83 @@ Fancy List now supports only Individual Elements mode for styling. All other mod
   - **Spacing**: 1px gap between icon and input
 - **Usage:** All color picker controls use this enhanced styling for consistent, intuitive color selection.
 
+### Background Controls System
+- **Purpose:** Comprehensive background customization system with unified transparency control
+- **Container:** Grey background container (`#f3f2f1`) with 12px padding and 4px border radius
+- **Header Layout:** Inline "Background" title with Type dropdown (120px min-width)
+- **Type Options:** Solid, Gradient, Image backgrounds
+- **Unified Transparency:** Single transparency slider that adapts to background type
+- **Smart State Management:** Each background type maintains separate transparency values
+
+#### **Solid Background Controls:**
+- **Color Picker:** Enhanced ColorPickerControl with combined hex input and color preview
+- **Transparency Slider:** 0-100% range with percentage display
+- **State Property:** `backgroundAlpha` for solid backgrounds
+
+#### **Gradient Background Controls:**
+- **Direction Dropdown:** 5 gradient directions (to bottom, left-right, to bottom right, to bottom left, radial)
+- **Swap Colors Button:** Swaps both actual gradient colors and preview colors
+- **Interactive Preview Box:** 190px × 32px black/white gradient preview showing direction
+- **Inline Color Pickers:** Two ColorPickerControls side-by-side with 8px gap
+- **State Properties:** `gradientColor1`, `gradientColor2`, `gradientAlpha` for gradient backgrounds
+
+#### **Image Background Controls:**
+- **URL Input:** TextField for image URL entry
+- **Transparency Slider:** 0-100% range with percentage display
+- **State Property:** `imageAlpha` for image backgrounds
+
+#### **Technical Implementation:**
+```typescript
+// Background container styling
+<div style={{ 
+  backgroundColor: '#f3f2f1', 
+  padding: '12px', 
+  borderRadius: '4px',
+  marginBottom: 16 
+}}>
+  {/* Header with inline title and dropdown */}
+  <div style={{ 
+    display: 'flex', 
+    alignItems: 'flex-start', 
+    gap: '8px',
+    marginBottom: '12px'
+  }}>
+    <div style={{ fontSize: '16px', fontWeight: '600', color: '#323130' }}>
+      Background
+    </div>
+    <Dropdown styles={{ root: { minWidth: 120 } }} />
+  </div>
+  
+  {/* Conditional controls based on background type */}
+  {/* Unified transparency slider */}
+</div>
+```
+
+#### **Dependencies:**
+- **ColorPickerControl:** Enhanced with combined hex input and dynamic contrasting text
+- **FontControl:** Compact single-line layout for font selection
+- **ShapePickerControl:** For shape selection
+- **React Hooks:** useState for preview color management
+- **Fluent UI:** Dropdown, Slider, TextField, IconButton components
+
+#### **State Management:**
+```typescript
+// Preview colors for gradient direction preview
+const [previewColor1, setPreviewColor1] = React.useState<string>('#ffffff');
+const [previewColor2, setPreviewColor2] = React.useState<string>('#000000');
+
+// Gradient preview function
+const getGradientPreview = (direction: string, color1: string, color2: string): string => {
+  switch(direction) {
+    case 'to bottom': return `linear-gradient(to bottom, ${color1}, ${color2})`;
+    case 'left-right': return `linear-gradient(to right, ${color1}, ${color2})`;
+    case 'to bottom right': return `linear-gradient(to bottom right, ${color1}, ${color2})`;
+    case 'to bottom left': return `linear-gradient(to bottom left, ${color1}, ${color2})`;
+    case 'radial': return `radial-gradient(circle, ${color1}, ${color2})`;
+    default: return `linear-gradient(to right, ${color1}, ${color2})`;
+  }
+};
+```
+
 ### Design Principle
 - **Object-Oriented:** Each control is focused, reusable, and maintains separation of concerns. This enables maintainability, testability, and easy integration across the web part.
