@@ -3,9 +3,11 @@ import { TextField } from '@fluentui/react/lib/TextField';
 import { Toggle } from '@fluentui/react/lib/Toggle';
 import { Dropdown, IDropdownOption } from '@fluentui/react/lib/Dropdown';
 import { Slider } from '@fluentui/react/lib/Slider';
+import { PrimaryButton } from '@fluentui/react/lib/Button';
 import { FontControl } from './FontControl';
 import { ColorPickerControl } from './ColorPickerControl';
 import { ShapePickerControl, ShapeOption } from './ShapePickerControl';
+import DEFAULTS_CONFIG from '../DEFAULTS_CONFIG';
 
 export interface TitleConfigurationProps {
   label?: string;
@@ -105,6 +107,27 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
     const tempColor = settings.gradientColor1;
     handlePropertyChange('gradientColor1', settings.gradientColor2);
     handlePropertyChange('gradientColor2', tempColor);
+  };
+
+  const handleReset = () => {
+    handlePropertyChange('webPartTitle', DEFAULTS_CONFIG.titleSettings.webPartTitle);
+    handlePropertyChange('shape', DEFAULTS_CONFIG.titleSettings.shape);
+    handlePropertyChange('showDivider', DEFAULTS_CONFIG.titleSettings.showDivider);
+    handlePropertyChange('backgroundType', DEFAULTS_CONFIG.titleSettings.background.type);
+    handlePropertyChange('backgroundColor', DEFAULTS_CONFIG.titleSettings.background.color);
+    handlePropertyChange('backgroundAlpha', DEFAULTS_CONFIG.titleSettings.background.alpha);
+    handlePropertyChange('gradientDirection', DEFAULTS_CONFIG.titleSettings.background.gradientDirection);
+    handlePropertyChange('gradientColor1', DEFAULTS_CONFIG.titleSettings.background.gradientColor1);
+    handlePropertyChange('gradientColor2', DEFAULTS_CONFIG.titleSettings.background.gradientColor2);
+    handlePropertyChange('gradientAlpha', DEFAULTS_CONFIG.titleSettings.background.gradientAlpha1);
+    handlePropertyChange('imageUrl', DEFAULTS_CONFIG.titleSettings.background.image);
+    handlePropertyChange('imageAlpha', DEFAULTS_CONFIG.titleSettings.background.imageAlpha);
+    handleFontChange({
+      fontFamily: DEFAULTS_CONFIG.titleSettings.font.family,
+      fontSize: DEFAULTS_CONFIG.titleSettings.font.size,
+      formatting: DEFAULTS_CONFIG.titleSettings.font.formatting
+    });
+    handlePropertyChange('font.color', DEFAULTS_CONFIG.titleSettings.font.color);
   };
 
   return (
@@ -337,6 +360,11 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
           </div>
         </>
       )}
+
+      {/* Reset Button */}
+      <div style={{ marginTop: 16 }}>
+        <PrimaryButton text="Reset" onClick={handleReset} />
+      </div>
     </div>
   );
 }; 

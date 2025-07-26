@@ -699,13 +699,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ 5959);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @fluentui/react/lib/TextField */ 7102);
-/* harmony import */ var _fluentui_react_lib_Toggle__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @fluentui/react/lib/Toggle */ 6264);
-/* harmony import */ var _fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @fluentui/react/lib/Dropdown */ 2042);
-/* harmony import */ var _fluentui_react_lib_Slider__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @fluentui/react/lib/Slider */ 1798);
+/* harmony import */ var _fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @fluentui/react/lib/TextField */ 7102);
+/* harmony import */ var _fluentui_react_lib_Toggle__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @fluentui/react/lib/Toggle */ 6264);
+/* harmony import */ var _fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @fluentui/react/lib/Dropdown */ 2042);
+/* harmony import */ var _fluentui_react_lib_Slider__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @fluentui/react/lib/Slider */ 1798);
+/* harmony import */ var _fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @fluentui/react/lib/Button */ 9425);
 /* harmony import */ var _FontControl__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FontControl */ 8177);
 /* harmony import */ var _ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ColorPickerControl */ 9193);
 /* harmony import */ var _ShapePickerControl__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ShapePickerControl */ 4439);
+/* harmony import */ var _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../DEFAULTS_CONFIG */ 7702);
+
+
 
 
 
@@ -770,6 +774,26 @@ var TitleConfiguration = function (_a) {
         handlePropertyChange('gradientColor1', settings.gradientColor2);
         handlePropertyChange('gradientColor2', tempColor);
     };
+    var handleReset = function () {
+        handlePropertyChange('webPartTitle', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.webPartTitle);
+        handlePropertyChange('shape', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.shape);
+        handlePropertyChange('showDivider', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.showDivider);
+        handlePropertyChange('backgroundType', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.background.type);
+        handlePropertyChange('backgroundColor', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.background.color);
+        handlePropertyChange('backgroundAlpha', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.background.alpha);
+        handlePropertyChange('gradientDirection', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.background.gradientDirection);
+        handlePropertyChange('gradientColor1', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.background.gradientColor1);
+        handlePropertyChange('gradientColor2', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.background.gradientColor2);
+        handlePropertyChange('gradientAlpha', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.background.gradientAlpha1);
+        handlePropertyChange('imageUrl', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.background.image);
+        handlePropertyChange('imageAlpha', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.background.imageAlpha);
+        handleFontChange({
+            fontFamily: _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.font.family,
+            fontSize: _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.font.size,
+            formatting: _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.font.formatting
+        });
+        handlePropertyChange('font.color', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.font.color);
+    };
     return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
                 fontSize: '16px',
@@ -791,7 +815,7 @@ var TitleConfiguration = function (_a) {
                     marginBottom: '8px',
                     display: 'block'
                 } }, "Title Text"),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_4__.TextField, { value: settings.webPartTitle, onChange: function (_, newValue) { return handlePropertyChange('webPartTitle', newValue || ''); }, placeholder: "Enter title text" })),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_5__.TextField, { value: settings.webPartTitle, onChange: function (_, newValue) { return handlePropertyChange('webPartTitle', newValue || ''); }, placeholder: "Enter title text" })),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ShapePickerControl__WEBPACK_IMPORTED_MODULE_3__.ShapePickerControl, { value: settings.shape, label: "Title Shape", onChange: function (newShape) { return handlePropertyChange('shape', newShape); } })),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
@@ -799,9 +823,9 @@ var TitleConfiguration = function (_a) {
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__.ColorPickerControl, { color: settings.font.color, field: "titleColor", label: "Title Color", onChange: function (field, newColor) { return handlePropertyChange('font.color', newColor); } })),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Toggle__WEBPACK_IMPORTED_MODULE_5__.Toggle, { label: "Show Title Divider", checked: settings.showDivider, onText: "On", offText: "Off", onChange: function (_, checked) { return handlePropertyChange('showDivider', checked); } })),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Toggle__WEBPACK_IMPORTED_MODULE_6__.Toggle, { label: "Show Title Divider", checked: settings.showDivider, onText: "On", offText: "Off", onChange: function (_, checked) { return handlePropertyChange('showDivider', checked); } })),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_6__.Dropdown, { label: "Background Type", options: backgroundTypeOptions, selectedKey: settings.backgroundType, onChange: function (_, option) { return handlePropertyChange('backgroundType', option === null || option === void 0 ? void 0 : option.key); } })),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_7__.Dropdown, { label: "Background Type", options: backgroundTypeOptions, selectedKey: settings.backgroundType, onChange: function (_, option) { return handlePropertyChange('backgroundType', option === null || option === void 0 ? void 0 : option.key); } })),
         settings.backgroundType === 'solid' && (react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null,
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__.ColorPickerControl, { color: settings.backgroundColor, field: "backgroundColor", label: "Background Color", onChange: function (field, newColor) { return handlePropertyChange('backgroundColor', newColor); } })),
@@ -813,10 +837,10 @@ var TitleConfiguration = function (_a) {
                         marginBottom: '8px',
                         display: 'block'
                     } }, "Background Transparency"),
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Slider__WEBPACK_IMPORTED_MODULE_7__.Slider, { min: 0, max: 100, value: settings.backgroundAlpha, onChange: function (value) { return handlePropertyChange('backgroundAlpha', value); }, showValue: true, valueFormat: function (value) { return "".concat(value, "%"); } })))),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Slider__WEBPACK_IMPORTED_MODULE_8__.Slider, { min: 0, max: 100, value: settings.backgroundAlpha, onChange: function (value) { return handlePropertyChange('backgroundAlpha', value); }, showValue: true, valueFormat: function (value) { return "".concat(value, "%"); } })))),
         settings.backgroundType === 'gradient' && (react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null,
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_6__.Dropdown, { label: "Gradient Direction", options: gradientDirectionOptions, selectedKey: settings.gradientDirection, onChange: function (_, option) { return handlePropertyChange('gradientDirection', option === null || option === void 0 ? void 0 : option.key); } })),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_7__.Dropdown, { label: "Gradient Direction", options: gradientDirectionOptions, selectedKey: settings.gradientDirection, onChange: function (_, option) { return handlePropertyChange('gradientDirection', option === null || option === void 0 ? void 0 : option.key); } })),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 8 } },
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { type: "button", onClick: handleSwapColors, style: {
                         padding: '4px 8px',
@@ -839,7 +863,7 @@ var TitleConfiguration = function (_a) {
                         marginBottom: '8px',
                         display: 'block'
                     } }, "Gradient Transparency"),
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Slider__WEBPACK_IMPORTED_MODULE_7__.Slider, { min: 0, max: 100, value: settings.gradientAlpha, onChange: function (value) { return handlePropertyChange('gradientAlpha', value); }, showValue: true, valueFormat: function (value) { return "".concat(value, "%"); } })))),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Slider__WEBPACK_IMPORTED_MODULE_8__.Slider, { min: 0, max: 100, value: settings.gradientAlpha, onChange: function (value) { return handlePropertyChange('gradientAlpha', value); }, showValue: true, valueFormat: function (value) { return "".concat(value, "%"); } })))),
         settings.backgroundType === 'image' && (react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null,
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: {
@@ -849,7 +873,7 @@ var TitleConfiguration = function (_a) {
                         marginBottom: '8px',
                         display: 'block'
                     } }, "Image URL"),
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_4__.TextField, { value: settings.imageUrl, onChange: function (_, newValue) { return handlePropertyChange('imageUrl', newValue || ''); }, placeholder: "Enter image URL" })),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_5__.TextField, { value: settings.imageUrl, onChange: function (_, newValue) { return handlePropertyChange('imageUrl', newValue || ''); }, placeholder: "Enter image URL" })),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: {
                         fontSize: '14px',
@@ -858,7 +882,9 @@ var TitleConfiguration = function (_a) {
                         marginBottom: '8px',
                         display: 'block'
                     } }, "Image Transparency"),
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Slider__WEBPACK_IMPORTED_MODULE_7__.Slider, { min: 0, max: 100, value: settings.imageAlpha, onChange: function (value) { return handlePropertyChange('imageAlpha', value); }, showValue: true, valueFormat: function (value) { return "".concat(value, "%"); } }))))));
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Slider__WEBPACK_IMPORTED_MODULE_8__.Slider, { min: 0, max: 100, value: settings.imageAlpha, onChange: function (value) { return handlePropertyChange('imageAlpha', value); }, showValue: true, valueFormat: function (value) { return "".concat(value, "%"); } })))),
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginTop: 16 } },
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_9__.PrimaryButton, { text: "Reset", onClick: handleReset }))));
 };
 
 
@@ -5939,6 +5965,248 @@ var getStyles = (0,_Utilities__WEBPACK_IMPORTED_MODULE_0__.memoizeFunction)(func
 
 /***/ }),
 
+/***/ 9874:
+/*!****************************************************************************!*\
+  !*** ./node_modules/@fluentui/react/lib/components/Button/ButtonThemes.js ***!
+  \****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   primaryStyles: () => (/* binding */ primaryStyles),
+/* harmony export */   standardStyles: () => (/* binding */ standardStyles)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 196);
+/* harmony import */ var _Styling__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Styling */ 8455);
+/* harmony import */ var _Utilities__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Utilities */ 7291);
+
+
+
+var splitButtonDividerBaseStyles = function () {
+    return {
+        position: 'absolute',
+        width: 1,
+        right: 31,
+        top: 8,
+        bottom: 8,
+    };
+};
+function standardStyles(theme) {
+    var _a, _b, _c, _d, _e;
+    var s = theme.semanticColors, p = theme.palette;
+    var buttonBackground = s.buttonBackground;
+    var buttonBackgroundPressed = s.buttonBackgroundPressed;
+    var buttonBackgroundHovered = s.buttonBackgroundHovered;
+    var buttonBackgroundDisabled = s.buttonBackgroundDisabled;
+    var buttonText = s.buttonText;
+    var buttonTextHovered = s.buttonTextHovered;
+    var buttonTextDisabled = s.buttonTextDisabled;
+    var buttonTextChecked = s.buttonTextChecked;
+    var buttonTextCheckedHovered = s.buttonTextCheckedHovered;
+    return {
+        root: {
+            backgroundColor: buttonBackground,
+            color: buttonText,
+        },
+        rootHovered: (_a = {
+                backgroundColor: buttonBackgroundHovered,
+                color: buttonTextHovered
+            },
+            _a[_Styling__WEBPACK_IMPORTED_MODULE_0__.HighContrastSelector] = {
+                borderColor: 'Highlight',
+                color: 'Highlight',
+            },
+            _a),
+        rootPressed: {
+            backgroundColor: buttonBackgroundPressed,
+            color: buttonTextChecked,
+        },
+        rootExpanded: {
+            backgroundColor: buttonBackgroundPressed,
+            color: buttonTextChecked,
+        },
+        rootChecked: {
+            backgroundColor: buttonBackgroundPressed,
+            color: buttonTextChecked,
+        },
+        rootCheckedHovered: {
+            backgroundColor: buttonBackgroundPressed,
+            color: buttonTextCheckedHovered,
+        },
+        rootDisabled: (_b = {
+                color: buttonTextDisabled,
+                backgroundColor: buttonBackgroundDisabled
+            },
+            _b[_Styling__WEBPACK_IMPORTED_MODULE_0__.HighContrastSelector] = {
+                color: 'GrayText',
+                borderColor: 'GrayText',
+                backgroundColor: 'Window',
+            },
+            _b),
+        // Split button styles
+        splitButtonContainer: (_c = {},
+            _c[_Styling__WEBPACK_IMPORTED_MODULE_0__.HighContrastSelector] = {
+                border: 'none',
+            },
+            _c),
+        splitButtonMenuButton: {
+            color: p.white,
+            backgroundColor: 'transparent',
+            ':hover': (_d = {
+                    backgroundColor: p.neutralLight
+                },
+                _d[_Styling__WEBPACK_IMPORTED_MODULE_0__.HighContrastSelector] = {
+                    color: 'Highlight',
+                },
+                _d),
+        },
+        splitButtonMenuButtonDisabled: {
+            backgroundColor: s.buttonBackgroundDisabled,
+            ':hover': {
+                backgroundColor: s.buttonBackgroundDisabled,
+            },
+        },
+        splitButtonDivider: (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)({}, splitButtonDividerBaseStyles()), (_e = { backgroundColor: p.neutralTertiaryAlt }, _e[_Styling__WEBPACK_IMPORTED_MODULE_0__.HighContrastSelector] = {
+            backgroundColor: 'WindowText',
+        }, _e)),
+        splitButtonDividerDisabled: {
+            backgroundColor: theme.palette.neutralTertiaryAlt,
+        },
+        splitButtonMenuButtonChecked: {
+            backgroundColor: p.neutralQuaternaryAlt,
+            ':hover': {
+                backgroundColor: p.neutralQuaternaryAlt,
+            },
+        },
+        splitButtonMenuButtonExpanded: {
+            backgroundColor: p.neutralQuaternaryAlt,
+            ':hover': {
+                backgroundColor: p.neutralQuaternaryAlt,
+            },
+        },
+        splitButtonMenuIcon: {
+            color: s.buttonText,
+        },
+        splitButtonMenuIconDisabled: {
+            color: s.buttonTextDisabled,
+        },
+    };
+}
+function primaryStyles(theme) {
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j;
+    var p = theme.palette, s = theme.semanticColors;
+    return {
+        root: (_a = {
+                backgroundColor: s.primaryButtonBackground,
+                border: "1px solid ".concat(s.primaryButtonBackground),
+                color: s.primaryButtonText
+            },
+            _a[_Styling__WEBPACK_IMPORTED_MODULE_0__.HighContrastSelector] = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)({ color: 'Window', backgroundColor: 'WindowText', borderColor: 'WindowText' }, (0,_Styling__WEBPACK_IMPORTED_MODULE_0__.getHighContrastNoAdjustStyle)()),
+            _a[".".concat(_Utilities__WEBPACK_IMPORTED_MODULE_2__.IsFocusVisibleClassName, " &:focus, :host(.").concat(_Utilities__WEBPACK_IMPORTED_MODULE_2__.IsFocusVisibleClassName, ") &:focus")] = {
+                ':after': {
+                    border: "none",
+                    outlineColor: p.white,
+                },
+            },
+            _a),
+        rootHovered: (_b = {
+                backgroundColor: s.primaryButtonBackgroundHovered,
+                border: "1px solid ".concat(s.primaryButtonBackgroundHovered),
+                color: s.primaryButtonTextHovered
+            },
+            _b[_Styling__WEBPACK_IMPORTED_MODULE_0__.HighContrastSelector] = {
+                color: 'Window',
+                backgroundColor: 'Highlight',
+                borderColor: 'Highlight',
+            },
+            _b),
+        rootPressed: (_c = {
+                backgroundColor: s.primaryButtonBackgroundPressed,
+                border: "1px solid ".concat(s.primaryButtonBackgroundPressed),
+                color: s.primaryButtonTextPressed
+            },
+            _c[_Styling__WEBPACK_IMPORTED_MODULE_0__.HighContrastSelector] = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)({ color: 'Window', backgroundColor: 'WindowText', borderColor: 'WindowText' }, (0,_Styling__WEBPACK_IMPORTED_MODULE_0__.getHighContrastNoAdjustStyle)()),
+            _c),
+        rootExpanded: {
+            backgroundColor: s.primaryButtonBackgroundPressed,
+            color: s.primaryButtonTextPressed,
+        },
+        rootChecked: {
+            backgroundColor: s.primaryButtonBackgroundPressed,
+            color: s.primaryButtonTextPressed,
+        },
+        rootCheckedHovered: {
+            backgroundColor: s.primaryButtonBackgroundPressed,
+            color: s.primaryButtonTextPressed,
+        },
+        rootDisabled: (_d = {
+                color: s.primaryButtonTextDisabled,
+                backgroundColor: s.primaryButtonBackgroundDisabled
+            },
+            _d[_Styling__WEBPACK_IMPORTED_MODULE_0__.HighContrastSelector] = {
+                color: 'GrayText',
+                borderColor: 'GrayText',
+                backgroundColor: 'Window',
+            },
+            _d),
+        // Split button styles
+        splitButtonContainer: (_e = {},
+            _e[_Styling__WEBPACK_IMPORTED_MODULE_0__.HighContrastSelector] = {
+                border: 'none',
+            },
+            _e),
+        splitButtonDivider: (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)({}, splitButtonDividerBaseStyles()), (_f = { backgroundColor: p.white }, _f[_Styling__WEBPACK_IMPORTED_MODULE_0__.HighContrastSelector] = {
+            backgroundColor: 'Window',
+        }, _f)),
+        splitButtonMenuButton: (_g = {
+                backgroundColor: s.primaryButtonBackground,
+                color: s.primaryButtonText
+            },
+            _g[_Styling__WEBPACK_IMPORTED_MODULE_0__.HighContrastSelector] = {
+                backgroundColor: 'Canvas',
+            },
+            _g[':hover'] = (_h = {
+                    backgroundColor: s.primaryButtonBackgroundHovered
+                },
+                _h[_Styling__WEBPACK_IMPORTED_MODULE_0__.HighContrastSelector] = {
+                    color: 'Highlight',
+                },
+                _h),
+            _g),
+        splitButtonMenuButtonDisabled: {
+            backgroundColor: s.primaryButtonBackgroundDisabled,
+            ':hover': {
+                backgroundColor: s.primaryButtonBackgroundDisabled,
+            },
+        },
+        splitButtonMenuButtonChecked: {
+            backgroundColor: s.primaryButtonBackgroundPressed,
+            ':hover': {
+                backgroundColor: s.primaryButtonBackgroundPressed,
+            },
+        },
+        splitButtonMenuButtonExpanded: {
+            backgroundColor: s.primaryButtonBackgroundPressed,
+            ':hover': {
+                backgroundColor: s.primaryButtonBackgroundPressed,
+            },
+        },
+        splitButtonMenuIcon: {
+            color: s.primaryButtonText,
+        },
+        splitButtonMenuIconDisabled: (_j = {
+                color: p.neutralTertiary
+            },
+            _j[_Styling__WEBPACK_IMPORTED_MODULE_0__.HighContrastSelector] = {
+                color: 'GrayText',
+            },
+            _j),
+    };
+}
+
+
+/***/ }),
+
 /***/ 8293:
 /*!*******************************************************************************************!*\
   !*** ./node_modules/@fluentui/react/lib/components/Button/CommandButton/CommandButton.js ***!
@@ -5955,6 +6223,91 @@ __webpack_require__.r(__webpack_exports__);
  * {@docCategory Button}
  */
 var CommandButton = _ActionButton_ActionButton__WEBPACK_IMPORTED_MODULE_0__.ActionButton;
+
+
+/***/ }),
+
+/***/ 5613:
+/*!*******************************************************************************************!*\
+  !*** ./node_modules/@fluentui/react/lib/components/Button/DefaultButton/DefaultButton.js ***!
+  \*******************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   DefaultButton: () => (/* binding */ DefaultButton)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 196);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ 5959);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _BaseButton__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../BaseButton */ 1045);
+/* harmony import */ var _Utilities__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../Utilities */ 2727);
+/* harmony import */ var _Utilities__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../Utilities */ 5004);
+/* harmony import */ var _DefaultButton_styles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./DefaultButton.styles */ 377);
+
+
+
+
+
+/**
+ * {@docCategory Button}
+ */
+var DefaultButton = /** @class */ (function (_super) {
+    (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__extends)(DefaultButton, _super);
+    function DefaultButton() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    // eslint-disable-next-line @typescript-eslint/no-deprecated
+    DefaultButton.prototype.render = function () {
+        var _a = this.props, _b = _a.primary, primary = _b === void 0 ? false : _b, styles = _a.styles, theme = _a.theme;
+        return (react__WEBPACK_IMPORTED_MODULE_0__.createElement(_BaseButton__WEBPACK_IMPORTED_MODULE_2__.BaseButton, (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)({}, this.props, { variantClassName: primary ? 'ms-Button--primary' : 'ms-Button--default', styles: (0,_DefaultButton_styles__WEBPACK_IMPORTED_MODULE_3__.getStyles)(theme, styles, primary), onRenderDescription: _Utilities__WEBPACK_IMPORTED_MODULE_4__.nullRender })));
+    };
+    DefaultButton = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([
+        (0,_Utilities__WEBPACK_IMPORTED_MODULE_5__.customizable)('DefaultButton', ['theme', 'styles'], true)
+    ], DefaultButton);
+    return DefaultButton;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component));
+
+
+
+/***/ }),
+
+/***/ 377:
+/*!**************************************************************************************************!*\
+  !*** ./node_modules/@fluentui/react/lib/components/Button/DefaultButton/DefaultButton.styles.js ***!
+  \**************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   getStyles: () => (/* binding */ getStyles)
+/* harmony export */ });
+/* harmony import */ var _Styling__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../Styling */ 8455);
+/* harmony import */ var _Utilities__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../Utilities */ 5659);
+/* harmony import */ var _BaseButton_styles__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../BaseButton.styles */ 8657);
+/* harmony import */ var _SplitButton_SplitButton_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../SplitButton/SplitButton.styles */ 4129);
+/* harmony import */ var _ButtonThemes__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../ButtonThemes */ 9874);
+
+
+
+
+
+var DEFAULT_BUTTON_MIN_HEIGHT = '32px';
+var DEFAULT_BUTTON_MIN_WIDTH = '80px';
+var getStyles = (0,_Utilities__WEBPACK_IMPORTED_MODULE_0__.memoizeFunction)(function (theme, customStyles, primary) {
+    var baseButtonStyles = (0,_BaseButton_styles__WEBPACK_IMPORTED_MODULE_1__.getStyles)(theme);
+    var splitButtonStyles = (0,_SplitButton_SplitButton_styles__WEBPACK_IMPORTED_MODULE_2__.getStyles)(theme);
+    var defaultButtonStyles = {
+        root: {
+            minWidth: DEFAULT_BUTTON_MIN_WIDTH,
+            minHeight: DEFAULT_BUTTON_MIN_HEIGHT,
+        },
+        label: {
+            fontWeight: _Styling__WEBPACK_IMPORTED_MODULE_3__.FontWeights.semibold,
+        },
+    };
+    return (0,_Styling__WEBPACK_IMPORTED_MODULE_3__.concatStyleSets)(baseButtonStyles, defaultButtonStyles, primary ? (0,_ButtonThemes__WEBPACK_IMPORTED_MODULE_4__.primaryStyles)(theme) : (0,_ButtonThemes__WEBPACK_IMPORTED_MODULE_4__.standardStyles)(theme), splitButtonStyles, customStyles);
+});
 
 
 /***/ }),
@@ -6070,6 +6423,48 @@ var getStyles = (0,_Utilities__WEBPACK_IMPORTED_MODULE_0__.memoizeFunction)(func
     };
     return (0,_Styling__WEBPACK_IMPORTED_MODULE_3__.concatStyleSets)(baseButtonStyles, iconButtonStyles, splitButtonStyles, customStyles);
 });
+
+
+/***/ }),
+
+/***/ 9425:
+/*!*******************************************************************************************!*\
+  !*** ./node_modules/@fluentui/react/lib/components/Button/PrimaryButton/PrimaryButton.js ***!
+  \*******************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   PrimaryButton: () => (/* binding */ PrimaryButton)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 196);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ 5959);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Utilities__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../Utilities */ 2727);
+/* harmony import */ var _Utilities__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../Utilities */ 5004);
+/* harmony import */ var _DefaultButton_DefaultButton__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../DefaultButton/DefaultButton */ 5613);
+
+
+
+
+/**
+ * {@docCategory Button}
+ */
+var PrimaryButton = /** @class */ (function (_super) {
+    (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__extends)(PrimaryButton, _super);
+    function PrimaryButton() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    // eslint-disable-next-line @typescript-eslint/no-deprecated
+    PrimaryButton.prototype.render = function () {
+        return react__WEBPACK_IMPORTED_MODULE_0__.createElement(_DefaultButton_DefaultButton__WEBPACK_IMPORTED_MODULE_2__.DefaultButton, (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)({}, this.props, { primary: true, onRenderDescription: _Utilities__WEBPACK_IMPORTED_MODULE_3__.nullRender }));
+    };
+    PrimaryButton = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([
+        (0,_Utilities__WEBPACK_IMPORTED_MODULE_4__.customizable)('PrimaryButton', ['theme', 'styles'], true)
+    ], PrimaryButton);
+    return PrimaryButton;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component));
+
 
 
 /***/ }),
