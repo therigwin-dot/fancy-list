@@ -152,25 +152,7 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
         Customize the web parts title text, font, color, background, and shape settings. Use the reset button to put the default look and feel back in place. Use the Back and Next buttons to switch to a different configuration page.
       </div>
 
-      {/* 1. Title Text Control */}
-      <div style={{ marginBottom: 16 }}>
-        <TextField
-          value={settings.webPartTitle}
-          onChange={(_, newValue) => handlePropertyChange('webPartTitle', newValue || '')}
-          placeholder="Enter title text"
-        />
-      </div>
-
-      {/* 2. Shape Control */}
-      <div style={{ marginBottom: 16 }}>
-        <ShapePickerControl
-          value={settings.shape}
-          label=""
-          onChange={(newShape) => handlePropertyChange('shape', newShape)}
-        />
-      </div>
-
-      {/* 3. Title Font Control */}
+      {/* 1. Title Font Control */}
       <div style={{ marginBottom: 16 }}>
         <FontControl
           fontFamily={settings.font.family}
@@ -180,7 +162,16 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
         />
       </div>
 
-      {/* 4. Color Control */}
+      {/* 2. Title Text Control */}
+      <div style={{ marginBottom: 16 }}>
+        <TextField
+          value={settings.webPartTitle}
+          onChange={(_, newValue) => handlePropertyChange('webPartTitle', newValue || '')}
+          placeholder="Enter title text"
+        />
+      </div>
+
+      {/* 3. Color Control */}
       <div style={{ marginBottom: 16 }}>
         <ColorPickerControl
           color={settings.font.color}
@@ -190,15 +181,12 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
         />
       </div>
 
-      {/* 5. Show Divider Toggle */}
+      {/* 4. Shape Control */}
       <div style={{ marginBottom: 16 }}>
-        <Toggle
-          label="Divider"
-          inlineLabel={true}
-          checked={settings.showDivider}
-          onText="On"
-          offText="Off"
-          onChange={(_, checked) => handlePropertyChange('showDivider', checked)}
+        <ShapePickerControl
+          value={settings.shape}
+          label=""
+          onChange={(newShape) => handlePropertyChange('shape', newShape)}
         />
       </div>
 
@@ -343,6 +331,18 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
             valueFormat={(value) => `${value}%`}
           />
         </div>
+      </div>
+
+      {/* 5. Show Divider Toggle */}
+      <div style={{ marginBottom: 16 }}>
+        <Toggle
+          label="Divider"
+          inlineLabel={true}
+          checked={settings.showDivider}
+          onText="On"
+          offText="Off"
+          onChange={(_, checked) => handlePropertyChange('showDivider', checked)}
+        />
       </div>
 
       {/* Reset Button */}
