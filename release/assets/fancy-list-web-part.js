@@ -602,6 +602,7 @@ var FilterModuleControl = function (_a) {
         imageUrl: '',
         imageAlpha: 0
     } : _b, onPropertyChange = _a.onPropertyChange;
+    var _c = react__WEBPACK_IMPORTED_MODULE_0__.useState(true), enabled = _c[0], setEnabled = _c[1];
     var handlePropertyChange = function (propertyPath, newValue) {
         if (onPropertyChange) {
             onPropertyChange(propertyPath, newValue);
@@ -646,8 +647,8 @@ var FilterModuleControl = function (_a) {
                 marginBottom: '16px'
             } }, _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.description),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Toggle__WEBPACK_IMPORTED_MODULE_5__.Toggle, { label: "Enabled", checked: true, onText: "On", offText: "Off", onChange: function (_, checked) {
-                    // Does nothing - just toggles on and off
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Toggle__WEBPACK_IMPORTED_MODULE_5__.Toggle, { label: "Enabled", checked: enabled, onText: "On", offText: "Off", onChange: function (_, checked) {
+                    setEnabled(checked || false);
                 } })),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_FontControl__WEBPACK_IMPORTED_MODULE_1__.FontControl, { label: "Filter Font", fontFamily: settings.font.family, fontSize: settings.font.size, formatting: settings.font.formatting, onChange: handleFontChange })),

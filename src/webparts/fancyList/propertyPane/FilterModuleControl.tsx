@@ -80,6 +80,7 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
   },
   onPropertyChange 
 }) => {
+  const [enabled, setEnabled] = React.useState(true);
   const handlePropertyChange = (propertyPath: string, newValue: any) => {
     if (onPropertyChange) {
       onPropertyChange(propertyPath, newValue);
@@ -149,11 +150,11 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
       <div style={{ marginBottom: 16 }}>
         <Toggle
           label="Enabled"
-          checked={true}
+          checked={enabled}
           onText="On"
           offText="Off"
           onChange={(_, checked) => {
-            // Does nothing - just toggles on and off
+            setEnabled(checked || false);
           }}
         />
       </div>
