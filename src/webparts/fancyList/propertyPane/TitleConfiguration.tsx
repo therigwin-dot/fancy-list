@@ -68,6 +68,8 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
   },
   onPropertyChange 
 }) => {
+  const [previewColor1, setPreviewColor1] = React.useState<string>('#ffffff');
+  const [previewColor2, setPreviewColor2] = React.useState<string>('#000000');
   const handlePropertyChange = (propertyPath: string, newValue: any) => {
     if (onPropertyChange) {
       onPropertyChange(propertyPath, newValue);
@@ -104,9 +106,15 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
   ];
 
   const handleSwapColors = () => {
+    // Swap actual gradient colors
     const tempColor = settings.gradientColor1;
     handlePropertyChange('gradientColor1', settings.gradientColor2);
     handlePropertyChange('gradientColor2', tempColor);
+    
+    // Swap preview colors
+    const tempPreview = previewColor1;
+    setPreviewColor1(previewColor2);
+    setPreviewColor2(tempPreview);
   };
 
   const getGradientPreview = (direction: string, color1: string, color2: string): string => {
@@ -274,9 +282,9 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
                   height: '32px',
                   borderRadius: '4px',
                   border: '1px solid #ccc',
-                  background: getGradientPreview(settings.gradientDirection, '#ffffff', '#000000')
+                  background: getGradientPreview(settings.gradientDirection, previewColor1, previewColor2)
                 }}
-                title="Gradient direction preview (white to black)"
+                title="Gradient direction preview (click Swap Colors to reverse)"
               />
             </div>
             <div style={{ 

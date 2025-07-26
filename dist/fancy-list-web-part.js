@@ -1506,6 +1506,8 @@ var TitleConfiguration = function (_a) {
             color: '#323130'
         }
     } : _b, onPropertyChange = _a.onPropertyChange;
+    var _c = react__WEBPACK_IMPORTED_MODULE_0__.useState('#ffffff'), previewColor1 = _c[0], setPreviewColor1 = _c[1];
+    var _d = react__WEBPACK_IMPORTED_MODULE_0__.useState('#000000'), previewColor2 = _d[0], setPreviewColor2 = _d[1];
     var handlePropertyChange = function (propertyPath, newValue) {
         if (onPropertyChange) {
             onPropertyChange(propertyPath, newValue);
@@ -1532,9 +1534,14 @@ var TitleConfiguration = function (_a) {
         { key: 'radial', text: 'Radial' }
     ];
     var handleSwapColors = function () {
+        // Swap actual gradient colors
         var tempColor = settings.gradientColor1;
         handlePropertyChange('gradientColor1', settings.gradientColor2);
         handlePropertyChange('gradientColor2', tempColor);
+        // Swap preview colors
+        var tempPreview = previewColor1;
+        setPreviewColor1(previewColor2);
+        setPreviewColor2(tempPreview);
     };
     var getGradientPreview = function (direction, color1, color2) {
         switch (direction) {
@@ -1632,8 +1639,8 @@ var TitleConfiguration = function (_a) {
                             height: '32px',
                             borderRadius: '4px',
                             border: '1px solid #ccc',
-                            background: getGradientPreview(settings.gradientDirection, '#ffffff', '#000000')
-                        }, title: "Gradient direction preview (white to black)" })),
+                            background: getGradientPreview(settings.gradientDirection, previewColor1, previewColor2)
+                        }, title: "Gradient direction preview (click Swap Colors to reverse)" })),
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
                         display: 'flex',
                         alignItems: 'center',
