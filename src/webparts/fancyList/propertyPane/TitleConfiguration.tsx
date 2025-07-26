@@ -64,6 +64,15 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
     if (fields.formatting) handlePropertyChange('font.formatting', fields.formatting);
   };
 
+  // Unified label styling for all controls
+  const controlLabelStyle = {
+    fontSize: '14px',
+    fontWeight: '600',
+    color: '#323130',
+    marginBottom: '8px',
+    display: 'block' as const
+  };
+
   return (
     <div style={{ marginBottom: 16 }}>
       {/* Bold Header */}
@@ -88,8 +97,8 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
 
       {/* 1. Title Text Control */}
       <div style={{ marginBottom: 16 }}>
+        <label style={controlLabelStyle}>Title Text</label>
         <TextField
-          label="Title Text"
           value={settings.webPartTitle}
           onChange={(_, newValue) => handlePropertyChange('webPartTitle', newValue || '')}
           placeholder="Enter title text"
@@ -98,17 +107,17 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
 
       {/* 2. Title Shape Control */}
       <div style={{ marginBottom: 16 }}>
+        <label style={controlLabelStyle}>Title Shape</label>
         <ShapePickerControl
           value={settings.shape}
-          label="Title Shape"
           onChange={(newShape) => handlePropertyChange('shape', newShape)}
         />
       </div>
 
       {/* 3. Title Font Control */}
       <div style={{ marginBottom: 16 }}>
+        <label style={controlLabelStyle}>Title Font</label>
         <FontControl
-          label="Title Font"
           fontFamily={settings.font.family}
           fontSize={settings.font.size}
           formatting={settings.font.formatting}
@@ -118,10 +127,11 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
 
       {/* 4. Title Color Control */}
       <div style={{ marginBottom: 16 }}>
+        <label style={controlLabelStyle}>Title Color</label>
         <ColorPickerControl
-          label="Title Color"
           color={settings.font.color}
           field="titleColor"
+          label="" // Empty label since we're using our own label
           onChange={(field: string, newColor: string) => handlePropertyChange('font.color', newColor)}
         />
       </div>
