@@ -280,6 +280,12 @@ Page 1 provides comprehensive list and field selection functionality with dynami
 | Gradient Color 2 | `props.titleSectionBackgroundGradientColor2` | `'#0f46d1'` | `titleSectionBackgroundGradientColor2` | `'#0f46d1'` | `BackgroundPickerControl` | `ColorPickerControl` |
 | Show Title Divider | `props.showTitleDiguvider` | `false` | `showTitleDiguvider` | `false` | `PropertyPaneToggle` | None |
 
+**Reset Button Behavior:**
+- The reset button resets all title settings (font, color, background, shape, divider, etc.) to their default values from `DEFAULTS_CONFIG.titleSettings`.
+- **The title text (webPartTitle) is NOT reset** by the reset button, by design, to preserve the user's custom title.
+- **The divider toggle (Show Title Divider) IS reset** to its default value.
+- The reset button label is configurable via `resetButtonText` in `DEFAULTS_CONFIG.titleSettings`.
+
 **Notes:**
 - Uses proven `getBackgroundStyle()` function for rendering
 - BackgroundPickerControl contains multiple sub-controls

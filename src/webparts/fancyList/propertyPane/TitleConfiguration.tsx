@@ -110,7 +110,7 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
   };
 
   const handleReset = () => {
-    handlePropertyChange('webPartTitle', DEFAULTS_CONFIG.titleSettings.webPartTitle);
+    // Do NOT reset webPartTitle (preserve current title text) per design
     handlePropertyChange('shape', DEFAULTS_CONFIG.titleSettings.shape);
     handlePropertyChange('showDivider', DEFAULTS_CONFIG.titleSettings.showDivider);
     handlePropertyChange('backgroundType', DEFAULTS_CONFIG.titleSettings.background.type);
@@ -363,7 +363,7 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
 
       {/* Reset Button */}
       <div style={{ marginTop: 16 }}>
-        <PrimaryButton text="Reset" onClick={handleReset} />
+        <PrimaryButton text={DEFAULTS_CONFIG.titleSettings.resetButtonText} onClick={handleReset} />
       </div>
     </div>
   );

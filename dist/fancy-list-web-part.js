@@ -775,7 +775,7 @@ var TitleConfiguration = function (_a) {
         handlePropertyChange('gradientColor2', tempColor);
     };
     var handleReset = function () {
-        handlePropertyChange('webPartTitle', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.webPartTitle);
+        // Do NOT reset webPartTitle (preserve current title text) per design
         handlePropertyChange('shape', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.shape);
         handlePropertyChange('showDivider', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.showDivider);
         handlePropertyChange('backgroundType', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.background.type);
@@ -884,7 +884,7 @@ var TitleConfiguration = function (_a) {
                     } }, "Image Transparency"),
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Slider__WEBPACK_IMPORTED_MODULE_8__.Slider, { min: 0, max: 100, value: settings.imageAlpha, onChange: function (value) { return handlePropertyChange('imageAlpha', value); }, showValue: true, valueFormat: function (value) { return "".concat(value, "%"); } })))),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginTop: 16 } },
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_9__.PrimaryButton, { text: "Reset", onClick: handleReset }))));
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_9__.PrimaryButton, { text: _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.resetButtonText, onClick: handleReset }))));
 };
 
 
