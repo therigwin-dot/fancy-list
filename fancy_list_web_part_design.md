@@ -63,5 +63,20 @@ Fancy List now supports only Individual Elements mode for styling. All other mod
   - Formatting: Bold, Underline, StrikeThrough, Italics
 - **Usage:** Can be plugged into any area needing font controls.
 
+### Section Controls
+- **Purpose:** Comprehensive section styling for Category, Subject, and Description sections.
+- **Parameters:**
+  - Font controls (family, size, formatting, color)
+  - Background controls (type, colors, transparency, images, gradients)
+  - Shape selection (square, rounded, pill)
+  - Icon controls (expand/collapse icons, position)
+  - Toggle controls (show divider, auto expand)
+  - Hover color control
+- **Features:**
+  - Auto Expand toggle (default: off) - enables automatic expansion of sections
+  - Show Divider toggle - displays divider lines between sections
+  - Hover color control - customizes hover effects
+  - Icon configuration - expand/collapse icons and positioning
+
 ### Design Principle
 - **Object-Oriented:** Each control is focused, reusable, and maintains separation of concerns. This enables maintainability, testability, and easy integration across the web part.

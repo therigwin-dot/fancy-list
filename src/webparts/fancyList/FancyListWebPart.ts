@@ -136,6 +136,8 @@ export interface SectionSettings {
   };
   shape: 'square' | 'rounded' | 'pill';
   showDivider: boolean;
+  autoExpand: boolean;
+  hoverColor: string;
   iconSettings: {
     enabled: boolean;
     iconPosition: 'left' | 'right';

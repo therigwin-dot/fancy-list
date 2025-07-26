@@ -123,7 +123,7 @@ var DEFAULTS_CONFIG = {
     categorySectionSettings: {
         sectionType: 'category',
         resetButtonText: "Reset Category Formatting",
-        description: "Customize the appearance of category sections including font, colors, shape, and background settings.",
+        description: "Customize the appearance of category sections including font, colors, shape, background, and icon settings.",
         font: {
             family: 'Segoe UI',
             size: '18px',
@@ -144,6 +144,8 @@ var DEFAULTS_CONFIG = {
         },
         shape: 'rounded',
         showDivider: true,
+        autoExpand: false,
+        hoverColor: '#e1dfdd',
         iconSettings: {
             enabled: true,
             iconPosition: 'left',
@@ -155,7 +157,7 @@ var DEFAULTS_CONFIG = {
     subjectSectionSettings: {
         sectionType: 'subject',
         resetButtonText: "Reset Subject Formatting",
-        description: "Customize the appearance of subject sections including font, colors, shape, and background settings.",
+        description: "Customize the appearance of subject sections including font, colors, shape, background, and icon settings.",
         font: {
             family: 'Segoe UI',
             size: '16px',
@@ -176,6 +178,8 @@ var DEFAULTS_CONFIG = {
         },
         shape: 'rounded',
         showDivider: false,
+        autoExpand: false,
+        hoverColor: '#f3f2f1',
         iconSettings: {
             enabled: true,
             iconPosition: 'left',
@@ -207,9 +211,11 @@ var DEFAULTS_CONFIG = {
             gradientAlpha2: 0.5
         },
         shape: 'rounded',
-        showDivider: true,
+        showDivider: false,
+        autoExpand: false,
+        hoverColor: '#faf9f8',
         iconSettings: {
-            enabled: true,
+            enabled: false,
             iconPosition: 'left',
             collapsedIcon: '▶',
             expandedIcon: '▼'
@@ -657,7 +663,7 @@ var FilterModuleControl = function (_a) {
                 lineHeight: '1.4',
                 marginBottom: '16px'
             } }, _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.description),
-        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { display: 'flex', gap: '16px', marginBottom: 16 } },
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Toggle__WEBPACK_IMPORTED_MODULE_5__.Toggle, { label: "Enabled", checked: enabled, onText: "On", offText: "Off", onChange: function (_, checked) {
                     setEnabled(checked || false);
                 } })),
@@ -749,7 +755,7 @@ var FilterModuleControl = function (_a) {
                             display: 'block'
                         } }, "Image Transparency"),
                     react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Slider__WEBPACK_IMPORTED_MODULE_7__.Slider, { min: 0, max: 100, value: settings.imageAlpha, onChange: function (value) { return handlePropertyChange('imageAlpha', value); }, showValue: true, valueFormat: function (value) { return "".concat(value, "%"); } })))),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { display: 'flex', gap: '16px', marginBottom: 16 } },
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Toggle__WEBPACK_IMPORTED_MODULE_5__.Toggle, { label: "Show Filter Divider", checked: settings.showDivider, onText: "On", offText: "Off", onChange: function (_, checked) { return handlePropertyChange('showDivider', checked); } })),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginTop: 16 } },
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_9__.PrimaryButton, { text: "Reset Filter Formatting", onClick: function () {
@@ -1171,9 +1177,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ 5959);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @fluentui/react/lib/Button */ 9425);
+/* harmony import */ var _fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @fluentui/react/lib/Button */ 9425);
+/* harmony import */ var _fluentui_react_lib_Toggle__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @fluentui/react/lib/Toggle */ 6264);
+/* harmony import */ var _fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @fluentui/react/lib/Dropdown */ 2042);
+/* harmony import */ var _fluentui_react_lib_Slider__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @fluentui/react/lib/Slider */ 1798);
+/* harmony import */ var _fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @fluentui/react/lib/TextField */ 7102);
 /* harmony import */ var _IconControl__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./IconControl */ 8189);
-/* harmony import */ var _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../DEFAULTS_CONFIG */ 7702);
+/* harmony import */ var _ShapePickerControl__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ShapePickerControl */ 4439);
+/* harmony import */ var _FontControl__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./FontControl */ 8177);
+/* harmony import */ var _ColorPickerControl__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ColorPickerControl */ 9193);
+/* harmony import */ var _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../DEFAULTS_CONFIG */ 7702);
 var __assign = (undefined && undefined.__assign) || function () {
     __assign = Object.assign || function(t) {
         for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -1189,6 +1202,13 @@ var __assign = (undefined && undefined.__assign) || function () {
 
 
 
+
+
+
+
+
+
+
 var SectionModuleControl = function (_a) {
     var sectionType = _a.sectionType, sectionSettings = _a.sectionSettings, onChange = _a.onChange, label = _a.label;
     var handleReset = function () {
@@ -1196,13 +1216,13 @@ var SectionModuleControl = function (_a) {
         var defaultSettings;
         switch (sectionType) {
             case 'category':
-                defaultSettings = _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_2__["default"].categorySectionSettings;
+                defaultSettings = _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].categorySectionSettings;
                 break;
             case 'subject':
-                defaultSettings = _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_2__["default"].subjectSectionSettings;
+                defaultSettings = _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].subjectSectionSettings;
                 break;
             case 'description':
-                defaultSettings = _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_2__["default"].descriptionSectionSettings;
+                defaultSettings = _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].descriptionSectionSettings;
                 break;
             default:
                 console.error("Unknown section type: ".concat(sectionType));
@@ -1223,6 +1243,46 @@ var SectionModuleControl = function (_a) {
     var getSectionDescription = function () {
         return sectionSettings.description;
     };
+    var handlePropertyChange = function (propertyPath, newValue) {
+        var newSettings = __assign({}, sectionSettings);
+        // Handle nested property paths
+        var pathParts = propertyPath.split('.');
+        var current = newSettings;
+        for (var i = 0; i < pathParts.length - 1; i++) {
+            current = current[pathParts[i]];
+        }
+        current[pathParts[pathParts.length - 1]] = newValue;
+        onChange(newSettings);
+    };
+    var handleFontChange = function (fields) {
+        var newSettings = __assign({}, sectionSettings);
+        if (fields.fontFamily)
+            newSettings.font.family = fields.fontFamily;
+        if (fields.fontSize)
+            newSettings.font.size = fields.fontSize;
+        if (fields.formatting)
+            newSettings.font.formatting = fields.formatting;
+        onChange(newSettings);
+    };
+    var handleSwapColors = function () {
+        var newSettings = __assign({}, sectionSettings);
+        var tempColor = newSettings.background.gradientColor1;
+        newSettings.background.gradientColor1 = newSettings.background.gradientColor2;
+        newSettings.background.gradientColor2 = tempColor;
+        onChange(newSettings);
+    };
+    var backgroundTypeOptions = [
+        { key: 'solid', text: 'Solid' },
+        { key: 'gradient', text: 'Gradient' },
+        { key: 'image', text: 'Image' }
+    ];
+    var gradientDirectionOptions = [
+        { key: 'to bottom', text: 'Top to Bottom' },
+        { key: 'left-right', text: 'Left to Right' },
+        { key: 'to bottom right', text: 'Top Left to Bottom Right' },
+        { key: 'to bottom left', text: 'Top Right to Bottom Left' },
+        { key: 'radial', text: 'Radial' }
+    ];
     return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
                 fontSize: '16px',
@@ -1236,24 +1296,83 @@ var SectionModuleControl = function (_a) {
                 lineHeight: '1.4',
                 marginBottom: '16px'
             } }, getSectionDescription()),
-        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
+        sectionType !== 'description' && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_IconControl__WEBPACK_IMPORTED_MODULE_1__.IconControl, { label: "Expand/Collapse Icons", settings: sectionSettings.iconSettings, onChange: function (iconSettings) {
                     var newSettings = __assign(__assign({}, sectionSettings), { iconSettings: iconSettings });
                     onChange(newSettings);
-                } })),
-        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
-                padding: '16px',
-                backgroundColor: '#f3f2f1',
-                borderRadius: '4px',
-                border: '1px dashed #c8c6c4',
-                textAlign: 'center',
-                color: '#666',
-                fontSize: '14px'
-            } },
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: '8px' } }, "\uD83D\uDD27 Additional controls coming soon..."),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { fontSize: '12px' } }, "Font, Color, Background, and Shape controls will be implemented here")),
+                } }))),
+        sectionType !== 'description' && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { display: 'flex', gap: '16px', marginBottom: 16 } },
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Toggle__WEBPACK_IMPORTED_MODULE_6__.Toggle, { label: "Auto Expand", checked: sectionSettings.autoExpand, onText: "On", offText: "Off", onChange: function (_, checked) { return handlePropertyChange('autoExpand', checked); } }),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Toggle__WEBPACK_IMPORTED_MODULE_6__.Toggle, { label: "Show Divider", checked: sectionSettings.showDivider, onText: "On", offText: "Off", onChange: function (_, checked) { return handlePropertyChange('showDivider', checked); } }))),
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_FontControl__WEBPACK_IMPORTED_MODULE_3__.FontControl, { label: "", fontFamily: sectionSettings.font.family, fontSize: sectionSettings.font.size, formatting: sectionSettings.font.formatting, onChange: handleFontChange })),
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_4__.ColorPickerControl, { color: sectionSettings.font.color, field: "fontColor", label: "", onChange: function (field, newColor) { return handlePropertyChange('font.color', newColor); } })),
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_7__.Dropdown, { label: "Background Type", options: backgroundTypeOptions, selectedKey: sectionSettings.background.type, onChange: function (_, option) { return handlePropertyChange('background.type', option === null || option === void 0 ? void 0 : option.key); } })),
+        sectionSettings.background.type === 'solid' && (react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null,
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_4__.ColorPickerControl, { color: sectionSettings.background.color, field: "backgroundColor", label: "Background Color", onChange: function (field, newColor) { return handlePropertyChange('background.color', newColor); } })),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: {
+                        fontSize: '14px',
+                        fontWeight: '600',
+                        color: '#323130',
+                        marginBottom: '8px',
+                        display: 'block'
+                    } }, "Background Transparency"),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Slider__WEBPACK_IMPORTED_MODULE_8__.Slider, { min: 0, max: 100, value: sectionSettings.background.alpha, onChange: function (value) { return handlePropertyChange('background.alpha', value); }, showValue: true, valueFormat: function (value) { return "".concat(value, "%"); } })))),
+        sectionSettings.background.type === 'gradient' && (react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null,
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_7__.Dropdown, { label: "Gradient Direction", options: gradientDirectionOptions, selectedKey: sectionSettings.background.gradientDirection, onChange: function (_, option) { return handlePropertyChange('background.gradientDirection', option === null || option === void 0 ? void 0 : option.key); } })),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 8 } },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { type: "button", onClick: handleSwapColors, style: {
+                        padding: '4px 8px',
+                        border: '1px solid #0078d4',
+                        borderRadius: '4px',
+                        background: '#e5f1fb',
+                        color: '#0078d4',
+                        cursor: 'pointer',
+                        fontSize: '12px'
+                    } }, "Swap Colors")),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_4__.ColorPickerControl, { color: sectionSettings.background.gradientColor1, field: "gradientColor1", label: "Gradient Color 1", onChange: function (field, newColor) { return handlePropertyChange('background.gradientColor1', newColor); } })),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_4__.ColorPickerControl, { color: sectionSettings.background.gradientColor2, field: "gradientColor2", label: "Gradient Color 2", onChange: function (field, newColor) { return handlePropertyChange('background.gradientColor2', newColor); } })),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: {
+                        fontSize: '14px',
+                        fontWeight: '600',
+                        color: '#323130',
+                        marginBottom: '8px',
+                        display: 'block'
+                    } }, "Gradient Transparency"),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Slider__WEBPACK_IMPORTED_MODULE_8__.Slider, { min: 0, max: 100, value: sectionSettings.background.gradientAlpha1, onChange: function (value) { return handlePropertyChange('background.gradientAlpha1', value); }, showValue: true, valueFormat: function (value) { return "".concat(value, "%"); } })))),
+        sectionSettings.background.type === 'image' && (react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null,
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: {
+                        fontSize: '14px',
+                        fontWeight: '600',
+                        color: '#323130',
+                        marginBottom: '8px',
+                        display: 'block'
+                    } }, "Image URL"),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_9__.TextField, { value: sectionSettings.background.image, onChange: function (_, newValue) { return handlePropertyChange('background.image', newValue || ''); }, placeholder: "Enter image URL" })),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: {
+                        fontSize: '14px',
+                        fontWeight: '600',
+                        color: '#323130',
+                        marginBottom: '8px',
+                        display: 'block'
+                    } }, "Image Transparency"),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Slider__WEBPACK_IMPORTED_MODULE_8__.Slider, { min: 0, max: 100, value: sectionSettings.background.imageAlpha, onChange: function (value) { return handlePropertyChange('background.imageAlpha', value); }, showValue: true, valueFormat: function (value) { return "".concat(value, "%"); } })))),
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ShapePickerControl__WEBPACK_IMPORTED_MODULE_2__.ShapePickerControl, { label: "Shape", value: sectionSettings.shape, onChange: function (shape) { return handlePropertyChange('shape', shape); } })),
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_4__.ColorPickerControl, { color: sectionSettings.hoverColor, field: "hoverColor", label: "Hover Color", onChange: function (field, newColor) { return handlePropertyChange('hoverColor', newColor); } })),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginTop: 16 } },
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_3__.PrimaryButton, { text: sectionSettings.resetButtonText, onClick: handleReset, disabled: false }))));
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_10__.PrimaryButton, { text: sectionSettings.resetButtonText, onClick: handleReset }))));
 };
 
 
@@ -1438,7 +1557,7 @@ var TitleConfiguration = function (_a) {
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_FontControl__WEBPACK_IMPORTED_MODULE_1__.FontControl, { label: "Title Font", fontFamily: settings.font.family, fontSize: settings.font.size, formatting: settings.font.formatting, onChange: handleFontChange })),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__.ColorPickerControl, { color: settings.font.color, field: "titleColor", label: "Title Color", onChange: function (field, newColor) { return handlePropertyChange('font.color', newColor); } })),
-        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { display: 'flex', gap: '16px', marginBottom: 16 } },
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Toggle__WEBPACK_IMPORTED_MODULE_6__.Toggle, { label: "Show Title Divider", checked: settings.showDivider, onText: "On", offText: "Off", onChange: function (_, checked) { return handlePropertyChange('showDivider', checked); } })),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_7__.Dropdown, { label: "Background Type", options: backgroundTypeOptions, selectedKey: settings.backgroundType, onChange: function (_, option) { return handlePropertyChange('backgroundType', option === null || option === void 0 ? void 0 : option.key); } })),

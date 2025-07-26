@@ -77,7 +77,7 @@ export const DEFAULTS_CONFIG = {
   categorySectionSettings: {
     sectionType: 'category' as const,
     resetButtonText: "Reset Category Formatting",
-    description: "Customize the appearance of category sections including font, colors, shape, and background settings.",
+    description: "Customize the appearance of category sections including font, colors, shape, background, and icon settings.",
     font: {
       family: 'Segoe UI',
       size: '18px',
@@ -98,6 +98,8 @@ export const DEFAULTS_CONFIG = {
     },
     shape: 'rounded' as const,
     showDivider: true,
+    autoExpand: false,
+    hoverColor: '#e1dfdd',
     iconSettings: {
       enabled: true,
       iconPosition: 'left' as const,
@@ -110,7 +112,7 @@ export const DEFAULTS_CONFIG = {
   subjectSectionSettings: {
     sectionType: 'subject' as const,
     resetButtonText: "Reset Subject Formatting",
-    description: "Customize the appearance of subject sections including font, colors, shape, and background settings.",
+    description: "Customize the appearance of subject sections including font, colors, shape, background, and icon settings.",
     font: {
       family: 'Segoe UI',
       size: '16px',
@@ -131,6 +133,8 @@ export const DEFAULTS_CONFIG = {
     },
     shape: 'rounded' as const,
     showDivider: false,
+    autoExpand: false,
+    hoverColor: '#f3f2f1',
     iconSettings: {
       enabled: true,
       iconPosition: 'left' as const,
@@ -163,9 +167,11 @@ export const DEFAULTS_CONFIG = {
       gradientAlpha2: 0.5
     },
     shape: 'rounded' as const,
-    showDivider: true,
+    showDivider: false,
+    autoExpand: false,
+    hoverColor: '#faf9f8',
     iconSettings: {
-      enabled: true,
+      enabled: false,
       iconPosition: 'left' as const,
       collapsedIcon: '▶',
       expandedIcon: '▼'
