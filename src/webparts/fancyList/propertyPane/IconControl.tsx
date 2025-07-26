@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Toggle } from '@fluentui/react/lib/Toggle';
-import { Dropdown, IDropdownOption } from '@fluentui/react/lib/Dropdown';
 import { ComboBox, IComboBoxOption } from '@fluentui/react/lib/ComboBox';
 import { IconButton } from '@fluentui/react/lib/Button';
 import { Modal } from '@fluentui/react/lib/Modal';
@@ -34,10 +33,7 @@ export const IconControl: React.FC<IconControlProps> = ({
     onChange(newSettings);
   };
 
-  const positionOptions: IDropdownOption[] = [
-    { key: 'left', text: 'Left' },
-    { key: 'right', text: 'Right' }
-  ];
+
 
   // Icon pairing mapping for auto-pairing behavior
   const iconPairs: Record<string, string> = {
@@ -168,10 +164,11 @@ export const IconControl: React.FC<IconControlProps> = ({
         Configure expand/collapse icons for this section. Choose from predefined options or enter custom text.
       </div>
 
-      {/* 1. Enable Icons Toggle */}
-      <div style={{ marginBottom: 16 }}>
+      {/* Line 1: Enable Icons */}
+      <div style={{ marginBottom: '12px' }}>
         <Toggle
           label="Enable Icons"
+          inlineLabel={true}
           checked={settings.enabled}
           onText="On"
           offText="Off"
@@ -182,22 +179,37 @@ export const IconControl: React.FC<IconControlProps> = ({
       {/* Conditional rendering based on enabled state */}
       {settings.enabled && (
         <>
-          {/* 2. Icon Position */}
-          <div style={{ marginBottom: 16 }}>
-            <Dropdown
-              label="Icon Position"
-              options={positionOptions}
-              selectedKey={settings.iconPosition}
-              onChange={(_, option) => handlePropertyChange('iconPosition', option?.key)}
+          {/* Line 2: Position */}
+          <div style={{ marginBottom: '12px' }}>
+            <Toggle
+              label="Position"
+              inlineLabel={true}
+              checked={settings.iconPosition === 'right'}
+              onText="Right"
+              offText="Left"
+              onChange={(_, checked) => handlePropertyChange('iconPosition', checked ? 'right' : 'left')}
             />
           </div>
 
-          {/* 3. Collapsed Icon */}
-          <div style={{ marginBottom: 16 }}>
-            <div style={{ display: 'flex', alignItems: 'flex-end', gap: '8px' }}>
+          {/* Line 3: Icons */}
+          <div style={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            gap: '12px'
+          }}>
+            {/* Collapsed */}
+            <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <div style={{ 
+                fontSize: '14px', 
+                fontWeight: '600', 
+                color: '#323130',
+                minWidth: '40px',
+                lineHeight: '1'
+              }}>
+                Coll
+              </div>
               <div style={{ flex: 1 }}>
                 <ComboBox
-                  label="Collapsed Icon"
                   options={collapsedIconOptions}
                   text={settings.collapsedIcon}
                   allowFreeform={true}
@@ -215,17 +227,22 @@ export const IconControl: React.FC<IconControlProps> = ({
                 iconProps={{ iconName: 'Emoji2' }}
                 title="Open emoji picker"
                 onClick={() => openEmojiPicker('collapsed')}
-                style={{ marginBottom: '8px' }}
               />
             </div>
-          </div>
 
-          {/* 4. Expanded Icon */}
-          <div style={{ marginBottom: 16 }}>
-            <div style={{ display: 'flex', alignItems: 'flex-end', gap: '8px' }}>
+            {/* Expanded */}
+            <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <div style={{ 
+                fontSize: '14px', 
+                fontWeight: '600', 
+                color: '#323130',
+                minWidth: '40px',
+                lineHeight: '1'
+              }}>
+                Exp
+              </div>
               <div style={{ flex: 1 }}>
                 <ComboBox
-                  label="Expanded Icon"
                   options={expandedIconOptions}
                   text={settings.expandedIcon}
                   allowFreeform={true}
@@ -243,7 +260,6 @@ export const IconControl: React.FC<IconControlProps> = ({
                 iconProps={{ iconName: 'Emoji2' }}
                 title="Open emoji picker"
                 onClick={() => openEmojiPicker('expanded')}
-                style={{ marginBottom: '8px' }}
               />
             </div>
           </div>

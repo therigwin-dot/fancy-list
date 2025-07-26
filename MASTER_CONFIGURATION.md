@@ -844,7 +844,23 @@ Complete Pages 4-6 implementation using SectionModuleControl:
 
 ### **Level 2: Composite Controls**
 - **FontControl**: Combines font family, size, and formatting
-- **IconControl**: Combines expand/collapse icon configuration
+- **IconControl**: Combines expand/collapse icon configuration with enhanced emoji picker and auto-pairing
+
+#### **IconControl Details**
+- **Purpose**: Reusable component for configuring expand/collapse icons
+- **Features**: 
+  - Enable/disable toggle with inline label
+  - Icon position toggle (Left/Right) with inline label
+  - Collapsed/Expanded icon selection with ComboBox and emoji picker
+  - Auto-pairing functionality for icon sets
+  - Categorized emoji picker with search (5 categories, 90+ emojis)
+  - Ultra-compact 3-line layout design
+- **Layout**: 
+  - Line 1: Enable Icons toggle (inline label)
+  - Line 2: Position toggle (inline label) 
+  - Line 3: Coll/Exp labels with ComboBoxes and emoji buttons
+- **Technical**: Uses Fluent UI Toggle, ComboBox, Modal components with custom styling
+- **Status**: COMPLETED ✅
 
 ### **Level 3: Module Controls**
 - **TitleModuleControl**: Combines all title section controls
@@ -869,7 +885,7 @@ Complete Pages 4-6 implementation using SectionModuleControl:
 | FontControl | ❌ | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ |
 | TitleModuleControl | ❌ | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | FilterModuleControl | ❌ | ❌ | ✅ | ❌ | ❌ | ❌ | ❌ |
-| IconControl | ❌ | ❌ | ❌ | 📋 | 📋 | 📋 | ❌ |
+| IconControl | ❌ | ❌ | ❌ | ✅ | ✅ | ✅ | ❌ |
 | SectionModuleControl | ❌ | ❌ | ❌ | 📋 | 📋 | 📋 | ❌ |
 
 **Legend:**

@@ -897,11 +897,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ 5959);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _fluentui_react_lib_Toggle__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fluentui/react/lib/Toggle */ 6264);
-/* harmony import */ var _fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fluentui/react/lib/Dropdown */ 2042);
-/* harmony import */ var _fluentui_react_lib_ComboBox__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @fluentui/react/lib/ComboBox */ 3898);
-/* harmony import */ var _fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @fluentui/react/lib/Button */ 4533);
-/* harmony import */ var _fluentui_react_lib_Modal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @fluentui/react/lib/Modal */ 6702);
-/* harmony import */ var _fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @fluentui/react/lib/Button */ 5613);
+/* harmony import */ var _fluentui_react_lib_ComboBox__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fluentui/react/lib/ComboBox */ 3898);
+/* harmony import */ var _fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @fluentui/react/lib/Button */ 4533);
+/* harmony import */ var _fluentui_react_lib_Modal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @fluentui/react/lib/Modal */ 6702);
+/* harmony import */ var _fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @fluentui/react/lib/Button */ 5613);
 var __assign = (undefined && undefined.__assign) || function () {
     __assign = Object.assign || function(t) {
         for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -919,7 +918,6 @@ var __assign = (undefined && undefined.__assign) || function () {
 
 
 
-
 var IconControl = function (_a) {
     var _b = _a.label, label = _b === void 0 ? 'Icon Configuration' : _b, settings = _a.settings, onChange = _a.onChange;
     var _c = react__WEBPACK_IMPORTED_MODULE_0__.useState(false), showEmojiPicker = _c[0], setShowEmojiPicker = _c[1];
@@ -931,10 +929,6 @@ var IconControl = function (_a) {
         var newSettings = __assign(__assign({}, settings), (_a = {}, _a[property] = value, _a));
         onChange(newSettings);
     };
-    var positionOptions = [
-        { key: 'left', text: 'Left' },
-        { key: 'right', text: 'Right' }
-    ];
     // Icon pairing mapping for auto-pairing behavior
     var iconPairs = {
         '▶️': '🔽', // Standard emoji
@@ -1042,15 +1036,26 @@ var IconControl = function (_a) {
                 lineHeight: '1.4',
                 marginBottom: '16px'
             } }, "Configure expand/collapse icons for this section. Choose from predefined options or enter custom text."),
-        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Toggle__WEBPACK_IMPORTED_MODULE_1__.Toggle, { label: "Enable Icons", checked: settings.enabled, onText: "On", offText: "Off", onChange: function (_, checked) { return handlePropertyChange('enabled', checked); } })),
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: '12px' } },
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Toggle__WEBPACK_IMPORTED_MODULE_1__.Toggle, { label: "Enable Icons", inlineLabel: true, checked: settings.enabled, onText: "On", offText: "Off", onChange: function (_, checked) { return handlePropertyChange('enabled', checked); } })),
         settings.enabled && (react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null,
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_2__.Dropdown, { label: "Icon Position", options: positionOptions, selectedKey: settings.iconPosition, onChange: function (_, option) { return handlePropertyChange('iconPosition', option === null || option === void 0 ? void 0 : option.key); } })),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { display: 'flex', alignItems: 'flex-end', gap: '8px' } },
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: '12px' } },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Toggle__WEBPACK_IMPORTED_MODULE_1__.Toggle, { label: "Position", inlineLabel: true, checked: settings.iconPosition === 'right', onText: "Right", offText: "Left", onChange: function (_, checked) { return handlePropertyChange('iconPosition', checked ? 'right' : 'left'); } })),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '12px'
+                } },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { flex: 1, display: 'flex', alignItems: 'center', gap: '8px' } },
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                            fontSize: '14px',
+                            fontWeight: '600',
+                            color: '#323130',
+                            minWidth: '40px',
+                            lineHeight: '1'
+                        } }, "Coll"),
                     react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { flex: 1 } },
-                        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_ComboBox__WEBPACK_IMPORTED_MODULE_3__.ComboBox, { label: "Collapsed Icon", options: collapsedIconOptions, text: settings.collapsedIcon, allowFreeform: true, autoComplete: "on", onChange: function (_, option, __, text) {
+                        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_ComboBox__WEBPACK_IMPORTED_MODULE_2__.ComboBox, { options: collapsedIconOptions, text: settings.collapsedIcon, allowFreeform: true, autoComplete: "on", onChange: function (_, option, __, text) {
                                 if (option) {
                                     handleCollapsedIconChange(option.key);
                                 }
@@ -1058,11 +1063,17 @@ var IconControl = function (_a) {
                                     handleCollapsedIconChange(text);
                                 }
                             } })),
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_4__.IconButton, { iconProps: { iconName: 'Emoji2' }, title: "Open emoji picker", onClick: function () { return openEmojiPicker('collapsed'); }, style: { marginBottom: '8px' } }))),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { display: 'flex', alignItems: 'flex-end', gap: '8px' } },
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_3__.IconButton, { iconProps: { iconName: 'Emoji2' }, title: "Open emoji picker", onClick: function () { return openEmojiPicker('collapsed'); } })),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { flex: 1, display: 'flex', alignItems: 'center', gap: '8px' } },
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                            fontSize: '14px',
+                            fontWeight: '600',
+                            color: '#323130',
+                            minWidth: '40px',
+                            lineHeight: '1'
+                        } }, "Exp"),
                     react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { flex: 1 } },
-                        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_ComboBox__WEBPACK_IMPORTED_MODULE_3__.ComboBox, { label: "Expanded Icon", options: expandedIconOptions, text: settings.expandedIcon, allowFreeform: true, autoComplete: "on", onChange: function (_, option, __, text) {
+                        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_ComboBox__WEBPACK_IMPORTED_MODULE_2__.ComboBox, { options: expandedIconOptions, text: settings.expandedIcon, allowFreeform: true, autoComplete: "on", onChange: function (_, option, __, text) {
                                 if (option) {
                                     handlePropertyChange('expandedIcon', option.key);
                                 }
@@ -1070,8 +1081,8 @@ var IconControl = function (_a) {
                                     handlePropertyChange('expandedIcon', text);
                                 }
                             } })),
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_4__.IconButton, { iconProps: { iconName: 'Emoji2' }, title: "Open emoji picker", onClick: function () { return openEmojiPicker('expanded'); }, style: { marginBottom: '8px' } }))))),
-        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Modal__WEBPACK_IMPORTED_MODULE_5__.Modal, { isOpen: showEmojiPicker, onDismiss: closeEmojiPicker, isBlocking: false, containerClassName: "emoji-picker-modal" },
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_3__.IconButton, { iconProps: { iconName: 'Emoji2' }, title: "Open emoji picker", onClick: function () { return openEmojiPicker('expanded'); } }))))),
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Modal__WEBPACK_IMPORTED_MODULE_4__.Modal, { isOpen: showEmojiPicker, onDismiss: closeEmojiPicker, isBlocking: false, containerClassName: "emoji-picker-modal" },
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
                     padding: '24px',
                     backgroundColor: 'white',
@@ -1154,7 +1165,7 @@ var IconControl = function (_a) {
                         justifyContent: 'flex-end',
                         gap: '8px'
                     } },
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_6__.DefaultButton, { text: "Cancel", onClick: closeEmojiPicker }))))));
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_5__.DefaultButton, { text: "Cancel", onClick: closeEmojiPicker }))))));
 };
 
 
