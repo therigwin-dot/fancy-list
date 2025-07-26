@@ -51,7 +51,7 @@ The Fancy List Web Part implements a 7-page property pane configuration framewor
 ### **Standard Look and Feel of Controls**
 - **Purpose**: Ensure consistent visual design and user experience across all property pane controls
 - **Container Styling**: All controls wrapped in `div` with `marginBottom: 16` for consistent spacing
-- **Toggle Controls**: Use flex containers with `display: 'flex', gap: '16px'` for single-line display
+- **Toggle Controls**: Use `inlineLabel={true}` for single-line display (no flex containers needed)
 - **Label Styling**: Standard Fluent UI labels with consistent font weight and color
 - **Control Spacing**: 16px bottom margin between all control groups
 - **Color Consistency**: Use Fluent UI color palette (#323130 for text, #666 for secondary text)

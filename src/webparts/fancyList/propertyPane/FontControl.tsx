@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Dropdown, IDropdownOption, IconButton, Stack, Text, TooltipHost } from '@fluentui/react';
+import { Dropdown, IDropdownOption, IconButton, TooltipHost } from '@fluentui/react';
 
 export interface FontControlProps {
   fontFamily: string;
@@ -87,23 +87,36 @@ export const FontControl: React.FC<FontControlProps> = ({ fontFamily, fontSize, 
   }
 
   return (
-    <Stack tokens={{ childrenGap: 8 }} style={{ marginBottom: 16 }}>
+    <div style={{ marginBottom: 16 }}>
       {label && (
-        <Text 
-          variant="mediumPlus" 
-          styles={{ 
-            root: { 
-              fontSize: '14px',
-              fontWeight: '600',
-              color: '#323130',
-              marginBottom: '8px'
-            } 
-          }}
-        >
+        <div style={{
+          fontSize: '14px',
+          fontWeight: '600',
+          color: '#323130',
+          marginBottom: '8px'
+        }}>
           {label}
-        </Text>
+        </div>
       )}
-      <Stack horizontal verticalAlign="center" tokens={{ childrenGap: 4 }}>
+      <div style={{ 
+        display: 'flex', 
+        alignItems: 'center', 
+        gap: '8px',
+        flexWrap: 'nowrap'
+      }}>
+        {/* Font Family Dropdown */}
+        <Dropdown
+          label={undefined}
+          ariaLabel="Font Family"
+          options={FONT_FAMILIES}
+          selectedKey={fontFamily || 'Segoe UI'}
+          onChange={(_, option) => onChange({ fontFamily: option!.key as string })}
+          onRenderOption={renderFontOption}
+          onRenderTitle={renderFontTitle}
+          styles={{ root: { minWidth: 140, flex: '1 1 auto' } }}
+        />
+        
+        {/* Formatting Buttons */}
         <TooltipHost content="Bold">
           <IconButton
             iconProps={{ iconName: 'Bold' }}
@@ -144,25 +157,17 @@ export const FontControl: React.FC<FontControlProps> = ({ fontFamily, fontSize, 
             onClick={() => handleFormattingChange('strikethrough', !formatting.strikethrough)}
           />
         </TooltipHost>
+        
+        {/* Font Size Dropdown */}
         <Dropdown
           label={undefined}
           ariaLabel="Font Size"
           options={FONT_SIZES}
           selectedKey={fontSize || '24px'}
           onChange={(_, option) => onChange({ fontSize: option!.key as string })}
-          styles={{ root: { width: 140, marginLeft: 8 } }}
+          styles={{ root: { width: 120, flex: '0 0 auto' } }}
         />
-      </Stack>
-      <Dropdown
-        label={undefined}
-        ariaLabel="Font Family"
-        options={FONT_FAMILIES}
-        selectedKey={fontFamily || 'Segoe UI'}
-        onChange={(_, option) => onChange({ fontFamily: option!.key as string })}
-        onRenderOption={renderFontOption}
-        onRenderTitle={renderFontTitle}
-        styles={{ root: { maxWidth: 260 } }}
-      />
-    </Stack>
+      </div>
+    </div>
   );
 }; 

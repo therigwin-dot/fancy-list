@@ -92,9 +92,10 @@ Fancy List now supports only Individual Elements mode for styling. All other mod
 - **Purpose:** Standardized toggle control styling across all components.
 - **Standard Implementation:**
   ```jsx
-  <div style={{ display: 'flex', gap: '16px', marginBottom: 16 }}>
+  <div style={{ marginBottom: 16 }}>
     <Toggle
       label="Control Name"
+      inlineLabel={true}
       checked={value}
       onText="On"
       offText="Off"
@@ -103,12 +104,12 @@ Fancy List now supports only Individual Elements mode for styling. All other mod
   </div>
   ```
 - **Features:**
-  - **Flex Container**: All toggles wrapped in flex containers for single-line display
-  - **Consistent Spacing**: 16px gap between elements, 16px bottom margin
+  - **Inline Label**: All toggles use `inlineLabel={true}` for single-line display
+  - **Consistent Spacing**: 16px bottom margin for all toggle containers
   - **Compact Labels**: Short, descriptive labels (e.g., "Title Divider" instead of "Show Title Divider")
   - **Standard On/Off Text**: All toggles use "On"/"Off" state text
-  - **No inlineLabel**: Uses standard label property for consistent styling
-- **Usage:** All toggle controls across the application must use flex containers and follow this pattern for consistency.
+  - **Simple Container**: Standard div with marginBottom, no flex containers needed
+- **Usage:** All toggle controls across the application must use `inlineLabel={true}` and follow this pattern for consistency.
 - **Label Guidelines:**
   - "Enabled" (for main enable/disable toggles)
   - "Title Divider" (for title section dividers)
