@@ -700,9 +700,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ 5959);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @fluentui/react/lib/TextField */ 7102);
+/* harmony import */ var _fluentui_react_lib_Toggle__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @fluentui/react/lib/Toggle */ 6264);
+/* harmony import */ var _fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @fluentui/react/lib/Dropdown */ 2042);
+/* harmony import */ var _fluentui_react_lib_Slider__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @fluentui/react/lib/Slider */ 1798);
 /* harmony import */ var _FontControl__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FontControl */ 8177);
 /* harmony import */ var _ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ColorPickerControl */ 9193);
 /* harmony import */ var _ShapePickerControl__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ShapePickerControl */ 4439);
+
+
+
 
 
 
@@ -712,6 +718,16 @@ var TitleConfiguration = function (_a) {
     var label = _a.label, _b = _a.settings, settings = _b === void 0 ? {
         webPartTitle: 'Fancy List',
         shape: 'rounded',
+        showDivider: false,
+        backgroundType: 'solid',
+        backgroundColor: '#ffffff',
+        backgroundAlpha: 100,
+        gradientDirection: 'to right',
+        gradientColor1: '#0078d4',
+        gradientColor2: '#ffffff',
+        gradientAlpha: 100,
+        imageUrl: '',
+        imageAlpha: 100,
         font: {
             family: 'Segoe UI',
             size: '24px',
@@ -736,6 +752,26 @@ var TitleConfiguration = function (_a) {
             handlePropertyChange('font.size', fields.fontSize);
         if (fields.formatting)
             handlePropertyChange('font.formatting', fields.formatting);
+    };
+    var backgroundTypeOptions = [
+        { key: 'solid', text: 'Solid' },
+        { key: 'gradient', text: 'Gradient' },
+        { key: 'image', text: 'Image' }
+    ];
+    var gradientDirectionOptions = [
+        { key: 'to right', text: 'To Right' },
+        { key: 'to left', text: 'To Left' },
+        { key: 'to bottom', text: 'To Bottom' },
+        { key: 'to top', text: 'To Top' },
+        { key: 'to bottom right', text: 'To Bottom Right' },
+        { key: 'to bottom left', text: 'To Bottom Left' },
+        { key: 'to top right', text: 'To Top Right' },
+        { key: 'to top left', text: 'To Top Left' }
+    ];
+    var handleSwapColors = function () {
+        var tempColor = settings.gradientColor1;
+        handlePropertyChange('gradientColor1', settings.gradientColor2);
+        handlePropertyChange('gradientColor2', tempColor);
     };
     return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
@@ -764,7 +800,68 @@ var TitleConfiguration = function (_a) {
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_FontControl__WEBPACK_IMPORTED_MODULE_1__.FontControl, { label: "Title Font", fontFamily: settings.font.family, fontSize: settings.font.size, formatting: settings.font.formatting, onChange: handleFontChange })),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__.ColorPickerControl, { color: settings.font.color, field: "titleColor", label: "Title Color", onChange: function (field, newColor) { return handlePropertyChange('font.color', newColor); } }))));
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__.ColorPickerControl, { color: settings.font.color, field: "titleColor", label: "Title Color", onChange: function (field, newColor) { return handlePropertyChange('font.color', newColor); } })),
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Toggle__WEBPACK_IMPORTED_MODULE_5__.Toggle, { label: "Show Title Divider", checked: settings.showDivider, onText: "On", offText: "Off", onChange: function (_, checked) { return handlePropertyChange('showDivider', checked); } })),
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_6__.Dropdown, { label: "Background Type", options: backgroundTypeOptions, selectedKey: settings.backgroundType, onChange: function (_, option) { return handlePropertyChange('backgroundType', option === null || option === void 0 ? void 0 : option.key); } })),
+        settings.backgroundType === 'solid' && (react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null,
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__.ColorPickerControl, { color: settings.backgroundColor, field: "backgroundColor", label: "Background Color", onChange: function (field, newColor) { return handlePropertyChange('backgroundColor', newColor); } })),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: {
+                        fontSize: '14px',
+                        fontWeight: '600',
+                        color: '#323130',
+                        marginBottom: '8px',
+                        display: 'block'
+                    } }, "Background Transparency"),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Slider__WEBPACK_IMPORTED_MODULE_7__.Slider, { min: 0, max: 100, value: settings.backgroundAlpha, onChange: function (value) { return handlePropertyChange('backgroundAlpha', value); }, showValue: true, valueFormat: function (value) { return "".concat(value, "%"); } })))),
+        settings.backgroundType === 'gradient' && (react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null,
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_6__.Dropdown, { label: "Gradient Direction", options: gradientDirectionOptions, selectedKey: settings.gradientDirection, onChange: function (_, option) { return handlePropertyChange('gradientDirection', option === null || option === void 0 ? void 0 : option.key); } })),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 8 } },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { type: "button", onClick: handleSwapColors, style: {
+                        padding: '4px 8px',
+                        border: '1px solid #0078d4',
+                        borderRadius: '4px',
+                        background: '#e5f1fb',
+                        color: '#0078d4',
+                        cursor: 'pointer',
+                        fontSize: '12px'
+                    } }, "Swap Colors")),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__.ColorPickerControl, { color: settings.gradientColor1, field: "gradientColor1", label: "Gradient Color 1", onChange: function (field, newColor) { return handlePropertyChange('gradientColor1', newColor); } })),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__.ColorPickerControl, { color: settings.gradientColor2, field: "gradientColor2", label: "Gradient Color 2", onChange: function (field, newColor) { return handlePropertyChange('gradientColor2', newColor); } })),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: {
+                        fontSize: '14px',
+                        fontWeight: '600',
+                        color: '#323130',
+                        marginBottom: '8px',
+                        display: 'block'
+                    } }, "Gradient Transparency"),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Slider__WEBPACK_IMPORTED_MODULE_7__.Slider, { min: 0, max: 100, value: settings.gradientAlpha, onChange: function (value) { return handlePropertyChange('gradientAlpha', value); }, showValue: true, valueFormat: function (value) { return "".concat(value, "%"); } })))),
+        settings.backgroundType === 'image' && (react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null,
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: {
+                        fontSize: '14px',
+                        fontWeight: '600',
+                        color: '#323130',
+                        marginBottom: '8px',
+                        display: 'block'
+                    } }, "Image URL"),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_4__.TextField, { value: settings.imageUrl, onChange: function (_, newValue) { return handlePropertyChange('imageUrl', newValue || ''); }, placeholder: "Enter image URL" })),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: {
+                        fontSize: '14px',
+                        fontWeight: '600',
+                        color: '#323130',
+                        marginBottom: '8px',
+                        display: 'block'
+                    } }, "Image Transparency"),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Slider__WEBPACK_IMPORTED_MODULE_7__.Slider, { min: 0, max: 100, value: settings.imageAlpha, onChange: function (value) { return handlePropertyChange('imageAlpha', value); }, showValue: true, valueFormat: function (value) { return "".concat(value, "%"); } }))))));
 };
 
 
@@ -4435,6 +4532,53 @@ function usePrevious(value) {
     });
     return ref.current;
 }
+
+
+/***/ }),
+
+/***/ 7461:
+/*!*****************************************************************!*\
+  !*** ./node_modules/@fluentui/react-hooks/lib/useSetTimeout.js ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   useSetTimeout: () => (/* binding */ useSetTimeout)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ 5959);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _useConst__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./useConst */ 5559);
+
+
+/**
+ *  Returns a wrapper function for `setTimeout` which automatically handles disposal.
+ */
+var useSetTimeout = function () {
+    var timeoutIds = (0,_useConst__WEBPACK_IMPORTED_MODULE_1__.useConst)({});
+    // Cleanup function.
+    react__WEBPACK_IMPORTED_MODULE_0__.useEffect(function () { return function () {
+        for (var _i = 0, _a = Object.keys(timeoutIds); _i < _a.length; _i++) {
+            var id = _a[_i];
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            clearTimeout(id);
+        }
+    }; }, 
+    // useConst ensures this will never change, but react-hooks/exhaustive-deps doesn't know that
+    [timeoutIds]);
+    // Return wrapper which will auto cleanup.
+    return (0,_useConst__WEBPACK_IMPORTED_MODULE_1__.useConst)({
+        setTimeout: function (func, duration) {
+            var id = setTimeout(func, duration);
+            timeoutIds[id] = 1;
+            return id;
+        },
+        clearTimeout: function (id) {
+            delete timeoutIds[id];
+            clearTimeout(id);
+        },
+    });
+};
 
 
 /***/ }),
@@ -15491,6 +15635,772 @@ Popup.displayName = 'Popup';
 
 /***/ }),
 
+/***/ 2347:
+/*!***************************************************************************!*\
+  !*** ./node_modules/@fluentui/react/lib/components/Slider/Slider.base.js ***!
+  \***************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   SliderBase: () => (/* binding */ SliderBase)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 196);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ 5959);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _fluentui_react_hooks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fluentui/react-hooks */ 2295);
+/* harmony import */ var _fluentui_utilities__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @fluentui/utilities */ 5123);
+/* harmony import */ var _Label_Label__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Label/Label */ 3166);
+/* harmony import */ var _useSlider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./useSlider */ 957);
+
+
+
+
+
+
+var COMPONENT_NAME = 'SliderBase';
+var SliderBase = react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(function (props, ref) {
+    var slotProps = (0,_useSlider__WEBPACK_IMPORTED_MODULE_1__.useSlider)(props, ref);
+    if (true) {
+        // eslint-disable-next-line react-hooks/rules-of-hooks -- build-time conditional
+        (0,_fluentui_react_hooks__WEBPACK_IMPORTED_MODULE_2__.useWarnings)({
+            name: COMPONENT_NAME,
+            props: props,
+            mutuallyExclusive: { value: 'defaultValue' },
+        });
+    }
+    return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__assign)({}, slotProps.root),
+        slotProps && react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Label_Label__WEBPACK_IMPORTED_MODULE_4__.Label, (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__assign)({}, slotProps.label)),
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__assign)({}, slotProps.container),
+            props.ranged &&
+                (props.vertical
+                    ? slotProps.valueLabel && react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Label_Label__WEBPACK_IMPORTED_MODULE_4__.Label, (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__assign)({}, slotProps.valueLabel))
+                    : slotProps.lowerValueLabel && react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Label_Label__WEBPACK_IMPORTED_MODULE_4__.Label, (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__assign)({}, slotProps.lowerValueLabel))),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__assign)({}, slotProps.sliderBox),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__assign)({}, slotProps.sliderLine),
+                    props.ranged && react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__assign)({}, slotProps.lowerValueThumb)),
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__assign)({}, slotProps.thumb)),
+                    slotProps.zeroTick && react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__assign)({}, slotProps.zeroTick)),
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__assign)({}, slotProps.bottomInactiveTrack)),
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__assign)({}, slotProps.activeTrack)),
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__assign)({}, slotProps.topInactiveTrack)))),
+            props.ranged && props.vertical
+                ? slotProps.lowerValueLabel && react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Label_Label__WEBPACK_IMPORTED_MODULE_4__.Label, (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__assign)({}, slotProps.lowerValueLabel))
+                : slotProps.valueLabel && react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Label_Label__WEBPACK_IMPORTED_MODULE_4__.Label, (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__assign)({}, slotProps.valueLabel))),
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_utilities__WEBPACK_IMPORTED_MODULE_5__.FocusRects, null)));
+});
+SliderBase.displayName = COMPONENT_NAME;
+
+
+/***/ }),
+
+/***/ 1798:
+/*!**********************************************************************!*\
+  !*** ./node_modules/@fluentui/react/lib/components/Slider/Slider.js ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Slider: () => (/* binding */ Slider)
+/* harmony export */ });
+/* harmony import */ var _fluentui_utilities__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @fluentui/utilities */ 5336);
+/* harmony import */ var _Slider_base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Slider.base */ 2347);
+/* harmony import */ var _Slider_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Slider.styles */ 7632);
+
+
+
+var Slider = (0,_fluentui_utilities__WEBPACK_IMPORTED_MODULE_0__.styled)(_Slider_base__WEBPACK_IMPORTED_MODULE_1__.SliderBase, _Slider_styles__WEBPACK_IMPORTED_MODULE_2__.getStyles, undefined, {
+    scope: 'Slider',
+});
+
+
+/***/ }),
+
+/***/ 7632:
+/*!*****************************************************************************!*\
+  !*** ./node_modules/@fluentui/react/lib/components/Slider/Slider.styles.js ***!
+  \*****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   getStyles: () => (/* binding */ getStyles)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 196);
+/* harmony import */ var _fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @fluentui/style-utilities */ 8455);
+/* harmony import */ var _fluentui_utilities__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fluentui/utilities */ 6657);
+
+
+
+var GlobalClassNames = {
+    root: 'ms-Slider',
+    enabled: 'ms-Slider-enabled',
+    disabled: 'ms-Slider-disabled',
+    row: 'ms-Slider-row',
+    column: 'ms-Slider-column',
+    container: 'ms-Slider-container',
+    slideBox: 'ms-Slider-slideBox',
+    line: 'ms-Slider-line',
+    thumb: 'ms-Slider-thumb',
+    activeSection: 'ms-Slider-active',
+    inactiveSection: 'ms-Slider-inactive',
+    valueLabel: 'ms-Slider-value',
+    showValue: 'ms-Slider-showValue',
+    showTransitions: 'ms-Slider-showTransitions',
+    zeroTick: 'ms-Slider-zeroTick',
+};
+var getStyles = function (props) {
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o;
+    var className = props.className, titleLabelClassName = props.titleLabelClassName, theme = props.theme, vertical = props.vertical, disabled = props.disabled, showTransitions = props.showTransitions, showValue = props.showValue, ranged = props.ranged;
+    var semanticColors = theme.semanticColors, palette = theme.palette;
+    var classNames = (0,_fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__.getGlobalClassNames)(GlobalClassNames, theme);
+    /** Tokens:
+     *   The word "active" in the token refers to the selected section of the slider
+     *   The word "inactive" in the token refers to the unselected section of the slider */
+    var pressedActiveSectionColor = semanticColors.inputBackgroundCheckedHovered;
+    var hoveredActiveSectionColor = semanticColors.inputBackgroundChecked;
+    var hoveredPressedinactiveSectionColor = palette.neutralSecondaryAlt;
+    var restActiveSectionColor = palette.neutralPrimary;
+    var restInactiveSectionColor = palette.neutralSecondaryAlt;
+    var disabledActiveSectionColor = semanticColors.disabledText;
+    var disabledInactiveSectionColor = semanticColors.disabledBackground;
+    var thumbBackgroundColor = semanticColors.inputBackground;
+    var thumbBorderColor = semanticColors.smallInputBorder;
+    var thumbDisabledBorderColor = semanticColors.disabledBorder;
+    var slideBoxActiveSectionStyles = !disabled && {
+        backgroundColor: pressedActiveSectionColor,
+        selectors: (_a = {},
+            _a[_fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__.HighContrastSelector] = {
+                backgroundColor: 'Highlight',
+            },
+            _a),
+    };
+    var slideBoxInactiveSectionStyles = !disabled && {
+        backgroundColor: hoveredPressedinactiveSectionColor,
+        selectors: (_b = {},
+            _b[_fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__.HighContrastSelector] = {
+                borderColor: 'Highlight',
+            },
+            _b),
+    };
+    var slideHoverSectionStyles = !disabled && {
+        backgroundColor: hoveredActiveSectionColor,
+        selectors: (_c = {},
+            _c[_fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__.HighContrastSelector] = {
+                backgroundColor: 'Highlight',
+            },
+            _c),
+    };
+    var slideBoxActiveThumbStyles = !disabled && {
+        border: "2px solid ".concat(pressedActiveSectionColor),
+        selectors: (_d = {},
+            _d[_fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__.HighContrastSelector] = {
+                borderColor: 'Highlight',
+            },
+            _d),
+    };
+    var slideBoxActiveZeroTickStyles = !props.disabled && {
+        backgroundColor: semanticColors.inputPlaceholderBackgroundChecked,
+        selectors: (_e = {},
+            _e[_fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__.HighContrastSelector] = {
+                backgroundColor: 'Highlight',
+            },
+            _e),
+    };
+    return {
+        root: (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__spreadArray)((0,tslib__WEBPACK_IMPORTED_MODULE_1__.__spreadArray)((0,tslib__WEBPACK_IMPORTED_MODULE_1__.__spreadArray)((0,tslib__WEBPACK_IMPORTED_MODULE_1__.__spreadArray)((0,tslib__WEBPACK_IMPORTED_MODULE_1__.__spreadArray)([
+            classNames.root,
+            theme.fonts.medium,
+            {
+                userSelect: 'none',
+            },
+            vertical && {
+                marginRight: 8,
+            }
+        ], [!disabled ? classNames.enabled : undefined], false), [disabled ? classNames.disabled : undefined], false), [!vertical ? classNames.row : undefined], false), [vertical ? classNames.column : undefined], false), [
+            className,
+        ], false),
+        titleLabel: [
+            {
+                padding: 0,
+            },
+            titleLabelClassName,
+        ],
+        container: [
+            classNames.container,
+            {
+                display: 'flex',
+                flexWrap: 'nowrap',
+                alignItems: 'center',
+            },
+            vertical && {
+                flexDirection: 'column',
+                height: '100%',
+                textAlign: 'center',
+                margin: '8px 0',
+            },
+        ],
+        slideBox: (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__spreadArray)((0,tslib__WEBPACK_IMPORTED_MODULE_1__.__spreadArray)([
+            classNames.slideBox,
+            !ranged && (0,_fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__.getFocusStyle)(theme),
+            {
+                background: 'transparent',
+                border: 'none',
+                flexGrow: 1,
+                lineHeight: 28,
+                display: 'flex',
+                alignItems: 'center',
+                selectors: (_f = {},
+                    _f[":active .".concat(classNames.activeSection)] = slideBoxActiveSectionStyles,
+                    _f[":hover .".concat(classNames.activeSection)] = slideHoverSectionStyles,
+                    _f[":active .".concat(classNames.inactiveSection)] = slideBoxInactiveSectionStyles,
+                    _f[":hover .".concat(classNames.inactiveSection)] = slideBoxInactiveSectionStyles,
+                    _f[":active .".concat(classNames.thumb)] = slideBoxActiveThumbStyles,
+                    _f[":hover .".concat(classNames.thumb)] = slideBoxActiveThumbStyles,
+                    _f[":active .".concat(classNames.zeroTick)] = slideBoxActiveZeroTickStyles,
+                    _f[":hover .".concat(classNames.zeroTick)] = slideBoxActiveZeroTickStyles,
+                    _f[_fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__.HighContrastSelector] = {
+                        forcedColorAdjust: 'none',
+                    },
+                    _f),
+            },
+            vertical
+                ? {
+                    height: '100%',
+                    width: 28,
+                    padding: '8px 0', // Make room for thumb at bottom of line
+                }
+                : {
+                    height: 28,
+                    width: 'auto',
+                    padding: '0 8px', // Make room for thumb at ends of line
+                }
+        ], [showValue ? classNames.showValue : undefined], false), [showTransitions ? classNames.showTransitions : undefined], false),
+        thumb: [
+            classNames.thumb,
+            ranged && (0,_fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__.getFocusStyle)(theme, { inset: -4 }),
+            {
+                borderWidth: 2,
+                borderStyle: 'solid',
+                borderColor: thumbBorderColor,
+                borderRadius: 10,
+                boxSizing: 'border-box',
+                background: thumbBackgroundColor,
+                display: 'block',
+                width: 16,
+                height: 16,
+                position: 'absolute',
+            },
+            vertical
+                ? {
+                    left: -6,
+                    margin: '0 auto',
+                    transform: 'translateY(8px)',
+                }
+                : {
+                    top: -6,
+                    transform: (0,_fluentui_utilities__WEBPACK_IMPORTED_MODULE_2__.getRTL)(theme) ? 'translateX(50%)' : 'translateX(-50%)',
+                },
+            showTransitions && {
+                transition: "left ".concat(_fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__.AnimationVariables.durationValue3, " ").concat(_fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__.AnimationVariables.easeFunction1),
+            },
+            disabled && {
+                borderColor: thumbDisabledBorderColor,
+                selectors: (_g = {},
+                    _g[_fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__.HighContrastSelector] = {
+                        borderColor: 'GrayText',
+                    },
+                    _g),
+            },
+        ],
+        line: [
+            classNames.line,
+            {
+                display: 'flex',
+                position: 'relative',
+            },
+            vertical
+                ? {
+                    height: '100%',
+                    width: 4,
+                    margin: '0 auto',
+                    flexDirection: 'column-reverse',
+                }
+                : {
+                    width: '100%',
+                },
+        ],
+        lineContainer: [
+            {
+                borderRadius: 4,
+                boxSizing: 'border-box',
+            },
+            vertical
+                ? {
+                    width: 4,
+                    height: '100%',
+                }
+                : {
+                    height: 4,
+                    width: '100%',
+                },
+        ],
+        activeSection: [
+            classNames.activeSection,
+            {
+                background: restActiveSectionColor,
+                selectors: (_h = {},
+                    _h[_fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__.HighContrastSelector] = {
+                        backgroundColor: 'WindowText',
+                    },
+                    _h),
+            },
+            showTransitions && {
+                transition: "width ".concat(_fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__.AnimationVariables.durationValue3, " ").concat(_fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__.AnimationVariables.easeFunction1),
+            },
+            disabled && {
+                background: disabledActiveSectionColor,
+                selectors: (_j = {},
+                    _j[_fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__.HighContrastSelector] = {
+                        backgroundColor: 'GrayText',
+                        borderColor: 'GrayText',
+                    },
+                    _j),
+            },
+        ],
+        inactiveSection: [
+            classNames.inactiveSection,
+            {
+                background: restInactiveSectionColor,
+                selectors: (_k = {},
+                    _k[_fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__.HighContrastSelector] = {
+                        border: '1px solid WindowText',
+                    },
+                    _k),
+            },
+            showTransitions && {
+                transition: "width ".concat(_fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__.AnimationVariables.durationValue3, " ").concat(_fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__.AnimationVariables.easeFunction1),
+            },
+            disabled && {
+                background: disabledInactiveSectionColor,
+                selectors: (_l = {},
+                    _l[_fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__.HighContrastSelector] = {
+                        borderColor: 'GrayText',
+                    },
+                    _l),
+            },
+        ],
+        zeroTick: [
+            classNames.zeroTick,
+            {
+                position: 'absolute',
+                background: semanticColors.disabledBorder,
+                selectors: (_m = {},
+                    _m[_fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__.HighContrastSelector] = {
+                        backgroundColor: 'WindowText',
+                    },
+                    _m),
+            },
+            props.disabled && {
+                background: semanticColors.disabledBackground,
+                selectors: (_o = {},
+                    _o[_fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__.HighContrastSelector] = {
+                        backgroundColor: 'GrayText',
+                    },
+                    _o),
+            },
+            props.vertical
+                ? {
+                    width: '16px',
+                    height: '1px',
+                    transform: (0,_fluentui_utilities__WEBPACK_IMPORTED_MODULE_2__.getRTL)(theme) ? 'translateX(6px)' : 'translateX(-6px)',
+                }
+                : {
+                    width: '1px',
+                    height: '16px',
+                    transform: 'translateY(-6px)',
+                },
+        ],
+        valueLabel: [
+            classNames.valueLabel,
+            {
+                flexShrink: 1,
+                width: 30,
+                lineHeight: '1', // using a string here meaning it's relative to the size of the font
+            },
+            vertical
+                ? {
+                    margin: '0 auto',
+                    whiteSpace: 'nowrap',
+                    width: 40,
+                }
+                : {
+                    margin: '0 8px',
+                    whiteSpace: 'nowrap',
+                    width: 40,
+                },
+        ],
+    };
+};
+
+
+/***/ }),
+
+/***/ 957:
+/*!*************************************************************************!*\
+  !*** ./node_modules/@fluentui/react/lib/components/Slider/useSlider.js ***!
+  \*************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   ONKEYDOWN_TIMEOUT_DURATION: () => (/* binding */ ONKEYDOWN_TIMEOUT_DURATION),
+/* harmony export */   useSlider: () => (/* binding */ useSlider)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! tslib */ 196);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ 5959);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _fluentui_react_hooks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fluentui/react-hooks */ 7461);
+/* harmony import */ var _fluentui_react_hooks__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @fluentui/react-hooks */ 6228);
+/* harmony import */ var _fluentui_react_hooks__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @fluentui/react-hooks */ 5559);
+/* harmony import */ var _fluentui_react_hooks__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @fluentui/react-hooks */ 8555);
+/* harmony import */ var _fluentui_utilities__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fluentui/utilities */ 3583);
+/* harmony import */ var _fluentui_utilities__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @fluentui/utilities */ 6657);
+/* harmony import */ var _fluentui_utilities__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @fluentui/utilities */ 9524);
+/* harmony import */ var _fluentui_utilities__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @fluentui/utilities */ 5947);
+/* harmony import */ var _fluentui_utilities__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @fluentui/utilities */ 8972);
+/* harmony import */ var _fluentui_utilities__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @fluentui/utilities */ 7974);
+/* harmony import */ var _utilities_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utilities/dom */ 4707);
+
+
+
+
+
+var ONKEYDOWN_TIMEOUT_DURATION = 1000;
+var getClassNames = (0,_fluentui_utilities__WEBPACK_IMPORTED_MODULE_1__.classNamesFunction)();
+var getSlotStyleFn = function (sty) {
+    return function (value) {
+        var _a;
+        return _a = {},
+            _a[sty] = "".concat(value, "%"),
+            _a;
+    };
+};
+var getPercent = function (value, sliderMin, sliderMax) {
+    return sliderMax === sliderMin ? 0 : ((value - sliderMin) / (sliderMax - sliderMin)) * 100;
+};
+var useComponentRef = function (props, sliderBoxRef, value, range) {
+    react__WEBPACK_IMPORTED_MODULE_0__.useImperativeHandle(props.componentRef, function () { return ({
+        get value() {
+            return value;
+        },
+        get range() {
+            return range;
+        },
+        focus: function () {
+            var _a;
+            (_a = sliderBoxRef.current) === null || _a === void 0 ? void 0 : _a.focus();
+        },
+    }); }, [range, sliderBoxRef, value]);
+};
+var useSlider = function (props, ref) {
+    var _a = props.step, step = _a === void 0 ? 1 : _a, className = props.className, _b = props.disabled, disabled = _b === void 0 ? false : _b, label = props.label, _c = props.max, max = _c === void 0 ? 10 : _c, _d = props.min, min = _d === void 0 ? 0 : _d, _e = props.showValue, showValue = _e === void 0 ? true : _e, _f = props.buttonProps, buttonProps = _f === void 0 ? {} : _f, _g = props.vertical, vertical = _g === void 0 ? false : _g, snapToStep = props.snapToStep, valueFormat = props.valueFormat, styles = props.styles, theme = props.theme, originFromZero = props.originFromZero, ariaLabelledBy = props["aria-labelledby"], _h = props.ariaLabel, ariaLabel = _h === void 0 ? props['aria-label'] : _h, ranged = props.ranged, onChange = props.onChange, onChanged = props.onChanged;
+    var disposables = react__WEBPACK_IMPORTED_MODULE_0__.useRef([]);
+    var _j = (0,_fluentui_react_hooks__WEBPACK_IMPORTED_MODULE_2__.useSetTimeout)(), setTimeout = _j.setTimeout, clearTimeout = _j.clearTimeout;
+    var sliderLine = react__WEBPACK_IMPORTED_MODULE_0__.useRef(null);
+    var win = (0,_utilities_dom__WEBPACK_IMPORTED_MODULE_3__.useWindowEx)();
+    // Casting here is necessary because useControllableValue expects the event for the change callback
+    // to extend React.SyntheticEvent, when in fact for Slider, the event could be either a React event
+    // or a native browser event depending on the context.
+    var _k = (0,_fluentui_react_hooks__WEBPACK_IMPORTED_MODULE_4__.useControllableValue)(props.value, props.defaultValue, function (ev, v) {
+        return onChange === null || onChange === void 0 ? void 0 : onChange(v, ranged ? [internalState.latestLowerValue, v] : undefined, ev);
+    }), unclampedValue = _k[0], setValue = _k[1];
+    var _l = (0,_fluentui_react_hooks__WEBPACK_IMPORTED_MODULE_4__.useControllableValue)(props.lowerValue, props.defaultLowerValue, function (ev, lv) { return onChange === null || onChange === void 0 ? void 0 : onChange(internalState.latestValue, [lv, internalState.latestValue], ev); }), unclampedLowerValue = _l[0], setLowerValue = _l[1];
+    // Ensure that value is always a number and is clamped by min/max.
+    var value = Math.max(min, Math.min(max, unclampedValue || 0));
+    var lowerValue = Math.max(min, Math.min(value, unclampedLowerValue || 0));
+    var internalState = (0,_fluentui_react_hooks__WEBPACK_IMPORTED_MODULE_5__.useConst)({
+        onKeyDownTimer: -1,
+        isAdjustingLowerValue: false,
+        latestValue: value,
+        latestLowerValue: lowerValue,
+    });
+    // On each render, update this saved value used by callbacks. (This should be safe even if render
+    // is called multiple times, because an event handler or timeout callback will only run once.)
+    internalState.latestValue = value;
+    internalState.latestLowerValue = lowerValue;
+    var id = (0,_fluentui_react_hooks__WEBPACK_IMPORTED_MODULE_6__.useId)('Slider', props.id || (buttonProps === null || buttonProps === void 0 ? void 0 : buttonProps.id));
+    var classNames = getClassNames(styles, {
+        className: className,
+        disabled: disabled,
+        vertical: vertical,
+        showTransitions: !snapToStep && !internalState.isBetweenSteps,
+        showValue: showValue,
+        ranged: ranged,
+        theme: theme,
+    });
+    var steps = (max - min) / step;
+    var clearOnKeyDownTimer = function () {
+        clearTimeout(internalState.onKeyDownTimer);
+        internalState.onKeyDownTimer = -1;
+    };
+    var setOnKeyDownTimer = function (event) {
+        clearOnKeyDownTimer();
+        if (onChanged) {
+            internalState.onKeyDownTimer = setTimeout(function () {
+                onChanged(event, internalState.latestValue, ranged ? [internalState.latestLowerValue, internalState.latestValue] : undefined);
+            }, ONKEYDOWN_TIMEOUT_DURATION);
+        }
+    };
+    var getAriaValueText = function (valueProps) {
+        var ariaValueText = props.ariaValueText;
+        if (valueProps !== undefined) {
+            return ariaValueText ? ariaValueText(valueProps) : valueProps.toString();
+        }
+        return undefined;
+    };
+    /**
+     * Update `value` or `lowerValue`, including clamping between min/max and rounding to
+     * appropriate precision.
+     * @param newValue - New current value of the slider, possibly rounded to a whole step.
+     * @param newUnroundedValue - Like `newValue` but without the rounding to a step. If this is
+     * provided and not equal to `newValue`, `internalState.isBetweenSteps` will be set, which
+     * may cause thumb movement animations to be disabled.
+     */
+    var updateValue = function (ev, newValue, newUnroundedValue) {
+        newValue = Math.min(max, Math.max(min, newValue));
+        newUnroundedValue = newUnroundedValue !== undefined ? Math.min(max, Math.max(min, newUnroundedValue)) : undefined;
+        var numDec = 0;
+        if (isFinite(step)) {
+            while (Math.round(step * Math.pow(10, numDec)) / Math.pow(10, numDec) !== step) {
+                numDec++;
+            }
+        }
+        // Make sure value has correct number of decimal places based on number of decimals in step
+        var roundedValue = parseFloat(newValue.toFixed(numDec));
+        internalState.isBetweenSteps = newUnroundedValue !== undefined && newUnroundedValue !== roundedValue;
+        if (ranged) {
+            // decided which thumb value to change
+            if (internalState.isAdjustingLowerValue &&
+                (originFromZero ? roundedValue <= 0 : roundedValue <= internalState.latestValue)) {
+                setLowerValue(roundedValue, ev);
+            }
+            else if (!internalState.isAdjustingLowerValue &&
+                (originFromZero ? roundedValue >= 0 : roundedValue >= internalState.latestLowerValue)) {
+                setValue(roundedValue, ev);
+            }
+        }
+        else {
+            setValue(roundedValue, ev);
+        }
+    };
+    var onKeyDown = function (event) {
+        var newCurrentValue = internalState.isAdjustingLowerValue
+            ? internalState.latestLowerValue
+            : internalState.latestValue;
+        var diff = 0;
+        // eslint-disable-next-line @typescript-eslint/no-deprecated
+        switch (event.which) {
+            case (0,_fluentui_utilities__WEBPACK_IMPORTED_MODULE_7__.getRTLSafeKeyCode)(_fluentui_utilities__WEBPACK_IMPORTED_MODULE_8__.KeyCodes.left, props.theme):
+            case _fluentui_utilities__WEBPACK_IMPORTED_MODULE_8__.KeyCodes.down:
+                diff = -step;
+                clearOnKeyDownTimer();
+                setOnKeyDownTimer(event);
+                break;
+            case (0,_fluentui_utilities__WEBPACK_IMPORTED_MODULE_7__.getRTLSafeKeyCode)(_fluentui_utilities__WEBPACK_IMPORTED_MODULE_8__.KeyCodes.right, props.theme):
+            case _fluentui_utilities__WEBPACK_IMPORTED_MODULE_8__.KeyCodes.up:
+                diff = step;
+                clearOnKeyDownTimer();
+                setOnKeyDownTimer(event);
+                break;
+            case _fluentui_utilities__WEBPACK_IMPORTED_MODULE_8__.KeyCodes.home:
+                newCurrentValue = min;
+                clearOnKeyDownTimer();
+                setOnKeyDownTimer(event);
+                break;
+            case _fluentui_utilities__WEBPACK_IMPORTED_MODULE_8__.KeyCodes.end:
+                newCurrentValue = max;
+                clearOnKeyDownTimer();
+                setOnKeyDownTimer(event);
+                break;
+            default:
+                return;
+        }
+        updateValue(event, newCurrentValue + diff);
+        event.preventDefault();
+        event.stopPropagation();
+    };
+    var getPosition = function (event, verticalProp) {
+        var currentPosition = 0;
+        switch (event.type) {
+            case 'mousedown':
+            case 'mousemove':
+                currentPosition = !verticalProp ? event.clientX : event.clientY;
+                break;
+            case 'touchstart':
+            case 'touchmove':
+                currentPosition = !verticalProp
+                    ? event.touches[0].clientX
+                    : event.touches[0].clientY;
+                break;
+        }
+        return currentPosition;
+    };
+    var calculateCurrentSteps = function (event) {
+        // eslint-disable-next-line @typescript-eslint/no-deprecated
+        var sliderPositionRect = sliderLine.current.getBoundingClientRect();
+        var sliderLength = !props.vertical ? sliderPositionRect.width : sliderPositionRect.height;
+        var stepLength = sliderLength / steps;
+        var currentSteps;
+        var distance;
+        if (!props.vertical) {
+            var left = getPosition(event, props.vertical);
+            distance = (0,_fluentui_utilities__WEBPACK_IMPORTED_MODULE_7__.getRTL)(props.theme) ? sliderPositionRect.right - left : left - sliderPositionRect.left;
+            currentSteps = distance / stepLength;
+        }
+        else {
+            var bottom = getPosition(event, props.vertical);
+            distance = sliderPositionRect.bottom - bottom;
+            currentSteps = distance / stepLength;
+        }
+        return currentSteps;
+    };
+    var onMouseMoveOrTouchMove = function (event, suppressEventCancelation) {
+        var currentSteps = calculateCurrentSteps(event);
+        var newUnroundedValue = min + step * currentSteps;
+        var newCurrentValue = min + step * Math.round(currentSteps);
+        updateValue(event, newCurrentValue, newUnroundedValue);
+        if (!suppressEventCancelation) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+    };
+    var onMouseDownOrTouchStart = function (event) {
+        if (ranged) {
+            var currentSteps = calculateCurrentSteps(event);
+            var newValue = min + step * currentSteps;
+            internalState.isAdjustingLowerValue =
+                newValue <= internalState.latestLowerValue ||
+                    newValue - internalState.latestLowerValue <= internalState.latestValue - newValue;
+        }
+        // safe to use `win!` since it can only be called on the client
+        if (event.type === 'mousedown') {
+            disposables.current.push((0,_fluentui_utilities__WEBPACK_IMPORTED_MODULE_9__.on)(win, 'mousemove', onMouseMoveOrTouchMove, true), (0,_fluentui_utilities__WEBPACK_IMPORTED_MODULE_9__.on)(win, 'mouseup', onMouseUpOrTouchEnd, true));
+        }
+        else if (event.type === 'touchstart') {
+            disposables.current.push((0,_fluentui_utilities__WEBPACK_IMPORTED_MODULE_9__.on)(win, 'touchmove', onMouseMoveOrTouchMove, true), (0,_fluentui_utilities__WEBPACK_IMPORTED_MODULE_9__.on)(win, 'touchend', onMouseUpOrTouchEnd, true));
+        }
+        onMouseMoveOrTouchMove(event, true);
+    };
+    var onMouseUpOrTouchEnd = function (event) {
+        // Done adjusting, so clear this value
+        internalState.isBetweenSteps = undefined;
+        onChanged === null || onChanged === void 0 ? void 0 : onChanged(event, internalState.latestValue, ranged ? [internalState.latestLowerValue, internalState.latestValue] : undefined);
+        disposeListeners();
+    };
+    var onThumbFocus = function (event) {
+        internalState.isAdjustingLowerValue = event.target === lowerValueThumbRef.current;
+    };
+    var disposeListeners = react__WEBPACK_IMPORTED_MODULE_0__.useCallback(function () {
+        disposables.current.forEach(function (dispose) { return dispose(); });
+        disposables.current = [];
+    }, []);
+    react__WEBPACK_IMPORTED_MODULE_0__.useEffect(function () { return disposeListeners; }, [disposeListeners]);
+    var lowerValueThumbRef = react__WEBPACK_IMPORTED_MODULE_0__.useRef(null);
+    var thumbRef = react__WEBPACK_IMPORTED_MODULE_0__.useRef(null);
+    var sliderBoxRef = react__WEBPACK_IMPORTED_MODULE_0__.useRef(null);
+    useComponentRef(props, sliderBoxRef, value, ranged ? [lowerValue, value] : undefined);
+    var getPositionStyles = getSlotStyleFn(vertical ? 'bottom' : (0,_fluentui_utilities__WEBPACK_IMPORTED_MODULE_7__.getRTL)(props.theme) ? 'right' : 'left');
+    var getTrackStyles = getSlotStyleFn(vertical ? 'height' : 'width');
+    var originValue = originFromZero ? 0 : min;
+    var valuePercent = getPercent(value, min, max);
+    var lowerValuePercent = getPercent(lowerValue, min, max);
+    var originPercentOfLine = getPercent(originValue, min, max);
+    var activeSectionWidth = ranged ? valuePercent - lowerValuePercent : Math.abs(originPercentOfLine - valuePercent);
+    var topSectionWidth = Math.min(100 - valuePercent, 100 - originPercentOfLine);
+    var bottomSectionWidth = ranged ? lowerValuePercent : Math.min(valuePercent, originPercentOfLine);
+    var rootProps = {
+        className: classNames.root,
+        ref: ref,
+    };
+    var labelProps = {
+        className: classNames.titleLabel,
+        children: label,
+        disabled: disabled,
+        htmlFor: ariaLabel ? undefined : id,
+    };
+    var valueLabelProps = showValue
+        ? {
+            className: classNames.valueLabel,
+            children: valueFormat ? valueFormat(value) : value,
+            disabled: disabled,
+            htmlFor: disabled ? id : undefined,
+        }
+        : undefined;
+    var lowerValueLabelProps = ranged && showValue
+        ? {
+            className: classNames.valueLabel,
+            children: valueFormat ? valueFormat(lowerValue) : lowerValue,
+            disabled: disabled,
+        }
+        : undefined;
+    var zeroTickProps = originFromZero
+        ? {
+            className: classNames.zeroTick,
+            style: getPositionStyles(originPercentOfLine),
+        }
+        : undefined;
+    var trackActiveProps = {
+        className: (0,_fluentui_utilities__WEBPACK_IMPORTED_MODULE_10__.css)(classNames.lineContainer, classNames.activeSection),
+        style: getTrackStyles(activeSectionWidth),
+    };
+    var trackTopInactiveProps = {
+        className: (0,_fluentui_utilities__WEBPACK_IMPORTED_MODULE_10__.css)(classNames.lineContainer, classNames.inactiveSection),
+        style: getTrackStyles(topSectionWidth),
+    };
+    var trackBottomInactiveProps = {
+        className: (0,_fluentui_utilities__WEBPACK_IMPORTED_MODULE_10__.css)(classNames.lineContainer, classNames.inactiveSection),
+        style: getTrackStyles(bottomSectionWidth),
+    };
+    var sliderProps = (0,tslib__WEBPACK_IMPORTED_MODULE_11__.__assign)({ 'aria-disabled': disabled, role: 'slider', tabIndex: disabled ? undefined : 0 }, { 'data-is-focusable': !disabled });
+    var sliderBoxProps = (0,tslib__WEBPACK_IMPORTED_MODULE_11__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_11__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_11__.__assign)({ id: id, className: (0,_fluentui_utilities__WEBPACK_IMPORTED_MODULE_10__.css)(classNames.slideBox, buttonProps.className), ref: sliderBoxRef }, (!disabled && {
+        onMouseDown: onMouseDownOrTouchStart,
+        onTouchStart: onMouseDownOrTouchStart,
+        onKeyDown: onKeyDown,
+    })), (buttonProps &&
+        (0,_fluentui_utilities__WEBPACK_IMPORTED_MODULE_12__.getNativeProps)(buttonProps, _fluentui_utilities__WEBPACK_IMPORTED_MODULE_12__.divProperties, ['id', 'className']))), (!ranged && (0,tslib__WEBPACK_IMPORTED_MODULE_11__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_11__.__assign)({}, sliderProps), { 'aria-valuemin': min, 'aria-valuemax': max, 'aria-valuenow': value, 'aria-valuetext': getAriaValueText(value), 'aria-label': ariaLabel || label, 'aria-labelledby': ariaLabelledBy })));
+    var onFocusProp = disabled ? {} : { onFocus: onThumbFocus };
+    var thumbProps = (0,tslib__WEBPACK_IMPORTED_MODULE_11__.__assign)({ ref: thumbRef, className: classNames.thumb, style: getPositionStyles(valuePercent) }, (ranged && (0,tslib__WEBPACK_IMPORTED_MODULE_11__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_11__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_11__.__assign)({}, sliderProps), onFocusProp), { id: "max-".concat(id), 'aria-valuemin': lowerValue, 'aria-valuemax': max, 'aria-valuenow': value, 'aria-valuetext': getAriaValueText(value), 'aria-label': "max ".concat(ariaLabel || label) })));
+    var lowerValueThumbProps = ranged
+        ? (0,tslib__WEBPACK_IMPORTED_MODULE_11__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_11__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_11__.__assign)({ ref: lowerValueThumbRef, className: classNames.thumb, style: getPositionStyles(lowerValuePercent) }, sliderProps), onFocusProp), { id: "min-".concat(id), 'aria-valuemin': min, 'aria-valuemax': value, 'aria-valuenow': lowerValue, 'aria-valuetext': getAriaValueText(lowerValue), 'aria-label': "min ".concat(ariaLabel || label) }) : undefined;
+    var containerProps = {
+        className: classNames.container,
+    };
+    var sliderLineProps = {
+        ref: sliderLine,
+        className: classNames.line,
+    };
+    return {
+        root: rootProps,
+        label: labelProps,
+        sliderBox: sliderBoxProps,
+        container: containerProps,
+        valueLabel: valueLabelProps,
+        lowerValueLabel: lowerValueLabelProps,
+        thumb: thumbProps,
+        lowerValueThumb: lowerValueThumbProps,
+        zeroTick: zeroTickProps,
+        activeTrack: trackActiveProps,
+        topInactiveTrack: trackTopInactiveProps,
+        bottomInactiveTrack: trackBottomInactiveProps,
+        sliderLine: sliderLineProps,
+    };
+};
+
+
+/***/ }),
+
 /***/ 1314:
 /*!********************************************************************!*\
   !*** ./node_modules/@fluentui/react/lib/components/Stack/Stack.js ***!
@@ -17037,6 +17947,414 @@ function getStyles(props) {
         },
     };
 }
+
+
+/***/ }),
+
+/***/ 869:
+/*!***************************************************************************!*\
+  !*** ./node_modules/@fluentui/react/lib/components/Toggle/Toggle.base.js ***!
+  \***************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   ToggleBase: () => (/* binding */ ToggleBase)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! tslib */ 196);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ 5959);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _fluentui_react_hooks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fluentui/react-hooks */ 6228);
+/* harmony import */ var _fluentui_react_hooks__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @fluentui/react-hooks */ 8555);
+/* harmony import */ var _fluentui_react_hooks__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @fluentui/react-hooks */ 2295);
+/* harmony import */ var _fluentui_utilities__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fluentui/utilities */ 3583);
+/* harmony import */ var _fluentui_utilities__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @fluentui/utilities */ 7974);
+/* harmony import */ var _fluentui_utilities__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @fluentui/utilities */ 5123);
+/* harmony import */ var _Label_Label__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../Label/Label */ 3166);
+
+
+
+
+
+var getClassNames = (0,_fluentui_utilities__WEBPACK_IMPORTED_MODULE_1__.classNamesFunction)();
+var COMPONENT_NAME = 'Toggle';
+var ToggleBase = react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(function (props, forwardedRef) {
+    var _a = props.as, RootType = _a === void 0 ? 'div' : _a, ariaLabel = props.ariaLabel, controlledChecked = props.checked, className = props.className, _b = props.defaultChecked, defaultChecked = _b === void 0 ? false : _b, disabled = props.disabled, inlineLabel = props.inlineLabel, label = props.label, 
+    // eslint-disable-next-line @typescript-eslint/no-deprecated
+    offAriaLabel = props.offAriaLabel, offText = props.offText, 
+    // eslint-disable-next-line @typescript-eslint/no-deprecated
+    onAriaLabel = props.onAriaLabel, onChange = props.onChange, 
+    // eslint-disable-next-line @typescript-eslint/no-deprecated
+    onChanged = props.onChanged, onToggleClick = props.onClick, onText = props.onText, role = props.role, styles = props.styles, theme = props.theme;
+    var _c = (0,_fluentui_react_hooks__WEBPACK_IMPORTED_MODULE_2__.useControllableValue)(controlledChecked, defaultChecked, react__WEBPACK_IMPORTED_MODULE_0__.useCallback(function (ev, isChecked) {
+        onChange === null || onChange === void 0 ? void 0 : onChange(ev, isChecked);
+        onChanged === null || onChanged === void 0 ? void 0 : onChanged(isChecked);
+    }, [onChange, onChanged])), checked = _c[0], setChecked = _c[1];
+    var classNames = getClassNames(styles, {
+        theme: theme,
+        className: className,
+        disabled: disabled,
+        checked: checked,
+        inlineLabel: inlineLabel,
+        onOffMissing: !onText && !offText,
+    });
+    var badAriaLabel = checked ? onAriaLabel : offAriaLabel;
+    var id = (0,_fluentui_react_hooks__WEBPACK_IMPORTED_MODULE_3__.useId)(COMPONENT_NAME, props.id);
+    var labelId = "".concat(id, "-label");
+    var stateTextId = "".concat(id, "-stateText");
+    var stateText = checked ? onText : offText;
+    var toggleNativeProps = (0,_fluentui_utilities__WEBPACK_IMPORTED_MODULE_4__.getNativeProps)(props, _fluentui_utilities__WEBPACK_IMPORTED_MODULE_4__.inputProperties, [
+        'defaultChecked',
+    ]);
+    // The following properties take priority for what Narrator should read:
+    // 1. ariaLabel
+    // 2. onAriaLabel (if checked) or offAriaLabel (if not checked)
+    // 3. label, if existent
+    var labelledById = undefined;
+    if (!ariaLabel && !badAriaLabel) {
+        if (label) {
+            labelledById = labelId;
+        }
+        if (stateText && !labelledById) {
+            labelledById = stateTextId;
+        }
+    }
+    var toggleButton = react__WEBPACK_IMPORTED_MODULE_0__.useRef(null);
+    (0,_fluentui_utilities__WEBPACK_IMPORTED_MODULE_5__.useFocusRects)(toggleButton);
+    useComponentRef(props, checked, toggleButton);
+    if (true) {
+        // eslint-disable-next-line react-hooks/rules-of-hooks -- build-time conditional
+        (0,_fluentui_react_hooks__WEBPACK_IMPORTED_MODULE_6__.useWarnings)({
+            name: COMPONENT_NAME,
+            props: props,
+            deprecations: {
+                offAriaLabel: undefined,
+                onAriaLabel: 'ariaLabel',
+                onChanged: 'onChange',
+            },
+            mutuallyExclusive: { checked: 'defaultChecked' },
+        });
+    }
+    var onClick = function (ev) {
+        if (!disabled) {
+            setChecked(!checked, ev);
+            if (onToggleClick) {
+                onToggleClick(ev);
+            }
+        }
+    };
+    var slotProps = {
+        root: {
+            className: classNames.root,
+            hidden: toggleNativeProps.hidden,
+        },
+        label: {
+            children: label,
+            className: classNames.label,
+            htmlFor: id,
+            id: labelId,
+        },
+        container: {
+            className: classNames.container,
+        },
+        pill: (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_7__.__assign)({}, toggleNativeProps), { 'aria-disabled': disabled, 'aria-checked': checked, 'aria-label': ariaLabel ? ariaLabel : badAriaLabel, 'aria-labelledby': labelledById, className: classNames.pill, 'data-is-focusable': true, 'data-ktp-target': true, disabled: disabled, id: id, onClick: onClick, ref: toggleButton, role: role ? role : 'switch', type: 'button' }),
+        thumb: {
+            className: classNames.thumb,
+        },
+        stateText: {
+            children: stateText,
+            className: classNames.text,
+            htmlFor: id,
+            id: stateTextId,
+        },
+    };
+    return (react__WEBPACK_IMPORTED_MODULE_0__.createElement(RootType, (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__assign)({ ref: forwardedRef }, slotProps.root),
+        label && react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Label_Label__WEBPACK_IMPORTED_MODULE_8__.Label, (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__assign)({}, slotProps.label)),
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__assign)({}, slotProps.container),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__assign)({}, slotProps.pill),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__assign)({}, slotProps.thumb))),
+            ((checked && onText) || offText) && react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Label_Label__WEBPACK_IMPORTED_MODULE_8__.Label, (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__assign)({}, slotProps.stateText)))));
+});
+ToggleBase.displayName = COMPONENT_NAME + 'Base';
+var useComponentRef = function (props, isChecked, toggleButtonRef) {
+    react__WEBPACK_IMPORTED_MODULE_0__.useImperativeHandle(props.componentRef, function () { return ({
+        get checked() {
+            return !!isChecked;
+        },
+        focus: function () {
+            if (toggleButtonRef.current) {
+                toggleButtonRef.current.focus();
+            }
+        },
+    }); }, [isChecked, toggleButtonRef]);
+};
+
+
+/***/ }),
+
+/***/ 6264:
+/*!**********************************************************************!*\
+  !*** ./node_modules/@fluentui/react/lib/components/Toggle/Toggle.js ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Toggle: () => (/* binding */ Toggle)
+/* harmony export */ });
+/* harmony import */ var _fluentui_utilities__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @fluentui/utilities */ 5336);
+/* harmony import */ var _Toggle_base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Toggle.base */ 869);
+/* harmony import */ var _Toggle_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Toggle.styles */ 9602);
+
+
+
+var Toggle = (0,_fluentui_utilities__WEBPACK_IMPORTED_MODULE_0__.styled)(_Toggle_base__WEBPACK_IMPORTED_MODULE_1__.ToggleBase, _Toggle_styles__WEBPACK_IMPORTED_MODULE_2__.getStyles, undefined, {
+    scope: 'Toggle',
+});
+
+
+/***/ }),
+
+/***/ 9602:
+/*!*****************************************************************************!*\
+  !*** ./node_modules/@fluentui/react/lib/components/Toggle/Toggle.styles.js ***!
+  \*****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   getStyles: () => (/* binding */ getStyles)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 196);
+/* harmony import */ var _fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @fluentui/style-utilities */ 8455);
+
+
+var DEFAULT_PILL_WIDTH = 40;
+var DEFAULT_PILL_HEIGHT = 20;
+var DEFAULT_THUMB_SIZE = 12;
+var getStyles = function (props) {
+    var _a, _b, _c, _d, _e, _f, _g;
+    var theme = props.theme, className = props.className, disabled = props.disabled, checked = props.checked, inlineLabel = props.inlineLabel, onOffMissing = props.onOffMissing;
+    var semanticColors = theme.semanticColors, palette = theme.palette;
+    // Tokens
+    var pillUncheckedBackground = semanticColors.bodyBackground;
+    var pillCheckedBackground = semanticColors.inputBackgroundChecked;
+    var pillCheckedHoveredBackground = semanticColors.inputBackgroundCheckedHovered;
+    var thumbUncheckedHoveredBackground = palette.neutralDark;
+    var pillCheckedDisabledBackground = semanticColors.disabledBodySubtext;
+    var thumbBackground = semanticColors.smallInputBorder;
+    var thumbCheckedBackground = semanticColors.inputForegroundChecked;
+    var thumbDisabledBackground = semanticColors.disabledBodySubtext;
+    var thumbCheckedDisabledBackground = semanticColors.disabledBackground;
+    var pillBorderColor = semanticColors.smallInputBorder;
+    var pillBorderHoveredColor = semanticColors.inputBorderHovered;
+    var pillBorderDisabledColor = semanticColors.disabledBodySubtext;
+    var textDisabledColor = semanticColors.disabledText;
+    return {
+        root: [
+            'ms-Toggle',
+            checked && 'is-checked',
+            !disabled && 'is-enabled',
+            disabled && 'is-disabled',
+            theme.fonts.medium,
+            {
+                marginBottom: '8px',
+            },
+            inlineLabel && {
+                display: 'flex',
+                alignItems: 'center',
+            },
+            className,
+        ],
+        label: [
+            'ms-Toggle-label',
+            { display: 'inline-block' },
+            disabled && {
+                color: textDisabledColor,
+                selectors: (_a = {},
+                    _a[_fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__.HighContrastSelector] = {
+                        color: 'GrayText',
+                    },
+                    _a),
+            },
+            inlineLabel &&
+                !onOffMissing && {
+                marginRight: 16,
+            },
+            onOffMissing &&
+                inlineLabel && {
+                order: 1,
+                marginLeft: 16,
+            },
+            inlineLabel && { wordBreak: 'break-word' },
+        ],
+        container: [
+            'ms-Toggle-innerContainer',
+            {
+                display: 'flex',
+                position: 'relative',
+            },
+        ],
+        pill: [
+            'ms-Toggle-background',
+            (0,_fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__.getFocusStyle)(theme, { inset: -3 }),
+            {
+                fontSize: '20px',
+                boxSizing: 'border-box',
+                width: DEFAULT_PILL_WIDTH,
+                height: DEFAULT_PILL_HEIGHT,
+                borderRadius: DEFAULT_PILL_HEIGHT / 2,
+                transition: 'all 0.1s ease',
+                border: "1px solid ".concat(pillBorderColor),
+                background: pillUncheckedBackground,
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                padding: '0 3px',
+                overflow: 'visible',
+            },
+            !disabled && [
+                !checked && {
+                    selectors: {
+                        ':hover': [
+                            {
+                                borderColor: pillBorderHoveredColor,
+                            },
+                        ],
+                        ':hover .ms-Toggle-thumb': [
+                            {
+                                backgroundColor: thumbUncheckedHoveredBackground,
+                                selectors: (_b = {},
+                                    _b[_fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__.HighContrastSelector] = {
+                                        borderColor: 'Highlight',
+                                    },
+                                    _b),
+                            },
+                        ],
+                    },
+                },
+                checked && [
+                    {
+                        background: pillCheckedBackground,
+                        borderColor: 'transparent',
+                        justifyContent: 'flex-end',
+                    },
+                    {
+                        selectors: (_c = {
+                                ':hover': [
+                                    {
+                                        backgroundColor: pillCheckedHoveredBackground,
+                                        borderColor: 'transparent',
+                                        selectors: (_d = {},
+                                            _d[_fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__.HighContrastSelector] = {
+                                                backgroundColor: 'Highlight',
+                                            },
+                                            _d),
+                                    },
+                                ]
+                            },
+                            _c[_fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__.HighContrastSelector] = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__assign)({ backgroundColor: 'Highlight' }, (0,_fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__.getHighContrastNoAdjustStyle)()),
+                            _c),
+                    },
+                ],
+            ],
+            disabled && [
+                {
+                    cursor: 'default',
+                },
+                !checked && [
+                    {
+                        borderColor: pillBorderDisabledColor,
+                    },
+                ],
+                checked && [
+                    {
+                        backgroundColor: pillCheckedDisabledBackground,
+                        borderColor: 'transparent',
+                        justifyContent: 'flex-end',
+                    },
+                ],
+            ],
+            !disabled && {
+                selectors: {
+                    '&:hover': {
+                        selectors: (_e = {},
+                            _e[_fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__.HighContrastSelector] = {
+                                borderColor: 'Highlight',
+                            },
+                            _e),
+                    },
+                },
+            },
+        ],
+        thumb: [
+            'ms-Toggle-thumb',
+            {
+                display: 'block',
+                width: DEFAULT_THUMB_SIZE,
+                height: DEFAULT_THUMB_SIZE,
+                borderRadius: '50%',
+                transition: 'all 0.1s ease',
+                backgroundColor: thumbBackground,
+                /* Border is added to handle high contrast mode for Firefox */
+                borderColor: 'transparent',
+                borderWidth: DEFAULT_THUMB_SIZE / 2,
+                borderStyle: 'solid',
+                boxSizing: 'border-box',
+            },
+            !disabled &&
+                checked && [
+                {
+                    backgroundColor: thumbCheckedBackground,
+                    selectors: (_f = {},
+                        _f[_fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__.HighContrastSelector] = {
+                            backgroundColor: 'Window',
+                            borderColor: 'Window',
+                        },
+                        _f),
+                },
+            ],
+            disabled && [
+                !checked && [
+                    {
+                        backgroundColor: thumbDisabledBackground,
+                    },
+                ],
+                checked && [
+                    {
+                        backgroundColor: thumbCheckedDisabledBackground,
+                    },
+                ],
+            ],
+        ],
+        text: [
+            'ms-Toggle-stateText',
+            {
+                selectors: {
+                    // Workaround: make rules more specific than Label rules.
+                    '&&': {
+                        padding: '0',
+                        margin: '0 8px',
+                        userSelect: 'none',
+                        fontWeight: _fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__.FontWeights.regular,
+                    },
+                },
+            },
+            disabled && {
+                selectors: {
+                    '&&': {
+                        color: textDisabledColor,
+                        selectors: (_g = {},
+                            _g[_fluentui_style_utilities__WEBPACK_IMPORTED_MODULE_0__.HighContrastSelector] = {
+                                color: 'GrayText',
+                            },
+                            _g),
+                    },
+                },
+            },
+        ],
+    };
+};
 
 
 /***/ }),
@@ -29217,6 +30535,16 @@ var FancyListWebPart = /** @class */ (function (_super) {
                                                 settings: {
                                                     webPartTitle: _this.properties.webPartTitle || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.webPartTitle,
                                                     shape: ((_a = _this.properties.titleSettings) === null || _a === void 0 ? void 0 : _a.shape) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.shape,
+                                                    showDivider: _this.properties.showTitleDivider || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.showDivider,
+                                                    backgroundType: _this.properties.webPartTitleBackgroundType || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.background.type,
+                                                    backgroundColor: _this.properties.webPartTitleBackgroundColor || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.background.color,
+                                                    backgroundAlpha: _this.properties.webPartTitleBackgroundAlpha || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.background.alpha,
+                                                    gradientDirection: _this.properties.webPartTitleBackgroundGradientDirection || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.background.gradientDirection,
+                                                    gradientColor1: _this.properties.webPartTitleBackgroundGradientColor1 || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.background.gradientColor1,
+                                                    gradientColor2: _this.properties.webPartTitleBackgroundGradientColor2 || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.background.gradientColor2,
+                                                    gradientAlpha: _this.properties.webPartTitleBackgroundGradientAlpha1 || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.background.gradientAlpha1,
+                                                    imageUrl: _this.properties.webPartTitleBackgroundImage || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.background.image,
+                                                    imageAlpha: _this.properties.webPartTitleBackgroundImageAlpha || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.background.imageAlpha,
                                                     font: {
                                                         family: _this.properties.webPartTitleFont || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.font.family,
                                                         size: _this.properties.webPartTitleFontSize || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.font.size,
@@ -29234,6 +30562,36 @@ var FancyListWebPart = /** @class */ (function (_super) {
                                                             if (!_this.properties.titleSettings)
                                                                 _this.properties.titleSettings = __assign({}, _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings);
                                                             _this.properties.titleSettings.shape = newValue;
+                                                            break;
+                                                        case 'showDivider':
+                                                            _this.properties.showTitleDivider = newValue;
+                                                            break;
+                                                        case 'backgroundType':
+                                                            _this.properties.webPartTitleBackgroundType = newValue;
+                                                            break;
+                                                        case 'backgroundColor':
+                                                            _this.properties.webPartTitleBackgroundColor = newValue;
+                                                            break;
+                                                        case 'backgroundAlpha':
+                                                            _this.properties.webPartTitleBackgroundAlpha = newValue;
+                                                            break;
+                                                        case 'gradientDirection':
+                                                            _this.properties.webPartTitleBackgroundGradientDirection = newValue;
+                                                            break;
+                                                        case 'gradientColor1':
+                                                            _this.properties.webPartTitleBackgroundGradientColor1 = newValue;
+                                                            break;
+                                                        case 'gradientColor2':
+                                                            _this.properties.webPartTitleBackgroundGradientColor2 = newValue;
+                                                            break;
+                                                        case 'gradientAlpha':
+                                                            _this.properties.webPartTitleBackgroundGradientAlpha1 = newValue;
+                                                            break;
+                                                        case 'imageUrl':
+                                                            _this.properties.webPartTitleBackgroundImage = newValue;
+                                                            break;
+                                                        case 'imageAlpha':
+                                                            _this.properties.webPartTitleBackgroundImageAlpha = newValue;
                                                             break;
                                                         case 'font.family':
                                                             _this.properties.webPartTitleFont = newValue;

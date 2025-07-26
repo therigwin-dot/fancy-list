@@ -5,6 +5,16 @@ export interface TitleConfigurationProps {
     settings?: {
         webPartTitle: string;
         shape: ShapeOption;
+        showDivider: boolean;
+        backgroundType: 'solid' | 'gradient' | 'image';
+        backgroundColor: string;
+        backgroundAlpha: number;
+        gradientDirection: string;
+        gradientColor1: string;
+        gradientColor2: string;
+        gradientAlpha: number;
+        imageUrl: string;
+        imageAlpha: number;
         font: {
             family: string;
             size: string;

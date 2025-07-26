@@ -1,5 +1,8 @@
 import * as React from 'react';
 import { TextField } from '@fluentui/react/lib/TextField';
+import { Toggle } from '@fluentui/react/lib/Toggle';
+import { Dropdown, IDropdownOption } from '@fluentui/react/lib/Dropdown';
+import { Slider } from '@fluentui/react/lib/Slider';
 import { FontControl } from './FontControl';
 import { ColorPickerControl } from './ColorPickerControl';
 import { ShapePickerControl, ShapeOption } from './ShapePickerControl';
@@ -9,6 +12,16 @@ export interface TitleConfigurationProps {
   settings?: {
     webPartTitle: string;
     shape: ShapeOption;
+    showDivider: boolean;
+    backgroundType: 'solid' | 'gradient' | 'image';
+    backgroundColor: string;
+    backgroundAlpha: number;
+    gradientDirection: string;
+    gradientColor1: string;
+    gradientColor2: string;
+    gradientAlpha: number;
+    imageUrl: string;
+    imageAlpha: number;
     font: {
       family: string;
       size: string;
@@ -29,6 +42,16 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
   settings = {
     webPartTitle: 'Fancy List',
     shape: 'rounded',
+    showDivider: false,
+    backgroundType: 'solid',
+    backgroundColor: '#ffffff',
+    backgroundAlpha: 100,
+    gradientDirection: 'to right',
+    gradientColor1: '#0078d4',
+    gradientColor2: '#ffffff',
+    gradientAlpha: 100,
+    imageUrl: '',
+    imageAlpha: 100,
     font: {
       family: 'Segoe UI',
       size: '24px',
@@ -62,6 +85,29 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
     if (fields.fontFamily) handlePropertyChange('font.family', fields.fontFamily);
     if (fields.fontSize) handlePropertyChange('font.size', fields.fontSize);
     if (fields.formatting) handlePropertyChange('font.formatting', fields.formatting);
+  };
+
+  const backgroundTypeOptions: IDropdownOption[] = [
+    { key: 'solid', text: 'Solid' },
+    { key: 'gradient', text: 'Gradient' },
+    { key: 'image', text: 'Image' }
+  ];
+
+  const gradientDirectionOptions: IDropdownOption[] = [
+    { key: 'to right', text: 'To Right' },
+    { key: 'to left', text: 'To Left' },
+    { key: 'to bottom', text: 'To Bottom' },
+    { key: 'to top', text: 'To Top' },
+    { key: 'to bottom right', text: 'To Bottom Right' },
+    { key: 'to bottom left', text: 'To Bottom Left' },
+    { key: 'to top right', text: 'To Top Right' },
+    { key: 'to top left', text: 'To Top Left' }
+  ];
+
+  const handleSwapColors = () => {
+    const tempColor = settings.gradientColor1;
+    handlePropertyChange('gradientColor1', settings.gradientColor2);
+    handlePropertyChange('gradientColor2', tempColor);
   };
 
   return (
@@ -133,6 +179,167 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
           onChange={(field: string, newColor: string) => handlePropertyChange('font.color', newColor)}
         />
       </div>
+
+      {/* 5. Show Divider Toggle */}
+      <div style={{ marginBottom: 16 }}>
+        <Toggle
+          label="Show Title Divider"
+          checked={settings.showDivider}
+          onText="On"
+          offText="Off"
+          onChange={(_, checked) => handlePropertyChange('showDivider', checked)}
+        />
+      </div>
+
+      {/* 6. Background Type Dropdown */}
+      <div style={{ marginBottom: 16 }}>
+        <Dropdown
+          label="Background Type"
+          options={backgroundTypeOptions}
+          selectedKey={settings.backgroundType}
+          onChange={(_, option) => handlePropertyChange('backgroundType', option?.key)}
+        />
+      </div>
+
+      {/* 7. Solid Background Controls */}
+      {settings.backgroundType === 'solid' && (
+        <>
+          <div style={{ marginBottom: 16 }}>
+            <ColorPickerControl
+              color={settings.backgroundColor}
+              field="backgroundColor"
+              label="Background Color"
+              onChange={(field: string, newColor: string) => handlePropertyChange('backgroundColor', newColor)}
+            />
+          </div>
+          <div style={{ marginBottom: 16 }}>
+            <label style={{
+              fontSize: '14px',
+              fontWeight: '600',
+              color: '#323130',
+              marginBottom: '8px',
+              display: 'block'
+            }}>
+              Background Transparency
+            </label>
+            <Slider
+              min={0}
+              max={100}
+              value={settings.backgroundAlpha}
+              onChange={(value) => handlePropertyChange('backgroundAlpha', value)}
+              showValue={true}
+              valueFormat={(value) => `${value}%`}
+            />
+          </div>
+        </>
+      )}
+
+      {/* 8. Gradient Background Controls */}
+      {settings.backgroundType === 'gradient' && (
+        <>
+          <div style={{ marginBottom: 16 }}>
+            <Dropdown
+              label="Gradient Direction"
+              options={gradientDirectionOptions}
+              selectedKey={settings.gradientDirection}
+              onChange={(_, option) => handlePropertyChange('gradientDirection', option?.key)}
+            />
+          </div>
+          <div style={{ marginBottom: 8 }}>
+            <button
+              type="button"
+              onClick={handleSwapColors}
+              style={{
+                padding: '4px 8px',
+                border: '1px solid #0078d4',
+                borderRadius: '4px',
+                background: '#e5f1fb',
+                color: '#0078d4',
+                cursor: 'pointer',
+                fontSize: '12px'
+              }}
+            >
+              Swap Colors
+            </button>
+          </div>
+          <div style={{ marginBottom: 16 }}>
+            <ColorPickerControl
+              color={settings.gradientColor1}
+              field="gradientColor1"
+              label="Gradient Color 1"
+              onChange={(field: string, newColor: string) => handlePropertyChange('gradientColor1', newColor)}
+            />
+          </div>
+          <div style={{ marginBottom: 16 }}>
+            <ColorPickerControl
+              color={settings.gradientColor2}
+              field="gradientColor2"
+              label="Gradient Color 2"
+              onChange={(field: string, newColor: string) => handlePropertyChange('gradientColor2', newColor)}
+            />
+          </div>
+          <div style={{ marginBottom: 16 }}>
+            <label style={{
+              fontSize: '14px',
+              fontWeight: '600',
+              color: '#323130',
+              marginBottom: '8px',
+              display: 'block'
+            }}>
+              Gradient Transparency
+            </label>
+            <Slider
+              min={0}
+              max={100}
+              value={settings.gradientAlpha}
+              onChange={(value) => handlePropertyChange('gradientAlpha', value)}
+              showValue={true}
+              valueFormat={(value) => `${value}%`}
+            />
+          </div>
+        </>
+      )}
+
+      {/* 9. Image Background Controls */}
+      {settings.backgroundType === 'image' && (
+        <>
+          <div style={{ marginBottom: 16 }}>
+            <label style={{
+              fontSize: '14px',
+              fontWeight: '600',
+              color: '#323130',
+              marginBottom: '8px',
+              display: 'block'
+            }}>
+              Image URL
+            </label>
+            <TextField
+              value={settings.imageUrl}
+              onChange={(_, newValue) => handlePropertyChange('imageUrl', newValue || '')}
+              placeholder="Enter image URL"
+            />
+          </div>
+          <div style={{ marginBottom: 16 }}>
+            <label style={{
+              fontSize: '14px',
+              fontWeight: '600',
+              color: '#323130',
+              marginBottom: '8px',
+              display: 'block'
+            }}>
+              Image Transparency
+            </label>
+            <Slider
+              min={0}
+              max={100}
+              value={settings.imageAlpha}
+              onChange={(value) => handlePropertyChange('imageAlpha', value)}
+              showValue={true}
+              valueFormat={(value) => `${value}%`}
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 }; 

@@ -514,6 +514,16 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
                           settings: {
                             webPartTitle: this.properties.webPartTitle || DEFAULTS_CONFIG.titleSettings.webPartTitle,
                             shape: this.properties.titleSettings?.shape || DEFAULTS_CONFIG.titleSettings.shape,
+                            showDivider: this.properties.showTitleDivider || DEFAULTS_CONFIG.titleSettings.showDivider,
+                            backgroundType: this.properties.webPartTitleBackgroundType || DEFAULTS_CONFIG.titleSettings.background.type,
+                            backgroundColor: this.properties.webPartTitleBackgroundColor || DEFAULTS_CONFIG.titleSettings.background.color,
+                            backgroundAlpha: this.properties.webPartTitleBackgroundAlpha || DEFAULTS_CONFIG.titleSettings.background.alpha,
+                            gradientDirection: this.properties.webPartTitleBackgroundGradientDirection || DEFAULTS_CONFIG.titleSettings.background.gradientDirection,
+                            gradientColor1: this.properties.webPartTitleBackgroundGradientColor1 || DEFAULTS_CONFIG.titleSettings.background.gradientColor1,
+                            gradientColor2: this.properties.webPartTitleBackgroundGradientColor2 || DEFAULTS_CONFIG.titleSettings.background.gradientColor2,
+                            gradientAlpha: this.properties.webPartTitleBackgroundGradientAlpha1 || DEFAULTS_CONFIG.titleSettings.background.gradientAlpha1,
+                            imageUrl: this.properties.webPartTitleBackgroundImage || DEFAULTS_CONFIG.titleSettings.background.image,
+                            imageAlpha: this.properties.webPartTitleBackgroundImageAlpha || DEFAULTS_CONFIG.titleSettings.background.imageAlpha,
                             font: {
                               family: this.properties.webPartTitleFont || DEFAULTS_CONFIG.titleSettings.font.family,
                               size: this.properties.webPartTitleFontSize || DEFAULTS_CONFIG.titleSettings.font.size,
@@ -530,6 +540,36 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
                               case 'shape':
                                 if (!this.properties.titleSettings) this.properties.titleSettings = { ...DEFAULTS_CONFIG.titleSettings };
                                 this.properties.titleSettings.shape = newValue;
+                                break;
+                              case 'showDivider':
+                                this.properties.showTitleDivider = newValue;
+                                break;
+                              case 'backgroundType':
+                                this.properties.webPartTitleBackgroundType = newValue;
+                                break;
+                              case 'backgroundColor':
+                                this.properties.webPartTitleBackgroundColor = newValue;
+                                break;
+                              case 'backgroundAlpha':
+                                this.properties.webPartTitleBackgroundAlpha = newValue;
+                                break;
+                              case 'gradientDirection':
+                                this.properties.webPartTitleBackgroundGradientDirection = newValue;
+                                break;
+                              case 'gradientColor1':
+                                this.properties.webPartTitleBackgroundGradientColor1 = newValue;
+                                break;
+                              case 'gradientColor2':
+                                this.properties.webPartTitleBackgroundGradientColor2 = newValue;
+                                break;
+                              case 'gradientAlpha':
+                                this.properties.webPartTitleBackgroundGradientAlpha1 = newValue;
+                                break;
+                              case 'imageUrl':
+                                this.properties.webPartTitleBackgroundImage = newValue;
+                                break;
+                              case 'imageAlpha':
+                                this.properties.webPartTitleBackgroundImageAlpha = newValue;
                                 break;
                               case 'font.family':
                                 this.properties.webPartTitleFont = newValue;
