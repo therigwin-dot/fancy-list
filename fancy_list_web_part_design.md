@@ -78,5 +78,43 @@ Fancy List now supports only Individual Elements mode for styling. All other mod
   - Hover color control - customizes hover effects
   - Icon configuration - expand/collapse icons and positioning
 
+### Standard Look and Feel of Controls
+- **Purpose:** Ensure consistent visual design and user experience across all property pane controls
+- **Container Styling:** All controls wrapped in `div` with `marginBottom: 16` for consistent spacing
+- **Toggle Controls:** Use flex containers with `display: 'flex', gap: '16px'` for single-line display
+- **Label Styling:** Standard Fluent UI labels with consistent font weight and color
+- **Control Spacing:** 16px bottom margin between all control groups
+- **Color Consistency:** Use Fluent UI color palette (#323130 for text, #666 for secondary text)
+- **Font Consistency:** Segoe UI font family with appropriate sizing (14px for labels, 12px for secondary text)
+- **Layout Consistency:** All controls follow the same visual hierarchy and spacing patterns
+
+### Toggle Control Styling Reference
+- **Purpose:** Standardized toggle control styling across all components.
+- **Standard Implementation:**
+  ```jsx
+  <div style={{ display: 'flex', gap: '16px', marginBottom: 16 }}>
+    <Toggle
+      label="Control Name"
+      checked={value}
+      onText="On"
+      offText="Off"
+      onChange={(_, checked) => handleChange(checked)}
+    />
+  </div>
+  ```
+- **Features:**
+  - **Flex Container**: All toggles wrapped in flex containers for single-line display
+  - **Consistent Spacing**: 16px gap between elements, 16px bottom margin
+  - **Compact Labels**: Short, descriptive labels (e.g., "Title Divider" instead of "Show Title Divider")
+  - **Standard On/Off Text**: All toggles use "On"/"Off" state text
+  - **No inlineLabel**: Uses standard label property for consistent styling
+- **Usage:** All toggle controls across the application must use flex containers and follow this pattern for consistency.
+- **Label Guidelines:**
+  - "Enabled" (for main enable/disable toggles)
+  - "Title Divider" (for title section dividers)
+  - "Filter Divider" (for filter section dividers)
+  - "Auto Expand" (for auto-expansion features)
+  - "Show Divider" (for general divider toggles)
+
 ### Design Principle
 - **Object-Oriented:** Each control is focused, reusable, and maintains separation of concerns. This enables maintainability, testability, and easy integration across the web part.
