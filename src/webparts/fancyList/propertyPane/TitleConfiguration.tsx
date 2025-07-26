@@ -162,16 +162,7 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
         />
       </div>
 
-      {/* 2. Title Text Control */}
-      <div style={{ marginBottom: 16 }}>
-        <TextField
-          value={settings.webPartTitle}
-          onChange={(_, newValue) => handlePropertyChange('webPartTitle', newValue || '')}
-          placeholder="Enter title text"
-        />
-      </div>
-
-      {/* 3. Color Control */}
+      {/* 2. Color Control */}
       <div style={{ marginBottom: 16 }}>
         <ColorPickerControl
           color={settings.font.color}
@@ -181,12 +172,12 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
         />
       </div>
 
-      {/* 4. Shape Control */}
+      {/* 3. Title Text Control */}
       <div style={{ marginBottom: 16 }}>
-        <ShapePickerControl
-          value={settings.shape}
-          label=""
-          onChange={(newShape) => handlePropertyChange('shape', newShape)}
+        <TextField
+          value={settings.webPartTitle}
+          onChange={(_, newValue) => handlePropertyChange('webPartTitle', newValue || '')}
+          placeholder="Enter title text"
         />
       </div>
 
@@ -243,7 +234,26 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
                 onChange={(_, option) => handlePropertyChange('gradientDirection', option?.key)}
               />
             </div>
-            <div style={{ marginBottom: 8 }}>
+            <div style={{ 
+              display: 'flex', 
+              alignItems: 'center', 
+              gap: '8px',
+              marginBottom: 16 
+            }}>
+              <ColorPickerControl
+                color={settings.gradientColor1}
+                field="gradientColor1"
+                label=""
+                onChange={(field: string, newColor: string) => handlePropertyChange('gradientColor1', newColor)}
+              />
+              <ColorPickerControl
+                color={settings.gradientColor2}
+                field="gradientColor2"
+                label=""
+                onChange={(field: string, newColor: string) => handlePropertyChange('gradientColor2', newColor)}
+              />
+            </div>
+            <div style={{ marginBottom: 16 }}>
               <button
                 type="button"
                 onClick={handleSwapColors}
@@ -259,22 +269,6 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
               >
                 Swap Colors
               </button>
-            </div>
-            <div style={{ marginBottom: 16 }}>
-              <ColorPickerControl
-                color={settings.gradientColor1}
-                field="gradientColor1"
-                label="Color 1"
-                onChange={(field: string, newColor: string) => handlePropertyChange('gradientColor1', newColor)}
-              />
-            </div>
-            <div style={{ marginBottom: 16 }}>
-              <ColorPickerControl
-                color={settings.gradientColor2}
-                field="gradientColor2"
-                label="Color 2"
-                onChange={(field: string, newColor: string) => handlePropertyChange('gradientColor2', newColor)}
-              />
             </div>
           </>
         )}
@@ -331,6 +325,15 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
             valueFormat={(value) => `${value}%`}
           />
         </div>
+      </div>
+
+      {/* 4. Shape Control */}
+      <div style={{ marginBottom: 16 }}>
+        <ShapePickerControl
+          value={settings.shape}
+          label=""
+          onChange={(newShape) => handlePropertyChange('shape', newShape)}
+        />
       </div>
 
       {/* 5. Show Divider Toggle */}
