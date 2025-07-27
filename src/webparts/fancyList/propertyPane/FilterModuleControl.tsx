@@ -220,8 +220,9 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
                 onText="On"
                 offText="Off"
                 onChange={(_, checked) => {
-                  console.log('🔄 STEP 1 DEBUG: Toggle clicked, new value:', checked);
+                  console.log('🔄 STEP 2 DEBUG: Toggle clicked, new value:', checked);
                   setShowAllToggle(checked || false);
+                  handlePropertyChange('showAllCategories', checked);
                 }}
               />
             </div>
