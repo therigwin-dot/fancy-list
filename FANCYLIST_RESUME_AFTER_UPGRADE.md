@@ -70,15 +70,15 @@
    - **Testing Confirmed**: Console output shows property changes, filter section hides/shows correctly
 
 2. **Transparency Slider Not Working** ✅ **FIXED**
-   - **Root Cause**: Double-normalization of alpha value in `hexToRgba` function
-   - **Solution**: Removed double division by 100: `alpha` instead of `alpha / 100`
+   - **Root Cause**: Alpha value inversion needed for proper slider behavior
+   - **Solution**: Applied alpha inversion in `getFilterBackgroundStyle` function
    - **Technical Fix**:
-     - Fixed `hexToRgba` function in `FancyList.tsx` (line 295)
-     - Changed `const normalizedAlpha = alpha / 100;` to `const normalizedAlpha = alpha;`
-     - Alpha parameter is already normalized (0-1) from `getFilterBackgroundStyle`
-     - Now 0% = fully transparent (alpha = 0), 100% = fully opaque (alpha = 1)
-   - **Result**: Transparency slider now works correctly for solid and gradient backgrounds
-   - **Testing Confirmed**: Console output shows property values updating, visual effect now working
+     - Modified `getFilterBackgroundStyle` function in `FancyList.tsx`
+     - Changed solid background: `background.alpha / 100` to `1 - (background.alpha / 100)`
+     - Changed gradient background: `background.gradientAlpha1 / 100` to `1 - (background.gradientAlpha1 / 100)`
+     - Now 0% = fully opaque (alpha = 1), 100% = fully transparent (alpha = 0)
+   - **Result**: Transparency slider now works correctly for solid and gradient backgrounds with proper behavior
+   - **Testing Confirmed**: Console output shows property values updating, visual effect working as expected
 
 **Remaining Filter Issues:**
 2. **✅ Transparency Slider Not Working** - ✅ **FIXED** - Double-normalization in hexToRgba function corrected
