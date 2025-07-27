@@ -45,7 +45,7 @@
 
 #### **Filter Component Bugs**:
 1. **✅ Filter Enabled Toggle** - ✅ **FIXED** - Property change handler was missing
-2. **Transparency Slider Not Working** - 🔴 **Critical** - For solid and gradient backgrounds
+2. **✅ Transparency Slider Not Working** - ✅ **FIXED** - Alpha inversion in hexToRgba function
 3. **Shape Button Not Working** - 🔴 **Critical** - Always shows square, doesn't adjust
 4. **Reset Button Incomplete** - 🟡 **Medium** - Only resets divider and shape control
 5. **Shape Control Default Wrong** - 🟡 **Medium** - Reverts to pill instead of rounded

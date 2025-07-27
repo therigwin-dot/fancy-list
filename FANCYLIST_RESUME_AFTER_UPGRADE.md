@@ -57,7 +57,7 @@
 **Date:** July 2025
 **Status:** ✅ **COMPLETED - Filter Enabled Toggle Fixed**
 
-**Critical Issue Fixed:**
+**Critical Issues Fixed:**
 1. **Filter Enabled Toggle Not Working** ✅ **FIXED**
    - **Root Cause**: Filter toggle was not calling property change handler
    - **Solution**: Added missing `handlePropertyChange('enabled', checked || false)` call
@@ -69,8 +69,18 @@
    - **Result**: Filter toggle now properly updates `enableFilters` property and triggers re-render
    - **Testing Confirmed**: Console output shows property changes, filter section hides/shows correctly
 
+2. **Transparency Slider Not Working** ✅ **FIXED**
+   - **Root Cause**: Alpha inversion in `hexToRgba` function was backwards
+   - **Solution**: Removed the inversion: `alpha / 100` instead of `1 - (alpha / 100)`
+   - **Technical Fix**:
+     - Fixed `hexToRgba` function in `FancyList.tsx` (line 295)
+     - Changed `const normalizedAlpha = 1 - (alpha / 100);` to `const normalizedAlpha = alpha / 100;`
+     - Now 0% = fully transparent (alpha = 0), 100% = fully opaque (alpha = 1)
+   - **Result**: Transparency slider now works correctly for solid and gradient backgrounds
+   - **Testing Confirmed**: Console output shows property values updating, visual effect now working
+
 **Remaining Filter Issues:**
-2. **Transparency Slider Not Working** - For solid and gradient backgrounds
+2. **✅ Transparency Slider Not Working** - ✅ **FIXED** - Alpha inversion in hexToRgba function
 3. **Shape Button Not Working** - Always shows square, doesn't adjust
 4. **Reset Button Incomplete** - Only resets divider and shape control
 5. **Shape Control Default Wrong** - Reverts to pill instead of rounded
@@ -79,6 +89,7 @@
 
 **Working Features:**
 - ✅ **Filter Enabled Toggle** - Now working perfectly (property change handler fixed)
+- ✅ **Transparency Slider** - Now working for solid and gradient backgrounds (alpha inversion fixed)
 - ✅ All font controls work correctly
 - ✅ Color pickers work (except positioning)
 - ✅ URL image controls work 100% including transparency
