@@ -1109,7 +1109,8 @@ var FilterModuleControl = function (_a) {
                         handleFontChange({
                             fontFamily: _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.font.family,
                             fontSize: _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.font.size,
-                            formatting: _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.font.formatting
+                            formatting: _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.font.formatting,
+                            alignment: _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.font.alignment
                         });
                         handlePropertyChange('activeColors.background', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.activeColors.background);
                         handlePropertyChange('activeColors.font', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.activeColors.font);
@@ -2034,7 +2035,8 @@ var TitleConfiguration = function (_a) {
         handleFontChange({
             fontFamily: _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.font.family,
             fontSize: _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.font.size,
-            formatting: _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.font.formatting
+            formatting: _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.font.formatting,
+            alignment: _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.font.alignment
         });
         handlePropertyChange('font.color', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.font.color);
     };

@@ -463,7 +463,8 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
                 handleFontChange({
                   fontFamily: DEFAULTS_CONFIG.filterSettings.font.family,
                   fontSize: DEFAULTS_CONFIG.filterSettings.font.size,
-                  formatting: DEFAULTS_CONFIG.filterSettings.font.formatting
+                  formatting: DEFAULTS_CONFIG.filterSettings.font.formatting,
+                  alignment: DEFAULTS_CONFIG.filterSettings.font.alignment
                 });
                 handlePropertyChange('activeColors.background', DEFAULTS_CONFIG.filterSettings.activeColors.background);
                 handlePropertyChange('activeColors.font', DEFAULTS_CONFIG.filterSettings.activeColors.font);

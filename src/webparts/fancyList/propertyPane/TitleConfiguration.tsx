@@ -152,7 +152,8 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
     handleFontChange({
       fontFamily: DEFAULTS_CONFIG.titleSettings.font.family,
       fontSize: DEFAULTS_CONFIG.titleSettings.font.size,
-      formatting: DEFAULTS_CONFIG.titleSettings.font.formatting
+      formatting: DEFAULTS_CONFIG.titleSettings.font.formatting,
+      alignment: DEFAULTS_CONFIG.titleSettings.font.alignment
     });
     handlePropertyChange('font.color', DEFAULTS_CONFIG.titleSettings.font.color);
   };
