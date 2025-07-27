@@ -168,12 +168,12 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     switch (backgroundType) {
       case 'solid':
         return {
-          backgroundColor: this.hexToRgba(backgroundColor, backgroundAlpha),
+          backgroundColor: this.hexToRgba(backgroundColor, backgroundAlpha / 100), // Normalize alpha: 0-100 to 0-1
           borderRadius: this.getShapeRadius(shape)
         };
       case 'gradient':
         return {
-          background: this.getGradientStyle(gradientDirection, gradientColor1, gradientColor2, gradientAlpha),
+          background: this.getGradientStyle(gradientDirection, gradientColor1, gradientColor2, gradientAlpha / 100), // Normalize alpha: 0-100 to 0-1
           borderRadius: this.getShapeRadius(shape)
         };
       case 'image':
