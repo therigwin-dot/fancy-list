@@ -1162,7 +1162,10 @@ var FilterModuleControl = function (_a) {
                         marginBottom: '12px'
                     } }, "Default Filter Selection"),
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Toggle__WEBPACK_IMPORTED_MODULE_5__.Toggle, { label: "Show 'All' Filter Button", inlineLabel: true, checked: settings.showAllCategories || false, onText: "On", offText: "Off", onChange: function (_, checked) { return handlePropertyChange('showAllCategories', checked); } }))),
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Toggle__WEBPACK_IMPORTED_MODULE_5__.Toggle, { label: "Show 'All' Filter Button", inlineLabel: true, checked: settings.showAllCategories || false, onText: "On", offText: "Off", onChange: function (_, checked) {
+                            console.log('🔄 TOGGLE DEBUG: showAllCategories changed to:', checked);
+                            handlePropertyChange('showAllCategories', checked);
+                        } }))),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
                     backgroundColor: '#f3f2f1',
                     padding: '12px',
@@ -35563,6 +35566,7 @@ var FancyListWebPart = /** @class */ (function (_super) {
                                                             _this.properties.filterSettings.inactiveColors.font = newValue;
                                                             break;
                                                         case 'showAllCategories':
+                                                            console.log('🔄 WEBPART DEBUG: showAllCategories property changed to:', newValue);
                                                             _this.properties.filterSettings.showAllCategories = newValue;
                                                             break;
                                                     }

@@ -881,6 +881,7 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
                                 this.properties.filterSettings.inactiveColors.font = newValue;
                                 break;
                               case 'showAllCategories':
+                                console.log('🔄 WEBPART DEBUG: showAllCategories property changed to:', newValue);
                                 this.properties.filterSettings.showAllCategories = newValue;
                                 break;
                             }

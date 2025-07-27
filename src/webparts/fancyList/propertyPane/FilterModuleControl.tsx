@@ -218,7 +218,10 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
                 checked={settings.showAllCategories || false}
                 onText="On"
                 offText="Off"
-                onChange={(_, checked) => handlePropertyChange('showAllCategories', checked)}
+                onChange={(_, checked) => {
+                  console.log('🔄 TOGGLE DEBUG: showAllCategories changed to:', checked);
+                  handlePropertyChange('showAllCategories', checked);
+                }}
               />
             </div>
           </div>
