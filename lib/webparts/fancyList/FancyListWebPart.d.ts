@@ -41,6 +41,7 @@ export interface IFancyListWebPartProps {
 export interface TitleSettings {
     resetButtonText: string;
     description: string;
+    enabled: boolean;
     webPartTitle: string;
     font: {
         family: string;

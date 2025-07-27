@@ -3,6 +3,7 @@ import { ShapeOption } from './ShapePickerControl';
 export interface TitleConfigurationProps {
     label?: string;
     settings?: {
+        enabled: boolean;
         webPartTitle: string;
         shape: ShapeOption;
         showDivider: boolean;

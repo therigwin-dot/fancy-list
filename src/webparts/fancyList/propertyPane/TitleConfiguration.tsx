@@ -12,6 +12,7 @@ import DEFAULTS_CONFIG from '../DEFAULTS_CONFIG';
 export interface TitleConfigurationProps {
   label?: string;
   settings?: {
+    enabled: boolean;
     webPartTitle: string;
     shape: ShapeOption;
     showDivider: boolean;
@@ -42,6 +43,7 @@ export interface TitleConfigurationProps {
 export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({ 
   label, 
   settings = {
+    enabled: true,
     webPartTitle: 'Fancy List',
     shape: 'rounded',
     showDivider: false,
@@ -70,6 +72,8 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
 }) => {
   const [previewColor1, setPreviewColor1] = React.useState<string>('#ffffff');
   const [previewColor2, setPreviewColor2] = React.useState<string>('#000000');
+  const [enabled, setEnabled] = React.useState<boolean>(settings.enabled);
+  
   const handlePropertyChange = (propertyPath: string, newValue: any) => {
     if (onPropertyChange) {
       onPropertyChange(propertyPath, newValue);
@@ -171,15 +175,33 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
         Customize the web parts title text, font, color, background, and shape settings. Use the reset button to put the default look and feel back in place. Use the Back and Next buttons to switch to a different configuration page.
       </div>
 
-      {/* 1. Title Font Control */}
+      {/* 1. Enabled Toggle */}
       <div style={{ marginBottom: 16 }}>
-        <FontControl
-          fontFamily={settings.font.family}
-          fontSize={settings.font.size}
-          formatting={settings.font.formatting}
-          onChange={handleFontChange}
+        <Toggle
+          label="Enabled"
+          inlineLabel={true}
+          checked={enabled}
+          onText="On"
+          offText="Off"
+          onChange={(_, checked) => {
+            setEnabled(checked || false);
+            handlePropertyChange('enabled', checked || false);
+          }}
         />
       </div>
+
+      {/* Conditional rendering for all other controls when enabled */}
+      {enabled && (
+        <>
+          {/* 2. Title Font Control */}
+          <div style={{ marginBottom: 16 }}>
+            <FontControl
+              fontFamily={settings.font.family}
+              fontSize={settings.font.size}
+              formatting={settings.font.formatting}
+              onChange={handleFontChange}
+            />
+          </div>
 
       {/* 2. Color and Text Controls */}
       <div style={{ 
@@ -388,6 +410,8 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
       <div style={{ marginTop: 16 }}>
         <PrimaryButton text={DEFAULTS_CONFIG.titleSettings.resetButtonText} onClick={handleReset} />
       </div>
+        </>
+      )}
     </div>
   );
 }; 

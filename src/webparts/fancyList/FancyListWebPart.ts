@@ -55,6 +55,7 @@ export interface IFancyListWebPartProps {
 export interface TitleSettings {
   resetButtonText: string;
   description: string;
+  enabled: boolean;
   webPartTitle: string;
   font: {
     family: string;
@@ -575,6 +576,7 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
                         React.createElement(TitleConfiguration, {
                           label: 'Title Configuration',
                           settings: {
+                            enabled: this.properties.titleSettings?.enabled || DEFAULTS_CONFIG.titleSettings.enabled,
                             webPartTitle: this.properties.webPartTitle || DEFAULTS_CONFIG.titleSettings.webPartTitle,
                             shape: this.properties.titleSettings?.shape || DEFAULTS_CONFIG.titleSettings.shape,
                             showDivider: this.properties.showTitleDivider || DEFAULTS_CONFIG.titleSettings.showDivider,
@@ -597,6 +599,10 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
                           onPropertyChange: (propertyPath: string, newValue: any) => {
                             // Handle property changes and update the web part properties
                             switch (propertyPath) {
+                              case 'enabled':
+                                if (!this.properties.titleSettings) this.properties.titleSettings = { ...DEFAULTS_CONFIG.titleSettings };
+                                this.properties.titleSettings.enabled = newValue;
+                                break;
                               case 'webPartTitle':
                                 this.properties.webPartTitle = newValue;
                                 break;
