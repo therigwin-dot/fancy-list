@@ -226,29 +226,34 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
       }
     };
 
+    // Helper function to get text decoration (like Compare backup)
+    const getTextDecoration = (formatting: {
+      bold: boolean;
+      italic: boolean;
+      underline: boolean;
+      strikethrough: boolean;
+    }): string => {
+      let decoration = '';
+      if (formatting.underline) decoration += 'underline ';
+      if (formatting.strikethrough) decoration += 'line-through';
+      return decoration.trim() || 'none';
+    };
+
     return {
+      ...this.getBackgroundStyle(),
       fontFamily: font.family,
       fontSize: font.size,
       color: font.color,
-      ...this.getTextDecoration(font.formatting)
+      fontWeight: font.formatting.bold ? 'bold' : 'normal',
+      fontStyle: font.formatting.italic ? 'italic' : 'normal',
+      textDecoration: getTextDecoration(font.formatting),
+      marginBottom: '0.5em',
+      lineHeight: 1.2,
+      position: 'relative'
     };
   }
 
-  private getTextDecoration(formatting: {
-    bold: boolean;
-    italic: boolean;
-    underline: boolean;
-    strikethrough: boolean;
-  }): React.CSSProperties {
-    return {
-      fontWeight: formatting.bold ? 'bold' : 'normal',
-      fontStyle: formatting.italic ? 'italic' : 'normal',
-      textDecoration: [
-        formatting.underline ? 'underline' : '',
-        formatting.strikethrough ? 'line-through' : ''
-      ].filter(Boolean).join(' ') || 'none'
-    };
-  }
+
 
   private renderTitle(): React.ReactElement | null {
     const { titleSettings } = this.props;
@@ -256,10 +261,8 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     // If no titleSettings, render a default title (like Compare backup)
     if (!titleSettings) {
       return (
-        <div className={styles.titleContainer}>
-          <div className={styles.titleText}>
-            Fancy List
-          </div>
+        <div style={this.getTitleStyle()}>
+          Fancy List
         </div>
       );
     }
@@ -278,26 +281,26 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     // Check for invalid image URL
     if (backgroundType === 'image' && imageUrl && !this.isValidImageUrl(imageUrl)) {
       return (
-        <div className={styles.titleContainer} style={this.getBackgroundStyle()}>
-          <div className={styles.titleError}>
-            <div className={styles.errorTitle} style={this.getTitleStyle()}>
+        <div style={this.getTitleStyle()}>
+          <div style={{ textAlign: 'center', padding: '8px' }}>
+            <div style={{ color: '#d13438', fontWeight: 'bold', marginBottom: '4px' }}>
               Invalid Image URL
             </div>
-            <div className={styles.errorMessage}>
+            <div style={{ color: '#605e5c', fontSize: '12px', lineHeight: '1.3' }}>
               Please provide a valid image file (.jpg, .jpeg, .png, .gif, .webp)
             </div>
           </div>
-          {showDivider && <div className={styles.titleDivider} />}
+          {showDivider && <div style={{ height: '1px', backgroundColor: 'rgba(0, 0, 0, 0.1)', marginTop: '12px' }} />}
         </div>
       );
     }
 
     return (
-      <div className={styles.titleContainer} style={this.getBackgroundStyle()}>
-        <div className={styles.titleText} style={this.getTitleStyle()}>
+      <div style={this.getTitleStyle()}>
+        <div style={{ position: 'relative', zIndex: 2 }}>
           {webPartTitle}
         </div>
-        {showDivider && <div className={styles.titleDivider} />}
+        {showDivider && <div style={{ height: '1px', backgroundColor: 'rgba(0, 0, 0, 0.1)', marginTop: '12px' }} />}
       </div>
     );
   }

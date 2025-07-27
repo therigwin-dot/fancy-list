@@ -535,24 +535,22 @@ var FancyList = /** @class */ (function (_super) {
                 strikethrough: false
             }
         };
-        return __assign({ fontFamily: font.family, fontSize: font.size, color: font.color }, this.getTextDecoration(font.formatting));
-    };
-    FancyList.prototype.getTextDecoration = function (formatting) {
-        return {
-            fontWeight: formatting.bold ? 'bold' : 'normal',
-            fontStyle: formatting.italic ? 'italic' : 'normal',
-            textDecoration: [
-                formatting.underline ? 'underline' : '',
-                formatting.strikethrough ? 'line-through' : ''
-            ].filter(Boolean).join(' ') || 'none'
+        // Helper function to get text decoration (like Compare backup)
+        var getTextDecoration = function (formatting) {
+            var decoration = '';
+            if (formatting.underline)
+                decoration += 'underline ';
+            if (formatting.strikethrough)
+                decoration += 'line-through';
+            return decoration.trim() || 'none';
         };
+        return __assign(__assign({}, this.getBackgroundStyle()), { fontFamily: font.family, fontSize: font.size, color: font.color, fontWeight: font.formatting.bold ? 'bold' : 'normal', fontStyle: font.formatting.italic ? 'italic' : 'normal', textDecoration: getTextDecoration(font.formatting), marginBottom: '0.5em', lineHeight: 1.2, position: 'relative' });
     };
     FancyList.prototype.renderTitle = function () {
         var titleSettings = this.props.titleSettings;
         // If no titleSettings, render a default title (like Compare backup)
         if (!titleSettings) {
-            return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].titleContainer },
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].titleText }, "Fancy List")));
+            return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: this.getTitleStyle() }, "Fancy List"));
         }
         // If titleSettings exists but disabled, don't render
         if (!titleSettings.enabled) {
@@ -565,15 +563,15 @@ var FancyList = /** @class */ (function (_super) {
         var imageUrl = titleSettings.imageUrl || '';
         // Check for invalid image URL
         if (backgroundType === 'image' && imageUrl && !this.isValidImageUrl(imageUrl)) {
-            return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].titleContainer, style: this.getBackgroundStyle() },
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].titleError },
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].errorTitle, style: this.getTitleStyle() }, "Invalid Image URL"),
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].errorMessage }, "Please provide a valid image file (.jpg, .jpeg, .png, .gif, .webp)")),
-                showDivider && react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].titleDivider })));
+            return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: this.getTitleStyle() },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { textAlign: 'center', padding: '8px' } },
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { color: '#d13438', fontWeight: 'bold', marginBottom: '4px' } }, "Invalid Image URL"),
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { color: '#605e5c', fontSize: '12px', lineHeight: '1.3' } }, "Please provide a valid image file (.jpg, .jpeg, .png, .gif, .webp)")),
+                showDivider && react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { height: '1px', backgroundColor: 'rgba(0, 0, 0, 0.1)', marginTop: '12px' } })));
         }
-        return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].titleContainer, style: this.getBackgroundStyle() },
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].titleText, style: this.getTitleStyle() }, webPartTitle),
-            showDivider && react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].titleDivider })));
+        return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: this.getTitleStyle() },
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { position: 'relative', zIndex: 2 } }, webPartTitle),
+            showDivider && react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { height: '1px', backgroundColor: 'rgba(0, 0, 0, 0.1)', marginTop: '12px' } })));
     };
     FancyList.prototype.render = function () {
         var _this = this;
