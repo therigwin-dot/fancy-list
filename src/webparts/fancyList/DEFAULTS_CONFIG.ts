@@ -16,7 +16,7 @@ export const DEFAULTS_CONFIG = {
     resetButtonText: "Reset Title Formatting",
     description: 'Customize the web parts title text, font, color, background, and shape settings. Use the reset button to put the default look and feel back in place. Use the Back and Next buttons to switch to a different configuration page.',
     enabled: true,
-    webPartTitle: 'Fancy List',
+    webPartTitle: '',
     font: {
       family: 'inherit',
       size: '24px',

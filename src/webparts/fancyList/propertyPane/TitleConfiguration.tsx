@@ -44,7 +44,7 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
   label, 
   settings = {
     enabled: true,
-    webPartTitle: 'Fancy List',
+    webPartTitle: '',
     shape: 'rounded',
     showDivider: false,
     backgroundType: 'solid',

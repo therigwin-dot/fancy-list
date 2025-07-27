@@ -273,10 +273,15 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     }
 
     // Safe property access with fallbacks
-    const webPartTitle = titleSettings.webPartTitle || 'Fancy List';
+    const webPartTitle = titleSettings.webPartTitle;
     const showDivider = titleSettings.showDivider || false;
     const backgroundType = titleSettings.backgroundType || 'solid';
     const imageUrl = titleSettings.imageUrl || '';
+    
+    // Don't render title if webPartTitle is null, undefined, or empty
+    if (!webPartTitle || webPartTitle.trim() === '') {
+      return null;
+    }
     
     // Check for invalid image URL
     if (backgroundType === 'image' && imageUrl && !this.isValidImageUrl(imageUrl)) {

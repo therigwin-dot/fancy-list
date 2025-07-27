@@ -159,6 +159,7 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
   private _fieldsLoadedForList: string = '';
   private _loadingLists: boolean = false;
   private _loadingFields: boolean = false;
+  private _previousListId: string = '';
 
   // Testing defaults for Page 1
   private readonly TESTING_DEFAULTS = {
@@ -173,7 +174,7 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
     // Use default values if properties are undefined
     const titleSettings = {
       enabled: this.properties.titleSettings?.enabled ?? DEFAULTS_CONFIG.titleSettings.enabled,
-      webPartTitle: this.properties.webPartTitle ?? DEFAULTS_CONFIG.titleSettings.webPartTitle,
+      webPartTitle: this.properties.webPartTitle ?? '',
       shape: this.properties.titleSettings?.shape ?? DEFAULTS_CONFIG.titleSettings.shape,
       showDivider: this.properties.showTitleDivider ?? DEFAULTS_CONFIG.titleSettings.showDivider,
       backgroundType: this.properties.webPartTitleBackgroundType ?? DEFAULTS_CONFIG.titleSettings.background.type,
@@ -236,6 +237,10 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
 
   public async onPropertyPaneFieldChanged(propertyPath: string, oldValue: unknown, newValue: unknown): Promise<void> {
     if (propertyPath === 'selectedListId') {
+      // Get the previous list name for comparison
+      const previousList = this._lists.find(list => list.key === this._previousListId);
+      const previousListName = previousList ? previousList.text : '';
+      
       // Clear field selections and reload fields
       this.properties.categoryField = '';
       this.properties.subjectField = '';
@@ -247,6 +252,24 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
       this._fields = fields;
       this._fieldsLoadedForList = this.properties.selectedListId;
       this._loadingFields = false;
+      
+      // Get the new list name
+      const selectedList = this._lists.find(list => list.key === this.properties.selectedListId);
+      const newListName = selectedList ? selectedList.text : '';
+      
+      // Update title text if:
+      // 1. Title is currently empty/null, OR
+      // 2. Title exactly matches the previous list name
+      if ((!this.properties.webPartTitle || this.properties.webPartTitle.trim() === '') ||
+          (this.properties.webPartTitle.trim() === previousListName)) {
+        if (newListName) {
+          this.properties.webPartTitle = newListName;
+        }
+      }
+      
+      // Store the current list ID as previous for next change
+      this._previousListId = this.properties.selectedListId;
+      
       this.context.propertyPane.refresh();
     } else if (propertyPath === 'categoryField') {
       // Clear subject and description when category changes
@@ -496,6 +519,10 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
                             onClick: async () => {
                               // Set test defaults one by one
                               this.properties.selectedListId = this.TESTING_DEFAULTS.selectedListId;
+                              
+                              // Set the title text to "Testing Fancy List"
+                              this.properties.webPartTitle = 'Testing Fancy List';
+                              
                               if (changeCallback) changeCallback();
                               this.context.propertyPane.refresh();
                               

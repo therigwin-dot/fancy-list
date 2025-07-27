@@ -70,7 +70,7 @@ var DEFAULTS_CONFIG = {
         resetButtonText: "Reset Title Formatting",
         description: 'Customize the web parts title text, font, color, background, and shape settings. Use the reset button to put the default look and feel back in place. Use the Back and Next buttons to switch to a different configuration page.',
         enabled: true,
-        webPartTitle: 'Fancy List',
+        webPartTitle: '',
         font: {
             family: 'inherit',
             size: '24px',
@@ -557,10 +557,14 @@ var FancyList = /** @class */ (function (_super) {
             return null;
         }
         // Safe property access with fallbacks
-        var webPartTitle = titleSettings.webPartTitle || 'Fancy List';
+        var webPartTitle = titleSettings.webPartTitle;
         var showDivider = titleSettings.showDivider || false;
         var backgroundType = titleSettings.backgroundType || 'solid';
         var imageUrl = titleSettings.imageUrl || '';
+        // Don't render title if webPartTitle is null, undefined, or empty
+        if (!webPartTitle || webPartTitle.trim() === '') {
+            return null;
+        }
         // Check for invalid image URL
         if (backgroundType === 'image' && imageUrl && !this.isValidImageUrl(imageUrl)) {
             return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: this.getTitleStyle() },
@@ -1842,7 +1846,7 @@ __webpack_require__.r(__webpack_exports__);
 var TitleConfiguration = function (_a) {
     var label = _a.label, _b = _a.settings, settings = _b === void 0 ? {
         enabled: true,
-        webPartTitle: 'Fancy List',
+        webPartTitle: '',
         shape: 'rounded',
         showDivider: false,
         backgroundType: 'solid',
@@ -34448,6 +34452,7 @@ var FancyListWebPart = /** @class */ (function (_super) {
         _this._fieldsLoadedForList = '';
         _this._loadingLists = false;
         _this._loadingFields = false;
+        _this._previousListId = '';
         // Testing defaults for Page 1
         _this.TESTING_DEFAULTS = {
             selectedListId: 'Events',
@@ -34463,7 +34468,7 @@ var FancyListWebPart = /** @class */ (function (_super) {
         // Use default values if properties are undefined
         var titleSettings = {
             enabled: (_b = (_a = this.properties.titleSettings) === null || _a === void 0 ? void 0 : _a.enabled) !== null && _b !== void 0 ? _b : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.enabled,
-            webPartTitle: (_c = this.properties.webPartTitle) !== null && _c !== void 0 ? _c : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.webPartTitle,
+            webPartTitle: (_c = this.properties.webPartTitle) !== null && _c !== void 0 ? _c : '',
             shape: (_e = (_d = this.properties.titleSettings) === null || _d === void 0 ? void 0 : _d.shape) !== null && _e !== void 0 ? _e : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.shape,
             showDivider: (_f = this.properties.showTitleDivider) !== null && _f !== void 0 ? _f : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.showDivider,
             backgroundType: (_g = this.properties.webPartTitleBackgroundType) !== null && _g !== void 0 ? _g : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.background.type,
@@ -34531,11 +34536,14 @@ var FancyListWebPart = /** @class */ (function (_super) {
     };
     FancyListWebPart.prototype.onPropertyPaneFieldChanged = function (propertyPath, oldValue, newValue) {
         return __awaiter(this, void 0, void 0, function () {
-            var fields;
+            var previousList, previousListName, fields, selectedList, newListName;
+            var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         if (!(propertyPath === 'selectedListId')) return [3 /*break*/, 2];
+                        previousList = this._lists.find(function (list) { return list.key === _this._previousListId; });
+                        previousListName = previousList ? previousList.text : '';
                         // Clear field selections and reload fields
                         this.properties.categoryField = '';
                         this.properties.subjectField = '';
@@ -34549,6 +34557,19 @@ var FancyListWebPart = /** @class */ (function (_super) {
                         this._fields = fields;
                         this._fieldsLoadedForList = this.properties.selectedListId;
                         this._loadingFields = false;
+                        selectedList = this._lists.find(function (list) { return list.key === _this.properties.selectedListId; });
+                        newListName = selectedList ? selectedList.text : '';
+                        // Update title text if:
+                        // 1. Title is currently empty/null, OR
+                        // 2. Title exactly matches the previous list name
+                        if ((!this.properties.webPartTitle || this.properties.webPartTitle.trim() === '') ||
+                            (this.properties.webPartTitle.trim() === previousListName)) {
+                            if (newListName) {
+                                this.properties.webPartTitle = newListName;
+                            }
+                        }
+                        // Store the current list ID as previous for next change
+                        this._previousListId = this.properties.selectedListId;
                         this.context.propertyPane.refresh();
                         return [3 /*break*/, 3];
                     case 2:
@@ -34815,6 +34836,8 @@ var FancyListWebPart = /** @class */ (function (_super) {
                                                         return __generator(this, function (_a) {
                                                             // Set test defaults one by one
                                                             this.properties.selectedListId = this.TESTING_DEFAULTS.selectedListId;
+                                                            // Set the title text to "Testing Fancy List"
+                                                            this.properties.webPartTitle = 'Testing Fancy List';
                                                             if (changeCallback)
                                                                 changeCallback();
                                                             this.context.propertyPane.refresh();
