@@ -36,6 +36,7 @@ export interface FilterModuleControlProps {
     shape: ShapeOption;
     showDivider: boolean;
     showAllCategories: boolean;
+    defaultFilterSelection: string;
     backgroundType: 'solid' | 'gradient' | 'image';
     backgroundColor: string;
     backgroundAlpha: number;
@@ -76,6 +77,7 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
     shape: 'pill',
     showDivider: false,
     showAllCategories: true,
+    defaultFilterSelection: 'All',
     backgroundType: 'solid',
     backgroundColor: '#ffffff',
     backgroundAlpha: 0,
@@ -91,6 +93,7 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
 }) => {
   const [enabled, setEnabled] = React.useState(settings?.enableFilters ?? true);
   const [showAllToggle, setShowAllToggle] = React.useState(settings?.showAllCategories ?? true);
+  const [defaultFilterDropdown, setDefaultFilterDropdown] = React.useState(settings?.defaultFilterSelection ?? 'All');
   
   // Keep local state in sync with settings
   React.useEffect(() => {
@@ -230,6 +233,24 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
                   console.log('🔄 STEP 3 DEBUG: Toggle clicked, new value:', checked);
                   setShowAllToggle(checked || false);
                   handlePropertyChange('showAllCategories', checked);
+                }}
+              />
+            </div>
+
+            {/* Default Filter Selection Dropdown */}
+            <div style={{ marginBottom: 16 }}>
+              <Dropdown
+                selectedKey={defaultFilterDropdown}
+                options={[
+                  { key: 'All', text: 'All' },
+                  { key: 'Category1', text: 'Category1' },
+                  { key: 'Category2', text: 'Category2' },
+                  { key: 'Category3', text: 'Category3' }
+                ]}
+                onChange={(_, option) => {
+                  console.log('🔄 DROPDOWN DEBUG: Selected:', option?.key);
+                  setDefaultFilterDropdown(option?.key as string || 'All');
+                  handlePropertyChange('defaultFilterSelection', option?.key || 'All');
                 }}
               />
             </div>
@@ -539,6 +560,10 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
                 // Reset showAllCategories
                 handlePropertyChange('showAllCategories', DEFAULTS_CONFIG.filterSettings.showAllCategories);
                 setShowAllToggle(DEFAULTS_CONFIG.filterSettings.showAllCategories);
+                
+                // Reset defaultFilterSelection
+                handlePropertyChange('defaultFilterSelection', DEFAULTS_CONFIG.filterSettings.defaultFilterSelection);
+                setDefaultFilterDropdown(DEFAULTS_CONFIG.filterSettings.defaultFilterSelection);
                 
                 // Reset background settings
                 handlePropertyChange('backgroundType', DEFAULTS_CONFIG.filterSettings.background.type);

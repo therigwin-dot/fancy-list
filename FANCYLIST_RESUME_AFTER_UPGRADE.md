@@ -17,9 +17,9 @@
 
 ## **🔄 RECENT PROGRESS (Latest Updates)**
 
-### **✅ Title Component Rendering - Major Progress**
+### **✅ Title Component Rendering - COMPLETED**
 **Date:** July 2025
-**Status:** ✅ **COMPLETED**
+**Status:** ✅ **COMPLETED - ALL ISSUES RESOLVED**
 
 **Issues Fixed:**
 1. **Text Input Null Value** ✅
@@ -98,6 +98,45 @@
      - Changed solid background: `backgroundAlpha / 100` to `1 - (backgroundAlpha / 100)`
      - Changed gradient background: `gradientAlpha / 100` to `1 - (gradientAlpha / 100)`
      - Now 0% = fully opaque (alpha = 1), 100% = fully transparent (alpha = 0)
+
+5. **Shape Button Not Working** ✅ **FIXED**
+   - **Root Cause**: Shape control was in wrong location and not applying to container
+   - **Solution**: Moved shape control outside background box and applied to container
+   - **Technical Fix**:
+     - Moved `ShapePickerControl` from inside background box to separate section
+     - Removed "Filter Section Shape" header (implied)
+     - Changed default from 'pill' to 'rounded' in `DEFAULTS_CONFIG.ts`
+     - Added `borderRadius` to filter section container in `FancyList.tsx`
+     - Added `backgroundShape` to `IFancyListProps.ts` interface
+     - Fixed property mapping in `FancyListWebPart.ts`
+   - **Result**: Shape control now properly affects the entire filter section container
+   - **Testing Confirmed**: All shape buttons work correctly for container and individual buttons
+
+6. **Reset Button Incomplete** ✅ **FIXED**
+   - **Root Cause**: Reset button only reset some properties, not all filter settings
+   - **Solution**: Added explicit property change calls for all filter settings
+   - **Technical Fix**:
+     - Modified `FilterModuleControl.tsx` reset button `onClick` handler
+     - Added explicit `handlePropertyChange` calls for all filter settings (font, colors, background, shapes, divider)
+     - Replaced `handleFontChange` call with individual property change calls
+     - Added `showAllCategories` reset to restore "All" filter toggle
+   - **Result**: Reset button now properly resets all filter settings to defaults
+   - **Testing Confirmed**: All controls reset to default values when reset button is clicked
+
+7. **Missing "All" Filter Button Toggle** ✅ **FIXED**
+   - **Root Cause**: No control to show/hide the "All" filter button
+   - **Solution**: Added "Default Filter Selection" section with toggle control
+   - **Technical Fix**:
+     - Added new grey box container for "Default Filter Selection" in `FilterModuleControl.tsx`
+     - Added `Toggle` control for `showAllCategories` with proper state management
+     - Added `showAllCategories` to `FilterModuleControlProps` interface and default settings
+     - Added `showAllCategories` to `FilterSettings` interface in `IFancyListProps.ts`
+     - Added `showAllCategories` case to `onPropertyChange` in `FancyListWebPart.ts`
+     - Fixed property mapping to pass `showAllCategories` from `filterSettings` instead of top-level
+     - Added `useEffect` to keep local state synchronized with settings
+     - Fixed nullish coalescing operator (`??` instead of `||`) for proper false value handling
+   - **Result**: Toggle now properly controls "All" filter button visibility with persistence
+   - **Testing Confirmed**: Toggle works correctly, persists across navigation and page refresh
    - **Result**: Title transparency sliders now work correctly for solid and gradient backgrounds with proper behavior
    - **Testing Confirmed**: Title transparency sliders adjust visual appearance properly (0% opaque, 100% transparent)
 

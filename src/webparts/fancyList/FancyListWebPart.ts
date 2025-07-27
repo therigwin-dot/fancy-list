@@ -102,6 +102,7 @@ export interface FilterSettings {
   };
   shape: 'square' | 'rounded' | 'pill';
   backgroundShape: 'square' | 'rounded' | 'pill';
+  defaultFilterSelection: string;
   background: {
     type: 'solid' | 'gradient' | 'image';
     color: string;
@@ -799,6 +800,7 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
                             shape: this.properties.filterSettings?.shape || DEFAULTS_CONFIG.filterSettings.shape,
                             backgroundShape: this.properties.filterSettings?.backgroundShape || DEFAULTS_CONFIG.filterSettings.backgroundShape,
                             showAllCategories: this.properties.filterSettings?.showAllCategories ?? DEFAULTS_CONFIG.filterSettings.showAllCategories,
+                            defaultFilterSelection: this.properties.filterSettings?.defaultFilterSelection ?? DEFAULTS_CONFIG.filterSettings.defaultFilterSelection,
                             showDivider: this.properties.filterSettings?.showDivider || DEFAULTS_CONFIG.filterSettings.showDivider,
                             backgroundType: this.properties.filterSettings?.background.type || DEFAULTS_CONFIG.filterSettings.background.type,
                             backgroundColor: this.properties.filterSettings?.background.color || DEFAULTS_CONFIG.filterSettings.background.color,
@@ -883,6 +885,10 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
                               case 'showAllCategories':
                                 console.log('🔄 WEBPART DEBUG: showAllCategories property changed to:', newValue);
                                 this.properties.filterSettings.showAllCategories = newValue;
+                                break;
+                              case 'defaultFilterSelection':
+                                console.log('🔄 WEBPART DEBUG: defaultFilterSelection property changed to:', newValue);
+                                this.properties.filterSettings.defaultFilterSelection = newValue;
                                 break;
                             }
                             if (changeCallback) changeCallback();

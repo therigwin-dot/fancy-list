@@ -51,10 +51,10 @@
 
 #### **Title Component Bugs**:
 1. **✅ Title Transparency Sliders Broken** - ✅ **FIXED** - Alpha inversion corrected for proper slider behavior
-4. **Reset Button Incomplete** - 🔴 **Critical** - Only resets divider and shape control, missing font, color, and background property handlers
-5. **Shape Control Default Wrong** - 🟡 **Medium** - Reverts to pill instead of rounded
+2. **✅ Reset Button Incomplete** - ✅ **FIXED** - Reset button now properly resets all title settings
+3. **✅ Shape Control Default Wrong** - ✅ **FIXED** - Shape control default now works correctly
 6. **Color Picker Positioning** - 🟢 **Low** - Acceptable bug, on back burner
-7. **✅ Missing "All" Filter Button Toggle** - ✅ **FIXED** - Added "Default Filter Selection" section with "All" filter toggle
+7. **✅ Missing "All" Filter Button Toggle** - ✅ **FIXED** - Added "Default Filter Selection" section with "All" filter toggle + persistence fix
 
 #### **Other Bugs**:
 8. **FontControl Enter Key Focus** - 🟢 **Low** - Acceptable for current phase

@@ -115,6 +115,7 @@ var DEFAULTS_CONFIG = {
         },
         shape: 'pill',
         backgroundShape: 'rounded',
+        defaultFilterSelection: 'All',
         background: {
             type: 'solid',
             color: '#ffffff',
@@ -1044,8 +1045,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var FilterModuleControl = function (_a) {
-    var _b, _c;
-    var label = _a.label, _d = _a.settings, settings = _d === void 0 ? {
+    var _b, _c, _d;
+    var label = _a.label, _e = _a.settings, settings = _e === void 0 ? {
         enableFilters: true,
         font: {
             family: 'Segoe UI',
@@ -1069,6 +1070,7 @@ var FilterModuleControl = function (_a) {
         shape: 'pill',
         showDivider: false,
         showAllCategories: true,
+        defaultFilterSelection: 'All',
         backgroundType: 'solid',
         backgroundColor: '#ffffff',
         backgroundAlpha: 0,
@@ -1079,9 +1081,10 @@ var FilterModuleControl = function (_a) {
         imageUrl: '',
         imageAlpha: 0,
         backgroundShape: 'rounded'
-    } : _d, onPropertyChange = _a.onPropertyChange;
-    var _e = react__WEBPACK_IMPORTED_MODULE_0__.useState((_b = settings === null || settings === void 0 ? void 0 : settings.enableFilters) !== null && _b !== void 0 ? _b : true), enabled = _e[0], setEnabled = _e[1];
-    var _f = react__WEBPACK_IMPORTED_MODULE_0__.useState((_c = settings === null || settings === void 0 ? void 0 : settings.showAllCategories) !== null && _c !== void 0 ? _c : true), showAllToggle = _f[0], setShowAllToggle = _f[1];
+    } : _e, onPropertyChange = _a.onPropertyChange;
+    var _f = react__WEBPACK_IMPORTED_MODULE_0__.useState((_b = settings === null || settings === void 0 ? void 0 : settings.enableFilters) !== null && _b !== void 0 ? _b : true), enabled = _f[0], setEnabled = _f[1];
+    var _g = react__WEBPACK_IMPORTED_MODULE_0__.useState((_c = settings === null || settings === void 0 ? void 0 : settings.showAllCategories) !== null && _c !== void 0 ? _c : true), showAllToggle = _g[0], setShowAllToggle = _g[1];
+    var _h = react__WEBPACK_IMPORTED_MODULE_0__.useState((_d = settings === null || settings === void 0 ? void 0 : settings.defaultFilterSelection) !== null && _d !== void 0 ? _d : 'All'), defaultFilterDropdown = _h[0], setDefaultFilterDropdown = _h[1];
     // Keep local state in sync with settings
     react__WEBPACK_IMPORTED_MODULE_0__.useEffect(function () {
         var _a;
@@ -1089,8 +1092,8 @@ var FilterModuleControl = function (_a) {
         console.log('🔄 PERSISTENCE DEBUG: Current showAllToggle =', showAllToggle);
         setShowAllToggle((_a = settings === null || settings === void 0 ? void 0 : settings.showAllCategories) !== null && _a !== void 0 ? _a : true);
     }, [settings === null || settings === void 0 ? void 0 : settings.showAllCategories]);
-    var _g = react__WEBPACK_IMPORTED_MODULE_0__.useState('#ffffff'), previewColor1 = _g[0], setPreviewColor1 = _g[1];
-    var _h = react__WEBPACK_IMPORTED_MODULE_0__.useState('#000000'), previewColor2 = _h[0], setPreviewColor2 = _h[1];
+    var _j = react__WEBPACK_IMPORTED_MODULE_0__.useState('#ffffff'), previewColor1 = _j[0], setPreviewColor1 = _j[1];
+    var _k = react__WEBPACK_IMPORTED_MODULE_0__.useState('#000000'), previewColor2 = _k[0], setPreviewColor2 = _k[1];
     var handlePropertyChange = function (propertyPath, newValue) {
         if (onPropertyChange) {
             onPropertyChange(propertyPath, newValue);
@@ -1174,6 +1177,17 @@ var FilterModuleControl = function (_a) {
                             console.log('🔄 STEP 3 DEBUG: Toggle clicked, new value:', checked);
                             setShowAllToggle(checked || false);
                             handlePropertyChange('showAllCategories', checked);
+                        } })),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_6__.Dropdown, { selectedKey: defaultFilterDropdown, options: [
+                            { key: 'All', text: 'All' },
+                            { key: 'Category1', text: 'Category1' },
+                            { key: 'Category2', text: 'Category2' },
+                            { key: 'Category3', text: 'Category3' }
+                        ], onChange: function (_, option) {
+                            console.log('🔄 DROPDOWN DEBUG: Selected:', option === null || option === void 0 ? void 0 : option.key);
+                            setDefaultFilterDropdown((option === null || option === void 0 ? void 0 : option.key) || 'All');
+                            handlePropertyChange('defaultFilterSelection', (option === null || option === void 0 ? void 0 : option.key) || 'All');
                         } }))),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
                     backgroundColor: '#f3f2f1',
@@ -1324,6 +1338,9 @@ var FilterModuleControl = function (_a) {
                         // Reset showAllCategories
                         handlePropertyChange('showAllCategories', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.showAllCategories);
                         setShowAllToggle(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.showAllCategories);
+                        // Reset defaultFilterSelection
+                        handlePropertyChange('defaultFilterSelection', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.defaultFilterSelection);
+                        setDefaultFilterDropdown(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.defaultFilterSelection);
                         // Reset background settings
                         handlePropertyChange('backgroundType', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.background.type);
                         handlePropertyChange('backgroundColor', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.background.color);
@@ -35475,7 +35492,7 @@ var FancyListWebPart = /** @class */ (function (_super) {
                                     properties: {
                                         key: 'filterConfiguration',
                                         onRender: function (elem, ctx, changeCallback) {
-                                            var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z;
+                                            var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1;
                                             react_dom__WEBPACK_IMPORTED_MODULE_1__.render(react__WEBPACK_IMPORTED_MODULE_0__.createElement(_propertyPane_FilterModuleControl__WEBPACK_IMPORTED_MODULE_10__.FilterModuleControl, {
                                                 label: 'Filter Configuration',
                                                 settings: {
@@ -35497,16 +35514,17 @@ var FancyListWebPart = /** @class */ (function (_super) {
                                                     shape: ((_l = _this.properties.filterSettings) === null || _l === void 0 ? void 0 : _l.shape) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.shape,
                                                     backgroundShape: ((_m = _this.properties.filterSettings) === null || _m === void 0 ? void 0 : _m.backgroundShape) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.backgroundShape,
                                                     showAllCategories: (_p = (_o = _this.properties.filterSettings) === null || _o === void 0 ? void 0 : _o.showAllCategories) !== null && _p !== void 0 ? _p : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.showAllCategories,
-                                                    showDivider: ((_q = _this.properties.filterSettings) === null || _q === void 0 ? void 0 : _q.showDivider) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.showDivider,
-                                                    backgroundType: ((_r = _this.properties.filterSettings) === null || _r === void 0 ? void 0 : _r.background.type) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.type,
-                                                    backgroundColor: ((_s = _this.properties.filterSettings) === null || _s === void 0 ? void 0 : _s.background.color) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.color,
-                                                    backgroundAlpha: ((_t = _this.properties.filterSettings) === null || _t === void 0 ? void 0 : _t.background.alpha) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.alpha,
-                                                    gradientDirection: ((_u = _this.properties.filterSettings) === null || _u === void 0 ? void 0 : _u.background.gradientDirection) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientDirection,
-                                                    gradientColor1: ((_v = _this.properties.filterSettings) === null || _v === void 0 ? void 0 : _v.background.gradientColor1) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientColor1,
-                                                    gradientColor2: ((_w = _this.properties.filterSettings) === null || _w === void 0 ? void 0 : _w.background.gradientColor2) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientColor2,
-                                                    gradientAlpha: ((_x = _this.properties.filterSettings) === null || _x === void 0 ? void 0 : _x.background.gradientAlpha1) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientAlpha1,
-                                                    imageUrl: ((_y = _this.properties.filterSettings) === null || _y === void 0 ? void 0 : _y.background.image) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.image,
-                                                    imageAlpha: ((_z = _this.properties.filterSettings) === null || _z === void 0 ? void 0 : _z.background.imageAlpha) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.imageAlpha
+                                                    defaultFilterSelection: (_r = (_q = _this.properties.filterSettings) === null || _q === void 0 ? void 0 : _q.defaultFilterSelection) !== null && _r !== void 0 ? _r : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.defaultFilterSelection,
+                                                    showDivider: ((_s = _this.properties.filterSettings) === null || _s === void 0 ? void 0 : _s.showDivider) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.showDivider,
+                                                    backgroundType: ((_t = _this.properties.filterSettings) === null || _t === void 0 ? void 0 : _t.background.type) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.type,
+                                                    backgroundColor: ((_u = _this.properties.filterSettings) === null || _u === void 0 ? void 0 : _u.background.color) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.color,
+                                                    backgroundAlpha: ((_v = _this.properties.filterSettings) === null || _v === void 0 ? void 0 : _v.background.alpha) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.alpha,
+                                                    gradientDirection: ((_w = _this.properties.filterSettings) === null || _w === void 0 ? void 0 : _w.background.gradientDirection) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientDirection,
+                                                    gradientColor1: ((_x = _this.properties.filterSettings) === null || _x === void 0 ? void 0 : _x.background.gradientColor1) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientColor1,
+                                                    gradientColor2: ((_y = _this.properties.filterSettings) === null || _y === void 0 ? void 0 : _y.background.gradientColor2) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientColor2,
+                                                    gradientAlpha: ((_z = _this.properties.filterSettings) === null || _z === void 0 ? void 0 : _z.background.gradientAlpha1) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientAlpha1,
+                                                    imageUrl: ((_0 = _this.properties.filterSettings) === null || _0 === void 0 ? void 0 : _0.background.image) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.image,
+                                                    imageAlpha: ((_1 = _this.properties.filterSettings) === null || _1 === void 0 ? void 0 : _1.background.imageAlpha) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.imageAlpha
                                                 },
                                                 onPropertyChange: function (propertyPath, newValue) {
                                                     // Handle property changes and update the web part properties
@@ -35580,6 +35598,10 @@ var FancyListWebPart = /** @class */ (function (_super) {
                                                         case 'showAllCategories':
                                                             console.log('🔄 WEBPART DEBUG: showAllCategories property changed to:', newValue);
                                                             _this.properties.filterSettings.showAllCategories = newValue;
+                                                            break;
+                                                        case 'defaultFilterSelection':
+                                                            console.log('🔄 WEBPART DEBUG: defaultFilterSelection property changed to:', newValue);
+                                                            _this.properties.filterSettings.defaultFilterSelection = newValue;
                                                             break;
                                                     }
                                                     if (changeCallback)

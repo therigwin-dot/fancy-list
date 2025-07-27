@@ -62,6 +62,7 @@ export const DEFAULTS_CONFIG = {
     },
     shape: 'pill' as const,
     backgroundShape: 'rounded' as const,
+    defaultFilterSelection: 'All',
     background: {
       type: 'solid' as const,
       color: '#ffffff',
