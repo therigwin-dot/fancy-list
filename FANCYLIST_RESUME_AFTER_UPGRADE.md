@@ -371,6 +371,38 @@ if (!this.props.filterSettings?.enabled) {
 - **Filters disabled**: No buttons should be pressed (or "All" button pressed)
 - **Property changes**: Selected category should update when dropdown selection changes
 
+### **🔄 Category Field onChange Behavior:**
+
+#### **Scenario: List/Category Field Changes**
+When a user on Page 1 changes the List/Document Library or Category Field selection, the available categories change. This affects the Default Filter Selection dropdown:
+
+#### **Expected Behavior:**
+1. **New List Selected**: Available categories change → Default Filter Selection dropdown options update
+2. **Category Field Changed**: Available categories change → Default Filter Selection dropdown options update
+3. **Current Selection Invalid**: If the current `defaultFilterSelection` is no longer valid (category doesn't exist in new list), it should:
+   - **Option A**: Reset to "All" (if "All" is enabled)
+   - **Option B**: Reset to first available category
+   - **Option C**: Clear selection and require user to choose
+
+#### **Implementation Requirements:**
+```typescript
+// MISSING: Handle category field changes in FancyListWebPart.ts
+case 'categoryField':
+  // Clear defaultFilterSelection if it's no longer valid
+  // Update available categories for dropdown
+  // Reset to safe default (All or first category)
+  break;
+```
+
+#### **Dropdown Options Update Logic:**
+```typescript
+// When category field changes:
+// 1. Get new available categories from selected list
+// 2. Update dropdown options in FilterModuleControl
+// 3. Validate current defaultFilterSelection
+// 4. Reset to safe default if invalid
+```
+
 ### **📁 Files to Modify:**
 - `src/webparts/fancyList/components/FancyList.tsx` - Main implementation
 - `src/webparts/fancyList/components/IFancyListProps.ts` - Interface updates if needed
