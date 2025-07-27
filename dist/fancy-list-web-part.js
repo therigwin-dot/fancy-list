@@ -34630,7 +34630,7 @@ var FancyListWebPart = /** @class */ (function (_super) {
         return _this;
     }
     FancyListWebPart.prototype.render = function () {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, _23, _24, _25, _26, _27, _28, _29, _30, _31, _32, _33, _34, _35, _36, _37, _38, _39, _40, _41, _42, _43, _44, _45, _46, _47, _48, _49, _50, _51, _52, _53, _54, _55;
         // Map individual properties to the format expected by FancyList component
         // Use default values if properties are undefined
         var titleSettings = {
@@ -34655,6 +34655,39 @@ var FancyListWebPart = /** @class */ (function (_super) {
                 alignment: (_v = this.properties.webPartTitleAlignment) !== null && _v !== void 0 ? _v : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.font.alignment
             }
         };
+        // Map filter properties to the format expected by FancyList component
+        var filterSettings = {
+            enabled: (_x = (_w = this.properties.filterSettings) === null || _w === void 0 ? void 0 : _w.enableFilters) !== null && _x !== void 0 ? _x : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.enableFilters,
+            font: {
+                family: (_0 = (_z = (_y = this.properties.filterSettings) === null || _y === void 0 ? void 0 : _y.font) === null || _z === void 0 ? void 0 : _z.family) !== null && _0 !== void 0 ? _0 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.font.family,
+                size: (_3 = (_2 = (_1 = this.properties.filterSettings) === null || _1 === void 0 ? void 0 : _1.font) === null || _2 === void 0 ? void 0 : _2.size) !== null && _3 !== void 0 ? _3 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.font.size,
+                color: '#605e5c', // Default filter font color
+                formatting: (_6 = (_5 = (_4 = this.properties.filterSettings) === null || _4 === void 0 ? void 0 : _4.font) === null || _5 === void 0 ? void 0 : _5.formatting) !== null && _6 !== void 0 ? _6 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.font.formatting,
+                alignment: (_9 = (_8 = (_7 = this.properties.filterSettings) === null || _7 === void 0 ? void 0 : _7.font) === null || _8 === void 0 ? void 0 : _8.alignment) !== null && _9 !== void 0 ? _9 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.font.alignment
+            },
+            activeColors: {
+                background: (_12 = (_11 = (_10 = this.properties.filterSettings) === null || _10 === void 0 ? void 0 : _10.activeColors) === null || _11 === void 0 ? void 0 : _11.background) !== null && _12 !== void 0 ? _12 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.activeColors.background,
+                font: (_15 = (_14 = (_13 = this.properties.filterSettings) === null || _13 === void 0 ? void 0 : _13.activeColors) === null || _14 === void 0 ? void 0 : _14.font) !== null && _15 !== void 0 ? _15 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.activeColors.font
+            },
+            inactiveColors: {
+                background: (_18 = (_17 = (_16 = this.properties.filterSettings) === null || _16 === void 0 ? void 0 : _16.inactiveColors) === null || _17 === void 0 ? void 0 : _17.background) !== null && _18 !== void 0 ? _18 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.inactiveColors.background,
+                font: (_21 = (_20 = (_19 = this.properties.filterSettings) === null || _19 === void 0 ? void 0 : _19.inactiveColors) === null || _20 === void 0 ? void 0 : _20.font) !== null && _21 !== void 0 ? _21 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.inactiveColors.font
+            },
+            shape: (_23 = (_22 = this.properties.filterSettings) === null || _22 === void 0 ? void 0 : _22.shape) !== null && _23 !== void 0 ? _23 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.shape,
+            background: {
+                type: (_26 = (_25 = (_24 = this.properties.filterSettings) === null || _24 === void 0 ? void 0 : _24.background) === null || _25 === void 0 ? void 0 : _25.type) !== null && _26 !== void 0 ? _26 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.type,
+                color: (_29 = (_28 = (_27 = this.properties.filterSettings) === null || _27 === void 0 ? void 0 : _27.background) === null || _28 === void 0 ? void 0 : _28.color) !== null && _29 !== void 0 ? _29 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.color,
+                alpha: (_32 = (_31 = (_30 = this.properties.filterSettings) === null || _30 === void 0 ? void 0 : _30.background) === null || _31 === void 0 ? void 0 : _31.alpha) !== null && _32 !== void 0 ? _32 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.alpha,
+                image: (_35 = (_34 = (_33 = this.properties.filterSettings) === null || _33 === void 0 ? void 0 : _33.background) === null || _34 === void 0 ? void 0 : _34.image) !== null && _35 !== void 0 ? _35 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.image,
+                imageAlpha: (_38 = (_37 = (_36 = this.properties.filterSettings) === null || _36 === void 0 ? void 0 : _36.background) === null || _37 === void 0 ? void 0 : _37.imageAlpha) !== null && _38 !== void 0 ? _38 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.imageAlpha,
+                gradientDirection: (_41 = (_40 = (_39 = this.properties.filterSettings) === null || _39 === void 0 ? void 0 : _39.background) === null || _40 === void 0 ? void 0 : _40.gradientDirection) !== null && _41 !== void 0 ? _41 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientDirection,
+                gradientColor1: (_44 = (_43 = (_42 = this.properties.filterSettings) === null || _42 === void 0 ? void 0 : _42.background) === null || _43 === void 0 ? void 0 : _43.gradientColor1) !== null && _44 !== void 0 ? _44 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientColor1,
+                gradientAlpha1: (_47 = (_46 = (_45 = this.properties.filterSettings) === null || _45 === void 0 ? void 0 : _45.background) === null || _46 === void 0 ? void 0 : _46.gradientAlpha1) !== null && _47 !== void 0 ? _47 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientAlpha1,
+                gradientColor2: (_50 = (_49 = (_48 = this.properties.filterSettings) === null || _48 === void 0 ? void 0 : _48.background) === null || _49 === void 0 ? void 0 : _49.gradientColor2) !== null && _50 !== void 0 ? _50 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientColor2,
+                gradientAlpha2: (_53 = (_52 = (_51 = this.properties.filterSettings) === null || _51 === void 0 ? void 0 : _51.background) === null || _52 === void 0 ? void 0 : _52.gradientAlpha2) !== null && _53 !== void 0 ? _53 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientAlpha2
+            },
+            showDivider: (_55 = (_54 = this.properties.filterSettings) === null || _54 === void 0 ? void 0 : _54.showDivider) !== null && _55 !== void 0 ? _55 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.showDivider
+        };
         var element = react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_FancyList__WEBPACK_IMPORTED_MODULE_7__["default"], {
             selectedListId: this.properties.selectedListId,
             categoryField: this.properties.categoryField,
@@ -34667,7 +34700,8 @@ var FancyListWebPart = /** @class */ (function (_super) {
             hasTeamsContext: !!this.context.sdks.microsoftTeams,
             userDisplayName: this.context.pageContext.user.displayName,
             context: this.context,
-            titleSettings: titleSettings
+            titleSettings: titleSettings,
+            filterSettings: filterSettings
         });
         react_dom__WEBPACK_IMPORTED_MODULE_1__.render(element, this.domElement);
     };

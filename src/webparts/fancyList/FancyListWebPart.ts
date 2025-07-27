@@ -199,6 +199,40 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
       }
     };
 
+    // Map filter properties to the format expected by FancyList component
+    const filterSettings = {
+      enabled: this.properties.filterSettings?.enableFilters ?? DEFAULTS_CONFIG.filterSettings.enableFilters,
+      font: {
+        family: this.properties.filterSettings?.font?.family ?? DEFAULTS_CONFIG.filterSettings.font.family,
+        size: this.properties.filterSettings?.font?.size ?? DEFAULTS_CONFIG.filterSettings.font.size,
+        color: '#605e5c', // Default filter font color
+        formatting: this.properties.filterSettings?.font?.formatting ?? DEFAULTS_CONFIG.filterSettings.font.formatting,
+        alignment: this.properties.filterSettings?.font?.alignment ?? DEFAULTS_CONFIG.filterSettings.font.alignment
+      },
+      activeColors: {
+        background: this.properties.filterSettings?.activeColors?.background ?? DEFAULTS_CONFIG.filterSettings.activeColors.background,
+        font: this.properties.filterSettings?.activeColors?.font ?? DEFAULTS_CONFIG.filterSettings.activeColors.font
+      },
+      inactiveColors: {
+        background: this.properties.filterSettings?.inactiveColors?.background ?? DEFAULTS_CONFIG.filterSettings.inactiveColors.background,
+        font: this.properties.filterSettings?.inactiveColors?.font ?? DEFAULTS_CONFIG.filterSettings.inactiveColors.font
+      },
+      shape: this.properties.filterSettings?.shape ?? DEFAULTS_CONFIG.filterSettings.shape,
+      background: {
+        type: this.properties.filterSettings?.background?.type ?? DEFAULTS_CONFIG.filterSettings.background.type,
+        color: this.properties.filterSettings?.background?.color ?? DEFAULTS_CONFIG.filterSettings.background.color,
+        alpha: this.properties.filterSettings?.background?.alpha ?? DEFAULTS_CONFIG.filterSettings.background.alpha,
+        image: this.properties.filterSettings?.background?.image ?? DEFAULTS_CONFIG.filterSettings.background.image,
+        imageAlpha: this.properties.filterSettings?.background?.imageAlpha ?? DEFAULTS_CONFIG.filterSettings.background.imageAlpha,
+        gradientDirection: this.properties.filterSettings?.background?.gradientDirection ?? DEFAULTS_CONFIG.filterSettings.background.gradientDirection,
+        gradientColor1: this.properties.filterSettings?.background?.gradientColor1 ?? DEFAULTS_CONFIG.filterSettings.background.gradientColor1,
+        gradientAlpha1: this.properties.filterSettings?.background?.gradientAlpha1 ?? DEFAULTS_CONFIG.filterSettings.background.gradientAlpha1,
+        gradientColor2: this.properties.filterSettings?.background?.gradientColor2 ?? DEFAULTS_CONFIG.filterSettings.background.gradientColor2,
+        gradientAlpha2: this.properties.filterSettings?.background?.gradientAlpha2 ?? DEFAULTS_CONFIG.filterSettings.background.gradientAlpha2
+      },
+      showDivider: this.properties.filterSettings?.showDivider ?? DEFAULTS_CONFIG.filterSettings.showDivider
+    };
+
     const element: React.ReactElement<IFancyListProps> = React.createElement(
       FancyList,
       {
@@ -213,7 +247,8 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
         hasTeamsContext: !!this.context.sdks.microsoftTeams,
         userDisplayName: this.context.pageContext.user.displayName,
         context: this.context,
-        titleSettings: titleSettings
+        titleSettings: titleSettings,
+        filterSettings: filterSettings
       }
     );
 
