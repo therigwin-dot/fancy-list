@@ -72,6 +72,8 @@ const iconButtonStyles = (active: boolean) => ({
 });
 
 export const FontControl: React.FC<FontControlProps> = ({ fontFamily, fontSize, formatting, alignment = 'left', onChange, label }) => {
+  const [isEditing, setIsEditing] = React.useState<boolean>(false);
+
   const handleFormattingChange = (key: keyof typeof formatting, value: boolean) => {
     onChange({ formatting: {
       bold: key === 'bold' ? value : !!formatting.bold,
@@ -89,6 +91,15 @@ export const FontControl: React.FC<FontControlProps> = ({ fontFamily, fontSize, 
     // Allow common font size formats: px, em, rem, %, pt
     const fontSizeRegex = /^\d+(\.\d+)?(px|em|rem|%|pt)$/;
     return fontSizeRegex.test(value.trim());
+  };
+
+  const normalizeFontSize = (value: string): string => {
+    const trimmed = value.trim();
+    // If it's just a number, assume px
+    if (/^\d+(\.\d+)?$/.test(trimmed)) {
+      return `${trimmed}px`;
+    }
+    return trimmed;
   };
 
   function renderFontOption(option?: IDropdownOption): JSX.Element {
@@ -229,18 +240,33 @@ export const FontControl: React.FC<FontControlProps> = ({ fontFamily, fontSize, 
           label={undefined}
           ariaLabel="Font Size"
           options={FONT_SIZES}
-          selectedKey={fontSize || '24px'}
+          selectedKey={isEditing ? undefined : (fontSize || '24px')}
+          text={isEditing ? '' : (fontSize || '24px')}
           allowFreeform={true}
           autoComplete="on"
+          onFocus={() => {
+            setIsEditing(true);
+          }}
+          onBlur={() => {
+            // If still editing, restore the original state
+            if (isEditing) {
+              setIsEditing(false);
+            }
+          }}
           onChange={(_, option, __, textValue) => {
             if (option) {
               // Selected from dropdown
+              setIsEditing(false);
               onChange({ fontSize: option.key as string });
-            } else if (textValue && validateFontSize(textValue)) {
-              // Custom valid input
-              onChange({ fontSize: textValue.trim() });
+            } else if (textValue) {
+              const normalizedValue = normalizeFontSize(textValue);
+              if (validateFontSize(normalizedValue)) {
+                // Custom valid input
+                setIsEditing(false);
+                onChange({ fontSize: normalizedValue });
+              }
+              // Invalid input is ignored but keeps editing state
             }
-            // Invalid input is ignored
           }}
           styles={{ root: { flex: '1 1 50%' } }}
         />

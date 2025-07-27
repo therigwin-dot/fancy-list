@@ -1197,6 +1197,7 @@ var iconButtonStyles = function (active) { return ({
 }); };
 var FontControl = function (_a) {
     var fontFamily = _a.fontFamily, fontSize = _a.fontSize, formatting = _a.formatting, _b = _a.alignment, alignment = _b === void 0 ? 'left' : _b, onChange = _a.onChange, label = _a.label;
+    var _c = react__WEBPACK_IMPORTED_MODULE_0__.useState(false), isEditing = _c[0], setIsEditing = _c[1];
     var handleFormattingChange = function (key, value) {
         onChange({ formatting: {
                 bold: key === 'bold' ? value : !!formatting.bold,
@@ -1212,6 +1213,14 @@ var FontControl = function (_a) {
         // Allow common font size formats: px, em, rem, %, pt
         var fontSizeRegex = /^\d+(\.\d+)?(px|em|rem|%|pt)$/;
         return fontSizeRegex.test(value.trim());
+    };
+    var normalizeFontSize = function (value) {
+        var trimmed = value.trim();
+        // If it's just a number, assume px
+        if (/^\d+(\.\d+)?$/.test(trimmed)) {
+            return "".concat(trimmed, "px");
+        }
+        return trimmed;
     };
     function renderFontOption(option) {
         var _a;
@@ -1259,16 +1268,28 @@ var FontControl = function (_a) {
                 gap: '8px'
             } },
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_3__.Dropdown, { label: undefined, ariaLabel: "Font Family", options: FONT_FAMILIES, selectedKey: fontFamily || 'inherit', onChange: function (_, option) { return onChange({ fontFamily: option.key }); }, onRenderOption: renderFontOption, onRenderTitle: renderFontTitle, styles: { root: { flex: '1 1 50%' } } }),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_4__.ComboBox, { label: undefined, ariaLabel: "Font Size", options: FONT_SIZES, selectedKey: fontSize || '24px', allowFreeform: true, autoComplete: "on", onChange: function (_, option, __, textValue) {
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_4__.ComboBox, { label: undefined, ariaLabel: "Font Size", options: FONT_SIZES, selectedKey: isEditing ? undefined : (fontSize || '24px'), text: isEditing ? '' : (fontSize || '24px'), allowFreeform: true, autoComplete: "on", onFocus: function () {
+                    setIsEditing(true);
+                }, onBlur: function () {
+                    // If still editing, restore the original state
+                    if (isEditing) {
+                        setIsEditing(false);
+                    }
+                }, onChange: function (_, option, __, textValue) {
                     if (option) {
                         // Selected from dropdown
+                        setIsEditing(false);
                         onChange({ fontSize: option.key });
                     }
-                    else if (textValue && validateFontSize(textValue)) {
-                        // Custom valid input
-                        onChange({ fontSize: textValue.trim() });
+                    else if (textValue) {
+                        var normalizedValue = normalizeFontSize(textValue);
+                        if (validateFontSize(normalizedValue)) {
+                            // Custom valid input
+                            setIsEditing(false);
+                            onChange({ fontSize: normalizedValue });
+                        }
+                        // Invalid input is ignored but keeps editing state
                     }
-                    // Invalid input is ignored
                 }, styles: { root: { flex: '1 1 50%' } } }))));
 };
 
