@@ -1044,8 +1044,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var FilterModuleControl = function (_a) {
-    var _b;
-    var label = _a.label, _c = _a.settings, settings = _c === void 0 ? {
+    var _b, _c;
+    var label = _a.label, _d = _a.settings, settings = _d === void 0 ? {
         enableFilters: true,
         font: {
             family: 'Segoe UI',
@@ -1079,10 +1079,11 @@ var FilterModuleControl = function (_a) {
         imageUrl: '',
         imageAlpha: 0,
         backgroundShape: 'rounded'
-    } : _c, onPropertyChange = _a.onPropertyChange;
-    var _d = react__WEBPACK_IMPORTED_MODULE_0__.useState((_b = settings === null || settings === void 0 ? void 0 : settings.enableFilters) !== null && _b !== void 0 ? _b : true), enabled = _d[0], setEnabled = _d[1];
-    var _e = react__WEBPACK_IMPORTED_MODULE_0__.useState('#ffffff'), previewColor1 = _e[0], setPreviewColor1 = _e[1];
-    var _f = react__WEBPACK_IMPORTED_MODULE_0__.useState('#000000'), previewColor2 = _f[0], setPreviewColor2 = _f[1];
+    } : _d, onPropertyChange = _a.onPropertyChange;
+    var _e = react__WEBPACK_IMPORTED_MODULE_0__.useState((_b = settings === null || settings === void 0 ? void 0 : settings.enableFilters) !== null && _b !== void 0 ? _b : true), enabled = _e[0], setEnabled = _e[1];
+    var _f = react__WEBPACK_IMPORTED_MODULE_0__.useState((_c = settings === null || settings === void 0 ? void 0 : settings.showAllCategories) !== null && _c !== void 0 ? _c : true), showAllToggle = _f[0], setShowAllToggle = _f[1];
+    var _g = react__WEBPACK_IMPORTED_MODULE_0__.useState('#ffffff'), previewColor1 = _g[0], setPreviewColor1 = _g[1];
+    var _h = react__WEBPACK_IMPORTED_MODULE_0__.useState('#000000'), previewColor2 = _h[0], setPreviewColor2 = _h[1];
     var handlePropertyChange = function (propertyPath, newValue) {
         if (onPropertyChange) {
             onPropertyChange(propertyPath, newValue);
@@ -1162,9 +1163,9 @@ var FilterModuleControl = function (_a) {
                         marginBottom: '12px'
                     } }, "Default Filter Selection"),
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Toggle__WEBPACK_IMPORTED_MODULE_5__.Toggle, { label: "Show 'All' Filter Button", inlineLabel: true, checked: settings.showAllCategories || false, onText: "On", offText: "Off", onChange: function (_, checked) {
-                            console.log('🔄 TOGGLE DEBUG: showAllCategories changed to:', checked);
-                            handlePropertyChange('showAllCategories', checked);
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Toggle__WEBPACK_IMPORTED_MODULE_5__.Toggle, { label: "Show 'All' Filter Button", inlineLabel: true, checked: showAllToggle, onText: "On", offText: "Off", onChange: function (_, checked) {
+                            console.log('🔄 STEP 1 DEBUG: Toggle clicked, new value:', checked);
+                            setShowAllToggle(checked || false);
                         } }))),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
                     backgroundColor: '#f3f2f1',

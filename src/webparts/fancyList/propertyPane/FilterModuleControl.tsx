@@ -90,6 +90,7 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
   onPropertyChange 
 }) => {
   const [enabled, setEnabled] = React.useState(settings?.enableFilters ?? true);
+  const [showAllToggle, setShowAllToggle] = React.useState(settings?.showAllCategories ?? true);
   const [previewColor1, setPreviewColor1] = React.useState<string>('#ffffff');
   const [previewColor2, setPreviewColor2] = React.useState<string>('#000000');
   
@@ -215,12 +216,12 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
               <Toggle
                 label="Show 'All' Filter Button"
                 inlineLabel={true}
-                checked={settings.showAllCategories || false}
+                checked={showAllToggle}
                 onText="On"
                 offText="Off"
                 onChange={(_, checked) => {
-                  console.log('🔄 TOGGLE DEBUG: showAllCategories changed to:', checked);
-                  handlePropertyChange('showAllCategories', checked);
+                  console.log('🔄 STEP 1 DEBUG: Toggle clicked, new value:', checked);
+                  setShowAllToggle(checked || false);
                 }}
               />
             </div>
