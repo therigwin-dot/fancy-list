@@ -82,25 +82,9 @@ export const SectionModuleControl: React.FC<SectionModuleControlProps> = ({
         return;
     }
     
-    // Reset using individual property changes (like Title control)
-    handlePropertyChange('font.family', defaultSettings.font.family);
-    handlePropertyChange('font.size', defaultSettings.font.size);
-    handlePropertyChange('font.color', defaultSettings.font.color);
-    handlePropertyChange('font.formatting', defaultSettings.font.formatting);
-    handlePropertyChange('background.type', defaultSettings.background.type);
-    handlePropertyChange('background.color', defaultSettings.background.color);
-    handlePropertyChange('background.alpha', defaultSettings.background.alpha);
-    handlePropertyChange('background.image', defaultSettings.background.image);
-    handlePropertyChange('background.imageAlpha', defaultSettings.background.imageAlpha);
-    handlePropertyChange('background.gradientDirection', defaultSettings.background.gradientDirection);
-    handlePropertyChange('background.gradientColor1', defaultSettings.background.gradientColor1);
-    handlePropertyChange('background.gradientColor2', defaultSettings.background.gradientColor2);
-    handlePropertyChange('background.gradientAlpha1', defaultSettings.background.gradientAlpha1);
-    handlePropertyChange('background.gradientAlpha2', defaultSettings.background.gradientAlpha2);
-    handlePropertyChange('shape', defaultSettings.shape);
-    handlePropertyChange('showDivider', defaultSettings.showDivider);
-    handlePropertyChange('autoExpand', defaultSettings.autoExpand);
-    handlePropertyChange('iconSettings', defaultSettings.iconSettings);
+    // Reset by directly updating the entire settings object
+    // This ensures all properties are properly reset to their default values
+    onChange(defaultSettings);
     
     console.log(`Reset ${sectionType} settings to defaults`);
   };
@@ -119,6 +103,7 @@ export const SectionModuleControl: React.FC<SectionModuleControlProps> = ({
   };
 
   const handlePropertyChange = (propertyPath: string, newValue: any) => {
+    // Use individual property updates like Title Control
     const newSettings = { ...sectionSettings };
     
     // Handle nested property paths
@@ -130,6 +115,65 @@ export const SectionModuleControl: React.FC<SectionModuleControlProps> = ({
     }
     
     current[pathParts[pathParts.length - 1]] = newValue;
+    
+    // Update the specific property in the parent component
+    switch (propertyPath) {
+      case 'autoExpand':
+        newSettings.autoExpand = newValue;
+        break;
+      case 'showDivider':
+        newSettings.showDivider = newValue;
+        break;
+      case 'shape':
+        newSettings.shape = newValue;
+        break;
+      case 'font.family':
+        newSettings.font.family = newValue;
+        break;
+      case 'font.size':
+        newSettings.font.size = newValue;
+        break;
+      case 'font.color':
+        newSettings.font.color = newValue;
+        break;
+      case 'font.formatting':
+        newSettings.font.formatting = newValue;
+        break;
+      case 'background.type':
+        newSettings.background.type = newValue;
+        break;
+      case 'background.color':
+        newSettings.background.color = newValue;
+        break;
+      case 'background.alpha':
+        newSettings.background.alpha = newValue;
+        break;
+      case 'background.image':
+        newSettings.background.image = newValue;
+        break;
+      case 'background.imageAlpha':
+        newSettings.background.imageAlpha = newValue;
+        break;
+      case 'background.gradientDirection':
+        newSettings.background.gradientDirection = newValue;
+        break;
+      case 'background.gradientColor1':
+        newSettings.background.gradientColor1 = newValue;
+        break;
+      case 'background.gradientColor2':
+        newSettings.background.gradientColor2 = newValue;
+        break;
+      case 'background.gradientAlpha1':
+        newSettings.background.gradientAlpha1 = newValue;
+        break;
+      case 'background.gradientAlpha2':
+        newSettings.background.gradientAlpha2 = newValue;
+        break;
+      case 'iconSettings':
+        newSettings.iconSettings = newValue;
+        break;
+    }
+    
     onChange(newSettings);
   };
 

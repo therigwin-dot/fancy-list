@@ -40,6 +40,7 @@ export declare const DEFAULTS_CONFIG: {
         shape: "rounded";
         showDivider: boolean;
         autoExpand: boolean;
+        hoverColor: string;
         iconSettings: {
             enabled: boolean;
             iconPosition: "left";
@@ -77,6 +78,7 @@ export declare const DEFAULTS_CONFIG: {
         shape: "rounded";
         showDivider: boolean;
         autoExpand: boolean;
+        hoverColor: string;
         iconSettings: {
             enabled: boolean;
             iconPosition: "left";
@@ -114,6 +116,7 @@ export declare const DEFAULTS_CONFIG: {
         shape: "rounded";
         showDivider: boolean;
         autoExpand: boolean;
+        hoverColor: string;
         iconSettings: {
             enabled: boolean;
             iconPosition: "left";
