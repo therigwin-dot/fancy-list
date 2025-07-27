@@ -20,6 +20,7 @@ export interface IFancyListWebPartProps {
         underline: boolean;
         strikethrough: boolean;
     };
+    webPartTitleAlignment?: 'left' | 'center' | 'right' | 'justify';
     webPartTitleBackgroundType: 'solid' | 'gradient' | 'image';
     webPartTitleBackgroundColor: string;
     webPartTitleBackgroundAlpha: number;
@@ -53,6 +54,7 @@ export interface TitleSettings {
             underline: boolean;
             strikethrough: boolean;
         };
+        alignment?: 'left' | 'center' | 'right' | 'justify';
     };
     background: {
         type: 'solid' | 'gradient' | 'image';
@@ -83,6 +85,7 @@ export interface FilterSettings {
             underline: boolean;
             strikethrough: boolean;
         };
+        alignment?: 'left' | 'center' | 'right' | 'justify';
     };
     activeColors: {
         background: string;
@@ -122,6 +125,7 @@ export interface SectionSettings {
             underline: boolean;
             strikethrough: boolean;
         };
+        alignment?: 'left' | 'center' | 'right' | 'justify';
     };
     background: {
         type: 'solid' | 'gradient' | 'image';

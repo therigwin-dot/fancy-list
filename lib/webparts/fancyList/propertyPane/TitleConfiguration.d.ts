@@ -25,6 +25,7 @@ export interface TitleConfigurationProps {
                 underline: boolean;
                 strikethrough: boolean;
             };
+            alignment?: 'left' | 'center' | 'right' | 'justify';
             color: string;
         };
     };

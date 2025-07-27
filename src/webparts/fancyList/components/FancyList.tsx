@@ -304,6 +304,7 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
       fontWeight: font.formatting.bold ? 'bold' : 'normal',
       fontStyle: font.formatting.italic ? 'italic' : 'normal',
       textDecoration: getTextDecoration(font.formatting),
+      textAlign: font.alignment || 'left',
       marginBottom: '0.5em',
       lineHeight: 1.2,
       position: 'relative'

@@ -22,6 +22,7 @@ export interface FilterModuleControlProps {
         underline: boolean;
         strikethrough: boolean;
       };
+      alignment?: 'left' | 'center' | 'right' | 'justify';
     };
     activeColors: {
       background: string;
@@ -58,7 +59,8 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
         italic: false,
         underline: false,
         strikethrough: false
-      }
+      },
+      alignment: 'center'
     },
     activeColors: {
       background: '#0078d4',
@@ -102,10 +104,12 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
       underline: boolean;
       strikethrough: boolean;
     };
+    alignment?: 'left' | 'center' | 'right' | 'justify';
   }) => {
     if (fields.fontFamily) handlePropertyChange('font.family', fields.fontFamily);
     if (fields.fontSize) handlePropertyChange('font.size', fields.fontSize);
     if (fields.formatting) handlePropertyChange('font.formatting', fields.formatting);
+    if (fields.alignment) handlePropertyChange('font.alignment', fields.alignment);
   };
 
   const backgroundTypeOptions: IDropdownOption[] = [
@@ -207,6 +211,7 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
                 fontFamily={settings.font.family}
                 fontSize={settings.font.size}
                 formatting={settings.font.formatting}
+                alignment={settings.font.alignment}
                 onChange={handleFontChange}
               />
             </div>

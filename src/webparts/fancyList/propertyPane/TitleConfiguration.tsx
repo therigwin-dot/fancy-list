@@ -34,6 +34,7 @@ export interface TitleConfigurationProps {
         underline: boolean;
         strikethrough: boolean;
       };
+      alignment?: 'left' | 'center' | 'right' | 'justify';
       color: string;
     };
   };
@@ -65,6 +66,7 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
         underline: false,
         strikethrough: false
       },
+      alignment: 'left',
       color: '#323130'
     }
   },
@@ -89,10 +91,12 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
       underline: boolean;
       strikethrough: boolean;
     };
+    alignment?: 'left' | 'center' | 'right' | 'justify';
   }) => {
     if (fields.fontFamily) handlePropertyChange('font.family', fields.fontFamily);
     if (fields.fontSize) handlePropertyChange('font.size', fields.fontSize);
     if (fields.formatting) handlePropertyChange('font.formatting', fields.formatting);
+    if (fields.alignment) handlePropertyChange('font.alignment', fields.alignment);
   };
 
   const backgroundTypeOptions: IDropdownOption[] = [
@@ -199,6 +203,7 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
               fontFamily={settings.font.family}
               fontSize={settings.font.size}
               formatting={settings.font.formatting}
+              alignment={settings.font.alignment}
               onChange={handleFontChange}
             />
           </div>

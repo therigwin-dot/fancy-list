@@ -34,6 +34,7 @@ export interface IFancyListProps {
                 underline: boolean;
                 strikethrough: boolean;
             };
+            alignment?: 'left' | 'center' | 'right' | 'justify';
         };
     };
 }

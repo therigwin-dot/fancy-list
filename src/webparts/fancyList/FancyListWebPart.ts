@@ -33,6 +33,7 @@ export interface IFancyListWebPartProps {
   webPartTitleFont: string;
   webPartTitleFontSize: string;
   webPartTitleFormatting: { bold: boolean; italic: boolean; underline: boolean; strikethrough: boolean };
+  webPartTitleAlignment?: 'left' | 'center' | 'right' | 'justify';
   webPartTitleBackgroundType: 'solid' | 'gradient' | 'image';
   webPartTitleBackgroundColor: string;
   webPartTitleBackgroundAlpha: number;
@@ -62,6 +63,7 @@ export interface TitleSettings {
     size: string;
     color: string;
     formatting: { bold: boolean; italic: boolean; underline: boolean; strikethrough: boolean; };
+    alignment?: 'left' | 'center' | 'right' | 'justify';
   };
   background: {
     type: 'solid' | 'gradient' | 'image';
@@ -88,6 +90,7 @@ export interface FilterSettings {
     family: string;
     size: string;
     formatting: { bold: boolean; italic: boolean; underline: boolean; strikethrough: boolean; };
+    alignment?: 'left' | 'center' | 'right' | 'justify';
   };
   activeColors: {
     background: string;
@@ -123,6 +126,7 @@ export interface SectionSettings {
     size: string;
     color: string;
     formatting: { bold: boolean; italic: boolean; underline: boolean; strikethrough: boolean; };
+    alignment?: 'left' | 'center' | 'right' | 'justify';
   };
   background: {
     type: 'solid' | 'gradient' | 'image';
@@ -190,7 +194,8 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
         family: this.properties.webPartTitleFont ?? DEFAULTS_CONFIG.titleSettings.font.family,
         size: this.properties.webPartTitleFontSize ?? DEFAULTS_CONFIG.titleSettings.font.size,
         color: this.properties.webPartTitleColor ?? DEFAULTS_CONFIG.titleSettings.font.color,
-        formatting: this.properties.webPartTitleFormatting ?? DEFAULTS_CONFIG.titleSettings.font.formatting
+        formatting: this.properties.webPartTitleFormatting ?? DEFAULTS_CONFIG.titleSettings.font.formatting,
+        alignment: this.properties.webPartTitleAlignment ?? DEFAULTS_CONFIG.titleSettings.font.alignment
       }
     };
 

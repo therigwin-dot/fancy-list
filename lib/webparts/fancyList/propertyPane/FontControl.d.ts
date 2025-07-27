@@ -8,6 +8,7 @@ export interface FontControlProps {
         underline: boolean;
         strikethrough: boolean;
     };
+    alignment?: 'left' | 'center' | 'right' | 'justify';
     onChange: (fields: {
         fontFamily?: string;
         fontSize?: string;
@@ -17,6 +18,7 @@ export interface FontControlProps {
             underline: boolean;
             strikethrough: boolean;
         };
+        alignment?: 'left' | 'center' | 'right' | 'justify';
     }) => void;
     label?: string;
 }

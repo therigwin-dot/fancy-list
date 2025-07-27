@@ -24,6 +24,7 @@ export declare const DEFAULTS_CONFIG: {
                 underline: boolean;
                 strikethrough: boolean;
             };
+            alignment: string;
         };
         background: {
             type: "solid";
@@ -62,6 +63,7 @@ export declare const DEFAULTS_CONFIG: {
                 underline: boolean;
                 strikethrough: boolean;
             };
+            alignment: string;
         };
         background: {
             type: "solid";
@@ -100,6 +102,7 @@ export declare const DEFAULTS_CONFIG: {
                 underline: boolean;
                 strikethrough: boolean;
             };
+            alignment: string;
         };
         background: {
             type: "solid";

@@ -20,6 +20,7 @@ export interface SectionSettings {
             underline: boolean;
             strikethrough: boolean;
         };
+        alignment?: 'left' | 'center' | 'right' | 'justify';
     };
     background: {
         type: 'solid' | 'gradient' | 'image';

@@ -28,6 +28,7 @@ export interface SectionSettings {
     size: string;
     color: string;
     formatting: { bold: boolean; italic: boolean; underline: boolean; strikethrough: boolean; };
+    alignment?: 'left' | 'center' | 'right' | 'justify';
   };
   background: {
     type: 'solid' | 'gradient' | 'image';
@@ -181,11 +182,13 @@ export const SectionModuleControl: React.FC<SectionModuleControlProps> = ({
     fontFamily?: string;
     fontSize?: string;
     formatting?: { bold: boolean; italic: boolean; underline: boolean; strikethrough: boolean; };
+    alignment?: 'left' | 'center' | 'right' | 'justify';
   }) => {
     const newSettings = { ...sectionSettings };
     if (fields.fontFamily) newSettings.font.family = fields.fontFamily;
     if (fields.fontSize) newSettings.font.size = fields.fontSize;
     if (fields.formatting) newSettings.font.formatting = fields.formatting;
+    if (fields.alignment) newSettings.font.alignment = fields.alignment;
     onChange(newSettings);
   };
 
@@ -322,6 +325,7 @@ export const SectionModuleControl: React.FC<SectionModuleControlProps> = ({
           fontFamily={sectionSettings.font.family}
           fontSize={sectionSettings.font.size}
           formatting={sectionSettings.font.formatting}
+          alignment={sectionSettings.font.alignment}
           onChange={handleFontChange}
         />
       </div>

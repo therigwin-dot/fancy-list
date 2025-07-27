@@ -10,6 +10,7 @@ export interface FontControlProps {
     underline: boolean;
     strikethrough: boolean;
   };
+  alignment?: 'left' | 'center' | 'right' | 'justify';
   onChange: (fields: {
     fontFamily?: string;
     fontSize?: string;
@@ -19,6 +20,7 @@ export interface FontControlProps {
       underline: boolean;
       strikethrough: boolean;
     };
+    alignment?: 'left' | 'center' | 'right' | 'justify';
   }) => void;
   label?: string;
 }
@@ -46,6 +48,8 @@ const FONT_SIZES: IDropdownOption[] = [
   { key: '32px', text: '32px (Large Heading)' }
 ];
 
+
+
 const iconButtonStyles = (active: boolean) => ({
   root: {
     background: active ? '#e5f1fb' : 'transparent',
@@ -65,7 +69,7 @@ const iconButtonStyles = (active: boolean) => ({
   }
 });
 
-export const FontControl: React.FC<FontControlProps> = ({ fontFamily, fontSize, formatting, onChange, label }) => {
+export const FontControl: React.FC<FontControlProps> = ({ fontFamily, fontSize, formatting, alignment = 'left', onChange, label }) => {
   const handleFormattingChange = (key: keyof typeof formatting, value: boolean) => {
     onChange({ formatting: {
       bold: key === 'bold' ? value : !!formatting.bold,
@@ -73,6 +77,10 @@ export const FontControl: React.FC<FontControlProps> = ({ fontFamily, fontSize, 
       underline: key === 'underline' ? value : !!formatting.underline,
       strikethrough: key === 'strikethrough' ? value : !!formatting.strikethrough
     }});
+  };
+
+  const handleAlignmentChange = (newAlignment: 'left' | 'center' | 'right' | 'justify') => {
+    onChange({ alignment: newAlignment });
   };
 
   function renderFontOption(option?: IDropdownOption): JSX.Element {
@@ -98,11 +106,11 @@ export const FontControl: React.FC<FontControlProps> = ({ fontFamily, fontSize, 
           {label}
         </div>
       )}
+      {/* Row 1: Font and Size dropdowns (50/50 split) */}
       <div style={{ 
         display: 'flex', 
-        alignItems: 'center', 
-        gap: '1px',
-        flexWrap: 'nowrap'
+        gap: '8px', 
+        marginBottom: '4px'
       }}>
         {/* Font Family Dropdown */}
         <Dropdown
@@ -113,9 +121,27 @@ export const FontControl: React.FC<FontControlProps> = ({ fontFamily, fontSize, 
           onChange={(_, option) => onChange({ fontFamily: option!.key as string })}
           onRenderOption={renderFontOption}
           onRenderTitle={renderFontTitle}
-          styles={{ root: { minWidth: 100, flex: '1 1 auto' } }}
+          styles={{ root: { flex: '1 1 50%' } }}
         />
         
+        {/* Font Size Dropdown */}
+        <Dropdown
+          label={undefined}
+          ariaLabel="Font Size"
+          options={FONT_SIZES}
+          selectedKey={fontSize || '24px'}
+          onChange={(_, option) => onChange({ fontSize: option!.key as string })}
+          styles={{ root: { flex: '1 1 50%' } }}
+        />
+      </div>
+
+      {/* Row 2: Formatting and Alignment buttons */}
+      <div style={{ 
+        display: 'flex', 
+        alignItems: 'center', 
+        gap: '1px',
+        flexWrap: 'nowrap'
+      }}>
         {/* Formatting Buttons */}
         <TooltipHost content="Bold">
           <IconButton
@@ -158,15 +184,47 @@ export const FontControl: React.FC<FontControlProps> = ({ fontFamily, fontSize, 
           />
         </TooltipHost>
         
-        {/* Font Size Dropdown */}
-        <Dropdown
-          label={undefined}
-          ariaLabel="Font Size"
-          options={FONT_SIZES}
-          selectedKey={fontSize || '24px'}
-          onChange={(_, option) => onChange({ fontSize: option!.key as string })}
-          styles={{ root: { width: 80, flex: '0 0 auto' } }}
-        />
+        {/* Alignment Buttons */}
+        <TooltipHost content="Align Left">
+          <IconButton
+            iconProps={{ iconName: 'AlignLeft' }}
+            title="Align Left"
+            ariaLabel="Align Left"
+            checked={alignment === 'left'}
+            styles={iconButtonStyles(alignment === 'left')}
+            onClick={() => handleAlignmentChange('left')}
+          />
+        </TooltipHost>
+        <TooltipHost content="Align Center">
+          <IconButton
+            iconProps={{ iconName: 'AlignCenter' }}
+            title="Align Center"
+            ariaLabel="Align Center"
+            checked={alignment === 'center'}
+            styles={iconButtonStyles(alignment === 'center')}
+            onClick={() => handleAlignmentChange('center')}
+          />
+        </TooltipHost>
+        <TooltipHost content="Align Right">
+          <IconButton
+            iconProps={{ iconName: 'AlignRight' }}
+            title="Align Right"
+            ariaLabel="Align Right"
+            checked={alignment === 'right'}
+            styles={iconButtonStyles(alignment === 'right')}
+            onClick={() => handleAlignmentChange('right')}
+          />
+        </TooltipHost>
+        <TooltipHost content="Justify">
+          <IconButton
+            iconProps={{ iconName: 'AlignJustify' }}
+            title="Justify"
+            ariaLabel="Justify"
+            checked={alignment === 'justify'}
+            styles={iconButtonStyles(alignment === 'justify')}
+            onClick={() => handleAlignmentChange('justify')}
+          />
+        </TooltipHost>
       </div>
     </div>
   );

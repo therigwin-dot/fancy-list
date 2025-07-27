@@ -75,7 +75,8 @@ var DEFAULTS_CONFIG = {
             family: 'inherit',
             size: '24px',
             color: '#323130',
-            formatting: { bold: false, italic: false, underline: false, strikethrough: false }
+            formatting: { bold: false, italic: false, underline: false, strikethrough: false },
+            alignment: 'left'
         },
         background: {
             type: 'solid',
@@ -101,7 +102,8 @@ var DEFAULTS_CONFIG = {
         font: {
             family: 'inherit',
             size: '12px',
-            formatting: { bold: false, italic: false, underline: false, strikethrough: false }
+            formatting: { bold: false, italic: false, underline: false, strikethrough: false },
+            alignment: 'center'
         },
         activeColors: {
             background: '#0078d4',
@@ -136,7 +138,8 @@ var DEFAULTS_CONFIG = {
             family: 'inherit',
             size: '18px',
             color: '#323130',
-            formatting: { bold: true, italic: false, underline: false, strikethrough: false }
+            formatting: { bold: true, italic: false, underline: false, strikethrough: false },
+            alignment: 'left'
         },
         background: {
             type: 'solid',
@@ -170,7 +173,8 @@ var DEFAULTS_CONFIG = {
             family: 'inherit',
             size: '16px',
             color: '#323130',
-            formatting: { bold: false, italic: false, underline: false, strikethrough: false }
+            formatting: { bold: false, italic: false, underline: false, strikethrough: false },
+            alignment: 'left'
         },
         background: {
             type: 'solid',
@@ -204,7 +208,8 @@ var DEFAULTS_CONFIG = {
             family: 'inherit',
             size: '14px',
             color: '#605e5c',
-            formatting: { bold: false, italic: false, underline: false, strikethrough: false }
+            formatting: { bold: false, italic: false, underline: false, strikethrough: false },
+            alignment: 'left'
         },
         background: {
             type: 'solid',
@@ -595,7 +600,7 @@ var FancyList = /** @class */ (function (_super) {
                 decoration += 'line-through';
             return decoration.trim() || 'none';
         };
-        return __assign(__assign({}, this.getBackgroundStyle()), { fontFamily: font.family, fontSize: font.size, color: font.color, fontWeight: font.formatting.bold ? 'bold' : 'normal', fontStyle: font.formatting.italic ? 'italic' : 'normal', textDecoration: getTextDecoration(font.formatting), marginBottom: '0.5em', lineHeight: 1.2, position: 'relative' });
+        return __assign(__assign({}, this.getBackgroundStyle()), { fontFamily: font.family, fontSize: font.size, color: font.color, fontWeight: font.formatting.bold ? 'bold' : 'normal', fontStyle: font.formatting.italic ? 'italic' : 'normal', textDecoration: getTextDecoration(font.formatting), textAlign: font.alignment || 'left', marginBottom: '0.5em', lineHeight: 1.2, position: 'relative' });
     };
     FancyList.prototype.renderTitle = function () {
         var titleSettings = this.props.titleSettings;
@@ -885,7 +890,8 @@ var FilterModuleControl = function (_a) {
                 italic: false,
                 underline: false,
                 strikethrough: false
-            }
+            },
+            alignment: 'center'
         },
         activeColors: {
             background: '#0078d4',
@@ -923,6 +929,8 @@ var FilterModuleControl = function (_a) {
             handlePropertyChange('font.size', fields.fontSize);
         if (fields.formatting)
             handlePropertyChange('font.formatting', fields.formatting);
+        if (fields.alignment)
+            handlePropertyChange('font.alignment', fields.alignment);
     };
     var backgroundTypeOptions = [
         { key: 'solid', text: 'Solid' },
@@ -987,7 +995,7 @@ var FilterModuleControl = function (_a) {
                         marginBottom: '12px'
                     } }, "Button"),
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_FontControl__WEBPACK_IMPORTED_MODULE_1__.FontControl, { fontFamily: settings.font.family, fontSize: settings.font.size, formatting: settings.font.formatting, onChange: handleFontChange })),
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_FontControl__WEBPACK_IMPORTED_MODULE_1__.FontControl, { fontFamily: settings.font.family, fontSize: settings.font.size, formatting: settings.font.formatting, alignment: settings.font.alignment, onChange: handleFontChange })),
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
                     react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
                             display: 'flex',
@@ -1182,7 +1190,7 @@ var iconButtonStyles = function (active) { return ({
     }
 }); };
 var FontControl = function (_a) {
-    var fontFamily = _a.fontFamily, fontSize = _a.fontSize, formatting = _a.formatting, onChange = _a.onChange, label = _a.label;
+    var fontFamily = _a.fontFamily, fontSize = _a.fontSize, formatting = _a.formatting, _b = _a.alignment, alignment = _b === void 0 ? 'left' : _b, onChange = _a.onChange, label = _a.label;
     var handleFormattingChange = function (key, value) {
         onChange({ formatting: {
                 bold: key === 'bold' ? value : !!formatting.bold,
@@ -1190,6 +1198,9 @@ var FontControl = function (_a) {
                 underline: key === 'underline' ? value : !!formatting.underline,
                 strikethrough: key === 'strikethrough' ? value : !!formatting.strikethrough
             } });
+    };
+    var handleAlignmentChange = function (newAlignment) {
+        onChange({ alignment: newAlignment });
     };
     function renderFontOption(option) {
         var _a;
@@ -1211,11 +1222,17 @@ var FontControl = function (_a) {
             } }, label)),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
                 display: 'flex',
+                gap: '8px',
+                marginBottom: '4px'
+            } },
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_1__.Dropdown, { label: undefined, ariaLabel: "Font Family", options: FONT_FAMILIES, selectedKey: fontFamily || 'inherit', onChange: function (_, option) { return onChange({ fontFamily: option.key }); }, onRenderOption: renderFontOption, onRenderTitle: renderFontTitle, styles: { root: { flex: '1 1 50%' } } }),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_1__.Dropdown, { label: undefined, ariaLabel: "Font Size", options: FONT_SIZES, selectedKey: fontSize || '24px', onChange: function (_, option) { return onChange({ fontSize: option.key }); }, styles: { root: { flex: '1 1 50%' } } })),
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                display: 'flex',
                 alignItems: 'center',
                 gap: '1px',
                 flexWrap: 'nowrap'
             } },
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_1__.Dropdown, { label: undefined, ariaLabel: "Font Family", options: FONT_FAMILIES, selectedKey: fontFamily || 'inherit', onChange: function (_, option) { return onChange({ fontFamily: option.key }); }, onRenderOption: renderFontOption, onRenderTitle: renderFontTitle, styles: { root: { minWidth: 100, flex: '1 1 auto' } } }),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_2__.TooltipHost, { content: "Bold" },
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_3__.IconButton, { iconProps: { iconName: 'Bold' }, title: "Bold", ariaLabel: "Bold", checked: !!formatting.bold, styles: iconButtonStyles(!!formatting.bold), onClick: function () { return handleFormattingChange('bold', !formatting.bold); } })),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_2__.TooltipHost, { content: "Italic" },
@@ -1224,7 +1241,14 @@ var FontControl = function (_a) {
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_3__.IconButton, { iconProps: { iconName: 'Underline' }, title: "Underline", ariaLabel: "Underline", checked: !!formatting.underline, styles: iconButtonStyles(!!formatting.underline), onClick: function () { return handleFormattingChange('underline', !formatting.underline); } })),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_2__.TooltipHost, { content: "Strikethrough" },
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_3__.IconButton, { iconProps: { iconName: 'Strikethrough' }, title: "Strikethrough", ariaLabel: "Strikethrough", checked: !!formatting.strikethrough, styles: iconButtonStyles(!!formatting.strikethrough), onClick: function () { return handleFormattingChange('strikethrough', !formatting.strikethrough); } })),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_1__.Dropdown, { label: undefined, ariaLabel: "Font Size", options: FONT_SIZES, selectedKey: fontSize || '24px', onChange: function (_, option) { return onChange({ fontSize: option.key }); }, styles: { root: { width: 80, flex: '0 0 auto' } } }))));
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_2__.TooltipHost, { content: "Align Left" },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_3__.IconButton, { iconProps: { iconName: 'AlignLeft' }, title: "Align Left", ariaLabel: "Align Left", checked: alignment === 'left', styles: iconButtonStyles(alignment === 'left'), onClick: function () { return handleAlignmentChange('left'); } })),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_2__.TooltipHost, { content: "Align Center" },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_3__.IconButton, { iconProps: { iconName: 'AlignCenter' }, title: "Align Center", ariaLabel: "Align Center", checked: alignment === 'center', styles: iconButtonStyles(alignment === 'center'), onClick: function () { return handleAlignmentChange('center'); } })),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_2__.TooltipHost, { content: "Align Right" },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_3__.IconButton, { iconProps: { iconName: 'AlignRight' }, title: "Align Right", ariaLabel: "Align Right", checked: alignment === 'right', styles: iconButtonStyles(alignment === 'right'), onClick: function () { return handleAlignmentChange('right'); } })),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_2__.TooltipHost, { content: "Justify" },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_3__.IconButton, { iconProps: { iconName: 'AlignJustify' }, title: "Justify", ariaLabel: "Justify", checked: alignment === 'justify', styles: iconButtonStyles(alignment === 'justify'), onClick: function () { return handleAlignmentChange('justify'); } })))));
 };
 
 
@@ -1663,6 +1687,8 @@ var SectionModuleControl = function (_a) {
             newSettings.font.size = fields.fontSize;
         if (fields.formatting)
             newSettings.font.formatting = fields.formatting;
+        if (fields.alignment)
+            newSettings.font.alignment = fields.alignment;
         onChange(newSettings);
     };
     var handleSwapColors = function () {
@@ -1744,7 +1770,7 @@ var SectionModuleControl = function (_a) {
                     } }, "Divider"),
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Toggle__WEBPACK_IMPORTED_MODULE_6__.Toggle, { label: "", inlineLabel: true, checked: sectionSettings.showDivider, onText: "On", offText: "Off", onChange: function (_, checked) { return handlePropertyChange('showDivider', checked); } })))),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_FontControl__WEBPACK_IMPORTED_MODULE_3__.FontControl, { label: "", fontFamily: sectionSettings.font.family, fontSize: sectionSettings.font.size, formatting: sectionSettings.font.formatting, onChange: handleFontChange })),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_FontControl__WEBPACK_IMPORTED_MODULE_3__.FontControl, { label: "", fontFamily: sectionSettings.font.family, fontSize: sectionSettings.font.size, formatting: sectionSettings.font.formatting, alignment: sectionSettings.font.alignment, onChange: handleFontChange })),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_4__.ColorPickerControl, { color: sectionSettings.font.color, field: "fontColor", label: "", onChange: function (field, newColor) { return handlePropertyChange('font.color', newColor); } })),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
@@ -1938,6 +1964,7 @@ var TitleConfiguration = function (_a) {
                 underline: false,
                 strikethrough: false
             },
+            alignment: 'left',
             color: '#323130'
         }
     } : _b, onPropertyChange = _a.onPropertyChange;
@@ -1956,6 +1983,8 @@ var TitleConfiguration = function (_a) {
             handlePropertyChange('font.size', fields.fontSize);
         if (fields.formatting)
             handlePropertyChange('font.formatting', fields.formatting);
+        if (fields.alignment)
+            handlePropertyChange('font.alignment', fields.alignment);
     };
     var backgroundTypeOptions = [
         { key: 'solid', text: 'Solid' },
@@ -2029,7 +2058,7 @@ var TitleConfiguration = function (_a) {
                 } })),
         enabled && (react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null,
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_FontControl__WEBPACK_IMPORTED_MODULE_1__.FontControl, { fontFamily: settings.font.family, fontSize: settings.font.size, formatting: settings.font.formatting, onChange: handleFontChange })),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_FontControl__WEBPACK_IMPORTED_MODULE_1__.FontControl, { fontFamily: settings.font.family, fontSize: settings.font.size, formatting: settings.font.formatting, alignment: settings.font.alignment, onChange: handleFontChange })),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
                     display: 'flex',
                     alignItems: 'flex-start',
@@ -34534,7 +34563,7 @@ var FancyListWebPart = /** @class */ (function (_super) {
         return _this;
     }
     FancyListWebPart.prototype.render = function () {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v;
         // Map individual properties to the format expected by FancyList component
         // Use default values if properties are undefined
         var titleSettings = {
@@ -34555,7 +34584,8 @@ var FancyListWebPart = /** @class */ (function (_super) {
                 family: (_r = this.properties.webPartTitleFont) !== null && _r !== void 0 ? _r : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.font.family,
                 size: (_s = this.properties.webPartTitleFontSize) !== null && _s !== void 0 ? _s : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.font.size,
                 color: (_t = this.properties.webPartTitleColor) !== null && _t !== void 0 ? _t : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.font.color,
-                formatting: (_u = this.properties.webPartTitleFormatting) !== null && _u !== void 0 ? _u : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.font.formatting
+                formatting: (_u = this.properties.webPartTitleFormatting) !== null && _u !== void 0 ? _u : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.font.formatting,
+                alignment: (_v = this.properties.webPartTitleAlignment) !== null && _v !== void 0 ? _v : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.font.alignment
             }
         };
         var element = react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_FancyList__WEBPACK_IMPORTED_MODULE_7__["default"], {

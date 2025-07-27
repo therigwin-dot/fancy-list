@@ -12,6 +12,7 @@ export interface FilterModuleControlProps {
                 underline: boolean;
                 strikethrough: boolean;
             };
+            alignment?: 'left' | 'center' | 'right' | 'justify';
         };
         activeColors: {
             background: string;

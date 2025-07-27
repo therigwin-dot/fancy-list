@@ -21,7 +21,8 @@ export const DEFAULTS_CONFIG = {
       family: 'inherit',
       size: '24px',
       color: '#323130',
-      formatting: { bold: false, italic: false, underline: false, strikethrough: false }
+      formatting: { bold: false, italic: false, underline: false, strikethrough: false },
+      alignment: 'left'
     },
     background: {
       type: 'solid' as const,
@@ -48,7 +49,8 @@ export const DEFAULTS_CONFIG = {
     font: {
       family: 'inherit',
       size: '12px',
-      formatting: { bold: false, italic: false, underline: false, strikethrough: false }
+      formatting: { bold: false, italic: false, underline: false, strikethrough: false },
+      alignment: 'center'
     },
     activeColors: {
       background: '#0078d4',
@@ -84,7 +86,8 @@ export const DEFAULTS_CONFIG = {
       family: 'inherit',
       size: '18px',
       color: '#323130',
-      formatting: { bold: true, italic: false, underline: false, strikethrough: false }
+      formatting: { bold: true, italic: false, underline: false, strikethrough: false },
+      alignment: 'left'
     },
     background: {
       type: 'solid' as const,
@@ -119,7 +122,8 @@ export const DEFAULTS_CONFIG = {
       family: 'inherit',
       size: '16px',
       color: '#323130',
-      formatting: { bold: false, italic: false, underline: false, strikethrough: false }
+      formatting: { bold: false, italic: false, underline: false, strikethrough: false },
+      alignment: 'left'
     },
     background: {
       type: 'solid' as const,
@@ -154,7 +158,8 @@ export const DEFAULTS_CONFIG = {
       family: 'inherit',
       size: '14px',
       color: '#605e5c',
-      formatting: { bold: false, italic: false, underline: false, strikethrough: false }
+      formatting: { bold: false, italic: false, underline: false, strikethrough: false },
+      alignment: 'left'
     },
     background: {
       type: 'solid' as const,
