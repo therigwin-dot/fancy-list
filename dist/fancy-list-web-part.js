@@ -1091,10 +1091,10 @@ var FilterModuleControl = function (_a) {
         imageUrl: '',
         imageAlpha: 0,
         backgroundShape: 'rounded'
-    } : _e, onPropertyChange = _a.onPropertyChange;
-    var _f = react__WEBPACK_IMPORTED_MODULE_0__.useState((_b = settings === null || settings === void 0 ? void 0 : settings.enableFilters) !== null && _b !== void 0 ? _b : true), enabled = _f[0], setEnabled = _f[1];
-    var _g = react__WEBPACK_IMPORTED_MODULE_0__.useState((_c = settings === null || settings === void 0 ? void 0 : settings.showAllCategories) !== null && _c !== void 0 ? _c : true), showAllToggle = _g[0], setShowAllToggle = _g[1];
-    var _h = react__WEBPACK_IMPORTED_MODULE_0__.useState((_d = settings === null || settings === void 0 ? void 0 : settings.defaultFilterSelection) !== null && _d !== void 0 ? _d : 'All'), defaultFilterDropdown = _h[0], setDefaultFilterDropdown = _h[1];
+    } : _e, _f = _a.availableCategories, availableCategories = _f === void 0 ? [] : _f, onPropertyChange = _a.onPropertyChange;
+    var _g = react__WEBPACK_IMPORTED_MODULE_0__.useState((_b = settings === null || settings === void 0 ? void 0 : settings.enableFilters) !== null && _b !== void 0 ? _b : true), enabled = _g[0], setEnabled = _g[1];
+    var _h = react__WEBPACK_IMPORTED_MODULE_0__.useState((_c = settings === null || settings === void 0 ? void 0 : settings.showAllCategories) !== null && _c !== void 0 ? _c : true), showAllToggle = _h[0], setShowAllToggle = _h[1];
+    var _j = react__WEBPACK_IMPORTED_MODULE_0__.useState((_d = settings === null || settings === void 0 ? void 0 : settings.defaultFilterSelection) !== null && _d !== void 0 ? _d : 'All'), defaultFilterDropdown = _j[0], setDefaultFilterDropdown = _j[1];
     // Keep local state in sync with settings
     react__WEBPACK_IMPORTED_MODULE_0__.useEffect(function () {
         var _a;
@@ -1102,8 +1102,8 @@ var FilterModuleControl = function (_a) {
         console.log('🔄 PERSISTENCE DEBUG: Current showAllToggle =', showAllToggle);
         setShowAllToggle((_a = settings === null || settings === void 0 ? void 0 : settings.showAllCategories) !== null && _a !== void 0 ? _a : true);
     }, [settings === null || settings === void 0 ? void 0 : settings.showAllCategories]);
-    var _j = react__WEBPACK_IMPORTED_MODULE_0__.useState('#ffffff'), previewColor1 = _j[0], setPreviewColor1 = _j[1];
-    var _k = react__WEBPACK_IMPORTED_MODULE_0__.useState('#000000'), previewColor2 = _k[0], setPreviewColor2 = _k[1];
+    var _k = react__WEBPACK_IMPORTED_MODULE_0__.useState('#ffffff'), previewColor1 = _k[0], setPreviewColor1 = _k[1];
+    var _l = react__WEBPACK_IMPORTED_MODULE_0__.useState('#000000'), previewColor2 = _l[0], setPreviewColor2 = _l[1];
     var handlePropertyChange = function (propertyPath, newValue) {
         if (onPropertyChange) {
             onPropertyChange(propertyPath, newValue);
@@ -1188,10 +1188,9 @@ var FilterModuleControl = function (_a) {
                             setShowAllToggle(checked || false);
                             handlePropertyChange('showAllCategories', checked);
                             // Handle dropdown selection when "All" toggle changes
-                            var testCategories = ['Category1', 'Category2', 'Category3'];
-                            if (!checked && defaultFilterDropdown === 'All' && testCategories.length > 0) {
+                            if (!checked && defaultFilterDropdown === 'All' && availableCategories.length > 0) {
                                 // "All" toggle turned OFF and current selection is "All" - change to first available filter
-                                var firstFilter = testCategories[0];
+                                var firstFilter = availableCategories[0];
                                 console.log('🔄 TOGGLE DEBUG: Changing from "All" to first filter:', firstFilter);
                                 setDefaultFilterDropdown(firstFilter);
                                 handlePropertyChange('defaultFilterSelection', firstFilter);
@@ -1199,18 +1198,17 @@ var FilterModuleControl = function (_a) {
                         } })),
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
                     react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_6__.Dropdown, { selectedKey: defaultFilterDropdown, options: (function () {
-                            var testCategories = ['Category1', 'Category2', 'Category3'];
                             console.log('🔄 DROPDOWN DEBUG: Show all toggle:', showAllToggle);
-                            console.log('🔄 DROPDOWN DEBUG: Test categories:', testCategories);
+                            console.log('🔄 DROPDOWN DEBUG: Available categories:', availableCategories);
                             if (showAllToggle) {
                                 var options = __spreadArray([
                                     { key: 'All', text: 'All' }
-                                ], testCategories.map(function (cat) { return ({ key: cat, text: cat }); }), true);
+                                ], availableCategories.map(function (cat) { return ({ key: cat, text: cat }); }), true);
                                 console.log('🔄 DROPDOWN DEBUG: Options with All:', options);
                                 return options;
                             }
                             else {
-                                var options = testCategories.map(function (cat) { return ({ key: cat, text: cat }); });
+                                var options = availableCategories.map(function (cat) { return ({ key: cat, text: cat }); });
                                 console.log('🔄 DROPDOWN DEBUG: Options without All:', options);
                                 return options;
                             }
@@ -35189,6 +35187,49 @@ var FancyListWebPart = /** @class */ (function (_super) {
                 field.key !== _this.properties.subjectField;
         });
     };
+    FancyListWebPart.prototype._getAvailableCategories = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, categories, error_1;
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        console.log('🔄 CATEGORIES DEBUG: Getting categories for list:', this.properties.selectedListId);
+                        // Return empty array if no list is selected
+                        if (!this.properties.selectedListId) {
+                            console.log('🔄 CATEGORIES DEBUG: No list selected, returning empty array');
+                            return [2 /*return*/, []];
+                        }
+                        // Return empty array if no category field is selected
+                        if (!this.properties.categoryField) {
+                            console.log('🔄 CATEGORIES DEBUG: No category field selected, returning empty array');
+                            return [2 /*return*/, []];
+                        }
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 4, , 5]);
+                        return [4 /*yield*/, this.context.spHttpClient.get("".concat(this.context.pageContext.web.absoluteUrl, "/_api/web/lists/getbytitle('").concat(this.properties.selectedListId, "')/items?$select=").concat(this.properties.categoryField, "&$orderby=").concat(this.properties.categoryField), _microsoft_sp_http__WEBPACK_IMPORTED_MODULE_5__.SPHttpClient.configurations.v1)];
+                    case 2:
+                        response = _a.sent();
+                        if (!response.ok) {
+                            console.log('🔄 CATEGORIES DEBUG: Failed to load list data:', response.statusText);
+                            return [2 /*return*/, []];
+                        }
+                        return [4 /*yield*/, response.json()];
+                    case 3:
+                        data = _a.sent();
+                        categories = Array.from(new Set(data.value.map(function (item) { return item[_this.properties.categoryField] || 'Uncategorized'; }))).sort();
+                        console.log('🔄 CATEGORIES DEBUG: Available categories:', categories);
+                        return [2 /*return*/, categories];
+                    case 4:
+                        error_1 = _a.sent();
+                        console.log('🔄 CATEGORIES DEBUG: Error loading categories:', error_1);
+                        return [2 /*return*/, []];
+                    case 5: return [2 /*return*/];
+                }
+            });
+        });
+    };
     FancyListWebPart.prototype.getPropertyPaneConfiguration = function () {
         var _this = this;
         return {
@@ -35300,7 +35341,7 @@ var FancyListWebPart = /** @class */ (function (_super) {
                                                             this.context.propertyPane.refresh();
                                                             // Wait longer for the list to load, then load fields and set category field
                                                             setTimeout(function () { return __awaiter(_this, void 0, void 0, function () {
-                                                                var _a, error_1;
+                                                                var _a, error_2;
                                                                 var _this = this;
                                                                 return __generator(this, function (_b) {
                                                                     switch (_b.label) {
@@ -35346,8 +35387,8 @@ var FancyListWebPart = /** @class */ (function (_super) {
                                                                             }); }, 2000);
                                                                             return [3 /*break*/, 3];
                                                                         case 2:
-                                                                            error_1 = _b.sent();
-                                                                            console.error('Error loading fields:', error_1);
+                                                                            error_2 = _b.sent();
+                                                                            console.error('Error loading fields:', error_2);
                                                                             return [3 /*break*/, 3];
                                                                         case 3: return [2 /*return*/];
                                                                     }
@@ -35522,123 +35563,127 @@ var FancyListWebPart = /** @class */ (function (_super) {
                                     properties: {
                                         key: 'filterConfiguration',
                                         onRender: function (elem, ctx, changeCallback) {
-                                            var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1;
-                                            react_dom__WEBPACK_IMPORTED_MODULE_1__.render(react__WEBPACK_IMPORTED_MODULE_0__.createElement(_propertyPane_FilterModuleControl__WEBPACK_IMPORTED_MODULE_10__.FilterModuleControl, {
-                                                label: 'Filter Configuration',
-                                                settings: {
-                                                    enableFilters: (_b = (_a = _this.properties.filterSettings) === null || _a === void 0 ? void 0 : _a.enableFilters) !== null && _b !== void 0 ? _b : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.enableFilters,
-                                                    font: {
-                                                        family: ((_c = _this.properties.filterSettings) === null || _c === void 0 ? void 0 : _c.font.family) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.font.family,
-                                                        size: ((_d = _this.properties.filterSettings) === null || _d === void 0 ? void 0 : _d.font.size) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.font.size,
-                                                        formatting: ((_e = _this.properties.filterSettings) === null || _e === void 0 ? void 0 : _e.font.formatting) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.font.formatting,
-                                                        alignment: ((_f = _this.properties.filterSettings) === null || _f === void 0 ? void 0 : _f.font.alignment) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.font.alignment
+                                            // Load categories asynchronously and re-render when ready
+                                            _this._getAvailableCategories().then(function (availableCategories) {
+                                                var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1;
+                                                react_dom__WEBPACK_IMPORTED_MODULE_1__.render(react__WEBPACK_IMPORTED_MODULE_0__.createElement(_propertyPane_FilterModuleControl__WEBPACK_IMPORTED_MODULE_10__.FilterModuleControl, {
+                                                    label: 'Filter Configuration',
+                                                    settings: {
+                                                        enableFilters: (_b = (_a = _this.properties.filterSettings) === null || _a === void 0 ? void 0 : _a.enableFilters) !== null && _b !== void 0 ? _b : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.enableFilters,
+                                                        font: {
+                                                            family: ((_c = _this.properties.filterSettings) === null || _c === void 0 ? void 0 : _c.font.family) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.font.family,
+                                                            size: ((_d = _this.properties.filterSettings) === null || _d === void 0 ? void 0 : _d.font.size) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.font.size,
+                                                            formatting: ((_e = _this.properties.filterSettings) === null || _e === void 0 ? void 0 : _e.font.formatting) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.font.formatting,
+                                                            alignment: ((_f = _this.properties.filterSettings) === null || _f === void 0 ? void 0 : _f.font.alignment) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.font.alignment
+                                                        },
+                                                        activeColors: {
+                                                            background: ((_g = _this.properties.filterSettings) === null || _g === void 0 ? void 0 : _g.activeColors.background) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.activeColors.background,
+                                                            font: ((_h = _this.properties.filterSettings) === null || _h === void 0 ? void 0 : _h.activeColors.font) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.activeColors.font
+                                                        },
+                                                        inactiveColors: {
+                                                            background: ((_j = _this.properties.filterSettings) === null || _j === void 0 ? void 0 : _j.inactiveColors.background) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.inactiveColors.background,
+                                                            font: ((_k = _this.properties.filterSettings) === null || _k === void 0 ? void 0 : _k.inactiveColors.font) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.inactiveColors.font
+                                                        },
+                                                        shape: ((_l = _this.properties.filterSettings) === null || _l === void 0 ? void 0 : _l.shape) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.shape,
+                                                        backgroundShape: ((_m = _this.properties.filterSettings) === null || _m === void 0 ? void 0 : _m.backgroundShape) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.backgroundShape,
+                                                        showAllCategories: (_p = (_o = _this.properties.filterSettings) === null || _o === void 0 ? void 0 : _o.showAllCategories) !== null && _p !== void 0 ? _p : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.showAllCategories,
+                                                        defaultFilterSelection: (_r = (_q = _this.properties.filterSettings) === null || _q === void 0 ? void 0 : _q.defaultFilterSelection) !== null && _r !== void 0 ? _r : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.defaultFilterSelection,
+                                                        showDivider: ((_s = _this.properties.filterSettings) === null || _s === void 0 ? void 0 : _s.showDivider) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.showDivider,
+                                                        backgroundType: ((_t = _this.properties.filterSettings) === null || _t === void 0 ? void 0 : _t.background.type) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.type,
+                                                        backgroundColor: ((_u = _this.properties.filterSettings) === null || _u === void 0 ? void 0 : _u.background.color) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.color,
+                                                        backgroundAlpha: ((_v = _this.properties.filterSettings) === null || _v === void 0 ? void 0 : _v.background.alpha) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.alpha,
+                                                        gradientDirection: ((_w = _this.properties.filterSettings) === null || _w === void 0 ? void 0 : _w.background.gradientDirection) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientDirection,
+                                                        gradientColor1: ((_x = _this.properties.filterSettings) === null || _x === void 0 ? void 0 : _x.background.gradientColor1) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientColor1,
+                                                        gradientColor2: ((_y = _this.properties.filterSettings) === null || _y === void 0 ? void 0 : _y.background.gradientColor2) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientColor2,
+                                                        gradientAlpha: ((_z = _this.properties.filterSettings) === null || _z === void 0 ? void 0 : _z.background.gradientAlpha1) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientAlpha1,
+                                                        imageUrl: ((_0 = _this.properties.filterSettings) === null || _0 === void 0 ? void 0 : _0.background.image) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.image,
+                                                        imageAlpha: ((_1 = _this.properties.filterSettings) === null || _1 === void 0 ? void 0 : _1.background.imageAlpha) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.imageAlpha
                                                     },
-                                                    activeColors: {
-                                                        background: ((_g = _this.properties.filterSettings) === null || _g === void 0 ? void 0 : _g.activeColors.background) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.activeColors.background,
-                                                        font: ((_h = _this.properties.filterSettings) === null || _h === void 0 ? void 0 : _h.activeColors.font) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.activeColors.font
-                                                    },
-                                                    inactiveColors: {
-                                                        background: ((_j = _this.properties.filterSettings) === null || _j === void 0 ? void 0 : _j.inactiveColors.background) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.inactiveColors.background,
-                                                        font: ((_k = _this.properties.filterSettings) === null || _k === void 0 ? void 0 : _k.inactiveColors.font) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.inactiveColors.font
-                                                    },
-                                                    shape: ((_l = _this.properties.filterSettings) === null || _l === void 0 ? void 0 : _l.shape) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.shape,
-                                                    backgroundShape: ((_m = _this.properties.filterSettings) === null || _m === void 0 ? void 0 : _m.backgroundShape) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.backgroundShape,
-                                                    showAllCategories: (_p = (_o = _this.properties.filterSettings) === null || _o === void 0 ? void 0 : _o.showAllCategories) !== null && _p !== void 0 ? _p : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.showAllCategories,
-                                                    defaultFilterSelection: (_r = (_q = _this.properties.filterSettings) === null || _q === void 0 ? void 0 : _q.defaultFilterSelection) !== null && _r !== void 0 ? _r : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.defaultFilterSelection,
-                                                    showDivider: ((_s = _this.properties.filterSettings) === null || _s === void 0 ? void 0 : _s.showDivider) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.showDivider,
-                                                    backgroundType: ((_t = _this.properties.filterSettings) === null || _t === void 0 ? void 0 : _t.background.type) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.type,
-                                                    backgroundColor: ((_u = _this.properties.filterSettings) === null || _u === void 0 ? void 0 : _u.background.color) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.color,
-                                                    backgroundAlpha: ((_v = _this.properties.filterSettings) === null || _v === void 0 ? void 0 : _v.background.alpha) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.alpha,
-                                                    gradientDirection: ((_w = _this.properties.filterSettings) === null || _w === void 0 ? void 0 : _w.background.gradientDirection) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientDirection,
-                                                    gradientColor1: ((_x = _this.properties.filterSettings) === null || _x === void 0 ? void 0 : _x.background.gradientColor1) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientColor1,
-                                                    gradientColor2: ((_y = _this.properties.filterSettings) === null || _y === void 0 ? void 0 : _y.background.gradientColor2) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientColor2,
-                                                    gradientAlpha: ((_z = _this.properties.filterSettings) === null || _z === void 0 ? void 0 : _z.background.gradientAlpha1) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientAlpha1,
-                                                    imageUrl: ((_0 = _this.properties.filterSettings) === null || _0 === void 0 ? void 0 : _0.background.image) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.image,
-                                                    imageAlpha: ((_1 = _this.properties.filterSettings) === null || _1 === void 0 ? void 0 : _1.background.imageAlpha) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.imageAlpha
-                                                },
-                                                onPropertyChange: function (propertyPath, newValue) {
-                                                    // Handle property changes and update the web part properties
-                                                    if (!_this.properties.filterSettings) {
-                                                        _this.properties.filterSettings = __assign({}, _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings);
+                                                    availableCategories: availableCategories,
+                                                    onPropertyChange: function (propertyPath, newValue) {
+                                                        // Handle property changes and update the web part properties
+                                                        if (!_this.properties.filterSettings) {
+                                                            _this.properties.filterSettings = __assign({}, _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings);
+                                                        }
+                                                        switch (propertyPath) {
+                                                            case 'enabled':
+                                                                _this.properties.filterSettings.enableFilters = newValue;
+                                                                break;
+                                                            case 'shape':
+                                                                _this.properties.filterSettings.shape = newValue;
+                                                                break;
+                                                            case 'backgroundShape':
+                                                                _this.properties.filterSettings.backgroundShape = newValue;
+                                                                break;
+                                                            case 'showDivider':
+                                                                _this.properties.filterSettings.showDivider = newValue;
+                                                                break;
+                                                            case 'backgroundType':
+                                                                _this.properties.filterSettings.background.type = newValue;
+                                                                break;
+                                                            case 'backgroundColor':
+                                                                _this.properties.filterSettings.background.color = newValue;
+                                                                break;
+                                                            case 'backgroundAlpha':
+                                                                _this.properties.filterSettings.background.alpha = newValue;
+                                                                break;
+                                                            case 'gradientDirection':
+                                                                _this.properties.filterSettings.background.gradientDirection = newValue;
+                                                                break;
+                                                            case 'gradientColor1':
+                                                                _this.properties.filterSettings.background.gradientColor1 = newValue;
+                                                                break;
+                                                            case 'gradientColor2':
+                                                                _this.properties.filterSettings.background.gradientColor2 = newValue;
+                                                                break;
+                                                            case 'gradientAlpha':
+                                                                _this.properties.filterSettings.background.gradientAlpha1 = newValue;
+                                                                break;
+                                                            case 'imageUrl':
+                                                                _this.properties.filterSettings.background.image = newValue;
+                                                                break;
+                                                            case 'imageAlpha':
+                                                                _this.properties.filterSettings.background.imageAlpha = newValue;
+                                                                break;
+                                                            case 'font.family':
+                                                                _this.properties.filterSettings.font.family = newValue;
+                                                                break;
+                                                            case 'font.size':
+                                                                _this.properties.filterSettings.font.size = newValue;
+                                                                break;
+                                                            case 'font.formatting':
+                                                                _this.properties.filterSettings.font.formatting = newValue;
+                                                                break;
+                                                            case 'font.alignment':
+                                                                _this.properties.filterSettings.font.alignment = newValue;
+                                                                break;
+                                                            case 'activeColors.background':
+                                                                _this.properties.filterSettings.activeColors.background = newValue;
+                                                                break;
+                                                            case 'activeColors.font':
+                                                                _this.properties.filterSettings.activeColors.font = newValue;
+                                                                break;
+                                                            case 'inactiveColors.background':
+                                                                _this.properties.filterSettings.inactiveColors.background = newValue;
+                                                                break;
+                                                            case 'inactiveColors.font':
+                                                                _this.properties.filterSettings.inactiveColors.font = newValue;
+                                                                break;
+                                                            case 'showAllCategories':
+                                                                console.log('🔄 WEBPART DEBUG: showAllCategories property changed to:', newValue);
+                                                                _this.properties.filterSettings.showAllCategories = newValue;
+                                                                break;
+                                                            case 'defaultFilterSelection':
+                                                                console.log('🔄 WEBPART DEBUG: defaultFilterSelection property changed to:', newValue);
+                                                                _this.properties.filterSettings.defaultFilterSelection = newValue;
+                                                                break;
+                                                        }
+                                                        if (changeCallback)
+                                                            changeCallback();
+                                                        _this.context.propertyPane.refresh();
                                                     }
-                                                    switch (propertyPath) {
-                                                        case 'enabled':
-                                                            _this.properties.filterSettings.enableFilters = newValue;
-                                                            break;
-                                                        case 'shape':
-                                                            _this.properties.filterSettings.shape = newValue;
-                                                            break;
-                                                        case 'backgroundShape':
-                                                            _this.properties.filterSettings.backgroundShape = newValue;
-                                                            break;
-                                                        case 'showDivider':
-                                                            _this.properties.filterSettings.showDivider = newValue;
-                                                            break;
-                                                        case 'backgroundType':
-                                                            _this.properties.filterSettings.background.type = newValue;
-                                                            break;
-                                                        case 'backgroundColor':
-                                                            _this.properties.filterSettings.background.color = newValue;
-                                                            break;
-                                                        case 'backgroundAlpha':
-                                                            _this.properties.filterSettings.background.alpha = newValue;
-                                                            break;
-                                                        case 'gradientDirection':
-                                                            _this.properties.filterSettings.background.gradientDirection = newValue;
-                                                            break;
-                                                        case 'gradientColor1':
-                                                            _this.properties.filterSettings.background.gradientColor1 = newValue;
-                                                            break;
-                                                        case 'gradientColor2':
-                                                            _this.properties.filterSettings.background.gradientColor2 = newValue;
-                                                            break;
-                                                        case 'gradientAlpha':
-                                                            _this.properties.filterSettings.background.gradientAlpha1 = newValue;
-                                                            break;
-                                                        case 'imageUrl':
-                                                            _this.properties.filterSettings.background.image = newValue;
-                                                            break;
-                                                        case 'imageAlpha':
-                                                            _this.properties.filterSettings.background.imageAlpha = newValue;
-                                                            break;
-                                                        case 'font.family':
-                                                            _this.properties.filterSettings.font.family = newValue;
-                                                            break;
-                                                        case 'font.size':
-                                                            _this.properties.filterSettings.font.size = newValue;
-                                                            break;
-                                                        case 'font.formatting':
-                                                            _this.properties.filterSettings.font.formatting = newValue;
-                                                            break;
-                                                        case 'font.alignment':
-                                                            _this.properties.filterSettings.font.alignment = newValue;
-                                                            break;
-                                                        case 'activeColors.background':
-                                                            _this.properties.filterSettings.activeColors.background = newValue;
-                                                            break;
-                                                        case 'activeColors.font':
-                                                            _this.properties.filterSettings.activeColors.font = newValue;
-                                                            break;
-                                                        case 'inactiveColors.background':
-                                                            _this.properties.filterSettings.inactiveColors.background = newValue;
-                                                            break;
-                                                        case 'inactiveColors.font':
-                                                            _this.properties.filterSettings.inactiveColors.font = newValue;
-                                                            break;
-                                                        case 'showAllCategories':
-                                                            console.log('🔄 WEBPART DEBUG: showAllCategories property changed to:', newValue);
-                                                            _this.properties.filterSettings.showAllCategories = newValue;
-                                                            break;
-                                                        case 'defaultFilterSelection':
-                                                            console.log('🔄 WEBPART DEBUG: defaultFilterSelection property changed to:', newValue);
-                                                            _this.properties.filterSettings.defaultFilterSelection = newValue;
-                                                            break;
-                                                    }
-                                                    if (changeCallback)
-                                                        changeCallback();
-                                                    _this.context.propertyPane.refresh();
-                                                }
-                                            }), elem);
+                                                }), elem);
+                                            });
                                         },
                                         onDispose: function (elem) {
                                             react_dom__WEBPACK_IMPORTED_MODULE_1__.unmountComponentAtNode(elem);

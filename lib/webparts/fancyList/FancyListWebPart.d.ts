@@ -174,6 +174,7 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
     private _getAvailableFieldsForCategory;
     private _getAvailableFieldsForSubject;
     private _getAvailableFieldsForDescription;
+    private _getAvailableCategories;
     protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration;
 }
 //# sourceMappingURL=FancyListWebPart.d.ts.map

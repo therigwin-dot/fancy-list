@@ -453,6 +453,46 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
     );
   }
 
+  private async _getAvailableCategories(): Promise<string[]> {
+    console.log('🔄 CATEGORIES DEBUG: Getting categories for list:', this.properties.selectedListId);
+    
+    // Return empty array if no list is selected
+    if (!this.properties.selectedListId) {
+      console.log('🔄 CATEGORIES DEBUG: No list selected, returning empty array');
+      return [];
+    }
+    
+    // Return empty array if no category field is selected
+    if (!this.properties.categoryField) {
+      console.log('🔄 CATEGORIES DEBUG: No category field selected, returning empty array');
+      return [];
+    }
+    
+    try {
+      // Query the list to get actual categories (same logic as FancyList component)
+      const response = await this.context.spHttpClient.get(
+        `${this.context.pageContext.web.absoluteUrl}/_api/web/lists/getbytitle('${this.properties.selectedListId}')/items?$select=${this.properties.categoryField}&$orderby=${this.properties.categoryField}`,
+        SPHttpClient.configurations.v1
+      );
+      
+      if (!response.ok) {
+        console.log('🔄 CATEGORIES DEBUG: Failed to load list data:', response.statusText);
+        return [];
+      }
+      
+      const data = await response.json();
+      const categories = Array.from(new Set(
+        data.value.map((item: any) => (item[this.properties.categoryField] as string) || 'Uncategorized')
+      )).sort() as string[];
+      
+      console.log('🔄 CATEGORIES DEBUG: Available categories:', categories);
+      return categories;
+    } catch (error) {
+      console.log('🔄 CATEGORIES DEBUG: Error loading categories:', error);
+      return [];
+    }
+  }
+
   protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
     return {
       pages: [
@@ -778,125 +818,129 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
                   properties: {
                     key: 'filterConfiguration',
                     onRender: (elem: HTMLElement, ctx: unknown, changeCallback?: () => void) => {
-                      ReactDom.render(
-                        React.createElement(FilterModuleControl, {
-                          label: 'Filter Configuration',
-                                                      settings: {
-                              enableFilters: this.properties.filterSettings?.enableFilters ?? DEFAULTS_CONFIG.filterSettings.enableFilters,
-                              font: {
-                                family: this.properties.filterSettings?.font.family || DEFAULTS_CONFIG.filterSettings.font.family,
-                                size: this.properties.filterSettings?.font.size || DEFAULTS_CONFIG.filterSettings.font.size,
-                                formatting: this.properties.filterSettings?.font.formatting || DEFAULTS_CONFIG.filterSettings.font.formatting,
-                                alignment: this.properties.filterSettings?.font.alignment || DEFAULTS_CONFIG.filterSettings.font.alignment
+                      // Load categories asynchronously and re-render when ready
+                      this._getAvailableCategories().then(availableCategories => {
+                        ReactDom.render(
+                          React.createElement(FilterModuleControl, {
+                            label: 'Filter Configuration',
+                                                        settings: {
+                                enableFilters: this.properties.filterSettings?.enableFilters ?? DEFAULTS_CONFIG.filterSettings.enableFilters,
+                                font: {
+                                  family: this.properties.filterSettings?.font.family || DEFAULTS_CONFIG.filterSettings.font.family,
+                                  size: this.properties.filterSettings?.font.size || DEFAULTS_CONFIG.filterSettings.font.size,
+                                  formatting: this.properties.filterSettings?.font.formatting || DEFAULTS_CONFIG.filterSettings.font.formatting,
+                                  alignment: this.properties.filterSettings?.font.alignment || DEFAULTS_CONFIG.filterSettings.font.alignment
+                                },
+                              activeColors: {
+                                background: this.properties.filterSettings?.activeColors.background || DEFAULTS_CONFIG.filterSettings.activeColors.background,
+                                font: this.properties.filterSettings?.activeColors.font || DEFAULTS_CONFIG.filterSettings.activeColors.font
                               },
-                            activeColors: {
-                              background: this.properties.filterSettings?.activeColors.background || DEFAULTS_CONFIG.filterSettings.activeColors.background,
-                              font: this.properties.filterSettings?.activeColors.font || DEFAULTS_CONFIG.filterSettings.activeColors.font
+                              inactiveColors: {
+                                background: this.properties.filterSettings?.inactiveColors.background || DEFAULTS_CONFIG.filterSettings.inactiveColors.background,
+                                font: this.properties.filterSettings?.inactiveColors.font || DEFAULTS_CONFIG.filterSettings.inactiveColors.font
+                              },
+                              shape: this.properties.filterSettings?.shape || DEFAULTS_CONFIG.filterSettings.shape,
+                              backgroundShape: this.properties.filterSettings?.backgroundShape || DEFAULTS_CONFIG.filterSettings.backgroundShape,
+                              showAllCategories: this.properties.filterSettings?.showAllCategories ?? DEFAULTS_CONFIG.filterSettings.showAllCategories,
+                              defaultFilterSelection: this.properties.filterSettings?.defaultFilterSelection ?? DEFAULTS_CONFIG.filterSettings.defaultFilterSelection,
+                              showDivider: this.properties.filterSettings?.showDivider || DEFAULTS_CONFIG.filterSettings.showDivider,
+                              backgroundType: this.properties.filterSettings?.background.type || DEFAULTS_CONFIG.filterSettings.background.type,
+                              backgroundColor: this.properties.filterSettings?.background.color || DEFAULTS_CONFIG.filterSettings.background.color,
+                              backgroundAlpha: this.properties.filterSettings?.background.alpha || DEFAULTS_CONFIG.filterSettings.background.alpha,
+                              gradientDirection: this.properties.filterSettings?.background.gradientDirection || DEFAULTS_CONFIG.filterSettings.background.gradientDirection,
+                              gradientColor1: this.properties.filterSettings?.background.gradientColor1 || DEFAULTS_CONFIG.filterSettings.background.gradientColor1,
+                              gradientColor2: this.properties.filterSettings?.background.gradientColor2 || DEFAULTS_CONFIG.filterSettings.background.gradientColor2,
+                              gradientAlpha: this.properties.filterSettings?.background.gradientAlpha1 || DEFAULTS_CONFIG.filterSettings.background.gradientAlpha1,
+                              imageUrl: this.properties.filterSettings?.background.image || DEFAULTS_CONFIG.filterSettings.background.image,
+                              imageAlpha: this.properties.filterSettings?.background.imageAlpha || DEFAULTS_CONFIG.filterSettings.background.imageAlpha
                             },
-                            inactiveColors: {
-                              background: this.properties.filterSettings?.inactiveColors.background || DEFAULTS_CONFIG.filterSettings.inactiveColors.background,
-                              font: this.properties.filterSettings?.inactiveColors.font || DEFAULTS_CONFIG.filterSettings.inactiveColors.font
-                            },
-                            shape: this.properties.filterSettings?.shape || DEFAULTS_CONFIG.filterSettings.shape,
-                            backgroundShape: this.properties.filterSettings?.backgroundShape || DEFAULTS_CONFIG.filterSettings.backgroundShape,
-                            showAllCategories: this.properties.filterSettings?.showAllCategories ?? DEFAULTS_CONFIG.filterSettings.showAllCategories,
-                            defaultFilterSelection: this.properties.filterSettings?.defaultFilterSelection ?? DEFAULTS_CONFIG.filterSettings.defaultFilterSelection,
-                            showDivider: this.properties.filterSettings?.showDivider || DEFAULTS_CONFIG.filterSettings.showDivider,
-                            backgroundType: this.properties.filterSettings?.background.type || DEFAULTS_CONFIG.filterSettings.background.type,
-                            backgroundColor: this.properties.filterSettings?.background.color || DEFAULTS_CONFIG.filterSettings.background.color,
-                            backgroundAlpha: this.properties.filterSettings?.background.alpha || DEFAULTS_CONFIG.filterSettings.background.alpha,
-                            gradientDirection: this.properties.filterSettings?.background.gradientDirection || DEFAULTS_CONFIG.filterSettings.background.gradientDirection,
-                            gradientColor1: this.properties.filterSettings?.background.gradientColor1 || DEFAULTS_CONFIG.filterSettings.background.gradientColor1,
-                            gradientColor2: this.properties.filterSettings?.background.gradientColor2 || DEFAULTS_CONFIG.filterSettings.background.gradientColor2,
-                            gradientAlpha: this.properties.filterSettings?.background.gradientAlpha1 || DEFAULTS_CONFIG.filterSettings.background.gradientAlpha1,
-                            imageUrl: this.properties.filterSettings?.background.image || DEFAULTS_CONFIG.filterSettings.background.image,
-                            imageAlpha: this.properties.filterSettings?.background.imageAlpha || DEFAULTS_CONFIG.filterSettings.background.imageAlpha
-                          },
-                          onPropertyChange: (propertyPath: string, newValue: any) => {
-                            // Handle property changes and update the web part properties
-                            if (!this.properties.filterSettings) {
-                              this.properties.filterSettings = { ...DEFAULTS_CONFIG.filterSettings };
+                            availableCategories: availableCategories,
+                            onPropertyChange: (propertyPath: string, newValue: any) => {
+                              // Handle property changes and update the web part properties
+                              if (!this.properties.filterSettings) {
+                                this.properties.filterSettings = { ...DEFAULTS_CONFIG.filterSettings };
+                              }
+                              
+                              switch (propertyPath) {
+                                case 'enabled':
+                                  this.properties.filterSettings.enableFilters = newValue;
+                                  break;
+                                case 'shape':
+                                  this.properties.filterSettings.shape = newValue;
+                                  break;
+                                case 'backgroundShape':
+                                  this.properties.filterSettings.backgroundShape = newValue;
+                                  break;
+                                case 'showDivider':
+                                  this.properties.filterSettings.showDivider = newValue;
+                                  break;
+                                case 'backgroundType':
+                                  this.properties.filterSettings.background.type = newValue;
+                                  break;
+                                case 'backgroundColor':
+                                  this.properties.filterSettings.background.color = newValue;
+                                  break;
+                                case 'backgroundAlpha':
+                                  this.properties.filterSettings.background.alpha = newValue;
+                                  break;
+                                case 'gradientDirection':
+                                  this.properties.filterSettings.background.gradientDirection = newValue;
+                                  break;
+                                case 'gradientColor1':
+                                  this.properties.filterSettings.background.gradientColor1 = newValue;
+                                  break;
+                                case 'gradientColor2':
+                                  this.properties.filterSettings.background.gradientColor2 = newValue;
+                                  break;
+                                case 'gradientAlpha':
+                                  this.properties.filterSettings.background.gradientAlpha1 = newValue;
+                                  break;
+                                case 'imageUrl':
+                                  this.properties.filterSettings.background.image = newValue;
+                                  break;
+                                case 'imageAlpha':
+                                  this.properties.filterSettings.background.imageAlpha = newValue;
+                                  break;
+                                case 'font.family':
+                                  this.properties.filterSettings.font.family = newValue;
+                                  break;
+                                case 'font.size':
+                                  this.properties.filterSettings.font.size = newValue;
+                                  break;
+                                case 'font.formatting':
+                                  this.properties.filterSettings.font.formatting = newValue;
+                                  break;
+                                case 'font.alignment':
+                                  this.properties.filterSettings.font.alignment = newValue;
+                                  break;
+                                case 'activeColors.background':
+                                  this.properties.filterSettings.activeColors.background = newValue;
+                                  break;
+                                case 'activeColors.font':
+                                  this.properties.filterSettings.activeColors.font = newValue;
+                                  break;
+                                case 'inactiveColors.background':
+                                  this.properties.filterSettings.inactiveColors.background = newValue;
+                                  break;
+                                case 'inactiveColors.font':
+                                  this.properties.filterSettings.inactiveColors.font = newValue;
+                                  break;
+                                case 'showAllCategories':
+                                  console.log('🔄 WEBPART DEBUG: showAllCategories property changed to:', newValue);
+                                  this.properties.filterSettings.showAllCategories = newValue;
+                                  break;
+                                case 'defaultFilterSelection':
+                                  console.log('🔄 WEBPART DEBUG: defaultFilterSelection property changed to:', newValue);
+                                  this.properties.filterSettings.defaultFilterSelection = newValue;
+                                  break;
+                              }
+                              if (changeCallback) changeCallback();
+                              this.context.propertyPane.refresh();
                             }
-                            
-                            switch (propertyPath) {
-                              case 'enabled':
-                                this.properties.filterSettings.enableFilters = newValue;
-                                break;
-                              case 'shape':
-                                this.properties.filterSettings.shape = newValue;
-                                break;
-                              case 'backgroundShape':
-                                this.properties.filterSettings.backgroundShape = newValue;
-                                break;
-                              case 'showDivider':
-                                this.properties.filterSettings.showDivider = newValue;
-                                break;
-                              case 'backgroundType':
-                                this.properties.filterSettings.background.type = newValue;
-                                break;
-                              case 'backgroundColor':
-                                this.properties.filterSettings.background.color = newValue;
-                                break;
-                              case 'backgroundAlpha':
-                                this.properties.filterSettings.background.alpha = newValue;
-                                break;
-                              case 'gradientDirection':
-                                this.properties.filterSettings.background.gradientDirection = newValue;
-                                break;
-                              case 'gradientColor1':
-                                this.properties.filterSettings.background.gradientColor1 = newValue;
-                                break;
-                              case 'gradientColor2':
-                                this.properties.filterSettings.background.gradientColor2 = newValue;
-                                break;
-                              case 'gradientAlpha':
-                                this.properties.filterSettings.background.gradientAlpha1 = newValue;
-                                break;
-                              case 'imageUrl':
-                                this.properties.filterSettings.background.image = newValue;
-                                break;
-                              case 'imageAlpha':
-                                this.properties.filterSettings.background.imageAlpha = newValue;
-                                break;
-                              case 'font.family':
-                                this.properties.filterSettings.font.family = newValue;
-                                break;
-                              case 'font.size':
-                                this.properties.filterSettings.font.size = newValue;
-                                break;
-                              case 'font.formatting':
-                                this.properties.filterSettings.font.formatting = newValue;
-                                break;
-                              case 'font.alignment':
-                                this.properties.filterSettings.font.alignment = newValue;
-                                break;
-                              case 'activeColors.background':
-                                this.properties.filterSettings.activeColors.background = newValue;
-                                break;
-                              case 'activeColors.font':
-                                this.properties.filterSettings.activeColors.font = newValue;
-                                break;
-                              case 'inactiveColors.background':
-                                this.properties.filterSettings.inactiveColors.background = newValue;
-                                break;
-                              case 'inactiveColors.font':
-                                this.properties.filterSettings.inactiveColors.font = newValue;
-                                break;
-                              case 'showAllCategories':
-                                console.log('🔄 WEBPART DEBUG: showAllCategories property changed to:', newValue);
-                                this.properties.filterSettings.showAllCategories = newValue;
-                                break;
-                              case 'defaultFilterSelection':
-                                console.log('🔄 WEBPART DEBUG: defaultFilterSelection property changed to:', newValue);
-                                this.properties.filterSettings.defaultFilterSelection = newValue;
-                                break;
-                            }
-                            if (changeCallback) changeCallback();
-                            this.context.propertyPane.refresh();
-                          }
-                        }),
-                        elem
-                      );
+                          }),
+                          elem
+                        );
+                      });
                     },
                     onDispose: (elem: HTMLElement) => {
                       ReactDom.unmountComponentAtNode(elem);

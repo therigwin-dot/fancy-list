@@ -38,6 +38,7 @@ export interface FilterModuleControlProps {
         imageAlpha: number;
         backgroundShape: ShapeOption;
     };
+    availableCategories?: string[];
     onPropertyChange?: (propertyPath: string, newValue: any) => void;
 }
 export declare const FilterModuleControl: React.FC<FilterModuleControlProps>;
