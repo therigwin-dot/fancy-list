@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Dropdown, IDropdownOption, IconButton, TooltipHost } from '@fluentui/react';
+import { Dropdown, IDropdownOption, IconButton, TooltipHost, ComboBox, IComboBoxOption } from '@fluentui/react';
 
 export interface FontControlProps {
   fontFamily: string;
@@ -37,7 +37,7 @@ const FONT_FAMILIES: IDropdownOption[] = [
   { key: 'inherit', text: 'Inherit (default)', data: { font: 'inherit' } }
 ];
 
-const FONT_SIZES: IDropdownOption[] = [
+const FONT_SIZES: IComboBoxOption[] = [
   { key: '12px', text: '12px (Small)' },
   { key: '14px', text: '14px (Small Medium)' },
   { key: '16px', text: '16px (Medium)' },
@@ -45,7 +45,9 @@ const FONT_SIZES: IDropdownOption[] = [
   { key: '20px', text: '20px (Extra Large)' },
   { key: '24px', text: '24px (Title)' },
   { key: '28px', text: '28px (Heading)' },
-  { key: '32px', text: '32px (Large Heading)' }
+  { key: '32px', text: '32px (Large Heading)' },
+  { key: '36px', text: '36px (Extra Large Heading)' },
+  { key: '48px', text: '48px (Hero)' }
 ];
 
 
@@ -81,6 +83,12 @@ export const FontControl: React.FC<FontControlProps> = ({ fontFamily, fontSize, 
 
   const handleAlignmentChange = (newAlignment: 'left' | 'center' | 'right' | 'justify') => {
     onChange({ alignment: newAlignment });
+  };
+
+  const validateFontSize = (value: string): boolean => {
+    // Allow common font size formats: px, em, rem, %, pt
+    const fontSizeRegex = /^\d+(\.\d+)?(px|em|rem|%|pt)$/;
+    return fontSizeRegex.test(value.trim());
   };
 
   function renderFontOption(option?: IDropdownOption): JSX.Element {
@@ -216,13 +224,24 @@ export const FontControl: React.FC<FontControlProps> = ({ fontFamily, fontSize, 
           styles={{ root: { flex: '1 1 50%' } }}
         />
         
-        {/* Font Size Dropdown */}
-        <Dropdown
+        {/* Font Size ComboBox */}
+        <ComboBox
           label={undefined}
           ariaLabel="Font Size"
           options={FONT_SIZES}
           selectedKey={fontSize || '24px'}
-          onChange={(_, option) => onChange({ fontSize: option!.key as string })}
+          allowFreeform={true}
+          autoComplete="on"
+          onChange={(_, option, __, textValue) => {
+            if (option) {
+              // Selected from dropdown
+              onChange({ fontSize: option.key as string });
+            } else if (textValue && validateFontSize(textValue)) {
+              // Custom valid input
+              onChange({ fontSize: textValue.trim() });
+            }
+            // Invalid input is ignored
+          }}
           styles={{ root: { flex: '1 1 50%' } }}
         />
       </div>

@@ -1151,6 +1151,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _fluentui_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fluentui/react */ 1880);
 /* harmony import */ var _fluentui_react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fluentui/react */ 4533);
 /* harmony import */ var _fluentui_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @fluentui/react */ 2042);
+/* harmony import */ var _fluentui_react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @fluentui/react */ 3898);
 
 
 var FONT_FAMILIES = [
@@ -1172,7 +1173,9 @@ var FONT_SIZES = [
     { key: '20px', text: '20px (Extra Large)' },
     { key: '24px', text: '24px (Title)' },
     { key: '28px', text: '28px (Heading)' },
-    { key: '32px', text: '32px (Large Heading)' }
+    { key: '32px', text: '32px (Large Heading)' },
+    { key: '36px', text: '36px (Extra Large Heading)' },
+    { key: '48px', text: '48px (Hero)' }
 ];
 var iconButtonStyles = function (active) { return ({
     root: {
@@ -1204,6 +1207,11 @@ var FontControl = function (_a) {
     };
     var handleAlignmentChange = function (newAlignment) {
         onChange({ alignment: newAlignment });
+    };
+    var validateFontSize = function (value) {
+        // Allow common font size formats: px, em, rem, %, pt
+        var fontSizeRegex = /^\d+(\.\d+)?(px|em|rem|%|pt)$/;
+        return fontSizeRegex.test(value.trim());
     };
     function renderFontOption(option) {
         var _a;
@@ -1251,7 +1259,17 @@ var FontControl = function (_a) {
                 gap: '8px'
             } },
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_3__.Dropdown, { label: undefined, ariaLabel: "Font Family", options: FONT_FAMILIES, selectedKey: fontFamily || 'inherit', onChange: function (_, option) { return onChange({ fontFamily: option.key }); }, onRenderOption: renderFontOption, onRenderTitle: renderFontTitle, styles: { root: { flex: '1 1 50%' } } }),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_3__.Dropdown, { label: undefined, ariaLabel: "Font Size", options: FONT_SIZES, selectedKey: fontSize || '24px', onChange: function (_, option) { return onChange({ fontSize: option.key }); }, styles: { root: { flex: '1 1 50%' } } }))));
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_4__.ComboBox, { label: undefined, ariaLabel: "Font Size", options: FONT_SIZES, selectedKey: fontSize || '24px', allowFreeform: true, autoComplete: "on", onChange: function (_, option, __, textValue) {
+                    if (option) {
+                        // Selected from dropdown
+                        onChange({ fontSize: option.key });
+                    }
+                    else if (textValue && validateFontSize(textValue)) {
+                        // Custom valid input
+                        onChange({ fontSize: textValue.trim() });
+                    }
+                    // Invalid input is ignored
+                }, styles: { root: { flex: '1 1 50%' } } }))));
 };
 
 
