@@ -8,6 +8,7 @@ interface IFancyListState {
     expandedItems: Set<number>;
     loading: boolean;
     error: string;
+    titleImageError: boolean;
 }
 export default class FancyList extends React.Component<IFancyListProps, IFancyListState> {
     constructor(props: IFancyListProps);
@@ -22,6 +23,7 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     private getGradientStyle;
     private hexToRgba;
     private isValidImageUrl;
+    private checkTitleImage;
     private getTitleStyle;
     private renderTitle;
     render(): React.ReactElement<IFancyListProps>;

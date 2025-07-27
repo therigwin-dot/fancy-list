@@ -11,6 +11,7 @@ interface IFancyListState {
   expandedItems: Set<number>;
   loading: boolean;
   error: string;
+  titleImageError: boolean;
 }
 
 export default class FancyList extends React.Component<IFancyListProps, IFancyListState> {
@@ -22,12 +23,14 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
       selectedCategory: 'all',
       expandedItems: new Set(),
       loading: false,
-      error: ''
+      error: '',
+      titleImageError: false
     };
   }
 
   public componentDidMount(): void {
     this.loadListData();
+    this.checkTitleImage();
   }
 
   public componentDidUpdate(prevProps: IFancyListProps): void {
@@ -45,6 +48,12 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
           new Set(prevState.items.map(item => item.id)) : 
           new Set()
       }));
+    }
+
+    // Image loading detection for title section
+    if (prevProps.titleSettings?.imageUrl !== this.props.titleSettings?.imageUrl ||
+        prevProps.titleSettings?.backgroundType !== this.props.titleSettings?.backgroundType) {
+      this.checkTitleImage();
     }
   }
 
@@ -204,6 +213,25 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     return validExtensions.some(ext => lowerUrl.endsWith(ext));
   }
 
+  private checkTitleImage(): void {
+    const { titleSettings } = this.props;
+    
+    if (titleSettings?.backgroundType === 'image' && titleSettings?.imageUrl) {
+      this.setState({ titleImageError: false });
+      
+      const img = new Image();
+      img.onload = () => {
+        this.setState({ titleImageError: false });
+      };
+      img.onerror = () => {
+        this.setState({ titleImageError: true });
+      };
+      img.src = titleSettings.imageUrl;
+    } else {
+      this.setState({ titleImageError: false });
+    }
+  }
+
   // Title Rendering Methods
 
   private getTitleStyle(): React.CSSProperties {
@@ -257,6 +285,7 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
 
   private renderTitle(): React.ReactElement | null {
     const { titleSettings } = this.props;
+    const { titleImageError } = this.state;
     
     // If no titleSettings, render a default title (like Compare backup)
     if (!titleSettings) {
@@ -277,14 +306,15 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     const showDivider = titleSettings.showDivider || false;
     const backgroundType = titleSettings.backgroundType || 'solid';
     const imageUrl = titleSettings.imageUrl || '';
+    const imageAlpha = titleSettings.imageAlpha || 0;
     
     // Don't render title if webPartTitle is null, undefined, or empty
     if (!webPartTitle || webPartTitle.trim() === '') {
       return null;
     }
     
-    // Check for invalid image URL
-    if (backgroundType === 'image' && imageUrl && !this.isValidImageUrl(imageUrl)) {
+    // Check for invalid image URL or image loading error
+    if (backgroundType === 'image' && imageUrl && (!this.isValidImageUrl(imageUrl) || titleImageError)) {
       return (
         <div style={this.getTitleStyle()}>
           <div style={{ textAlign: 'center', padding: '8px' }}>
@@ -302,6 +332,23 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
 
     return (
       <div style={this.getTitleStyle()}>
+        {/* Add transparency overlay for valid images */}
+        {backgroundType === 'image' && imageUrl && !titleImageError && 
+         imageAlpha !== undefined && imageAlpha > 0 && (
+          <div
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              background: `rgba(255,255,255,${imageAlpha / 100})`,
+              pointerEvents: 'none',
+              zIndex: 1
+            }}
+          />
+        )}
+        
         <div style={{ position: 'relative', zIndex: 2 }}>
           {webPartTitle}
         </div>

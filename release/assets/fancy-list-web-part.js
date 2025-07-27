@@ -351,15 +351,18 @@ var FancyList = /** @class */ (function (_super) {
             selectedCategory: 'all',
             expandedItems: new Set(),
             loading: false,
-            error: ''
+            error: '',
+            titleImageError: false
         };
         return _this;
     }
     FancyList.prototype.componentDidMount = function () {
         this.loadListData();
+        this.checkTitleImage();
     };
     FancyList.prototype.componentDidUpdate = function (prevProps) {
         var _this = this;
+        var _a, _b, _c, _d;
         if (prevProps.selectedListId !== this.props.selectedListId ||
             prevProps.categoryField !== this.props.categoryField ||
             prevProps.subjectField !== this.props.subjectField ||
@@ -373,6 +376,11 @@ var FancyList = /** @class */ (function (_super) {
                     new Set(prevState.items.map(function (item) { return item.id; })) :
                     new Set()
             }); });
+        }
+        // Image loading detection for title section
+        if (((_a = prevProps.titleSettings) === null || _a === void 0 ? void 0 : _a.imageUrl) !== ((_b = this.props.titleSettings) === null || _b === void 0 ? void 0 : _b.imageUrl) ||
+            ((_c = prevProps.titleSettings) === null || _c === void 0 ? void 0 : _c.backgroundType) !== ((_d = this.props.titleSettings) === null || _d === void 0 ? void 0 : _d.backgroundType)) {
+            this.checkTitleImage();
         }
     };
     FancyList.prototype.loadListData = function () {
@@ -517,6 +525,24 @@ var FancyList = /** @class */ (function (_super) {
         var lowerUrl = url.toLowerCase();
         return validExtensions.some(function (ext) { return lowerUrl.endsWith(ext); });
     };
+    FancyList.prototype.checkTitleImage = function () {
+        var _this = this;
+        var titleSettings = this.props.titleSettings;
+        if ((titleSettings === null || titleSettings === void 0 ? void 0 : titleSettings.backgroundType) === 'image' && (titleSettings === null || titleSettings === void 0 ? void 0 : titleSettings.imageUrl)) {
+            this.setState({ titleImageError: false });
+            var img = new Image();
+            img.onload = function () {
+                _this.setState({ titleImageError: false });
+            };
+            img.onerror = function () {
+                _this.setState({ titleImageError: true });
+            };
+            img.src = titleSettings.imageUrl;
+        }
+        else {
+            this.setState({ titleImageError: false });
+        }
+    };
     // Title Rendering Methods
     FancyList.prototype.getTitleStyle = function () {
         var titleSettings = this.props.titleSettings;
@@ -548,6 +574,7 @@ var FancyList = /** @class */ (function (_super) {
     };
     FancyList.prototype.renderTitle = function () {
         var titleSettings = this.props.titleSettings;
+        var titleImageError = this.state.titleImageError;
         // If no titleSettings, render a default title (like Compare backup)
         if (!titleSettings) {
             return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: this.getTitleStyle() }, "Fancy List"));
@@ -561,12 +588,13 @@ var FancyList = /** @class */ (function (_super) {
         var showDivider = titleSettings.showDivider || false;
         var backgroundType = titleSettings.backgroundType || 'solid';
         var imageUrl = titleSettings.imageUrl || '';
+        var imageAlpha = titleSettings.imageAlpha || 0;
         // Don't render title if webPartTitle is null, undefined, or empty
         if (!webPartTitle || webPartTitle.trim() === '') {
             return null;
         }
-        // Check for invalid image URL
-        if (backgroundType === 'image' && imageUrl && !this.isValidImageUrl(imageUrl)) {
+        // Check for invalid image URL or image loading error
+        if (backgroundType === 'image' && imageUrl && (!this.isValidImageUrl(imageUrl) || titleImageError)) {
             return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: this.getTitleStyle() },
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { textAlign: 'center', padding: '8px' } },
                     react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { color: '#d13438', fontWeight: 'bold', marginBottom: '4px' } }, "Invalid Image URL"),
@@ -574,6 +602,17 @@ var FancyList = /** @class */ (function (_super) {
                 showDivider && react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { height: '1px', backgroundColor: 'rgba(0, 0, 0, 0.1)', marginTop: '12px' } })));
         }
         return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: this.getTitleStyle() },
+            backgroundType === 'image' && imageUrl && !titleImageError &&
+                imageAlpha !== undefined && imageAlpha > 0 && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    background: "rgba(255,255,255,".concat(imageAlpha / 100, ")"),
+                    pointerEvents: 'none',
+                    zIndex: 1
+                } })),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { position: 'relative', zIndex: 2 } }, webPartTitle),
             showDivider && react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { height: '1px', backgroundColor: 'rgba(0, 0, 0, 0.1)', marginTop: '12px' } })));
     };
