@@ -550,24 +550,48 @@ var ColorPickerControl = function (_a) {
                 marginBottom: '8px',
                 display: 'block'
             } }, label)),
-        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { display: 'flex', alignItems: 'center', gap: 1 } },
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_1__.IconButton, { iconProps: { iconName: 'Color' }, title: "Click to open color picker", ariaLabel: "Open color picker", onClick: function () { return setPickerVisible(function (v) { return !v; }); }, disabled: disabled }),
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                display: 'flex',
+                alignItems: 'center',
+                backgroundColor: currentColor,
+                borderRadius: 4,
+                border: '1px solid #ccc',
+                overflow: 'hidden',
+                width: 120
+            } },
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_1__.IconButton, { iconProps: { iconName: 'Color' }, title: "Click to open color picker", ariaLabel: "Open color picker", onClick: function () { return setPickerVisible(function (v) { return !v; }); }, disabled: disabled, styles: {
+                    root: {
+                        backgroundColor: 'transparent',
+                        border: 'none',
+                        color: getContrastColor(currentColor),
+                        minWidth: 'auto',
+                        padding: '4px'
+                    },
+                    rootHovered: {
+                        backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                        color: getContrastColor(currentColor)
+                    },
+                    rootPressed: {
+                        backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                        color: getContrastColor(currentColor)
+                    }
+                } }),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_2__.TextField, { value: currentColor, onChange: handleHexChange, disabled: disabled, styles: {
                     root: {
-                        width: 95,
-                        borderRadius: 4,
-                        border: '1px solid #ccc'
+                        flex: 1,
+                        border: 'none'
                     },
                     field: {
-                        backgroundColor: currentColor,
+                        backgroundColor: 'transparent',
                         color: getContrastColor(currentColor),
                         fontWeight: '600',
                         fontSize: '12px',
                         border: 'none',
-                        outline: 'none'
+                        outline: 'none',
+                        padding: '4px 8px'
                     },
                     fieldGroup: {
-                        backgroundColor: currentColor,
+                        backgroundColor: 'transparent',
                         border: 'none'
                     }
                 }, placeholder: "#RRGGBB", title: "Type a hex color code (e.g., #ff0000 for red)" })),
@@ -34471,7 +34495,6 @@ var FancyListWebPart = /** @class */ (function (_super) {
                 {
                     groups: [
                         {
-                            groupName: 'List Configuration',
                             groupFields: [
                                 {
                                     type: 1, // PropertyPaneFieldType.Custom
@@ -34483,10 +34506,10 @@ var FancyListWebPart = /** @class */ (function (_super) {
                                                 style: {
                                                     fontSize: '16px',
                                                     fontWeight: '600',
-                                                    color: '#323130',
+                                                    color: 'rgb(50, 49, 48)',
                                                     marginBottom: '12px'
                                                 }
-                                            }, 'List Configuration'), elem);
+                                            }, 'List Selection Configuration'), elem);
                                         },
                                         onDispose: function (elem) {
                                             react_dom__WEBPACK_IMPORTED_MODULE_1__.unmountComponentAtNode(elem);

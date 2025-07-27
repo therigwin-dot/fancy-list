@@ -71,13 +71,38 @@ export const ColorPickerControl: React.FC<ColorPickerControlProps> = ({ color, f
           {label}
         </label>
       )}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+      <div style={{ 
+        display: 'flex', 
+        alignItems: 'center', 
+        backgroundColor: currentColor,
+        borderRadius: 4,
+        border: '1px solid #ccc',
+        overflow: 'hidden',
+        width: 120
+      }}>
         <IconButton
           iconProps={{ iconName: 'Color' }}
           title="Click to open color picker"
           ariaLabel="Open color picker"
           onClick={() => setPickerVisible(v => !v)}
           disabled={disabled}
+          styles={{
+            root: {
+              backgroundColor: 'transparent',
+              border: 'none',
+              color: getContrastColor(currentColor),
+              minWidth: 'auto',
+              padding: '4px'
+            },
+            rootHovered: {
+              backgroundColor: 'rgba(255, 255, 255, 0.1)',
+              color: getContrastColor(currentColor)
+            },
+            rootPressed: {
+              backgroundColor: 'rgba(255, 255, 255, 0.2)',
+              color: getContrastColor(currentColor)
+            }
+          }}
         />
         <TextField
           value={currentColor}
@@ -85,20 +110,20 @@ export const ColorPickerControl: React.FC<ColorPickerControlProps> = ({ color, f
           disabled={disabled}
           styles={{ 
             root: { 
-              width: 95,
-              borderRadius: 4,
-              border: '1px solid #ccc'
+              flex: 1,
+              border: 'none'
             },
             field: {
-              backgroundColor: currentColor,
+              backgroundColor: 'transparent',
               color: getContrastColor(currentColor),
               fontWeight: '600',
               fontSize: '12px',
               border: 'none',
-              outline: 'none'
+              outline: 'none',
+              padding: '4px 8px'
             },
             fieldGroup: {
-              backgroundColor: currentColor,
+              backgroundColor: 'transparent',
               border: 'none'
             }
           }}

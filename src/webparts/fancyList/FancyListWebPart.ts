@@ -369,7 +369,6 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
         {
           groups: [
             {
-              groupName: 'List Configuration',
               groupFields: [
                 {
                   type: 1, // PropertyPaneFieldType.Custom
@@ -382,10 +381,10 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
                           style: { 
                             fontSize: '16px',
                             fontWeight: '600',
-                            color: '#323130',
+                            color: 'rgb(50, 49, 48)',
                             marginBottom: '12px'
                           }
-                        }, 'List Configuration'),
+                        }, 'List Selection Configuration'),
                         elem
                       );
                     },
