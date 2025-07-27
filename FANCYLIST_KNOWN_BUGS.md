@@ -48,6 +48,9 @@
 2. **✅ Transparency Slider Not Working** - ✅ **FIXED** - Alpha inversion corrected for proper slider behavior
 3. **✅ Image Background Broken** - ✅ **FIXED** - Property name corrected from imageUrl to image
 4. **Shape Button Not Working** - 🔴 **Critical** - Always shows square, doesn't adjust
+
+#### **Title Component Bugs**:
+1. **✅ Title Transparency Sliders Broken** - ✅ **FIXED** - Alpha normalization corrected in getBackgroundStyle
 4. **Reset Button Incomplete** - 🟡 **Medium** - Only resets divider and shape control
 5. **Shape Control Default Wrong** - 🟡 **Medium** - Reverts to pill instead of rounded
 6. **Color Picker Positioning** - 🟢 **Low** - Acceptable bug, on back burner

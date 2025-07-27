@@ -90,6 +90,17 @@
    - **Result**: Image backgrounds now display correctly with transparency slider working
    - **Testing Confirmed**: Images load properly, transparency slider works for image backgrounds
 
+4. **Title Transparency Sliders Broken** ✅ **FIXED**
+   - **Root Cause**: Alpha normalization issue after Filter transparency fix
+   - **Solution**: Normalized alpha values in `getBackgroundStyle` function
+   - **Technical Fix**:
+     - Modified `getBackgroundStyle` function in `FancyList.tsx`
+     - Changed solid background: `backgroundAlpha` to `backgroundAlpha / 100`
+     - Changed gradient background: `gradientAlpha` to `gradientAlpha / 100`
+     - Now Title section passes normalized alpha values (0-1) to `hexToRgba`
+   - **Result**: Title transparency sliders now work correctly for solid and gradient backgrounds
+   - **Testing Confirmed**: Title transparency sliders adjust visual appearance properly
+
 **Remaining Filter Issues:**
 2. **✅ Transparency Slider Not Working** - ✅ **FIXED** - Double-normalization in hexToRgba function corrected
 3. **Shape Button Not Working** - Always shows square, doesn't adjust
