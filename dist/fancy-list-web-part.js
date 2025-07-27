@@ -1082,6 +1082,11 @@ var FilterModuleControl = function (_a) {
     } : _d, onPropertyChange = _a.onPropertyChange;
     var _e = react__WEBPACK_IMPORTED_MODULE_0__.useState((_b = settings === null || settings === void 0 ? void 0 : settings.enableFilters) !== null && _b !== void 0 ? _b : true), enabled = _e[0], setEnabled = _e[1];
     var _f = react__WEBPACK_IMPORTED_MODULE_0__.useState((_c = settings === null || settings === void 0 ? void 0 : settings.showAllCategories) !== null && _c !== void 0 ? _c : true), showAllToggle = _f[0], setShowAllToggle = _f[1];
+    // Keep local state in sync with settings
+    react__WEBPACK_IMPORTED_MODULE_0__.useEffect(function () {
+        var _a;
+        setShowAllToggle((_a = settings === null || settings === void 0 ? void 0 : settings.showAllCategories) !== null && _a !== void 0 ? _a : true);
+    }, [settings === null || settings === void 0 ? void 0 : settings.showAllCategories]);
     var _g = react__WEBPACK_IMPORTED_MODULE_0__.useState('#ffffff'), previewColor1 = _g[0], setPreviewColor1 = _g[1];
     var _h = react__WEBPACK_IMPORTED_MODULE_0__.useState('#000000'), previewColor2 = _h[0], setPreviewColor2 = _h[1];
     var handlePropertyChange = function (propertyPath, newValue) {

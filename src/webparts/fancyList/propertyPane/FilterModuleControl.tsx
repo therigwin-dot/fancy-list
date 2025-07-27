@@ -91,6 +91,11 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
 }) => {
   const [enabled, setEnabled] = React.useState(settings?.enableFilters ?? true);
   const [showAllToggle, setShowAllToggle] = React.useState(settings?.showAllCategories ?? true);
+  
+  // Keep local state in sync with settings
+  React.useEffect(() => {
+    setShowAllToggle(settings?.showAllCategories ?? true);
+  }, [settings?.showAllCategories]);
   const [previewColor1, setPreviewColor1] = React.useState<string>('#ffffff');
   const [previewColor2, setPreviewColor2] = React.useState<string>('#000000');
   
