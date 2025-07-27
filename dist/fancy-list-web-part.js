@@ -352,7 +352,9 @@ var FancyList = /** @class */ (function (_super) {
             expandedItems: new Set(),
             loading: false,
             error: '',
-            titleImageError: false
+            titleImageError: false,
+            titleImageValidationError: null,
+            titleImageLoadError: false
         };
         return _this;
     }
@@ -528,27 +530,42 @@ var FancyList = /** @class */ (function (_super) {
         var normalizedAlpha = 1 - (alpha / 100);
         return "rgba(".concat(r, ",").concat(g, ",").concat(b, ",").concat(normalizedAlpha, ")");
     };
-    FancyList.prototype.isValidImageUrl = function (url) {
+    FancyList.prototype.validateImageFileType = function (url) {
+        if (!url)
+            return null;
         var validExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp'];
         var lowerUrl = url.toLowerCase();
-        return validExtensions.some(function (ext) { return lowerUrl.endsWith(ext); });
+        var hasValidExtension = validExtensions.some(function (ext) { return lowerUrl.endsWith(ext); });
+        return hasValidExtension ? null : 'Not a valid image type';
     };
     FancyList.prototype.checkTitleImage = function () {
         var _this = this;
         var titleSettings = this.props.titleSettings;
         if ((titleSettings === null || titleSettings === void 0 ? void 0 : titleSettings.backgroundType) === 'image' && (titleSettings === null || titleSettings === void 0 ? void 0 : titleSettings.imageUrl)) {
-            this.setState({ titleImageError: false });
+            // Check file type first
+            var validationError = this.validateImageFileType(titleSettings.imageUrl);
+            this.setState({ titleImageValidationError: validationError });
+            if (validationError) {
+                this.setState({ titleImageLoadError: false, titleImageError: false });
+                return;
+            }
+            // If file type is valid, check loading
+            this.setState({ titleImageLoadError: false, titleImageError: false });
             var img = new Image();
             img.onload = function () {
-                _this.setState({ titleImageError: false });
+                _this.setState({ titleImageLoadError: false, titleImageError: false });
             };
             img.onerror = function () {
-                _this.setState({ titleImageError: true });
+                _this.setState({ titleImageLoadError: true, titleImageError: true });
             };
             img.src = titleSettings.imageUrl;
         }
         else {
-            this.setState({ titleImageError: false });
+            this.setState({
+                titleImageError: false,
+                titleImageValidationError: null,
+                titleImageLoadError: false
+            });
         }
     };
     // Title Rendering Methods
@@ -582,7 +599,7 @@ var FancyList = /** @class */ (function (_super) {
     };
     FancyList.prototype.renderTitle = function () {
         var titleSettings = this.props.titleSettings;
-        var titleImageError = this.state.titleImageError;
+        var _a = this.state, titleImageError = _a.titleImageError, titleImageValidationError = _a.titleImageValidationError, titleImageLoadError = _a.titleImageLoadError;
         // If no titleSettings, render a default title (like Compare backup)
         if (!titleSettings) {
             return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: this.getTitleStyle() }, "Fancy List"));
@@ -601,14 +618,6 @@ var FancyList = /** @class */ (function (_super) {
         if (!webPartTitle || webPartTitle.trim() === '') {
             return null;
         }
-        // Check for invalid image URL or image loading error
-        if (backgroundType === 'image' && imageUrl && (!this.isValidImageUrl(imageUrl) || titleImageError)) {
-            return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: this.getTitleStyle() },
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { textAlign: 'center', padding: '8px' } },
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { color: '#d13438', fontWeight: 'bold', marginBottom: '4px' } }, "Invalid Image URL"),
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { color: '#605e5c', fontSize: '12px', lineHeight: '1.3' } }, "Please provide a valid image file (.jpg, .jpeg, .png, .gif, .webp)")),
-                showDivider && react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { height: '1px', backgroundColor: 'rgba(0, 0, 0, 0.1)', marginTop: '12px' } })));
-        }
         return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: this.getTitleStyle() },
             backgroundType === 'image' && imageUrl && !titleImageError &&
                 imageAlpha !== undefined && imageAlpha > 0 && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
@@ -621,7 +630,17 @@ var FancyList = /** @class */ (function (_super) {
                     pointerEvents: 'none',
                     zIndex: 1
                 } })),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { position: 'relative', zIndex: 2 } }, webPartTitle),
+            (titleImageValidationError || titleImageLoadError) && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                    position: 'absolute',
+                    bottom: '8px',
+                    right: '8px',
+                    fontSize: '12px',
+                    fontFamily: 'Arial, sans-serif',
+                    color: '#000000',
+                    zIndex: 2,
+                    pointerEvents: 'none'
+                } }, titleImageValidationError || (titleImageLoadError ? 'Unable to access URL' : ''))),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { position: 'relative', zIndex: 3 } }, webPartTitle),
             showDivider && react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { height: '1px', backgroundColor: 'rgba(0, 0, 0, 0.1)', marginTop: '12px' } })));
     };
     FancyList.prototype.render = function () {

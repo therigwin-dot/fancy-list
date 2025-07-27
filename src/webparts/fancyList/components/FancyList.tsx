@@ -12,6 +12,8 @@ interface IFancyListState {
   loading: boolean;
   error: string;
   titleImageError: boolean;
+  titleImageValidationError: string | null; // For file type validation
+  titleImageLoadError: boolean; // For load failures
 }
 
 export default class FancyList extends React.Component<IFancyListProps, IFancyListState> {
@@ -24,7 +26,9 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
       expandedItems: new Set(),
       loading: false,
       error: '',
-      titleImageError: false
+      titleImageError: false,
+      titleImageValidationError: null,
+      titleImageLoadError: false
     };
   }
 
@@ -214,28 +218,46 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     return `rgba(${r},${g},${b},${normalizedAlpha})`;
   }
 
-  private isValidImageUrl(url: string): boolean {
+
+
+  private validateImageFileType(url: string): string | null {
+    if (!url) return null;
     const validExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp'];
     const lowerUrl = url.toLowerCase();
-    return validExtensions.some(ext => lowerUrl.endsWith(ext));
+    const hasValidExtension = validExtensions.some(ext => lowerUrl.endsWith(ext));
+    return hasValidExtension ? null : 'Not a valid image type';
   }
 
   private checkTitleImage(): void {
     const { titleSettings } = this.props;
     
     if (titleSettings?.backgroundType === 'image' && titleSettings?.imageUrl) {
-      this.setState({ titleImageError: false });
+      // Check file type first
+      const validationError = this.validateImageFileType(titleSettings.imageUrl);
+      this.setState({ titleImageValidationError: validationError });
+      
+      if (validationError) {
+        this.setState({ titleImageLoadError: false, titleImageError: false });
+        return;
+      }
+      
+      // If file type is valid, check loading
+      this.setState({ titleImageLoadError: false, titleImageError: false });
       
       const img = new Image();
       img.onload = () => {
-        this.setState({ titleImageError: false });
+        this.setState({ titleImageLoadError: false, titleImageError: false });
       };
       img.onerror = () => {
-        this.setState({ titleImageError: true });
+        this.setState({ titleImageLoadError: true, titleImageError: true });
       };
       img.src = titleSettings.imageUrl;
     } else {
-      this.setState({ titleImageError: false });
+      this.setState({ 
+        titleImageError: false, 
+        titleImageValidationError: null, 
+        titleImageLoadError: false 
+      });
     }
   }
 
@@ -292,7 +314,7 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
 
   private renderTitle(): React.ReactElement | null {
     const { titleSettings } = this.props;
-    const { titleImageError } = this.state;
+    const { titleImageError, titleImageValidationError, titleImageLoadError } = this.state;
     
     // If no titleSettings, render a default title (like Compare backup)
     if (!titleSettings) {
@@ -319,27 +341,10 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     if (!webPartTitle || webPartTitle.trim() === '') {
       return null;
     }
-    
-    // Check for invalid image URL or image loading error
-    if (backgroundType === 'image' && imageUrl && (!this.isValidImageUrl(imageUrl) || titleImageError)) {
-      return (
-        <div style={this.getTitleStyle()}>
-          <div style={{ textAlign: 'center', padding: '8px' }}>
-            <div style={{ color: '#d13438', fontWeight: 'bold', marginBottom: '4px' }}>
-              Invalid Image URL
-            </div>
-            <div style={{ color: '#605e5c', fontSize: '12px', lineHeight: '1.3' }}>
-              Please provide a valid image file (.jpg, .jpeg, .png, .gif, .webp)
-            </div>
-          </div>
-          {showDivider && <div style={{ height: '1px', backgroundColor: 'rgba(0, 0, 0, 0.1)', marginTop: '12px' }} />}
-        </div>
-      );
-    }
 
     return (
       <div style={this.getTitleStyle()}>
-        {/* Add transparency overlay for valid images */}
+        {/* Layer 1: Transparency overlay for valid images */}
         {backgroundType === 'image' && imageUrl && !titleImageError && 
          imageAlpha !== undefined && imageAlpha > 0 && (
           <div
@@ -356,7 +361,26 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
           />
         )}
         
-        <div style={{ position: 'relative', zIndex: 2 }}>
+        {/* Layer 2: Error message layer */}
+        {(titleImageValidationError || titleImageLoadError) && (
+          <div
+            style={{
+              position: 'absolute',
+              bottom: '8px',
+              right: '8px',
+              fontSize: '12px',
+              fontFamily: 'Arial, sans-serif',
+              color: '#000000',
+              zIndex: 2,
+              pointerEvents: 'none'
+            }}
+          >
+            {titleImageValidationError || (titleImageLoadError ? 'Unable to access URL' : '')}
+          </div>
+        )}
+        
+        {/* Layer 3: Title text */}
+        <div style={{ position: 'relative', zIndex: 3 }}>
           {webPartTitle}
         </div>
         {showDivider && <div style={{ height: '1px', backgroundColor: 'rgba(0, 0, 0, 0.1)', marginTop: '12px' }} />}
