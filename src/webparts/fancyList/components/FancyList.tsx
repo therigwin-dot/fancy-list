@@ -530,7 +530,9 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
         {console.log('🔍 FILTER DEBUG:', {
           filterSettings: this.props.filterSettings,
           enabled: this.props.filterSettings?.enableFilters,
-          willRender: this.props.filterSettings?.enableFilters === true
+          willRender: this.props.filterSettings?.enableFilters === true,
+          backgroundAlpha: this.props.filterSettings?.background?.alpha,
+          gradientAlpha: this.props.filterSettings?.background?.gradientAlpha1
         }, 'FILTER SETTINGS FULL:', this.props.filterSettings)}
         {this.props.filterSettings?.enableFilters && (
           <>

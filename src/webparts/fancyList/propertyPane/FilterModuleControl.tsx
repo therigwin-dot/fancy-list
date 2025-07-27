@@ -422,6 +422,13 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
                   settings.imageAlpha
                 }
                 onChange={(value) => {
+                  console.log('🎨 TRANSPARENCY SLIDER:', {
+                    backgroundType: settings.backgroundType,
+                    value: value,
+                    currentAlpha: settings.backgroundType === 'solid' ? settings.backgroundAlpha : 
+                                  settings.backgroundType === 'gradient' ? settings.gradientAlpha : 
+                                  settings.imageAlpha
+                  });
                   if (settings.backgroundType === 'solid') {
                     handlePropertyChange('backgroundAlpha', value);
                   } else if (settings.backgroundType === 'gradient') {
