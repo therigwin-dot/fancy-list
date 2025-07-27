@@ -798,7 +798,7 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
                             },
                             shape: this.properties.filterSettings?.shape || DEFAULTS_CONFIG.filterSettings.shape,
                             backgroundShape: this.properties.filterSettings?.backgroundShape || DEFAULTS_CONFIG.filterSettings.backgroundShape,
-                            showAllCategories: this.properties.filterSettings?.showAllCategories || DEFAULTS_CONFIG.filterSettings.showAllCategories,
+                            showAllCategories: this.properties.filterSettings?.showAllCategories ?? DEFAULTS_CONFIG.filterSettings.showAllCategories,
                             showDivider: this.properties.filterSettings?.showDivider || DEFAULTS_CONFIG.filterSettings.showDivider,
                             backgroundType: this.properties.filterSettings?.background.type || DEFAULTS_CONFIG.filterSettings.background.type,
                             backgroundColor: this.properties.filterSettings?.background.color || DEFAULTS_CONFIG.filterSettings.background.color,
