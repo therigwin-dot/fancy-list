@@ -30,8 +30,104 @@ Implement the Title component rendering for Page 2 of the Fancy List Web Part, c
 
 ## 🛠️ **IMPLEMENTATION PHASES**
 
-### **Phase 1: Update Props Interface**
+### **Phase 1: Title Transparency Rendering Fix**
+**File**: `src/webparts/fancyList/components/FancyList.tsx`
+
+**Objective**: Fix image background transparency using Compare backup solution
+**Key Changes**:
+1. **Add Image Error State**: Track image loading errors with React.useState
+2. **Implement Transparency Overlay**: Use absolute positioned div for image transparency
+3. **Use Current Property Names**: `webPartTitleBackgroundImageAlpha` instead of nested structure
+4. **Add Error Handling**: Show appropriate messages for invalid/empty images
+
+**Implementation Details**:
+```typescript
+// Add to component state
+const [titleImageError, setTitleImageError] = React.useState(false);
+
+// Add image loading detection
+React.useEffect(() => {
+  if (titleSettings?.backgroundType === 'image' && titleSettings?.imageUrl) {
+    setTitleImageError(false);
+    
+    const img = new Image();
+    img.onload = () => setTitleImageError(false);
+    img.onerror = () => setTitleImageError(true);
+    img.src = titleSettings.imageUrl;
+  }
+}, [titleSettings?.imageUrl]);
+
+// Update renderTitle() method
+return (
+  <div style={this.getTitleStyle()}>
+    {/* Show error overlay for invalid images */}
+    {backgroundType === 'image' && titleImageError && (
+      <div style={{ textAlign: 'center', padding: '8px' }}>
+        <div style={{ color: '#d13438', fontWeight: 'bold', marginBottom: '4px' }}>
+          Invalid Image URL
+        </div>
+        <div style={{ color: '#605e5c', fontSize: '12px', lineHeight: '1.3' }}>
+          Please provide a valid image file (.jpg, .jpeg, .png, .gif, .webp)
+        </div>
+      </div>
+    )}
+    
+    {/* Add transparency overlay for valid images */}
+    {backgroundType === 'image' && imageUrl && !titleImageError && 
+     titleSettings.webPartTitleBackgroundImageAlpha !== undefined && 
+     titleSettings.webPartTitleBackgroundImageAlpha > 0 && (
+      <div
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: `rgba(255,255,255,${titleSettings.webPartTitleBackgroundImageAlpha / 100})`,
+          pointerEvents: 'none',
+          zIndex: 1
+        }}
+      />
+    )}
+    
+    <div style={{ position: 'relative', zIndex: 2 }}>
+      {webPartTitle}
+    </div>
+    
+    {showDivider && <div style={{ height: '1px', backgroundColor: 'rgba(0, 0, 0, 0.1)', marginTop: '12px' }} />}
+  </div>
+);
+```
+
+**Compare Backup Analysis**:
+- **Property Structure**: Compare backup uses `titleSettings.background.imageAlpha` vs our `webPartTitleBackgroundImageAlpha`
+- **Transparency Implementation**: Identical overlay approach with direct alpha division
+- **Alpha Behavior**: Image alpha uses direct division (higher = more opaque), normal alpha uses inversion
+- **Error Handling**: Same error detection and messaging approach
+
+### **Phase 2: Update Background Style Method**
+**File**: `src/webparts/fancyList/components/FancyList.tsx`
+
+**Objective**: Separate image handling from normal background alpha
+**Changes**:
+1. **Separate Image Handling**: Don't apply alpha to background-image CSS
+2. **Keep Normal Alpha**: Use inverted alpha for solid/gradient backgrounds
+3. **Use Current Property**: Handle `webPartTitleBackgroundImageAlpha` separately
+
+### **Phase 3: Ensure Property Mapping**
+**File**: `src/webparts/fancyList/FancyListWebPart.ts`
+
+**Objective**: Verify property mapping and add defaults
+**Changes**:
+1. **Verify Mapping**: Ensure `webPartTitleBackgroundImageAlpha` is mapped correctly
+2. **Maintain Compatibility**: Keep existing property structure
+3. **Add Default**: Use proper default for image alpha
+
+### **Phase 4: Update Props Interface**
 **File**: `src/webparts/fancyList/components/IFancyListProps.ts`
+
+**Objective**: Add individual filter properties (like Compare backup)
+**Changes**:
 ```typescript
 export interface IFancyListProps {
   // Existing props...
@@ -66,10 +162,10 @@ export interface IFancyListProps {
 }
 ```
 
-### **Phase 2: Add Utility Functions**
+### **Phase 5: Add Utility Functions**
 **File**: `src/webparts/fancyList/components/FancyList.tsx`
 
-#### **2.1 Background Style Function**
+#### **5.1 Background Style Function**
 ```typescript
 private getBackgroundStyle(): React.CSSProperties {
   const { titleSettings } = this.props;
