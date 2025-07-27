@@ -313,7 +313,7 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     const r = (num >> 16) & 255;
     const g = (num >> 8) & 255;
     const b = num & 255;
-    const normalizedAlpha = 1 - (alpha / 100);
+    const normalizedAlpha = alpha / 100; // Fixed: removed inversion - 0% = transparent, 100% = opaque
     return `rgba(${r},${g},${b},${normalizedAlpha})`;
   }
 
