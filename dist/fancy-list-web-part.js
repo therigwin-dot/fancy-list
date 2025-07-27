@@ -1222,6 +1222,11 @@ var FontControl = function (_a) {
         }
         return trimmed;
     };
+    var getFontSizeDisplayText = function (value) {
+        // Find matching option to show full description
+        var matchingOption = FONT_SIZES.find(function (option) { return option.key === value; });
+        return matchingOption ? matchingOption.text : value;
+    };
     function renderFontOption(option) {
         var _a;
         if (!option)
@@ -1268,11 +1273,17 @@ var FontControl = function (_a) {
                 gap: '8px'
             } },
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_3__.Dropdown, { label: undefined, ariaLabel: "Font Family", options: FONT_FAMILIES, selectedKey: fontFamily || 'inherit', onChange: function (_, option) { return onChange({ fontFamily: option.key }); }, onRenderOption: renderFontOption, onRenderTitle: renderFontTitle, styles: { root: { flex: '1 1 50%' } } }),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_4__.ComboBox, { label: undefined, ariaLabel: "Font Size", options: FONT_SIZES, selectedKey: isEditing ? undefined : (fontSize || '24px'), text: isEditing ? '' : (fontSize || '24px'), allowFreeform: true, autoComplete: "on", onFocus: function () {
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_4__.ComboBox, { label: undefined, ariaLabel: "Font Size", options: FONT_SIZES, selectedKey: isEditing ? undefined : (fontSize || '24px'), text: isEditing ? '' : getFontSizeDisplayText(fontSize || '24px'), allowFreeform: true, autoComplete: "on", onFocus: function () {
                     setIsEditing(true);
                 }, onBlur: function () {
                     // If still editing, restore the original state
                     if (isEditing) {
+                        setIsEditing(false);
+                    }
+                }, onKeyDown: function (event) {
+                    if (event.key === 'Enter') {
+                        // Release focus when Enter is pressed
+                        event.preventDefault();
                         setIsEditing(false);
                     }
                 }, onChange: function (_, option, __, textValue) {

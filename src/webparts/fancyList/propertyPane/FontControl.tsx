@@ -74,6 +74,7 @@ const iconButtonStyles = (active: boolean) => ({
 export const FontControl: React.FC<FontControlProps> = ({ fontFamily, fontSize, formatting, alignment = 'left', onChange, label }) => {
   const [isEditing, setIsEditing] = React.useState<boolean>(false);
 
+
   const handleFormattingChange = (key: keyof typeof formatting, value: boolean) => {
     onChange({ formatting: {
       bold: key === 'bold' ? value : !!formatting.bold,
@@ -100,6 +101,12 @@ export const FontControl: React.FC<FontControlProps> = ({ fontFamily, fontSize, 
       return `${trimmed}px`;
     }
     return trimmed;
+  };
+
+  const getFontSizeDisplayText = (value: string): string => {
+    // Find matching option to show full description
+    const matchingOption = FONT_SIZES.find(option => option.key === value);
+    return matchingOption ? matchingOption.text : value;
   };
 
   function renderFontOption(option?: IDropdownOption): JSX.Element {
@@ -241,7 +248,7 @@ export const FontControl: React.FC<FontControlProps> = ({ fontFamily, fontSize, 
           ariaLabel="Font Size"
           options={FONT_SIZES}
           selectedKey={isEditing ? undefined : (fontSize || '24px')}
-          text={isEditing ? '' : (fontSize || '24px')}
+          text={isEditing ? '' : getFontSizeDisplayText(fontSize || '24px')}
           allowFreeform={true}
           autoComplete="on"
           onFocus={() => {
@@ -250,6 +257,13 @@ export const FontControl: React.FC<FontControlProps> = ({ fontFamily, fontSize, 
           onBlur={() => {
             // If still editing, restore the original state
             if (isEditing) {
+              setIsEditing(false);
+            }
+          }}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter') {
+              // Release focus when Enter is pressed
+              event.preventDefault();
               setIsEditing(false);
             }
           }}
@@ -268,6 +282,7 @@ export const FontControl: React.FC<FontControlProps> = ({ fontFamily, fontSize, 
               // Invalid input is ignored but keeps editing state
             }
           }}
+
           styles={{ root: { flex: '1 1 50%' } }}
         />
       </div>
