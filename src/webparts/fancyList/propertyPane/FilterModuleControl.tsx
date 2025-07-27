@@ -233,6 +233,16 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
                   console.log('🔄 STEP 3 DEBUG: Toggle clicked, new value:', checked);
                   setShowAllToggle(checked || false);
                   handlePropertyChange('showAllCategories', checked);
+                  
+                  // Handle dropdown selection when "All" toggle changes
+                  const testCategories = ['Category1', 'Category2', 'Category3'];
+                  if (!checked && defaultFilterDropdown === 'All' && testCategories.length > 0) {
+                    // "All" toggle turned OFF and current selection is "All" - change to first available filter
+                    const firstFilter = testCategories[0];
+                    console.log('🔄 TOGGLE DEBUG: Changing from "All" to first filter:', firstFilter);
+                    setDefaultFilterDropdown(firstFilter);
+                    handlePropertyChange('defaultFilterSelection', firstFilter);
+                  }
                 }}
               />
             </div>
@@ -241,12 +251,24 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
             <div style={{ marginBottom: 16 }}>
               <Dropdown
                 selectedKey={defaultFilterDropdown}
-                options={[
-                  { key: 'All', text: 'All' },
-                  { key: 'Category1', text: 'Category1' },
-                  { key: 'Category2', text: 'Category2' },
-                  { key: 'Category3', text: 'Category3' }
-                ]}
+                options={(() => {
+                  const testCategories = ['Category1', 'Category2', 'Category3'];
+                  console.log('🔄 DROPDOWN DEBUG: Show all toggle:', showAllToggle);
+                  console.log('🔄 DROPDOWN DEBUG: Test categories:', testCategories);
+                  
+                  if (showAllToggle) {
+                    const options = [
+                      { key: 'All', text: 'All' },
+                      ...testCategories.map(cat => ({ key: cat, text: cat }))
+                    ];
+                    console.log('🔄 DROPDOWN DEBUG: Options with All:', options);
+                    return options;
+                  } else {
+                    const options = testCategories.map(cat => ({ key: cat, text: cat }));
+                    console.log('🔄 DROPDOWN DEBUG: Options without All:', options);
+                    return options;
+                  }
+                })()}
                 onChange={(_, option) => {
                   console.log('🔄 DROPDOWN DEBUG: Selected:', option?.key);
                   setDefaultFilterDropdown(option?.key as string || 'All');

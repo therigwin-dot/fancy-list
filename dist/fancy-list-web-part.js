@@ -1034,6 +1034,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ColorPickerControl */ 9193);
 /* harmony import */ var _ShapePickerControl__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ShapePickerControl */ 4439);
 /* harmony import */ var _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../DEFAULTS_CONFIG */ 7702);
+var __spreadArray = (undefined && undefined.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+};
 
 
 
@@ -1177,14 +1186,34 @@ var FilterModuleControl = function (_a) {
                             console.log('🔄 STEP 3 DEBUG: Toggle clicked, new value:', checked);
                             setShowAllToggle(checked || false);
                             handlePropertyChange('showAllCategories', checked);
+                            // Handle dropdown selection when "All" toggle changes
+                            var testCategories = ['Category1', 'Category2', 'Category3'];
+                            if (!checked && defaultFilterDropdown === 'All' && testCategories.length > 0) {
+                                // "All" toggle turned OFF and current selection is "All" - change to first available filter
+                                var firstFilter = testCategories[0];
+                                console.log('🔄 TOGGLE DEBUG: Changing from "All" to first filter:', firstFilter);
+                                setDefaultFilterDropdown(firstFilter);
+                                handlePropertyChange('defaultFilterSelection', firstFilter);
+                            }
                         } })),
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_6__.Dropdown, { selectedKey: defaultFilterDropdown, options: [
-                            { key: 'All', text: 'All' },
-                            { key: 'Category1', text: 'Category1' },
-                            { key: 'Category2', text: 'Category2' },
-                            { key: 'Category3', text: 'Category3' }
-                        ], onChange: function (_, option) {
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_6__.Dropdown, { selectedKey: defaultFilterDropdown, options: (function () {
+                            var testCategories = ['Category1', 'Category2', 'Category3'];
+                            console.log('🔄 DROPDOWN DEBUG: Show all toggle:', showAllToggle);
+                            console.log('🔄 DROPDOWN DEBUG: Test categories:', testCategories);
+                            if (showAllToggle) {
+                                var options = __spreadArray([
+                                    { key: 'All', text: 'All' }
+                                ], testCategories.map(function (cat) { return ({ key: cat, text: cat }); }), true);
+                                console.log('🔄 DROPDOWN DEBUG: Options with All:', options);
+                                return options;
+                            }
+                            else {
+                                var options = testCategories.map(function (cat) { return ({ key: cat, text: cat }); });
+                                console.log('🔄 DROPDOWN DEBUG: Options without All:', options);
+                                return options;
+                            }
+                        })(), onChange: function (_, option) {
                             console.log('🔄 DROPDOWN DEBUG: Selected:', option === null || option === void 0 ? void 0 : option.key);
                             setDefaultFilterDropdown((option === null || option === void 0 ? void 0 : option.key) || 'All');
                             handlePropertyChange('defaultFilterSelection', (option === null || option === void 0 ? void 0 : option.key) || 'All');
