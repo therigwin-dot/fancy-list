@@ -14,6 +14,8 @@ interface IFancyListState {
   titleImageError: boolean;
   titleImageValidationError: string | null; // For file type validation
   titleImageLoadError: boolean; // For load failures
+  filterImageValidationError: string | null; // For filter file type validation
+  filterImageLoadError: boolean; // For filter load failures
 }
 
 export default class FancyList extends React.Component<IFancyListProps, IFancyListState> {
@@ -28,13 +30,16 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
       error: '',
       titleImageError: false,
       titleImageValidationError: null,
-      titleImageLoadError: false
+      titleImageLoadError: false,
+      filterImageValidationError: null,
+      filterImageLoadError: false
     };
   }
 
   public componentDidMount(): void {
     this.loadListData();
     this.checkTitleImage();
+    this.checkFilterImage();
   }
 
   public componentDidUpdate(prevProps: IFancyListProps): void {
@@ -58,6 +63,12 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     if (prevProps.titleSettings?.imageUrl !== this.props.titleSettings?.imageUrl ||
         prevProps.titleSettings?.backgroundType !== this.props.titleSettings?.backgroundType) {
       this.checkTitleImage();
+    }
+    
+    // Image loading detection for filter section
+    if (prevProps.filterSettings?.background?.image !== this.props.filterSettings?.background?.image ||
+        prevProps.filterSettings?.background?.type !== this.props.filterSettings?.background?.type) {
+      this.checkFilterImage();
     }
   }
 
@@ -204,6 +215,82 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
       case 'to bottom left': return `linear-gradient(to bottom left, ${rgba1}, ${rgba2})`;
       case 'radial': return `radial-gradient(circle, ${rgba1}, ${rgba2})`;
       default: return `linear-gradient(to right, ${rgba1}, ${rgba2})`;
+    }
+  }
+
+  // Filter utility methods (like Title component pattern)
+  private getFilterBorderRadius(shape: string): string {
+    return shape === 'square' ? '0px'
+      : shape === 'pill' ? '999px'
+      : '16px'; // rounded default
+  }
+
+  private getFilterBackgroundStyle(filterSettings: any): React.CSSProperties {
+    const { background } = filterSettings;
+    
+    if (background.type === 'solid') {
+      return {
+        background: this.hexToRgba(background.color, background.alpha / 100)
+      };
+    } else if (background.type === 'gradient') {
+      return {
+        background: this.getGradientStyle(
+          background.gradientDirection,
+          background.gradientColor1,
+          background.gradientColor2,
+          background.gradientAlpha1 / 100
+        )
+      };
+    } else if (background.type === 'image') {
+      if (background.image) {
+        return {
+          backgroundImage: `url(${background.image})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
+        };
+      } else {
+        return {
+          backgroundColor: '#ffffff' // Simple white background for empty/invalid URLs
+        };
+      }
+    }
+    return {};
+  }
+
+  // Add filter image error state management (like Title component)
+  private checkFilterImage(): void {
+    const { filterSettings } = this.props;
+    
+    if (filterSettings?.background?.type === 'image' && filterSettings.background.image) {
+      // Validate file type
+      const validationError = this.validateImageFileType(filterSettings.background.image);
+      this.setState({ 
+        filterImageValidationError: validationError,
+        filterImageLoadError: false 
+      });
+      
+      if (!validationError) {
+        // Test image loading
+        const img = new Image();
+        img.onload = () => {
+          this.setState({ 
+            filterImageLoadError: false,
+            filterImageValidationError: null 
+          });
+        };
+        img.onerror = () => {
+          this.setState({ 
+            filterImageLoadError: true,
+            filterImageValidationError: null 
+          });
+        };
+        img.src = filterSettings.background.image;
+      }
+    } else {
+      this.setState({ 
+        filterImageValidationError: null,
+        filterImageLoadError: false 
+      });
     }
   }
 

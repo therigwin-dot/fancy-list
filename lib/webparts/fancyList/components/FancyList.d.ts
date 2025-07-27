@@ -11,6 +11,8 @@ interface IFancyListState {
     titleImageError: boolean;
     titleImageValidationError: string | null;
     titleImageLoadError: boolean;
+    filterImageValidationError: string | null;
+    filterImageLoadError: boolean;
 }
 export default class FancyList extends React.Component<IFancyListProps, IFancyListState> {
     constructor(props: IFancyListProps);
@@ -23,6 +25,9 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     private getBackgroundStyle;
     private getShapeRadius;
     private getGradientStyle;
+    private getFilterBorderRadius;
+    private getFilterBackgroundStyle;
+    private checkFilterImage;
     private hexToRgba;
     private validateImageFileType;
     private checkTitleImage;
