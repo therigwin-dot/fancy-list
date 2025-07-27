@@ -1,74 +1,106 @@
-# **🎯 FILTER COMPONENT RENDERING IMPLEMENTATION PLAN**
+# **🎯 FILTER COMPONENT RENDERING IMPLEMENTATION PLAN - UPDATED**
 
 ## **📋 OVERVIEW**
-Based on the Compare backup analysis and lessons learned from the Title component implementation, this plan implements filter rendering using the proven pattern of individual properties with direct inline styling. The plan incorporates key improvements from Title component: **layered transparency system**, **professional error handling**, and **proper divider positioning**.
+Based on our current nested object architecture and lessons learned from Title component and FontControl implementation, this plan implements filter rendering using the proven pattern of nested objects with direct inline styling. The plan incorporates key improvements: **layered transparency system**, **professional error handling**, **proper divider positioning**, and **text alignment support**.
 
 ---
 
-## **️ PHASE 1: PROPERTY MAPPING & INTERFACE UPDATES**
+## **️ PHASE 1: INTERFACE & PROPERTY MAPPING UPDATES**
 
 ### **Step 1.1: Update IFancyListProps Interface**
 **File:** `src/webparts/fancyList/components/IFancyListProps.ts`
 **Changes:**
-- Add individual filter properties (like Compare backup)
-- Keep existing titleSettings structure
-- Add filter-specific properties for colors, fonts, shapes, backgrounds
+- Add `filterSettings` object (like Title component)
+- Include all filter properties in nested structure
+- Add alignment support to font object
 
 ```typescript
-// Add to IFancyListProps (individual properties like Compare backup)
-// Filter Configuration
-categoryFilterActiveColor: string;
-categoryFilterInactiveColor: string;
-categoryFilterActiveFontColor: string;
-categoryFilterInactiveFontColor: string;
-categoryFilterFont: string;
-categoryFilterFontSize: string;
-categoryFilterShape: string;
-categoryFiltersBackgroundType: string;
-categoryFiltersBackgroundColor: string;
-categoryFiltersBackgroundAlpha: number;
-categoryFiltersBackgroundImage: string;
-categoryFiltersBackgroundGradientDirection: string;
-categoryFiltersBackgroundGradientColor1: string;
-categoryFiltersBackgroundGradientAlpha1: number;
-categoryFiltersBackgroundGradientColor2: string;
-categoryFiltersBackgroundGradientAlpha2: number;
-showPillsDivider: boolean;
+// Add to IFancyListProps (nested structure like Title component)
+filterSettings?: {
+  enabled: boolean;
+  font: {
+    family: string;
+    size: string;
+    color: string;
+    formatting: {
+      bold: boolean;
+      italic: boolean;
+      underline: boolean;
+      strikethrough: boolean;
+    };
+    alignment?: 'left' | 'center' | 'right' | 'justify'; // NEW - from FontControl
+  };
+  activeColors: {
+    background: string;
+    font: string;
+  };
+  inactiveColors: {
+    background: string;
+    font: string;
+  };
+  shape: string;
+  background: {
+    type: string;
+    color: string;
+    alpha: number;
+    image: string;
+    imageAlpha: number; // NEW - for layered transparency
+    gradientDirection: string;
+    gradientColor1: string;
+    gradientAlpha1: number;
+    gradientColor2: string;
+    gradientAlpha2: number;
+  };
+  showDivider: boolean;
+};
 ```
 
 ### **Step 1.2: Update FancyListWebPart Property Mapping**
 **File:** `src/webparts/fancyList/FancyListWebPart.ts`
 **Changes:**
-- Map individual filter properties in `render()` method
+- Map nested filter properties in `render()` method
 - Use `DEFAULTS_CONFIG.filterSettings` for fallbacks
 - Follow the same pattern as titleSettings mapping
 
 ```typescript
-// Add to render() method (individual property mapping)
-const filterProps = {
-  categoryFilterActiveColor: this.properties.filterActiveBackground ?? DEFAULTS_CONFIG.filterSettings.activeColors.background,
-  categoryFilterInactiveColor: this.properties.filterInactiveBackground ?? DEFAULTS_CONFIG.filterSettings.inactiveColors.background,
-  categoryFilterActiveFontColor: this.properties.filterActiveFont ?? DEFAULTS_CONFIG.filterSettings.activeColors.font,
-  categoryFilterInactiveFontColor: this.properties.filterInactiveFont ?? DEFAULTS_CONFIG.filterSettings.inactiveColors.font,
-  categoryFilterFont: this.properties.filterFont ?? DEFAULTS_CONFIG.filterSettings.font.family,
-  categoryFilterFontSize: this.properties.filterFontSize ?? DEFAULTS_CONFIG.filterSettings.font.size,
-  categoryFilterShape: this.properties.filterShape ?? DEFAULTS_CONFIG.filterSettings.shape,
-  categoryFiltersBackgroundType: this.properties.filterBackgroundType ?? DEFAULTS_CONFIG.filterSettings.background.type,
-  categoryFiltersBackgroundColor: this.properties.filterBackgroundColor ?? DEFAULTS_CONFIG.filterSettings.background.color,
-  categoryFiltersBackgroundAlpha: this.properties.filterBackgroundAlpha ?? DEFAULTS_CONFIG.filterSettings.background.alpha,
-  categoryFiltersBackgroundImage: this.properties.filterBackgroundImage ?? DEFAULTS_CONFIG.filterSettings.background.image,
-  categoryFiltersBackgroundGradientDirection: this.properties.filterBackgroundGradientDirection ?? DEFAULTS_CONFIG.filterSettings.background.gradientDirection,
-  categoryFiltersBackgroundGradientColor1: this.properties.filterBackgroundGradientColor1 ?? DEFAULTS_CONFIG.filterSettings.background.gradientColor1,
-  categoryFiltersBackgroundGradientAlpha1: this.properties.filterBackgroundGradientAlpha1 ?? DEFAULTS_CONFIG.filterSettings.background.gradientAlpha1,
-  categoryFiltersBackgroundGradientColor2: this.properties.filterBackgroundGradientColor2 ?? DEFAULTS_CONFIG.filterSettings.background.gradientColor2,
-  categoryFiltersBackgroundGradientAlpha2: this.properties.filterBackgroundGradientAlpha2 ?? DEFAULTS_CONFIG.filterSettings.background.gradientAlpha2,
-  showPillsDivider: this.properties.filterShowDivider ?? DEFAULTS_CONFIG.filterSettings.showDivider
+// Add to render() method (nested property mapping like Title component)
+const filterSettings = {
+  enabled: this.properties.filterEnabled ?? DEFAULTS_CONFIG.filterSettings.enabled,
+  font: {
+    family: this.properties.filterFont ?? DEFAULTS_CONFIG.filterSettings.font.family,
+    size: this.properties.filterFontSize ?? DEFAULTS_CONFIG.filterSettings.font.size,
+    color: this.properties.filterFontColor ?? DEFAULTS_CONFIG.filterSettings.font.color,
+    formatting: this.properties.filterFormatting ?? DEFAULTS_CONFIG.filterSettings.font.formatting,
+    alignment: this.properties.filterAlignment ?? DEFAULTS_CONFIG.filterSettings.font.alignment // NEW
+  },
+  activeColors: {
+    background: this.properties.filterActiveBackground ?? DEFAULTS_CONFIG.filterSettings.activeColors.background,
+    font: this.properties.filterActiveFont ?? DEFAULTS_CONFIG.filterSettings.activeColors.font
+  },
+  inactiveColors: {
+    background: this.properties.filterInactiveBackground ?? DEFAULTS_CONFIG.filterSettings.inactiveColors.background,
+    font: this.properties.filterInactiveFont ?? DEFAULTS_CONFIG.filterSettings.inactiveColors.font
+  },
+  shape: this.properties.filterShape ?? DEFAULTS_CONFIG.filterSettings.shape,
+  background: {
+    type: this.properties.filterBackgroundType ?? DEFAULTS_CONFIG.filterSettings.background.type,
+    color: this.properties.filterBackgroundColor ?? DEFAULTS_CONFIG.filterSettings.background.color,
+    alpha: this.properties.filterBackgroundAlpha ?? DEFAULTS_CONFIG.filterSettings.background.alpha,
+    image: this.properties.filterBackgroundImage ?? DEFAULTS_CONFIG.filterSettings.background.image,
+    imageAlpha: this.properties.filterBackgroundImageAlpha ?? DEFAULTS_CONFIG.filterSettings.background.imageAlpha, // NEW
+    gradientDirection: this.properties.filterBackgroundGradientDirection ?? DEFAULTS_CONFIG.filterSettings.background.gradientDirection,
+    gradientColor1: this.properties.filterBackgroundGradientColor1 ?? DEFAULTS_CONFIG.filterSettings.background.gradientColor1,
+    gradientAlpha1: this.properties.filterBackgroundGradientAlpha1 ?? DEFAULTS_CONFIG.filterSettings.background.gradientAlpha1,
+    gradientColor2: this.properties.filterBackgroundGradientColor2 ?? DEFAULTS_CONFIG.filterSettings.background.gradientColor2,
+    gradientAlpha2: this.properties.filterBackgroundGradientAlpha2 ?? DEFAULTS_CONFIG.filterSettings.background.gradientAlpha2
+  },
+  showDivider: this.properties.filterShowDivider ?? DEFAULTS_CONFIG.filterSettings.showDivider
 };
 ```
 
 ---
 
-## **📚 LESSONS LEARNED FROM TITLE COMPONENT**
+## **📚 LESSONS LEARNED FROM TITLE COMPONENT & FONTCONTROL**
 
 ### **✅ Key Improvements Applied:**
 
@@ -89,12 +121,17 @@ const filterProps = {
    - **Solution**: Move divider outside component in main render method
    - **Implementation**: Position between filters and list items with proper margins
 
-4. **Image Validation**:
+4. **Text Alignment Support**:
+   - **Problem**: Filters need text alignment control
+   - **Solution**: Add alignment to font object (from FontControl)
+   - **Implementation**: Use `textAlign` in filter button styling
+
+5. **Image Validation**:
    - **Problem**: Need immediate feedback for invalid image types
    - **Solution**: File extension validation with `validateImageFileType()` method
    - **Implementation**: Check for .jpg, .jpeg, .png, .gif, .webp extensions
 
-5. **State Management**:
+6. **State Management**:
    - **Problem**: Need to track image loading and validation states
    - **Solution**: Add `filterImageValidationError` and `filterImageLoadError` to component state
    - **Implementation**: Use `componentDidMount` and `componentDidUpdate` to check images
@@ -106,37 +143,39 @@ const filterProps = {
 ### **Step 2.1: Add Filter Utility Methods**
 **File:** `src/webparts/fancyList/components/FancyList.tsx`
 **Changes:**
-- Add `getFilterBorderRadius()` helper (like Compare backup)
+- Add `getFilterBorderRadius()` helper
 - Add `getFilterBackgroundStyle()` method for container background
-- Add `getFilterImageErrorState()` for image validation (like Title component)
+- Add `getFilterImageErrorState()` for image validation
 - Reuse existing utility methods (`getGradientStyle`, `hexToRgba`, `validateImageFileType`)
 
 ```typescript
-// Add filter utility methods (like Compare backup pattern)
+// Add filter utility methods (like Title component pattern)
 private getFilterBorderRadius(shape: string): string {
   return shape === 'square' ? '0px'
     : shape === 'pill' ? '999px'
     : '16px'; // rounded default
 }
 
-private getFilterBackgroundStyle(props: any): React.CSSProperties {
-  if (props.categoryFiltersBackgroundType === 'solid') {
+private getFilterBackgroundStyle(filterSettings: any): React.CSSProperties {
+  const { background } = filterSettings;
+  
+  if (background.type === 'solid') {
     return {
-      background: this.hexToRgba(props.categoryFiltersBackgroundColor, props.categoryFiltersBackgroundAlpha / 100)
+      background: this.hexToRgba(background.color, background.alpha / 100)
     };
-  } else if (props.categoryFiltersBackgroundType === 'gradient') {
+  } else if (background.type === 'gradient') {
     return {
       background: this.getGradientStyle(
-        props.categoryFiltersBackgroundGradientDirection,
-        props.categoryFiltersBackgroundGradientColor1,
-        props.categoryFiltersBackgroundGradientColor2,
-        props.categoryFiltersBackgroundGradientAlpha1 / 100
+        background.gradientDirection,
+        background.gradientColor1,
+        background.gradientColor2,
+        background.gradientAlpha1 / 100
       )
     };
-  } else if (props.categoryFiltersBackgroundType === 'image') {
-    if (props.categoryFiltersBackgroundImage) {
+  } else if (background.type === 'image') {
+    if (background.image) {
       return {
-        backgroundImage: `url(${props.categoryFiltersBackgroundImage})`,
+        backgroundImage: `url(${background.image})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center'
       };
@@ -149,30 +188,13 @@ private getFilterBackgroundStyle(props: any): React.CSSProperties {
   return {};
 }
 
-// Add image error state tracking (like Title component)
-private getFilterImageErrorState(): { validationError: string | null; loadError: boolean } {
-  const { categoryFiltersBackgroundImage, categoryFiltersBackgroundType } = this.props;
-  
-  if (categoryFiltersBackgroundType !== 'image' || !categoryFiltersBackgroundImage) {
-    return { validationError: null, loadError: false };
-  }
-  
-  // Check file type validation
-  const validationError = this.validateImageFileType(categoryFiltersBackgroundImage);
-  
-  // Check load error (simplified - in real implementation would track state)
-  const loadError = false; // Would be tracked in component state
-  
-  return { validationError, loadError };
-}
-
 // Add filter image error state management (like Title component)
 private checkFilterImage(): void {
-  const { categoryFiltersBackgroundType, categoryFiltersBackgroundImage } = this.props;
+  const { filterSettings } = this.props;
   
-  if (categoryFiltersBackgroundType === 'image' && categoryFiltersBackgroundImage) {
+  if (filterSettings?.background?.type === 'image' && filterSettings.background.image) {
     // Validate file type
-    const validationError = this.validateImageFileType(categoryFiltersBackgroundImage);
+    const validationError = this.validateImageFileType(filterSettings.background.image);
     this.setState({ 
       filterImageValidationError: validationError,
       filterImageLoadError: false 
@@ -193,7 +215,7 @@ private checkFilterImage(): void {
           filterImageValidationError: null 
         });
       };
-      img.src = categoryFiltersBackgroundImage;
+      img.src = filterSettings.background.image;
     }
   } else {
     this.setState({ 
@@ -208,107 +230,127 @@ private checkFilterImage(): void {
 **File:** `src/webparts/fancyList/components/FancyList.tsx`
 **Changes:**
 - Replace existing filter rendering with new implementation
-- Use individual properties (like Compare backup)
+- Use nested filterSettings object
 - Apply direct inline styling for filter buttons
-- Add background container styling
+- Add background container styling with layered transparency
 
 ```typescript
 // Replace existing filter rendering in render() method
-{/* Category Filter Pills */}
-<div
-  className={styles.categoryFilters}
-  style={this.getFilterBackgroundStyle(this.props)}
->
-  {/* Layer 1: Transparency overlay for image backgrounds */}
-  {this.props.categoryFiltersBackgroundType === 'image' && 
-   this.props.categoryFiltersBackgroundImage && 
-   !this.state.filterImageError && 
-   this.props.categoryFiltersBackgroundImageAlpha !== undefined && 
-   this.props.categoryFiltersBackgroundImageAlpha > 0 && (
+{filterSettings?.enabled && (
+  <>
+    {/* Category Filter Pills */}
     <div
+      className={styles.categoryFilters}
       style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        background: `rgba(255,255,255,${this.props.categoryFiltersBackgroundImageAlpha / 100})`,
-        pointerEvents: 'none',
-        zIndex: 1
+        ...this.getFilterBackgroundStyle(filterSettings),
+        position: 'relative',
+        padding: '12px',
+        marginBottom: '12px'
       }}
-    />
-  )}
-  
-  {/* Layer 2: Filter buttons */}
-  <div style={{ position: 'relative', zIndex: 2 }}>
-    {this.props.showAllCategories && (
-      <button
-        className={`${styles.categoryFilter} ${selectedCategory === 'all' ? styles.active : ''}`}
+    >
+      {/* Layer 1: Transparency overlay for image backgrounds */}
+      {filterSettings.background.type === 'image' && 
+       filterSettings.background.image && 
+       !this.state.filterImageValidationError && 
+       !this.state.filterImageLoadError && 
+       filterSettings.background.imageAlpha !== undefined && 
+       filterSettings.background.imageAlpha > 0 && (
+        <div
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: `rgba(255,255,255,${filterSettings.background.imageAlpha / 100})`,
+            pointerEvents: 'none',
+            zIndex: 1
+          }}
+        />
+      )}
+      
+      {/* Layer 2: Filter buttons */}
+      <div style={{ 
+        position: 'relative', 
+        zIndex: 2,
+        textAlign: filterSettings.font.alignment || 'left' // NEW - text alignment
+      }}>
+        {this.props.showAllCategories && (
+          <button
+            className={`${styles.categoryFilter} ${selectedCategory === 'all' ? styles.active : ''}`}
+            style={{
+              background: selectedCategory === 'all' ? filterSettings.activeColors.background : filterSettings.inactiveColors.background,
+              color: selectedCategory === 'all' ? filterSettings.activeColors.font : filterSettings.inactiveColors.font,
+              fontFamily: filterSettings.font.family,
+              fontSize: filterSettings.font.size,
+              fontWeight: filterSettings.font.formatting.bold ? 'bold' : 'normal',
+              fontStyle: filterSettings.font.formatting.italic ? 'italic' : 'normal',
+              textDecoration: this.getTextDecoration(filterSettings.font.formatting),
+              borderRadius: this.getFilterBorderRadius(filterSettings.shape),
+              border: 'none',
+              padding: '8px 16px',
+              margin: '4px',
+              cursor: 'pointer',
+              transition: 'all 0.2s ease'
+            }}
+            onClick={() => this.handleCategoryClick('all')}
+          >
+            All
+          </button>
+        )}
+        {categories.map(category => (
+          <button
+            key={category}
+            className={`${styles.categoryFilter} ${selectedCategory === category ? styles.active : ''}`}
+            style={{
+              background: selectedCategory === category ? filterSettings.activeColors.background : filterSettings.inactiveColors.background,
+              color: selectedCategory === category ? filterSettings.activeColors.font : filterSettings.inactiveColors.font,
+              fontFamily: filterSettings.font.family,
+              fontSize: filterSettings.font.size,
+              fontWeight: filterSettings.font.formatting.bold ? 'bold' : 'normal',
+              fontStyle: filterSettings.font.formatting.italic ? 'italic' : 'normal',
+              textDecoration: this.getTextDecoration(filterSettings.font.formatting),
+              borderRadius: this.getFilterBorderRadius(filterSettings.shape),
+              border: 'none',
+              padding: '8px 16px',
+              margin: '4px',
+              cursor: 'pointer',
+              transition: 'all 0.2s ease'
+            }}
+            onClick={() => this.handleCategoryClick(category)}
+          >
+            {category}
+          </button>
+        ))}
+      </div>
+    </div>
+
+    {/* Filter Image Error Message - positioned below filter section */}
+    {(this.state.filterImageValidationError || this.state.filterImageLoadError) && (
+      <div
         style={{
-          background: selectedCategory === 'all' ? this.props.categoryFilterActiveColor : this.props.categoryFilterInactiveColor,
-          color: selectedCategory === 'all' ? this.props.categoryFilterActiveFontColor : this.props.categoryFilterInactiveFontColor,
-          fontFamily: this.props.categoryFilterFont,
-          fontSize: this.props.categoryFilterFontSize,
-          borderRadius: this.getFilterBorderRadius(this.props.categoryFilterShape),
-          border: 'none',
-          padding: '8px 16px',
-          margin: '4px',
-          cursor: 'pointer',
-          transition: 'all 0.2s ease'
+          fontSize: '12px',
+          fontFamily: 'Arial, sans-serif',
+          color: '#000000',
+          textAlign: 'right',
+          marginTop: '8px',
+          marginBottom: '8px'
         }}
-        onClick={() => this.handleCategoryClick('all')}
       >
-        All
-      </button>
+        {this.state.filterImageValidationError || (this.state.filterImageLoadError ? 'Unable to access URL' : '')}
+      </div>
     )}
-    {categories.map(category => (
-      <button
-        key={category}
-        className={`${styles.categoryFilter} ${selectedCategory === category ? styles.active : ''}`}
-        style={{
-          background: selectedCategory === category ? this.props.categoryFilterActiveColor : this.props.categoryFilterInactiveColor,
-          color: selectedCategory === category ? this.props.categoryFilterActiveFontColor : this.props.categoryFilterInactiveFontColor,
-          fontFamily: this.props.categoryFilterFont,
-          fontSize: this.props.categoryFilterFontSize,
-          borderRadius: this.getFilterBorderRadius(this.props.categoryFilterShape),
-          border: 'none',
-          padding: '8px 16px',
-          margin: '4px',
-          cursor: 'pointer',
-          transition: 'all 0.2s ease'
-        }}
-        onClick={() => this.handleCategoryClick(category)}
-      >
-        {category}
-      </button>
-    ))}
-  </div>
-</div>
 
-{/* Filter Image Error Message - positioned below filter section */}
-{(this.state.filterImageValidationError || this.state.filterImageLoadError) && (
-  <div
-    style={{
-      fontSize: '12px',
-      fontFamily: 'Arial, sans-serif',
-      color: '#000000',
-      textAlign: 'right',
-      marginTop: '8px',
-      marginBottom: '8px'
-    }}
-  >
-    {this.state.filterImageValidationError || (this.state.filterImageLoadError ? 'Unable to access URL' : '')}
-  </div>
-)}
-
-{/* Filter Divider - positioned between filters and list items */}
-{this.props.showPillsDivider && (
-  <div style={{
-    height: '1px',
-    backgroundColor: 'rgba(0, 0, 0, 0.1)',
-    marginTop: '12px',
-    marginBottom: '12px'
-  }} />
+    {/* Filter Divider - positioned between filters and list items */}
+    {filterSettings.showDivider && (
+      <div style={{
+        height: '1px',
+        backgroundColor: 'rgba(0, 0, 0, 0.1)',
+        marginTop: '12px',
+        marginBottom: '12px'
+      }} />
+    )}
+  </>
 )}
 ```
 
@@ -319,19 +361,69 @@ private checkFilterImage(): void {
 ### **Step 3.1: Update Component Props**
 **File:** `src/webparts/fancyList/FancyListWebPart.ts`
 **Changes:**
-- Pass individual filter properties to `FancyList` component
-- Use spread operator to pass all filter properties
+- Pass filterSettings object to `FancyList` component
+- Add filterSettings to IFancyListProps
 
 ```typescript
 // In React.createElement(FancyList, { ... })
 React.createElement(FancyList, {
   // ... existing props
-  ...filterProps, // Spread all filter properties
+  filterSettings: filterSettings,
   titleSettings: titleSettings
 });
 ```
 
-### **Step 3.2: Build & Test**
+### **Step 3.2: Update FilterModuleControl**
+**File:** `src/webparts/fancyList/propertyPane/FilterModuleControl.tsx`
+**Changes:**
+- Add alignment support to FontControl
+- Update reset button to include alignment reset
+
+```typescript
+// Add alignment to FontControl props
+<FontControl
+  fontFamily={settings.font.family}
+  fontSize={settings.font.size}
+  formatting={settings.font.formatting}
+  alignment={settings.font.alignment} // NEW
+  onChange={handleFontChange}
+  label="Filter Font"
+/>
+
+// Update reset button to include alignment
+handleFontChange({
+  fontFamily: DEFAULTS_CONFIG.filterSettings.font.family,
+  fontSize: DEFAULTS_CONFIG.filterSettings.font.size,
+  formatting: DEFAULTS_CONFIG.filterSettings.font.formatting,
+  alignment: DEFAULTS_CONFIG.filterSettings.font.alignment // NEW
+});
+```
+
+### **Step 3.3: Update DEFAULTS_CONFIG**
+**File:** `src/webparts/fancyList/DEFAULTS_CONFIG.ts`
+**Changes:**
+- Add alignment to filterSettings.font
+- Add imageAlpha to filterSettings.background
+
+```typescript
+// Update filterSettings in DEFAULTS_CONFIG
+filterSettings: {
+  // ... existing settings
+  font: {
+    family: 'inherit',
+    size: '14px',
+    color: '#605e5c',
+    formatting: { bold: false, italic: false, underline: false, strikethrough: false },
+    alignment: 'center' // NEW - default center alignment for filters
+  },
+  background: {
+    // ... existing settings
+    imageAlpha: 0 // NEW - default no transparency
+  }
+}
+```
+
+### **Step 3.4: Build & Test**
 **Actions:**
 1. Run `gulp build` to verify no TypeScript errors
 2. Test in SharePoint Online Workbench
@@ -341,6 +433,7 @@ React.createElement(FancyList, {
 6. Test background controls (solid, gradient, image)
 7. Test shape controls
 8. Test divider toggle
+9. Test text alignment controls
 
 ---
 
@@ -356,6 +449,7 @@ React.createElement(FancyList, {
 2. **Font Controls** ✅
    - [ ] Font family changes filter text appearance
    - [ ] Font size changes filter text size
+   - [ ] **Text alignment** changes filter button alignment (NEW)
 
 3. **Color Controls** ✅
    - [ ] Active background color changes selected filter background
@@ -395,25 +489,33 @@ React.createElement(FancyList, {
    - [ ] Filter state resets when changing list selection
    - [ ] Filter state works with title rendering
 
+3. **Reset Button Testing** ✅
+   - [ ] Reset button resets all filter settings including alignment
+   - [ ] Reset button works for font, colors, shape, background
+   - [ ] Reset button restores default values correctly
+
 ---
 
 ## **📊 SUCCESS CRITERIA**
 
 ### **✅ Phase 1 Success:**
-- [ ] IFancyListProps updated with individual filter properties
+- [ ] IFancyListProps updated with nested filterSettings object
 - [ ] FancyListWebPart property mapping complete
 - [ ] No TypeScript compilation errors
 
 ### **✅ Phase 2 Success:**
 - [ ] Filter utility methods implemented
-- [ ] Filter rendering updated with individual properties
+- [ ] Filter rendering updated with nested properties
 - [ ] All filter controls affect visual output
 - [ ] **Layered transparency system** implemented for image backgrounds
 - [ ] **Professional error handling** with file validation and load error detection
 - [ ] **Proper divider positioning** between filters and list items
+- [ ] **Text alignment support** working for filter buttons
 
 ### **✅ Phase 3 Success:**
 - [ ] Component integration complete
+- [ ] FilterModuleControl updated with alignment support
+- [ ] DEFAULTS_CONFIG updated with alignment and imageAlpha
 - [ ] Build passes without errors
 - [ ] Basic functionality working
 
@@ -425,18 +527,22 @@ React.createElement(FancyList, {
 - [ ] **Image transparency** working with layered system
 - [ ] **Error handling** providing user-friendly feedback positioned below filters
 - [ ] **Divider positioning** correctly placed between filters and content
+- [ ] **Text alignment** working for filter buttons
+- [ ] **Reset button** working for all settings including alignment
 
 ---
 
 ## **🎯 IMPLEMENTATION ORDER**
 
-1. **Phase 1.1**: Update IFancyListProps interface with individual properties
+1. **Phase 1.1**: Update IFancyListProps interface with nested filterSettings object
 2. **Phase 1.2**: Update FancyListWebPart property mapping
 3. **Phase 2.1**: Add filter utility methods and image error state management
 4. **Phase 2.2**: Update filter rendering with layered transparency and error handling
 5. **Phase 3.1**: Update component props integration
-6. **Phase 3.2**: Build and initial test
-7. **Phase 4**: Comprehensive UI validation including transparency and error handling
+6. **Phase 3.2**: Update FilterModuleControl with alignment support
+7. **Phase 3.3**: Update DEFAULTS_CONFIG with alignment and imageAlpha
+8. **Phase 3.4**: Build and initial test
+9. **Phase 4**: Comprehensive UI validation including transparency, error handling, and alignment
 
 ---
 
@@ -444,11 +550,12 @@ React.createElement(FancyList, {
 
 - **Phase 1**: 30 minutes
 - **Phase 2**: 45 minutes
-- **Phase 3**: 15 minutes
+- **Phase 3**: 30 minutes
 - **Phase 4**: 30 minutes
-- **Total**: ~2 hours
+- **Total**: ~2.5 hours
 
 ---
 
 *Created: July 2025*
-*Based on: Compare backup analysis and Title component implementation pattern* 
+*Updated: July 27, 2025*
+*Based on: Current nested object architecture and lessons from Title component & FontControl implementation* 
