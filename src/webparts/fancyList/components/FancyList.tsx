@@ -567,7 +567,7 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
                 zIndex: 2,
                 textAlign: this.props.filterSettings?.font?.alignment || 'left'
               }}>
-                {this.props.showAllCategories && (
+                {this.props.filterSettings?.showAllCategories && (
                   <button
                     className={`${styles.categoryPill} ${selectedCategory === 'all' ? styles.active : ''}`}
                     style={{

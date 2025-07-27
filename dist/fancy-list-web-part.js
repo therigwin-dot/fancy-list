@@ -724,8 +724,8 @@ var FancyList = /** @class */ (function (_super) {
     };
     FancyList.prototype.render = function () {
         var _this = this;
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, _23, _24;
-        var _25 = this.state, loading = _25.loading, error = _25.error, categories = _25.categories, selectedCategory = _25.selectedCategory, expandedItems = _25.expandedItems;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, _23, _24, _25;
+        var _26 = this.state, loading = _26.loading, error = _26.error, categories = _26.categories, selectedCategory = _26.selectedCategory, expandedItems = _26.expandedItems;
         var filteredItems = this.getFilteredItems();
         if (loading) {
             return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].fancyList },
@@ -783,15 +783,15 @@ var FancyList = /** @class */ (function (_super) {
                             zIndex: 2,
                             textAlign: ((_y = (_x = this.props.filterSettings) === null || _x === void 0 ? void 0 : _x.font) === null || _y === void 0 ? void 0 : _y.alignment) || 'left'
                         } },
-                        this.props.showAllCategories && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { className: "".concat(_FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].categoryPill, " ").concat(selectedCategory === 'all' ? _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].active : ''), style: {
-                                background: selectedCategory === 'all' ? (_0 = (_z = this.props.filterSettings) === null || _z === void 0 ? void 0 : _z.activeColors) === null || _0 === void 0 ? void 0 : _0.background : (_2 = (_1 = this.props.filterSettings) === null || _1 === void 0 ? void 0 : _1.inactiveColors) === null || _2 === void 0 ? void 0 : _2.background,
-                                color: selectedCategory === 'all' ? (_4 = (_3 = this.props.filterSettings) === null || _3 === void 0 ? void 0 : _3.activeColors) === null || _4 === void 0 ? void 0 : _4.font : (_6 = (_5 = this.props.filterSettings) === null || _5 === void 0 ? void 0 : _5.inactiveColors) === null || _6 === void 0 ? void 0 : _6.font,
-                                fontFamily: (_8 = (_7 = this.props.filterSettings) === null || _7 === void 0 ? void 0 : _7.font) === null || _8 === void 0 ? void 0 : _8.family,
-                                fontSize: (_10 = (_9 = this.props.filterSettings) === null || _9 === void 0 ? void 0 : _9.font) === null || _10 === void 0 ? void 0 : _10.size,
-                                fontWeight: ((_13 = (_12 = (_11 = this.props.filterSettings) === null || _11 === void 0 ? void 0 : _11.font) === null || _12 === void 0 ? void 0 : _12.formatting) === null || _13 === void 0 ? void 0 : _13.bold) ? 'bold' : 'normal',
-                                fontStyle: ((_16 = (_15 = (_14 = this.props.filterSettings) === null || _14 === void 0 ? void 0 : _14.font) === null || _15 === void 0 ? void 0 : _15.formatting) === null || _16 === void 0 ? void 0 : _16.italic) ? 'italic' : 'normal',
-                                textDecoration: this.getTextDecoration(((_18 = (_17 = this.props.filterSettings) === null || _17 === void 0 ? void 0 : _17.font) === null || _18 === void 0 ? void 0 : _18.formatting) || { bold: false, italic: false, underline: false, strikethrough: false }),
-                                borderRadius: this.getFilterBorderRadius(((_19 = this.props.filterSettings) === null || _19 === void 0 ? void 0 : _19.shape) || 'rounded'),
+                        ((_z = this.props.filterSettings) === null || _z === void 0 ? void 0 : _z.showAllCategories) && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { className: "".concat(_FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].categoryPill, " ").concat(selectedCategory === 'all' ? _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].active : ''), style: {
+                                background: selectedCategory === 'all' ? (_1 = (_0 = this.props.filterSettings) === null || _0 === void 0 ? void 0 : _0.activeColors) === null || _1 === void 0 ? void 0 : _1.background : (_3 = (_2 = this.props.filterSettings) === null || _2 === void 0 ? void 0 : _2.inactiveColors) === null || _3 === void 0 ? void 0 : _3.background,
+                                color: selectedCategory === 'all' ? (_5 = (_4 = this.props.filterSettings) === null || _4 === void 0 ? void 0 : _4.activeColors) === null || _5 === void 0 ? void 0 : _5.font : (_7 = (_6 = this.props.filterSettings) === null || _6 === void 0 ? void 0 : _6.inactiveColors) === null || _7 === void 0 ? void 0 : _7.font,
+                                fontFamily: (_9 = (_8 = this.props.filterSettings) === null || _8 === void 0 ? void 0 : _8.font) === null || _9 === void 0 ? void 0 : _9.family,
+                                fontSize: (_11 = (_10 = this.props.filterSettings) === null || _10 === void 0 ? void 0 : _10.font) === null || _11 === void 0 ? void 0 : _11.size,
+                                fontWeight: ((_14 = (_13 = (_12 = this.props.filterSettings) === null || _12 === void 0 ? void 0 : _12.font) === null || _13 === void 0 ? void 0 : _13.formatting) === null || _14 === void 0 ? void 0 : _14.bold) ? 'bold' : 'normal',
+                                fontStyle: ((_17 = (_16 = (_15 = this.props.filterSettings) === null || _15 === void 0 ? void 0 : _15.font) === null || _16 === void 0 ? void 0 : _16.formatting) === null || _17 === void 0 ? void 0 : _17.italic) ? 'italic' : 'normal',
+                                textDecoration: this.getTextDecoration(((_19 = (_18 = this.props.filterSettings) === null || _18 === void 0 ? void 0 : _18.font) === null || _19 === void 0 ? void 0 : _19.formatting) || { bold: false, italic: false, underline: false, strikethrough: false }),
+                                borderRadius: this.getFilterBorderRadius(((_20 = this.props.filterSettings) === null || _20 === void 0 ? void 0 : _20.shape) || 'rounded'),
                                 border: 'none',
                                 padding: '8px 16px',
                                 margin: '4px',
@@ -817,7 +817,7 @@ var FancyList = /** @class */ (function (_super) {
                                 }, onClick: function () { return _this.handleCategoryClick(category); } }, category));
                         }))),
                 (this.state.filterImageValidationError || this.state.filterImageLoadError ||
-                    (((_21 = (_20 = this.props.filterSettings) === null || _20 === void 0 ? void 0 : _20.background) === null || _21 === void 0 ? void 0 : _21.type) === 'image' && !((_23 = (_22 = this.props.filterSettings) === null || _22 === void 0 ? void 0 : _22.background) === null || _23 === void 0 ? void 0 : _23.image))) && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                    (((_22 = (_21 = this.props.filterSettings) === null || _21 === void 0 ? void 0 : _21.background) === null || _22 === void 0 ? void 0 : _22.type) === 'image' && !((_24 = (_23 = this.props.filterSettings) === null || _23 === void 0 ? void 0 : _23.background) === null || _24 === void 0 ? void 0 : _24.image))) && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
                         fontSize: '12px',
                         fontFamily: 'Arial, sans-serif',
                         color: '#000000',
@@ -827,7 +827,7 @@ var FancyList = /** @class */ (function (_super) {
                     } }, this.state.filterImageValidationError ||
                     (this.state.filterImageLoadError ? 'Unable to access URL' : '') ||
                     'Please enter an image URL')),
-                ((_24 = this.props.filterSettings) === null || _24 === void 0 ? void 0 : _24.showDivider) && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                ((_25 = this.props.filterSettings) === null || _25 === void 0 ? void 0 : _25.showDivider) && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
                         height: '1px',
                         backgroundColor: 'rgba(0, 0, 0, 0.1)',
                         marginTop: '12px',
