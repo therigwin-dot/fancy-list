@@ -696,7 +696,7 @@ var FancyList = /** @class */ (function (_super) {
             titleSettings: titleSettings,
             enabled: titleSettings === null || titleSettings === void 0 ? void 0 : titleSettings.enabled,
             willRender: (titleSettings === null || titleSettings === void 0 ? void 0 : titleSettings.enabled) !== false
-        });
+        }, 'TITLE SETTINGS FULL:', titleSettings);
         // If no titleSettings, render a default title (like Compare backup)
         if (!titleSettings) {
             return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: this.getTitleStyle() }, "Fancy List"));
@@ -764,7 +764,7 @@ var FancyList = /** @class */ (function (_super) {
                 filterSettings: this.props.filterSettings,
                 enabled: (_d = this.props.filterSettings) === null || _d === void 0 ? void 0 : _d.enableFilters,
                 willRender: ((_e = this.props.filterSettings) === null || _e === void 0 ? void 0 : _e.enableFilters) === true
-            }),
+            }, 'FILTER SETTINGS FULL:', this.props.filterSettings),
             ((_f = this.props.filterSettings) === null || _f === void 0 ? void 0 : _f.enableFilters) && (react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null,
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].categoryFilters, style: __assign(__assign({}, this.getFilterBackgroundStyle(this.props.filterSettings)), { position: 'relative', padding: '12px', marginBottom: '12px' }) },
                     ((_h = (_g = this.props.filterSettings) === null || _g === void 0 ? void 0 : _g.background) === null || _h === void 0 ? void 0 : _h.type) === 'image' &&

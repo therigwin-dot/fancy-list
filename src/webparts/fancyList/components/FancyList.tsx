@@ -416,11 +416,11 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     const { titleSettings } = this.props;
     const { titleImageError } = this.state;
     
-    console.log('🔍 TITLE DEBUG:', {
-      titleSettings: titleSettings,
-      enabled: titleSettings?.enabled,
-      willRender: titleSettings?.enabled !== false
-    });
+            console.log('🔍 TITLE DEBUG:', {
+          titleSettings: titleSettings,
+          enabled: titleSettings?.enabled,
+          willRender: titleSettings?.enabled !== false
+        }, 'TITLE SETTINGS FULL:', titleSettings);
     
     // If no titleSettings, render a default title (like Compare backup)
     if (!titleSettings) {
@@ -531,7 +531,7 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
           filterSettings: this.props.filterSettings,
           enabled: this.props.filterSettings?.enableFilters,
           willRender: this.props.filterSettings?.enableFilters === true
-        })}
+        }, 'FILTER SETTINGS FULL:', this.props.filterSettings)}
         {this.props.filterSettings?.enableFilters && (
           <>
             <div
