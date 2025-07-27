@@ -107,7 +107,7 @@
 4. **Reset Button Incomplete** - Only resets divider and shape control
 5. **Shape Control Default Wrong** - Reverts to pill instead of rounded
 6. **Color Picker Positioning** - Acceptable bug, on back burner
-7. **Missing "All" Filter Button Toggle** - Need to add this control
+7. **✅ Missing "All" Filter Button Toggle** - ✅ **FIXED** - Added "Default Filter Selection" section with "All" filter toggle
 
 **Working Features:**
 - ✅ **Filter Enabled Toggle** - Now working perfectly (property change handler fixed)
