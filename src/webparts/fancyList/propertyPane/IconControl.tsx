@@ -175,20 +175,20 @@ export const IconControl: React.FC<IconControlProps> = ({
           <div style={{ 
             display: 'flex', 
             alignItems: 'center', 
-            gap: '12px'
+            gap: '8px'
           }}>
             {/* Collapsed */}
-            <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '6px' }}>
               <div style={{ 
                 fontSize: '14px', 
                 fontWeight: '600', 
                 color: '#323130',
-                minWidth: '40px',
+                minWidth: '35px',
                 lineHeight: '1'
               }}>
                 Coll
               </div>
-              <div style={{ flex: 1 }}>
+              <div style={{ flex: 1, minWidth: '40px' }}>
                 <ComboBox
                   options={collapsedIconOptions}
                   text={settings.collapsedIcon}
@@ -211,17 +211,17 @@ export const IconControl: React.FC<IconControlProps> = ({
             </div>
 
             {/* Expanded */}
-            <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '6px' }}>
               <div style={{ 
                 fontSize: '14px', 
                 fontWeight: '600', 
                 color: '#323130',
-                minWidth: '40px',
+                minWidth: '35px',
                 lineHeight: '1'
               }}>
                 Exp
               </div>
-              <div style={{ flex: 1 }}>
+              <div style={{ flex: 1, minWidth: '40px' }}>
                 <ComboBox
                   options={expandedIconOptions}
                   text={settings.expandedIcon}

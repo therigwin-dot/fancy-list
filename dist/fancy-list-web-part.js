@@ -1125,17 +1125,17 @@ var IconControl = function (_a) {
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
                     display: 'flex',
                     alignItems: 'center',
-                    gap: '12px'
+                    gap: '8px'
                 } },
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { flex: 1, display: 'flex', alignItems: 'center', gap: '8px' } },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { flex: 1, display: 'flex', alignItems: 'center', gap: '6px' } },
                     react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
                             fontSize: '14px',
                             fontWeight: '600',
                             color: '#323130',
-                            minWidth: '40px',
+                            minWidth: '35px',
                             lineHeight: '1'
                         } }, "Coll"),
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { flex: 1 } },
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { flex: 1, minWidth: '40px' } },
                         react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_ComboBox__WEBPACK_IMPORTED_MODULE_2__.ComboBox, { options: collapsedIconOptions, text: settings.collapsedIcon, allowFreeform: true, autoComplete: "on", onChange: function (_, option, __, text) {
                                 if (option) {
                                     handleCollapsedIconChange(option.key);
@@ -1145,15 +1145,15 @@ var IconControl = function (_a) {
                                 }
                             } })),
                     react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_3__.IconButton, { iconProps: { iconName: 'Emoji2' }, title: "Open emoji picker", onClick: function () { return openEmojiPicker('collapsed'); } })),
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { flex: 1, display: 'flex', alignItems: 'center', gap: '8px' } },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { flex: 1, display: 'flex', alignItems: 'center', gap: '6px' } },
                     react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
                             fontSize: '14px',
                             fontWeight: '600',
                             color: '#323130',
-                            minWidth: '40px',
+                            minWidth: '35px',
                             lineHeight: '1'
                         } }, "Exp"),
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { flex: 1 } },
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { flex: 1, minWidth: '40px' } },
                         react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_ComboBox__WEBPACK_IMPORTED_MODULE_2__.ComboBox, { options: expandedIconOptions, text: settings.expandedIcon, allowFreeform: true, autoComplete: "on", onChange: function (_, option, __, text) {
                                 if (option) {
                                     handlePropertyChange('expandedIcon', option.key);
@@ -1418,7 +1418,12 @@ var SectionModuleControl = function (_a) {
                 lineHeight: '1.4',
                 marginBottom: '16px'
             } }, getSectionDescription()),
-        sectionType !== 'description' && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
+        sectionType !== 'description' && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                backgroundColor: '#f3f2f1',
+                padding: '12px',
+                borderRadius: '4px',
+                marginBottom: 16
+            } },
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_IconControl__WEBPACK_IMPORTED_MODULE_1__.IconControl, { label: "Expand/Collapse Icons", settings: sectionSettings.iconSettings, onChange: function (iconSettings) {
                     var newSettings = __assign(__assign({}, sectionSettings), { iconSettings: iconSettings });
                     onChange(newSettings);
@@ -1516,9 +1521,20 @@ var SectionModuleControl = function (_a) {
                         }
                     }, showValue: true, valueFormat: function (value) { return "".concat(value, "%"); } }))),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ShapePickerControl__WEBPACK_IMPORTED_MODULE_2__.ShapePickerControl, { label: "Shape", value: sectionSettings.shape, onChange: function (shape) { return handlePropertyChange('shape', shape); } })),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ShapePickerControl__WEBPACK_IMPORTED_MODULE_2__.ShapePickerControl, { label: "", value: sectionSettings.shape, onChange: function (shape) { return handlePropertyChange('shape', shape); } })),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_4__.ColorPickerControl, { color: sectionSettings.hoverColor, field: "hoverColor", label: "Hover Color", onChange: function (field, newColor) { return handlePropertyChange('hoverColor', newColor); } })),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    marginBottom: '8px'
+                } },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                        fontSize: '14px',
+                        fontWeight: '600',
+                        color: '#323130'
+                    } }, "Hover"),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_4__.ColorPickerControl, { color: sectionSettings.hoverColor, field: "hoverColor", label: "", onChange: function (field, newColor) { return handlePropertyChange('hoverColor', newColor); } }))),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginTop: 16 } },
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_10__.PrimaryButton, { text: sectionSettings.resetButtonText, onClick: handleReset }))));
 };

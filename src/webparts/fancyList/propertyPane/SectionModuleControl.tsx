@@ -210,7 +210,12 @@ export const SectionModuleControl: React.FC<SectionModuleControlProps> = ({
 
       {/* 1. Icon Control - Only show for Category and Subject */}
       {sectionType !== 'description' && (
-        <div style={{ marginBottom: 16 }}>
+        <div style={{ 
+          backgroundColor: '#f3f2f1', 
+          padding: '12px', 
+          borderRadius: '4px',
+          marginBottom: 16 
+        }}>
           <IconControl
             label="Expand/Collapse Icons"
             settings={sectionSettings.iconSettings}
@@ -433,7 +438,7 @@ export const SectionModuleControl: React.FC<SectionModuleControlProps> = ({
       {/* 7. Shape Picker Control */}
       <div style={{ marginBottom: 16 }}>
         <ShapePickerControl
-          label="Shape"
+          label=""
           value={sectionSettings.shape}
           onChange={(shape) => handlePropertyChange('shape', shape)}
         />
@@ -441,12 +446,26 @@ export const SectionModuleControl: React.FC<SectionModuleControlProps> = ({
 
       {/* 8. Hover Color Control */}
       <div style={{ marginBottom: 16 }}>
-        <ColorPickerControl
-          color={sectionSettings.hoverColor}
-          field="hoverColor"
-          label="Hover Color"
-          onChange={(field: string, newColor: string) => handlePropertyChange('hoverColor', newColor)}
-        />
+        <div style={{ 
+          display: 'flex', 
+          alignItems: 'center', 
+          gap: '8px',
+          marginBottom: '8px'
+        }}>
+          <div style={{
+            fontSize: '14px',
+            fontWeight: '600',
+            color: '#323130'
+          }}>
+            Hover
+          </div>
+          <ColorPickerControl
+            color={sectionSettings.hoverColor}
+            field="hoverColor"
+            label=""
+            onChange={(field: string, newColor: string) => handlePropertyChange('hoverColor', newColor)}
+          />
+        </div>
       </div>
 
       {/* Reset Button */}
