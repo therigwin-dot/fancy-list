@@ -193,20 +193,74 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     return validExtensions.some(ext => lowerUrl.endsWith(ext));
   }
 
+  // Title Rendering Methods
+
+  private getTitleStyle(): React.CSSProperties {
+    const { titleSettings } = this.props;
+    if (!titleSettings || !titleSettings.enabled) return {};
+    
+    const { font } = titleSettings;
+    return {
+      fontFamily: font.family,
+      fontSize: font.size,
+      color: font.color,
+      ...this.getTextDecoration(font.formatting)
+    };
+  }
+
+  private getTextDecoration(formatting: {
+    bold: boolean;
+    italic: boolean;
+    underline: boolean;
+    strikethrough: boolean;
+  }): React.CSSProperties {
+    return {
+      fontWeight: formatting.bold ? 'bold' : 'normal',
+      fontStyle: formatting.italic ? 'italic' : 'normal',
+      textDecoration: [
+        formatting.underline ? 'underline' : '',
+        formatting.strikethrough ? 'line-through' : ''
+      ].filter(Boolean).join(' ') || 'none'
+    };
+  }
+
+  private renderTitle(): React.ReactElement | null {
+    const { titleSettings } = this.props;
+    if (!titleSettings || !titleSettings.enabled) return null;
+
+    const { webPartTitle, showDivider, backgroundType, imageUrl } = titleSettings;
+    
+    // Check for invalid image URL
+    if (backgroundType === 'image' && imageUrl && !this.isValidImageUrl(imageUrl)) {
+      return (
+        <div className={styles.titleContainer} style={this.getBackgroundStyle()}>
+          <div className={styles.titleError}>
+            <div className={styles.errorTitle} style={this.getTitleStyle()}>
+              Invalid Image URL
+            </div>
+            <div className={styles.errorMessage}>
+              Please provide a valid image file (.jpg, .jpeg, .png, .gif, .webp)
+            </div>
+          </div>
+          {showDivider && <div className={styles.titleDivider} />}
+        </div>
+      );
+    }
+
+    return (
+      <div className={styles.titleContainer} style={this.getBackgroundStyle()}>
+        <div className={styles.titleText} style={this.getTitleStyle()}>
+          {webPartTitle}
+        </div>
+        {showDivider && <div className={styles.titleDivider} />}
+      </div>
+    );
+  }
+
   public render(): React.ReactElement<IFancyListProps> {
     const { loading, error, categories, selectedCategory, expandedItems } = this.state;
     const filteredItems = this.getFilteredItems();
     
-    // Temporary usage to prevent TypeScript unused function warnings
-    // These will be used in Phase 3
-    if (this.props.titleSettings) {
-      this.getBackgroundStyle();
-      this.getShapeRadius('rounded');
-      this.getGradientStyle('left-right', '#ff0000', '#00ff00', 50);
-      this.hexToRgba('#ff0000', 50);
-      this.isValidImageUrl('test.jpg');
-    }
-
     if (loading) {
       return (
         <div className={styles.fancyList}>
@@ -225,6 +279,7 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
 
     return (
       <div className={styles.fancyList}>
+        {this.renderTitle()}
         {/* Category Filter Pills */}
         <div className={styles.categoryFilters}>
           {this.props.showAllCategories && (

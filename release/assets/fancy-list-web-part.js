@@ -16,23 +16,29 @@ __webpack_require__.r(__webpack_exports__);
 // Imports
 
 
-_node_modules_microsoft_sp_css_loader_node_modules_microsoft_load_themed_styles_lib_es6_index_js__WEBPACK_IMPORTED_MODULE_0__.loadStyles(".fancyList_74413b63{background:var(--background,#fff);color:var(--bodyText,#323130);font-family:Segoe UI,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;padding:1em}.categoryFilters_74413b63{border-bottom:1px solid var(--neutralLight,#edebe9);display:flex;flex-wrap:nowrap;gap:.5em;margin-bottom:1em;overflow-x:auto;padding-bottom:.5em}.categoryPill_74413b63{background:var(--neutralLighter,#f3f2f1);border:1px solid var(--neutralLight,#edebe9);border-radius:999px;color:var(--bodyText,#323130);cursor:pointer;display:inline-block;font-weight:500;outline:0;padding:.4em 1.2em;transition:background .2s,color .2s,border .2s}.categoryPill_74413b63:focus,.categoryPill_74413b63:hover{background:var(--themeLighter,#e5f1fb);border-color:var(--themePrimary,#0078d4);color:var(--themePrimary,#0078d4)}.categoryPill_74413b63.active_74413b63{background:var(--themePrimary,#0078d4);border-color:var(--themePrimary,#0078d4);color:var(--white,#fff)}.itemsContainer_74413b63{display:flex;flex-direction:column;gap:.7em}.itemPanel_74413b63{background:var(--white,#fff);border:1px solid var(--neutralLight,#edebe9);border-radius:6px;box-shadow:0 1px 3px rgba(0,0,0,.04);overflow:hidden}.itemHeader_74413b63{align-items:center;background:0 0;border:none;color:var(--bodyText,#323130);cursor:pointer;display:flex;font-size:1.1em;font-weight:600;justify-content:space-between;outline:0;padding:1em;text-align:left;transition:background .2s;width:100%}.itemHeader_74413b63:focus,.itemHeader_74413b63:hover{background:var(--neutralLighter,#f3f2f1)}.itemSubject_74413b63{flex:1 1 auto}.expandIcon_74413b63{color:var(--themePrimary,#0078d4);font-size:1.3em;margin-left:1em}.itemContent_74413b63{background:var(--neutralLighter,#f3f2f1);border-top:1px solid var(--neutralLight,#edebe9);padding:1em}.itemDescription_74413b63{color:var(--bodyText,#323130);font-size:1em}.error_74413b63,.loading_74413b63{color:var(--themePrimary,#0078d4);font-size:1.1em;padding:2em 0;text-align:center}@media (max-width:600px){.categoryFilters_74413b63{font-size:.95em;gap:.2em}.itemContent_74413b63,.itemHeader_74413b63{padding:.7em}}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImZpbGU6Ly8vb3B0L2N1cnNvci1wcm9qZWN0cy9GYW5jeUxpc3Qvc3JjL3dlYnBhcnRzL2ZhbmN5TGlzdC9jb21wb25lbnRzL0ZhbmN5TGlzdC5tb2R1bGUuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFFQSxvQkFHRSxpQ0FBQSxDQURBLDZCQUFBLENBRUEsc0ZBQUEsQ0FIQSxXQUdBLENBR0YsMEJBT0UsbURBQUEsQ0FOQSxZQUFBLENBQ0EsZ0JBQUEsQ0FFQSxRQUFBLENBQ0EsaUJBQUEsQ0FGQSxlQUFBLENBR0EsbUJBQ0EsQ0FHRix1QkFLRSx3Q0FBQSxDQURBLDRDQUFBLENBREEsbUJBQUEsQ0FHQSw2QkFBQSxDQUVBLGNBQUEsQ0FQQSxvQkFBQSxDQU1BLGVBQUEsQ0FHQSxTQUFBLENBUkEsa0JBQUEsQ0FPQSw4Q0FDQSxDQUNBLDBEQUNFLHNDQUFBLENBQ0Esd0NBQUEsQ0FDQSxpQ0FBQSxDQUVGLHVDQUNFLHNDQUFBLENBRUEsd0NBQUEsQ0FEQSx1QkFDQSxDQUlKLHlCQUNFLFlBQUEsQ0FDQSxxQkFBQSxDQUNBLFFBQUEsQ0FHRixvQkFHRSw0QkFBQSxDQURBLDRDQUFBLENBREEsaUJBQUEsQ0FHQSxvQ0FBQSxDQUNBLGVBQUEsQ0FHRixxQkFVRSxrQkFBQSxDQVJBLGNBQUEsQ0FDQSxXQUFBLENBS0EsNkJBQUEsQ0FJQSxjQUFBLENBSEEsWUFBQSxDQUhBLGVBQUEsQ0FDQSxlQUFBLENBSUEsNkJBQUEsQ0FFQSxTQUFBLENBVEEsV0FBQSxDQUNBLGVBQUEsQ0FTQSx5QkFBQSxDQWJBLFVBYUEsQ0FDQSxzREFDRSx3Q0FBQSxDQUlKLHNCQUNFLGFBQUEsQ0FHRixxQkFHRSxpQ0FBQSxDQUZBLGVBQUEsQ0FDQSxlQUNBLENBR0Ysc0JBRUUsd0NBQUEsQ0FDQSxnREFBQSxDQUZBLFdBRUEsQ0FHRiwwQkFFRSw2QkFBQSxDQURBLGFBQ0EsQ0FHRixrQ0FHRSxpQ0FBQSxDQUNBLGVBQUEsQ0FGQSxhQUFBLENBREEsaUJBR0EsQ0FHRix5QkFDRSwwQkFFRSxlQUFBLENBREEsUUFDQSxDQUVGLDJDQUNFLFlBQUEsQ0FBQSIsImZpbGUiOiJGYW5jeUxpc3QubW9kdWxlLmNzcyJ9 */", true);
+_node_modules_microsoft_sp_css_loader_node_modules_microsoft_load_themed_styles_lib_es6_index_js__WEBPACK_IMPORTED_MODULE_0__.loadStyles(".fancyList_85f5a1aa{background:var(--background,#fff);color:var(--bodyText,#323130);font-family:Segoe UI,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;padding:1em}.categoryFilters_85f5a1aa{border-bottom:1px solid var(--neutralLight,#edebe9);display:flex;flex-wrap:nowrap;gap:.5em;margin-bottom:1em;overflow-x:auto;padding-bottom:.5em}.categoryPill_85f5a1aa{background:var(--neutralLighter,#f3f2f1);border:1px solid var(--neutralLight,#edebe9);border-radius:999px;color:var(--bodyText,#323130);cursor:pointer;display:inline-block;font-weight:500;outline:0;padding:.4em 1.2em;transition:background .2s,color .2s,border .2s}.categoryPill_85f5a1aa:focus,.categoryPill_85f5a1aa:hover{background:var(--themeLighter,#e5f1fb);border-color:var(--themePrimary,#0078d4);color:var(--themePrimary,#0078d4)}.categoryPill_85f5a1aa.active_85f5a1aa{background:var(--themePrimary,#0078d4);border-color:var(--themePrimary,#0078d4);color:var(--white,#fff)}.itemsContainer_85f5a1aa{display:flex;flex-direction:column;gap:.7em}.itemPanel_85f5a1aa{background:var(--white,#fff);border:1px solid var(--neutralLight,#edebe9);border-radius:6px;box-shadow:0 1px 3px rgba(0,0,0,.04);overflow:hidden}.itemHeader_85f5a1aa{align-items:center;background:0 0;border:none;color:var(--bodyText,#323130);cursor:pointer;display:flex;font-size:1.1em;font-weight:600;justify-content:space-between;outline:0;padding:1em;text-align:left;transition:background .2s;width:100%}.itemHeader_85f5a1aa:focus,.itemHeader_85f5a1aa:hover{background:var(--neutralLighter,#f3f2f1)}.itemSubject_85f5a1aa{flex:1 1 auto}.expandIcon_85f5a1aa{color:var(--themePrimary,#0078d4);font-size:1.3em;margin-left:1em}.itemContent_85f5a1aa{background:var(--neutralLighter,#f3f2f1);border-top:1px solid var(--neutralLight,#edebe9);padding:1em}.itemDescription_85f5a1aa{color:var(--bodyText,#323130);font-size:1em}.error_85f5a1aa,.loading_85f5a1aa{color:var(--themePrimary,#0078d4);font-size:1.1em;padding:2em 0;text-align:center}.titleContainer_85f5a1aa{border-radius:4px;margin-bottom:16px;padding:12px 16px;position:relative}.titleText_85f5a1aa{line-height:1.4;margin:0;padding:0}.titleError_85f5a1aa{padding:8px;text-align:center}.errorTitle_85f5a1aa{color:#d13438;font-weight:700;margin-bottom:4px}.errorMessage_85f5a1aa{color:#605e5c;font-size:12px;line-height:1.3}.titleDivider_85f5a1aa{background-color:rgba(0,0,0,.1);height:1px;margin-top:12px}@media (max-width:600px){.categoryFilters_85f5a1aa{font-size:.95em;gap:.2em}.itemContent_85f5a1aa,.itemHeader_85f5a1aa{padding:.7em}}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImZpbGU6Ly8vb3B0L2N1cnNvci1wcm9qZWN0cy9GYW5jeUxpc3Qvc3JjL3dlYnBhcnRzL2ZhbmN5TGlzdC9jb21wb25lbnRzL0ZhbmN5TGlzdC5tb2R1bGUuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFFQSxvQkFHRSxpQ0FBQSxDQURBLDZCQUFBLENBRUEsc0ZBQUEsQ0FIQSxXQUdBLENBR0YsMEJBT0UsbURBQUEsQ0FOQSxZQUFBLENBQ0EsZ0JBQUEsQ0FFQSxRQUFBLENBQ0EsaUJBQUEsQ0FGQSxlQUFBLENBR0EsbUJBQ0EsQ0FHRix1QkFLRSx3Q0FBQSxDQURBLDRDQUFBLENBREEsbUJBQUEsQ0FHQSw2QkFBQSxDQUVBLGNBQUEsQ0FQQSxvQkFBQSxDQU1BLGVBQUEsQ0FHQSxTQUFBLENBUkEsa0JBQUEsQ0FPQSw4Q0FDQSxDQUNBLDBEQUNFLHNDQUFBLENBQ0Esd0NBQUEsQ0FDQSxpQ0FBQSxDQUVGLHVDQUNFLHNDQUFBLENBRUEsd0NBQUEsQ0FEQSx1QkFDQSxDQUlKLHlCQUNFLFlBQUEsQ0FDQSxxQkFBQSxDQUNBLFFBQUEsQ0FHRixvQkFHRSw0QkFBQSxDQURBLDRDQUFBLENBREEsaUJBQUEsQ0FHQSxvQ0FBQSxDQUNBLGVBQUEsQ0FHRixxQkFVRSxrQkFBQSxDQVJBLGNBQUEsQ0FDQSxXQUFBLENBS0EsNkJBQUEsQ0FJQSxjQUFBLENBSEEsWUFBQSxDQUhBLGVBQUEsQ0FDQSxlQUFBLENBSUEsNkJBQUEsQ0FFQSxTQUFBLENBVEEsV0FBQSxDQUNBLGVBQUEsQ0FTQSx5QkFBQSxDQWJBLFVBYUEsQ0FDQSxzREFDRSx3Q0FBQSxDQUlKLHNCQUNFLGFBQUEsQ0FHRixxQkFHRSxpQ0FBQSxDQUZBLGVBQUEsQ0FDQSxlQUNBLENBR0Ysc0JBRUUsd0NBQUEsQ0FDQSxnREFBQSxDQUZBLFdBRUEsQ0FHRiwwQkFFRSw2QkFBQSxDQURBLGFBQ0EsQ0FHRixrQ0FHRSxpQ0FBQSxDQUNBLGVBQUEsQ0FGQSxhQUFBLENBREEsaUJBR0EsQ0FJRix5QkFHRSxpQkFBQSxDQUZBLGtCQUFBLENBQ0EsaUJBQUEsQ0FFQSxpQkFBQSxDQUdGLG9CQUdFLGVBQUEsQ0FGQSxRQUFBLENBQ0EsU0FDQSxDQUdGLHFCQUVFLFdBQUEsQ0FEQSxpQkFDQSxDQUdGLHFCQUNFLGFBQUEsQ0FDQSxlQUFBLENBQ0EsaUJBQUEsQ0FHRix1QkFDRSxhQUFBLENBQ0EsY0FBQSxDQUNBLGVBQUEsQ0FHRix1QkFFRSwrQkFBQSxDQURBLFVBQUEsQ0FFQSxlQUFBLENBR0YseUJBQ0UsMEJBRUUsZUFBQSxDQURBLFFBQ0EsQ0FFRiwyQ0FDRSxZQUFBLENBQUEiLCJmaWxlIjoiRmFuY3lMaXN0Lm1vZHVsZS5jc3MifQ== */", true);
 
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  fancyList_74413b63: "fancyList_74413b63",
-  categoryFilters_74413b63: "categoryFilters_74413b63",
-  categoryPill_74413b63: "categoryPill_74413b63",
-  active_74413b63: "active_74413b63",
-  itemsContainer_74413b63: "itemsContainer_74413b63",
-  itemPanel_74413b63: "itemPanel_74413b63",
-  itemHeader_74413b63: "itemHeader_74413b63",
-  itemSubject_74413b63: "itemSubject_74413b63",
-  expandIcon_74413b63: "expandIcon_74413b63",
-  itemContent_74413b63: "itemContent_74413b63",
-  itemDescription_74413b63: "itemDescription_74413b63",
-  error_74413b63: "error_74413b63",
-  loading_74413b63: "loading_74413b63"
+  fancyList_85f5a1aa: "fancyList_85f5a1aa",
+  categoryFilters_85f5a1aa: "categoryFilters_85f5a1aa",
+  categoryPill_85f5a1aa: "categoryPill_85f5a1aa",
+  active_85f5a1aa: "active_85f5a1aa",
+  itemsContainer_85f5a1aa: "itemsContainer_85f5a1aa",
+  itemPanel_85f5a1aa: "itemPanel_85f5a1aa",
+  itemHeader_85f5a1aa: "itemHeader_85f5a1aa",
+  itemSubject_85f5a1aa: "itemSubject_85f5a1aa",
+  expandIcon_85f5a1aa: "expandIcon_85f5a1aa",
+  itemContent_85f5a1aa: "itemContent_85f5a1aa",
+  itemDescription_85f5a1aa: "itemDescription_85f5a1aa",
+  error_85f5a1aa: "error_85f5a1aa",
+  loading_85f5a1aa: "loading_85f5a1aa",
+  titleContainer_85f5a1aa: "titleContainer_85f5a1aa",
+  titleText_85f5a1aa: "titleText_85f5a1aa",
+  titleError_85f5a1aa: "titleError_85f5a1aa",
+  errorTitle_85f5a1aa: "errorTitle_85f5a1aa",
+  errorMessage_85f5a1aa: "errorMessage_85f5a1aa",
+  titleDivider_85f5a1aa: "titleDivider_85f5a1aa"
 });
 
 
@@ -272,6 +278,17 @@ var __extends = (undefined && undefined.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __assign = (undefined && undefined.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -490,19 +507,45 @@ var FancyList = /** @class */ (function (_super) {
         var lowerUrl = url.toLowerCase();
         return validExtensions.some(function (ext) { return lowerUrl.endsWith(ext); });
     };
+    // Title Rendering Methods
+    FancyList.prototype.getTitleStyle = function () {
+        var titleSettings = this.props.titleSettings;
+        if (!titleSettings || !titleSettings.enabled)
+            return {};
+        var font = titleSettings.font;
+        return __assign({ fontFamily: font.family, fontSize: font.size, color: font.color }, this.getTextDecoration(font.formatting));
+    };
+    FancyList.prototype.getTextDecoration = function (formatting) {
+        return {
+            fontWeight: formatting.bold ? 'bold' : 'normal',
+            fontStyle: formatting.italic ? 'italic' : 'normal',
+            textDecoration: [
+                formatting.underline ? 'underline' : '',
+                formatting.strikethrough ? 'line-through' : ''
+            ].filter(Boolean).join(' ') || 'none'
+        };
+    };
+    FancyList.prototype.renderTitle = function () {
+        var titleSettings = this.props.titleSettings;
+        if (!titleSettings || !titleSettings.enabled)
+            return null;
+        var webPartTitle = titleSettings.webPartTitle, showDivider = titleSettings.showDivider, backgroundType = titleSettings.backgroundType, imageUrl = titleSettings.imageUrl;
+        // Check for invalid image URL
+        if (backgroundType === 'image' && imageUrl && !this.isValidImageUrl(imageUrl)) {
+            return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].titleContainer, style: this.getBackgroundStyle() },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].titleError },
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].errorTitle, style: this.getTitleStyle() }, "Invalid Image URL"),
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].errorMessage }, "Please provide a valid image file (.jpg, .jpeg, .png, .gif, .webp)")),
+                showDivider && react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].titleDivider })));
+        }
+        return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].titleContainer, style: this.getBackgroundStyle() },
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].titleText, style: this.getTitleStyle() }, webPartTitle),
+            showDivider && react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].titleDivider })));
+    };
     FancyList.prototype.render = function () {
         var _this = this;
         var _a = this.state, loading = _a.loading, error = _a.error, categories = _a.categories, selectedCategory = _a.selectedCategory, expandedItems = _a.expandedItems;
         var filteredItems = this.getFilteredItems();
-        // Temporary usage to prevent TypeScript unused function warnings
-        // These will be used in Phase 3
-        if (this.props.titleSettings) {
-            this.getBackgroundStyle();
-            this.getShapeRadius('rounded');
-            this.getGradientStyle('left-right', '#ff0000', '#00ff00', 50);
-            this.hexToRgba('#ff0000', 50);
-            this.isValidImageUrl('test.jpg');
-        }
         if (loading) {
             return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].fancyList },
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].loading }, "Loading...")));
@@ -512,6 +555,7 @@ var FancyList = /** @class */ (function (_super) {
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].error }, error)));
         }
         return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].fancyList },
+            this.renderTitle(),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].categoryFilters },
                 this.props.showAllCategories && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { className: "".concat(_FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].categoryPill, " ").concat(selectedCategory === 'all' ? _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].active : ''), onClick: function () { return _this.handleCategoryClick('all'); } }, "All")),
                 categories.map(function (category) { return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { key: category, className: "".concat(_FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].categoryPill, " ").concat(selectedCategory === category ? _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].active : ''), onClick: function () { return _this.handleCategoryClick(category); } }, category)); })),
@@ -541,19 +585,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 __webpack_require__(/*! ./FancyList.module.css */ 6837);
 var styles = {
-    fancyList: 'fancyList_74413b63',
-    categoryFilters: 'categoryFilters_74413b63',
-    categoryPill: 'categoryPill_74413b63',
-    active: 'active_74413b63',
-    itemsContainer: 'itemsContainer_74413b63',
-    itemPanel: 'itemPanel_74413b63',
-    itemHeader: 'itemHeader_74413b63',
-    itemSubject: 'itemSubject_74413b63',
-    expandIcon: 'expandIcon_74413b63',
-    itemContent: 'itemContent_74413b63',
-    itemDescription: 'itemDescription_74413b63',
-    loading: 'loading_74413b63',
-    error: 'error_74413b63'
+    fancyList: 'fancyList_85f5a1aa',
+    categoryFilters: 'categoryFilters_85f5a1aa',
+    categoryPill: 'categoryPill_85f5a1aa',
+    active: 'active_85f5a1aa',
+    itemsContainer: 'itemsContainer_85f5a1aa',
+    itemPanel: 'itemPanel_85f5a1aa',
+    itemHeader: 'itemHeader_85f5a1aa',
+    itemSubject: 'itemSubject_85f5a1aa',
+    expandIcon: 'expandIcon_85f5a1aa',
+    itemContent: 'itemContent_85f5a1aa',
+    itemDescription: 'itemDescription_85f5a1aa',
+    loading: 'loading_85f5a1aa',
+    error: 'error_85f5a1aa',
+    titleContainer: 'titleContainer_85f5a1aa',
+    titleText: 'titleText_85f5a1aa',
+    titleError: 'titleError_85f5a1aa',
+    errorTitle: 'errorTitle_85f5a1aa',
+    errorMessage: 'errorMessage_85f5a1aa',
+    titleDivider: 'titleDivider_85f5a1aa'
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (styles);
 

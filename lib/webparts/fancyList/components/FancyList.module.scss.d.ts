@@ -12,6 +12,12 @@ declare const styles: {
     itemDescription: string;
     loading: string;
     error: string;
+    titleContainer: string;
+    titleText: string;
+    titleError: string;
+    errorTitle: string;
+    errorMessage: string;
+    titleDivider: string;
 };
 export default styles;
 //# sourceMappingURL=FancyList.module.scss.d.ts.map

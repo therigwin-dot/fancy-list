@@ -22,6 +22,9 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     private getGradientStyle;
     private hexToRgba;
     private isValidImageUrl;
+    private getTitleStyle;
+    private getTextDecoration;
+    private renderTitle;
     render(): React.ReactElement<IFancyListProps>;
 }
 export {};
