@@ -610,7 +610,6 @@ var FancyList = /** @class */ (function (_super) {
         }
         // Safe property access with fallbacks
         var webPartTitle = titleSettings.webPartTitle;
-        var showDivider = titleSettings.showDivider || false;
         var backgroundType = titleSettings.backgroundType || 'solid';
         var imageUrl = titleSettings.imageUrl || '';
         var imageAlpha = titleSettings.imageAlpha || 0;
@@ -640,12 +639,12 @@ var FancyList = /** @class */ (function (_super) {
                     zIndex: 2,
                     pointerEvents: 'none'
                 } }, titleImageValidationError || (titleImageLoadError ? 'Unable to access URL' : ''))),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { position: 'relative', zIndex: 3 } }, webPartTitle),
-            showDivider && react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { height: '1px', backgroundColor: 'rgba(0, 0, 0, 0.1)', marginTop: '12px' } })));
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { position: 'relative', zIndex: 3 } }, webPartTitle)));
     };
     FancyList.prototype.render = function () {
         var _this = this;
-        var _a = this.state, loading = _a.loading, error = _a.error, categories = _a.categories, selectedCategory = _a.selectedCategory, expandedItems = _a.expandedItems;
+        var _a;
+        var _b = this.state, loading = _b.loading, error = _b.error, categories = _b.categories, selectedCategory = _b.selectedCategory, expandedItems = _b.expandedItems;
         var filteredItems = this.getFilteredItems();
         if (loading) {
             return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].fancyList },
@@ -657,6 +656,12 @@ var FancyList = /** @class */ (function (_super) {
         }
         return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].fancyList },
             this.renderTitle(),
+            ((_a = this.props.titleSettings) === null || _a === void 0 ? void 0 : _a.showDivider) && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                    height: '1px',
+                    backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                    marginTop: '12px',
+                    marginBottom: '12px'
+                } })),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].categoryFilters },
                 this.props.showAllCategories && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { className: "".concat(_FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].categoryPill, " ").concat(selectedCategory === 'all' ? _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].active : ''), onClick: function () { return _this.handleCategoryClick('all'); } }, "All")),
                 categories.map(function (category) { return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { key: category, className: "".concat(_FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].categoryPill, " ").concat(selectedCategory === category ? _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].active : ''), onClick: function () { return _this.handleCategoryClick(category); } }, category)); })),

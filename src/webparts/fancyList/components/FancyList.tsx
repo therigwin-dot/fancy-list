@@ -332,7 +332,6 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
 
     // Safe property access with fallbacks
     const webPartTitle = titleSettings.webPartTitle;
-    const showDivider = titleSettings.showDivider || false;
     const backgroundType = titleSettings.backgroundType || 'solid';
     const imageUrl = titleSettings.imageUrl || '';
     const imageAlpha = titleSettings.imageAlpha || 0;
@@ -383,7 +382,6 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
         <div style={{ position: 'relative', zIndex: 3 }}>
           {webPartTitle}
         </div>
-        {showDivider && <div style={{ height: '1px', backgroundColor: 'rgba(0, 0, 0, 0.1)', marginTop: '12px' }} />}
       </div>
     );
   }
@@ -411,6 +409,15 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     return (
       <div className={styles.fancyList}>
         {this.renderTitle()}
+        {/* Title Divider - positioned between title and filters */}
+        {this.props.titleSettings?.showDivider && (
+          <div style={{ 
+            height: '1px', 
+            backgroundColor: 'rgba(0, 0, 0, 0.1)', 
+            marginTop: '12px',
+            marginBottom: '12px'
+          }} />
+        )}
         {/* Category Filter Pills */}
         <div className={styles.categoryFilters}>
           {this.props.showAllCategories && (
