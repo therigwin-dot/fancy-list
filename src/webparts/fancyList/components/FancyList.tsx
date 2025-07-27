@@ -239,10 +239,10 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
 
   private getFilterBackgroundStyle(filterSettings: any): React.CSSProperties {
     const { background } = filterSettings;
-    
+
     if (background.type === 'solid') {
       return {
-        background: this.hexToRgba(background.color, background.alpha / 100)
+        background: this.hexToRgba(background.color, 1 - (background.alpha / 100)) // Invert alpha: 0% = opaque (alpha 1), 100% = transparent (alpha 0)
       };
     } else if (background.type === 'gradient') {
       return {
@@ -250,21 +250,15 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
           background.gradientDirection,
           background.gradientColor1,
           background.gradientColor2,
-          background.gradientAlpha1 / 100
+          1 - (background.gradientAlpha1 / 100) // Invert alpha: 0% = opaque (alpha 1), 100% = transparent (alpha 0)
         )
       };
     } else if (background.type === 'image') {
-      if (background.image) {
-        return {
-          backgroundImage: `url(${background.image})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center'
-        };
-      } else {
-        return {
-          backgroundColor: '#ffffff' // Simple white background for empty/invalid URLs
-        };
-      }
+      return {
+        background: `linear-gradient(rgba(0,0,0,${background.alpha / 100}), rgba(0,0,0,${background.alpha / 100})), url(${background.imageUrl})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
+      };
     }
     return {};
   }
