@@ -212,7 +212,7 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
       }}>
         <TextField
           value={settings.webPartTitle}
-          onChange={(_, newValue) => handlePropertyChange('webPartTitle', newValue || '')}
+          onChange={(_, newValue) => handlePropertyChange('webPartTitle', newValue ?? '')}
           placeholder="Enter title text"
           styles={{ root: { flex: '1 1 auto' } }}
         />

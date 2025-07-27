@@ -446,9 +446,7 @@ var FancyList = /** @class */ (function (_super) {
     // Title Rendering Utility Functions
     FancyList.prototype.getBackgroundStyle = function () {
         var titleSettings = this.props.titleSettings;
-        console.log('getBackgroundStyle called, titleSettings:', titleSettings);
         if (!titleSettings) {
-            console.log('getBackgroundStyle: no titleSettings, returning empty object');
             return {};
         }
         // Safe property access with fallbacks
@@ -461,17 +459,6 @@ var FancyList = /** @class */ (function (_super) {
         var gradientAlpha = titleSettings.gradientAlpha || 0;
         var imageUrl = titleSettings.imageUrl || '';
         var shape = titleSettings.shape || 'rounded';
-        console.log('getBackgroundStyle properties:', {
-            backgroundType: backgroundType,
-            backgroundColor: backgroundColor,
-            backgroundAlpha: backgroundAlpha,
-            gradientDirection: gradientDirection,
-            gradientColor1: gradientColor1,
-            gradientColor2: gradientColor2,
-            gradientAlpha: gradientAlpha,
-            imageUrl: imageUrl,
-            shape: shape
-        });
         switch (backgroundType) {
             case 'solid':
                 return {
@@ -533,9 +520,7 @@ var FancyList = /** @class */ (function (_super) {
     // Title Rendering Methods
     FancyList.prototype.getTitleStyle = function () {
         var titleSettings = this.props.titleSettings;
-        console.log('getTitleStyle called, titleSettings:', titleSettings);
         if (!titleSettings || !titleSettings.enabled) {
-            console.log('getTitleStyle: titleSettings is null or disabled, returning empty object');
             return {};
         }
         // Safe property access with fallbacks
@@ -550,15 +535,6 @@ var FancyList = /** @class */ (function (_super) {
                 strikethrough: false
             }
         };
-        console.log('getTitleStyle properties:', {
-            fontFamily: font.family,
-            fontSize: font.size,
-            color: font.color,
-            bold: font.formatting.bold,
-            italic: font.formatting.italic,
-            underline: font.formatting.underline,
-            strikethrough: font.formatting.strikethrough
-        });
         return __assign({ fontFamily: font.family, fontSize: font.size, color: font.color }, this.getTextDecoration(font.formatting));
     };
     FancyList.prototype.getTextDecoration = function (formatting) {
@@ -573,12 +549,13 @@ var FancyList = /** @class */ (function (_super) {
     };
     FancyList.prototype.renderTitle = function () {
         var titleSettings = this.props.titleSettings;
-        // Debug logging
-        console.log('renderTitle called');
-        console.log('titleSettings:', titleSettings);
-        console.log('titleSettings?.enabled:', titleSettings === null || titleSettings === void 0 ? void 0 : titleSettings.enabled);
-        if (!titleSettings || !titleSettings.enabled) {
-            console.log('Title not rendered: titleSettings is null or disabled');
+        // If no titleSettings, render a default title (like Compare backup)
+        if (!titleSettings) {
+            return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].titleContainer },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].titleText }, "Fancy List")));
+        }
+        // If titleSettings exists but disabled, don't render
+        if (!titleSettings.enabled) {
             return null;
         }
         // Safe property access with fallbacks
@@ -586,20 +563,14 @@ var FancyList = /** @class */ (function (_super) {
         var showDivider = titleSettings.showDivider || false;
         var backgroundType = titleSettings.backgroundType || 'solid';
         var imageUrl = titleSettings.imageUrl || '';
-        // Debug logging for properties
-        console.log('webPartTitle:', webPartTitle);
-        console.log('backgroundType:', backgroundType);
-        console.log('showDivider:', showDivider);
         // Check for invalid image URL
         if (backgroundType === 'image' && imageUrl && !this.isValidImageUrl(imageUrl)) {
-            console.log('Rendering error state for invalid image URL');
             return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].titleContainer, style: this.getBackgroundStyle() },
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].titleError },
                     react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].errorTitle, style: this.getTitleStyle() }, "Invalid Image URL"),
                     react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].errorMessage }, "Please provide a valid image file (.jpg, .jpeg, .png, .gif, .webp)")),
                 showDivider && react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].titleDivider })));
         }
-        console.log('Rendering normal title');
         return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].titleContainer, style: this.getBackgroundStyle() },
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].titleText, style: this.getTitleStyle() }, webPartTitle),
             showDivider && react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].titleDivider })));
@@ -1992,7 +1963,7 @@ var TitleConfiguration = function (_a) {
                     gap: '8px',
                     marginBottom: 16
                 } },
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_6__.TextField, { value: settings.webPartTitle, onChange: function (_, newValue) { return handlePropertyChange('webPartTitle', newValue || ''); }, placeholder: "Enter title text", styles: { root: { flex: '1 1 auto' } } }),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_6__.TextField, { value: settings.webPartTitle, onChange: function (_, newValue) { return handlePropertyChange('webPartTitle', newValue !== null && newValue !== void 0 ? newValue : ''); }, placeholder: "Enter title text", styles: { root: { flex: '1 1 auto' } } }),
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__.ColorPickerControl, { color: settings.font.color, field: "titleColor", label: "", onChange: function (field, newColor) { return handlePropertyChange('font.color', newColor); } })),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
                     backgroundColor: '#f3f2f1',
@@ -34489,28 +34460,30 @@ var FancyListWebPart = /** @class */ (function (_super) {
         return _this;
     }
     FancyListWebPart.prototype.render = function () {
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, _22;
         // Map TitleSettings to the format expected by FancyList component
-        var titleSettings = this.properties.titleSettings ? {
-            enabled: this.properties.titleSettings.enabled,
-            webPartTitle: this.properties.titleSettings.webPartTitle,
-            shape: this.properties.titleSettings.shape,
-            showDivider: this.properties.titleSettings.showDivider,
-            backgroundType: this.properties.titleSettings.background.type,
-            backgroundColor: this.properties.titleSettings.background.color,
-            backgroundAlpha: this.properties.titleSettings.background.alpha,
-            gradientDirection: this.properties.titleSettings.background.gradientDirection,
-            gradientColor1: this.properties.titleSettings.background.gradientColor1,
-            gradientColor2: this.properties.titleSettings.background.gradientColor2,
-            gradientAlpha: this.properties.titleSettings.background.gradientAlpha1, // Using alpha1 as main alpha
-            imageUrl: this.properties.titleSettings.background.image,
-            imageAlpha: this.properties.titleSettings.background.imageAlpha,
+        // Use default values if titleSettings is undefined
+        var titleSettings = {
+            enabled: (_b = (_a = this.properties.titleSettings) === null || _a === void 0 ? void 0 : _a.enabled) !== null && _b !== void 0 ? _b : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.enabled,
+            webPartTitle: (_d = (_c = this.properties.titleSettings) === null || _c === void 0 ? void 0 : _c.webPartTitle) !== null && _d !== void 0 ? _d : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.webPartTitle,
+            shape: (_f = (_e = this.properties.titleSettings) === null || _e === void 0 ? void 0 : _e.shape) !== null && _f !== void 0 ? _f : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.shape,
+            showDivider: (_h = (_g = this.properties.titleSettings) === null || _g === void 0 ? void 0 : _g.showDivider) !== null && _h !== void 0 ? _h : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.showDivider,
+            backgroundType: (_l = (_k = (_j = this.properties.titleSettings) === null || _j === void 0 ? void 0 : _j.background) === null || _k === void 0 ? void 0 : _k.type) !== null && _l !== void 0 ? _l : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.background.type,
+            backgroundColor: (_p = (_o = (_m = this.properties.titleSettings) === null || _m === void 0 ? void 0 : _m.background) === null || _o === void 0 ? void 0 : _o.color) !== null && _p !== void 0 ? _p : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.background.color,
+            backgroundAlpha: (_s = (_r = (_q = this.properties.titleSettings) === null || _q === void 0 ? void 0 : _q.background) === null || _r === void 0 ? void 0 : _r.alpha) !== null && _s !== void 0 ? _s : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.background.alpha,
+            gradientDirection: (_v = (_u = (_t = this.properties.titleSettings) === null || _t === void 0 ? void 0 : _t.background) === null || _u === void 0 ? void 0 : _u.gradientDirection) !== null && _v !== void 0 ? _v : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.background.gradientDirection,
+            gradientColor1: (_y = (_x = (_w = this.properties.titleSettings) === null || _w === void 0 ? void 0 : _w.background) === null || _x === void 0 ? void 0 : _x.gradientColor1) !== null && _y !== void 0 ? _y : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.background.gradientColor1,
+            gradientColor2: (_1 = (_0 = (_z = this.properties.titleSettings) === null || _z === void 0 ? void 0 : _z.background) === null || _0 === void 0 ? void 0 : _0.gradientColor2) !== null && _1 !== void 0 ? _1 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.background.gradientColor2,
+            gradientAlpha: (_4 = (_3 = (_2 = this.properties.titleSettings) === null || _2 === void 0 ? void 0 : _2.background) === null || _3 === void 0 ? void 0 : _3.gradientAlpha1) !== null && _4 !== void 0 ? _4 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.background.gradientAlpha1,
+            imageUrl: (_7 = (_6 = (_5 = this.properties.titleSettings) === null || _5 === void 0 ? void 0 : _5.background) === null || _6 === void 0 ? void 0 : _6.image) !== null && _7 !== void 0 ? _7 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.background.image,
+            imageAlpha: (_10 = (_9 = (_8 = this.properties.titleSettings) === null || _8 === void 0 ? void 0 : _8.background) === null || _9 === void 0 ? void 0 : _9.imageAlpha) !== null && _10 !== void 0 ? _10 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.background.imageAlpha,
             font: {
-                family: this.properties.titleSettings.font.family,
-                size: this.properties.titleSettings.font.size,
-                color: this.properties.titleSettings.font.color,
-                formatting: this.properties.titleSettings.font.formatting
+                family: (_13 = (_12 = (_11 = this.properties.titleSettings) === null || _11 === void 0 ? void 0 : _11.font) === null || _12 === void 0 ? void 0 : _12.family) !== null && _13 !== void 0 ? _13 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.font.family,
+                size: (_16 = (_15 = (_14 = this.properties.titleSettings) === null || _14 === void 0 ? void 0 : _14.font) === null || _15 === void 0 ? void 0 : _15.size) !== null && _16 !== void 0 ? _16 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.font.size,
+                color: (_19 = (_18 = (_17 = this.properties.titleSettings) === null || _17 === void 0 ? void 0 : _17.font) === null || _18 === void 0 ? void 0 : _18.color) !== null && _19 !== void 0 ? _19 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.font.color,
+                formatting: (_22 = (_21 = (_20 = this.properties.titleSettings) === null || _20 === void 0 ? void 0 : _20.font) === null || _21 === void 0 ? void 0 : _21.formatting) !== null && _22 !== void 0 ? _22 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.font.formatting
             }
-        } : undefined;
+        };
         var element = react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_FancyList__WEBPACK_IMPORTED_MODULE_7__["default"], {
             selectedListId: this.properties.selectedListId,
             categoryField: this.properties.categoryField,

@@ -170,27 +170,28 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
 
   public render(): void {
     // Map TitleSettings to the format expected by FancyList component
-    const titleSettings = this.properties.titleSettings ? {
-      enabled: this.properties.titleSettings.enabled,
-      webPartTitle: this.properties.titleSettings.webPartTitle,
-      shape: this.properties.titleSettings.shape,
-      showDivider: this.properties.titleSettings.showDivider,
-      backgroundType: this.properties.titleSettings.background.type,
-      backgroundColor: this.properties.titleSettings.background.color,
-      backgroundAlpha: this.properties.titleSettings.background.alpha,
-      gradientDirection: this.properties.titleSettings.background.gradientDirection,
-      gradientColor1: this.properties.titleSettings.background.gradientColor1,
-      gradientColor2: this.properties.titleSettings.background.gradientColor2,
-      gradientAlpha: this.properties.titleSettings.background.gradientAlpha1, // Using alpha1 as main alpha
-      imageUrl: this.properties.titleSettings.background.image,
-      imageAlpha: this.properties.titleSettings.background.imageAlpha,
+    // Use default values if titleSettings is undefined
+    const titleSettings = {
+      enabled: this.properties.titleSettings?.enabled ?? DEFAULTS_CONFIG.titleSettings.enabled,
+      webPartTitle: this.properties.titleSettings?.webPartTitle ?? DEFAULTS_CONFIG.titleSettings.webPartTitle,
+      shape: this.properties.titleSettings?.shape ?? DEFAULTS_CONFIG.titleSettings.shape,
+      showDivider: this.properties.titleSettings?.showDivider ?? DEFAULTS_CONFIG.titleSettings.showDivider,
+      backgroundType: this.properties.titleSettings?.background?.type ?? DEFAULTS_CONFIG.titleSettings.background.type,
+      backgroundColor: this.properties.titleSettings?.background?.color ?? DEFAULTS_CONFIG.titleSettings.background.color,
+      backgroundAlpha: this.properties.titleSettings?.background?.alpha ?? DEFAULTS_CONFIG.titleSettings.background.alpha,
+      gradientDirection: this.properties.titleSettings?.background?.gradientDirection ?? DEFAULTS_CONFIG.titleSettings.background.gradientDirection,
+      gradientColor1: this.properties.titleSettings?.background?.gradientColor1 ?? DEFAULTS_CONFIG.titleSettings.background.gradientColor1,
+      gradientColor2: this.properties.titleSettings?.background?.gradientColor2 ?? DEFAULTS_CONFIG.titleSettings.background.gradientColor2,
+      gradientAlpha: this.properties.titleSettings?.background?.gradientAlpha1 ?? DEFAULTS_CONFIG.titleSettings.background.gradientAlpha1,
+      imageUrl: this.properties.titleSettings?.background?.image ?? DEFAULTS_CONFIG.titleSettings.background.image,
+      imageAlpha: this.properties.titleSettings?.background?.imageAlpha ?? DEFAULTS_CONFIG.titleSettings.background.imageAlpha,
       font: {
-        family: this.properties.titleSettings.font.family,
-        size: this.properties.titleSettings.font.size,
-        color: this.properties.titleSettings.font.color,
-        formatting: this.properties.titleSettings.font.formatting
+        family: this.properties.titleSettings?.font?.family ?? DEFAULTS_CONFIG.titleSettings.font.family,
+        size: this.properties.titleSettings?.font?.size ?? DEFAULTS_CONFIG.titleSettings.font.size,
+        color: this.properties.titleSettings?.font?.color ?? DEFAULTS_CONFIG.titleSettings.font.color,
+        formatting: this.properties.titleSettings?.font?.formatting ?? DEFAULTS_CONFIG.titleSettings.font.formatting
       }
-    } : undefined;
+    };
 
     const element: React.ReactElement<IFancyListProps> = React.createElement(
       FancyList,
