@@ -394,7 +394,8 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
         {this.renderTitle()}
         
         {/* Title Image Error Message - positioned below title section */}
-        {(this.state.titleImageValidationError || this.state.titleImageLoadError) && (
+        {(this.state.titleImageValidationError || this.state.titleImageLoadError || 
+          (this.props.titleSettings?.backgroundType === 'image' && !this.props.titleSettings?.imageUrl)) && (
           <div
             style={{
               fontSize: '12px',
@@ -405,7 +406,9 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
               marginBottom: '8px'
             }}
           >
-            {this.state.titleImageValidationError || (this.state.titleImageLoadError ? 'Unable to access URL' : '')}
+            {this.state.titleImageValidationError || 
+             (this.state.titleImageLoadError ? 'Unable to access URL' : '') ||
+             'Please enter an image URL'}
           </div>
         )}
         

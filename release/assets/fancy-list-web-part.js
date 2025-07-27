@@ -638,8 +638,8 @@ var FancyList = /** @class */ (function (_super) {
     };
     FancyList.prototype.render = function () {
         var _this = this;
-        var _a;
-        var _b = this.state, loading = _b.loading, error = _b.error, categories = _b.categories, selectedCategory = _b.selectedCategory, expandedItems = _b.expandedItems;
+        var _a, _b, _c;
+        var _d = this.state, loading = _d.loading, error = _d.error, categories = _d.categories, selectedCategory = _d.selectedCategory, expandedItems = _d.expandedItems;
         var filteredItems = this.getFilteredItems();
         if (loading) {
             return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].fancyList },
@@ -651,15 +651,18 @@ var FancyList = /** @class */ (function (_super) {
         }
         return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].fancyList },
             this.renderTitle(),
-            (this.state.titleImageValidationError || this.state.titleImageLoadError) && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+            (this.state.titleImageValidationError || this.state.titleImageLoadError ||
+                (((_a = this.props.titleSettings) === null || _a === void 0 ? void 0 : _a.backgroundType) === 'image' && !((_b = this.props.titleSettings) === null || _b === void 0 ? void 0 : _b.imageUrl))) && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
                     fontSize: '12px',
                     fontFamily: 'Arial, sans-serif',
                     color: '#000000',
                     textAlign: 'right',
                     marginTop: '8px',
                     marginBottom: '8px'
-                } }, this.state.titleImageValidationError || (this.state.titleImageLoadError ? 'Unable to access URL' : ''))),
-            ((_a = this.props.titleSettings) === null || _a === void 0 ? void 0 : _a.showDivider) && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                } }, this.state.titleImageValidationError ||
+                (this.state.titleImageLoadError ? 'Unable to access URL' : '') ||
+                'Please enter an image URL')),
+            ((_c = this.props.titleSettings) === null || _c === void 0 ? void 0 : _c.showDivider) && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
                     height: '1px',
                     backgroundColor: 'rgba(0, 0, 0, 0.1)',
                     marginTop: '12px',
