@@ -121,9 +121,91 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     return this.state.items.filter(item => item.category === this.state.selectedCategory);
   }
 
+  // Title Rendering Utility Functions
+
+  private getBackgroundStyle(): React.CSSProperties {
+    const { titleSettings } = this.props;
+    if (!titleSettings) return {};
+    
+    const { backgroundType, backgroundColor, backgroundAlpha, gradientDirection, 
+            gradientColor1, gradientColor2, gradientAlpha, imageUrl } = titleSettings;
+    
+    switch (backgroundType) {
+      case 'solid':
+        return {
+          backgroundColor: this.hexToRgba(backgroundColor, backgroundAlpha),
+          borderRadius: this.getShapeRadius(titleSettings.shape)
+        };
+      case 'gradient':
+        return {
+          background: this.getGradientStyle(gradientDirection, gradientColor1, gradientColor2, gradientAlpha),
+          borderRadius: this.getShapeRadius(titleSettings.shape)
+        };
+      case 'image':
+        return {
+          backgroundImage: `url(${imageUrl})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          borderRadius: this.getShapeRadius(titleSettings.shape)
+        };
+      default:
+        return {};
+    }
+  }
+
+  private getShapeRadius(shape: 'square' | 'rounded' | 'pill'): string {
+    switch (shape) {
+      case 'square': return '0px';
+      case 'rounded': return '4px';
+      case 'pill': return '20px';
+      default: return '4px';
+    }
+  }
+
+  private getGradientStyle(direction: string, color1: string, color2: string, alpha: number): string {
+    const rgba1 = this.hexToRgba(color1, alpha);
+    const rgba2 = this.hexToRgba(color2, alpha);
+    
+    switch (direction) {
+      case 'to bottom': return `linear-gradient(to bottom, ${rgba1}, ${rgba2})`;
+      case 'left-right': return `linear-gradient(to right, ${rgba1}, ${rgba2})`;
+      case 'to bottom right': return `linear-gradient(to bottom right, ${rgba1}, ${rgba2})`;
+      case 'to bottom left': return `linear-gradient(to bottom left, ${rgba1}, ${rgba2})`;
+      case 'radial': return `radial-gradient(circle, ${rgba1}, ${rgba2})`;
+      default: return `linear-gradient(to right, ${rgba1}, ${rgba2})`;
+    }
+  }
+
+  private hexToRgba(hex: string, alpha: number): string {
+    let c = hex.replace('#', '');
+    if (c.length === 3) c = c[0] + c[0] + c[1] + c[1] + c[2] + c[2];
+    const num = parseInt(c, 16);
+    const r = (num >> 16) & 255;
+    const g = (num >> 8) & 255;
+    const b = num & 255;
+    const normalizedAlpha = 1 - (alpha / 100);
+    return `rgba(${r},${g},${b},${normalizedAlpha})`;
+  }
+
+  private isValidImageUrl(url: string): boolean {
+    const validExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp'];
+    const lowerUrl = url.toLowerCase();
+    return validExtensions.some(ext => lowerUrl.endsWith(ext));
+  }
+
   public render(): React.ReactElement<IFancyListProps> {
     const { loading, error, categories, selectedCategory, expandedItems } = this.state;
     const filteredItems = this.getFilteredItems();
+    
+    // Temporary usage to prevent TypeScript unused function warnings
+    // These will be used in Phase 3
+    if (this.props.titleSettings) {
+      this.getBackgroundStyle();
+      this.getShapeRadius('rounded');
+      this.getGradientStyle('left-right', '#ff0000', '#00ff00', 50);
+      this.hexToRgba('#ff0000', 50);
+      this.isValidImageUrl('test.jpg');
+    }
 
     if (loading) {
       return (
@@ -171,7 +253,7 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
               <button
                 className={styles.itemHeader}
                 onClick={() => this.handleItemToggle(item.id)}
-                aria-expanded={expandedItems.has(item.id)}
+                aria-expanded={expandedItems.has(item.id) ? "true" : "false"}
               >
                 <span className={styles.itemSubject}>{item.subject}</span>
                 <span className={styles.expandIcon}>

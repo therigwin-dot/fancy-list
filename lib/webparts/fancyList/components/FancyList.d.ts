@@ -17,6 +17,11 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     private handleCategoryClick;
     private handleItemToggle;
     private getFilteredItems;
+    private getBackgroundStyle;
+    private getShapeRadius;
+    private getGradientStyle;
+    private hexToRgba;
+    private isValidImageUrl;
     render(): React.ReactElement<IFancyListProps>;
 }
 export {};

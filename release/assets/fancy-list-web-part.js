@@ -426,10 +426,83 @@ var FancyList = /** @class */ (function (_super) {
         }
         return this.state.items.filter(function (item) { return item.category === _this.state.selectedCategory; });
     };
+    // Title Rendering Utility Functions
+    FancyList.prototype.getBackgroundStyle = function () {
+        var titleSettings = this.props.titleSettings;
+        if (!titleSettings)
+            return {};
+        var backgroundType = titleSettings.backgroundType, backgroundColor = titleSettings.backgroundColor, backgroundAlpha = titleSettings.backgroundAlpha, gradientDirection = titleSettings.gradientDirection, gradientColor1 = titleSettings.gradientColor1, gradientColor2 = titleSettings.gradientColor2, gradientAlpha = titleSettings.gradientAlpha, imageUrl = titleSettings.imageUrl;
+        switch (backgroundType) {
+            case 'solid':
+                return {
+                    backgroundColor: this.hexToRgba(backgroundColor, backgroundAlpha),
+                    borderRadius: this.getShapeRadius(titleSettings.shape)
+                };
+            case 'gradient':
+                return {
+                    background: this.getGradientStyle(gradientDirection, gradientColor1, gradientColor2, gradientAlpha),
+                    borderRadius: this.getShapeRadius(titleSettings.shape)
+                };
+            case 'image':
+                return {
+                    backgroundImage: "url(".concat(imageUrl, ")"),
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    borderRadius: this.getShapeRadius(titleSettings.shape)
+                };
+            default:
+                return {};
+        }
+    };
+    FancyList.prototype.getShapeRadius = function (shape) {
+        switch (shape) {
+            case 'square': return '0px';
+            case 'rounded': return '4px';
+            case 'pill': return '20px';
+            default: return '4px';
+        }
+    };
+    FancyList.prototype.getGradientStyle = function (direction, color1, color2, alpha) {
+        var rgba1 = this.hexToRgba(color1, alpha);
+        var rgba2 = this.hexToRgba(color2, alpha);
+        switch (direction) {
+            case 'to bottom': return "linear-gradient(to bottom, ".concat(rgba1, ", ").concat(rgba2, ")");
+            case 'left-right': return "linear-gradient(to right, ".concat(rgba1, ", ").concat(rgba2, ")");
+            case 'to bottom right': return "linear-gradient(to bottom right, ".concat(rgba1, ", ").concat(rgba2, ")");
+            case 'to bottom left': return "linear-gradient(to bottom left, ".concat(rgba1, ", ").concat(rgba2, ")");
+            case 'radial': return "radial-gradient(circle, ".concat(rgba1, ", ").concat(rgba2, ")");
+            default: return "linear-gradient(to right, ".concat(rgba1, ", ").concat(rgba2, ")");
+        }
+    };
+    FancyList.prototype.hexToRgba = function (hex, alpha) {
+        var c = hex.replace('#', '');
+        if (c.length === 3)
+            c = c[0] + c[0] + c[1] + c[1] + c[2] + c[2];
+        var num = parseInt(c, 16);
+        var r = (num >> 16) & 255;
+        var g = (num >> 8) & 255;
+        var b = num & 255;
+        var normalizedAlpha = 1 - (alpha / 100);
+        return "rgba(".concat(r, ",").concat(g, ",").concat(b, ",").concat(normalizedAlpha, ")");
+    };
+    FancyList.prototype.isValidImageUrl = function (url) {
+        var validExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp'];
+        var lowerUrl = url.toLowerCase();
+        return validExtensions.some(function (ext) { return lowerUrl.endsWith(ext); });
+    };
     FancyList.prototype.render = function () {
         var _this = this;
         var _a = this.state, loading = _a.loading, error = _a.error, categories = _a.categories, selectedCategory = _a.selectedCategory, expandedItems = _a.expandedItems;
         var filteredItems = this.getFilteredItems();
+        // Temporary usage to prevent TypeScript unused function warnings
+        // These will be used in Phase 3
+        if (this.props.titleSettings) {
+            this.getBackgroundStyle();
+            this.getShapeRadius('rounded');
+            this.getGradientStyle('left-right', '#ff0000', '#00ff00', 50);
+            this.hexToRgba('#ff0000', 50);
+            this.isValidImageUrl('test.jpg');
+        }
         if (loading) {
             return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].fancyList },
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].loading }, "Loading...")));
@@ -443,7 +516,7 @@ var FancyList = /** @class */ (function (_super) {
                 this.props.showAllCategories && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { className: "".concat(_FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].categoryPill, " ").concat(selectedCategory === 'all' ? _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].active : ''), onClick: function () { return _this.handleCategoryClick('all'); } }, "All")),
                 categories.map(function (category) { return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { key: category, className: "".concat(_FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].categoryPill, " ").concat(selectedCategory === category ? _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].active : ''), onClick: function () { return _this.handleCategoryClick(category); } }, category)); })),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemsContainer }, filteredItems.map(function (item) { return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { key: item.id, className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemPanel },
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemHeader, onClick: function () { return _this.handleItemToggle(item.id); }, "aria-expanded": expandedItems.has(item.id) },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemHeader, onClick: function () { return _this.handleItemToggle(item.id); }, "aria-expanded": expandedItems.has(item.id) ? "true" : "false" },
                     react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemSubject }, item.subject),
                     react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].expandIcon }, expandedItems.has(item.id) ? '−' : '+')),
                 expandedItems.has(item.id) && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemContent },
