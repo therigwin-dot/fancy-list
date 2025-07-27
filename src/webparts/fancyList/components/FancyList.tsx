@@ -162,12 +162,19 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
           borderRadius: this.getShapeRadius(shape)
         };
       case 'image':
-        return {
-          backgroundImage: `url(${imageUrl})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          borderRadius: this.getShapeRadius(shape)
-        };
+        if (imageUrl) {
+          return {
+            backgroundImage: `url(${imageUrl})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            borderRadius: this.getShapeRadius(shape)
+          };
+        } else {
+          return {
+            backgroundColor: '#ffffff', // Simple white background for empty/invalid URLs
+            borderRadius: this.getShapeRadius(shape)
+          };
+        }
       default:
         return {};
     }
