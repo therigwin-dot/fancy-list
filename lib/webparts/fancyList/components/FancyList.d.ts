@@ -26,6 +26,7 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     private getShapeRadius;
     private getGradientStyle;
     private getFilterBorderRadius;
+    private getTextDecoration;
     private getFilterBackgroundStyle;
     private checkFilterImage;
     private hexToRgba;

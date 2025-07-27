@@ -225,6 +225,18 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
       : '16px'; // rounded default
   }
 
+  private getTextDecoration(formatting: {
+    bold: boolean;
+    italic: boolean;
+    underline: boolean;
+    strikethrough: boolean;
+  }): string {
+    let decoration = '';
+    if (formatting.underline) decoration += 'underline ';
+    if (formatting.strikethrough) decoration += 'line-through';
+    return decoration.trim() || 'none';
+  }
+
   private getFilterBackgroundStyle(filterSettings: any): React.CSSProperties {
     const { background } = filterSettings;
     
@@ -509,25 +521,124 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
           }} />
         )}
         {/* Category Filter Pills */}
-        <div className={styles.categoryFilters}>
-          {this.props.showAllCategories && (
-            <button
-              className={`${styles.categoryPill} ${selectedCategory === 'all' ? styles.active : ''}`}
-              onClick={() => this.handleCategoryClick('all')}
+        {this.props.filterSettings?.enabled && (
+          <>
+            <div
+              className={styles.categoryFilters}
+              style={{
+                ...this.getFilterBackgroundStyle(this.props.filterSettings),
+                position: 'relative',
+                padding: '12px',
+                marginBottom: '12px'
+              }}
             >
-              All
-            </button>
-          )}
-          {categories.map(category => (
-            <button
-              key={category}
-              className={`${styles.categoryPill} ${selectedCategory === category ? styles.active : ''}`}
-              onClick={() => this.handleCategoryClick(category)}
-            >
-              {category}
-            </button>
-          ))}
-        </div>
+              {/* Layer 1: Transparency overlay for image backgrounds */}
+              {this.props.filterSettings.background.type === 'image' && 
+               this.props.filterSettings.background.image && 
+               !this.state.filterImageValidationError && 
+               !this.state.filterImageLoadError && 
+               this.props.filterSettings.background.imageAlpha !== undefined && 
+               this.props.filterSettings.background.imageAlpha > 0 && (
+                <div
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    background: `rgba(255,255,255,${this.props.filterSettings.background.imageAlpha / 100})`,
+                    pointerEvents: 'none',
+                    zIndex: 1
+                  }}
+                />
+              )}
+              
+              {/* Layer 2: Filter buttons */}
+              <div style={{ 
+                position: 'relative', 
+                zIndex: 2,
+                textAlign: this.props.filterSettings.font.alignment || 'left'
+              }}>
+                {this.props.showAllCategories && (
+                  <button
+                    className={`${styles.categoryPill} ${selectedCategory === 'all' ? styles.active : ''}`}
+                    style={{
+                      background: selectedCategory === 'all' ? this.props.filterSettings.activeColors.background : this.props.filterSettings.inactiveColors.background,
+                      color: selectedCategory === 'all' ? this.props.filterSettings.activeColors.font : this.props.filterSettings.inactiveColors.font,
+                      fontFamily: this.props.filterSettings.font.family,
+                      fontSize: this.props.filterSettings.font.size,
+                      fontWeight: this.props.filterSettings.font.formatting.bold ? 'bold' : 'normal',
+                      fontStyle: this.props.filterSettings.font.formatting.italic ? 'italic' : 'normal',
+                      textDecoration: this.getTextDecoration(this.props.filterSettings.font.formatting),
+                      borderRadius: this.getFilterBorderRadius(this.props.filterSettings.shape),
+                      border: 'none',
+                      padding: '8px 16px',
+                      margin: '4px',
+                      cursor: 'pointer',
+                      transition: 'all 0.2s ease'
+                    }}
+                    onClick={() => this.handleCategoryClick('all')}
+                  >
+                    All
+                  </button>
+                )}
+                {categories.map(category => (
+                  <button
+                    key={category}
+                    className={`${styles.categoryPill} ${selectedCategory === category ? styles.active : ''}`}
+                    style={{
+                      background: selectedCategory === category ? this.props.filterSettings.activeColors.background : this.props.filterSettings.inactiveColors.background,
+                      color: selectedCategory === category ? this.props.filterSettings.activeColors.font : this.props.filterSettings.inactiveColors.font,
+                      fontFamily: this.props.filterSettings.font.family,
+                      fontSize: this.props.filterSettings.font.size,
+                      fontWeight: this.props.filterSettings.font.formatting.bold ? 'bold' : 'normal',
+                      fontStyle: this.props.filterSettings.font.formatting.italic ? 'italic' : 'normal',
+                      textDecoration: this.getTextDecoration(this.props.filterSettings.font.formatting),
+                      borderRadius: this.getFilterBorderRadius(this.props.filterSettings.shape),
+                      border: 'none',
+                      padding: '8px 16px',
+                      margin: '4px',
+                      cursor: 'pointer',
+                      transition: 'all 0.2s ease'
+                    }}
+                    onClick={() => this.handleCategoryClick(category)}
+                  >
+                    {category}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Filter Image Error Message - positioned below filter section */}
+            {(this.state.filterImageValidationError || this.state.filterImageLoadError || 
+              (this.props.filterSettings.background.type === 'image' && !this.props.filterSettings.background.image)) && (
+              <div
+                style={{
+                  fontSize: '12px',
+                  fontFamily: 'Arial, sans-serif',
+                  color: '#000000',
+                  textAlign: 'right',
+                  marginTop: '8px',
+                  marginBottom: '8px'
+                }}
+              >
+                {this.state.filterImageValidationError || 
+                 (this.state.filterImageLoadError ? 'Unable to access URL' : '') ||
+                 'Please enter an image URL'}
+              </div>
+            )}
+
+            {/* Filter Divider - positioned between filters and list items */}
+            {this.props.filterSettings.showDivider && (
+              <div style={{
+                height: '1px',
+                backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                marginTop: '12px',
+                marginBottom: '12px'
+              }} />
+            )}
+          </>
+        )}
 
         {/* Collapsible Items */}
         <div className={styles.itemsContainer}>
