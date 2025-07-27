@@ -25,6 +25,7 @@ export interface FilterModuleControlProps {
         };
         shape: ShapeOption;
         showDivider: boolean;
+        showAllCategories: boolean;
         backgroundType: 'solid' | 'gradient' | 'image';
         backgroundColor: string;
         backgroundAlpha: number;

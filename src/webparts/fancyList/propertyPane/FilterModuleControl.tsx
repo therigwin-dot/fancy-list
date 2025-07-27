@@ -35,6 +35,7 @@ export interface FilterModuleControlProps {
     };
     shape: ShapeOption;
     showDivider: boolean;
+    showAllCategories: boolean;
     backgroundType: 'solid' | 'gradient' | 'image';
     backgroundColor: string;
     backgroundAlpha: number;
@@ -74,6 +75,7 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
     },
     shape: 'pill',
     showDivider: false,
+    showAllCategories: true,
     backgroundType: 'solid',
     backgroundColor: '#ffffff',
     backgroundAlpha: 0,
@@ -191,6 +193,36 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
       {/* Conditional rendering for all other controls when enabled */}
       {enabled && (
         <>
+          {/* 2. Default Filter Selection Gray Box Container */}
+          <div style={{ 
+            backgroundColor: '#f3f2f1', 
+            padding: '12px', 
+            borderRadius: '4px',
+            marginBottom: 16 
+          }}>
+            {/* Default Filter Selection Header */}
+            <div style={{
+              fontSize: '16px',
+              fontWeight: '600',
+              color: '#323130',
+              marginBottom: '12px'
+            }}>
+              Default Filter Selection
+            </div>
+
+            {/* All Filter Toggle */}
+            <div style={{ marginBottom: 16 }}>
+              <Toggle
+                label="Show 'All' Filter Button"
+                inlineLabel={true}
+                checked={settings.showAllCategories || false}
+                onText="On"
+                offText="Off"
+                onChange={(_, checked) => handlePropertyChange('showAllCategories', checked)}
+              />
+            </div>
+          </div>
+
           {/* 3. Button Gray Box Container */}
           <div style={{ 
             backgroundColor: '#f3f2f1', 

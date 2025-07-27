@@ -72,6 +72,7 @@ export interface IFancyListProps {
     };
     shape: string;
     backgroundShape: 'square' | 'rounded' | 'pill';
+    showAllCategories: boolean;
     background: {
       type: string;
       color: string;
