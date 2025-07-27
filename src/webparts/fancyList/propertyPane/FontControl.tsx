@@ -261,29 +261,32 @@ export const FontControl: React.FC<FontControlProps> = ({ fontFamily, fontSize, 
               setIsEditing(false);
             }
           }}
-          onKeyDown={(event) => {
-            if (event.key === 'Enter') {
-              // Release focus when Enter is pressed
-              event.preventDefault();
-              setIsEditing(false);
-              // Blur the input element directly
-              const inputElement = event.target as HTMLInputElement;
-              if (inputElement) {
-                inputElement.blur();
-              }
-            }
-          }}
+
           onChange={(_, option, __, textValue) => {
             if (option) {
               // Selected from dropdown
               setIsEditing(false);
               onChange({ fontSize: option.key as string });
+              // Blur after successful change
+              setTimeout(() => {
+                const inputElement = document.querySelector('[aria-label="Font Size"] input') as HTMLInputElement;
+                if (inputElement) {
+                  inputElement.blur();
+                }
+              }, 0);
             } else if (textValue) {
               const normalizedValue = normalizeFontSize(textValue);
               if (validateFontSize(normalizedValue)) {
                 // Custom valid input
                 setIsEditing(false);
                 onChange({ fontSize: normalizedValue });
+                // Blur after successful change
+                setTimeout(() => {
+                  const inputElement = document.querySelector('[aria-label="Font Size"] input') as HTMLInputElement;
+                  if (inputElement) {
+                    inputElement.blur();
+                  }
+                }, 0);
               }
               // Invalid input is ignored but keeps editing state
             }

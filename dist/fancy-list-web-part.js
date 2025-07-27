@@ -1281,22 +1281,18 @@ var FontControl = function (_a) {
                     if (isEditing) {
                         setIsEditing(false);
                     }
-                }, onKeyDown: function (event) {
-                    if (event.key === 'Enter') {
-                        // Release focus when Enter is pressed
-                        event.preventDefault();
-                        setIsEditing(false);
-                        // Blur the input element directly
-                        var inputElement = event.target;
-                        if (inputElement) {
-                            inputElement.blur();
-                        }
-                    }
                 }, onChange: function (_, option, __, textValue) {
                     if (option) {
                         // Selected from dropdown
                         setIsEditing(false);
                         onChange({ fontSize: option.key });
+                        // Blur after successful change
+                        setTimeout(function () {
+                            var inputElement = document.querySelector('[aria-label="Font Size"] input');
+                            if (inputElement) {
+                                inputElement.blur();
+                            }
+                        }, 0);
                     }
                     else if (textValue) {
                         var normalizedValue = normalizeFontSize(textValue);
@@ -1304,6 +1300,13 @@ var FontControl = function (_a) {
                             // Custom valid input
                             setIsEditing(false);
                             onChange({ fontSize: normalizedValue });
+                            // Blur after successful change
+                            setTimeout(function () {
+                                var inputElement = document.querySelector('[aria-label="Font Size"] input');
+                                if (inputElement) {
+                                    inputElement.blur();
+                                }
+                            }, 0);
                         }
                         // Invalid input is ignored but keeps editing state
                     }
