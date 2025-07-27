@@ -169,6 +169,29 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
   };
 
   public render(): void {
+    // Map TitleSettings to the format expected by FancyList component
+    const titleSettings = this.properties.titleSettings ? {
+      enabled: this.properties.titleSettings.enabled,
+      webPartTitle: this.properties.titleSettings.webPartTitle,
+      shape: this.properties.titleSettings.shape,
+      showDivider: this.properties.titleSettings.showDivider,
+      backgroundType: this.properties.titleSettings.background.type,
+      backgroundColor: this.properties.titleSettings.background.color,
+      backgroundAlpha: this.properties.titleSettings.background.alpha,
+      gradientDirection: this.properties.titleSettings.background.gradientDirection,
+      gradientColor1: this.properties.titleSettings.background.gradientColor1,
+      gradientColor2: this.properties.titleSettings.background.gradientColor2,
+      gradientAlpha: this.properties.titleSettings.background.gradientAlpha1, // Using alpha1 as main alpha
+      imageUrl: this.properties.titleSettings.background.image,
+      imageAlpha: this.properties.titleSettings.background.imageAlpha,
+      font: {
+        family: this.properties.titleSettings.font.family,
+        size: this.properties.titleSettings.font.size,
+        color: this.properties.titleSettings.font.color,
+        formatting: this.properties.titleSettings.font.formatting
+      }
+    } : undefined;
+
     const element: React.ReactElement<IFancyListProps> = React.createElement(
       FancyList,
       {
@@ -182,7 +205,8 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
         environmentMessage: this._environmentMessage,
         hasTeamsContext: !!this.context.sdks.microsoftTeams,
         userDisplayName: this.context.pageContext.user.displayName,
-        context: this.context
+        context: this.context,
+        titleSettings: titleSettings
       }
     );
 
