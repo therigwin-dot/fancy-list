@@ -1164,7 +1164,7 @@ var FilterModuleControl = function (_a) {
                     } }, "Default Filter Selection"),
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
                     react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Toggle__WEBPACK_IMPORTED_MODULE_5__.Toggle, { label: "Show 'All' Filter Button", inlineLabel: true, checked: showAllToggle, onText: "On", offText: "Off", onChange: function (_, checked) {
-                            console.log('🔄 STEP 2 DEBUG: Toggle clicked, new value:', checked);
+                            console.log('🔄 STEP 3 DEBUG: Toggle clicked, new value:', checked);
                             setShowAllToggle(checked || false);
                             handlePropertyChange('showAllCategories', checked);
                         } }))),
