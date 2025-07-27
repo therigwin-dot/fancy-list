@@ -762,10 +762,10 @@ var FancyList = /** @class */ (function (_super) {
                 } })),
             console.log('🔍 FILTER DEBUG:', {
                 filterSettings: this.props.filterSettings,
-                enabled: (_d = this.props.filterSettings) === null || _d === void 0 ? void 0 : _d.enabled,
-                willRender: ((_e = this.props.filterSettings) === null || _e === void 0 ? void 0 : _e.enabled) === true
+                enabled: (_d = this.props.filterSettings) === null || _d === void 0 ? void 0 : _d.enableFilters,
+                willRender: ((_e = this.props.filterSettings) === null || _e === void 0 ? void 0 : _e.enableFilters) === true
             }),
-            ((_f = this.props.filterSettings) === null || _f === void 0 ? void 0 : _f.enabled) && (react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null,
+            ((_f = this.props.filterSettings) === null || _f === void 0 ? void 0 : _f.enableFilters) && (react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null,
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].categoryFilters, style: __assign(__assign({}, this.getFilterBackgroundStyle(this.props.filterSettings)), { position: 'relative', padding: '12px', marginBottom: '12px' }) },
                     ((_h = (_g = this.props.filterSettings) === null || _g === void 0 ? void 0 : _g.background) === null || _h === void 0 ? void 0 : _h.type) === 'image' &&
                         ((_k = (_j = this.props.filterSettings) === null || _j === void 0 ? void 0 : _j.background) === null || _k === void 0 ? void 0 : _k.image) &&
@@ -34823,7 +34823,7 @@ var FancyListWebPart = /** @class */ (function (_super) {
         };
         // Map filter properties to the format expected by FancyList component
         var filterSettings = {
-            enabled: (_x = (_w = this.properties.filterSettings) === null || _w === void 0 ? void 0 : _w.enableFilters) !== null && _x !== void 0 ? _x : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.enableFilters,
+            enableFilters: (_x = (_w = this.properties.filterSettings) === null || _w === void 0 ? void 0 : _w.enableFilters) !== null && _x !== void 0 ? _x : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.enableFilters,
             font: {
                 family: (_0 = (_z = (_y = this.properties.filterSettings) === null || _y === void 0 ? void 0 : _y.font) === null || _z === void 0 ? void 0 : _z.family) !== null && _0 !== void 0 ? _0 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.font.family,
                 size: (_3 = (_2 = (_1 = this.properties.filterSettings) === null || _1 === void 0 ? void 0 : _1.font) === null || _2 === void 0 ? void 0 : _2.size) !== null && _3 !== void 0 ? _3 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.font.size,
@@ -35470,6 +35470,9 @@ var FancyListWebPart = /** @class */ (function (_super) {
                                                         _this.properties.filterSettings = __assign({}, _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings);
                                                     }
                                                     switch (propertyPath) {
+                                                        case 'enabled':
+                                                            _this.properties.filterSettings.enableFilters = newValue;
+                                                            break;
                                                         case 'shape':
                                                             _this.properties.filterSettings.shape = newValue;
                                                             break;

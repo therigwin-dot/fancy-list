@@ -38,7 +38,7 @@ export interface IFancyListProps {
         };
     };
     filterSettings?: {
-        enabled: boolean;
+        enableFilters: boolean;
         font: {
             family: string;
             size: string;

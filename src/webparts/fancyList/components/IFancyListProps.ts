@@ -49,7 +49,7 @@ export interface IFancyListProps {
   
   // Filter Settings
   filterSettings?: {
-    enabled: boolean;
+    enableFilters: boolean;
     font: {
       family: string;
       size: string;

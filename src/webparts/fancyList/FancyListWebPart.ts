@@ -201,7 +201,7 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
 
     // Map filter properties to the format expected by FancyList component
     const filterSettings = {
-      enabled: this.properties.filterSettings?.enableFilters ?? DEFAULTS_CONFIG.filterSettings.enableFilters,
+      enableFilters: this.properties.filterSettings?.enableFilters ?? DEFAULTS_CONFIG.filterSettings.enableFilters,
       font: {
         family: this.properties.filterSettings?.font?.family ?? DEFAULTS_CONFIG.filterSettings.font.family,
         size: this.properties.filterSettings?.font?.size ?? DEFAULTS_CONFIG.filterSettings.font.size,
@@ -813,6 +813,9 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
                             }
                             
                             switch (propertyPath) {
+                              case 'enabled':
+                                this.properties.filterSettings.enableFilters = newValue;
+                                break;
                               case 'shape':
                                 this.properties.filterSettings.shape = newValue;
                                 break;

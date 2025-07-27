@@ -529,10 +529,10 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
         {/* Category Filter Pills */}
         {console.log('🔍 FILTER DEBUG:', {
           filterSettings: this.props.filterSettings,
-          enabled: this.props.filterSettings?.enabled,
-          willRender: this.props.filterSettings?.enabled === true
+          enabled: this.props.filterSettings?.enableFilters,
+          willRender: this.props.filterSettings?.enableFilters === true
         })}
-        {this.props.filterSettings?.enabled && (
+        {this.props.filterSettings?.enableFilters && (
           <>
             <div
               className={styles.categoryFilters}
