@@ -111,6 +111,7 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
       }));
 
       const categories = Array.from(new Set(items.map(item => item.category))).sort();
+      console.log('🔄 CATEGORIES DEBUG: Available categories from list:', categories);
       
       this.setState({
         items,

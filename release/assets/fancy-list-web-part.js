@@ -442,6 +442,7 @@ var FancyList = /** @class */ (function (_super) {
                             description: item[_this.props.descriptionField] || ''
                         }); });
                         categories = Array.from(new Set(items.map(function (item) { return item.category; }))).sort();
+                        console.log('🔄 CATEGORIES DEBUG: Available categories from list:', categories);
                         this.setState({
                             items: items,
                             categories: categories,
