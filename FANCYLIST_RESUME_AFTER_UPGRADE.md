@@ -70,17 +70,18 @@
    - **Testing Confirmed**: Console output shows property changes, filter section hides/shows correctly
 
 2. **Transparency Slider Not Working** ✅ **FIXED**
-   - **Root Cause**: Alpha inversion in `hexToRgba` function was backwards
-   - **Solution**: Removed the inversion: `alpha / 100` instead of `1 - (alpha / 100)`
+   - **Root Cause**: Double-normalization of alpha value in `hexToRgba` function
+   - **Solution**: Removed double division by 100: `alpha` instead of `alpha / 100`
    - **Technical Fix**:
      - Fixed `hexToRgba` function in `FancyList.tsx` (line 295)
-     - Changed `const normalizedAlpha = 1 - (alpha / 100);` to `const normalizedAlpha = alpha / 100;`
+     - Changed `const normalizedAlpha = alpha / 100;` to `const normalizedAlpha = alpha;`
+     - Alpha parameter is already normalized (0-1) from `getFilterBackgroundStyle`
      - Now 0% = fully transparent (alpha = 0), 100% = fully opaque (alpha = 1)
    - **Result**: Transparency slider now works correctly for solid and gradient backgrounds
    - **Testing Confirmed**: Console output shows property values updating, visual effect now working
 
 **Remaining Filter Issues:**
-2. **✅ Transparency Slider Not Working** - ✅ **FIXED** - Alpha inversion in hexToRgba function
+2. **✅ Transparency Slider Not Working** - ✅ **FIXED** - Double-normalization in hexToRgba function corrected
 3. **Shape Button Not Working** - Always shows square, doesn't adjust
 4. **Reset Button Incomplete** - Only resets divider and shape control
 5. **Shape Control Default Wrong** - Reverts to pill instead of rounded
