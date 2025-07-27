@@ -359,17 +359,20 @@ var FancyList = /** @class */ (function (_super) {
             error: '',
             titleImageError: false,
             titleImageValidationError: null,
-            titleImageLoadError: false
+            titleImageLoadError: false,
+            filterImageValidationError: null,
+            filterImageLoadError: false
         };
         return _this;
     }
     FancyList.prototype.componentDidMount = function () {
         this.loadListData();
         this.checkTitleImage();
+        this.checkFilterImage();
     };
     FancyList.prototype.componentDidUpdate = function (prevProps) {
         var _this = this;
-        var _a, _b, _c, _d;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
         if (prevProps.selectedListId !== this.props.selectedListId ||
             prevProps.categoryField !== this.props.categoryField ||
             prevProps.subjectField !== this.props.subjectField ||
@@ -388,6 +391,11 @@ var FancyList = /** @class */ (function (_super) {
         if (((_a = prevProps.titleSettings) === null || _a === void 0 ? void 0 : _a.imageUrl) !== ((_b = this.props.titleSettings) === null || _b === void 0 ? void 0 : _b.imageUrl) ||
             ((_c = prevProps.titleSettings) === null || _c === void 0 ? void 0 : _c.backgroundType) !== ((_d = this.props.titleSettings) === null || _d === void 0 ? void 0 : _d.backgroundType)) {
             this.checkTitleImage();
+        }
+        // Image loading detection for filter section
+        if (((_f = (_e = prevProps.filterSettings) === null || _e === void 0 ? void 0 : _e.background) === null || _f === void 0 ? void 0 : _f.image) !== ((_h = (_g = this.props.filterSettings) === null || _g === void 0 ? void 0 : _g.background) === null || _h === void 0 ? void 0 : _h.image) ||
+            ((_k = (_j = prevProps.filterSettings) === null || _j === void 0 ? void 0 : _j.background) === null || _k === void 0 ? void 0 : _k.type) !== ((_m = (_l = this.props.filterSettings) === null || _l === void 0 ? void 0 : _l.background) === null || _m === void 0 ? void 0 : _m.type)) {
+            this.checkFilterImage();
         }
     };
     FancyList.prototype.loadListData = function () {
@@ -524,6 +532,85 @@ var FancyList = /** @class */ (function (_super) {
             default: return "linear-gradient(to right, ".concat(rgba1, ", ").concat(rgba2, ")");
         }
     };
+    // Filter utility methods (like Title component pattern)
+    FancyList.prototype.getFilterBorderRadius = function (shape) {
+        return shape === 'square' ? '0px'
+            : shape === 'pill' ? '999px'
+                : '16px'; // rounded default
+    };
+    FancyList.prototype.getTextDecoration = function (formatting) {
+        var decoration = '';
+        if (formatting.underline)
+            decoration += 'underline ';
+        if (formatting.strikethrough)
+            decoration += 'line-through';
+        return decoration.trim() || 'none';
+    };
+    FancyList.prototype.getFilterBackgroundStyle = function (filterSettings) {
+        var background = filterSettings.background;
+        if (background.type === 'solid') {
+            return {
+                background: this.hexToRgba(background.color, background.alpha / 100)
+            };
+        }
+        else if (background.type === 'gradient') {
+            return {
+                background: this.getGradientStyle(background.gradientDirection, background.gradientColor1, background.gradientColor2, background.gradientAlpha1 / 100)
+            };
+        }
+        else if (background.type === 'image') {
+            if (background.image) {
+                return {
+                    backgroundImage: "url(".concat(background.image, ")"),
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center'
+                };
+            }
+            else {
+                return {
+                    backgroundColor: '#ffffff' // Simple white background for empty/invalid URLs
+                };
+            }
+        }
+        return {};
+    };
+    // Add filter image error state management (like Title component)
+    FancyList.prototype.checkFilterImage = function () {
+        var _this = this;
+        var _a;
+        var filterSettings = this.props.filterSettings;
+        if (((_a = filterSettings === null || filterSettings === void 0 ? void 0 : filterSettings.background) === null || _a === void 0 ? void 0 : _a.type) === 'image' && filterSettings.background.image) {
+            // Validate file type
+            var validationError = this.validateImageFileType(filterSettings.background.image);
+            this.setState({
+                filterImageValidationError: validationError,
+                filterImageLoadError: false
+            });
+            if (!validationError) {
+                // Test image loading
+                var img = new Image();
+                img.onload = function () {
+                    _this.setState({
+                        filterImageLoadError: false,
+                        filterImageValidationError: null
+                    });
+                };
+                img.onerror = function () {
+                    _this.setState({
+                        filterImageLoadError: true,
+                        filterImageValidationError: null
+                    });
+                };
+                img.src = filterSettings.background.image;
+            }
+        }
+        else {
+            this.setState({
+                filterImageValidationError: null,
+                filterImageLoadError: false
+            });
+        }
+    };
     FancyList.prototype.hexToRgba = function (hex, alpha) {
         var c = hex.replace('#', '');
         if (c.length === 3)
@@ -638,8 +725,8 @@ var FancyList = /** @class */ (function (_super) {
     };
     FancyList.prototype.render = function () {
         var _this = this;
-        var _a, _b, _c;
-        var _d = this.state, loading = _d.loading, error = _d.error, categories = _d.categories, selectedCategory = _d.selectedCategory, expandedItems = _d.expandedItems;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17;
+        var _18 = this.state, loading = _18.loading, error = _18.error, categories = _18.categories, selectedCategory = _18.selectedCategory, expandedItems = _18.expandedItems;
         var filteredItems = this.getFilteredItems();
         if (loading) {
             return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].fancyList },
@@ -668,9 +755,78 @@ var FancyList = /** @class */ (function (_super) {
                     marginTop: '12px',
                     marginBottom: '12px'
                 } })),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].categoryFilters },
-                this.props.showAllCategories && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { className: "".concat(_FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].categoryPill, " ").concat(selectedCategory === 'all' ? _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].active : ''), onClick: function () { return _this.handleCategoryClick('all'); } }, "All")),
-                categories.map(function (category) { return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { key: category, className: "".concat(_FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].categoryPill, " ").concat(selectedCategory === category ? _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].active : ''), onClick: function () { return _this.handleCategoryClick(category); } }, category)); })),
+            ((_d = this.props.filterSettings) === null || _d === void 0 ? void 0 : _d.enabled) && (react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null,
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].categoryFilters, style: __assign(__assign({}, this.getFilterBackgroundStyle(this.props.filterSettings)), { position: 'relative', padding: '12px', marginBottom: '12px' }) },
+                    ((_f = (_e = this.props.filterSettings) === null || _e === void 0 ? void 0 : _e.background) === null || _f === void 0 ? void 0 : _f.type) === 'image' &&
+                        ((_h = (_g = this.props.filterSettings) === null || _g === void 0 ? void 0 : _g.background) === null || _h === void 0 ? void 0 : _h.image) &&
+                        !this.state.filterImageValidationError &&
+                        !this.state.filterImageLoadError &&
+                        ((_k = (_j = this.props.filterSettings) === null || _j === void 0 ? void 0 : _j.background) === null || _k === void 0 ? void 0 : _k.imageAlpha) !== undefined &&
+                        ((_m = (_l = this.props.filterSettings) === null || _l === void 0 ? void 0 : _l.background) === null || _m === void 0 ? void 0 : _m.imageAlpha) > 0 && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                            position: 'absolute',
+                            top: 0,
+                            left: 0,
+                            right: 0,
+                            bottom: 0,
+                            background: "rgba(255,255,255,".concat((((_p = (_o = this.props.filterSettings) === null || _o === void 0 ? void 0 : _o.background) === null || _p === void 0 ? void 0 : _p.imageAlpha) || 0) / 100, ")"),
+                            pointerEvents: 'none',
+                            zIndex: 1
+                        } })),
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                            position: 'relative',
+                            zIndex: 2,
+                            textAlign: ((_r = (_q = this.props.filterSettings) === null || _q === void 0 ? void 0 : _q.font) === null || _r === void 0 ? void 0 : _r.alignment) || 'left'
+                        } },
+                        this.props.showAllCategories && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { className: "".concat(_FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].categoryPill, " ").concat(selectedCategory === 'all' ? _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].active : ''), style: {
+                                background: selectedCategory === 'all' ? (_t = (_s = this.props.filterSettings) === null || _s === void 0 ? void 0 : _s.activeColors) === null || _t === void 0 ? void 0 : _t.background : (_v = (_u = this.props.filterSettings) === null || _u === void 0 ? void 0 : _u.inactiveColors) === null || _v === void 0 ? void 0 : _v.background,
+                                color: selectedCategory === 'all' ? (_x = (_w = this.props.filterSettings) === null || _w === void 0 ? void 0 : _w.activeColors) === null || _x === void 0 ? void 0 : _x.font : (_z = (_y = this.props.filterSettings) === null || _y === void 0 ? void 0 : _y.inactiveColors) === null || _z === void 0 ? void 0 : _z.font,
+                                fontFamily: (_1 = (_0 = this.props.filterSettings) === null || _0 === void 0 ? void 0 : _0.font) === null || _1 === void 0 ? void 0 : _1.family,
+                                fontSize: (_3 = (_2 = this.props.filterSettings) === null || _2 === void 0 ? void 0 : _2.font) === null || _3 === void 0 ? void 0 : _3.size,
+                                fontWeight: ((_6 = (_5 = (_4 = this.props.filterSettings) === null || _4 === void 0 ? void 0 : _4.font) === null || _5 === void 0 ? void 0 : _5.formatting) === null || _6 === void 0 ? void 0 : _6.bold) ? 'bold' : 'normal',
+                                fontStyle: ((_9 = (_8 = (_7 = this.props.filterSettings) === null || _7 === void 0 ? void 0 : _7.font) === null || _8 === void 0 ? void 0 : _8.formatting) === null || _9 === void 0 ? void 0 : _9.italic) ? 'italic' : 'normal',
+                                textDecoration: this.getTextDecoration(((_11 = (_10 = this.props.filterSettings) === null || _10 === void 0 ? void 0 : _10.font) === null || _11 === void 0 ? void 0 : _11.formatting) || { bold: false, italic: false, underline: false, strikethrough: false }),
+                                borderRadius: this.getFilterBorderRadius(((_12 = this.props.filterSettings) === null || _12 === void 0 ? void 0 : _12.shape) || 'rounded'),
+                                border: 'none',
+                                padding: '8px 16px',
+                                margin: '4px',
+                                cursor: 'pointer',
+                                transition: 'all 0.2s ease'
+                            }, onClick: function () { return _this.handleCategoryClick('all'); } }, "All")),
+                        categories.map(function (category) {
+                            var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w;
+                            return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { key: category, className: "".concat(_FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].categoryPill, " ").concat(selectedCategory === category ? _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].active : ''), style: {
+                                    background: selectedCategory === category ? (_b = (_a = _this.props.filterSettings) === null || _a === void 0 ? void 0 : _a.activeColors) === null || _b === void 0 ? void 0 : _b.background : (_d = (_c = _this.props.filterSettings) === null || _c === void 0 ? void 0 : _c.inactiveColors) === null || _d === void 0 ? void 0 : _d.background,
+                                    color: selectedCategory === category ? (_f = (_e = _this.props.filterSettings) === null || _e === void 0 ? void 0 : _e.activeColors) === null || _f === void 0 ? void 0 : _f.font : (_h = (_g = _this.props.filterSettings) === null || _g === void 0 ? void 0 : _g.inactiveColors) === null || _h === void 0 ? void 0 : _h.font,
+                                    fontFamily: (_k = (_j = _this.props.filterSettings) === null || _j === void 0 ? void 0 : _j.font) === null || _k === void 0 ? void 0 : _k.family,
+                                    fontSize: (_m = (_l = _this.props.filterSettings) === null || _l === void 0 ? void 0 : _l.font) === null || _m === void 0 ? void 0 : _m.size,
+                                    fontWeight: ((_q = (_p = (_o = _this.props.filterSettings) === null || _o === void 0 ? void 0 : _o.font) === null || _p === void 0 ? void 0 : _p.formatting) === null || _q === void 0 ? void 0 : _q.bold) ? 'bold' : 'normal',
+                                    fontStyle: ((_t = (_s = (_r = _this.props.filterSettings) === null || _r === void 0 ? void 0 : _r.font) === null || _s === void 0 ? void 0 : _s.formatting) === null || _t === void 0 ? void 0 : _t.italic) ? 'italic' : 'normal',
+                                    textDecoration: _this.getTextDecoration(((_v = (_u = _this.props.filterSettings) === null || _u === void 0 ? void 0 : _u.font) === null || _v === void 0 ? void 0 : _v.formatting) || { bold: false, italic: false, underline: false, strikethrough: false }),
+                                    borderRadius: _this.getFilterBorderRadius(((_w = _this.props.filterSettings) === null || _w === void 0 ? void 0 : _w.shape) || 'rounded'),
+                                    border: 'none',
+                                    padding: '8px 16px',
+                                    margin: '4px',
+                                    cursor: 'pointer',
+                                    transition: 'all 0.2s ease'
+                                }, onClick: function () { return _this.handleCategoryClick(category); } }, category));
+                        }))),
+                (this.state.filterImageValidationError || this.state.filterImageLoadError ||
+                    (((_14 = (_13 = this.props.filterSettings) === null || _13 === void 0 ? void 0 : _13.background) === null || _14 === void 0 ? void 0 : _14.type) === 'image' && !((_16 = (_15 = this.props.filterSettings) === null || _15 === void 0 ? void 0 : _15.background) === null || _16 === void 0 ? void 0 : _16.image))) && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                        fontSize: '12px',
+                        fontFamily: 'Arial, sans-serif',
+                        color: '#000000',
+                        textAlign: 'right',
+                        marginTop: '8px',
+                        marginBottom: '8px'
+                    } }, this.state.filterImageValidationError ||
+                    (this.state.filterImageLoadError ? 'Unable to access URL' : '') ||
+                    'Please enter an image URL')),
+                ((_17 = this.props.filterSettings) === null || _17 === void 0 ? void 0 : _17.showDivider) && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                        height: '1px',
+                        backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                        marginTop: '12px',
+                        marginBottom: '12px'
+                    } })))),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemsContainer }, filteredItems.map(function (item) { return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { key: item.id, className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemPanel },
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemHeader, onClick: function () { return _this.handleItemToggle(item.id); }, "aria-expanded": expandedItems.has(item.id) ? "true" : "false" },
                     react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemSubject }, item.subject),

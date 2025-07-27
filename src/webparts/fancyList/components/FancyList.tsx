@@ -533,12 +533,12 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
               }}
             >
               {/* Layer 1: Transparency overlay for image backgrounds */}
-              {this.props.filterSettings.background.type === 'image' && 
-               this.props.filterSettings.background.image && 
+              {this.props.filterSettings?.background?.type === 'image' && 
+               this.props.filterSettings?.background?.image && 
                !this.state.filterImageValidationError && 
                !this.state.filterImageLoadError && 
-               this.props.filterSettings.background.imageAlpha !== undefined && 
-               this.props.filterSettings.background.imageAlpha > 0 && (
+               this.props.filterSettings?.background?.imageAlpha !== undefined && 
+               this.props.filterSettings?.background?.imageAlpha > 0 && (
                 <div
                   style={{
                     position: 'absolute',
@@ -546,7 +546,7 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
                     left: 0,
                     right: 0,
                     bottom: 0,
-                    background: `rgba(255,255,255,${this.props.filterSettings.background.imageAlpha / 100})`,
+                    background: `rgba(255,255,255,${(this.props.filterSettings?.background?.imageAlpha || 0) / 100})`,
                     pointerEvents: 'none',
                     zIndex: 1
                   }}
@@ -557,20 +557,20 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
               <div style={{ 
                 position: 'relative', 
                 zIndex: 2,
-                textAlign: this.props.filterSettings.font.alignment || 'left'
+                textAlign: this.props.filterSettings?.font?.alignment || 'left'
               }}>
                 {this.props.showAllCategories && (
                   <button
                     className={`${styles.categoryPill} ${selectedCategory === 'all' ? styles.active : ''}`}
                     style={{
-                      background: selectedCategory === 'all' ? this.props.filterSettings.activeColors.background : this.props.filterSettings.inactiveColors.background,
-                      color: selectedCategory === 'all' ? this.props.filterSettings.activeColors.font : this.props.filterSettings.inactiveColors.font,
-                      fontFamily: this.props.filterSettings.font.family,
-                      fontSize: this.props.filterSettings.font.size,
-                      fontWeight: this.props.filterSettings.font.formatting.bold ? 'bold' : 'normal',
-                      fontStyle: this.props.filterSettings.font.formatting.italic ? 'italic' : 'normal',
-                      textDecoration: this.getTextDecoration(this.props.filterSettings.font.formatting),
-                      borderRadius: this.getFilterBorderRadius(this.props.filterSettings.shape),
+                      background: selectedCategory === 'all' ? this.props.filterSettings?.activeColors?.background : this.props.filterSettings?.inactiveColors?.background,
+                      color: selectedCategory === 'all' ? this.props.filterSettings?.activeColors?.font : this.props.filterSettings?.inactiveColors?.font,
+                      fontFamily: this.props.filterSettings?.font?.family,
+                      fontSize: this.props.filterSettings?.font?.size,
+                      fontWeight: this.props.filterSettings?.font?.formatting?.bold ? 'bold' : 'normal',
+                      fontStyle: this.props.filterSettings?.font?.formatting?.italic ? 'italic' : 'normal',
+                      textDecoration: this.getTextDecoration(this.props.filterSettings?.font?.formatting || { bold: false, italic: false, underline: false, strikethrough: false }),
+                      borderRadius: this.getFilterBorderRadius(this.props.filterSettings?.shape || 'rounded'),
                       border: 'none',
                       padding: '8px 16px',
                       margin: '4px',
@@ -587,14 +587,14 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
                     key={category}
                     className={`${styles.categoryPill} ${selectedCategory === category ? styles.active : ''}`}
                     style={{
-                      background: selectedCategory === category ? this.props.filterSettings.activeColors.background : this.props.filterSettings.inactiveColors.background,
-                      color: selectedCategory === category ? this.props.filterSettings.activeColors.font : this.props.filterSettings.inactiveColors.font,
-                      fontFamily: this.props.filterSettings.font.family,
-                      fontSize: this.props.filterSettings.font.size,
-                      fontWeight: this.props.filterSettings.font.formatting.bold ? 'bold' : 'normal',
-                      fontStyle: this.props.filterSettings.font.formatting.italic ? 'italic' : 'normal',
-                      textDecoration: this.getTextDecoration(this.props.filterSettings.font.formatting),
-                      borderRadius: this.getFilterBorderRadius(this.props.filterSettings.shape),
+                      background: selectedCategory === category ? this.props.filterSettings?.activeColors?.background : this.props.filterSettings?.inactiveColors?.background,
+                      color: selectedCategory === category ? this.props.filterSettings?.activeColors?.font : this.props.filterSettings?.inactiveColors?.font,
+                      fontFamily: this.props.filterSettings?.font?.family,
+                      fontSize: this.props.filterSettings?.font?.size,
+                      fontWeight: this.props.filterSettings?.font?.formatting?.bold ? 'bold' : 'normal',
+                      fontStyle: this.props.filterSettings?.font?.formatting?.italic ? 'italic' : 'normal',
+                      textDecoration: this.getTextDecoration(this.props.filterSettings?.font?.formatting || { bold: false, italic: false, underline: false, strikethrough: false }),
+                      borderRadius: this.getFilterBorderRadius(this.props.filterSettings?.shape || 'rounded'),
                       border: 'none',
                       padding: '8px 16px',
                       margin: '4px',
@@ -611,7 +611,7 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
 
             {/* Filter Image Error Message - positioned below filter section */}
             {(this.state.filterImageValidationError || this.state.filterImageLoadError || 
-              (this.props.filterSettings.background.type === 'image' && !this.props.filterSettings.background.image)) && (
+              (this.props.filterSettings?.background?.type === 'image' && !this.props.filterSettings?.background?.image)) && (
               <div
                 style={{
                   fontSize: '12px',
@@ -629,7 +629,7 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
             )}
 
             {/* Filter Divider - positioned between filters and list items */}
-            {this.props.filterSettings.showDivider && (
+            {this.props.filterSettings?.showDivider && (
               <div style={{
                 height: '1px',
                 backgroundColor: 'rgba(0, 0, 0, 0.1)',
