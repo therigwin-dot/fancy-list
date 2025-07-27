@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Dropdown, IDropdownOption, IconButton, TooltipHost, ComboBox, IComboBoxOption } from '@fluentui/react';
+import { Dropdown, IDropdownOption, IconButton, TooltipHost, ComboBox, IComboBoxOption, IComboBox } from '@fluentui/react';
 
 export interface FontControlProps {
   fontFamily: string;
@@ -73,6 +73,7 @@ const iconButtonStyles = (active: boolean) => ({
 
 export const FontControl: React.FC<FontControlProps> = ({ fontFamily, fontSize, formatting, alignment = 'left', onChange, label }) => {
   const [isEditing, setIsEditing] = React.useState<boolean>(false);
+  const comboBoxRef = React.useRef<IComboBox>(null);
 
 
   const handleFormattingChange = (key: keyof typeof formatting, value: boolean) => {
@@ -265,6 +266,11 @@ export const FontControl: React.FC<FontControlProps> = ({ fontFamily, fontSize, 
               // Release focus when Enter is pressed
               event.preventDefault();
               setIsEditing(false);
+              // Blur the input element directly
+              const inputElement = event.target as HTMLInputElement;
+              if (inputElement) {
+                inputElement.blur();
+              }
             }
           }}
           onChange={(_, option, __, textValue) => {
@@ -282,7 +288,7 @@ export const FontControl: React.FC<FontControlProps> = ({ fontFamily, fontSize, 
               // Invalid input is ignored but keeps editing state
             }
           }}
-
+          componentRef={comboBoxRef}
           styles={{ root: { flex: '1 1 50%' } }}
         />
       </div>

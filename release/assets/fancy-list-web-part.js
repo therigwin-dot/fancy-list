@@ -1198,6 +1198,7 @@ var iconButtonStyles = function (active) { return ({
 var FontControl = function (_a) {
     var fontFamily = _a.fontFamily, fontSize = _a.fontSize, formatting = _a.formatting, _b = _a.alignment, alignment = _b === void 0 ? 'left' : _b, onChange = _a.onChange, label = _a.label;
     var _c = react__WEBPACK_IMPORTED_MODULE_0__.useState(false), isEditing = _c[0], setIsEditing = _c[1];
+    var comboBoxRef = react__WEBPACK_IMPORTED_MODULE_0__.useRef(null);
     var handleFormattingChange = function (key, value) {
         onChange({ formatting: {
                 bold: key === 'bold' ? value : !!formatting.bold,
@@ -1285,6 +1286,11 @@ var FontControl = function (_a) {
                         // Release focus when Enter is pressed
                         event.preventDefault();
                         setIsEditing(false);
+                        // Blur the input element directly
+                        var inputElement = event.target;
+                        if (inputElement) {
+                            inputElement.blur();
+                        }
                     }
                 }, onChange: function (_, option, __, textValue) {
                     if (option) {
@@ -1301,7 +1307,7 @@ var FontControl = function (_a) {
                         }
                         // Invalid input is ignored but keeps editing state
                     }
-                }, styles: { root: { flex: '1 1 50%' } } }))));
+                }, componentRef: comboBoxRef, styles: { root: { flex: '1 1 50%' } } }))));
 };
 
 
