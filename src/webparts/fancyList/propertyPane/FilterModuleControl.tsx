@@ -446,15 +446,6 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
 
           {/* 8. Filter Section Shape Control */}
           <div style={{ marginBottom: 16 }}>
-            <label style={{
-              fontSize: '14px',
-              fontWeight: '600',
-              color: '#323130',
-              marginBottom: '8px',
-              display: 'block'
-            }}>
-              Filter Section Shape
-            </label>
             <ShapePickerControl
               value={settings.backgroundShape}
               label=""

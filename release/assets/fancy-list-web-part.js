@@ -1273,13 +1273,6 @@ var FilterModuleControl = function (_a) {
                             }
                         }, showValue: true, valueFormat: function (value) { return "".concat(value, "%"); } }))),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: {
-                        fontSize: '14px',
-                        fontWeight: '600',
-                        color: '#323130',
-                        marginBottom: '8px',
-                        display: 'block'
-                    } }, "Filter Section Shape"),
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ShapePickerControl__WEBPACK_IMPORTED_MODULE_3__.ShapePickerControl, { value: settings.backgroundShape, label: "", onChange: function (newShape) { return handlePropertyChange('backgroundShape', newShape); } }),
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", { style: { fontSize: '12px', color: '#666', marginTop: '4px', display: 'block' } }, "Choose the shape style for the entire filter section container")),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
