@@ -60,6 +60,7 @@ export interface IFancyListProps {
             font: string;
         };
         shape: string;
+        backgroundShape: 'square' | 'rounded' | 'pill';
         background: {
             type: string;
             color: string;

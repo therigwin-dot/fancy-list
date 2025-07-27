@@ -218,6 +218,7 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
         font: this.properties.filterSettings?.inactiveColors?.font ?? DEFAULTS_CONFIG.filterSettings.inactiveColors.font
       },
       shape: this.properties.filterSettings?.shape ?? DEFAULTS_CONFIG.filterSettings.shape,
+      backgroundShape: this.properties.filterSettings?.backgroundShape ?? DEFAULTS_CONFIG.filterSettings.backgroundShape,
       background: {
         type: this.properties.filterSettings?.background?.type ?? DEFAULTS_CONFIG.filterSettings.background.type,
         color: this.properties.filterSettings?.background?.color ?? DEFAULTS_CONFIG.filterSettings.background.color,

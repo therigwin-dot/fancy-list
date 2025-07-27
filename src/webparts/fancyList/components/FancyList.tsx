@@ -536,7 +536,8 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
                 ...this.getFilterBackgroundStyle(this.props.filterSettings),
                 position: 'relative',
                 padding: '12px',
-                marginBottom: '12px'
+                marginBottom: '12px',
+                borderRadius: this.getShapeRadius(this.props.filterSettings?.backgroundShape || 'rounded')
               }}
             >
               {/* Layer 1: Transparency overlay for image backgrounds */}
