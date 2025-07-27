@@ -47,7 +47,7 @@
 1. **✅ Filter Enabled Toggle** - ✅ **FIXED** - Property change handler was missing
 2. **✅ Transparency Slider Not Working** - ✅ **FIXED** - Alpha inversion corrected for proper slider behavior
 3. **✅ Image Background Broken** - ✅ **FIXED** - Property name corrected from imageUrl to image
-4. **Shape Button Not Working** - 🔴 **Critical** - Shape control in wrong location, needs to apply to filter section container, default should be Rounded
+4. **Shape Button Not Working** - 🔴 **Critical** - Shape control working but not applying to filter section container, needs rendering logic fix
 
 #### **Title Component Bugs**:
 1. **✅ Title Transparency Sliders Broken** - ✅ **FIXED** - Alpha inversion corrected for proper slider behavior
