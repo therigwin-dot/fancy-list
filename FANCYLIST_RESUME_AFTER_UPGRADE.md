@@ -103,7 +103,7 @@
 
 **Remaining Filter Issues:**
 2. **✅ Transparency Slider Not Working** - ✅ **FIXED** - Double-normalization in hexToRgba function corrected
-3. **Shape Button Not Working** - 🔴 **Critical** - Shape control in wrong location, needs to apply to filter section container
+3. **✅ Shape Button Not Working** - ✅ **FIXED** - Shape control now applies to filter section container, property mapping and rendering logic corrected
 4. **Reset Button Incomplete** - Only resets divider and shape control
 5. **Shape Control Default Wrong** - Reverts to pill instead of rounded
 6. **Color Picker Positioning** - Acceptable bug, on back burner
