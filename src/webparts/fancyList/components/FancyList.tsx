@@ -125,28 +125,46 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
 
   private getBackgroundStyle(): React.CSSProperties {
     const { titleSettings } = this.props;
-    if (!titleSettings) return {};
+    console.log('getBackgroundStyle called, titleSettings:', titleSettings);
     
-    const { backgroundType, backgroundColor, backgroundAlpha, gradientDirection, 
-            gradientColor1, gradientColor2, gradientAlpha, imageUrl } = titleSettings;
+    if (!titleSettings) {
+      console.log('getBackgroundStyle: no titleSettings, returning empty object');
+      return {};
+    }
+    
+    // Safe property access with fallbacks
+    const backgroundType = titleSettings.backgroundType || 'solid';
+    const backgroundColor = titleSettings.backgroundColor || '#ffffff';
+    const backgroundAlpha = titleSettings.backgroundAlpha || 0;
+    const gradientDirection = titleSettings.gradientDirection || 'left-right';
+    const gradientColor1 = titleSettings.gradientColor1 || '#ffffff';
+    const gradientColor2 = titleSettings.gradientColor2 || '#000000';
+    const gradientAlpha = titleSettings.gradientAlpha || 0;
+    const imageUrl = titleSettings.imageUrl || '';
+    const shape = titleSettings.shape || 'rounded';
+    
+    console.log('getBackgroundStyle properties:', {
+      backgroundType, backgroundColor, backgroundAlpha, gradientDirection,
+      gradientColor1, gradientColor2, gradientAlpha, imageUrl, shape
+    });
     
     switch (backgroundType) {
       case 'solid':
         return {
           backgroundColor: this.hexToRgba(backgroundColor, backgroundAlpha),
-          borderRadius: this.getShapeRadius(titleSettings.shape)
+          borderRadius: this.getShapeRadius(shape)
         };
       case 'gradient':
         return {
           background: this.getGradientStyle(gradientDirection, gradientColor1, gradientColor2, gradientAlpha),
-          borderRadius: this.getShapeRadius(titleSettings.shape)
+          borderRadius: this.getShapeRadius(shape)
         };
       case 'image':
         return {
           backgroundImage: `url(${imageUrl})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          borderRadius: this.getShapeRadius(titleSettings.shape)
+          borderRadius: this.getShapeRadius(shape)
         };
       default:
         return {};
@@ -197,9 +215,35 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
 
   private getTitleStyle(): React.CSSProperties {
     const { titleSettings } = this.props;
-    if (!titleSettings || !titleSettings.enabled) return {};
+    console.log('getTitleStyle called, titleSettings:', titleSettings);
     
-    const { font } = titleSettings;
+    if (!titleSettings || !titleSettings.enabled) {
+      console.log('getTitleStyle: titleSettings is null or disabled, returning empty object');
+      return {};
+    }
+    
+    // Safe property access with fallbacks
+    const font = titleSettings.font || {
+      family: 'Arial',
+      size: '16px',
+      color: '#000000',
+      formatting: {
+        bold: false,
+        italic: false,
+        underline: false,
+        strikethrough: false
+      }
+    };
+    console.log('getTitleStyle properties:', {
+      fontFamily: font.family,
+      fontSize: font.size,
+      color: font.color,
+      bold: font.formatting.bold,
+      italic: font.formatting.italic,
+      underline: font.formatting.underline,
+      strikethrough: font.formatting.strikethrough
+    });
+
     return {
       fontFamily: font.family,
       fontSize: font.size,
@@ -226,12 +270,31 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
 
   private renderTitle(): React.ReactElement | null {
     const { titleSettings } = this.props;
-    if (!titleSettings || !titleSettings.enabled) return null;
+    
+    // Debug logging
+    console.log('renderTitle called');
+    console.log('titleSettings:', titleSettings);
+    console.log('titleSettings?.enabled:', titleSettings?.enabled);
+    
+    if (!titleSettings || !titleSettings.enabled) {
+      console.log('Title not rendered: titleSettings is null or disabled');
+      return null;
+    }
 
-    const { webPartTitle, showDivider, backgroundType, imageUrl } = titleSettings;
+    // Safe property access with fallbacks
+    const webPartTitle = titleSettings.webPartTitle || 'Fancy List';
+    const showDivider = titleSettings.showDivider || false;
+    const backgroundType = titleSettings.backgroundType || 'solid';
+    const imageUrl = titleSettings.imageUrl || '';
+    
+    // Debug logging for properties
+    console.log('webPartTitle:', webPartTitle);
+    console.log('backgroundType:', backgroundType);
+    console.log('showDivider:', showDivider);
     
     // Check for invalid image URL
     if (backgroundType === 'image' && imageUrl && !this.isValidImageUrl(imageUrl)) {
+      console.log('Rendering error state for invalid image URL');
       return (
         <div className={styles.titleContainer} style={this.getBackgroundStyle()}>
           <div className={styles.titleError}>
@@ -247,6 +310,7 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
       );
     }
 
+    console.log('Rendering normal title');
     return (
       <div className={styles.titleContainer} style={this.getBackgroundStyle()}>
         <div className={styles.titleText} style={this.getTitleStyle()}>
