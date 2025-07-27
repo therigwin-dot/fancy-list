@@ -24,10 +24,21 @@ export const ColorPickerControl: React.FC<ColorPickerControlProps> = ({ color, f
     // Remove # if present
     const hex = hexColor.replace('#', '');
     
+    // Validate hex format (must be 6 characters and valid hex)
+    if (!/^[0-9A-Fa-f]{6}$/.test(hex)) {
+      // For invalid hex, use a safe default that's always visible
+      return '#000000'; // Black text on any background
+    }
+    
     // Convert to RGB
     const r = parseInt(hex.substr(0, 2), 16);
     const g = parseInt(hex.substr(2, 2), 16);
     const b = parseInt(hex.substr(4, 2), 16);
+    
+    // Validate RGB values (should be 0-255)
+    if (isNaN(r) || isNaN(g) || isNaN(b) || r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255) {
+      return '#000000'; // Black text on any background
+    }
     
     // Calculate luminance (perceived brightness)
     const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;

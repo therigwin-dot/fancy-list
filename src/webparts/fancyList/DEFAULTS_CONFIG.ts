@@ -51,7 +51,7 @@ export const DEFAULTS_CONFIG = {
     },
     activeColors: {
       background: '#0078d4',
-      font: '#fff'
+      font: '#ffffff'
     },
     inactiveColors: {
       background: '#f3f2f1',

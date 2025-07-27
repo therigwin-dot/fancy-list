@@ -98,7 +98,7 @@ var DEFAULTS_CONFIG = {
         },
         activeColors: {
             background: '#0078d4',
-            font: '#fff'
+            font: '#ffffff'
         },
         inactiveColors: {
             background: '#f3f2f1',
@@ -516,10 +516,19 @@ var ColorPickerControl = function (_a) {
     var getContrastColor = function (hexColor) {
         // Remove # if present
         var hex = hexColor.replace('#', '');
+        // Validate hex format (must be 6 characters and valid hex)
+        if (!/^[0-9A-Fa-f]{6}$/.test(hex)) {
+            // For invalid hex, use a safe default that's always visible
+            return '#000000'; // Black text on any background
+        }
         // Convert to RGB
         var r = parseInt(hex.substr(0, 2), 16);
         var g = parseInt(hex.substr(2, 2), 16);
         var b = parseInt(hex.substr(4, 2), 16);
+        // Validate RGB values (should be 0-255)
+        if (isNaN(r) || isNaN(g) || isNaN(b) || r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255) {
+            return '#000000'; // Black text on any background
+        }
         // Calculate luminance (perceived brightness)
         var luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
         // Return white for dark backgrounds, black for light backgrounds
@@ -711,8 +720,6 @@ var FilterModuleControl = function (_a) {
                     setEnabled(checked || false);
                 } })),
         enabled && (react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null,
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_FontControl__WEBPACK_IMPORTED_MODULE_1__.FontControl, { fontFamily: settings.font.family, fontSize: settings.font.size, formatting: settings.font.formatting, onChange: handleFontChange })),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
                     backgroundColor: '#f3f2f1',
                     padding: '12px',
@@ -726,39 +733,27 @@ var FilterModuleControl = function (_a) {
                         marginBottom: '12px'
                     } }, "Button"),
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: {
-                            fontSize: '14px',
-                            fontWeight: '600',
-                            color: '#323130',
-                            marginBottom: '8px',
-                            display: 'block'
-                        } }, "Text Controls"),
                     react__WEBPACK_IMPORTED_MODULE_0__.createElement(_FontControl__WEBPACK_IMPORTED_MODULE_1__.FontControl, { fontFamily: settings.font.family, fontSize: settings.font.size, formatting: settings.font.formatting, onChange: handleFontChange })),
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: {
-                            fontSize: '14px',
-                            fontWeight: '600',
-                            color: '#323130',
-                            marginBottom: '8px',
-                            display: 'block'
-                        } }, "Color Controls"),
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 8 } },
-                        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__.ColorPickerControl, { color: settings.activeColors.font, field: "activeFont", label: "Active Font Color", onChange: function (field, newColor) { return handlePropertyChange('activeColors.font', newColor); } })),
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 8 } },
-                        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__.ColorPickerControl, { color: settings.inactiveColors.font, field: "inactiveFont", label: "Inactive Font Color", onChange: function (field, newColor) { return handlePropertyChange('inactiveColors.font', newColor); } })),
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 8 } },
-                        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__.ColorPickerControl, { color: settings.activeColors.background, field: "activeBackground", label: "Active Background Color", onChange: function (field, newColor) { return handlePropertyChange('activeColors.background', newColor); } })),
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 8 } },
-                        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__.ColorPickerControl, { color: settings.inactiveColors.background, field: "inactiveBackground", label: "Inactive Background Color", onChange: function (field, newColor) { return handlePropertyChange('inactiveColors.background', newColor); } }))),
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '8px',
+                            marginBottom: 8
+                        } },
+                        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__.ColorPickerControl, { color: settings.activeColors.font, field: "activeFont", label: "", onChange: function (field, newColor) { return handlePropertyChange('activeColors.font', newColor); } }),
+                        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__.ColorPickerControl, { color: settings.inactiveColors.font, field: "inactiveFont", label: "", onChange: function (field, newColor) { return handlePropertyChange('inactiveColors.font', newColor); } }))),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '8px',
+                            marginBottom: 8
+                        } },
+                        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__.ColorPickerControl, { color: settings.activeColors.background, field: "activeBackground", label: "", onChange: function (field, newColor) { return handlePropertyChange('activeColors.background', newColor); } }),
+                        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__.ColorPickerControl, { color: settings.inactiveColors.background, field: "inactiveBackground", label: "", onChange: function (field, newColor) { return handlePropertyChange('inactiveColors.background', newColor); } }))),
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 0 } },
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: {
-                            fontSize: '14px',
-                            fontWeight: '600',
-                            color: '#323130',
-                            marginBottom: '8px',
-                            display: 'block'
-                        } }, "Shape Control"),
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ShapePickerControl__WEBPACK_IMPORTED_MODULE_3__.ShapePickerControl, { value: settings.shape, label: "Filter Shape", onChange: function (newShape) { return handlePropertyChange('shape', newShape); } }))),
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ShapePickerControl__WEBPACK_IMPORTED_MODULE_3__.ShapePickerControl, { value: settings.shape, label: "", onChange: function (newShape) { return handlePropertyChange('shape', newShape); } }))),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
                     backgroundColor: '#f3f2f1',
                     padding: '12px',
@@ -843,14 +838,7 @@ var FilterModuleControl = function (_a) {
                             }
                         }, showValue: true, valueFormat: function (value) { return "".concat(value, "%"); } })),
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 0 } },
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: {
-                            fontSize: '14px',
-                            fontWeight: '600',
-                            color: '#323130',
-                            marginBottom: '8px',
-                            display: 'block'
-                        } }, "Background Shape"),
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ShapePickerControl__WEBPACK_IMPORTED_MODULE_3__.ShapePickerControl, { value: settings.backgroundShape, label: "Background Shape", onChange: function (newShape) { return handlePropertyChange('backgroundShape', newShape); } }))),
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ShapePickerControl__WEBPACK_IMPORTED_MODULE_3__.ShapePickerControl, { value: settings.backgroundShape, label: "", onChange: function (newShape) { return handlePropertyChange('backgroundShape', newShape); } }))),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Toggle__WEBPACK_IMPORTED_MODULE_5__.Toggle, { label: "Divider", inlineLabel: true, checked: settings.showDivider, onText: "On", offText: "Off", onChange: function (_, checked) { return handlePropertyChange('showDivider', checked); } })),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginTop: 16 } },

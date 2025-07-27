@@ -184,16 +184,6 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
       {/* Conditional rendering for all other controls when enabled */}
       {enabled && (
         <>
-          {/* 2. Font Control */}
-          <div style={{ marginBottom: 16 }}>
-            <FontControl
-              fontFamily={settings.font.family}
-              fontSize={settings.font.size}
-              formatting={settings.font.formatting}
-              onChange={handleFontChange}
-            />
-          </div>
-
           {/* 3. Button Gray Box Container */}
           <div style={{ 
             backgroundColor: '#f3f2f1', 
@@ -213,15 +203,6 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
 
             {/* Text Controls */}
             <div style={{ marginBottom: 16 }}>
-              <label style={{
-                fontSize: '14px',
-                fontWeight: '600',
-                color: '#323130',
-                marginBottom: '8px',
-                display: 'block'
-              }}>
-                Text Controls
-              </label>
               <FontControl
                 fontFamily={settings.font.family}
                 fontSize={settings.font.size}
@@ -230,46 +211,47 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
               />
             </div>
 
-            {/* Color Controls */}
+            {/* Color Controls - Font Colors Side by Side */}
             <div style={{ marginBottom: 16 }}>
-              <label style={{
-                fontSize: '14px',
-                fontWeight: '600',
-                color: '#323130',
-                marginBottom: '8px',
-                display: 'block'
+              <div style={{ 
+                display: 'flex', 
+                alignItems: 'center', 
+                gap: '8px',
+                marginBottom: 8 
               }}>
-                Color Controls
-              </label>
-              <div style={{ marginBottom: 8 }}>
                 <ColorPickerControl
                   color={settings.activeColors.font}
                   field="activeFont"
-                  label="Active Font Color"
+                  label=""
                   onChange={(field: string, newColor: string) => handlePropertyChange('activeColors.font', newColor)}
                 />
-              </div>
-              <div style={{ marginBottom: 8 }}>
                 <ColorPickerControl
                   color={settings.inactiveColors.font}
                   field="inactiveFont"
-                  label="Inactive Font Color"
+                  label=""
                   onChange={(field: string, newColor: string) => handlePropertyChange('inactiveColors.font', newColor)}
                 />
               </div>
-              <div style={{ marginBottom: 8 }}>
+            </div>
+
+            {/* Color Controls - Background Colors Side by Side */}
+            <div style={{ marginBottom: 16 }}>
+              <div style={{ 
+                display: 'flex', 
+                alignItems: 'center', 
+                gap: '8px',
+                marginBottom: 8 
+              }}>
                 <ColorPickerControl
                   color={settings.activeColors.background}
                   field="activeBackground"
-                  label="Active Background Color"
+                  label=""
                   onChange={(field: string, newColor: string) => handlePropertyChange('activeColors.background', newColor)}
                 />
-              </div>
-              <div style={{ marginBottom: 8 }}>
                 <ColorPickerControl
                   color={settings.inactiveColors.background}
                   field="inactiveBackground"
-                  label="Inactive Background Color"
+                  label=""
                   onChange={(field: string, newColor: string) => handlePropertyChange('inactiveColors.background', newColor)}
                 />
               </div>
@@ -277,18 +259,9 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
 
             {/* Shape Control */}
             <div style={{ marginBottom: 0 }}>
-              <label style={{
-                fontSize: '14px',
-                fontWeight: '600',
-                color: '#323130',
-                marginBottom: '8px',
-                display: 'block'
-              }}>
-                Shape Control
-              </label>
               <ShapePickerControl
                 value={settings.shape}
-                label="Filter Shape"
+                label=""
                 onChange={(newShape) => handlePropertyChange('shape', newShape)}
               />
             </div>
@@ -456,18 +429,9 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
 
             {/* 8. Background Shape Control */}
             <div style={{ marginBottom: 0 }}>
-              <label style={{
-                fontSize: '14px',
-                fontWeight: '600',
-                color: '#323130',
-                marginBottom: '8px',
-                display: 'block'
-              }}>
-                Background Shape
-              </label>
               <ShapePickerControl
                 value={settings.backgroundShape}
-                label="Background Shape"
+                label=""
                 onChange={(newShape) => handlePropertyChange('backgroundShape', newShape)}
               />
             </div>
