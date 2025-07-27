@@ -37,5 +37,42 @@ export interface IFancyListProps {
             alignment?: 'left' | 'center' | 'right' | 'justify';
         };
     };
+    filterSettings?: {
+        enabled: boolean;
+        font: {
+            family: string;
+            size: string;
+            color: string;
+            formatting: {
+                bold: boolean;
+                italic: boolean;
+                underline: boolean;
+                strikethrough: boolean;
+            };
+            alignment?: 'left' | 'center' | 'right' | 'justify';
+        };
+        activeColors: {
+            background: string;
+            font: string;
+        };
+        inactiveColors: {
+            background: string;
+            font: string;
+        };
+        shape: string;
+        background: {
+            type: string;
+            color: string;
+            alpha: number;
+            image: string;
+            imageAlpha: number;
+            gradientDirection: string;
+            gradientColor1: string;
+            gradientAlpha1: number;
+            gradientColor2: string;
+            gradientAlpha2: number;
+        };
+        showDivider: boolean;
+    };
 }
 //# sourceMappingURL=IFancyListProps.d.ts.map
