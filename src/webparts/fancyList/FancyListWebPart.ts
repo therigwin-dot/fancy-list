@@ -242,7 +242,7 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
         categoryField: this.properties.categoryField,
         subjectField: this.properties.subjectField,
         descriptionField: this.properties.descriptionField,
-        showAllCategories: this.properties.showAllCategories,
+        showAllCategories: this.properties.filterSettings?.showAllCategories ?? DEFAULTS_CONFIG.filterSettings.showAllCategories,
         defaultExpanded: this.properties.defaultExpanded,
         isDarkTheme: this._isDarkTheme,
         environmentMessage: this._environmentMessage,
