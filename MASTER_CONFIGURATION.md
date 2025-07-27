@@ -315,6 +315,7 @@ Page 3 uses FilterModuleControl with embedded controls for comprehensive filter 
 |--------------|---------------------|---------------------|--------------------------------|------------------------|----------------------|-----------------------------------|
 | Enable Filters | `props.filterSettings.enabled` | `true` | `filterSettings.enabled` | `true` | `FilterModuleControl` | `PropertyPaneToggle` |
 | Show All Categories | `props.filterSettings.showAllCategories` | `true` | `filterSettings.showAllCategories` | `true` | `FilterModuleControl` | `PropertyPaneToggle` |
+| Default Filter Selection | `props.filterSettings.defaultFilterSelection` | `'All'` | `filterSettings.defaultFilterSelection` | `'All'` | `FilterModuleControl` | `PropertyPaneDropdown` |
 | Font Family | `props.filterSettings.font.family` | `'Segoe UI'` | `filterSettings.font.family` | `'Segoe UI'` | `FilterModuleControl` | `FontControl` |
 | Font Size | `props.filterSettings.font.size` | `'14px'` | `filterSettings.font.size` | `'14px'` | `FilterModuleControl` | `FontControl` |
 | Font Bold | `props.filterSettings.font.formatting.bold` | `false` | `filterSettings.font.formatting.bold` | `false` | `FilterModuleControl` | `FontControl` |

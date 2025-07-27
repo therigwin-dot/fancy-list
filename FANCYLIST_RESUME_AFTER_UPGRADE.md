@@ -143,14 +143,15 @@
 **Remaining Filter Issues:**
 2. **✅ Transparency Slider Not Working** - ✅ **FIXED** - Double-normalization in hexToRgba function corrected
 3. **✅ Shape Button Not Working** - ✅ **FIXED** - Shape control now applies to filter section container, property mapping and rendering logic corrected
-4. **Reset Button Incomplete** - Only resets divider and shape control
-5. **Shape Control Default Wrong** - Reverts to pill instead of rounded
+4. **✅ Reset Button Incomplete** - ✅ **FIXED** - Reset button now properly resets all filter settings to defaults
+5. **✅ Shape Control Default Wrong** - ✅ **FIXED** - Shape control default now works correctly
 6. **Color Picker Positioning** - Acceptable bug, on back burner
-7. **✅ Missing "All" Filter Button Toggle** - ✅ **FIXED** - Added "Default Filter Selection" section with "All" filter toggle
+7. **✅ Missing "All" Filter Button Toggle** - ✅ **FIXED** - Added "Default Filter Selection" section with "All" filter toggle + persistence fix
 
 **Working Features:**
 - ✅ **Filter Enabled Toggle** - Now working perfectly (property change handler fixed)
 - ✅ **Transparency Slider** - Now working for solid and gradient backgrounds (alpha inversion fixed)
+- ✅ **Show All Categories Toggle** - Now working perfectly with dropdown integration
 - ✅ All font controls work correctly
 - ✅ Color pickers work (except positioning)
 - ✅ URL image controls work 100% including transparency
@@ -188,6 +189,191 @@
 - ✅ List selection updates title intelligently
 - ✅ Custom text preserved when list changes
 - ✅ Test Defaults button sets complete test environment
+
+---
+
+## **🎯 "SHOW ALL" TOGGLE FEATURE - COMPLETE IMPLEMENTATION**
+
+### **✅ Feature Status: FULLY IMPLEMENTED AND WORKING**
+
+**Date:** July 2025  
+**Status:** ✅ **COMPLETED - All functionality working perfectly**
+
+### **Feature Overview:**
+The "Show All" toggle in the Filter Section provides users with complete control over the visibility of the "All" filter button and its integration with the default filter selection dropdown.
+
+### **Implementation Details:**
+
+#### **1. User Interface Components**
+- **Location**: Page 3 - Filter Configuration, "Default Filter Selection" section
+- **Container**: Grey box with "Default Filter Selection" header
+- **Toggle Control**: "Show 'All' Filter Button" with On/Off states
+- **Dropdown Integration**: Dynamic dropdown that updates based on toggle state
+
+#### **2. Technical Architecture**
+```typescript
+// FilterModuleControl.tsx - Key Implementation
+const [showAllToggle, setShowAllToggle] = React.useState(settings?.showAllCategories ?? true);
+const [defaultFilterDropdown, setDefaultFilterDropdown] = React.useState(settings?.defaultFilterSelection ?? 'All');
+
+// Toggle Change Handler
+onChange={(_, checked) => {
+  setShowAllToggle(checked || false);
+  handlePropertyChange('showAllCategories', checked);
+  
+  // Smart dropdown management
+  if (!checked && defaultFilterDropdown === 'All' && availableCategories.length > 0) {
+    const firstFilter = availableCategories[0];
+    setDefaultFilterDropdown(firstFilter);
+    handlePropertyChange('defaultFilterSelection', firstFilter);
+  }
+}}
+```
+
+#### **3. Dropdown Integration**
+- **With "All" Enabled**: Shows "All" + all available categories
+- **With "All" Disabled**: Shows only available categories
+- **Smart Selection**: Automatically switches from "All" to first category when "All" is disabled
+- **Persistence**: Maintains selection across navigation and page refresh
+
+#### **4. Rendering Integration**
+```typescript
+// FancyList.tsx - Rendering Logic
+{this.props.filterSettings?.showAllCategories && (
+  <button
+    className={`${styles.categoryPill} ${selectedCategory === 'all' ? styles.active : ''}`}
+    onClick={() => this.handleCategoryClick('all')}
+  >
+    All
+  </button>
+)}
+```
+
+#### **5. Property Mapping**
+- **Web Part Level**: `this.properties.filterSettings.showAllCategories`
+- **Component Level**: `props.filterSettings.showAllCategories`
+- **Default Value**: `true` (from DEFAULTS_CONFIG)
+- **Reset Functionality**: Included in reset button with proper state management
+
+#### **6. State Management**
+- **Local State**: `showAllToggle` for UI responsiveness
+- **Settings Sync**: `useEffect` keeps local state synchronized with settings
+- **Persistence**: Values persist across navigation and page refresh
+- **Reset Integration**: Properly resets to default value when reset button is clicked
+
+### **Key Features:**
+- ✅ **Toggle Control**: On/Off toggle for "All" filter button visibility
+- ✅ **Dropdown Integration**: Dynamic dropdown that updates based on toggle state
+- ✅ **Smart Selection**: Automatically switches from "All" to first category when disabled
+- ✅ **Persistence**: Values persist across navigation and page refresh
+- ✅ **Reset Integration**: Properly resets to default value
+- ✅ **Rendering Control**: "All" button only renders when toggle is enabled
+- ✅ **State Synchronization**: Local state stays synchronized with settings
+
+### **Testing Results:**
+- ✅ Toggle works correctly in all states
+- ✅ Dropdown updates dynamically based on toggle state
+- ✅ Smart selection works when disabling "All" with "All" selected
+- ✅ Values persist across navigation and page refresh
+- ✅ Reset button properly resets toggle to default
+- ✅ "All" button only renders when toggle is enabled
+- ✅ No console errors during operation
+
+### **Technical Files Modified:**
+- `src/webparts/fancyList/propertyPane/FilterModuleControl.tsx` - Main implementation
+- `src/webparts/fancyList/components/FancyList.tsx` - Rendering logic
+- `src/webparts/fancyList/FancyListWebPart.ts` - Property mapping
+- `src/webparts/fancyList/DEFAULTS_CONFIG.ts` - Default values
+- `src/webparts/fancyList/components/IFancyListProps.ts` - Interface definitions
+
+---
+
+## **⚠️ INCOMPLETE FEATURE: "DEFAULT FILTER SELECTION" DROPDOWN**
+
+### **🔄 Status: PARTIALLY IMPLEMENTED - NEEDS COMPLETION**
+
+**Date:** July 2025  
+**Status:** 🔄 **INCOMPLETE - Dropdown exists but doesn't affect rendering**
+
+### **Feature Purpose:**
+The "Default Filter Selection" dropdown is designed to set which filter button should be **automatically selected/pressed** when the web part loads. This controls the initial state of the filter section.
+
+### **Current Implementation Status:**
+
+#### **✅ What IS Implemented:**
+- **Dropdown Control**: ✅ Exists in FilterModuleControl.tsx
+- **Property Mapping**: ✅ `defaultFilterSelection` property exists in interfaces
+- **State Management**: ✅ Local state for dropdown selection
+- **Integration with "Show All"**: ✅ Dropdown updates based on toggle state
+- **Reset Functionality**: ✅ Included in reset button
+- **Property Change Handling**: ✅ Web part handles property changes
+
+#### **❌ What is MISSING (Critical Implementation):**
+- **Initial State Connection**: The `selectedCategory` in FancyList.tsx is **hardcoded to 'all'**
+- **No Connection**: The `defaultFilterSelection` property is **not used** to set the initial selected category
+- **No Rendering Logic**: The dropdown selection doesn't affect which filter button appears pressed
+- **Filter Disabled Logic**: No handling for when filters are disabled
+
+### **🔧 Missing Implementation Details:**
+
+#### **1. Initial State Connection (FancyList.tsx):**
+```typescript
+// CURRENT (hardcoded):
+this.state = {
+  selectedCategory: 'all', // ❌ HARDCODED
+  // ...
+};
+
+// SHOULD BE:
+this.state = {
+  selectedCategory: this.props.filterSettings?.defaultFilterSelection || 'all',
+  // ...
+};
+```
+
+#### **2. Property Change Handling (FancyList.tsx):**
+```typescript
+// MISSING in componentDidUpdate:
+if (prevProps.filterSettings?.defaultFilterSelection !== this.props.filterSettings?.defaultFilterSelection) {
+  this.setState({ selectedCategory: this.props.filterSettings?.defaultFilterSelection || 'all' });
+}
+```
+
+#### **3. Filter Disabled Logic:**
+```typescript
+// MISSING: Handle when filters are disabled
+if (!this.props.filterSettings?.enabled) {
+  // Should not show any filter buttons or set any as selected
+  // OR should default to 'all' even when disabled
+}
+```
+
+### **📋 Implementation Plan:**
+
+#### **Phase 1: Connect Initial State**
+1. **Modify FancyList.tsx constructor** to use `defaultFilterSelection` instead of hardcoded 'all'
+2. **Add property change handling** in `componentDidUpdate`
+3. **Test initial state** with different dropdown selections
+
+#### **Phase 2: Handle Filter Disabled State**
+1. **Add logic** for when filters are disabled
+2. **Determine behavior** (no buttons vs. default to 'all')
+3. **Test disabled state** functionality
+
+#### **Phase 3: Testing and Validation**
+1. **Test all scenarios**: Different dropdown selections, filter enabled/disabled
+2. **Validate persistence**: Changes persist across navigation
+3. **Test edge cases**: Invalid selections, empty categories
+
+### **🎯 Expected Behavior:**
+- **Dropdown set to "All"**: "All" button should be pressed when web part loads
+- **Dropdown set to "Category"**: That category's button should be pressed when web part loads
+- **Filters disabled**: No buttons should be pressed (or "All" button pressed)
+- **Property changes**: Selected category should update when dropdown selection changes
+
+### **📁 Files to Modify:**
+- `src/webparts/fancyList/components/FancyList.tsx` - Main implementation
+- `src/webparts/fancyList/components/IFancyListProps.ts` - Interface updates if needed
 
 ---
 
