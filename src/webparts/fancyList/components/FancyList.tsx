@@ -255,7 +255,7 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
       };
     } else if (background.type === 'image') {
       return {
-        background: `linear-gradient(rgba(0,0,0,${background.alpha / 100}), rgba(0,0,0,${background.alpha / 100})), url(${background.imageUrl})`,
+        background: `linear-gradient(rgba(0,0,0,${background.alpha / 100}), rgba(0,0,0,${background.alpha / 100})), url(${background.image})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center'
       };

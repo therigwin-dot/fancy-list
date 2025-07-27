@@ -561,7 +561,7 @@ var FancyList = /** @class */ (function (_super) {
         }
         else if (background.type === 'image') {
             return {
-                background: "linear-gradient(rgba(0,0,0,".concat(background.alpha / 100, "), rgba(0,0,0,").concat(background.alpha / 100, ")), url(").concat(background.imageUrl, ")"),
+                background: "linear-gradient(rgba(0,0,0,".concat(background.alpha / 100, "), rgba(0,0,0,").concat(background.alpha / 100, ")), url(").concat(background.image, ")"),
                 backgroundSize: 'cover',
                 backgroundPosition: 'center'
             };
