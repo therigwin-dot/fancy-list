@@ -106,41 +106,13 @@ export const FontControl: React.FC<FontControlProps> = ({ fontFamily, fontSize, 
           {label}
         </div>
       )}
-      {/* Row 1: Font and Size dropdowns (50/50 split) */}
-      <div style={{ 
-        display: 'flex', 
-        gap: '8px', 
-        marginBottom: '4px'
-      }}>
-        {/* Font Family Dropdown */}
-        <Dropdown
-          label={undefined}
-          ariaLabel="Font Family"
-          options={FONT_FAMILIES}
-          selectedKey={fontFamily || 'inherit'}
-          onChange={(_, option) => onChange({ fontFamily: option!.key as string })}
-          onRenderOption={renderFontOption}
-          onRenderTitle={renderFontTitle}
-          styles={{ root: { flex: '1 1 50%' } }}
-        />
-        
-        {/* Font Size Dropdown */}
-        <Dropdown
-          label={undefined}
-          ariaLabel="Font Size"
-          options={FONT_SIZES}
-          selectedKey={fontSize || '24px'}
-          onChange={(_, option) => onChange({ fontSize: option!.key as string })}
-          styles={{ root: { flex: '1 1 50%' } }}
-        />
-      </div>
-
-      {/* Row 2: Formatting and Alignment buttons */}
+      {/* Row 1: Formatting and Alignment buttons */}
       <div style={{ 
         display: 'flex', 
         alignItems: 'center', 
         gap: '1px',
-        flexWrap: 'nowrap'
+        flexWrap: 'nowrap',
+        marginBottom: '4px'
       }}>
         {/* Formatting Buttons */}
         <TooltipHost content="Bold">
@@ -225,6 +197,34 @@ export const FontControl: React.FC<FontControlProps> = ({ fontFamily, fontSize, 
             onClick={() => handleAlignmentChange('justify')}
           />
         </TooltipHost>
+      </div>
+
+      {/* Row 2: Font and Size dropdowns (50/50 split) */}
+      <div style={{ 
+        display: 'flex', 
+        gap: '8px'
+      }}>
+        {/* Font Family Dropdown */}
+        <Dropdown
+          label={undefined}
+          ariaLabel="Font Family"
+          options={FONT_FAMILIES}
+          selectedKey={fontFamily || 'inherit'}
+          onChange={(_, option) => onChange({ fontFamily: option!.key as string })}
+          onRenderOption={renderFontOption}
+          onRenderTitle={renderFontTitle}
+          styles={{ root: { flex: '1 1 50%' } }}
+        />
+        
+        {/* Font Size Dropdown */}
+        <Dropdown
+          label={undefined}
+          ariaLabel="Font Size"
+          options={FONT_SIZES}
+          selectedKey={fontSize || '24px'}
+          onChange={(_, option) => onChange({ fontSize: option!.key as string })}
+          styles={{ root: { flex: '1 1 50%' } }}
+        />
       </div>
     </div>
   );
