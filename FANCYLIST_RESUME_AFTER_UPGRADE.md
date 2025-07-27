@@ -80,6 +80,16 @@
    - **Result**: Transparency slider now works correctly for solid and gradient backgrounds with proper behavior
    - **Testing Confirmed**: Console output shows property values updating, visual effect working as expected
 
+3. **Image Background Broken** ✅ **FIXED**
+   - **Root Cause**: Incorrect property name in image background logic
+   - **Solution**: Corrected property name from `imageUrl` to `image`
+   - **Technical Fix**:
+     - Fixed `getFilterBackgroundStyle` function in `FancyList.tsx`
+     - Changed `background.imageUrl` to `background.image` in image background section
+     - Property name now matches the rest of the codebase
+   - **Result**: Image backgrounds now display correctly with transparency slider working
+   - **Testing Confirmed**: Images load properly, transparency slider works for image backgrounds
+
 **Remaining Filter Issues:**
 2. **✅ Transparency Slider Not Working** - ✅ **FIXED** - Double-normalization in hexToRgba function corrected
 3. **Shape Button Not Working** - Always shows square, doesn't adjust
