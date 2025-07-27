@@ -83,7 +83,7 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
     gradientAlpha: 0,
     imageUrl: '',
     imageAlpha: 0,
-    backgroundShape: 'pill'
+    backgroundShape: 'rounded'
   },
   onPropertyChange 
 }) => {
@@ -497,7 +497,7 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
                 handlePropertyChange('gradientAlpha', DEFAULTS_CONFIG.filterSettings.background.gradientAlpha1);
                 handlePropertyChange('imageUrl', DEFAULTS_CONFIG.filterSettings.background.image);
                 handlePropertyChange('imageAlpha', DEFAULTS_CONFIG.filterSettings.background.imageAlpha);
-                handlePropertyChange('backgroundShape', DEFAULTS_CONFIG.filterSettings.backgroundShape || 'pill');
+                handlePropertyChange('backgroundShape', DEFAULTS_CONFIG.filterSettings.backgroundShape || 'rounded');
               }} 
             />
           </div>

@@ -114,7 +114,7 @@ var DEFAULTS_CONFIG = {
             font: '#323130'
         },
         shape: 'pill',
-        backgroundShape: 'pill',
+        backgroundShape: 'rounded',
         background: {
             type: 'solid',
             color: '#ffffff',
@@ -1077,7 +1077,7 @@ var FilterModuleControl = function (_a) {
         gradientAlpha: 0,
         imageUrl: '',
         imageAlpha: 0,
-        backgroundShape: 'pill'
+        backgroundShape: 'rounded'
     } : _c, onPropertyChange = _a.onPropertyChange;
     var _d = react__WEBPACK_IMPORTED_MODULE_0__.useState((_b = settings === null || settings === void 0 ? void 0 : settings.enableFilters) !== null && _b !== void 0 ? _b : true), enabled = _d[0], setEnabled = _d[1];
     var _e = react__WEBPACK_IMPORTED_MODULE_0__.useState('#ffffff'), previewColor1 = _e[0], setPreviewColor1 = _e[1];
@@ -1303,7 +1303,7 @@ var FilterModuleControl = function (_a) {
                         handlePropertyChange('gradientAlpha', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.background.gradientAlpha1);
                         handlePropertyChange('imageUrl', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.background.image);
                         handlePropertyChange('imageAlpha', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.background.imageAlpha);
-                        handlePropertyChange('backgroundShape', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.backgroundShape || 'pill');
+                        handlePropertyChange('backgroundShape', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.backgroundShape || 'rounded');
                     } }))))));
 };
 

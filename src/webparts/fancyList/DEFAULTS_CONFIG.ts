@@ -61,7 +61,7 @@ export const DEFAULTS_CONFIG = {
       font: '#323130'
     },
     shape: 'pill' as const,
-    backgroundShape: 'pill' as const,
+    backgroundShape: 'rounded' as const,
     background: {
       type: 'solid' as const,
       color: '#ffffff',
