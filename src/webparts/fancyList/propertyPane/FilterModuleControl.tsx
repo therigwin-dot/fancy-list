@@ -442,14 +442,27 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
               />
             </div>
 
-            {/* 8. Background Shape Control */}
-            <div style={{ marginBottom: 0 }}>
-              <ShapePickerControl
-                value={settings.backgroundShape}
-                label=""
-                onChange={(newShape) => handlePropertyChange('backgroundShape', newShape)}
-              />
-            </div>
+          </div>
+
+          {/* 8. Filter Section Shape Control */}
+          <div style={{ marginBottom: 16 }}>
+            <label style={{
+              fontSize: '14px',
+              fontWeight: '600',
+              color: '#323130',
+              marginBottom: '8px',
+              display: 'block'
+            }}>
+              Filter Section Shape
+            </label>
+            <ShapePickerControl
+              value={settings.backgroundShape}
+              label=""
+              onChange={(newShape) => handlePropertyChange('backgroundShape', newShape)}
+            />
+            <span style={{ fontSize: '12px', color: '#666', marginTop: '4px', display: 'block' }}>
+              Choose the shape style for the entire filter section container
+            </span>
           </div>
 
           {/* 9. Divider Toggle */}
