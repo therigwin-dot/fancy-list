@@ -13,6 +13,7 @@ import DEFAULTS_CONFIG from '../DEFAULTS_CONFIG';
 export interface FilterModuleControlProps {
   label?: string;
   settings?: {
+    enableFilters: boolean;
     font: {
       family: string;
       size: string;
@@ -51,6 +52,7 @@ export interface FilterModuleControlProps {
 export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({ 
   label, 
   settings = {
+    enableFilters: true,
     font: {
       family: 'Segoe UI',
       size: '12px',
@@ -85,7 +87,7 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
   },
   onPropertyChange 
 }) => {
-  const [enabled, setEnabled] = React.useState(true);
+  const [enabled, setEnabled] = React.useState(settings?.enableFilters ?? true);
   const [previewColor1, setPreviewColor1] = React.useState<string>('#ffffff');
   const [previewColor2, setPreviewColor2] = React.useState<string>('#000000');
   
@@ -181,6 +183,7 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
           offText="Off"
           onChange={(_, checked) => {
             setEnabled(checked || false);
+            handlePropertyChange('enabled', checked || false);
           }}
         />
       </div>

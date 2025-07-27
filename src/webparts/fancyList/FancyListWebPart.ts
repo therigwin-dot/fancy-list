@@ -779,6 +779,7 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
                         React.createElement(FilterModuleControl, {
                           label: 'Filter Configuration',
                                                       settings: {
+                              enableFilters: this.properties.filterSettings?.enableFilters ?? DEFAULTS_CONFIG.filterSettings.enableFilters,
                               font: {
                                 family: this.properties.filterSettings?.font.family || DEFAULTS_CONFIG.filterSettings.font.family,
                                 size: this.properties.filterSettings?.font.size || DEFAULTS_CONFIG.filterSettings.font.size,

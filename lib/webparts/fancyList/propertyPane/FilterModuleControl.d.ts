@@ -3,6 +3,7 @@ import { ShapeOption } from './ShapePickerControl';
 export interface FilterModuleControlProps {
     label?: string;
     settings?: {
+        enableFilters: boolean;
         font: {
             family: string;
             size: string;
