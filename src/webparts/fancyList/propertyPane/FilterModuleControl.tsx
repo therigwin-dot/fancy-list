@@ -529,6 +529,10 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
                 handlePropertyChange('shape', DEFAULTS_CONFIG.filterSettings.shape);
                 handlePropertyChange('backgroundShape', DEFAULTS_CONFIG.filterSettings.backgroundShape);
                 
+                // Reset showAllCategories
+                handlePropertyChange('showAllCategories', DEFAULTS_CONFIG.filterSettings.showAllCategories);
+                setShowAllToggle(DEFAULTS_CONFIG.filterSettings.showAllCategories);
+                
                 // Reset background settings
                 handlePropertyChange('backgroundType', DEFAULTS_CONFIG.filterSettings.background.type);
                 handlePropertyChange('backgroundColor', DEFAULTS_CONFIG.filterSettings.background.color);

@@ -1314,6 +1314,9 @@ var FilterModuleControl = function (_a) {
                         // Reset shape settings
                         handlePropertyChange('shape', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.shape);
                         handlePropertyChange('backgroundShape', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.backgroundShape);
+                        // Reset showAllCategories
+                        handlePropertyChange('showAllCategories', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.showAllCategories);
+                        setShowAllToggle(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.showAllCategories);
                         // Reset background settings
                         handlePropertyChange('backgroundType', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.background.type);
                         handlePropertyChange('backgroundColor', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.background.color);
