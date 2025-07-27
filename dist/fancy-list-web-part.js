@@ -1424,11 +1424,27 @@ var SectionModuleControl = function (_a) {
                     var newSettings = __assign(__assign({}, sectionSettings), { iconSettings: iconSettings });
                     onChange(newSettings);
                 } }))),
-        sectionType !== 'description' && (react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null,
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Toggle__WEBPACK_IMPORTED_MODULE_6__.Toggle, { label: "Auto Expand", inlineLabel: true, checked: sectionSettings.autoExpand, onText: "On", offText: "Off", onChange: function (_, checked) { return handlePropertyChange('autoExpand', checked); } })),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Toggle__WEBPACK_IMPORTED_MODULE_6__.Toggle, { label: "Show Divider", inlineLabel: true, checked: sectionSettings.showDivider, onText: "On", offText: "Off", onChange: function (_, checked) { return handlePropertyChange('showDivider', checked); } })))),
+        sectionType !== 'description' && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                display: 'flex',
+                gap: '24px',
+                marginBottom: 16
+            } },
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { flex: 1 } },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                        fontSize: '14px',
+                        fontWeight: '600',
+                        color: '#323130',
+                        marginBottom: '8px'
+                    } }, "Auto Expand"),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Toggle__WEBPACK_IMPORTED_MODULE_6__.Toggle, { label: "", inlineLabel: true, checked: sectionSettings.autoExpand, onText: "On", offText: "Off", onChange: function (_, checked) { return handlePropertyChange('autoExpand', checked); } })),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { flex: 1 } },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                        fontSize: '14px',
+                        fontWeight: '600',
+                        color: '#323130',
+                        marginBottom: '8px'
+                    } }, "Divider"),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Toggle__WEBPACK_IMPORTED_MODULE_6__.Toggle, { label: "", inlineLabel: true, checked: sectionSettings.showDivider, onText: "On", offText: "Off", onChange: function (_, checked) { return handlePropertyChange('showDivider', checked); } })))),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_FontControl__WEBPACK_IMPORTED_MODULE_3__.FontControl, { label: "", fontFamily: sectionSettings.font.family, fontSize: sectionSettings.font.size, formatting: sectionSettings.font.formatting, onChange: handleFontChange })),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
