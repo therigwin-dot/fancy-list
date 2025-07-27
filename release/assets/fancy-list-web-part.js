@@ -35074,7 +35074,8 @@ var FancyListWebPart = /** @class */ (function (_super) {
                                                         family: _this.properties.webPartTitleFont || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.font.family,
                                                         size: _this.properties.webPartTitleFontSize || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.font.size,
                                                         formatting: _this.properties.webPartTitleFormatting || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.font.formatting,
-                                                        color: _this.properties.webPartTitleColor || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.font.color
+                                                        color: _this.properties.webPartTitleColor || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.font.color,
+                                                        alignment: _this.properties.webPartTitleAlignment || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.font.alignment
                                                     }
                                                 },
                                                 onPropertyChange: function (propertyPath, newValue) {
@@ -35135,6 +35136,9 @@ var FancyListWebPart = /** @class */ (function (_super) {
                                                         case 'font.color':
                                                             _this.properties.webPartTitleColor = newValue;
                                                             break;
+                                                        case 'font.alignment':
+                                                            _this.properties.webPartTitleAlignment = newValue;
+                                                            break;
                                                     }
                                                     if (changeCallback)
                                                         changeCallback();
@@ -35162,35 +35166,36 @@ var FancyListWebPart = /** @class */ (function (_super) {
                                     properties: {
                                         key: 'filterConfiguration',
                                         onRender: function (elem, ctx, changeCallback) {
-                                            var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u;
+                                            var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v;
                                             react_dom__WEBPACK_IMPORTED_MODULE_1__.render(react__WEBPACK_IMPORTED_MODULE_0__.createElement(_propertyPane_FilterModuleControl__WEBPACK_IMPORTED_MODULE_10__.FilterModuleControl, {
                                                 label: 'Filter Configuration',
                                                 settings: {
                                                     font: {
                                                         family: ((_a = _this.properties.filterSettings) === null || _a === void 0 ? void 0 : _a.font.family) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.font.family,
                                                         size: ((_b = _this.properties.filterSettings) === null || _b === void 0 ? void 0 : _b.font.size) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.font.size,
-                                                        formatting: ((_c = _this.properties.filterSettings) === null || _c === void 0 ? void 0 : _c.font.formatting) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.font.formatting
+                                                        formatting: ((_c = _this.properties.filterSettings) === null || _c === void 0 ? void 0 : _c.font.formatting) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.font.formatting,
+                                                        alignment: ((_d = _this.properties.filterSettings) === null || _d === void 0 ? void 0 : _d.font.alignment) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.font.alignment
                                                     },
                                                     activeColors: {
-                                                        background: ((_d = _this.properties.filterSettings) === null || _d === void 0 ? void 0 : _d.activeColors.background) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.activeColors.background,
-                                                        font: ((_e = _this.properties.filterSettings) === null || _e === void 0 ? void 0 : _e.activeColors.font) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.activeColors.font
+                                                        background: ((_e = _this.properties.filterSettings) === null || _e === void 0 ? void 0 : _e.activeColors.background) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.activeColors.background,
+                                                        font: ((_f = _this.properties.filterSettings) === null || _f === void 0 ? void 0 : _f.activeColors.font) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.activeColors.font
                                                     },
                                                     inactiveColors: {
-                                                        background: ((_f = _this.properties.filterSettings) === null || _f === void 0 ? void 0 : _f.inactiveColors.background) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.inactiveColors.background,
-                                                        font: ((_g = _this.properties.filterSettings) === null || _g === void 0 ? void 0 : _g.inactiveColors.font) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.inactiveColors.font
+                                                        background: ((_g = _this.properties.filterSettings) === null || _g === void 0 ? void 0 : _g.inactiveColors.background) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.inactiveColors.background,
+                                                        font: ((_h = _this.properties.filterSettings) === null || _h === void 0 ? void 0 : _h.inactiveColors.font) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.inactiveColors.font
                                                     },
-                                                    shape: ((_h = _this.properties.filterSettings) === null || _h === void 0 ? void 0 : _h.shape) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.shape,
-                                                    backgroundShape: ((_j = _this.properties.filterSettings) === null || _j === void 0 ? void 0 : _j.backgroundShape) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.backgroundShape,
-                                                    showDivider: ((_k = _this.properties.filterSettings) === null || _k === void 0 ? void 0 : _k.showDivider) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.showDivider,
-                                                    backgroundType: ((_l = _this.properties.filterSettings) === null || _l === void 0 ? void 0 : _l.background.type) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.type,
-                                                    backgroundColor: ((_m = _this.properties.filterSettings) === null || _m === void 0 ? void 0 : _m.background.color) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.color,
-                                                    backgroundAlpha: ((_o = _this.properties.filterSettings) === null || _o === void 0 ? void 0 : _o.background.alpha) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.alpha,
-                                                    gradientDirection: ((_p = _this.properties.filterSettings) === null || _p === void 0 ? void 0 : _p.background.gradientDirection) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientDirection,
-                                                    gradientColor1: ((_q = _this.properties.filterSettings) === null || _q === void 0 ? void 0 : _q.background.gradientColor1) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientColor1,
-                                                    gradientColor2: ((_r = _this.properties.filterSettings) === null || _r === void 0 ? void 0 : _r.background.gradientColor2) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientColor2,
-                                                    gradientAlpha: ((_s = _this.properties.filterSettings) === null || _s === void 0 ? void 0 : _s.background.gradientAlpha1) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientAlpha1,
-                                                    imageUrl: ((_t = _this.properties.filterSettings) === null || _t === void 0 ? void 0 : _t.background.image) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.image,
-                                                    imageAlpha: ((_u = _this.properties.filterSettings) === null || _u === void 0 ? void 0 : _u.background.imageAlpha) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.imageAlpha
+                                                    shape: ((_j = _this.properties.filterSettings) === null || _j === void 0 ? void 0 : _j.shape) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.shape,
+                                                    backgroundShape: ((_k = _this.properties.filterSettings) === null || _k === void 0 ? void 0 : _k.backgroundShape) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.backgroundShape,
+                                                    showDivider: ((_l = _this.properties.filterSettings) === null || _l === void 0 ? void 0 : _l.showDivider) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.showDivider,
+                                                    backgroundType: ((_m = _this.properties.filterSettings) === null || _m === void 0 ? void 0 : _m.background.type) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.type,
+                                                    backgroundColor: ((_o = _this.properties.filterSettings) === null || _o === void 0 ? void 0 : _o.background.color) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.color,
+                                                    backgroundAlpha: ((_p = _this.properties.filterSettings) === null || _p === void 0 ? void 0 : _p.background.alpha) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.alpha,
+                                                    gradientDirection: ((_q = _this.properties.filterSettings) === null || _q === void 0 ? void 0 : _q.background.gradientDirection) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientDirection,
+                                                    gradientColor1: ((_r = _this.properties.filterSettings) === null || _r === void 0 ? void 0 : _r.background.gradientColor1) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientColor1,
+                                                    gradientColor2: ((_s = _this.properties.filterSettings) === null || _s === void 0 ? void 0 : _s.background.gradientColor2) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientColor2,
+                                                    gradientAlpha: ((_t = _this.properties.filterSettings) === null || _t === void 0 ? void 0 : _t.background.gradientAlpha1) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientAlpha1,
+                                                    imageUrl: ((_u = _this.properties.filterSettings) === null || _u === void 0 ? void 0 : _u.background.image) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.image,
+                                                    imageAlpha: ((_v = _this.properties.filterSettings) === null || _v === void 0 ? void 0 : _v.background.imageAlpha) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.imageAlpha
                                                 },
                                                 onPropertyChange: function (propertyPath, newValue) {
                                                     // Handle property changes and update the web part properties
@@ -35242,6 +35247,9 @@ var FancyListWebPart = /** @class */ (function (_super) {
                                                             break;
                                                         case 'font.formatting':
                                                             _this.properties.filterSettings.font.formatting = newValue;
+                                                            break;
+                                                        case 'font.alignment':
+                                                            _this.properties.filterSettings.font.alignment = newValue;
                                                             break;
                                                         case 'activeColors.background':
                                                             _this.properties.filterSettings.activeColors.background = newValue;

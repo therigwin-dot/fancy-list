@@ -649,7 +649,8 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
                               family: this.properties.webPartTitleFont || DEFAULTS_CONFIG.titleSettings.font.family,
                               size: this.properties.webPartTitleFontSize || DEFAULTS_CONFIG.titleSettings.font.size,
                               formatting: this.properties.webPartTitleFormatting || DEFAULTS_CONFIG.titleSettings.font.formatting,
-                              color: this.properties.webPartTitleColor || DEFAULTS_CONFIG.titleSettings.font.color
+                              color: this.properties.webPartTitleColor || DEFAULTS_CONFIG.titleSettings.font.color,
+                              alignment: this.properties.webPartTitleAlignment || DEFAULTS_CONFIG.titleSettings.font.alignment
                             }
                           },
                           onPropertyChange: (propertyPath: string, newValue: any) => {
@@ -708,6 +709,9 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
                               case 'font.color':
                                 this.properties.webPartTitleColor = newValue;
                                 break;
+                              case 'font.alignment':
+                                this.properties.webPartTitleAlignment = newValue;
+                                break;
                             }
                             if (changeCallback) changeCallback();
                             this.context.propertyPane.refresh();
@@ -743,7 +747,8 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
                               font: {
                                 family: this.properties.filterSettings?.font.family || DEFAULTS_CONFIG.filterSettings.font.family,
                                 size: this.properties.filterSettings?.font.size || DEFAULTS_CONFIG.filterSettings.font.size,
-                                formatting: this.properties.filterSettings?.font.formatting || DEFAULTS_CONFIG.filterSettings.font.formatting
+                                formatting: this.properties.filterSettings?.font.formatting || DEFAULTS_CONFIG.filterSettings.font.formatting,
+                                alignment: this.properties.filterSettings?.font.alignment || DEFAULTS_CONFIG.filterSettings.font.alignment
                               },
                             activeColors: {
                               background: this.properties.filterSettings?.activeColors.background || DEFAULTS_CONFIG.filterSettings.activeColors.background,
@@ -817,6 +822,9 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
                                 break;
                               case 'font.formatting':
                                 this.properties.filterSettings.font.formatting = newValue;
+                                break;
+                              case 'font.alignment':
+                                this.properties.filterSettings.font.alignment = newValue;
                                 break;
                               case 'activeColors.background':
                                 this.properties.filterSettings.activeColors.background = newValue;
