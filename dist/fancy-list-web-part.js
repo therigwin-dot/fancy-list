@@ -147,7 +147,6 @@ var DEFAULTS_CONFIG = {
         shape: 'rounded',
         showDivider: true,
         autoExpand: false,
-        hoverColor: '#e1dfdd',
         iconSettings: {
             enabled: true,
             iconPosition: 'left',
@@ -181,7 +180,6 @@ var DEFAULTS_CONFIG = {
         shape: 'rounded',
         showDivider: false,
         autoExpand: false,
-        hoverColor: '#f3f2f1',
         iconSettings: {
             enabled: true,
             iconPosition: 'left',
@@ -215,7 +213,6 @@ var DEFAULTS_CONFIG = {
         shape: 'rounded',
         showDivider: false,
         autoExpand: false,
-        hoverColor: '#faf9f8',
         iconSettings: {
             enabled: false,
             iconPosition: 'left',
@@ -1335,7 +1332,6 @@ var SectionModuleControl = function (_a) {
         handlePropertyChange('shape', defaultSettings.shape);
         handlePropertyChange('showDivider', defaultSettings.showDivider);
         handlePropertyChange('autoExpand', defaultSettings.autoExpand);
-        handlePropertyChange('hoverColor', defaultSettings.hoverColor);
         handlePropertyChange('iconSettings', defaultSettings.iconSettings);
         console.log("Reset ".concat(sectionType, " settings to defaults"));
     };
@@ -1522,19 +1518,6 @@ var SectionModuleControl = function (_a) {
                     }, showValue: true, valueFormat: function (value) { return "".concat(value, "%"); } }))),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ShapePickerControl__WEBPACK_IMPORTED_MODULE_2__.ShapePickerControl, { label: "", value: sectionSettings.shape, onChange: function (shape) { return handlePropertyChange('shape', shape); } })),
-        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '8px',
-                    marginBottom: '8px'
-                } },
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
-                        fontSize: '14px',
-                        fontWeight: '600',
-                        color: '#323130'
-                    } }, "Hover"),
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_4__.ColorPickerControl, { color: sectionSettings.hoverColor, field: "hoverColor", label: "", onChange: function (field, newColor) { return handlePropertyChange('hoverColor', newColor); } }))),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginTop: 16 } },
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_10__.PrimaryButton, { text: sectionSettings.resetButtonText, onClick: handleReset }))));
 };

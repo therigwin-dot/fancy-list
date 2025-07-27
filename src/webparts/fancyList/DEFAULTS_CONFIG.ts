@@ -101,7 +101,6 @@ export const DEFAULTS_CONFIG = {
     shape: 'rounded' as const,
     showDivider: true,
     autoExpand: false,
-    hoverColor: '#e1dfdd',
     iconSettings: {
       enabled: true,
       iconPosition: 'left' as const,
@@ -136,7 +135,6 @@ export const DEFAULTS_CONFIG = {
     shape: 'rounded' as const,
     showDivider: false,
     autoExpand: false,
-    hoverColor: '#f3f2f1',
     iconSettings: {
       enabled: true,
       iconPosition: 'left' as const,
@@ -171,7 +169,6 @@ export const DEFAULTS_CONFIG = {
     shape: 'rounded' as const,
     showDivider: false,
     autoExpand: false,
-    hoverColor: '#faf9f8',
     iconSettings: {
       enabled: false,
       iconPosition: 'left' as const,

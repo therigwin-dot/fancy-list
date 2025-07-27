@@ -44,7 +44,6 @@ export interface SectionSettings {
   shape: 'square' | 'rounded' | 'pill';
   showDivider: boolean;
   autoExpand: boolean;
-  hoverColor: string;
   iconSettings: IconSettings;
 }
 
@@ -101,7 +100,6 @@ export const SectionModuleControl: React.FC<SectionModuleControlProps> = ({
     handlePropertyChange('shape', defaultSettings.shape);
     handlePropertyChange('showDivider', defaultSettings.showDivider);
     handlePropertyChange('autoExpand', defaultSettings.autoExpand);
-    handlePropertyChange('hoverColor', defaultSettings.hoverColor);
     handlePropertyChange('iconSettings', defaultSettings.iconSettings);
     
     console.log(`Reset ${sectionType} settings to defaults`);
@@ -444,29 +442,7 @@ export const SectionModuleControl: React.FC<SectionModuleControlProps> = ({
         />
       </div>
 
-      {/* 8. Hover Color Control */}
-      <div style={{ marginBottom: 16 }}>
-        <div style={{ 
-          display: 'flex', 
-          alignItems: 'center', 
-          gap: '8px',
-          marginBottom: '8px'
-        }}>
-          <div style={{
-            fontSize: '14px',
-            fontWeight: '600',
-            color: '#323130'
-          }}>
-            Hover
-          </div>
-          <ColorPickerControl
-            color={sectionSettings.hoverColor}
-            field="hoverColor"
-            label=""
-            onChange={(field: string, newColor: string) => handlePropertyChange('hoverColor', newColor)}
-          />
-        </div>
-      </div>
+
 
       {/* Reset Button */}
       <div style={{ marginTop: 16 }}>
