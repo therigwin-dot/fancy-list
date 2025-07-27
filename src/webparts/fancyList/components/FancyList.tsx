@@ -315,7 +315,7 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
 
   private renderTitle(): React.ReactElement | null {
     const { titleSettings } = this.props;
-    const { titleImageError, titleImageValidationError, titleImageLoadError } = this.state;
+    const { titleImageError } = this.state;
     
     // If no titleSettings, render a default title (like Compare backup)
     if (!titleSettings) {
@@ -361,26 +361,8 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
           />
         )}
         
-        {/* Layer 2: Error message layer */}
-        {(titleImageValidationError || titleImageLoadError) && (
-          <div
-            style={{
-              position: 'absolute',
-              bottom: '8px',
-              right: '8px',
-              fontSize: '12px',
-              fontFamily: 'Arial, sans-serif',
-              color: '#000000',
-              zIndex: 2,
-              pointerEvents: 'none'
-            }}
-          >
-            {titleImageValidationError || (titleImageLoadError ? 'Unable to access URL' : '')}
-          </div>
-        )}
-        
-        {/* Layer 3: Title text */}
-        <div style={{ position: 'relative', zIndex: 3 }}>
+        {/* Layer 2: Title text */}
+        <div style={{ position: 'relative', zIndex: 2 }}>
           {webPartTitle}
         </div>
       </div>
@@ -410,6 +392,23 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     return (
       <div className={styles.fancyList}>
         {this.renderTitle()}
+        
+        {/* Title Image Error Message - positioned below title section */}
+        {(this.state.titleImageValidationError || this.state.titleImageLoadError) && (
+          <div
+            style={{
+              fontSize: '12px',
+              fontFamily: 'Arial, sans-serif',
+              color: '#000000',
+              textAlign: 'right',
+              marginTop: '8px',
+              marginBottom: '8px'
+            }}
+          >
+            {this.state.titleImageValidationError || (this.state.titleImageLoadError ? 'Unable to access URL' : '')}
+          </div>
+        )}
+        
         {/* Title Divider - positioned between title and filters */}
         {this.props.titleSettings?.showDivider && (
           <div style={{ 

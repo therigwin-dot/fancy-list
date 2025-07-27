@@ -604,7 +604,7 @@ var FancyList = /** @class */ (function (_super) {
     };
     FancyList.prototype.renderTitle = function () {
         var titleSettings = this.props.titleSettings;
-        var _a = this.state, titleImageError = _a.titleImageError, titleImageValidationError = _a.titleImageValidationError, titleImageLoadError = _a.titleImageLoadError;
+        var titleImageError = this.state.titleImageError;
         // If no titleSettings, render a default title (like Compare backup)
         if (!titleSettings) {
             return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: this.getTitleStyle() }, "Fancy List"));
@@ -634,17 +634,7 @@ var FancyList = /** @class */ (function (_super) {
                     pointerEvents: 'none',
                     zIndex: 1
                 } })),
-            (titleImageValidationError || titleImageLoadError) && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
-                    position: 'absolute',
-                    bottom: '8px',
-                    right: '8px',
-                    fontSize: '12px',
-                    fontFamily: 'Arial, sans-serif',
-                    color: '#000000',
-                    zIndex: 2,
-                    pointerEvents: 'none'
-                } }, titleImageValidationError || (titleImageLoadError ? 'Unable to access URL' : ''))),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { position: 'relative', zIndex: 3 } }, webPartTitle)));
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { position: 'relative', zIndex: 2 } }, webPartTitle)));
     };
     FancyList.prototype.render = function () {
         var _this = this;
@@ -661,6 +651,14 @@ var FancyList = /** @class */ (function (_super) {
         }
         return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].fancyList },
             this.renderTitle(),
+            (this.state.titleImageValidationError || this.state.titleImageLoadError) && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                    fontSize: '12px',
+                    fontFamily: 'Arial, sans-serif',
+                    color: '#000000',
+                    textAlign: 'right',
+                    marginTop: '8px',
+                    marginBottom: '8px'
+                } }, this.state.titleImageValidationError || (this.state.titleImageLoadError ? 'Unable to access URL' : ''))),
             ((_a = this.props.titleSettings) === null || _a === void 0 ? void 0 : _a.showDivider) && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
                     height: '1px',
                     backgroundColor: 'rgba(0, 0, 0, 0.1)',
