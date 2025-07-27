@@ -466,6 +466,8 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
                   formatting: DEFAULTS_CONFIG.filterSettings.font.formatting,
                   alignment: DEFAULTS_CONFIG.filterSettings.font.alignment
                 });
+                // Also call direct property change to ensure it's processed
+                handlePropertyChange('font.alignment', DEFAULTS_CONFIG.filterSettings.font.alignment);
                 handlePropertyChange('activeColors.background', DEFAULTS_CONFIG.filterSettings.activeColors.background);
                 handlePropertyChange('activeColors.font', DEFAULTS_CONFIG.filterSettings.activeColors.font);
                 handlePropertyChange('inactiveColors.background', DEFAULTS_CONFIG.filterSettings.inactiveColors.background);

@@ -140,6 +140,9 @@ export const SectionModuleControl: React.FC<SectionModuleControlProps> = ({
       case 'font.formatting':
         newSettings.font.formatting = newValue;
         break;
+      case 'font.alignment':
+        newSettings.font.alignment = newValue;
+        break;
       case 'background.type':
         newSettings.background.type = newValue;
         break;

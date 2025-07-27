@@ -1112,6 +1112,8 @@ var FilterModuleControl = function (_a) {
                             formatting: _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.font.formatting,
                             alignment: _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.font.alignment
                         });
+                        // Also call direct property change to ensure it's processed
+                        handlePropertyChange('font.alignment', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.font.alignment);
                         handlePropertyChange('activeColors.background', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.activeColors.background);
                         handlePropertyChange('activeColors.font', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.activeColors.font);
                         handlePropertyChange('inactiveColors.background', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.inactiveColors.background);
@@ -1643,6 +1645,9 @@ var SectionModuleControl = function (_a) {
                 break;
             case 'font.formatting':
                 newSettings.font.formatting = newValue;
+                break;
+            case 'font.alignment':
+                newSettings.font.alignment = newValue;
                 break;
             case 'background.type':
                 newSettings.background.type = newValue;
