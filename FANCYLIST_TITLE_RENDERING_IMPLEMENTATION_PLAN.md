@@ -800,5 +800,19 @@ private validateImageFileType(url: string): string | null {
 
 ---
 
+### **Phase 4.5: Empty URL User Guidance** ✅ **COMPLETED**
+- **Objective**: Add proactive user guidance for empty image URLs
+- **Implementation**: Shows "Please enter an image URL" when background type is 'image' but no URL provided
+- **Testing Results**: User guidance working correctly, priority order: validation error > load error > empty URL guidance
+
+### **Enhanced Error Handling System**:
+- **Empty URL**: "Please enter an image URL" - proactive guidance
+- **Invalid Type**: "Not a valid image type" - file extension validation
+- **Load Error**: "Unable to access URL" - network/loading failures
+- **Positioning**: All error messages positioned below title section (no overlap with right-aligned text)
+
+---
+
 **Document Created**: July 26, 2025
-**Status**: Ready for implementation 
+**Updated**: July 27, 2025
+**Status**: Complete with enhanced error handling 
