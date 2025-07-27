@@ -619,7 +619,7 @@ var FancyList = /** @class */ (function (_super) {
         var r = (num >> 16) & 255;
         var g = (num >> 8) & 255;
         var b = num & 255;
-        var normalizedAlpha = alpha / 100; // Fixed: removed inversion - 0% = transparent, 100% = opaque
+        var normalizedAlpha = alpha; // Fixed: alpha is already normalized (0-1) from getFilterBackgroundStyle
         return "rgba(".concat(r, ",").concat(g, ",").concat(b, ",").concat(normalizedAlpha, ")");
     };
     FancyList.prototype.validateImageFileType = function (url) {

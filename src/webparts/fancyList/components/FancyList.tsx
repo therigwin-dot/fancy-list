@@ -313,7 +313,7 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     const r = (num >> 16) & 255;
     const g = (num >> 8) & 255;
     const b = num & 255;
-    const normalizedAlpha = alpha / 100; // Fixed: removed inversion - 0% = transparent, 100% = opaque
+    const normalizedAlpha = alpha; // Fixed: alpha is already normalized (0-1) from getFilterBackgroundStyle
     return `rgba(${r},${g},${b},${normalizedAlpha})`;
   }
 
