@@ -286,4 +286,258 @@ This document defines the structured testing values and implementation approach 
 
 ---
 
-**Please review Page 2 structure above. Any changes needed before I continue with Page 3?** 
+## **PAGE 3: Filter Configuration**
+
+### **Test Values Structure**
+```typescript
+{
+  page: 3,
+  section: "Filter Configuration",
+  controls: [
+    {
+      control: "defaultFilterSelection",
+      value: "All",
+      description: "Set default filter selection to All",
+      timing: 500,
+      dependency: null
+    },
+    {
+      control: "filterFontFamily",
+      value: "Calibri",
+      description: "Set filter font to Calibri (visually distinct)",
+      timing: 500,
+      dependency: null
+    },
+    {
+      control: "filterFontSize",
+      value: "18px",
+      description: "Set filter font size to 18px (large for testing)",
+      timing: 500,
+      dependency: null
+    },
+    {
+      control: "filterFontBold",
+      value: true,
+      description: "Set filter font to bold (visually distinct)",
+      timing: 500,
+      dependency: null
+    },
+    {
+      control: "filterFontItalic",
+      value: true,
+      description: "Set filter font to italic (visually distinct)",
+      timing: 500,
+      dependency: null
+    },
+    {
+      control: "filterFontUnderline",
+      value: false,
+      description: "Set filter font underline to false",
+      timing: 500,
+      dependency: null
+    },
+    {
+      control: "filterFontStrikethrough",
+      value: false,
+      description: "Set filter font strikethrough to false",
+      timing: 500,
+      dependency: null
+    },
+    {
+      control: "activeFilterBackgroundColor",
+      value: "#FF00FF", // Bright magenta
+      description: "Set active filter background to bright magenta",
+      timing: 500,
+      dependency: null
+    },
+    {
+      control: "activeFilterFontColor",
+      value: "#FFFFFF", // White
+      description: "Set active filter font color to white",
+      timing: 500,
+      dependency: null
+    },
+    {
+      control: "inactiveFilterBackgroundColor",
+      value: "#FFFF00", // Bright yellow
+      description: "Set inactive filter background to bright yellow",
+      timing: 500,
+      dependency: null
+    },
+    {
+      control: "inactiveFilterFontColor",
+      value: "#000000", // Black
+      description: "Set inactive filter font color to black",
+      timing: 500,
+      dependency: null
+    },
+    {
+      control: "filterShape",
+      value: "pill",
+      description: "Set filter shape to pill (visually distinct)",
+      timing: 500,
+      dependency: null
+    },
+    // Background Testing Sequence
+    {
+      control: "filterBackgroundType",
+      value: "solid",
+      description: "Switch to solid background for testing",
+      timing: 1000,
+      dependency: null
+    },
+    {
+      control: "filterBackgroundColor",
+      value: "#00FFFF", // Bright cyan
+      description: "Set solid background to bright cyan",
+      timing: 500,
+      dependency: "filterBackgroundType"
+    },
+    {
+      control: "filterBackgroundAlpha",
+      value: 60,
+      description: "Set background transparency to 60%",
+      timing: 500,
+      dependency: "filterBackgroundType"
+    },
+    {
+      control: "filterBackgroundType",
+      value: "gradient",
+      description: "Switch to gradient background for testing",
+      timing: 1000,
+      dependency: null
+    },
+    {
+      control: "filterGradientDirection",
+      value: "left-right",
+      description: "Set gradient direction to left-right",
+      timing: 500,
+      dependency: "filterBackgroundType"
+    },
+    {
+      control: "filterGradientColor1",
+      value: "#FF00FF", // Bright magenta
+      description: "Set gradient color 1 to bright magenta",
+      timing: 500,
+      dependency: "filterBackgroundType"
+    },
+    {
+      control: "filterGradientColor2",
+      value: "#00FFFF", // Bright cyan
+      description: "Set gradient color 2 to bright cyan",
+      timing: 500,
+      dependency: "filterBackgroundType"
+    },
+    {
+      control: "filterGradientAlpha",
+      value: 80,
+      description: "Set gradient transparency to 80%",
+      timing: 500,
+      dependency: "filterBackgroundType"
+    },
+    {
+      control: "filterBackgroundType",
+      value: "image",
+      description: "Switch to image background for testing",
+      timing: 1000,
+      dependency: null
+    },
+    {
+      control: "filterBackgroundImage",
+      value: "https://www.pixelstalk.net/wp-content/uploads/2016/07/Free-Amazing-Background-Images-Nature.jpg",
+      description: "Set good image URL for testing",
+      timing: 1000,
+      dependency: "filterBackgroundType"
+    },
+    {
+      control: "filterBackgroundImage",
+      value: "https://invalid-test-url.com/image.jpg",
+      description: "Set bad image URL for error testing",
+      timing: 1000,
+      dependency: "filterBackgroundType"
+    },
+    {
+      control: "filterBackgroundImage",
+      value: "",
+      description: "Set blank image URL for error testing",
+      timing: 1000,
+      dependency: "filterBackgroundType"
+    },
+    {
+      control: "filterBackgroundImage",
+      value: "https://www.pixelstalk.net/wp-content/uploads/2016/07/Free-Amazing-Background-Images-Nature.jpg",
+      description: "Restore good image URL",
+      timing: 1000,
+      dependency: "filterBackgroundType"
+    },
+    {
+      control: "filterBackgroundImageAlpha",
+      value: 30,
+      description: "Set image transparency to 30%",
+      timing: 500,
+      dependency: "filterBackgroundType"
+    },
+    // Final Background Type (Gradient for Page 3)
+    {
+      control: "filterBackgroundType",
+      value: "gradient",
+      description: "Set final background type to gradient for Page 3",
+      timing: 1000,
+      dependency: null
+    },
+    {
+      control: "filterGradientDirection",
+      value: "left-right",
+      description: "Set final gradient direction",
+      timing: 500,
+      dependency: "filterBackgroundType"
+    },
+    {
+      control: "filterGradientColor1",
+      value: "#FF00FF", // Bright magenta
+      description: "Set final gradient color 1",
+      timing: 500,
+      dependency: "filterBackgroundType"
+    },
+    {
+      control: "filterGradientColor2",
+      value: "#00FFFF", // Bright cyan
+      description: "Set final gradient color 2",
+      timing: 500,
+      dependency: "filterBackgroundType"
+    },
+    {
+      control: "filterGradientAlpha",
+      value: 80,
+      description: "Set final gradient transparency",
+      timing: 500,
+      dependency: "filterBackgroundType"
+    },
+    {
+      control: "filterBackgroundShape",
+      value: "rounded",
+      description: "Set filter background shape to rounded",
+      timing: 500,
+      dependency: null
+    },
+    {
+      control: "showFilterDivider",
+      value: true,
+      description: "Show filter divider (visually distinct)",
+      timing: 500,
+      dependency: null
+    }
+  ]
+}
+```
+
+### **Implementation Notes**
+- **Skip "Show All" Toggle**: Not included as requested (doesn't disable part)
+- **Bright Colors**: Magenta/cyan color scheme for visual testing
+- **Background Testing**: Complete sequence through all types
+- **Final Type**: Gradient background assigned to Page 3
+- **Quick Timing**: 500ms for most controls, 1000ms for background type changes
+
+---
+
+**Please review Page 3 structure above. Any changes needed before I continue with Page 4?** 
