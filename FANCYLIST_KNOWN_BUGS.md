@@ -43,6 +43,14 @@
 - **Status**: ✅ **FIXED** - Button now presses automatically based on dropdown selection
 - **Impact**: High - Core filter functionality now working correctly
 
+### **✅ Filter Selection Configuration UI Layout Issues**
+- **Component**: FilterModuleControl.tsx
+- **Issue**: Dropdown was positioned below Show All toggle and hidden when filters disabled
+- **Root Cause**: Incorrect conditional rendering and layout order
+- **Fix**: Moved dropdown above Show All toggle and made it always visible
+- **Status**: ✅ **FIXED** - Layout now matches user requirements exactly
+- **Impact**: High - UI now works as specified by user
+
 ## **Bug Tracking**
 
 ### **Status Legend**:
@@ -60,6 +68,7 @@
 4. **✅ Shape Button Not Working** - ✅ **FIXED** - Shape control now applies to filter section container, property mapping and rendering logic corrected
 5. **✅ Missing "All" Filter Button Toggle** - ✅ **FIXED** - Added "Default Filter Selection" section with "All" filter toggle + persistence fix
 6. **✅ Dropdown Logic Reverted** - ✅ **FIXED** - Available choices logic for dropdowns restored to correct behavior
+7. **✅ Filter Selection Configuration UI Layout** - ✅ **FIXED** - Dropdown positioned above Show All toggle, always visible
 
 **Bug Description:**
 - **Component**: Page 1 - List Selection & Configuration dropdowns
@@ -80,5 +89,5 @@
 
 ---
 
-*Last Updated: 2025-07-27*
-*Document Version: 1.0* 
+*Last Updated: 2025-01-27*
+*Document Version: 1.1* 
