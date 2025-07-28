@@ -489,6 +489,8 @@ return this._fields.filter(field =>
 - **Option B**: Reset to first available category
 - **Option C**: Clear selection and require user to choose
 
+**Answer**: **Option D** - Toggle All to be enabled and set the value to All. We will always assume back to that point if they are picking a new category to be the filter buttons.
+
 **Question 7**: When filters are disabled, what should happen to the `defaultFilterSelection`?
 - Should it be ignored completely?
 - Should it still be stored but not used?
