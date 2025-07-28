@@ -500,6 +500,8 @@ return this._fields.filter(field =>
 
 **Question 8**: Should the `defaultFilterSelection` change trigger an immediate update to the rendered filter buttons, or only when the web part reloads?
 
+**Answer**: Immediately so the user can see it. BUT at the same time, I do not want when the user is testing the filter button for it to change our default filter value.
+
 ---
 
 ## **🏗️ ARCHITECTURE STATUS**
