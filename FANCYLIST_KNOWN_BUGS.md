@@ -72,11 +72,14 @@
 8. **🔴 Default Filter Selection Dropdown Breaks Filter Selection** - 🟡 **Medium** - Dropdown prevents selecting other filters unless set to "All"
 
 **Bug Description:**
-- **Component**: Page 1 - List Selection & Configuration dropdowns
-- **Issue**: Available choices logic for dropdowns reverted to previous behavior during category field review
-- **Impact**: Affected Subject and Description field filtering logic
-- **Priority**: Critical - was blocking proper field selection
-- **Status**: ✅ **FIXED** - Logic restored to correct dependency chain behavior
+- **Component**: Page 3 - Filter Section, Default Filter Selection dropdown
+- **Issue**: When Default Filter Selection is set to any value other than "All", users cannot select other filter buttons
+- **Expected**: Users should be able to click any filter button regardless of default selection
+- **Current**: Filter buttons become unresponsive unless default is set to "All"
+- **Additional**: Disabling "All" filter makes the bug more obvious and problematic
+- **Impact**: High - Breaks core filter functionality
+- **Priority**: Medium - Critical filter interaction issue
+- **Status**: 🟡 **NEEDS INVESTIGATION** - Default selection logic interfering with manual filter selection
 
 #### **Title Component Bugs**:
 1. **✅ Title Transparency Sliders Broken** - ✅ **FIXED** - Alpha inversion corrected for proper slider behavior
