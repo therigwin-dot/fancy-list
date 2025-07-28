@@ -444,7 +444,7 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
       case 'image':
         if (imageUrl) {
           return {
-            background: `linear-gradient(rgba(0,0,0,${imageAlpha / 100}), rgba(0,0,0,${imageAlpha / 100})), url(${imageUrl})`,
+            background: `linear-gradient(rgba(255,255,255,${imageAlpha / 100}), rgba(255,255,255,${imageAlpha / 100})), url(${imageUrl})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             borderRadius: this.getShapeRadius(shape)

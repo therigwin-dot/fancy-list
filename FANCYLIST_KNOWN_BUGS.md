@@ -102,6 +102,29 @@
 6. **Color Picker Positioning** - 🟢 **Low** - Acceptable bug, on back burner
 7. **✅ Missing "All" Filter Button Toggle** - ✅ **FIXED** - Added "Default Filter Selection" section with "All" filter toggle + persistence fix
 
+#### **Category Section Background Bugs**:
+1. **🔴 Category Section Image Error Messages** - 🟢 **Low** - No error messages for invalid/broken image URLs (acceptable back burner bug)
+
+**Bug Description:**
+- **Component**: Page 4 - Category Section, Image Background control
+- **Issue**: When invalid or broken image URLs are entered, no error messages are displayed
+- **Expected**: Should show error messages for invalid URLs (like Title and Filter sections)
+- **Current**: Shows just white box with no feedback
+- **Impact**: Low - Users don't get feedback about invalid URLs
+- **Priority**: Low - Acceptable back burner bug
+- **Status**: 🟢 **BACK BURNER** - Will implement error handling in future iteration
+
+2. **🔴 Category Section Empty URL Message** - 🟢 **Low** - No message when image URL field is empty (acceptable back burner bug)
+
+**Bug Description:**
+- **Component**: Page 4 - Category Section, Image Background control
+- **Issue**: When image URL field is left empty, no message is displayed
+- **Expected**: Should show message indicating URL is required (like Title and Filter sections)
+- **Current**: Shows just white box with no feedback
+- **Impact**: Low - Users don't get feedback about empty URLs
+- **Priority**: Low - Acceptable back burner bug
+- **Status**: 🟢 **BACK BURNER** - Will implement error handling in future iteration
+
 #### **Other Bugs**:
 8. **FontControl Enter Key Focus** - 🟢 **Low** - Acceptable for current phase
 
