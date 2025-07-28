@@ -498,6 +498,35 @@ return this._fields.filter(field =>
 
 **Answer**: **New Feature Update** - Even if they disable the filter showing, I want this setting control available. So move it above the Enable Show All toggle. Then if the user disable the filters section, it hides everything except that dropdown. The dropdown will default behind the scenes to have the All setting available. It will default to All when the enable toggle is turned off. This allows the users to still filter the list to a specific category or all the categories if we hide the filter buttons.
 
+**Question 9**: Based on your answer about the new feature update, I have some clarifying questions:
+
+1. **UI Layout**: When you say "move it above the Enable Show All toggle" - should the "Default Filter Selection" dropdown be positioned above the "Show 'All' Filter Button" toggle in the Page 3 Filter Configuration?
+
+2. **Hidden State**: When filters are disabled, should the "Default Filter Selection" dropdown be the ONLY control visible in the Filter Configuration section, or should there be any other controls visible?
+
+3. **Default Behavior**: When filters are disabled and the dropdown defaults to "All", should this actually filter the list to show all items, or just set the default without applying any filter?
+
+**Answer 1**: It should go like this inside the filter control / page 3:
+- Header
+- Description  
+- Enable Toggle
+- Grey Box
+  - Header
+  - Filter Drop Down
+  - Show all filter button toggle
+- End of Gray Box
+- Rest the Same.
+
+Then when the Disabled Toggle is triggered the display changes to this:
+- Header
+- Description
+- Enable Toggle
+- Grey Box
+  - Header
+  - Drop Down
+- Gray Box ends
+- Everything else hidden.
+
 **Question 8**: Should the `defaultFilterSelection` change trigger an immediate update to the rendered filter buttons, or only when the web part reloads?
 
 **Answer**: Immediately so the user can see it. BUT at the same time, I do not want when the user is testing the filter button for it to change our default filter value.
