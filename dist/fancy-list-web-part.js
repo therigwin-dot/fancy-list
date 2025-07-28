@@ -1720,11 +1720,19 @@ var FancyList = /** @class */ (function (_super) {
                 clickedCategory: category,
                 currentSelected: _this.state.selectedCategory,
                 defaultSelection: (_a = _this.props.filterSettings) === null || _a === void 0 ? void 0 : _a.defaultFilterSelection,
-                mode: 'RUNTIME'
+                mode: 'RUNTIME',
+                willUpdateState: category !== _this.state.selectedCategory
             });
             // RUNTIME MODE: Mark that user has manually selected
             _this.userHasManuallySelected = true;
-            _this.setState({ selectedCategory: category });
+            _this.setState({ selectedCategory: category }, function () {
+                console.log('🔍 Filter Debug - Runtime State Updated:', {
+                    newSelectedCategory: _this.state.selectedCategory,
+                    expectedCategory: category,
+                    stateUpdated: _this.state.selectedCategory === category,
+                    userHasManuallySelected: _this.userHasManuallySelected
+                });
+            });
         };
         _this.handleItemToggle = function (itemId) {
             var newExpandedItems = new Set(_this.state.expandedItems);
@@ -1805,27 +1813,35 @@ var FancyList = /** @class */ (function (_super) {
             });
             // CONFIGURATION MODE: Reset manual selection flag and apply new default immediately
             this.userHasManuallySelected = false;
-            var newCategory = 'all';
+            var newCategory_1 = 'all';
             if ((_e = this.props.filterSettings) === null || _e === void 0 ? void 0 : _e.defaultFilterSelection) {
                 var selection_1 = this.props.filterSettings.defaultFilterSelection;
                 if (selection_1.toLowerCase() === 'all') {
-                    newCategory = 'all';
+                    newCategory_1 = 'all';
                 }
                 else {
                     // Find the exact case match from available categories
                     var exactMatch = this.state.categories.find(function (cat) {
                         return cat.toLowerCase() === selection_1.toLowerCase();
                     });
-                    newCategory = exactMatch || selection_1.toLowerCase();
+                    newCategory_1 = exactMatch || selection_1.toLowerCase();
                 }
             }
             console.log('🔍 Filter Debug - Configuration Mode: Applying New Default:', {
-                newCategory: newCategory,
+                newCategory: newCategory_1,
                 selection: (_f = this.props.filterSettings) === null || _f === void 0 ? void 0 : _f.defaultFilterSelection,
                 exactMatch: this.state.categories.find(function (cat) { var _a; return cat.toLowerCase() === (((_a = _this.props.filterSettings) === null || _a === void 0 ? void 0 : _a.defaultFilterSelection) || '').toLowerCase(); }),
-                mode: 'CONFIGURATION'
+                mode: 'CONFIGURATION',
+                willUpdateState: newCategory_1 !== this.state.selectedCategory
             });
-            this.setState({ selectedCategory: newCategory });
+            // Force immediate state update for configuration changes
+            this.setState({ selectedCategory: newCategory_1 }, function () {
+                console.log('🔍 Filter Debug - State Updated:', {
+                    newSelectedCategory: _this.state.selectedCategory,
+                    expectedCategory: newCategory_1,
+                    stateUpdated: _this.state.selectedCategory === newCategory_1
+                });
+            });
         }
         // Also check if categories changed and we need to update selectedCategory
         if (((_g = prevProps.filterSettings) === null || _g === void 0 ? void 0 : _g.defaultFilterSelection) === ((_h = this.props.filterSettings) === null || _h === void 0 ? void 0 : _h.defaultFilterSelection) &&

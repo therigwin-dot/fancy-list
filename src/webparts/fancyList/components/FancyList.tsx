@@ -107,10 +107,18 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
         exactMatch: this.state.categories.find(cat => 
           cat.toLowerCase() === (this.props.filterSettings?.defaultFilterSelection || '').toLowerCase()
         ),
-        mode: 'CONFIGURATION'
+        mode: 'CONFIGURATION',
+        willUpdateState: newCategory !== this.state.selectedCategory
       });
       
-      this.setState({ selectedCategory: newCategory });
+      // Force immediate state update for configuration changes
+      this.setState({ selectedCategory: newCategory }, () => {
+        console.log('🔍 Filter Debug - State Updated:', {
+          newSelectedCategory: this.state.selectedCategory,
+          expectedCategory: newCategory,
+          stateUpdated: this.state.selectedCategory === newCategory
+        });
+      });
     }
     
     // Also check if categories changed and we need to update selectedCategory
@@ -205,13 +213,21 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
       clickedCategory: category,
       currentSelected: this.state.selectedCategory,
       defaultSelection: this.props.filterSettings?.defaultFilterSelection,
-      mode: 'RUNTIME'
+      mode: 'RUNTIME',
+      willUpdateState: category !== this.state.selectedCategory
     });
     
     // RUNTIME MODE: Mark that user has manually selected
     this.userHasManuallySelected = true;
     
-    this.setState({ selectedCategory: category });
+    this.setState({ selectedCategory: category }, () => {
+      console.log('🔍 Filter Debug - Runtime State Updated:', {
+        newSelectedCategory: this.state.selectedCategory,
+        expectedCategory: category,
+        stateUpdated: this.state.selectedCategory === category,
+        userHasManuallySelected: this.userHasManuallySelected
+      });
+    });
   }
 
   private handleItemToggle = (itemId: number): void => {
