@@ -203,81 +203,83 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
         />
       </div>
 
+      {/* 2. Default Filter Selection Gray Box Container - Always Visible */}
+      <div style={{ 
+        backgroundColor: '#f3f2f1', 
+        padding: '12px', 
+        borderRadius: '4px',
+        marginBottom: 16 
+      }}>
+        {/* Default Filter Selection Header */}
+        <div style={{
+          fontSize: '16px',
+          fontWeight: '600',
+          color: '#323130',
+          marginBottom: '12px'
+        }}>
+          Default Filter Selection
+        </div>
+
+        {/* Default Filter Selection Dropdown - Always Visible */}
+        <div style={{ marginBottom: 16 }}>
+          <Dropdown
+            selectedKey={defaultFilterDropdown}
+            options={(() => {
+              console.log('🔄 DROPDOWN DEBUG: Show all toggle:', showAllToggle);
+              console.log('🔄 DROPDOWN DEBUG: Available categories:', availableCategories);
+              
+              if (showAllToggle) {
+                const options = [
+                  { key: 'All', text: 'All' },
+                  ...availableCategories.map(cat => ({ key: cat, text: cat }))
+                ];
+                console.log('🔄 DROPDOWN DEBUG: Options with All:', options);
+                return options;
+              } else {
+                const options = availableCategories.map(cat => ({ key: cat, text: cat }));
+                console.log('🔄 DROPDOWN DEBUG: Options without All:', options);
+                return options;
+              }
+            })()}
+            onChange={(_, option) => {
+              console.log('🔄 DROPDOWN DEBUG: Selected:', option?.key);
+              setDefaultFilterDropdown(option?.key as string || 'All');
+              handlePropertyChange('defaultFilterSelection', option?.key || 'All');
+            }}
+          />
+        </div>
+
+        {/* All Filter Toggle - Only visible when filters are enabled */}
+        {enabled && (
+          <div style={{ marginBottom: 16 }}>
+            <Toggle
+              label="Show 'All' Filter Button"
+              inlineLabel={true}
+              checked={showAllToggle}
+              onText="On"
+              offText="Off"
+              onChange={(_, checked) => {
+                console.log('🔄 STEP 3 DEBUG: Toggle clicked, new value:', checked);
+                setShowAllToggle(checked || false);
+                handlePropertyChange('showAllCategories', checked);
+                
+                // Handle dropdown selection when "All" toggle changes
+                if (!checked && defaultFilterDropdown === 'All' && availableCategories.length > 0) {
+                  // "All" toggle turned OFF and current selection is "All" - change to first available filter
+                  const firstFilter = availableCategories[0];
+                  console.log('🔄 TOGGLE DEBUG: Changing from "All" to first filter:', firstFilter);
+                  setDefaultFilterDropdown(firstFilter);
+                  handlePropertyChange('defaultFilterSelection', firstFilter);
+                }
+              }}
+            />
+          </div>
+        )}
+      </div>
+
       {/* Conditional rendering for all other controls when enabled */}
       {enabled && (
         <>
-          {/* 2. Default Filter Selection Gray Box Container */}
-          <div style={{ 
-            backgroundColor: '#f3f2f1', 
-            padding: '12px', 
-            borderRadius: '4px',
-            marginBottom: 16 
-          }}>
-            {/* Default Filter Selection Header */}
-            <div style={{
-              fontSize: '16px',
-              fontWeight: '600',
-              color: '#323130',
-              marginBottom: '12px'
-            }}>
-              Default Filter Selection
-            </div>
-
-            {/* All Filter Toggle */}
-            <div style={{ marginBottom: 16 }}>
-              <Toggle
-                label="Show 'All' Filter Button"
-                inlineLabel={true}
-                checked={showAllToggle}
-                onText="On"
-                offText="Off"
-                onChange={(_, checked) => {
-                  console.log('🔄 STEP 3 DEBUG: Toggle clicked, new value:', checked);
-                  setShowAllToggle(checked || false);
-                  handlePropertyChange('showAllCategories', checked);
-                  
-                  // Handle dropdown selection when "All" toggle changes
-                  if (!checked && defaultFilterDropdown === 'All' && availableCategories.length > 0) {
-                    // "All" toggle turned OFF and current selection is "All" - change to first available filter
-                    const firstFilter = availableCategories[0];
-                    console.log('🔄 TOGGLE DEBUG: Changing from "All" to first filter:', firstFilter);
-                    setDefaultFilterDropdown(firstFilter);
-                    handlePropertyChange('defaultFilterSelection', firstFilter);
-                  }
-                }}
-              />
-            </div>
-
-            {/* Default Filter Selection Dropdown */}
-            <div style={{ marginBottom: 16 }}>
-              <Dropdown
-                selectedKey={defaultFilterDropdown}
-                options={(() => {
-                  console.log('🔄 DROPDOWN DEBUG: Show all toggle:', showAllToggle);
-                  console.log('🔄 DROPDOWN DEBUG: Available categories:', availableCategories);
-                  
-                  if (showAllToggle) {
-                    const options = [
-                      { key: 'All', text: 'All' },
-                      ...availableCategories.map(cat => ({ key: cat, text: cat }))
-                    ];
-                    console.log('🔄 DROPDOWN DEBUG: Options with All:', options);
-                    return options;
-                  } else {
-                    const options = availableCategories.map(cat => ({ key: cat, text: cat }));
-                    console.log('🔄 DROPDOWN DEBUG: Options without All:', options);
-                    return options;
-                  }
-                })()}
-                onChange={(_, option) => {
-                  console.log('🔄 DROPDOWN DEBUG: Selected:', option?.key);
-                  setDefaultFilterDropdown(option?.key as string || 'All');
-                  handlePropertyChange('defaultFilterSelection', option?.key || 'All');
-                }}
-              />
-            </div>
-          </div>
-
           {/* 3. Button Gray Box Container */}
           <div style={{ 
             backgroundColor: '#f3f2f1', 

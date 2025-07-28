@@ -1201,54 +1201,54 @@ var FilterModuleControl = function (_a) {
                     setEnabled(checked || false);
                     handlePropertyChange('enabled', checked || false);
                 } })),
-        enabled && (react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null,
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                backgroundColor: '#f3f2f1',
+                padding: '12px',
+                borderRadius: '4px',
+                marginBottom: 16
+            } },
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
-                    backgroundColor: '#f3f2f1',
-                    padding: '12px',
-                    borderRadius: '4px',
-                    marginBottom: 16
-                } },
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
-                        fontSize: '16px',
-                        fontWeight: '600',
-                        color: '#323130',
-                        marginBottom: '12px'
-                    } }, "Default Filter Selection"),
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Toggle__WEBPACK_IMPORTED_MODULE_5__.Toggle, { label: "Show 'All' Filter Button", inlineLabel: true, checked: showAllToggle, onText: "On", offText: "Off", onChange: function (_, checked) {
-                            console.log('🔄 STEP 3 DEBUG: Toggle clicked, new value:', checked);
-                            setShowAllToggle(checked || false);
-                            handlePropertyChange('showAllCategories', checked);
-                            // Handle dropdown selection when "All" toggle changes
-                            if (!checked && defaultFilterDropdown === 'All' && availableCategories.length > 0) {
-                                // "All" toggle turned OFF and current selection is "All" - change to first available filter
-                                var firstFilter = availableCategories[0];
-                                console.log('🔄 TOGGLE DEBUG: Changing from "All" to first filter:', firstFilter);
-                                setDefaultFilterDropdown(firstFilter);
-                                handlePropertyChange('defaultFilterSelection', firstFilter);
-                            }
-                        } })),
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_6__.Dropdown, { selectedKey: defaultFilterDropdown, options: (function () {
-                            console.log('🔄 DROPDOWN DEBUG: Show all toggle:', showAllToggle);
-                            console.log('🔄 DROPDOWN DEBUG: Available categories:', availableCategories);
-                            if (showAllToggle) {
-                                var options = __spreadArray([
-                                    { key: 'All', text: 'All' }
-                                ], availableCategories.map(function (cat) { return ({ key: cat, text: cat }); }), true);
-                                console.log('🔄 DROPDOWN DEBUG: Options with All:', options);
-                                return options;
-                            }
-                            else {
-                                var options = availableCategories.map(function (cat) { return ({ key: cat, text: cat }); });
-                                console.log('🔄 DROPDOWN DEBUG: Options without All:', options);
-                                return options;
-                            }
-                        })(), onChange: function (_, option) {
-                            console.log('🔄 DROPDOWN DEBUG: Selected:', option === null || option === void 0 ? void 0 : option.key);
-                            setDefaultFilterDropdown((option === null || option === void 0 ? void 0 : option.key) || 'All');
-                            handlePropertyChange('defaultFilterSelection', (option === null || option === void 0 ? void 0 : option.key) || 'All');
-                        } }))),
+                    fontSize: '16px',
+                    fontWeight: '600',
+                    color: '#323130',
+                    marginBottom: '12px'
+                } }, "Default Filter Selection"),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_6__.Dropdown, { selectedKey: defaultFilterDropdown, options: (function () {
+                        console.log('🔄 DROPDOWN DEBUG: Show all toggle:', showAllToggle);
+                        console.log('🔄 DROPDOWN DEBUG: Available categories:', availableCategories);
+                        if (showAllToggle) {
+                            var options = __spreadArray([
+                                { key: 'All', text: 'All' }
+                            ], availableCategories.map(function (cat) { return ({ key: cat, text: cat }); }), true);
+                            console.log('🔄 DROPDOWN DEBUG: Options with All:', options);
+                            return options;
+                        }
+                        else {
+                            var options = availableCategories.map(function (cat) { return ({ key: cat, text: cat }); });
+                            console.log('🔄 DROPDOWN DEBUG: Options without All:', options);
+                            return options;
+                        }
+                    })(), onChange: function (_, option) {
+                        console.log('🔄 DROPDOWN DEBUG: Selected:', option === null || option === void 0 ? void 0 : option.key);
+                        setDefaultFilterDropdown((option === null || option === void 0 ? void 0 : option.key) || 'All');
+                        handlePropertyChange('defaultFilterSelection', (option === null || option === void 0 ? void 0 : option.key) || 'All');
+                    } })),
+            enabled && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Toggle__WEBPACK_IMPORTED_MODULE_5__.Toggle, { label: "Show 'All' Filter Button", inlineLabel: true, checked: showAllToggle, onText: "On", offText: "Off", onChange: function (_, checked) {
+                        console.log('🔄 STEP 3 DEBUG: Toggle clicked, new value:', checked);
+                        setShowAllToggle(checked || false);
+                        handlePropertyChange('showAllCategories', checked);
+                        // Handle dropdown selection when "All" toggle changes
+                        if (!checked && defaultFilterDropdown === 'All' && availableCategories.length > 0) {
+                            // "All" toggle turned OFF and current selection is "All" - change to first available filter
+                            var firstFilter = availableCategories[0];
+                            console.log('🔄 TOGGLE DEBUG: Changing from "All" to first filter:', firstFilter);
+                            setDefaultFilterDropdown(firstFilter);
+                            handlePropertyChange('defaultFilterSelection', firstFilter);
+                        }
+                    } })))),
+        enabled && (react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null,
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
                     backgroundColor: '#f3f2f1',
                     padding: '12px',
