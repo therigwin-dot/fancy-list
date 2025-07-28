@@ -14,6 +14,7 @@ export const DEFAULTS_CONFIG = {
   // Page 2: Title Settings
   titleSettings: {
     resetButtonText: "Reset Title Formatting",
+    testValuesButtonText: "Test Values",
     description: 'Customize the web parts title text, font, color, background, and shape settings. Use the reset button to put the default look and feel back in place. Use the Back and Next buttons to switch to a different configuration page.',
     enabled: true,
     webPartTitle: '',
@@ -37,12 +38,38 @@ export const DEFAULTS_CONFIG = {
       gradientAlpha2: 0
     },
     shape: 'rounded' as const,
-    showDivider: false
+    showDivider: false,
+    // Test Values for Title Section
+    testValues: {
+      webPartTitle: 'Testing Fancy List',
+      font: {
+        family: 'Arial',
+        size: '32px',
+        color: '#ff0000',
+        formatting: { bold: true, italic: true, underline: true, strikethrough: false },
+        alignment: 'center'
+      },
+      background: {
+        type: 'gradient' as const,
+        color: '#ffffff',
+        alpha: 50,
+        image: '',
+        imageAlpha: 0,
+        gradientDirection: 'top-bottom',
+        gradientColor1: '#ff0000',
+        gradientAlpha1: 80,
+        gradientColor2: '#00ff00',
+        gradientAlpha2: 60
+      },
+      shape: 'pill' as const,
+      showDivider: true
+    }
   } as TitleSettings,
 
   // Page 3: Filter Settings
   filterSettings: {
     resetButtonText: "Reset Filter Formatting",
+    testValuesButtonText: "Test Values",
     description: "Use this to customise the look and feel of your filters for your list. From colors to shape and size. The reset button will trigger it back to defaults. You can also use the Enable toggle to completely remove and disable this part.",
     enableFilters: true,
     showAllCategories: true,
@@ -75,13 +102,47 @@ export const DEFAULTS_CONFIG = {
       gradientColor2: '#0f46d1',
       gradientAlpha2: 0
     },
-    showDivider: false
+    showDivider: false,
+    // Test Values for Filter Section
+    testValues: {
+      font: {
+        family: 'Comic Sans MS',
+        size: '16px',
+        formatting: { bold: true, italic: false, underline: true, strikethrough: false },
+        alignment: 'right'
+      },
+      activeColors: {
+        background: '#ff6600',
+        font: '#ffffff'
+      },
+      inactiveColors: {
+        background: '#ffff00',
+        font: '#000000'
+      },
+      shape: 'square' as const,
+      backgroundShape: 'pill' as const,
+      defaultFilterSelection: 'Uncategorized',
+      background: {
+        type: 'gradient' as const,
+        color: '#ffffff',
+        alpha: 30,
+        image: '',
+        imageAlpha: 0,
+        gradientDirection: 'diagonal',
+        gradientColor1: '#ff00ff',
+        gradientAlpha1: 70,
+        gradientColor2: '#00ffff',
+        gradientAlpha2: 50
+      },
+      showDivider: true
+    }
   } as FilterSettings,
 
   // Page 4: Category Section Settings
   categorySectionSettings: {
     sectionType: 'category' as const,
     resetButtonText: "Reset Category Formatting",
+    testValuesButtonText: "Test Values",
     description: "Customize the appearance of category sections including font, colors, shape, background, and icon settings.",
     font: {
       family: 'inherit',
@@ -111,6 +172,38 @@ export const DEFAULTS_CONFIG = {
       iconPosition: 'left' as const,
       collapsedIcon: '▶',
       expandedIcon: '▼'
+    },
+    // Test Values for Category Section
+    testValues: {
+      font: {
+        family: 'Impact',
+        size: '24px',
+        color: '#0000ff',
+        formatting: { bold: true, italic: true, underline: false, strikethrough: true },
+        alignment: 'center'
+      },
+      background: {
+        type: 'gradient' as const,
+        color: '#f3f2f1',
+        alpha: 60,
+        image: '',
+        imageAlpha: 0,
+        gradientDirection: 'radial',
+        gradientColor1: '#ff0000',
+        gradientAlpha1: 90,
+        gradientColor2: '#00ff00',
+        gradientAlpha2: 40
+      },
+      shape: 'pill' as const,
+      showDivider: false,
+      autoExpand: true,
+      hoverColor: '#ff0000',
+      iconSettings: {
+        enabled: true,
+        iconPosition: 'right' as const,
+        collapsedIcon: '🔽',
+        expandedIcon: '🔼'
+      }
     }
   },
 
@@ -118,6 +211,7 @@ export const DEFAULTS_CONFIG = {
   subjectSectionSettings: {
     sectionType: 'subject' as const,
     resetButtonText: "Reset Subject Formatting",
+    testValuesButtonText: "Test Values",
     description: "Customize the appearance of subject sections including font, colors, shape, background, and icon settings.",
     font: {
       family: 'inherit',
@@ -147,6 +241,38 @@ export const DEFAULTS_CONFIG = {
       iconPosition: 'left' as const,
       collapsedIcon: '▶',
       expandedIcon: '▼'
+    },
+    // Test Values for Subject Section
+    testValues: {
+      font: {
+        family: 'Courier New',
+        size: '20px',
+        color: '#ff6600',
+        formatting: { bold: false, italic: true, underline: true, strikethrough: false },
+        alignment: 'right'
+      },
+      background: {
+        type: 'solid' as const,
+        color: '#ffffcc',
+        alpha: 70,
+        image: '',
+        imageAlpha: 0,
+        gradientDirection: 'left-right',
+        gradientColor1: '#ffffcc',
+        gradientAlpha1: 70,
+        gradientColor2: '#ffcc99',
+        gradientAlpha2: 50
+      },
+      shape: 'square' as const,
+      showDivider: true,
+      autoExpand: true,
+      hoverColor: '#ffcc99',
+      iconSettings: {
+        enabled: true,
+        iconPosition: 'right' as const,
+        collapsedIcon: '📁',
+        expandedIcon: '📂'
+      }
     }
   },
 
@@ -154,6 +280,7 @@ export const DEFAULTS_CONFIG = {
   descriptionSectionSettings: {
     sectionType: 'description' as const,
     resetButtonText: "Reset Description Formatting",
+    testValuesButtonText: "Test Values",
     description: "Customize the appearance of description sections including font, colors, shape, and background settings.",
     font: {
       family: 'inherit',
@@ -183,6 +310,38 @@ export const DEFAULTS_CONFIG = {
       iconPosition: 'left' as const,
       collapsedIcon: '▶',
       expandedIcon: '▼'
+    },
+    // Test Values for Description Section
+    testValues: {
+      font: {
+        family: 'Georgia',
+        size: '18px',
+        color: '#9932cc',
+        formatting: { bold: true, italic: false, underline: false, strikethrough: true },
+        alignment: 'justify'
+      },
+      background: {
+        type: 'image' as const,
+        color: '#ffffff',
+        alpha: 20,
+        image: 'https://via.placeholder.com/400x200/cccccc/666666?text=Test+Background',
+        imageAlpha: 80,
+        gradientDirection: 'left-right',
+        gradientColor1: '#ffffff',
+        gradientAlpha1: 20,
+        gradientColor2: '#faf9f8',
+        gradientAlpha2: 50
+      },
+      shape: 'pill' as const,
+      showDivider: true,
+      autoExpand: true,
+      hoverColor: '#e6ccff',
+      iconSettings: {
+        enabled: false,
+        iconPosition: 'left' as const,
+        collapsedIcon: '▶',
+        expandedIcon: '▼'
+      }
     }
   },
 

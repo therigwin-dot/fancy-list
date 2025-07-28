@@ -13,6 +13,7 @@ export declare const DEFAULTS_CONFIG: {
     categorySectionSettings: {
         sectionType: "category";
         resetButtonText: string;
+        testValuesButtonText: string;
         description: string;
         font: {
             family: string;
@@ -47,11 +48,48 @@ export declare const DEFAULTS_CONFIG: {
             iconPosition: "left";
             collapsedIcon: string;
             expandedIcon: string;
+        };
+        testValues: {
+            font: {
+                family: string;
+                size: string;
+                color: string;
+                formatting: {
+                    bold: boolean;
+                    italic: boolean;
+                    underline: boolean;
+                    strikethrough: boolean;
+                };
+                alignment: string;
+            };
+            background: {
+                type: "gradient";
+                color: string;
+                alpha: number;
+                image: string;
+                imageAlpha: number;
+                gradientDirection: string;
+                gradientColor1: string;
+                gradientAlpha1: number;
+                gradientColor2: string;
+                gradientAlpha2: number;
+            };
+            shape: "pill";
+            showDivider: boolean;
+            autoExpand: boolean;
+            hoverColor: string;
+            iconSettings: {
+                enabled: boolean;
+                iconPosition: "right";
+                collapsedIcon: string;
+                expandedIcon: string;
+            };
         };
     };
     subjectSectionSettings: {
         sectionType: "subject";
         resetButtonText: string;
+        testValuesButtonText: string;
         description: string;
         font: {
             family: string;
@@ -86,11 +124,48 @@ export declare const DEFAULTS_CONFIG: {
             iconPosition: "left";
             collapsedIcon: string;
             expandedIcon: string;
+        };
+        testValues: {
+            font: {
+                family: string;
+                size: string;
+                color: string;
+                formatting: {
+                    bold: boolean;
+                    italic: boolean;
+                    underline: boolean;
+                    strikethrough: boolean;
+                };
+                alignment: string;
+            };
+            background: {
+                type: "solid";
+                color: string;
+                alpha: number;
+                image: string;
+                imageAlpha: number;
+                gradientDirection: string;
+                gradientColor1: string;
+                gradientAlpha1: number;
+                gradientColor2: string;
+                gradientAlpha2: number;
+            };
+            shape: "square";
+            showDivider: boolean;
+            autoExpand: boolean;
+            hoverColor: string;
+            iconSettings: {
+                enabled: boolean;
+                iconPosition: "right";
+                collapsedIcon: string;
+                expandedIcon: string;
+            };
         };
     };
     descriptionSectionSettings: {
         sectionType: "description";
         resetButtonText: string;
+        testValuesButtonText: string;
         description: string;
         font: {
             family: string;
@@ -125,6 +200,42 @@ export declare const DEFAULTS_CONFIG: {
             iconPosition: "left";
             collapsedIcon: string;
             expandedIcon: string;
+        };
+        testValues: {
+            font: {
+                family: string;
+                size: string;
+                color: string;
+                formatting: {
+                    bold: boolean;
+                    italic: boolean;
+                    underline: boolean;
+                    strikethrough: boolean;
+                };
+                alignment: string;
+            };
+            background: {
+                type: "image";
+                color: string;
+                alpha: number;
+                image: string;
+                imageAlpha: number;
+                gradientDirection: string;
+                gradientColor1: string;
+                gradientAlpha1: number;
+                gradientColor2: string;
+                gradientAlpha2: number;
+            };
+            shape: "pill";
+            showDivider: boolean;
+            autoExpand: boolean;
+            hoverColor: string;
+            iconSettings: {
+                enabled: boolean;
+                iconPosition: "left";
+                collapsedIcon: string;
+                expandedIcon: string;
+            };
         };
     };
     aboutInfo: {

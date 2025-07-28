@@ -557,10 +557,10 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
             />
           </div>
 
-          {/* 10. Reset Button */}
-          <div style={{ marginTop: 16 }}>
+          {/* 10. Reset and Test Values Buttons */}
+          <div style={{ marginTop: 16, display: 'flex', gap: '8px' }}>
             <PrimaryButton 
-              text="Reset Filter Formatting" 
+              text={DEFAULTS_CONFIG.filterSettings.resetButtonText} 
               onClick={() => {
                 // Reset all filter settings to defaults
                 console.log('🔄 RESET BUTTON: Resetting all filter settings to defaults');
@@ -604,6 +604,49 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
                 handlePropertyChange('showDivider', DEFAULTS_CONFIG.filterSettings.showDivider);
                 
                 console.log('✅ RESET BUTTON: All properties reset to defaults');
+              }}
+            />
+            <PrimaryButton 
+              text={DEFAULTS_CONFIG.filterSettings.testValuesButtonText} 
+              onClick={() => {
+                // Apply test values
+                console.log('🧪 TEST VALUES BUTTON: Applying test values');
+                
+                // Apply font test values
+                handlePropertyChange('font.family', DEFAULTS_CONFIG.filterSettings.testValues.font.family);
+                handlePropertyChange('font.size', DEFAULTS_CONFIG.filterSettings.testValues.font.size);
+                handlePropertyChange('font.formatting', DEFAULTS_CONFIG.filterSettings.testValues.font.formatting);
+                handlePropertyChange('font.alignment', DEFAULTS_CONFIG.filterSettings.testValues.font.alignment);
+                
+                // Apply color test values
+                handlePropertyChange('activeColors.background', DEFAULTS_CONFIG.filterSettings.testValues.activeColors.background);
+                handlePropertyChange('activeColors.font', DEFAULTS_CONFIG.filterSettings.testValues.activeColors.font);
+                handlePropertyChange('inactiveColors.background', DEFAULTS_CONFIG.filterSettings.testValues.inactiveColors.background);
+                handlePropertyChange('inactiveColors.font', DEFAULTS_CONFIG.filterSettings.testValues.inactiveColors.font);
+                
+                // Apply shape test values
+                handlePropertyChange('shape', DEFAULTS_CONFIG.filterSettings.testValues.shape);
+                handlePropertyChange('backgroundShape', DEFAULTS_CONFIG.filterSettings.testValues.backgroundShape);
+                
+                // Apply defaultFilterSelection test value
+                handlePropertyChange('defaultFilterSelection', DEFAULTS_CONFIG.filterSettings.testValues.defaultFilterSelection);
+                setDefaultFilterDropdown(DEFAULTS_CONFIG.filterSettings.testValues.defaultFilterSelection);
+                
+                // Apply background test values
+                handlePropertyChange('backgroundType', DEFAULTS_CONFIG.filterSettings.testValues.background.type);
+                handlePropertyChange('backgroundColor', DEFAULTS_CONFIG.filterSettings.testValues.background.color);
+                handlePropertyChange('backgroundAlpha', DEFAULTS_CONFIG.filterSettings.testValues.background.alpha);
+                handlePropertyChange('gradientDirection', DEFAULTS_CONFIG.filterSettings.testValues.background.gradientDirection);
+                handlePropertyChange('gradientColor1', DEFAULTS_CONFIG.filterSettings.testValues.background.gradientColor1);
+                handlePropertyChange('gradientColor2', DEFAULTS_CONFIG.filterSettings.testValues.background.gradientColor2);
+                handlePropertyChange('gradientAlpha', DEFAULTS_CONFIG.filterSettings.testValues.background.gradientAlpha1);
+                handlePropertyChange('imageUrl', DEFAULTS_CONFIG.filterSettings.testValues.background.image);
+                handlePropertyChange('imageAlpha', DEFAULTS_CONFIG.filterSettings.testValues.background.imageAlpha);
+                
+                // Apply divider test value
+                handlePropertyChange('showDivider', DEFAULTS_CONFIG.filterSettings.testValues.showDivider);
+                
+                console.log('✅ TEST VALUES BUTTON: All test values applied');
               }}
             />
           </div>

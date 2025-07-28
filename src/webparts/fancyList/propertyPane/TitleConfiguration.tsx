@@ -158,6 +158,29 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
     handlePropertyChange('font.color', DEFAULTS_CONFIG.titleSettings.font.color);
   };
 
+  const handleTestValues = () => {
+    // Apply test values including webPartTitle
+    handlePropertyChange('webPartTitle', DEFAULTS_CONFIG.titleSettings.testValues.webPartTitle);
+    handlePropertyChange('shape', DEFAULTS_CONFIG.titleSettings.testValues.shape);
+    handlePropertyChange('showDivider', DEFAULTS_CONFIG.titleSettings.testValues.showDivider);
+    handlePropertyChange('backgroundType', DEFAULTS_CONFIG.titleSettings.testValues.background.type);
+    handlePropertyChange('backgroundColor', DEFAULTS_CONFIG.titleSettings.testValues.background.color);
+    handlePropertyChange('backgroundAlpha', DEFAULTS_CONFIG.titleSettings.testValues.background.alpha);
+    handlePropertyChange('gradientDirection', DEFAULTS_CONFIG.titleSettings.testValues.background.gradientDirection);
+    handlePropertyChange('gradientColor1', DEFAULTS_CONFIG.titleSettings.testValues.background.gradientColor1);
+    handlePropertyChange('gradientColor2', DEFAULTS_CONFIG.titleSettings.testValues.background.gradientColor2);
+    handlePropertyChange('gradientAlpha', DEFAULTS_CONFIG.titleSettings.testValues.background.gradientAlpha1);
+    handlePropertyChange('imageUrl', DEFAULTS_CONFIG.titleSettings.testValues.background.image);
+    handlePropertyChange('imageAlpha', DEFAULTS_CONFIG.titleSettings.testValues.background.imageAlpha);
+    handleFontChange({
+      fontFamily: DEFAULTS_CONFIG.titleSettings.testValues.font.family,
+      fontSize: DEFAULTS_CONFIG.titleSettings.testValues.font.size,
+      formatting: DEFAULTS_CONFIG.titleSettings.testValues.font.formatting,
+      alignment: DEFAULTS_CONFIG.titleSettings.testValues.font.alignment
+    });
+    handlePropertyChange('font.color', DEFAULTS_CONFIG.titleSettings.testValues.font.color);
+  };
+
   return (
     <div style={{ marginBottom: 16 }}>
       {/* Bold Header */}
@@ -412,9 +435,10 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
         />
       </div>
 
-      {/* Reset Button */}
-      <div style={{ marginTop: 16 }}>
+      {/* Reset and Test Values Buttons */}
+      <div style={{ marginTop: 16, display: 'flex', gap: '8px' }}>
         <PrimaryButton text={DEFAULTS_CONFIG.titleSettings.resetButtonText} onClick={handleReset} />
+        <PrimaryButton text={DEFAULTS_CONFIG.titleSettings.testValuesButtonText} onClick={handleTestValues} />
       </div>
         </>
       )}
