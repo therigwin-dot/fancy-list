@@ -586,6 +586,7 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
           backgroundAlpha: this.props.filterSettings?.background?.alpha,
           gradientAlpha: this.props.filterSettings?.background?.gradientAlpha1
         }, 'FILTER SETTINGS FULL:', this.props.filterSettings)}
+        {console.log('🔍 TEST DEBUG: Render method is being called!')}
         {this.props.filterSettings?.enableFilters && (
           <>
             <div
