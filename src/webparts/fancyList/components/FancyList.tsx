@@ -43,6 +43,7 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
       selectedCategory: initialCategory,
       expandedItems: new Set(),
       loading: false,
+      error: '',
       titleImageError: false,
       titleImageValidationError: null,
       titleImageLoadError: false,
@@ -522,7 +523,7 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
 
   public render(): React.ReactElement<IFancyListProps> {
     console.log('🔍 RENDER METHOD CALLED');
-    const { selectedCategory, categories, items, loading, error } = this.state;
+    const { selectedCategory, categories, loading, error } = this.state;
     
     // Debug logging for filter button state
     console.log('🔍 FILTER BUTTON DEBUG: selectedCategory =', selectedCategory);
