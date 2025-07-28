@@ -39,6 +39,7 @@ export interface IFancyListProps {
     };
     filterSettings?: {
         enableFilters: boolean;
+        defaultFilterSelection?: string;
         font: {
             family: string;
             size: string;

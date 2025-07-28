@@ -24,7 +24,7 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     this.state = {
       items: [],
       categories: [],
-      selectedCategory: 'all',
+      selectedCategory: props.filterSettings?.defaultFilterSelection?.toLowerCase() || 'all',
       expandedItems: new Set(),
       loading: false,
       error: '',
@@ -48,6 +48,13 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
         prevProps.subjectField !== this.props.subjectField ||
         prevProps.descriptionField !== this.props.descriptionField) {
       this.loadListData();
+    }
+    
+    // Update selected category when defaultFilterSelection changes
+    if (prevProps.filterSettings?.defaultFilterSelection !== this.props.filterSettings?.defaultFilterSelection) {
+      this.setState({ 
+        selectedCategory: this.props.filterSettings?.defaultFilterSelection?.toLowerCase() || 'all' 
+      });
     }
     
     // Refresh expanded state when defaultExpanded changes

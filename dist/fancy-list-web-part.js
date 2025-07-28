@@ -337,6 +337,7 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 var FancyList = /** @class */ (function (_super) {
     __extends(FancyList, _super);
     function FancyList(props) {
+        var _a, _b;
         var _this = _super.call(this, props) || this;
         _this.handleCategoryClick = function (category) {
             _this.setState({ selectedCategory: category });
@@ -354,7 +355,7 @@ var FancyList = /** @class */ (function (_super) {
         _this.state = {
             items: [],
             categories: [],
-            selectedCategory: 'all',
+            selectedCategory: ((_b = (_a = props.filterSettings) === null || _a === void 0 ? void 0 : _a.defaultFilterSelection) === null || _b === void 0 ? void 0 : _b.toLowerCase()) || 'all',
             expandedItems: new Set(),
             loading: false,
             error: '',
@@ -373,12 +374,18 @@ var FancyList = /** @class */ (function (_super) {
     };
     FancyList.prototype.componentDidUpdate = function (prevProps) {
         var _this = this;
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r;
         if (prevProps.selectedListId !== this.props.selectedListId ||
             prevProps.categoryField !== this.props.categoryField ||
             prevProps.subjectField !== this.props.subjectField ||
             prevProps.descriptionField !== this.props.descriptionField) {
             this.loadListData();
+        }
+        // Update selected category when defaultFilterSelection changes
+        if (((_a = prevProps.filterSettings) === null || _a === void 0 ? void 0 : _a.defaultFilterSelection) !== ((_b = this.props.filterSettings) === null || _b === void 0 ? void 0 : _b.defaultFilterSelection)) {
+            this.setState({
+                selectedCategory: ((_d = (_c = this.props.filterSettings) === null || _c === void 0 ? void 0 : _c.defaultFilterSelection) === null || _d === void 0 ? void 0 : _d.toLowerCase()) || 'all'
+            });
         }
         // Refresh expanded state when defaultExpanded changes
         if (prevProps.defaultExpanded !== this.props.defaultExpanded) {
@@ -389,13 +396,13 @@ var FancyList = /** @class */ (function (_super) {
             }); });
         }
         // Image loading detection for title section
-        if (((_a = prevProps.titleSettings) === null || _a === void 0 ? void 0 : _a.imageUrl) !== ((_b = this.props.titleSettings) === null || _b === void 0 ? void 0 : _b.imageUrl) ||
-            ((_c = prevProps.titleSettings) === null || _c === void 0 ? void 0 : _c.backgroundType) !== ((_d = this.props.titleSettings) === null || _d === void 0 ? void 0 : _d.backgroundType)) {
+        if (((_e = prevProps.titleSettings) === null || _e === void 0 ? void 0 : _e.imageUrl) !== ((_f = this.props.titleSettings) === null || _f === void 0 ? void 0 : _f.imageUrl) ||
+            ((_g = prevProps.titleSettings) === null || _g === void 0 ? void 0 : _g.backgroundType) !== ((_h = this.props.titleSettings) === null || _h === void 0 ? void 0 : _h.backgroundType)) {
             this.checkTitleImage();
         }
         // Image loading detection for filter section
-        if (((_f = (_e = prevProps.filterSettings) === null || _e === void 0 ? void 0 : _e.background) === null || _f === void 0 ? void 0 : _f.image) !== ((_h = (_g = this.props.filterSettings) === null || _g === void 0 ? void 0 : _g.background) === null || _h === void 0 ? void 0 : _h.image) ||
-            ((_k = (_j = prevProps.filterSettings) === null || _j === void 0 ? void 0 : _j.background) === null || _k === void 0 ? void 0 : _k.type) !== ((_m = (_l = this.props.filterSettings) === null || _l === void 0 ? void 0 : _l.background) === null || _m === void 0 ? void 0 : _m.type)) {
+        if (((_k = (_j = prevProps.filterSettings) === null || _j === void 0 ? void 0 : _j.background) === null || _k === void 0 ? void 0 : _k.image) !== ((_m = (_l = this.props.filterSettings) === null || _l === void 0 ? void 0 : _l.background) === null || _m === void 0 ? void 0 : _m.image) ||
+            ((_p = (_o = prevProps.filterSettings) === null || _o === void 0 ? void 0 : _o.background) === null || _p === void 0 ? void 0 : _p.type) !== ((_r = (_q = this.props.filterSettings) === null || _q === void 0 ? void 0 : _q.background) === null || _r === void 0 ? void 0 : _r.type)) {
             this.checkFilterImage();
         }
     };
@@ -34881,7 +34888,7 @@ var FancyListWebPart = /** @class */ (function (_super) {
         return _this;
     }
     FancyListWebPart.prototype.render = function () {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, _23, _24, _25, _26, _27, _28, _29, _30, _31, _32, _33, _34, _35, _36, _37, _38, _39, _40, _41, _42, _43, _44, _45, _46, _47, _48, _49, _50, _51, _52, _53, _54, _55, _56, _57, _58, _59, _60, _61;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, _23, _24, _25, _26, _27, _28, _29, _30, _31, _32, _33, _34, _35, _36, _37, _38, _39, _40, _41, _42, _43, _44, _45, _46, _47, _48, _49, _50, _51, _52, _53, _54, _55, _56, _57, _58, _59, _60, _61, _62, _63;
         // Map individual properties to the format expected by FancyList component
         // Use default values if properties are undefined
         var titleSettings = {
@@ -34909,44 +34916,45 @@ var FancyListWebPart = /** @class */ (function (_super) {
         // Map filter properties to the format expected by FancyList component
         var filterSettings = {
             enableFilters: (_x = (_w = this.properties.filterSettings) === null || _w === void 0 ? void 0 : _w.enableFilters) !== null && _x !== void 0 ? _x : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.enableFilters,
+            defaultFilterSelection: (_z = (_y = this.properties.filterSettings) === null || _y === void 0 ? void 0 : _y.defaultFilterSelection) !== null && _z !== void 0 ? _z : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.defaultFilterSelection,
             font: {
-                family: (_0 = (_z = (_y = this.properties.filterSettings) === null || _y === void 0 ? void 0 : _y.font) === null || _z === void 0 ? void 0 : _z.family) !== null && _0 !== void 0 ? _0 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.font.family,
-                size: (_3 = (_2 = (_1 = this.properties.filterSettings) === null || _1 === void 0 ? void 0 : _1.font) === null || _2 === void 0 ? void 0 : _2.size) !== null && _3 !== void 0 ? _3 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.font.size,
+                family: (_2 = (_1 = (_0 = this.properties.filterSettings) === null || _0 === void 0 ? void 0 : _0.font) === null || _1 === void 0 ? void 0 : _1.family) !== null && _2 !== void 0 ? _2 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.font.family,
+                size: (_5 = (_4 = (_3 = this.properties.filterSettings) === null || _3 === void 0 ? void 0 : _3.font) === null || _4 === void 0 ? void 0 : _4.size) !== null && _5 !== void 0 ? _5 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.font.size,
                 color: '#605e5c', // Default filter font color
-                formatting: (_6 = (_5 = (_4 = this.properties.filterSettings) === null || _4 === void 0 ? void 0 : _4.font) === null || _5 === void 0 ? void 0 : _5.formatting) !== null && _6 !== void 0 ? _6 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.font.formatting,
-                alignment: (_9 = (_8 = (_7 = this.properties.filterSettings) === null || _7 === void 0 ? void 0 : _7.font) === null || _8 === void 0 ? void 0 : _8.alignment) !== null && _9 !== void 0 ? _9 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.font.alignment
+                formatting: (_8 = (_7 = (_6 = this.properties.filterSettings) === null || _6 === void 0 ? void 0 : _6.font) === null || _7 === void 0 ? void 0 : _7.formatting) !== null && _8 !== void 0 ? _8 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.font.formatting,
+                alignment: (_11 = (_10 = (_9 = this.properties.filterSettings) === null || _9 === void 0 ? void 0 : _9.font) === null || _10 === void 0 ? void 0 : _10.alignment) !== null && _11 !== void 0 ? _11 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.font.alignment
             },
             activeColors: {
-                background: (_12 = (_11 = (_10 = this.properties.filterSettings) === null || _10 === void 0 ? void 0 : _10.activeColors) === null || _11 === void 0 ? void 0 : _11.background) !== null && _12 !== void 0 ? _12 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.activeColors.background,
-                font: (_15 = (_14 = (_13 = this.properties.filterSettings) === null || _13 === void 0 ? void 0 : _13.activeColors) === null || _14 === void 0 ? void 0 : _14.font) !== null && _15 !== void 0 ? _15 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.activeColors.font
+                background: (_14 = (_13 = (_12 = this.properties.filterSettings) === null || _12 === void 0 ? void 0 : _12.activeColors) === null || _13 === void 0 ? void 0 : _13.background) !== null && _14 !== void 0 ? _14 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.activeColors.background,
+                font: (_17 = (_16 = (_15 = this.properties.filterSettings) === null || _15 === void 0 ? void 0 : _15.activeColors) === null || _16 === void 0 ? void 0 : _16.font) !== null && _17 !== void 0 ? _17 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.activeColors.font
             },
             inactiveColors: {
-                background: (_18 = (_17 = (_16 = this.properties.filterSettings) === null || _16 === void 0 ? void 0 : _16.inactiveColors) === null || _17 === void 0 ? void 0 : _17.background) !== null && _18 !== void 0 ? _18 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.inactiveColors.background,
-                font: (_21 = (_20 = (_19 = this.properties.filterSettings) === null || _19 === void 0 ? void 0 : _19.inactiveColors) === null || _20 === void 0 ? void 0 : _20.font) !== null && _21 !== void 0 ? _21 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.inactiveColors.font
+                background: (_20 = (_19 = (_18 = this.properties.filterSettings) === null || _18 === void 0 ? void 0 : _18.inactiveColors) === null || _19 === void 0 ? void 0 : _19.background) !== null && _20 !== void 0 ? _20 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.inactiveColors.background,
+                font: (_23 = (_22 = (_21 = this.properties.filterSettings) === null || _21 === void 0 ? void 0 : _21.inactiveColors) === null || _22 === void 0 ? void 0 : _22.font) !== null && _23 !== void 0 ? _23 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.inactiveColors.font
             },
-            shape: (_23 = (_22 = this.properties.filterSettings) === null || _22 === void 0 ? void 0 : _22.shape) !== null && _23 !== void 0 ? _23 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.shape,
-            backgroundShape: (_25 = (_24 = this.properties.filterSettings) === null || _24 === void 0 ? void 0 : _24.backgroundShape) !== null && _25 !== void 0 ? _25 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.backgroundShape,
-            showAllCategories: (_27 = (_26 = this.properties.filterSettings) === null || _26 === void 0 ? void 0 : _26.showAllCategories) !== null && _27 !== void 0 ? _27 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.showAllCategories,
+            shape: (_25 = (_24 = this.properties.filterSettings) === null || _24 === void 0 ? void 0 : _24.shape) !== null && _25 !== void 0 ? _25 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.shape,
+            backgroundShape: (_27 = (_26 = this.properties.filterSettings) === null || _26 === void 0 ? void 0 : _26.backgroundShape) !== null && _27 !== void 0 ? _27 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.backgroundShape,
+            showAllCategories: (_29 = (_28 = this.properties.filterSettings) === null || _28 === void 0 ? void 0 : _28.showAllCategories) !== null && _29 !== void 0 ? _29 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.showAllCategories,
             background: {
-                type: (_30 = (_29 = (_28 = this.properties.filterSettings) === null || _28 === void 0 ? void 0 : _28.background) === null || _29 === void 0 ? void 0 : _29.type) !== null && _30 !== void 0 ? _30 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.type,
-                color: (_33 = (_32 = (_31 = this.properties.filterSettings) === null || _31 === void 0 ? void 0 : _31.background) === null || _32 === void 0 ? void 0 : _32.color) !== null && _33 !== void 0 ? _33 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.color,
-                alpha: (_36 = (_35 = (_34 = this.properties.filterSettings) === null || _34 === void 0 ? void 0 : _34.background) === null || _35 === void 0 ? void 0 : _35.alpha) !== null && _36 !== void 0 ? _36 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.alpha,
-                image: (_39 = (_38 = (_37 = this.properties.filterSettings) === null || _37 === void 0 ? void 0 : _37.background) === null || _38 === void 0 ? void 0 : _38.image) !== null && _39 !== void 0 ? _39 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.image,
-                imageAlpha: (_42 = (_41 = (_40 = this.properties.filterSettings) === null || _40 === void 0 ? void 0 : _40.background) === null || _41 === void 0 ? void 0 : _41.imageAlpha) !== null && _42 !== void 0 ? _42 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.imageAlpha,
-                gradientDirection: (_45 = (_44 = (_43 = this.properties.filterSettings) === null || _43 === void 0 ? void 0 : _43.background) === null || _44 === void 0 ? void 0 : _44.gradientDirection) !== null && _45 !== void 0 ? _45 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientDirection,
-                gradientColor1: (_48 = (_47 = (_46 = this.properties.filterSettings) === null || _46 === void 0 ? void 0 : _46.background) === null || _47 === void 0 ? void 0 : _47.gradientColor1) !== null && _48 !== void 0 ? _48 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientColor1,
-                gradientAlpha1: (_51 = (_50 = (_49 = this.properties.filterSettings) === null || _49 === void 0 ? void 0 : _49.background) === null || _50 === void 0 ? void 0 : _50.gradientAlpha1) !== null && _51 !== void 0 ? _51 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientAlpha1,
-                gradientColor2: (_54 = (_53 = (_52 = this.properties.filterSettings) === null || _52 === void 0 ? void 0 : _52.background) === null || _53 === void 0 ? void 0 : _53.gradientColor2) !== null && _54 !== void 0 ? _54 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientColor2,
-                gradientAlpha2: (_57 = (_56 = (_55 = this.properties.filterSettings) === null || _55 === void 0 ? void 0 : _55.background) === null || _56 === void 0 ? void 0 : _56.gradientAlpha2) !== null && _57 !== void 0 ? _57 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientAlpha2
+                type: (_32 = (_31 = (_30 = this.properties.filterSettings) === null || _30 === void 0 ? void 0 : _30.background) === null || _31 === void 0 ? void 0 : _31.type) !== null && _32 !== void 0 ? _32 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.type,
+                color: (_35 = (_34 = (_33 = this.properties.filterSettings) === null || _33 === void 0 ? void 0 : _33.background) === null || _34 === void 0 ? void 0 : _34.color) !== null && _35 !== void 0 ? _35 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.color,
+                alpha: (_38 = (_37 = (_36 = this.properties.filterSettings) === null || _36 === void 0 ? void 0 : _36.background) === null || _37 === void 0 ? void 0 : _37.alpha) !== null && _38 !== void 0 ? _38 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.alpha,
+                image: (_41 = (_40 = (_39 = this.properties.filterSettings) === null || _39 === void 0 ? void 0 : _39.background) === null || _40 === void 0 ? void 0 : _40.image) !== null && _41 !== void 0 ? _41 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.image,
+                imageAlpha: (_44 = (_43 = (_42 = this.properties.filterSettings) === null || _42 === void 0 ? void 0 : _42.background) === null || _43 === void 0 ? void 0 : _43.imageAlpha) !== null && _44 !== void 0 ? _44 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.imageAlpha,
+                gradientDirection: (_47 = (_46 = (_45 = this.properties.filterSettings) === null || _45 === void 0 ? void 0 : _45.background) === null || _46 === void 0 ? void 0 : _46.gradientDirection) !== null && _47 !== void 0 ? _47 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientDirection,
+                gradientColor1: (_50 = (_49 = (_48 = this.properties.filterSettings) === null || _48 === void 0 ? void 0 : _48.background) === null || _49 === void 0 ? void 0 : _49.gradientColor1) !== null && _50 !== void 0 ? _50 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientColor1,
+                gradientAlpha1: (_53 = (_52 = (_51 = this.properties.filterSettings) === null || _51 === void 0 ? void 0 : _51.background) === null || _52 === void 0 ? void 0 : _52.gradientAlpha1) !== null && _53 !== void 0 ? _53 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientAlpha1,
+                gradientColor2: (_56 = (_55 = (_54 = this.properties.filterSettings) === null || _54 === void 0 ? void 0 : _54.background) === null || _55 === void 0 ? void 0 : _55.gradientColor2) !== null && _56 !== void 0 ? _56 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientColor2,
+                gradientAlpha2: (_59 = (_58 = (_57 = this.properties.filterSettings) === null || _57 === void 0 ? void 0 : _57.background) === null || _58 === void 0 ? void 0 : _58.gradientAlpha2) !== null && _59 !== void 0 ? _59 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientAlpha2
             },
-            showDivider: (_59 = (_58 = this.properties.filterSettings) === null || _58 === void 0 ? void 0 : _58.showDivider) !== null && _59 !== void 0 ? _59 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.showDivider
+            showDivider: (_61 = (_60 = this.properties.filterSettings) === null || _60 === void 0 ? void 0 : _60.showDivider) !== null && _61 !== void 0 ? _61 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.showDivider
         };
         var element = react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_FancyList__WEBPACK_IMPORTED_MODULE_7__["default"], {
             selectedListId: this.properties.selectedListId,
             categoryField: this.properties.categoryField,
             subjectField: this.properties.subjectField,
             descriptionField: this.properties.descriptionField,
-            showAllCategories: (_61 = (_60 = this.properties.filterSettings) === null || _60 === void 0 ? void 0 : _60.showAllCategories) !== null && _61 !== void 0 ? _61 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.showAllCategories,
+            showAllCategories: (_63 = (_62 = this.properties.filterSettings) === null || _62 === void 0 ? void 0 : _62.showAllCategories) !== null && _63 !== void 0 ? _63 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.showAllCategories,
             defaultExpanded: this.properties.defaultExpanded,
             isDarkTheme: this._isDarkTheme,
             environmentMessage: this._environmentMessage,

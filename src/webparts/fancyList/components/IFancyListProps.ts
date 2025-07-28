@@ -50,6 +50,7 @@ export interface IFancyListProps {
   // Filter Settings
   filterSettings?: {
     enableFilters: boolean;
+    defaultFilterSelection?: string; // NEW - for default filter selection
     font: {
       family: string;
       size: string;
