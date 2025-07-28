@@ -796,3 +796,261 @@ This document defines the structured testing values and implementation approach 
 ---
 
 **Please review Page 4 structure above. Any changes needed before I continue with Page 5?** 
+
+---
+
+## **PAGE 5: Subject Section Configuration**
+
+### **Test Values Structure**
+```typescript
+{
+  page: 5,
+  section: "Subject Section Configuration",
+  controls: [
+    {
+      control: "subjectFontFamily",
+      value: "Georgia",
+      description: "Set subject font to Georgia (visually distinct)",
+      timing: 500,
+      dependency: null
+    },
+    {
+      control: "subjectFontSize",
+      value: "16px",
+      description: "Set subject font size to 16px (medium for testing)",
+      timing: 500,
+      dependency: null
+    },
+    {
+      control: "subjectFontColor",
+      value: "#006400", // Dark green
+      description: "Set subject font color to dark green (visually distinct)",
+      timing: 500,
+      dependency: null
+    },
+    {
+      control: "subjectFontBold",
+      value: true,
+      description: "Set subject font to bold (visually distinct)",
+      timing: 500,
+      dependency: null
+    },
+    {
+      control: "subjectFontItalic",
+      value: false,
+      description: "Set subject font italic to false",
+      timing: 500,
+      dependency: null
+    },
+    {
+      control: "subjectFontUnderline",
+      value: true,
+      description: "Set subject font to underline (visually distinct)",
+      timing: 500,
+      dependency: null
+    },
+    {
+      control: "subjectFontStrikethrough",
+      value: false,
+      description: "Set subject font strikethrough to false",
+      timing: 500,
+      dependency: null
+    },
+    {
+      control: "subjectFontAlignment",
+      value: "left",
+      description: "Set subject font alignment to left (visually distinct)",
+      timing: 500,
+      dependency: null
+    },
+    {
+      control: "subjectIconPosition",
+      value: "left",
+      description: "Set subject icon position to left (visually distinct)",
+      timing: 500,
+      dependency: null
+    },
+    {
+      control: "subjectCollapsedIcon",
+      value: "▶️",
+      description: "Set subject collapsed icon to play button",
+      timing: 500,
+      dependency: null
+    },
+    {
+      control: "subjectExpandedIcon",
+      value: "⏸️",
+      description: "Set subject expanded icon to pause button",
+      timing: 500,
+      dependency: null
+    },
+    {
+      control: "subjectHoverColor",
+      value: "#32CD32", // Lime green
+      description: "Set subject hover color to lime green (visually distinct)",
+      timing: 500,
+      dependency: null
+    },
+    {
+      control: "subjectAutoExpand",
+      value: false,
+      description: "Set subject auto expand to false (visually distinct)",
+      timing: 500,
+      dependency: null
+    },
+    {
+      control: "subjectHideExpandCollapse",
+      value: false,
+      description: "Set subject hide expand/collapse to false",
+      timing: 500,
+      dependency: null
+    },
+    // Background Testing Sequence
+    {
+      control: "subjectBackgroundType",
+      value: "solid",
+      description: "Switch to solid background for testing",
+      timing: 1000,
+      dependency: null
+    },
+    {
+      control: "subjectBackgroundColor",
+      value: "#E6F3E6", // Light green
+      description: "Set solid background to light green",
+      timing: 500,
+      dependency: "subjectBackgroundType"
+    },
+    {
+      control: "subjectBackgroundAlpha",
+      value: 55,
+      description: "Set background transparency to 55%",
+      timing: 500,
+      dependency: "subjectBackgroundType"
+    },
+    {
+      control: "subjectBackgroundType",
+      value: "gradient",
+      description: "Switch to gradient background for testing",
+      timing: 1000,
+      dependency: null
+    },
+    {
+      control: "subjectGradientDirection",
+      value: "bottom-top",
+      description: "Set gradient direction to bottom-top",
+      timing: 500,
+      dependency: "subjectBackgroundType"
+    },
+    {
+      control: "subjectGradientColor1",
+      value: "#006400", // Dark green
+      description: "Set gradient color 1 to dark green",
+      timing: 500,
+      dependency: "subjectBackgroundType"
+    },
+    {
+      control: "subjectGradientColor2",
+      value: "#32CD32", // Lime green
+      description: "Set gradient color 2 to lime green",
+      timing: 500,
+      dependency: "subjectBackgroundType"
+    },
+    {
+      control: "subjectGradientAlpha",
+      value: 90,
+      description: "Set gradient transparency to 90%",
+      timing: 500,
+      dependency: "subjectBackgroundType"
+    },
+    {
+      control: "subjectBackgroundType",
+      value: "image",
+      description: "Switch to image background for testing",
+      timing: 1000,
+      dependency: null
+    },
+    {
+      control: "subjectBackgroundImage",
+      value: "https://www.pixelstalk.net/wp-content/uploads/2016/07/Free-Amazing-Background-Images-Nature.jpg",
+      description: "Set good image URL for testing",
+      timing: 1000,
+      dependency: "subjectBackgroundType"
+    },
+    {
+      control: "subjectBackgroundImage",
+      value: "https://invalid-test-url.com/image.jpg",
+      description: "Set bad image URL for error testing",
+      timing: 1000,
+      dependency: "subjectBackgroundType"
+    },
+    {
+      control: "subjectBackgroundImage",
+      value: "",
+      description: "Set blank image URL for error testing",
+      timing: 1000,
+      dependency: "subjectBackgroundType"
+    },
+    {
+      control: "subjectBackgroundImage",
+      value: "https://www.pixelstalk.net/wp-content/uploads/2016/07/Free-Amazing-Background-Images-Nature.jpg",
+      description: "Restore good image URL",
+      timing: 1000,
+      dependency: "subjectBackgroundType"
+    },
+    {
+      control: "subjectBackgroundImageAlpha",
+      value: 35,
+      description: "Set image transparency to 35%",
+      timing: 500,
+      dependency: "subjectBackgroundType"
+    },
+    // Final Background Type (Solid for Page 5)
+    {
+      control: "subjectBackgroundType",
+      value: "solid",
+      description: "Set final background type to solid for Page 5",
+      timing: 1000,
+      dependency: null
+    },
+    {
+      control: "subjectBackgroundColor",
+      value: "#E6F3E6", // Light green
+      description: "Set final solid background color",
+      timing: 500,
+      dependency: "subjectBackgroundType"
+    },
+    {
+      control: "subjectBackgroundAlpha",
+      value: 55,
+      description: "Set final background transparency",
+      timing: 500,
+      dependency: "subjectBackgroundType"
+    },
+    {
+      control: "subjectShape",
+      value: "rounded",
+      description: "Set subject shape to rounded (visually distinct)",
+      timing: 500,
+      dependency: null
+    },
+    {
+      control: "showSubjectDivider",
+      value: true,
+      description: "Show subject divider (visually distinct)",
+      timing: 500,
+      dependency: null
+    }
+  ]
+}
+```
+
+### **Implementation Notes**
+- **Bright Colors**: Green color scheme for visual testing
+- **Background Testing**: Complete sequence through all types
+- **Final Type**: Solid background assigned to Page 5
+- **Quick Timing**: 500ms for most controls, 1000ms for background type changes
+- **Icon Controls**: Left position, play/pause icons, auto-expand disabled
+
+---
+
+**Please review Page 5 structure above. Any changes needed before I continue with Page 6?** 
