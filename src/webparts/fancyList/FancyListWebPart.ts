@@ -412,10 +412,8 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
     if (this._loadingFields) {
       return [{ key: '', text: 'Loading...' }];
     }
-    return this._fields.filter(field =>
-      field.key !== this.properties.subjectField &&
-      field.key !== this.properties.descriptionField
-    );
+    // Category always shows all available fields
+    return this._fields;
   }
 
   private _getAvailableFieldsForSubject(): { key: string, text: string }[] {
@@ -428,10 +426,8 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
     if (this._loadingFields) {
       return [{ key: '', text: 'Loading...' }];
     }
-    return this._fields.filter(field =>
-      field.key !== this.properties.categoryField &&
-      field.key !== this.properties.descriptionField
-    );
+    // Subject shows all fields except the selected Category
+    return this._fields.filter(field => field.key !== this.properties.categoryField);
   }
 
   private _getAvailableFieldsForDescription(): { key: string, text: string }[] {
@@ -447,8 +443,9 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
     if (this._loadingFields) {
       return [{ key: '', text: 'Loading...' }];
     }
-    return this._fields.filter(field =>
-      field.key !== this.properties.categoryField &&
+    // Description shows all fields except Category and Subject
+    return this._fields.filter(field => 
+      field.key !== this.properties.categoryField && 
       field.key !== this.properties.subjectField
     );
   }

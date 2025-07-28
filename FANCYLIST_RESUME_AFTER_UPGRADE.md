@@ -530,3 +530,72 @@ Then when the Disabled Toggle is triggered the display changes to this:
 **Answer 2**: That is correct. Based on previous answer, just the Enable Toggle and the gray box with our header and only the dropdown for picking our default filter button.
 
 **Answer 3**: It sets it to show all the items. Then if the user switches it to a different category, it will only show that category.
+
+---
+
+## **✅ CRITICAL BUG FIX: DROPDOWN LOGIC RESTORED**
+
+### **🔧 Fix Applied: July 2025**
+
+**Status:** ✅ **FIXED** - Dropdown logic restored to correct behavior
+
+### **🐛 Bug Description:**
+The Page 1 field selection dropdowns (Category, Subject, Description) had reverted to incorrect logic where fields were being filtered out prematurely, making them unavailable for selection.
+
+### **🔍 Root Cause:**
+The current implementation was filtering out fields that hadn't been selected yet, instead of only filtering out the previously selected fields in the dependency chain.
+
+### **✅ Correct Logic Restored:**
+
+#### **Category Field Dropdown:**
+```typescript
+// CORRECT: Category always shows all available fields
+return this._fields;
+```
+
+#### **Subject Field Dropdown:**
+```typescript
+// CORRECT: Subject shows all fields except the selected Category
+return this._fields.filter(field => field.key !== this.properties.categoryField);
+```
+
+#### **Description Field Dropdown:**
+```typescript
+// CORRECT: Description shows all fields except Category and Subject
+return this._fields.filter(field => 
+  field.key !== this.properties.categoryField && 
+  field.key !== this.properties.subjectField
+);
+```
+
+### **❌ Previous Incorrect Logic:**
+```typescript
+// WRONG: Category was filtering out Subject and Description
+return this._fields.filter(field =>
+  field.key !== this.properties.subjectField &&
+  field.key !== this.properties.descriptionField
+);
+
+// WRONG: Subject was filtering out Category and Description
+return this._fields.filter(field =>
+  field.key !== this.properties.categoryField &&
+  field.key !== this.properties.descriptionField
+);
+```
+
+### **📁 Files Modified:**
+- `src/webparts/fancyList/FancyListWebPart.ts` - Fixed `_getAvailableFieldsForCategory()`, `_getAvailableFieldsForSubject()`, and `_getAvailableFieldsForDescription()` methods
+
+### **🎯 Expected Behavior Now:**
+1. **Category Dropdown**: Shows all available fields from the selected list
+2. **Subject Dropdown**: Shows all fields except the selected Category field
+3. **Description Dropdown**: Shows all fields except the selected Category and Subject fields
+4. **Dependency Chain**: Each dropdown properly depends on the previous selection
+5. **No Premature Filtering**: Fields are only filtered out after they've been selected in a previous dropdown
+
+### **🧪 Testing Required:**
+- Test Category dropdown shows all available fields
+- Test Subject dropdown shows remaining fields after Category selection
+- Test Description dropdown shows remaining fields after Subject selection
+- Test dependency chain works correctly
+- Test field selection doesn't prematurely filter other dropdowns
