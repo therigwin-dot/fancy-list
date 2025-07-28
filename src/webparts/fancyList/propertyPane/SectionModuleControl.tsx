@@ -377,115 +377,151 @@ export const SectionModuleControl: React.FC<SectionModuleControlProps> = ({
         />
       </div>
 
-      {/* 5. Background Controls Container */}
+      {/* 5. Collapsed Settings Container */}
       <div style={{ 
-        backgroundColor: '#f3f2f1', 
+        backgroundColor: '#e1dfdd', 
         padding: '12px', 
         borderRadius: '4px',
         marginBottom: 16 
       }}>
-        {/* Background Header with Type Dropdown */}
-        <div style={{ 
-          display: 'flex', 
-          alignItems: 'flex-start', 
-          gap: '8px',
+        {/* Collapsed Settings Header */}
+        <div style={{
+          fontSize: '16px',
+          fontWeight: '600',
+          color: '#323130',
           marginBottom: '12px'
         }}>
-          <div style={{
-            fontSize: '16px',
-            fontWeight: '600',
-            color: '#323130'
-          }}>
-            Background
-          </div>
-          <Dropdown
-            label=""
-            options={backgroundTypeOptions}
-            selectedKey={sectionSettings.background.type}
-            onChange={(_, option) => handlePropertyChange('background.type', option?.key)}
-            styles={{ root: { minWidth: 120 } }}
-          />
+          Collapsed Settings
         </div>
 
-        {/* 5. Solid Background Controls */}
-        {sectionSettings.background.type === 'solid' && (
-          <div style={{ marginBottom: 16 }}>
-            <ColorPickerControl
-              color={sectionSettings.background.color}
-              field="backgroundColor"
+        {/* Background Controls Container */}
+        <div style={{ 
+          backgroundColor: '#f3f2f1', 
+          padding: '12px', 
+          borderRadius: '4px',
+          marginBottom: 16 
+        }}>
+          {/* Background Header with Type Dropdown */}
+          <div style={{ 
+            display: 'flex', 
+            alignItems: 'flex-start', 
+            gap: '8px',
+            marginBottom: '12px'
+          }}>
+            <div style={{
+              fontSize: '16px',
+              fontWeight: '600',
+              color: '#323130'
+            }}>
+              Background
+            </div>
+            <Dropdown
               label=""
-              onChange={(field: string, newColor: string) => handlePropertyChange('background.color', newColor)}
+              options={backgroundTypeOptions}
+              selectedKey={sectionSettings.background.type}
+              onChange={(_, option) => handlePropertyChange('background.type', option?.key)}
+              styles={{ root: { minWidth: 120 } }}
             />
           </div>
-        )}
 
-              {/* 5. Gradient Background Controls */}
-        {sectionSettings.background.type === 'gradient' && (
-          <>
+          {/* 5. Solid Background Controls */}
+          {sectionSettings.background.type === 'solid' && (
             <div style={{ marginBottom: 16 }}>
-              <Dropdown
-                label="Direction"
-                options={gradientDirectionOptions}
-                selectedKey={sectionSettings.background.gradientDirection}
-                onChange={(_, option) => handlePropertyChange('background.gradientDirection', option?.key)}
-              />
-            </div>
-            <div style={{ 
-              display: 'flex', 
-              alignItems: 'center', 
-              gap: '8px',
-              marginBottom: 8 
-            }}>
-              <button
-                type="button"
-                onClick={handleSwapColors}
-                style={{
-                  padding: '4px 8px',
-                  border: '1px solid #0078d4',
-                  borderRadius: '4px',
-                  background: '#e5f1fb',
-                  color: '#0078d4',
-                  cursor: 'pointer',
-                  fontSize: '12px'
-                }}
-              >
-                Swap Colors
-              </button>
-              <div
-                style={{
-                  width: '190px',
-                  height: '32px',
-                  borderRadius: '4px',
-                  border: '1px solid #ccc',
-                  background: getGradientPreview(sectionSettings.background.gradientDirection, previewColor1, previewColor2)
-                }}
-                title="Gradient direction preview (click Swap Colors to reverse)"
-              />
-            </div>
-            <div style={{ 
-              display: 'flex', 
-              alignItems: 'center', 
-              gap: '8px',
-              marginBottom: 16 
-            }}>
               <ColorPickerControl
-                color={sectionSettings.background.gradientColor1}
-                field="gradientColor1"
+                color={sectionSettings.background.color}
+                field="backgroundColor"
                 label=""
-                onChange={(field: string, newColor: string) => handlePropertyChange('background.gradientColor1', newColor)}
-              />
-              <ColorPickerControl
-                color={sectionSettings.background.gradientColor2}
-                field="gradientColor2"
-                label=""
-                onChange={(field: string, newColor: string) => handlePropertyChange('background.gradientColor2', newColor)}
+                onChange={(field: string, newColor: string) => handlePropertyChange('background.color', newColor)}
               />
             </div>
-          </>
-        )}
+          )}
 
-              {/* 5. Image Background Controls */}
-        {sectionSettings.background.type === 'image' && (
+                {/* 5. Gradient Background Controls */}
+          {sectionSettings.background.type === 'gradient' && (
+            <>
+              <div style={{ marginBottom: 16 }}>
+                <Dropdown
+                  label="Direction"
+                  options={gradientDirectionOptions}
+                  selectedKey={sectionSettings.background.gradientDirection}
+                  onChange={(_, option) => handlePropertyChange('background.gradientDirection', option?.key)}
+                />
+              </div>
+              <div style={{ 
+                display: 'flex', 
+                alignItems: 'center', 
+                gap: '8px',
+                marginBottom: 8 
+              }}>
+                <button
+                  type="button"
+                  onClick={handleSwapColors}
+                  style={{
+                    padding: '4px 8px',
+                    border: '1px solid #0078d4',
+                    borderRadius: '4px',
+                    background: '#e5f1fb',
+                    color: '#0078d4',
+                    cursor: 'pointer',
+                    fontSize: '12px'
+                  }}
+                >
+                  Swap Colors
+                </button>
+                <div
+                  style={{
+                    width: '190px',
+                    height: '32px',
+                    borderRadius: '4px',
+                    border: '1px solid #ccc',
+                    background: getGradientPreview(sectionSettings.background.gradientDirection, previewColor1, previewColor2)
+                  }}
+                  title="Gradient direction preview (click Swap Colors to reverse)"
+                />
+              </div>
+              <div style={{ 
+                display: 'flex', 
+                alignItems: 'center', 
+                gap: '8px',
+                marginBottom: 16 
+              }}>
+                <ColorPickerControl
+                  color={sectionSettings.background.gradientColor1}
+                  field="gradientColor1"
+                  label=""
+                  onChange={(field: string, newColor: string) => handlePropertyChange('background.gradientColor1', newColor)}
+                />
+                <ColorPickerControl
+                  color={sectionSettings.background.gradientColor2}
+                  field="gradientColor2"
+                  label=""
+                  onChange={(field: string, newColor: string) => handlePropertyChange('background.gradientColor2', newColor)}
+                />
+              </div>
+            </>
+          )}
+
+                {/* 5. Image Background Controls */}
+          {sectionSettings.background.type === 'image' && (
+            <div style={{ marginBottom: 16 }}>
+              <label style={{
+                fontSize: '14px',
+                fontWeight: '600',
+                color: '#323130',
+                marginBottom: '8px',
+                display: 'block'
+              }}>
+                URL
+              </label>
+              <TextField
+                value={sectionSettings.background.image}
+                onChange={(_, newValue) => handlePropertyChange('background.image', newValue || '')}
+                placeholder="Enter image URL"
+              />
+            </div>
+                  )}
+
+          {/* Unified Transparency Slider */}
           <div style={{ marginBottom: 16 }}>
             <label style={{
               fontSize: '14px',
@@ -494,59 +530,40 @@ export const SectionModuleControl: React.FC<SectionModuleControlProps> = ({
               marginBottom: '8px',
               display: 'block'
             }}>
-              URL
+              Transparency
             </label>
-            <TextField
-              value={sectionSettings.background.image}
-              onChange={(_, newValue) => handlePropertyChange('background.image', newValue || '')}
-              placeholder="Enter image URL"
+            <Slider
+              min={0}
+              max={100}
+              value={
+                sectionSettings.background.type === 'solid' ? sectionSettings.background.alpha :
+                sectionSettings.background.type === 'gradient' ? sectionSettings.background.gradientAlpha1 :
+                sectionSettings.background.imageAlpha
+              }
+              onChange={(value) => {
+                if (sectionSettings.background.type === 'solid') {
+                  handlePropertyChange('background.alpha', value);
+                } else if (sectionSettings.background.type === 'gradient') {
+                  handlePropertyChange('background.gradientAlpha1', value);
+                } else {
+                  handlePropertyChange('background.imageAlpha', value);
+                }
+              }}
+              showValue={true}
+              valueFormat={(value) => `${value}%`}
             />
           </div>
-                )}
+        </div>
 
-        {/* Unified Transparency Slider */}
-        <div style={{ marginBottom: 16 }}>
-          <label style={{
-            fontSize: '14px',
-            fontWeight: '600',
-            color: '#323130',
-            marginBottom: '8px',
-            display: 'block'
-          }}>
-            Transparency
-          </label>
-          <Slider
-            min={0}
-            max={100}
-            value={
-              sectionSettings.background.type === 'solid' ? sectionSettings.background.alpha :
-              sectionSettings.background.type === 'gradient' ? sectionSettings.background.gradientAlpha1 :
-              sectionSettings.background.imageAlpha
-            }
-            onChange={(value) => {
-              if (sectionSettings.background.type === 'solid') {
-                handlePropertyChange('background.alpha', value);
-              } else if (sectionSettings.background.type === 'gradient') {
-                handlePropertyChange('background.gradientAlpha1', value);
-              } else {
-                handlePropertyChange('background.imageAlpha', value);
-              }
-            }}
-            showValue={true}
-            valueFormat={(value) => `${value}%`}
+        {/* Shape Picker Control */}
+        <div style={{ marginBottom: 0 }}>
+          <ShapePickerControl
+            label=""
+            value={sectionSettings.shape}
+            onChange={(shape) => handlePropertyChange('shape', shape)}
           />
         </div>
       </div>
-
-      {/* 7. Shape Picker Control */}
-      <div style={{ marginBottom: 16 }}>
-        <ShapePickerControl
-          label=""
-          value={sectionSettings.shape}
-          onChange={(shape) => handlePropertyChange('shape', shape)}
-        />
-      </div>
-
 
 
       {/* Reset and Test Values Buttons */}
