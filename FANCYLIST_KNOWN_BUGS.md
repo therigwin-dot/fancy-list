@@ -93,6 +93,8 @@
 - **Priority**: Medium - Core reset functionality broken
 - **Status**: 🟡 **NEEDS INVESTIGATION** - Test Values button may be corrupting reset functionality and reset logic incomplete
 
+10. **🔴 Online Test Value Button URL Issue** - 🟡 **Medium** - URL test value only works for description section
+
 #### **Title Component Bugs**:
 1. **✅ Title Transparency Sliders Broken** - ✅ **FIXED** - Alpha inversion corrected for proper slider behavior
 2. **✅ Reset Button Incomplete** - ✅ **FIXED** - Reset button now properly resets all title settings
