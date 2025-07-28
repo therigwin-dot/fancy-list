@@ -4,6 +4,7 @@
 **Primary Backup Location**: `/Volumes/BigBoy/ProjectBackUps/Work/`
 **Local Git Repository**: `/opt/cursor-projects/FancyList/` (with `.git` folder)
 **External Git Archive**: `/Volumes/BigBoy/ProjectBackUps/Work/FancyList-Backup/`  
+**Documentation Archive**: `/Volumes/BigBoy/ProjectBackUps/Work/FANCYLIST_DOCUMENTATION_ARCHIVE_20250728_163835.md`
 **Naming Convention**: `ProjectName_BackupTag_DateTimeofBackup`
 
 ### **Current Backup Tags**
