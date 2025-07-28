@@ -427,6 +427,7 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     const gradientColor2 = backgroundSettings.gradientColor2 || '#000000';
     const gradientAlpha = backgroundSettings.gradientAlpha1 || 0;
     const imageUrl = backgroundSettings.image || '';
+    const imageAlpha = backgroundSettings.imageAlpha || 0;
     const shape = this.props.categorySectionSettings?.shape || 'rounded';
 
     switch (backgroundType) {
@@ -443,7 +444,7 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
       case 'image':
         if (imageUrl) {
           return {
-            backgroundImage: `url(${imageUrl})`,
+            background: `linear-gradient(rgba(0,0,0,${imageAlpha / 100}), rgba(0,0,0,${imageAlpha / 100})), url(${imageUrl})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             borderRadius: this.getShapeRadius(shape)
