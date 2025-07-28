@@ -16,6 +16,7 @@ interface IFancyListState {
     filterImageLoadError: boolean;
 }
 export default class FancyList extends React.Component<IFancyListProps, IFancyListState> {
+    private userHasManuallySelected;
     constructor(props: IFancyListProps);
     componentDidMount(): void;
     componentDidUpdate(prevProps: IFancyListProps): void;

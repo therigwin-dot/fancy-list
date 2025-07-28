@@ -1713,6 +1713,7 @@ var FancyList = /** @class */ (function (_super) {
     function FancyList(props) {
         var _a, _b;
         var _this = _super.call(this, props) || this;
+        _this.userHasManuallySelected = false; // Track if user has manually selected
         _this.handleCategoryClick = function (category) {
             var _a;
             console.log('🔍 Filter Debug - User Click:', {
@@ -1720,6 +1721,8 @@ var FancyList = /** @class */ (function (_super) {
                 currentSelected: _this.state.selectedCategory,
                 defaultSelection: (_a = _this.props.filterSettings) === null || _a === void 0 ? void 0 : _a.defaultFilterSelection
             });
+            // Mark that user has manually selected
+            _this.userHasManuallySelected = true;
             _this.setState({ selectedCategory: category });
         };
         _this.handleItemToggle = function (itemId) {
@@ -1796,28 +1799,38 @@ var FancyList = /** @class */ (function (_super) {
                 prevDefault: (_c = prevProps.filterSettings) === null || _c === void 0 ? void 0 : _c.defaultFilterSelection,
                 currentDefault: (_d = this.props.filterSettings) === null || _d === void 0 ? void 0 : _d.defaultFilterSelection,
                 currentSelected: this.state.selectedCategory,
-                availableCategories: this.state.categories
+                availableCategories: this.state.categories,
+                userHasManuallySelected: this.userHasManuallySelected
             });
-            var newCategory = 'all';
-            if ((_e = this.props.filterSettings) === null || _e === void 0 ? void 0 : _e.defaultFilterSelection) {
-                var selection_1 = this.props.filterSettings.defaultFilterSelection;
-                if (selection_1.toLowerCase() === 'all') {
-                    newCategory = 'all';
+            // Only apply default selection if user hasn't manually selected
+            if (!this.userHasManuallySelected) {
+                var newCategory = 'all';
+                if ((_e = this.props.filterSettings) === null || _e === void 0 ? void 0 : _e.defaultFilterSelection) {
+                    var selection_1 = this.props.filterSettings.defaultFilterSelection;
+                    if (selection_1.toLowerCase() === 'all') {
+                        newCategory = 'all';
+                    }
+                    else {
+                        // Find the exact case match from available categories
+                        var exactMatch = this.state.categories.find(function (cat) {
+                            return cat.toLowerCase() === selection_1.toLowerCase();
+                        });
+                        newCategory = exactMatch || selection_1.toLowerCase();
+                    }
                 }
-                else {
-                    // Find the exact case match from available categories
-                    var exactMatch = this.state.categories.find(function (cat) {
-                        return cat.toLowerCase() === selection_1.toLowerCase();
-                    });
-                    newCategory = exactMatch || selection_1.toLowerCase();
-                }
+                console.log('🔍 Filter Debug - Setting New Category (Default Logic):', {
+                    newCategory: newCategory,
+                    selection: (_f = this.props.filterSettings) === null || _f === void 0 ? void 0 : _f.defaultFilterSelection,
+                    exactMatch: this.state.categories.find(function (cat) { var _a; return cat.toLowerCase() === (((_a = _this.props.filterSettings) === null || _a === void 0 ? void 0 : _a.defaultFilterSelection) || '').toLowerCase(); })
+                });
+                this.setState({ selectedCategory: newCategory });
             }
-            console.log('🔍 Filter Debug - Setting New Category:', {
-                newCategory: newCategory,
-                selection: (_f = this.props.filterSettings) === null || _f === void 0 ? void 0 : _f.defaultFilterSelection,
-                exactMatch: this.state.categories.find(function (cat) { var _a; return cat.toLowerCase() === (((_a = _this.props.filterSettings) === null || _a === void 0 ? void 0 : _a.defaultFilterSelection) || '').toLowerCase(); })
-            });
-            this.setState({ selectedCategory: newCategory });
+            else {
+                console.log('🔍 Filter Debug - Preserving User Selection:', {
+                    currentSelected: this.state.selectedCategory,
+                    reason: 'User has manually selected a filter'
+                });
+            }
         }
         // Also check if categories changed and we need to update selectedCategory
         if (((_g = prevProps.filterSettings) === null || _g === void 0 ? void 0 : _g.defaultFilterSelection) === ((_h = this.props.filterSettings) === null || _h === void 0 ? void 0 : _h.defaultFilterSelection) &&

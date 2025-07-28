@@ -20,6 +20,8 @@ interface IFancyListState {
 }
 
 export default class FancyList extends React.Component<IFancyListProps, IFancyListState> {
+  private userHasManuallySelected: boolean = false; // Track if user has manually selected
+  
   constructor(props: IFancyListProps) {
     super(props);
     
@@ -78,32 +80,41 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
         prevDefault: prevProps.filterSettings?.defaultFilterSelection,
         currentDefault: this.props.filterSettings?.defaultFilterSelection,
         currentSelected: this.state.selectedCategory,
-        availableCategories: this.state.categories
+        availableCategories: this.state.categories,
+        userHasManuallySelected: this.userHasManuallySelected
       });
       
-      let newCategory = 'all';
-      if (this.props.filterSettings?.defaultFilterSelection) {
-        const selection = this.props.filterSettings.defaultFilterSelection;
-        if (selection.toLowerCase() === 'all') {
-          newCategory = 'all';
-        } else {
-          // Find the exact case match from available categories
-          const exactMatch = this.state.categories.find(cat => 
-            cat.toLowerCase() === selection.toLowerCase()
-          );
-          newCategory = exactMatch || selection.toLowerCase();
+      // Only apply default selection if user hasn't manually selected
+      if (!this.userHasManuallySelected) {
+        let newCategory = 'all';
+        if (this.props.filterSettings?.defaultFilterSelection) {
+          const selection = this.props.filterSettings.defaultFilterSelection;
+          if (selection.toLowerCase() === 'all') {
+            newCategory = 'all';
+          } else {
+            // Find the exact case match from available categories
+            const exactMatch = this.state.categories.find(cat => 
+              cat.toLowerCase() === selection.toLowerCase()
+            );
+            newCategory = exactMatch || selection.toLowerCase();
+          }
         }
+        
+        console.log('🔍 Filter Debug - Setting New Category (Default Logic):', {
+          newCategory,
+          selection: this.props.filterSettings?.defaultFilterSelection,
+          exactMatch: this.state.categories.find(cat => 
+            cat.toLowerCase() === (this.props.filterSettings?.defaultFilterSelection || '').toLowerCase()
+          )
+        });
+        
+        this.setState({ selectedCategory: newCategory });
+      } else {
+        console.log('🔍 Filter Debug - Preserving User Selection:', {
+          currentSelected: this.state.selectedCategory,
+          reason: 'User has manually selected a filter'
+        });
       }
-      
-      console.log('🔍 Filter Debug - Setting New Category:', {
-        newCategory,
-        selection: this.props.filterSettings?.defaultFilterSelection,
-        exactMatch: this.state.categories.find(cat => 
-          cat.toLowerCase() === (this.props.filterSettings?.defaultFilterSelection || '').toLowerCase()
-        )
-      });
-      
-      this.setState({ selectedCategory: newCategory });
     }
     
     // Also check if categories changed and we need to update selectedCategory
@@ -199,6 +210,10 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
       currentSelected: this.state.selectedCategory,
       defaultSelection: this.props.filterSettings?.defaultFilterSelection
     });
+    
+    // Mark that user has manually selected
+    this.userHasManuallySelected = true;
+    
     this.setState({ selectedCategory: category });
   }
 
