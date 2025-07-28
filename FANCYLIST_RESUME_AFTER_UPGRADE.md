@@ -480,6 +480,8 @@ return this._fields.filter(field =>
 
 **Question 5**: Should I create a test scenario to reproduce the dropdown logic issue, or do you have specific steps to reproduce it?
 
+**Answer**: User can reproduce and test it fine. These two things (dropdown logic bug and Category Field onChange) will be closely related as they use the same control.
+
 ### **🎯 Category Field onChange Behavior Questions:**
 
 **Question 6**: When the category field changes and the current `defaultFilterSelection` is no longer valid, which approach should we use?
