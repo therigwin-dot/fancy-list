@@ -50,6 +50,12 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
       filterImageValidationError: null,
       filterImageLoadError: false
     };
+    
+    console.log('🔍 Filter Debug - Constructor:', {
+      initialCategory,
+      defaultFilterSelection: props.filterSettings?.defaultFilterSelection,
+      filterSettings: props.filterSettings
+    });
   }
 
   public componentDidMount(): void {
@@ -68,6 +74,13 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     
     // Update selected category when defaultFilterSelection changes
     if (prevProps.filterSettings?.defaultFilterSelection !== this.props.filterSettings?.defaultFilterSelection) {
+      console.log('🔍 Filter Debug - Default Selection Changed:', {
+        prevDefault: prevProps.filterSettings?.defaultFilterSelection,
+        currentDefault: this.props.filterSettings?.defaultFilterSelection,
+        currentSelected: this.state.selectedCategory,
+        availableCategories: this.state.categories
+      });
+      
       let newCategory = 'all';
       if (this.props.filterSettings?.defaultFilterSelection) {
         const selection = this.props.filterSettings.defaultFilterSelection;
@@ -81,6 +94,15 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
           newCategory = exactMatch || selection.toLowerCase();
         }
       }
+      
+      console.log('🔍 Filter Debug - Setting New Category:', {
+        newCategory,
+        selection: this.props.filterSettings?.defaultFilterSelection,
+        exactMatch: this.state.categories.find(cat => 
+          cat.toLowerCase() === (this.props.filterSettings?.defaultFilterSelection || '').toLowerCase()
+        )
+      });
+      
       this.setState({ selectedCategory: newCategory });
     }
     
@@ -172,6 +194,11 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
   }
 
   private handleCategoryClick = (category: string): void => {
+    console.log('🔍 Filter Debug - User Click:', {
+      clickedCategory: category,
+      currentSelected: this.state.selectedCategory,
+      defaultSelection: this.props.filterSettings?.defaultFilterSelection
+    });
     this.setState({ selectedCategory: category });
   }
 

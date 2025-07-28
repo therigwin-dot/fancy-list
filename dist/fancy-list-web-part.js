@@ -1711,9 +1711,15 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 var FancyList = /** @class */ (function (_super) {
     __extends(FancyList, _super);
     function FancyList(props) {
-        var _a;
+        var _a, _b;
         var _this = _super.call(this, props) || this;
         _this.handleCategoryClick = function (category) {
+            var _a;
+            console.log('🔍 Filter Debug - User Click:', {
+                clickedCategory: category,
+                currentSelected: _this.state.selectedCategory,
+                defaultSelection: (_a = _this.props.filterSettings) === null || _a === void 0 ? void 0 : _a.defaultFilterSelection
+            });
             _this.setState({ selectedCategory: category });
         };
         _this.handleItemToggle = function (itemId) {
@@ -1763,6 +1769,11 @@ var FancyList = /** @class */ (function (_super) {
             filterImageValidationError: null,
             filterImageLoadError: false
         };
+        console.log('🔍 Filter Debug - Constructor:', {
+            initialCategory: initialCategory,
+            defaultFilterSelection: (_b = props.filterSettings) === null || _b === void 0 ? void 0 : _b.defaultFilterSelection,
+            filterSettings: props.filterSettings
+        });
         return _this;
     }
     FancyList.prototype.componentDidMount = function () {
@@ -1772,7 +1783,7 @@ var FancyList = /** @class */ (function (_super) {
     };
     FancyList.prototype.componentDidUpdate = function (prevProps) {
         var _this = this;
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w;
         if (prevProps.selectedListId !== this.props.selectedListId ||
             prevProps.categoryField !== this.props.categoryField ||
             prevProps.subjectField !== this.props.subjectField ||
@@ -1781,8 +1792,14 @@ var FancyList = /** @class */ (function (_super) {
         }
         // Update selected category when defaultFilterSelection changes
         if (((_a = prevProps.filterSettings) === null || _a === void 0 ? void 0 : _a.defaultFilterSelection) !== ((_b = this.props.filterSettings) === null || _b === void 0 ? void 0 : _b.defaultFilterSelection)) {
+            console.log('🔍 Filter Debug - Default Selection Changed:', {
+                prevDefault: (_c = prevProps.filterSettings) === null || _c === void 0 ? void 0 : _c.defaultFilterSelection,
+                currentDefault: (_d = this.props.filterSettings) === null || _d === void 0 ? void 0 : _d.defaultFilterSelection,
+                currentSelected: this.state.selectedCategory,
+                availableCategories: this.state.categories
+            });
             var newCategory = 'all';
-            if ((_c = this.props.filterSettings) === null || _c === void 0 ? void 0 : _c.defaultFilterSelection) {
+            if ((_e = this.props.filterSettings) === null || _e === void 0 ? void 0 : _e.defaultFilterSelection) {
                 var selection_1 = this.props.filterSettings.defaultFilterSelection;
                 if (selection_1.toLowerCase() === 'all') {
                     newCategory = 'all';
@@ -1795,11 +1812,16 @@ var FancyList = /** @class */ (function (_super) {
                     newCategory = exactMatch || selection_1.toLowerCase();
                 }
             }
+            console.log('🔍 Filter Debug - Setting New Category:', {
+                newCategory: newCategory,
+                selection: (_f = this.props.filterSettings) === null || _f === void 0 ? void 0 : _f.defaultFilterSelection,
+                exactMatch: this.state.categories.find(function (cat) { var _a; return cat.toLowerCase() === (((_a = _this.props.filterSettings) === null || _a === void 0 ? void 0 : _a.defaultFilterSelection) || '').toLowerCase(); })
+            });
             this.setState({ selectedCategory: newCategory });
         }
         // Also check if categories changed and we need to update selectedCategory
-        if (((_d = prevProps.filterSettings) === null || _d === void 0 ? void 0 : _d.defaultFilterSelection) === ((_e = this.props.filterSettings) === null || _e === void 0 ? void 0 : _e.defaultFilterSelection) &&
-            ((_f = this.props.filterSettings) === null || _f === void 0 ? void 0 : _f.defaultFilterSelection) &&
+        if (((_g = prevProps.filterSettings) === null || _g === void 0 ? void 0 : _g.defaultFilterSelection) === ((_h = this.props.filterSettings) === null || _h === void 0 ? void 0 : _h.defaultFilterSelection) &&
+            ((_j = this.props.filterSettings) === null || _j === void 0 ? void 0 : _j.defaultFilterSelection) &&
             this.props.filterSettings.defaultFilterSelection.toLowerCase() !== 'all') {
             var selection_2 = this.props.filterSettings.defaultFilterSelection;
             var exactMatch = this.state.categories.find(function (cat) {
@@ -1818,13 +1840,13 @@ var FancyList = /** @class */ (function (_super) {
             }); });
         }
         // Image loading detection for title section
-        if (((_g = prevProps.titleSettings) === null || _g === void 0 ? void 0 : _g.imageUrl) !== ((_h = this.props.titleSettings) === null || _h === void 0 ? void 0 : _h.imageUrl) ||
-            ((_j = prevProps.titleSettings) === null || _j === void 0 ? void 0 : _j.backgroundType) !== ((_k = this.props.titleSettings) === null || _k === void 0 ? void 0 : _k.backgroundType)) {
+        if (((_k = prevProps.titleSettings) === null || _k === void 0 ? void 0 : _k.imageUrl) !== ((_l = this.props.titleSettings) === null || _l === void 0 ? void 0 : _l.imageUrl) ||
+            ((_m = prevProps.titleSettings) === null || _m === void 0 ? void 0 : _m.backgroundType) !== ((_o = this.props.titleSettings) === null || _o === void 0 ? void 0 : _o.backgroundType)) {
             this.checkTitleImage();
         }
         // Image loading detection for filter section
-        if (((_m = (_l = prevProps.filterSettings) === null || _l === void 0 ? void 0 : _l.background) === null || _m === void 0 ? void 0 : _m.image) !== ((_p = (_o = this.props.filterSettings) === null || _o === void 0 ? void 0 : _o.background) === null || _p === void 0 ? void 0 : _p.image) ||
-            ((_r = (_q = prevProps.filterSettings) === null || _q === void 0 ? void 0 : _q.background) === null || _r === void 0 ? void 0 : _r.type) !== ((_t = (_s = this.props.filterSettings) === null || _s === void 0 ? void 0 : _s.background) === null || _t === void 0 ? void 0 : _t.type)) {
+        if (((_q = (_p = prevProps.filterSettings) === null || _p === void 0 ? void 0 : _p.background) === null || _q === void 0 ? void 0 : _q.image) !== ((_s = (_r = this.props.filterSettings) === null || _r === void 0 ? void 0 : _r.background) === null || _s === void 0 ? void 0 : _s.image) ||
+            ((_u = (_t = prevProps.filterSettings) === null || _t === void 0 ? void 0 : _t.background) === null || _u === void 0 ? void 0 : _u.type) !== ((_w = (_v = this.props.filterSettings) === null || _v === void 0 ? void 0 : _v.background) === null || _w === void 0 ? void 0 : _w.type)) {
             this.checkFilterImage();
         }
     };
