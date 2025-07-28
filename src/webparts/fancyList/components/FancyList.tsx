@@ -25,12 +25,13 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     // Handle defaultFilterSelection with proper case handling
     let initialCategory = 'all';
     if (props.filterSettings?.defaultFilterSelection) {
-      const selection = props.filterSettings.defaultFilterSelection.toLowerCase();
-      if (selection === 'all') {
+      const selection = props.filterSettings.defaultFilterSelection;
+      if (selection.toLowerCase() === 'all') {
         initialCategory = 'all';
       } else {
-        // For specific categories, we'll set it but it might not exist yet
-        initialCategory = selection;
+        // For specific categories, we'll set it to lowercase for now
+        // The actual matching will happen when categories are loaded
+        initialCategory = selection.toLowerCase();
       }
     }
     
@@ -40,7 +41,6 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
       selectedCategory: initialCategory,
       expandedItems: new Set(),
       loading: false,
-      error: '',
       titleImageError: false,
       titleImageValidationError: null,
       titleImageLoadError: false,
@@ -67,15 +67,31 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     if (prevProps.filterSettings?.defaultFilterSelection !== this.props.filterSettings?.defaultFilterSelection) {
       let newCategory = 'all';
       if (this.props.filterSettings?.defaultFilterSelection) {
-        const selection = this.props.filterSettings.defaultFilterSelection.toLowerCase();
-        if (selection === 'all') {
+        const selection = this.props.filterSettings.defaultFilterSelection;
+        if (selection.toLowerCase() === 'all') {
           newCategory = 'all';
         } else {
-          // For specific categories, we'll set it but it might not exist yet
-          newCategory = selection;
+          // Find the exact case match from available categories
+          const exactMatch = this.state.categories.find(cat => 
+            cat.toLowerCase() === selection.toLowerCase()
+          );
+          newCategory = exactMatch || selection.toLowerCase();
         }
       }
       this.setState({ selectedCategory: newCategory });
+    }
+    
+    // Also check if categories changed and we need to update selectedCategory
+    if (prevProps.filterSettings?.defaultFilterSelection === this.props.filterSettings?.defaultFilterSelection &&
+        this.props.filterSettings?.defaultFilterSelection &&
+        this.props.filterSettings.defaultFilterSelection.toLowerCase() !== 'all') {
+      const selection = this.props.filterSettings.defaultFilterSelection;
+      const exactMatch = this.state.categories.find(cat => 
+        cat.toLowerCase() === selection.toLowerCase()
+      );
+      if (exactMatch && this.state.selectedCategory !== exactMatch) {
+        this.setState({ selectedCategory: exactMatch });
+      }
     }
     
     // Refresh expanded state when defaultExpanded changes
