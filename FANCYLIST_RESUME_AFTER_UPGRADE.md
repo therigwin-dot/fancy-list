@@ -496,6 +496,8 @@ return this._fields.filter(field =>
 - Should it still be stored but not used?
 - Should it default to "All" even when disabled?
 
+**Answer**: **New Feature Update** - Even if they disable the filter showing, I want this setting control available. So move it above the Enable Show All toggle. Then if the user disable the filters section, it hides everything except that dropdown. The dropdown will default behind the scenes to have the All setting available. It will default to All when the enable toggle is turned off. This allows the users to still filter the list to a specific category or all the categories if we hide the filter buttons.
+
 **Question 8**: Should the `defaultFilterSelection` change trigger an immediate update to the rendered filter buttons, or only when the web part reloads?
 
 ---
