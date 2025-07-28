@@ -422,6 +422,12 @@ case 'categoryField':
 
 **Question 2**: What was the "previous behavior" that it reverted to? I need to understand what the correct behavior should be.
 
+**Answer**: 
+- After List or Document library is selected, the Category field is populated with available fields.
+- These fields always stay the same unless a new List or Library is selected, then it is repopulated.
+- After a Category is selected, the Subject is populated with the left over values from the Category. This remains static, unless the Category Field is changed.
+- Repeat this logic with the Description field.
+
 **Question 3**: Should I investigate this bug immediately, or should we focus on completing the Default Filter Selection implementation first?
 
 **Question 4**: Which file should I investigate first for the dropdown logic bug - `FancyListWebPart.ts` or the Page 1 property pane configuration?
@@ -514,56 +520,3 @@ if ((!this.properties.webPartTitle || this.properties.webPartTitle.trim() === ''
   this.properties.webPartTitle = newListName;
 }
 ```
-
-### **Test Defaults Enhancement**
-```typescript
-// Added to Test Defaults button onClick handler:
-this.properties.webPartTitle = 'Testing Fancy List';
-```
-
----
-
-## **📊 DEVELOPMENT METRICS**
-
-### **Completed Features:**
-- ✅ **7-Page Configuration System**: 100% complete
-- ✅ **Title Component Rendering**: 100% complete
-- ✅ **Filter Component Rendering**: 100% complete (Filter Enabled Toggle Fixed)
-- ✅ **List Selection Integration**: 100% complete
-- ✅ **Test Defaults Enhancement**: 100% complete
-
-### **Next Priority:**
-- ✅ **Filter Component Rendering**: **COMPLETED** - Filter Enabled Toggle Fixed
-- 📋 **Section Component Rendering**: Planned
-- 📋 **List Data Integration**: Planned
-
----
-
-## **🎯 IMMEDIATE NEXT STEPS**
-
-1. **✅ Update Documentation** ✅ (Current task)
-2. **✅ Create Git Backup** ✅ (Current task)
-3. **✅ Filter Component Rendering** ✅ **COMPLETED** - Filter Enabled Toggle Fixed
-4. **🔧 Fix Next Critical Filter Bug** (Current phase) - Transparency Slider
-5. **Address Remaining Filter Bugs** (Next phase)
-6. **Start Section Component Rendering** (Future phase)
-
----
-
-## **📝 NOTES FOR NEXT SESSION**
-
-### **Ready to Start:**
-- Filter Component Rendering implementation
-- Connect filter controls to visual rendering
-- Implement active/inactive filter states
-
-### **Architecture Pattern Established:**
-- Control Object Settings → Rendering Settings → Visual Output
-- Property mapping from web part to component
-- Inline styles for dynamic rendering
-- Conditional rendering based on settings
-
----
-
-*Last Updated: July 2025*
-*Status: All 7 pages complete, Title rendering complete, ready for Filter rendering* 
