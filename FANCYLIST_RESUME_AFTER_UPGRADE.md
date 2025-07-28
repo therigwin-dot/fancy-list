@@ -418,6 +418,8 @@ case 'categoryField':
 - Page 3 Filter dropdown (Default Filter Selection)?
 - Both?
 
+**Answer**: Page 1 field selection dropdowns
+
 **Question 2**: What was the "previous behavior" that it reverted to? I need to understand what the correct behavior should be.
 
 **Question 3**: Should I investigate this bug immediately, or should we focus on completing the Default Filter Selection implementation first?
