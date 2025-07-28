@@ -626,13 +626,7 @@ This document defines the structured testing values and implementation approach 
       timing: 500,
       dependency: null
     },
-    {
-      control: "categoryHoverColor",
-      value: "#FFA500", // Orange
-      description: "Set category hover color to orange (visually distinct)",
-      timing: 500,
-      dependency: null
-    },
+
     {
       control: "categoryAutoExpand",
       value: true,
@@ -792,6 +786,7 @@ This document defines the structured testing values and implementation approach 
 - **Background Testing**: Complete sequence through all types
 - **Final Type**: Image background assigned to Page 4
 - **Quick Timing**: 500ms for most controls, 1000ms for background type changes
+- **Icon Controls**: Right position, arrow icons, auto-expand enabled
 
 ---
 
@@ -884,13 +879,7 @@ This document defines the structured testing values and implementation approach 
       timing: 500,
       dependency: null
     },
-    {
-      control: "subjectHoverColor",
-      value: "#32CD32", // Lime green
-      description: "Set subject hover color to lime green (visually distinct)",
-      timing: 500,
-      dependency: null
-    },
+
     {
       control: "subjectAutoExpand",
       value: false,
@@ -1054,3 +1043,229 @@ This document defines the structured testing values and implementation approach 
 ---
 
 **Please review Page 5 structure above. Any changes needed before I continue with Page 6?** 
+
+---
+
+## **PAGE 6: Description Section Configuration**
+
+### **Test Values Structure**
+```typescript
+{
+  page: 6,
+  section: "Description Section Configuration",
+  controls: [
+    {
+      control: "descriptionFontFamily",
+      value: "Verdana",
+      description: "Set description font to Verdana (visually distinct)",
+      timing: 500,
+      dependency: null
+    },
+    {
+      control: "descriptionFontSize",
+      value: "14px",
+      description: "Set description font size to 14px (small for testing)",
+      timing: 500,
+      dependency: null
+    },
+    {
+      control: "descriptionFontColor",
+      value: "#4B0082", // Indigo
+      description: "Set description font color to indigo (visually distinct)",
+      timing: 500,
+      dependency: null
+    },
+    {
+      control: "descriptionFontBold",
+      value: false,
+      description: "Set description font bold to false",
+      timing: 500,
+      dependency: null
+    },
+    {
+      control: "descriptionFontItalic",
+      value: true,
+      description: "Set description font to italic (visually distinct)",
+      timing: 500,
+      dependency: null
+    },
+    {
+      control: "descriptionFontUnderline",
+      value: false,
+      description: "Set description font underline to false",
+      timing: 500,
+      dependency: null
+    },
+    {
+      control: "descriptionFontStrikethrough",
+      value: true,
+      description: "Set description font to strikethrough (visually distinct)",
+      timing: 500,
+      dependency: null
+    },
+    {
+      control: "descriptionFontAlignment",
+      value: "justify",
+      description: "Set description font alignment to justify (visually distinct)",
+      timing: 500,
+      dependency: null
+    },
+
+    // Background Testing Sequence
+    {
+      control: "descriptionBackgroundType",
+      value: "solid",
+      description: "Switch to solid background for testing",
+      timing: 1000,
+      dependency: null
+    },
+    {
+      control: "descriptionBackgroundColor",
+      value: "#F0F8FF", // Alice blue
+      description: "Set solid background to alice blue",
+      timing: 500,
+      dependency: "descriptionBackgroundType"
+    },
+    {
+      control: "descriptionBackgroundAlpha",
+      value: 65,
+      description: "Set background transparency to 65%",
+      timing: 500,
+      dependency: "descriptionBackgroundType"
+    },
+    {
+      control: "descriptionBackgroundType",
+      value: "gradient",
+      description: "Switch to gradient background for testing",
+      timing: 1000,
+      dependency: null
+    },
+    {
+      control: "descriptionGradientDirection",
+      value: "right-left",
+      description: "Set gradient direction to right-left",
+      timing: 500,
+      dependency: "descriptionBackgroundType"
+    },
+    {
+      control: "descriptionGradientColor1",
+      value: "#4B0082", // Indigo
+      description: "Set gradient color 1 to indigo",
+      timing: 500,
+      dependency: "descriptionBackgroundType"
+    },
+    {
+      control: "descriptionGradientColor2",
+      value: "#9370DB", // Medium purple
+      description: "Set gradient color 2 to medium purple",
+      timing: 500,
+      dependency: "descriptionBackgroundType"
+    },
+    {
+      control: "descriptionGradientAlpha",
+      value: 95,
+      description: "Set gradient transparency to 95%",
+      timing: 500,
+      dependency: "descriptionBackgroundType"
+    },
+    {
+      control: "descriptionBackgroundType",
+      value: "image",
+      description: "Switch to image background for testing",
+      timing: 1000,
+      dependency: null
+    },
+    {
+      control: "descriptionBackgroundImage",
+      value: "https://www.pixelstalk.net/wp-content/uploads/2016/07/Free-Amazing-Background-Images-Nature.jpg",
+      description: "Set good image URL for testing",
+      timing: 1000,
+      dependency: "descriptionBackgroundType"
+    },
+    {
+      control: "descriptionBackgroundImage",
+      value: "https://invalid-test-url.com/image.jpg",
+      description: "Set bad image URL for error testing",
+      timing: 1000,
+      dependency: "descriptionBackgroundType"
+    },
+    {
+      control: "descriptionBackgroundImage",
+      value: "",
+      description: "Set blank image URL for error testing",
+      timing: 1000,
+      dependency: "descriptionBackgroundType"
+    },
+    {
+      control: "descriptionBackgroundImage",
+      value: "https://www.pixelstalk.net/wp-content/uploads/2016/07/Free-Amazing-Background-Images-Nature.jpg",
+      description: "Restore good image URL",
+      timing: 1000,
+      dependency: "descriptionBackgroundType"
+    },
+    {
+      control: "descriptionBackgroundImageAlpha",
+      value: 45,
+      description: "Set image transparency to 45%",
+      timing: 500,
+      dependency: "descriptionBackgroundType"
+    },
+    // Final Background Type (Gradient for Page 6)
+    {
+      control: "descriptionBackgroundType",
+      value: "gradient",
+      description: "Set final background type to gradient for Page 6",
+      timing: 1000,
+      dependency: null
+    },
+    {
+      control: "descriptionGradientDirection",
+      value: "right-left",
+      description: "Set final gradient direction",
+      timing: 500,
+      dependency: "descriptionBackgroundType"
+    },
+    {
+      control: "descriptionGradientColor1",
+      value: "#4B0082", // Indigo
+      description: "Set final gradient color 1",
+      timing: 500,
+      dependency: "descriptionBackgroundType"
+    },
+    {
+      control: "descriptionGradientColor2",
+      value: "#9370DB", // Medium purple
+      description: "Set final gradient color 2",
+      timing: 500,
+      dependency: "descriptionBackgroundType"
+    },
+    {
+      control: "descriptionGradientAlpha",
+      value: 95,
+      description: "Set final gradient transparency",
+      timing: 500,
+      dependency: "descriptionBackgroundType"
+    },
+
+  ]
+}
+```
+
+### **Implementation Notes**
+- **Bright Colors**: Indigo/purple color scheme for visual testing
+- **Background Testing**: Complete sequence through all types
+- **Final Type**: Gradient background assigned to Page 6
+- **Quick Timing**: 500ms for most controls, 1000ms for background type changes
+- **Bottom Level Controls Only**: Font and background only (no expand/collapse functionality)
+- **Different Formatting**: Italic + strikethrough, justify alignment
+
+---
+
+## **SUMMARY OF FINAL BACKGROUND ASSIGNMENTS**
+- **Page 2 (Title)**: Solid background
+- **Page 3 (Filter)**: Gradient background  
+- **Page 4 (Category)**: Image background
+- **Page 5 (Subject)**: Solid background
+- **Page 6 (Description)**: Gradient background
+
+**Please review Page 6 structure above. Any changes needed before I complete the documentation?** 
