@@ -88,4 +88,45 @@ export interface IFancyListProps {
     };
     showDivider: boolean;
   };
+
+  // Category Section Settings
+  categorySectionSettings?: {
+    sectionType: 'category';
+    resetButtonText: string;
+    description: string;
+    font: {
+      family: string;
+      size: string;
+      color: string;
+      formatting: {
+        bold: boolean;
+        italic: boolean;
+        underline: boolean;
+        strikethrough: boolean;
+      };
+      alignment?: 'left' | 'center' | 'right' | 'justify';
+    };
+    background: {
+      type: 'solid' | 'gradient' | 'image';
+      color: string;
+      alpha: number;
+      image: string;
+      imageAlpha: number;
+      gradientDirection: string;
+      gradientColor1: string;
+      gradientAlpha1: number;
+      gradientColor2: string;
+      gradientAlpha2: number;
+    };
+    shape: 'square' | 'rounded' | 'pill';
+    showDivider: boolean;
+    autoExpand: boolean;
+    hoverColor: string;
+    icons: {
+      enabled: boolean;
+      iconPosition: 'left' | 'right';
+      collapsedIcon: string;
+      expandedIcon: string;
+    };
+  };
 }

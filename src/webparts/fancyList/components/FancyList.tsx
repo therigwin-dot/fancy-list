@@ -691,9 +691,11 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
                 aria-expanded={this.state.expandedItems.has(item.id) ? "true" : "false"}
               >
                 <span className={styles.itemSubject}>{item.subject}</span>
-                <span className={styles.expandIcon}>
-                  {this.state.expandedItems.has(item.id) ? '−' : '+'}
-                </span>
+                {this.props.categorySectionSettings?.icons?.enabled && (
+                  <span className={styles.expandIcon}>
+                    {this.state.expandedItems.has(item.id) ? '−' : '+'}
+                  </span>
+                )}
               </button>
               {this.state.expandedItems.has(item.id) && (
                 <div className={styles.itemContent}>
