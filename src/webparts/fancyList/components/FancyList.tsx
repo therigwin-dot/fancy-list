@@ -26,7 +26,6 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     let initialCategory = 'all';
     if (props.filterSettings?.defaultFilterSelection) {
       const selection = props.filterSettings.defaultFilterSelection;
-      console.log('🔍 CONSTRUCTOR DEBUG: defaultFilterSelection =', selection);
       if (selection.toLowerCase() === 'all') {
         initialCategory = 'all';
       } else {
@@ -35,7 +34,6 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
         initialCategory = selection.toLowerCase();
       }
     }
-    console.log('🔍 CONSTRUCTOR DEBUG: initialCategory =', initialCategory);
     
     this.state = {
       items: [],
@@ -68,11 +66,9 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     
     // Update selected category when defaultFilterSelection changes
     if (prevProps.filterSettings?.defaultFilterSelection !== this.props.filterSettings?.defaultFilterSelection) {
-      console.log('🔍 COMPONENTDIDUPDATE DEBUG: defaultFilterSelection changed');
       let newCategory = 'all';
       if (this.props.filterSettings?.defaultFilterSelection) {
         const selection = this.props.filterSettings.defaultFilterSelection;
-        console.log('🔍 COMPONENTDIDUPDATE DEBUG: selection =', selection);
         if (selection.toLowerCase() === 'all') {
           newCategory = 'all';
         } else {
@@ -83,7 +79,6 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
           newCategory = exactMatch || selection.toLowerCase();
         }
       }
-      console.log('🔍 COMPONENTDIDUPDATE DEBUG: newCategory =', newCategory);
       this.setState({ selectedCategory: newCategory });
     }
     
@@ -91,13 +86,11 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     if (prevProps.filterSettings?.defaultFilterSelection === this.props.filterSettings?.defaultFilterSelection &&
         this.props.filterSettings?.defaultFilterSelection &&
         this.props.filterSettings.defaultFilterSelection.toLowerCase() !== 'all') {
-      console.log('🔍 COMPONENTDIDUPDATE DEBUG: Checking for category match');
       const selection = this.props.filterSettings.defaultFilterSelection;
       const exactMatch = this.state.categories.find(cat => 
         cat.toLowerCase() === selection.toLowerCase()
       );
       if (exactMatch && this.state.selectedCategory !== exactMatch) {
-        console.log('🔍 COMPONENTDIDUPDATE DEBUG: Found exact match =', exactMatch);
         this.setState({ selectedCategory: exactMatch });
       }
     }
@@ -163,7 +156,6 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
       }));
 
       const categories = Array.from(new Set(items.map(item => item.category))).sort();
-      console.log('🔄 CATEGORIES DEBUG: Available categories from list:', categories);
       
       this.setState({
         items,
@@ -463,13 +455,7 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     const { titleSettings } = this.props;
     const { titleImageError } = this.state;
     
-            console.log('🔍 TITLE DEBUG:', {
-          titleSettings: titleSettings,
-          enabled: titleSettings?.enabled,
-          willRender: titleSettings?.enabled !== false
-        }, 'TITLE SETTINGS FULL:', titleSettings);
-    
-    // If no titleSettings, render a default title (like Compare backup)
+            // If no titleSettings, render a default title (like Compare backup)
     if (!titleSettings) {
       return (
         <div style={this.getTitleStyle()}>
@@ -522,15 +508,9 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
   }
 
   public render(): React.ReactElement<IFancyListProps> {
-    console.log('🔍 RENDER METHOD CALLED');
     const { selectedCategory, categories, loading, error } = this.state;
     
-    // Debug logging for filter button state
-    console.log('🔍 FILTER BUTTON DEBUG: selectedCategory =', selectedCategory);
-    console.log('🔍 FILTER BUTTON DEBUG: categories =', categories);
-    console.log('🔍 FILTER BUTTON DEBUG: showAllCategories =', this.props.filterSettings?.showAllCategories);
-    console.log('🔍 FILTER BUTTON DEBUG: enableFilters =', this.props.filterSettings?.enableFilters);
-    
+    // If loading, render loading state
     if (loading) {
       return (
         <div className={styles.fancyList}>
@@ -539,6 +519,7 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
       );
     }
 
+    // If error, render error state
     if (error) {
       return (
         <div className={styles.fancyList}>
@@ -580,14 +561,6 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
           }} />
         )}
         {/* Category Filter Pills */}
-        {console.log('🔍 FILTER DEBUG:', {
-          filterSettings: this.props.filterSettings,
-          enabled: this.props.filterSettings?.enableFilters,
-          willRender: this.props.filterSettings?.enableFilters === true,
-          backgroundAlpha: this.props.filterSettings?.background?.alpha,
-          gradientAlpha: this.props.filterSettings?.background?.gradientAlpha1
-        }, 'FILTER SETTINGS FULL:', this.props.filterSettings)}
-        {console.log('🔍 TEST DEBUG: Render method is being called!')}
         {this.props.filterSettings?.enableFilters && (
           <>
             <div

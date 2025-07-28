@@ -33,6 +33,16 @@
 
 ---
 
+## **✅ FIXED BUGS**
+
+### **✅ Default Filter Selection Not Working**
+- **Component**: FancyList.tsx
+- **Issue**: Default filter selection dropdown was not automatically pressing the correct button
+- **Root Cause**: Case sensitivity issue in category matching
+- **Fix**: Added proper case-insensitive matching in constructor and exact case matching in componentDidUpdate
+- **Status**: ✅ **FIXED** - Button now presses automatically based on dropdown selection
+- **Impact**: High - Core filter functionality now working correctly
+
 ## **Bug Tracking**
 
 ### **Status Legend**:
