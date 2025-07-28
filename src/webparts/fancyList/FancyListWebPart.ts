@@ -180,17 +180,36 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
     const page1Data = this.getPage1Controls();
     
     for (const control of page1Data.controls) {
-      // Set the property value
-      this.properties[control.control] = control.value;
-      
-      // Special handling for list selection (load fields)
-      if (control.control === 'selectedListId') {
-        try {
-          this._fields = await this._loadFields(control.value);
-          this._fieldsLoadedForList = control.value;
-        } catch (error) {
-          console.error('Error loading fields:', error);
-        }
+      // Set the property value using switch statement to avoid TypeScript errors
+      switch (control.control) {
+        case 'selectedListId':
+          this.properties.selectedListId = control.value as string;
+          // Special handling for list selection (load fields)
+          try {
+            this._fields = await this._loadFields(control.value as string);
+            this._fieldsLoadedForList = control.value as string;
+          } catch (error) {
+            console.error('Error loading fields:', error);
+          }
+          break;
+        case 'categoryField':
+          this.properties.categoryField = control.value as string;
+          break;
+        case 'subjectField':
+          this.properties.subjectField = control.value as string;
+          break;
+        case 'descriptionField':
+          this.properties.descriptionField = control.value as string;
+          break;
+        case 'showAllCategories':
+          this.properties.showAllCategories = control.value as boolean;
+          break;
+        case 'defaultExpanded':
+          this.properties.defaultExpanded = control.value as boolean;
+          break;
+        default:
+          console.log(`Unknown control: ${control.control}`);
+          break;
       }
       
       // Refresh property pane

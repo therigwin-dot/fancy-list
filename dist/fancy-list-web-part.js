@@ -36267,15 +36267,89 @@ var FancyListWebPart = /** @class */ (function (_super) {
         _this._loadingLists = false;
         _this._loadingFields = false;
         _this._previousListId = '';
-        // Testing defaults for Page 1
-        _this.TESTING_DEFAULTS = {
-            selectedListId: 'Events',
-            categoryField: 'Location',
-            subjectField: 'Title',
-            descriptionField: 'Description'
-        };
         return _this;
     }
+    // Testing defaults for Page 1
+    // Helper methods for Page 1 structured testing
+    FancyListWebPart.prototype.getPage1Controls = function () {
+        return _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].TESTING_VALUES[0];
+    };
+    FancyListWebPart.prototype.delay = function (ms) {
+        return new Promise(function (resolve) { return setTimeout(resolve, ms); });
+    };
+    FancyListWebPart.prototype.processPage1Controls = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var page1Data, _i, _a, control, _b, _c, error_1;
+            return __generator(this, function (_d) {
+                switch (_d.label) {
+                    case 0:
+                        page1Data = this.getPage1Controls();
+                        _i = 0, _a = page1Data.controls;
+                        _d.label = 1;
+                    case 1:
+                        if (!(_i < _a.length)) return [3 /*break*/, 16];
+                        control = _a[_i];
+                        _b = control.control;
+                        switch (_b) {
+                            case 'selectedListId': return [3 /*break*/, 2];
+                            case 'categoryField': return [3 /*break*/, 7];
+                            case 'subjectField': return [3 /*break*/, 8];
+                            case 'descriptionField': return [3 /*break*/, 9];
+                            case 'showAllCategories': return [3 /*break*/, 10];
+                            case 'defaultExpanded': return [3 /*break*/, 11];
+                        }
+                        return [3 /*break*/, 12];
+                    case 2:
+                        this.properties.selectedListId = control.value;
+                        _d.label = 3;
+                    case 3:
+                        _d.trys.push([3, 5, , 6]);
+                        _c = this;
+                        return [4 /*yield*/, this._loadFields(control.value)];
+                    case 4:
+                        _c._fields = _d.sent();
+                        this._fieldsLoadedForList = control.value;
+                        return [3 /*break*/, 6];
+                    case 5:
+                        error_1 = _d.sent();
+                        console.error('Error loading fields:', error_1);
+                        return [3 /*break*/, 6];
+                    case 6: return [3 /*break*/, 13];
+                    case 7:
+                        this.properties.categoryField = control.value;
+                        return [3 /*break*/, 13];
+                    case 8:
+                        this.properties.subjectField = control.value;
+                        return [3 /*break*/, 13];
+                    case 9:
+                        this.properties.descriptionField = control.value;
+                        return [3 /*break*/, 13];
+                    case 10:
+                        this.properties.showAllCategories = control.value;
+                        return [3 /*break*/, 13];
+                    case 11:
+                        this.properties.defaultExpanded = control.value;
+                        return [3 /*break*/, 13];
+                    case 12:
+                        console.log("Unknown control: ".concat(control.control));
+                        return [3 /*break*/, 13];
+                    case 13:
+                        // Refresh property pane
+                        this.context.propertyPane.refresh();
+                        // Wait for the specified timing
+                        return [4 /*yield*/, this.delay(control.timing)];
+                    case 14:
+                        // Wait for the specified timing
+                        _d.sent();
+                        _d.label = 15;
+                    case 15:
+                        _i++;
+                        return [3 /*break*/, 1];
+                    case 16: return [2 /*return*/];
+                }
+            });
+        });
+    };
     FancyListWebPart.prototype.render = function () {
         var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, _23, _24, _25, _26, _27, _28, _29, _30, _31, _32, _33, _34, _35, _36, _37, _38, _39, _40, _41, _42, _43, _44, _45, _46, _47, _48, _49, _50, _51, _52, _53, _54, _55, _56, _57, _58, _59, _60, _61, _62, _63, _64, _65, _66, _67, _68, _69, _70, _71, _72, _73, _74, _75, _76, _77, _78, _79, _80, _81, _82, _83, _84, _85, _86, _87, _88, _89, _90, _91, _92, _93, _94, _95, _96, _97, _98, _99, _100, _101, _102, _103, _104, _105, _106, _107, _108, _109, _110, _111, _112, _113, _114, _115, _116, _117, _118, _119, _120, _121, _122, _123, _124, _125, _126, _127, _128, _129, _130, _131, _132, _133, _134, _135, _136, _137, _138, _139, _140, _141, _142, _143, _144, _145, _146, _147, _148, _149, _150, _151, _152, _153, _154, _155, _156, _157, _158, _159, _160, _161, _162, _163, _164, _165, _166, _167, _168, _169, _170, _171, _172, _173, _174, _175, _176, _177, _178, _179, _180, _181, _182, _183, _184, _185, _186, _187, _188, _189, _190, _191, _192, _193, _194, _195, _196, _197, _198, _199, _200, _201, _202, _203, _204, _205, _206, _207, _208, _209, _210, _211, _212, _213, _214, _215, _216, _217, _218, _219, _220, _221, _222, _223, _224, _225, _226, _227, _228, _229, _230, _231, _232, _233, _234, _235, _236, _237, _238, _239, _240, _241, _242, _243, _244, _245, _246, _247, _248, _249, _250, _251, _252, _253, _254, _255, _256, _257, _258;
         // Map individual properties to the format expected by FancyList component
@@ -36684,7 +36758,7 @@ var FancyListWebPart = /** @class */ (function (_super) {
     };
     FancyListWebPart.prototype._getAvailableCategories = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, categories, error_1;
+            var response, data, categories, error_2;
             var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -36717,8 +36791,8 @@ var FancyListWebPart = /** @class */ (function (_super) {
                         console.log('🔄 CATEGORIES DEBUG: Available categories:', categories);
                         return [2 /*return*/, categories];
                     case 4:
-                        error_1 = _a.sent();
-                        console.log('🔄 CATEGORIES DEBUG: Error loading categories:', error_1);
+                        error_2 = _a.sent();
+                        console.log('🔄 CATEGORIES DEBUG: Error loading categories:', error_2);
                         return [2 /*return*/, []];
                     case 5: return [2 /*return*/];
                 }
@@ -36825,71 +36899,29 @@ var FancyListWebPart = /** @class */ (function (_super) {
                                                         marginRight: '8px'
                                                     },
                                                     onClick: function () { return __awaiter(_this, void 0, void 0, function () {
-                                                        var _this = this;
+                                                        var error_3;
                                                         return __generator(this, function (_a) {
-                                                            // Set test defaults one by one
-                                                            this.properties.selectedListId = this.TESTING_DEFAULTS.selectedListId;
-                                                            // Set the title text to "Testing Fancy List"
-                                                            this.properties.webPartTitle = 'Testing Fancy List';
-                                                            if (changeCallback)
-                                                                changeCallback();
-                                                            this.context.propertyPane.refresh();
-                                                            // Wait longer for the list to load, then load fields and set category field
-                                                            setTimeout(function () { return __awaiter(_this, void 0, void 0, function () {
-                                                                var _a, error_2;
-                                                                var _this = this;
-                                                                return __generator(this, function (_b) {
-                                                                    switch (_b.label) {
-                                                                        case 0:
-                                                                            _b.trys.push([0, 2, , 3]);
-                                                                            // Load fields for the selected list
-                                                                            _a = this;
-                                                                            return [4 /*yield*/, this._loadFields(this.TESTING_DEFAULTS.selectedListId)];
-                                                                        case 1:
-                                                                            // Load fields for the selected list
-                                                                            _a._fields = _b.sent();
-                                                                            this._fieldsLoadedForList = this.TESTING_DEFAULTS.selectedListId;
-                                                                            console.log('Loaded fields:', this._fields);
-                                                                            console.log('Looking for description field:', this.TESTING_DEFAULTS.descriptionField);
-                                                                            // Set category field
-                                                                            this.properties.categoryField = this.TESTING_DEFAULTS.categoryField;
-                                                                            if (changeCallback)
-                                                                                changeCallback();
-                                                                            this.context.propertyPane.refresh();
-                                                                            // Wait longer, then set subject field
-                                                                            setTimeout(function () { return __awaiter(_this, void 0, void 0, function () {
-                                                                                var _this = this;
-                                                                                return __generator(this, function (_a) {
-                                                                                    this.properties.subjectField = this.TESTING_DEFAULTS.subjectField;
-                                                                                    if (changeCallback)
-                                                                                        changeCallback();
-                                                                                    this.context.propertyPane.refresh();
-                                                                                    // Wait longer, then set description field
-                                                                                    setTimeout(function () {
-                                                                                        console.log('Setting description field to:', _this.TESTING_DEFAULTS.descriptionField);
-                                                                                        _this.properties.descriptionField = _this.TESTING_DEFAULTS.descriptionField;
-                                                                                        if (changeCallback)
-                                                                                            changeCallback();
-                                                                                        _this.context.propertyPane.refresh();
-                                                                                        // Force another refresh after a short delay to ensure the value is set
-                                                                                        setTimeout(function () {
-                                                                                            console.log('Final refresh to ensure description field is set');
-                                                                                            _this.context.propertyPane.refresh();
-                                                                                        }, 500);
-                                                                                    }, 2000);
-                                                                                    return [2 /*return*/];
-                                                                                });
-                                                                            }); }, 2000);
-                                                                            return [3 /*break*/, 3];
-                                                                        case 2:
-                                                                            error_2 = _b.sent();
-                                                                            console.error('Error loading fields:', error_2);
-                                                                            return [3 /*break*/, 3];
-                                                                        case 3: return [2 /*return*/];
-                                                                    }
-                                                                });
-                                                            }); }, 2000);
-                                                            return [2 /*return*/];
+                                                            switch (_a.label) {
+                                                                case 0:
+                                                                    _a.trys.push([0, 2, , 3]);
+                                                                    // Process Page 1 controls using structured data
+                                                                    return [4 /*yield*/, this.processPage1Controls()];
+                                                                case 1:
+                                                                    // Process Page 1 controls using structured data
+                                                                    _a.sent();
+                                                                    // Set the title text to "Testing Fancy List" (from Page 2 data)
+                                                                    this.properties.webPartTitle = 'Testing Fancy List';
+                                                                    if (changeCallback)
+                                                                        changeCallback();
+                                                                    this.context.propertyPane.refresh();
+                                                                    console.log('Page 1 testing completed successfully');
+                                                                    return [3 /*break*/, 3];
+                                                                case 2:
+                                                                    error_3 = _a.sent();
+                                                                    console.error('Error during Page 1 testing:', error_3);
+                                                                    return [3 /*break*/, 3];
+                                                                case 3: return [2 /*return*/];
+                                                            }
                                                         });
                                                     }); }
                                                 }, 'Test Defaults')
