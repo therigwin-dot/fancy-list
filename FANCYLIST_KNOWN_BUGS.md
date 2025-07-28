@@ -81,6 +81,8 @@
 - **Priority**: Medium - Critical filter interaction issue
 - **Status**: 🟡 **NEEDS INVESTIGATION** - Default selection logic interfering with manual filter selection
 
+9. **🔴 Reset Filter Formatting Button Broken After Test Values** - 🟡 **Medium** - Reset button stops working after Test Values button is used
+
 #### **Title Component Bugs**:
 1. **✅ Title Transparency Sliders Broken** - ✅ **FIXED** - Alpha inversion corrected for proper slider behavior
 2. **✅ Reset Button Incomplete** - ✅ **FIXED** - Reset button now properly resets all title settings
