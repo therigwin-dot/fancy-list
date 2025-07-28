@@ -133,6 +133,57 @@ export declare const DEFAULTS_CONFIG: {
         userStory: string;
         features: string[];
     };
+    TESTING_VALUES: ({
+        page: number;
+        section: string;
+        controls: ({
+            control: string;
+            value: boolean;
+            description: string;
+            timing: number;
+            dependency: null;
+        } | {
+            control: string;
+            value: boolean;
+            description: string;
+            timing: number;
+            dependency: string;
+        } | {
+            control: string;
+            value: string;
+            description: string;
+            timing: number;
+            dependency: null;
+        } | {
+            control: string;
+            value: string;
+            description: string;
+            timing: number;
+            dependency: string;
+        } | {
+            control: string;
+            value: number;
+            description: string;
+            timing: number;
+            dependency: string;
+        })[];
+    } | {
+        page: number;
+        section: string;
+        controls: ({
+            control: string;
+            value: string;
+            description: string;
+            timing: number;
+            dependency: null;
+        } | {
+            control: string;
+            value: string[];
+            description: string;
+            timing: number;
+            dependency: null;
+        })[];
+    })[];
 };
 export default DEFAULTS_CONFIG;
 //# sourceMappingURL=DEFAULTS_CONFIG.d.ts.map
