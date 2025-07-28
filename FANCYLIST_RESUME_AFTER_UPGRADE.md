@@ -318,6 +318,33 @@ interface IFancyListState {
 - **✅ Font controls**: Applied to correct levels
 - **✅ Hierarchical expansion**: Categories control subject visibility
 - **✅ Filter integration**: Still works with category filtering
+- **✅ Icon formatting fix**: Icons only scale with font size, not affected by bold/italic/underline formatting
+
+### **🎯 NEXT IMMEDIATE TASKS:**
+
+#### **Phase 4: Background Controls (NEXT)**
+- **Phase 4A: Category Background** - Connect Category Section background settings to rendering
+- **Phase 4B: Subject Background** - Connect Subject Section background settings to rendering  
+- **Phase 4C: Description Background** - Connect Description Section background settings to rendering
+
+#### **Phase 5: Shape Controls (AFTER BACKGROUND)**
+- **Phase 5A: Category Shape** - Connect Category Section shape settings to rendering
+- **Phase 5B: Subject Shape** - Connect Subject Section shape settings to rendering
+- **Phase 5C: Description Shape** - Connect Description Section shape settings to rendering
+
+#### **Phase 6: Auto-Expand Controls (AFTER SHAPE)**
+- **Phase 6A: Category Auto-Expand** - Connect Category Section autoExpand setting to hierarchical behavior
+- **Phase 6B: Subject Auto-Expand** - Connect Subject Section autoExpand setting to hierarchical behavior
+
+#### **Phase 7: Hover Effects (AFTER AUTO-EXPAND)**
+- **Phase 7A: Category Hover** - Implement hover effects for Category Section
+- **Phase 7B: Subject Hover** - Implement hover effects for Subject Section
+- **Phase 7C: Description Hover** - Implement hover effects for Description Section
+
+#### **Phase 8: Divider Controls (AFTER HOVER)**
+- **Phase 8A: Category Divider** - Connect Category Section divider settings to rendering
+- **Phase 8B: Subject Divider** - Connect Subject Section divider settings to rendering
+- **Phase 8C: Description Divider** - Connect Description Section divider settings to rendering
 
 ### **Next Steps:**
 - **Background controls**: Implement background styling for each section
