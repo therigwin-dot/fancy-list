@@ -409,6 +409,39 @@ case 'categoryField':
 
 ---
 
+## **❓ CLARIFYING QUESTIONS - CRITICAL BUG & CATEGORY FIELD ONCHANGE**
+
+### **🎯 Critical Bug Investigation Questions:**
+
+**Question 1**: When you mention "Available choices logic for dropdowns reverted to previous behavior" - are you referring to:
+- Page 1 field selection dropdowns (Category, Subject, Description)?
+- Page 3 Filter dropdown (Default Filter Selection)?
+- Both?
+
+**Question 2**: What was the "previous behavior" that it reverted to? I need to understand what the correct behavior should be.
+
+**Question 3**: Should I investigate this bug immediately, or should we focus on completing the Default Filter Selection implementation first?
+
+**Question 4**: Which file should I investigate first for the dropdown logic bug - `FancyListWebPart.ts` or the Page 1 property pane configuration?
+
+**Question 5**: Should I create a test scenario to reproduce the dropdown logic issue, or do you have specific steps to reproduce it?
+
+### **🎯 Category Field onChange Behavior Questions:**
+
+**Question 6**: When the category field changes and the current `defaultFilterSelection` is no longer valid, which approach should we use?
+- **Option A**: Reset to "All" (if "All" is enabled)
+- **Option B**: Reset to first available category
+- **Option C**: Clear selection and require user to choose
+
+**Question 7**: When filters are disabled, what should happen to the `defaultFilterSelection`?
+- Should it be ignored completely?
+- Should it still be stored but not used?
+- Should it default to "All" even when disabled?
+
+**Question 8**: Should the `defaultFilterSelection` change trigger an immediate update to the rendered filter buttons, or only when the web part reloads?
+
+---
+
 ## **🏗️ ARCHITECTURE STATUS**
 
 ### **✅ Configuration System (100% Complete)**
