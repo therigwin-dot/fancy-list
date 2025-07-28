@@ -432,6 +432,48 @@ case 'categoryField':
 
 **Answer**: This bug is priority. It worked correctly at one time and it was an easy implementation. The issue is that whatever is selected in any list becomes unavailable for all lists. Fortunately, there are more than 3 fields in the library, otherwise would have to switch entire library or list to reset them. Should check the logic of the population of the lists. The full file backup on the external drive should already have the logic to compare. Additionally, this should be documented in the Master Design and specifications documentation.
 
+**🔍 BUG INVESTIGATION FINDINGS:**
+
+**Root Cause Found**: The dropdown logic has reverted to incorrect behavior. Comparing with backup shows the issue:
+
+**CORRECT LOGIC (from backup):**
+```typescript
+// Category always shows all available fields
+return this._fields;
+
+// Subject shows all fields except the selected Category
+return this._fields.filter(field => field.key !== this.properties.categoryField);
+
+// Description shows all fields except Category and Subject
+return this._fields.filter(field => 
+  field.key !== this.properties.categoryField && 
+  field.key !== this.properties.subjectField
+);
+```
+
+**INCORRECT LOGIC (current):**
+```typescript
+// Category shows all fields except Subject and Description (WRONG!)
+return this._fields.filter(field =>
+  field.key !== this.properties.subjectField &&
+  field.key !== this.properties.descriptionField
+);
+
+// Subject shows all fields except Category and Description (WRONG!)
+return this._fields.filter(field =>
+  field.key !== this.properties.categoryField &&
+  field.key !== this.properties.descriptionField
+);
+
+// Description shows all fields except Category and Subject (CORRECT)
+return this._fields.filter(field =>
+  field.key !== this.properties.categoryField &&
+  field.key !== this.properties.subjectField
+);
+```
+
+**The Problem**: The current logic is filtering out fields that haven't been selected yet, instead of only filtering out the previously selected fields in the dependency chain.
+
 **Question 4**: Which file should I investigate first for the dropdown logic bug - `FancyListWebPart.ts` or the Page 1 property pane configuration?
 
 **Question 5**: Should I create a test scenario to reproduce the dropdown logic issue, or do you have specific steps to reproduce it?
