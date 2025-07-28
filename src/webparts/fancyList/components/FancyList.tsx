@@ -21,10 +21,23 @@ interface IFancyListState {
 export default class FancyList extends React.Component<IFancyListProps, IFancyListState> {
   constructor(props: IFancyListProps) {
     super(props);
+    
+    // Handle defaultFilterSelection with proper case handling
+    let initialCategory = 'all';
+    if (props.filterSettings?.defaultFilterSelection) {
+      const selection = props.filterSettings.defaultFilterSelection.toLowerCase();
+      if (selection === 'all') {
+        initialCategory = 'all';
+      } else {
+        // For specific categories, we'll set it but it might not exist yet
+        initialCategory = selection;
+      }
+    }
+    
     this.state = {
       items: [],
       categories: [],
-      selectedCategory: props.filterSettings?.defaultFilterSelection?.toLowerCase() || 'all',
+      selectedCategory: initialCategory,
       expandedItems: new Set(),
       loading: false,
       error: '',
@@ -52,9 +65,17 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     
     // Update selected category when defaultFilterSelection changes
     if (prevProps.filterSettings?.defaultFilterSelection !== this.props.filterSettings?.defaultFilterSelection) {
-      this.setState({ 
-        selectedCategory: this.props.filterSettings?.defaultFilterSelection?.toLowerCase() || 'all' 
-      });
+      let newCategory = 'all';
+      if (this.props.filterSettings?.defaultFilterSelection) {
+        const selection = this.props.filterSettings.defaultFilterSelection.toLowerCase();
+        if (selection === 'all') {
+          newCategory = 'all';
+        } else {
+          // For specific categories, we'll set it but it might not exist yet
+          newCategory = selection;
+        }
+      }
+      this.setState({ selectedCategory: newCategory });
     }
     
     // Refresh expanded state when defaultExpanded changes
