@@ -34916,7 +34916,7 @@ var FancyListWebPart = /** @class */ (function (_super) {
         return _this;
     }
     FancyListWebPart.prototype.render = function () {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, _23, _24, _25, _26, _27, _28, _29, _30, _31, _32, _33, _34, _35, _36, _37, _38, _39, _40, _41, _42, _43, _44, _45, _46, _47, _48, _49, _50, _51, _52, _53, _54, _55, _56, _57, _58, _59, _60, _61, _62, _63;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, _23, _24, _25, _26, _27, _28, _29, _30, _31, _32, _33, _34, _35, _36, _37, _38, _39, _40, _41, _42, _43, _44, _45, _46, _47, _48, _49, _50, _51, _52, _53, _54, _55, _56, _57, _58, _59, _60, _61, _62, _63, _64, _65, _66, _67, _68, _69, _70, _71, _72, _73, _74, _75, _76, _77, _78, _79, _80, _81, _82, _83, _84, _85, _86, _87, _88, _89, _90, _91, _92, _93, _94, _95, _96, _97, _98, _99, _100, _101, _102, _103, _104, _105, _106, _107, _108, _109, _110, _111, _112, _113, _114, _115, _116, _117, _118, _119, _120, _121, _122, _123, _124, _125, _126, _127, _128, _129, _130, _131, _132;
         // Map individual properties to the format expected by FancyList component
         // Use default values if properties are undefined
         var titleSettings = {
@@ -34977,12 +34977,47 @@ var FancyListWebPart = /** @class */ (function (_super) {
             },
             showDivider: (_61 = (_60 = this.properties.filterSettings) === null || _60 === void 0 ? void 0 : _60.showDivider) !== null && _61 !== void 0 ? _61 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.showDivider
         };
+        // Map category section properties to the format expected by FancyList component
+        var categorySectionSettings = {
+            sectionType: 'category',
+            resetButtonText: (_63 = (_62 = this.properties.categorySectionSettings) === null || _62 === void 0 ? void 0 : _62.resetButtonText) !== null && _63 !== void 0 ? _63 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.resetButtonText,
+            description: (_65 = (_64 = this.properties.categorySectionSettings) === null || _64 === void 0 ? void 0 : _64.description) !== null && _65 !== void 0 ? _65 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.description,
+            font: {
+                family: (_68 = (_67 = (_66 = this.properties.categorySectionSettings) === null || _66 === void 0 ? void 0 : _66.font) === null || _67 === void 0 ? void 0 : _67.family) !== null && _68 !== void 0 ? _68 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.font.family,
+                size: (_71 = (_70 = (_69 = this.properties.categorySectionSettings) === null || _69 === void 0 ? void 0 : _69.font) === null || _70 === void 0 ? void 0 : _70.size) !== null && _71 !== void 0 ? _71 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.font.size,
+                color: (_74 = (_73 = (_72 = this.properties.categorySectionSettings) === null || _72 === void 0 ? void 0 : _72.font) === null || _73 === void 0 ? void 0 : _73.color) !== null && _74 !== void 0 ? _74 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.font.color,
+                formatting: (_77 = (_76 = (_75 = this.properties.categorySectionSettings) === null || _75 === void 0 ? void 0 : _75.font) === null || _76 === void 0 ? void 0 : _76.formatting) !== null && _77 !== void 0 ? _77 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.font.formatting,
+                alignment: ((_80 = (_79 = (_78 = this.properties.categorySectionSettings) === null || _78 === void 0 ? void 0 : _78.font) === null || _79 === void 0 ? void 0 : _79.alignment) !== null && _80 !== void 0 ? _80 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.font.alignment)
+            },
+            background: {
+                type: (_83 = (_82 = (_81 = this.properties.categorySectionSettings) === null || _81 === void 0 ? void 0 : _81.background) === null || _82 === void 0 ? void 0 : _82.type) !== null && _83 !== void 0 ? _83 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.background.type,
+                color: (_86 = (_85 = (_84 = this.properties.categorySectionSettings) === null || _84 === void 0 ? void 0 : _84.background) === null || _85 === void 0 ? void 0 : _85.color) !== null && _86 !== void 0 ? _86 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.background.color,
+                alpha: (_89 = (_88 = (_87 = this.properties.categorySectionSettings) === null || _87 === void 0 ? void 0 : _87.background) === null || _88 === void 0 ? void 0 : _88.alpha) !== null && _89 !== void 0 ? _89 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.background.alpha,
+                image: (_92 = (_91 = (_90 = this.properties.categorySectionSettings) === null || _90 === void 0 ? void 0 : _90.background) === null || _91 === void 0 ? void 0 : _91.image) !== null && _92 !== void 0 ? _92 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.background.image,
+                imageAlpha: (_95 = (_94 = (_93 = this.properties.categorySectionSettings) === null || _93 === void 0 ? void 0 : _93.background) === null || _94 === void 0 ? void 0 : _94.imageAlpha) !== null && _95 !== void 0 ? _95 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.background.imageAlpha,
+                gradientDirection: (_98 = (_97 = (_96 = this.properties.categorySectionSettings) === null || _96 === void 0 ? void 0 : _96.background) === null || _97 === void 0 ? void 0 : _97.gradientDirection) !== null && _98 !== void 0 ? _98 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.background.gradientDirection,
+                gradientColor1: (_101 = (_100 = (_99 = this.properties.categorySectionSettings) === null || _99 === void 0 ? void 0 : _99.background) === null || _100 === void 0 ? void 0 : _100.gradientColor1) !== null && _101 !== void 0 ? _101 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.background.gradientColor1,
+                gradientAlpha1: (_104 = (_103 = (_102 = this.properties.categorySectionSettings) === null || _102 === void 0 ? void 0 : _102.background) === null || _103 === void 0 ? void 0 : _103.gradientAlpha1) !== null && _104 !== void 0 ? _104 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.background.gradientAlpha1,
+                gradientColor2: (_107 = (_106 = (_105 = this.properties.categorySectionSettings) === null || _105 === void 0 ? void 0 : _105.background) === null || _106 === void 0 ? void 0 : _106.gradientColor2) !== null && _107 !== void 0 ? _107 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.background.gradientColor2,
+                gradientAlpha2: (_110 = (_109 = (_108 = this.properties.categorySectionSettings) === null || _108 === void 0 ? void 0 : _108.background) === null || _109 === void 0 ? void 0 : _109.gradientAlpha2) !== null && _110 !== void 0 ? _110 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.background.gradientAlpha2
+            },
+            shape: (_112 = (_111 = this.properties.categorySectionSettings) === null || _111 === void 0 ? void 0 : _111.shape) !== null && _112 !== void 0 ? _112 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.shape,
+            showDivider: (_114 = (_113 = this.properties.categorySectionSettings) === null || _113 === void 0 ? void 0 : _113.showDivider) !== null && _114 !== void 0 ? _114 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.showDivider,
+            autoExpand: (_116 = (_115 = this.properties.categorySectionSettings) === null || _115 === void 0 ? void 0 : _115.autoExpand) !== null && _116 !== void 0 ? _116 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.autoExpand,
+            hoverColor: (_118 = (_117 = this.properties.categorySectionSettings) === null || _117 === void 0 ? void 0 : _117.hoverColor) !== null && _118 !== void 0 ? _118 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.hoverColor,
+            icons: {
+                enabled: (_121 = (_120 = (_119 = this.properties.categorySectionSettings) === null || _119 === void 0 ? void 0 : _119.iconSettings) === null || _120 === void 0 ? void 0 : _120.enabled) !== null && _121 !== void 0 ? _121 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.iconSettings.enabled,
+                iconPosition: (_124 = (_123 = (_122 = this.properties.categorySectionSettings) === null || _122 === void 0 ? void 0 : _122.iconSettings) === null || _123 === void 0 ? void 0 : _123.iconPosition) !== null && _124 !== void 0 ? _124 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.iconSettings.iconPosition,
+                collapsedIcon: (_127 = (_126 = (_125 = this.properties.categorySectionSettings) === null || _125 === void 0 ? void 0 : _125.iconSettings) === null || _126 === void 0 ? void 0 : _126.collapsedIcon) !== null && _127 !== void 0 ? _127 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.iconSettings.collapsedIcon,
+                expandedIcon: (_130 = (_129 = (_128 = this.properties.categorySectionSettings) === null || _128 === void 0 ? void 0 : _128.iconSettings) === null || _129 === void 0 ? void 0 : _129.expandedIcon) !== null && _130 !== void 0 ? _130 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.iconSettings.expandedIcon
+            }
+        };
         var element = react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_FancyList__WEBPACK_IMPORTED_MODULE_7__["default"], {
             selectedListId: this.properties.selectedListId,
             categoryField: this.properties.categoryField,
             subjectField: this.properties.subjectField,
             descriptionField: this.properties.descriptionField,
-            showAllCategories: (_63 = (_62 = this.properties.filterSettings) === null || _62 === void 0 ? void 0 : _62.showAllCategories) !== null && _63 !== void 0 ? _63 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.showAllCategories,
+            showAllCategories: (_132 = (_131 = this.properties.filterSettings) === null || _131 === void 0 ? void 0 : _131.showAllCategories) !== null && _132 !== void 0 ? _132 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.showAllCategories,
             defaultExpanded: this.properties.defaultExpanded,
             isDarkTheme: this._isDarkTheme,
             environmentMessage: this._environmentMessage,
@@ -34990,7 +35025,8 @@ var FancyListWebPart = /** @class */ (function (_super) {
             userDisplayName: this.context.pageContext.user.displayName,
             context: this.context,
             titleSettings: titleSettings,
-            filterSettings: filterSettings
+            filterSettings: filterSettings,
+            categorySectionSettings: categorySectionSettings
         });
         react_dom__WEBPACK_IMPORTED_MODULE_1__.render(element, this.domElement);
     };

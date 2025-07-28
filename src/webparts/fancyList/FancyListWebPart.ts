@@ -237,6 +237,42 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
       showDivider: this.properties.filterSettings?.showDivider ?? DEFAULTS_CONFIG.filterSettings.showDivider
     };
 
+    // Map category section properties to the format expected by FancyList component
+    const categorySectionSettings = {
+      sectionType: 'category' as const,
+      resetButtonText: this.properties.categorySectionSettings?.resetButtonText ?? DEFAULTS_CONFIG.categorySectionSettings.resetButtonText,
+      description: this.properties.categorySectionSettings?.description ?? DEFAULTS_CONFIG.categorySectionSettings.description,
+      font: {
+        family: this.properties.categorySectionSettings?.font?.family ?? DEFAULTS_CONFIG.categorySectionSettings.font.family,
+        size: this.properties.categorySectionSettings?.font?.size ?? DEFAULTS_CONFIG.categorySectionSettings.font.size,
+        color: this.properties.categorySectionSettings?.font?.color ?? DEFAULTS_CONFIG.categorySectionSettings.font.color,
+        formatting: this.properties.categorySectionSettings?.font?.formatting ?? DEFAULTS_CONFIG.categorySectionSettings.font.formatting,
+        alignment: (this.properties.categorySectionSettings?.font?.alignment ?? DEFAULTS_CONFIG.categorySectionSettings.font.alignment) as 'left' | 'center' | 'right' | 'justify' | undefined
+      },
+      background: {
+        type: this.properties.categorySectionSettings?.background?.type ?? DEFAULTS_CONFIG.categorySectionSettings.background.type,
+        color: this.properties.categorySectionSettings?.background?.color ?? DEFAULTS_CONFIG.categorySectionSettings.background.color,
+        alpha: this.properties.categorySectionSettings?.background?.alpha ?? DEFAULTS_CONFIG.categorySectionSettings.background.alpha,
+        image: this.properties.categorySectionSettings?.background?.image ?? DEFAULTS_CONFIG.categorySectionSettings.background.image,
+        imageAlpha: this.properties.categorySectionSettings?.background?.imageAlpha ?? DEFAULTS_CONFIG.categorySectionSettings.background.imageAlpha,
+        gradientDirection: this.properties.categorySectionSettings?.background?.gradientDirection ?? DEFAULTS_CONFIG.categorySectionSettings.background.gradientDirection,
+        gradientColor1: this.properties.categorySectionSettings?.background?.gradientColor1 ?? DEFAULTS_CONFIG.categorySectionSettings.background.gradientColor1,
+        gradientAlpha1: this.properties.categorySectionSettings?.background?.gradientAlpha1 ?? DEFAULTS_CONFIG.categorySectionSettings.background.gradientAlpha1,
+        gradientColor2: this.properties.categorySectionSettings?.background?.gradientColor2 ?? DEFAULTS_CONFIG.categorySectionSettings.background.gradientColor2,
+        gradientAlpha2: this.properties.categorySectionSettings?.background?.gradientAlpha2 ?? DEFAULTS_CONFIG.categorySectionSettings.background.gradientAlpha2
+      },
+      shape: this.properties.categorySectionSettings?.shape ?? DEFAULTS_CONFIG.categorySectionSettings.shape,
+      showDivider: this.properties.categorySectionSettings?.showDivider ?? DEFAULTS_CONFIG.categorySectionSettings.showDivider,
+      autoExpand: this.properties.categorySectionSettings?.autoExpand ?? DEFAULTS_CONFIG.categorySectionSettings.autoExpand,
+      hoverColor: this.properties.categorySectionSettings?.hoverColor ?? DEFAULTS_CONFIG.categorySectionSettings.hoverColor,
+      icons: {
+        enabled: this.properties.categorySectionSettings?.iconSettings?.enabled ?? DEFAULTS_CONFIG.categorySectionSettings.iconSettings.enabled,
+        iconPosition: this.properties.categorySectionSettings?.iconSettings?.iconPosition ?? DEFAULTS_CONFIG.categorySectionSettings.iconSettings.iconPosition,
+        collapsedIcon: this.properties.categorySectionSettings?.iconSettings?.collapsedIcon ?? DEFAULTS_CONFIG.categorySectionSettings.iconSettings.collapsedIcon,
+        expandedIcon: this.properties.categorySectionSettings?.iconSettings?.expandedIcon ?? DEFAULTS_CONFIG.categorySectionSettings.iconSettings.expandedIcon
+      }
+    };
+
     const element: React.ReactElement<IFancyListProps> = React.createElement(
       FancyList,
       {
@@ -252,7 +288,8 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
         userDisplayName: this.context.pageContext.user.displayName,
         context: this.context,
         titleSettings: titleSettings,
-        filterSettings: filterSettings
+        filterSettings: filterSettings,
+        categorySectionSettings: categorySectionSettings
       }
     );
 
