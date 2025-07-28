@@ -167,12 +167,39 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
   private _previousListId: string = '';
 
   // Testing defaults for Page 1
-  private readonly TESTING_DEFAULTS = {
-    selectedListId: 'Events',
-    categoryField: 'Location',
-    subjectField: 'Title',
-    descriptionField: 'Description'
-  };
+  // Helper methods for Page 1 structured testing
+  private getPage1Controls() {
+    return DEFAULTS_CONFIG.TESTING_VALUES[0];
+  }
+
+  private delay(ms: number): Promise<void> {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  private async processPage1Controls() {
+    const page1Data = this.getPage1Controls();
+    
+    for (const control of page1Data.controls) {
+      // Set the property value
+      this.properties[control.control] = control.value;
+      
+      // Special handling for list selection (load fields)
+      if (control.control === 'selectedListId') {
+        try {
+          this._fields = await this._loadFields(control.value);
+          this._fieldsLoadedForList = control.value;
+        } catch (error) {
+          console.error('Error loading fields:', error);
+        }
+      }
+      
+      // Refresh property pane
+      this.context.propertyPane.refresh();
+      
+      // Wait for the specified timing
+      await this.delay(control.timing);
+    }
+  }
 
   public render(): void {
     // Map individual properties to the format expected by FancyList component
@@ -703,53 +730,19 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
                               marginRight: '8px'
                             },
                             onClick: async () => {
-                              // Set test defaults one by one
-                              this.properties.selectedListId = this.TESTING_DEFAULTS.selectedListId;
-                              
-                              // Set the title text to "Testing Fancy List"
-                              this.properties.webPartTitle = 'Testing Fancy List';
-                              
-                              if (changeCallback) changeCallback();
-                              this.context.propertyPane.refresh();
-                              
-                              // Wait longer for the list to load, then load fields and set category field
-                              setTimeout(async () => {
-                                try {
-                                  // Load fields for the selected list
-                                  this._fields = await this._loadFields(this.TESTING_DEFAULTS.selectedListId);
-                                  this._fieldsLoadedForList = this.TESTING_DEFAULTS.selectedListId;
-                                  console.log('Loaded fields:', this._fields);
-                                  console.log('Looking for description field:', this.TESTING_DEFAULTS.descriptionField);
-                                  
-                                  // Set category field
-                                  this.properties.categoryField = this.TESTING_DEFAULTS.categoryField;
-                                  if (changeCallback) changeCallback();
-                                  this.context.propertyPane.refresh();
-                                  
-                                  // Wait longer, then set subject field
-                                  setTimeout(async () => {
-                                    this.properties.subjectField = this.TESTING_DEFAULTS.subjectField;
-                                    if (changeCallback) changeCallback();
-                                    this.context.propertyPane.refresh();
-                                    
-                                    // Wait longer, then set description field
-                                    setTimeout(() => {
-                                      console.log('Setting description field to:', this.TESTING_DEFAULTS.descriptionField);
-                                      this.properties.descriptionField = this.TESTING_DEFAULTS.descriptionField;
-                                      if (changeCallback) changeCallback();
-                                      this.context.propertyPane.refresh();
-                                      
-                                      // Force another refresh after a short delay to ensure the value is set
-                                      setTimeout(() => {
-                                        console.log('Final refresh to ensure description field is set');
-                                        this.context.propertyPane.refresh();
-                                      }, 500);
-                                    }, 2000);
-                                  }, 2000);
-                                } catch (error) {
-                                  console.error('Error loading fields:', error);
-                                }
-                              }, 2000);
+                              try {
+                                // Process Page 1 controls using structured data
+                                await this.processPage1Controls();
+                                
+                                // Set the title text to "Testing Fancy List" (from Page 2 data)
+                                this.properties.webPartTitle = 'Testing Fancy List';
+                                if (changeCallback) changeCallback();
+                                this.context.propertyPane.refresh();
+                                
+                                console.log('Page 1 testing completed successfully');
+                              } catch (error) {
+                                console.error('Error during Page 1 testing:', error);
+                              }
                             }
                           }, 'Test Defaults')
                         ]),

@@ -160,7 +160,9 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
     private _loadingLists;
     private _loadingFields;
     private _previousListId;
-    private readonly TESTING_DEFAULTS;
+    private getPage1Controls;
+    private delay;
+    private processPage1Controls;
     render(): void;
     onPropertyPaneConfigurationStart(): Promise<void>;
     onPropertyPaneFieldChanged(propertyPath: string, oldValue: unknown, newValue: unknown): Promise<void>;
