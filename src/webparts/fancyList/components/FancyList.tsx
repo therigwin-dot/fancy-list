@@ -26,6 +26,7 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     let initialCategory = 'all';
     if (props.filterSettings?.defaultFilterSelection) {
       const selection = props.filterSettings.defaultFilterSelection;
+      console.log('🔍 CONSTRUCTOR DEBUG: defaultFilterSelection =', selection);
       if (selection.toLowerCase() === 'all') {
         initialCategory = 'all';
       } else {
@@ -34,6 +35,7 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
         initialCategory = selection.toLowerCase();
       }
     }
+    console.log('🔍 CONSTRUCTOR DEBUG: initialCategory =', initialCategory);
     
     this.state = {
       items: [],
@@ -65,9 +67,11 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     
     // Update selected category when defaultFilterSelection changes
     if (prevProps.filterSettings?.defaultFilterSelection !== this.props.filterSettings?.defaultFilterSelection) {
+      console.log('🔍 COMPONENTDIDUPDATE DEBUG: defaultFilterSelection changed');
       let newCategory = 'all';
       if (this.props.filterSettings?.defaultFilterSelection) {
         const selection = this.props.filterSettings.defaultFilterSelection;
+        console.log('🔍 COMPONENTDIDUPDATE DEBUG: selection =', selection);
         if (selection.toLowerCase() === 'all') {
           newCategory = 'all';
         } else {
@@ -78,6 +82,7 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
           newCategory = exactMatch || selection.toLowerCase();
         }
       }
+      console.log('🔍 COMPONENTDIDUPDATE DEBUG: newCategory =', newCategory);
       this.setState({ selectedCategory: newCategory });
     }
     
@@ -85,11 +90,13 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     if (prevProps.filterSettings?.defaultFilterSelection === this.props.filterSettings?.defaultFilterSelection &&
         this.props.filterSettings?.defaultFilterSelection &&
         this.props.filterSettings.defaultFilterSelection.toLowerCase() !== 'all') {
+      console.log('🔍 COMPONENTDIDUPDATE DEBUG: Checking for category match');
       const selection = this.props.filterSettings.defaultFilterSelection;
       const exactMatch = this.state.categories.find(cat => 
         cat.toLowerCase() === selection.toLowerCase()
       );
       if (exactMatch && this.state.selectedCategory !== exactMatch) {
+        console.log('🔍 COMPONENTDIDUPDATE DEBUG: Found exact match =', exactMatch);
         this.setState({ selectedCategory: exactMatch });
       }
     }
