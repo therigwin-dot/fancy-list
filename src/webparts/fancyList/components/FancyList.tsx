@@ -282,6 +282,25 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     return decoration.trim() || 'none';
   }
 
+  // Helper function to get category section font styles
+  private getCategorySectionFontStyle(): React.CSSProperties {
+    const fontSettings = this.props.categorySectionSettings?.font;
+    
+    if (!fontSettings) {
+      return {};
+    }
+
+    return {
+      fontFamily: fontSettings.family || 'inherit',
+      fontSize: fontSettings.size || '16px',
+      color: fontSettings.color || '#323130',
+      fontWeight: fontSettings.formatting?.bold ? 'bold' : 'normal',
+      fontStyle: fontSettings.formatting?.italic ? 'italic' : 'normal',
+      textDecoration: this.getTextDecoration(fontSettings.formatting || { bold: false, italic: false, underline: false, strikethrough: false }),
+      textAlign: fontSettings.alignment || 'left'
+    };
+  }
+
   private getFilterBackgroundStyle(filterSettings: any): React.CSSProperties {
     const { background } = filterSettings;
 
@@ -693,7 +712,8 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
-                  width: '100%'
+                  width: '100%',
+                  ...this.getCategorySectionFontStyle()
                 }}
               >
                 <span className={styles.itemSubject}>{item.subject}</span>

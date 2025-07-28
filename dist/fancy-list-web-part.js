@@ -591,6 +591,23 @@ var FancyList = /** @class */ (function (_super) {
             decoration += 'line-through';
         return decoration.trim() || 'none';
     };
+    // Helper function to get category section font styles
+    FancyList.prototype.getCategorySectionFontStyle = function () {
+        var _a, _b, _c;
+        var fontSettings = (_a = this.props.categorySectionSettings) === null || _a === void 0 ? void 0 : _a.font;
+        if (!fontSettings) {
+            return {};
+        }
+        return {
+            fontFamily: fontSettings.family || 'inherit',
+            fontSize: fontSettings.size || '16px',
+            color: fontSettings.color || '#323130',
+            fontWeight: ((_b = fontSettings.formatting) === null || _b === void 0 ? void 0 : _b.bold) ? 'bold' : 'normal',
+            fontStyle: ((_c = fontSettings.formatting) === null || _c === void 0 ? void 0 : _c.italic) ? 'italic' : 'normal',
+            textDecoration: this.getTextDecoration(fontSettings.formatting || { bold: false, italic: false, underline: false, strikethrough: false }),
+            textAlign: fontSettings.alignment || 'left'
+        };
+    };
     FancyList.prototype.getFilterBackgroundStyle = function (filterSettings) {
         var background = filterSettings.background;
         if (background.type === 'solid') {
@@ -870,12 +887,7 @@ var FancyList = /** @class */ (function (_super) {
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemsContainer }, this.getFilteredItems().map(function (item) {
                 var _a, _b, _c, _d;
                 return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { key: item.id, className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemPanel },
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemHeader, onClick: function () { return _this.handleItemToggle(item.id); }, "aria-expanded": _this.state.expandedItems.has(item.id) ? "true" : "false", style: {
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'space-between',
-                            width: '100%'
-                        } },
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemHeader, onClick: function () { return _this.handleItemToggle(item.id); }, "aria-expanded": _this.state.expandedItems.has(item.id) ? "true" : "false", style: __assign({ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }, _this.getCategorySectionFontStyle()) },
                         react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemSubject }, item.subject),
                         ((_b = (_a = _this.props.categorySectionSettings) === null || _a === void 0 ? void 0 : _a.icons) === null || _b === void 0 ? void 0 : _b.enabled) && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].expandIcon, style: {
                                 order: _this.props.categorySectionSettings.icons.iconPosition === 'left' ? -1 : 1,
