@@ -122,7 +122,8 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     }
     
     // Also check if categories changed and we need to update selectedCategory
-    if (prevProps.filterSettings?.defaultFilterSelection === this.props.filterSettings?.defaultFilterSelection &&
+    if (!this.userHasManuallySelected && 
+        prevProps.filterSettings?.defaultFilterSelection === this.props.filterSettings?.defaultFilterSelection &&
         this.props.filterSettings?.defaultFilterSelection &&
         this.props.filterSettings.defaultFilterSelection.toLowerCase() !== 'all') {
       const selection = this.props.filterSettings.defaultFilterSelection;
@@ -130,6 +131,12 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
         cat.toLowerCase() === selection.toLowerCase()
       );
       if (exactMatch && this.state.selectedCategory !== exactMatch) {
+        console.log('🔍 Filter Debug - Applying Default Logic:', {
+          selection,
+          exactMatch,
+          currentSelected: this.state.selectedCategory,
+          userHasManuallySelected: this.userHasManuallySelected
+        });
         this.setState({ selectedCategory: exactMatch });
       }
     }

@@ -1844,7 +1844,8 @@ var FancyList = /** @class */ (function (_super) {
             });
         }
         // Also check if categories changed and we need to update selectedCategory
-        if (((_g = prevProps.filterSettings) === null || _g === void 0 ? void 0 : _g.defaultFilterSelection) === ((_h = this.props.filterSettings) === null || _h === void 0 ? void 0 : _h.defaultFilterSelection) &&
+        if (!this.userHasManuallySelected &&
+            ((_g = prevProps.filterSettings) === null || _g === void 0 ? void 0 : _g.defaultFilterSelection) === ((_h = this.props.filterSettings) === null || _h === void 0 ? void 0 : _h.defaultFilterSelection) &&
             ((_j = this.props.filterSettings) === null || _j === void 0 ? void 0 : _j.defaultFilterSelection) &&
             this.props.filterSettings.defaultFilterSelection.toLowerCase() !== 'all') {
             var selection_2 = this.props.filterSettings.defaultFilterSelection;
@@ -1852,6 +1853,12 @@ var FancyList = /** @class */ (function (_super) {
                 return cat.toLowerCase() === selection_2.toLowerCase();
             });
             if (exactMatch && this.state.selectedCategory !== exactMatch) {
+                console.log('🔍 Filter Debug - Applying Default Logic:', {
+                    selection: selection_2,
+                    exactMatch: exactMatch,
+                    currentSelected: this.state.selectedCategory,
+                    userHasManuallySelected: this.userHasManuallySelected
+                });
                 this.setState({ selectedCategory: exactMatch });
             }
         }
