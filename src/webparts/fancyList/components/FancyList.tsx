@@ -694,6 +694,14 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
   public render(): React.ReactElement<IFancyListProps> {
     const { selectedCategory, categories, loading, error } = this.state;
     
+    // Debug logging for render method
+    console.log('🔍 Filter Debug - Render Method:', {
+      selectedCategory,
+      availableCategories: categories,
+      defaultSelection: this.props.filterSettings?.defaultFilterSelection,
+      userHasManuallySelected: this.userHasManuallySelected
+    });
+
     // If loading, render loading state
     if (loading) {
       return (
