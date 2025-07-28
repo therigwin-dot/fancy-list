@@ -764,14 +764,17 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
           </>
         )}
 
-        {/* Collapsible Items */}
+        {/* Hierarchical Items - Category → Subject → Description */}
         <div className={styles.itemsContainer}>
-          {this.getFilteredItems().map(item => (
-            <div key={item.id} className={styles.itemPanel}>
+          {Object.keys(this.groupItemsByCategory(this.getFilteredItems())).map((category) => {
+            const items = this.groupItemsByCategory(this.getFilteredItems())[category];
+            return (
+            <div key={category} className={styles.itemPanel}>
+              {/* Category Header */}
               <button
                 className={styles.itemHeader}
-                onClick={() => this.handleItemToggle(item.id)}
-                aria-expanded={this.state.expandedItems.has(item.id) ? "true" : "false"}
+                onClick={() => this.handleCategoryToggle(category)}
+                aria-expanded={this.state.expandedCategories.has(category) ? "true" : "false"}
                 style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -780,7 +783,7 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
                   ...this.getCategorySectionFontStyle()
                 }}
               >
-                <span className={styles.itemSubject}>{item.subject}</span>
+                <span className={styles.itemSubject}>{category}</span>
                 {this.props.categorySectionSettings?.icons?.enabled && (
                   <span 
                     className={styles.expandIcon}
@@ -791,23 +794,65 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
                       marginRight: this.props.categorySectionSettings.icons.iconPosition === 'left' ? '8px' : '0'
                     }}
                   >
-                    {this.state.expandedItems.has(item.id) 
+                    {this.state.expandedCategories.has(category) 
                       ? (this.props.categorySectionSettings.icons.expandedIcon || '−')
                       : (this.props.categorySectionSettings.icons.collapsedIcon || '+')
                     }
                   </span>
                 )}
               </button>
-              {this.state.expandedItems.has(item.id) && (
+              
+              {/* Subject Items within Category */}
+              {this.state.expandedCategories.has(category) && (
                 <div className={styles.itemContent}>
-                  <div 
-                    className={styles.itemDescription}
-                    dangerouslySetInnerHTML={{ __html: item.description }}
-                  />
+                  {items.map((item: IListItem) => (
+                    <div key={item.id} className={styles.itemPanel}>
+                      <button
+                        className={styles.itemHeader}
+                        onClick={() => this.handleItemToggle(item.id)}
+                        aria-expanded={this.state.expandedItems.has(item.id) ? "true" : "false"}
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'space-between',
+                          width: '100%',
+                          ...this.getSubjectSectionFontStyle()
+                        }}
+                      >
+                        <span className={styles.itemSubject}>{item.subject}</span>
+                        {this.props.subjectSectionSettings?.icons?.enabled && (
+                          <span 
+                            className={styles.expandIcon}
+                            style={{
+                              order: this.props.subjectSectionSettings.icons.iconPosition === 'left' ? -1 : 1,
+                              fontSize: this.props.subjectSectionSettings?.font?.size || '16px',
+                              marginLeft: this.props.subjectSectionSettings.icons.iconPosition === 'left' ? '0' : '8px',
+                              marginRight: this.props.subjectSectionSettings.icons.iconPosition === 'left' ? '8px' : '0'
+                            }}
+                          >
+                            {this.state.expandedItems.has(item.id) 
+                              ? (this.props.subjectSectionSettings.icons.expandedIcon || '−')
+                              : (this.props.subjectSectionSettings.icons.collapsedIcon || '+')
+                            }
+                          </span>
+                        )}
+                      </button>
+                      {this.state.expandedItems.has(item.id) && (
+                        <div className={styles.itemContent}>
+                          <div 
+                            className={styles.itemDescription}
+                            style={this.getDescriptionSectionFontStyle()}
+                            dangerouslySetInnerHTML={{ __html: item.description }}
+                          />
+                        </div>
+                      )}
+                    </div>
+                  ))}
                 </div>
               )}
             </div>
-          ))}
+          );
+          })}
         </div>
       </div>
     );
