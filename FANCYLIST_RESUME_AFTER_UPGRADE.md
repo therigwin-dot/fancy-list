@@ -476,6 +476,8 @@ return this._fields.filter(field =>
 
 **Question 4**: Which file should I investigate first for the dropdown logic bug - `FancyListWebPart.ts` or the Page 1 property pane configuration?
 
+**Answer**: FancyListWebPart.ts - the bug is confirmed to be in the `_getAvailableFieldsForCategory()` and `_getAvailableFieldsForSubject()` methods
+
 **Question 5**: Should I create a test scenario to reproduce the dropdown logic issue, or do you have specific steps to reproduce it?
 
 ### **🎯 Category Field onChange Behavior Questions:**
