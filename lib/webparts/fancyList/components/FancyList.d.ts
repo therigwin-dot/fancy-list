@@ -32,6 +32,7 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     private getCategorySectionFontStyle;
     private getSubjectSectionFontStyle;
     private getDescriptionSectionFontStyle;
+    private getCategorySectionBackgroundStyle;
     private groupItemsByCategory;
     private getFilterBackgroundStyle;
     private checkFilterImage;

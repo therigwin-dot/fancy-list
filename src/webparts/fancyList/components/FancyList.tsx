@@ -351,6 +351,52 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     };
   }
 
+  // Helper function to get category section background styles
+  private getCategorySectionBackgroundStyle(): React.CSSProperties {
+    const backgroundSettings = this.props.categorySectionSettings?.background;
+    if (!backgroundSettings) return {};
+
+    // Safe property access with fallbacks
+    const backgroundType = backgroundSettings.type || 'solid';
+    const backgroundColor = backgroundSettings.color || '#ffffff';
+    const backgroundAlpha = backgroundSettings.alpha || 0;
+    const gradientDirection = backgroundSettings.gradientDirection || 'left-right';
+    const gradientColor1 = backgroundSettings.gradientColor1 || '#ffffff';
+    const gradientColor2 = backgroundSettings.gradientColor2 || '#000000';
+    const gradientAlpha = backgroundSettings.gradientAlpha1 || 0;
+    const imageUrl = backgroundSettings.image || '';
+    const shape = this.props.categorySectionSettings?.shape || 'rounded';
+
+    switch (backgroundType) {
+      case 'solid':
+        return {
+          backgroundColor: this.hexToRgba(backgroundColor, 1 - (backgroundAlpha / 100)), // Invert alpha: 0% = opaque (alpha 1), 100% = transparent (alpha 0)
+          borderRadius: this.getShapeRadius(shape)
+        };
+      case 'gradient':
+        return {
+          background: this.getGradientStyle(gradientDirection, gradientColor1, gradientColor2, 1 - (gradientAlpha / 100)), // Invert alpha: 0% = opaque (alpha 1), 100% = transparent (alpha 0)
+          borderRadius: this.getShapeRadius(shape)
+        };
+      case 'image':
+        if (imageUrl) {
+          return {
+            backgroundImage: `url(${imageUrl})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            borderRadius: this.getShapeRadius(shape)
+          };
+        } else {
+          return {
+            backgroundColor: '#ffffff', // Simple white background for empty/invalid URLs
+            borderRadius: this.getShapeRadius(shape)
+          };
+        }
+      default:
+        return {};
+    }
+  }
+
   // Helper function to group items by category
   private groupItemsByCategory(items: IListItem[]): { [category: string]: IListItem[] } {
     const grouped: { [category: string]: IListItem[] } = {};
@@ -779,7 +825,8 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
-                  width: '100%'
+                  width: '100%',
+                  ...this.getCategorySectionBackgroundStyle()
                 }}
               >
                 <span 
