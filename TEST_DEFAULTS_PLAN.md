@@ -533,6 +533,7 @@ This document defines the structured testing values and implementation approach 
 
 ### **Implementation Notes**
 - **Skip "Show All" Toggle**: Not included as requested (doesn't disable part)
+- **Skip "Enable Filters" Toggle**: Keep enabled, don't touch
 - **Bright Colors**: Magenta/cyan color scheme for visual testing
 - **Background Testing**: Complete sequence through all types
 - **Final Type**: Gradient background assigned to Page 3
@@ -540,4 +541,258 @@ This document defines the structured testing values and implementation approach 
 
 ---
 
-**Please review Page 3 structure above. Any changes needed before I continue with Page 4?** 
+## **PAGE 4: Category Section Configuration**
+
+### **Test Values Structure**
+```typescript
+{
+  page: 4,
+  section: "Category Section Configuration",
+  controls: [
+    {
+      control: "categoryFontFamily",
+      value: "Times New Roman",
+      description: "Set category font to Times New Roman (visually distinct)",
+      timing: 500,
+      dependency: null
+    },
+    {
+      control: "categoryFontSize",
+      value: "20px",
+      description: "Set category font size to 20px (large for testing)",
+      timing: 500,
+      dependency: null
+    },
+    {
+      control: "categoryFontColor",
+      value: "#800080", // Purple
+      description: "Set category font color to purple (visually distinct)",
+      timing: 500,
+      dependency: null
+    },
+    {
+      control: "categoryFontBold",
+      value: true,
+      description: "Set category font to bold (visually distinct)",
+      timing: 500,
+      dependency: null
+    },
+    {
+      control: "categoryFontItalic",
+      value: true,
+      description: "Set category font to italic (visually distinct)",
+      timing: 500,
+      dependency: null
+    },
+    {
+      control: "categoryFontUnderline",
+      value: false,
+      description: "Set category font underline to false",
+      timing: 500,
+      dependency: null
+    },
+    {
+      control: "categoryFontStrikethrough",
+      value: false,
+      description: "Set category font strikethrough to false",
+      timing: 500,
+      dependency: null
+    },
+    {
+      control: "categoryFontAlignment",
+      value: "center",
+      description: "Set category font alignment to center (visually distinct)",
+      timing: 500,
+      dependency: null
+    },
+    {
+      control: "categoryIconPosition",
+      value: "right",
+      description: "Set category icon position to right (visually distinct)",
+      timing: 500,
+      dependency: null
+    },
+    {
+      control: "categoryCollapsedIcon",
+      value: "🔽",
+      description: "Set category collapsed icon to down arrow",
+      timing: 500,
+      dependency: null
+    },
+    {
+      control: "categoryExpandedIcon",
+      value: "🔼",
+      description: "Set category expanded icon to up arrow",
+      timing: 500,
+      dependency: null
+    },
+    {
+      control: "categoryHoverColor",
+      value: "#FFA500", // Orange
+      description: "Set category hover color to orange (visually distinct)",
+      timing: 500,
+      dependency: null
+    },
+    {
+      control: "categoryAutoExpand",
+      value: true,
+      description: "Set category auto expand to true (visually distinct)",
+      timing: 500,
+      dependency: null
+    },
+    {
+      control: "categoryHideExpandCollapse",
+      value: false,
+      description: "Set category hide expand/collapse to false",
+      timing: 500,
+      dependency: null
+    },
+    // Background Testing Sequence
+    {
+      control: "categoryBackgroundType",
+      value: "solid",
+      description: "Switch to solid background for testing",
+      timing: 1000,
+      dependency: null
+    },
+    {
+      control: "categoryBackgroundColor",
+      value: "#FFE4B5", // Light orange
+      description: "Set solid background to light orange",
+      timing: 500,
+      dependency: "categoryBackgroundType"
+    },
+    {
+      control: "categoryBackgroundAlpha",
+      value: 70,
+      description: "Set background transparency to 70%",
+      timing: 500,
+      dependency: "categoryBackgroundType"
+    },
+    {
+      control: "categoryBackgroundType",
+      value: "gradient",
+      description: "Switch to gradient background for testing",
+      timing: 1000,
+      dependency: null
+    },
+    {
+      control: "categoryGradientDirection",
+      value: "diagonal",
+      description: "Set gradient direction to diagonal",
+      timing: 500,
+      dependency: "categoryBackgroundType"
+    },
+    {
+      control: "categoryGradientColor1",
+      value: "#800080", // Purple
+      description: "Set gradient color 1 to purple",
+      timing: 500,
+      dependency: "categoryBackgroundType"
+    },
+    {
+      control: "categoryGradientColor2",
+      value: "#FFA500", // Orange
+      description: "Set gradient color 2 to orange",
+      timing: 500,
+      dependency: "categoryBackgroundType"
+    },
+    {
+      control: "categoryGradientAlpha",
+      value: 85,
+      description: "Set gradient transparency to 85%",
+      timing: 500,
+      dependency: "categoryBackgroundType"
+    },
+    {
+      control: "categoryBackgroundType",
+      value: "image",
+      description: "Switch to image background for testing",
+      timing: 1000,
+      dependency: null
+    },
+    {
+      control: "categoryBackgroundImage",
+      value: "https://www.pixelstalk.net/wp-content/uploads/2016/07/Free-Amazing-Background-Images-Nature.jpg",
+      description: "Set good image URL for testing",
+      timing: 1000,
+      dependency: "categoryBackgroundType"
+    },
+    {
+      control: "categoryBackgroundImage",
+      value: "https://invalid-test-url.com/image.jpg",
+      description: "Set bad image URL for error testing",
+      timing: 1000,
+      dependency: "categoryBackgroundType"
+    },
+    {
+      control: "categoryBackgroundImage",
+      value: "",
+      description: "Set blank image URL for error testing",
+      timing: 1000,
+      dependency: "categoryBackgroundType"
+    },
+    {
+      control: "categoryBackgroundImage",
+      value: "https://www.pixelstalk.net/wp-content/uploads/2016/07/Free-Amazing-Background-Images-Nature.jpg",
+      description: "Restore good image URL",
+      timing: 1000,
+      dependency: "categoryBackgroundType"
+    },
+    {
+      control: "categoryBackgroundImageAlpha",
+      value: 40,
+      description: "Set image transparency to 40%",
+      timing: 500,
+      dependency: "categoryBackgroundType"
+    },
+    // Final Background Type (Image for Page 4)
+    {
+      control: "categoryBackgroundType",
+      value: "image",
+      description: "Set final background type to image for Page 4",
+      timing: 1000,
+      dependency: null
+    },
+    {
+      control: "categoryBackgroundImage",
+      value: "https://www.pixelstalk.net/wp-content/uploads/2016/07/Free-Amazing-Background-Images-Nature.jpg",
+      description: "Set final good image URL",
+      timing: 1000,
+      dependency: "categoryBackgroundType"
+    },
+    {
+      control: "categoryBackgroundImageAlpha",
+      value: 40,
+      description: "Set final image transparency",
+      timing: 500,
+      dependency: "categoryBackgroundType"
+    },
+    {
+      control: "categoryShape",
+      value: "square",
+      description: "Set category shape to square (visually distinct)",
+      timing: 500,
+      dependency: null
+    },
+    {
+      control: "showCategoryDivider",
+      value: true,
+      description: "Show category divider (visually distinct)",
+      timing: 500,
+      dependency: null
+    }
+  ]
+}
+```
+
+### **Implementation Notes**
+- **Skip "Enable Icons" Toggle**: Keep enabled, don't touch
+- **Bright Colors**: Purple/orange color scheme for visual testing
+- **Background Testing**: Complete sequence through all types
+- **Final Type**: Image background assigned to Page 4
+- **Quick Timing**: 500ms for most controls, 1000ms for background type changes
+
+---
+
+**Please review Page 4 structure above. Any changes needed before I continue with Page 5?** 
