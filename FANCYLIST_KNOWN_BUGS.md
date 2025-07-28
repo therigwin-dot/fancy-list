@@ -83,6 +83,16 @@
 
 9. **🔴 Reset Filter Formatting Button Broken After Test Values** - 🟡 **Medium** - Reset button stops working after Test Values button is used
 
+**Bug Description:**
+- **Component**: Page 3 - Filter Section, Reset Filter Formatting button
+- **Issue**: Reset button becomes non-functional after Test Values button is pushed
+- **Expected**: Reset button should always work to restore default filter formatting
+- **Current**: Reset button stops responding after Test Values button is used
+- **Additional**: Reset button only resets some values, not all filter formatting properties
+- **Impact**: Medium - Users cannot reset filter formatting after testing
+- **Priority**: Medium - Core reset functionality broken
+- **Status**: 🟡 **NEEDS INVESTIGATION** - Test Values button may be corrupting reset functionality and reset logic incomplete
+
 #### **Title Component Bugs**:
 1. **✅ Title Transparency Sliders Broken** - ✅ **FIXED** - Alpha inversion corrected for proper slider behavior
 2. **✅ Reset Button Incomplete** - ✅ **FIXED** - Reset button now properly resets all title settings
