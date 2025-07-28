@@ -90,6 +90,40 @@ export const SectionModuleControl: React.FC<SectionModuleControlProps> = ({
     console.log(`Reset ${sectionType} settings to defaults`);
   };
 
+  const handleTestValues = () => {
+    // Get the test values for this section type
+    let testSettings: SectionSettings;
+    
+    switch (sectionType) {
+      case 'category':
+        testSettings = {
+          ...DEFAULTS_CONFIG.categorySectionSettings,
+          ...DEFAULTS_CONFIG.categorySectionSettings.testValues
+        } as SectionSettings;
+        break;
+      case 'subject':
+        testSettings = {
+          ...DEFAULTS_CONFIG.subjectSectionSettings,
+          ...DEFAULTS_CONFIG.subjectSectionSettings.testValues
+        } as SectionSettings;
+        break;
+      case 'description':
+        testSettings = {
+          ...DEFAULTS_CONFIG.descriptionSectionSettings,
+          ...DEFAULTS_CONFIG.descriptionSectionSettings.testValues
+        } as SectionSettings;
+        break;
+      default:
+        console.error(`Unknown section type: ${sectionType}`);
+        return;
+    }
+    
+    // Apply test values by updating the entire settings object
+    onChange(testSettings);
+    
+    console.log(`Applied test values to ${sectionType} settings`);
+  };
+
   const getSectionTitle = () => {
     switch (sectionType) {
       case 'category': return 'Category Section Configuration';
@@ -515,11 +549,22 @@ export const SectionModuleControl: React.FC<SectionModuleControlProps> = ({
 
 
 
-      {/* Reset Button */}
-      <div style={{ marginTop: 16 }}>
+      {/* Reset and Test Values Buttons */}
+      <div style={{ marginTop: 16, display: 'flex', gap: '8px' }}>
         <PrimaryButton 
           text={sectionSettings.resetButtonText} 
           onClick={handleReset}
+        />
+        <PrimaryButton 
+          text={(() => {
+            switch (sectionType) {
+              case 'category': return DEFAULTS_CONFIG.categorySectionSettings.testValuesButtonText;
+              case 'subject': return DEFAULTS_CONFIG.subjectSectionSettings.testValuesButtonText;
+              case 'description': return DEFAULTS_CONFIG.descriptionSectionSettings.testValuesButtonText;
+              default: return 'Test Values';
+            }
+          })()} 
+          onClick={handleTestValues}
         />
       </div>
     </div>

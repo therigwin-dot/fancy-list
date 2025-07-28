@@ -3501,6 +3501,27 @@ var SectionModuleControl = function (_a) {
         onChange(defaultSettings);
         console.log("Reset ".concat(sectionType, " settings to defaults"));
     };
+    var handleTestValues = function () {
+        // Get the test values for this section type
+        var testSettings;
+        switch (sectionType) {
+            case 'category':
+                testSettings = __assign(__assign({}, _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].categorySectionSettings), _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].categorySectionSettings.testValues);
+                break;
+            case 'subject':
+                testSettings = __assign(__assign({}, _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].subjectSectionSettings), _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].subjectSectionSettings.testValues);
+                break;
+            case 'description':
+                testSettings = __assign(__assign({}, _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].descriptionSectionSettings), _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].descriptionSectionSettings.testValues);
+                break;
+            default:
+                console.error("Unknown section type: ".concat(sectionType));
+                return;
+        }
+        // Apply test values by updating the entire settings object
+        onChange(testSettings);
+        console.log("Applied test values to ".concat(sectionType, " settings"));
+    };
     var getSectionTitle = function () {
         switch (sectionType) {
             case 'category': return 'Category Section Configuration';
@@ -3763,8 +3784,16 @@ var SectionModuleControl = function (_a) {
                     }, showValue: true, valueFormat: function (value) { return "".concat(value, "%"); } }))),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ShapePickerControl__WEBPACK_IMPORTED_MODULE_2__.ShapePickerControl, { label: "", value: sectionSettings.shape, onChange: function (shape) { return handlePropertyChange('shape', shape); } })),
-        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginTop: 16 } },
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_10__.PrimaryButton, { text: sectionSettings.resetButtonText, onClick: handleReset }))));
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginTop: 16, display: 'flex', gap: '8px' } },
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_10__.PrimaryButton, { text: sectionSettings.resetButtonText, onClick: handleReset }),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_10__.PrimaryButton, { text: (function () {
+                    switch (sectionType) {
+                        case 'category': return _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].categorySectionSettings.testValuesButtonText;
+                        case 'subject': return _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].subjectSectionSettings.testValuesButtonText;
+                        case 'description': return _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].descriptionSectionSettings.testValuesButtonText;
+                        default: return 'Test Values';
+                    }
+                })(), onClick: handleTestValues }))));
 };
 
 
