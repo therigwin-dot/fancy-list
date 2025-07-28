@@ -240,5 +240,61 @@ if (!this.userHasManuallySelected) {
 
 ---
 
+## **📋 PHASE 3 PLAN: Smart Configuration vs Runtime Logic**
+
+**Date:** January 27, 2025  
+**Status:** 📋 **PLANNING - Awaiting Implementation**
+
+### **🎯 REQUIREMENT:**
+- **Configuring User** → Can simulate end-user experience
+- **Configuration Mode** → Default changes apply immediately for testing
+- **Runtime Mode** → End user selections are preserved
+
+### **🔧 IMPLEMENTATION PLAN:**
+
+#### **Smart State Management:**
+1. **Track Manual Selection** → `userHasManuallySelected` flag
+2. **Reset on Configuration** → When default changes, reset flag
+3. **Preserve on Runtime** → Once user clicks, preserve selections
+
+#### **Logic Flow:**
+```typescript
+// When default selection changes (CONFIGURATION MODE)
+if (defaultSelectionChanged) {
+  // Reset the manual selection flag
+  this.userHasManuallySelected = false;
+  // Apply the new default immediately
+  this.setState({ selectedCategory: newDefault });
+}
+
+// When user clicks filter (RUNTIME MODE)
+if (userClickedFilter) {
+  // Mark as manual selection
+  this.userHasManuallySelected = true;
+  // Apply the selection
+  this.setState({ selectedCategory: clickedCategory });
+}
+```
+
+#### **Key Changes:**
+1. **Modify componentDidUpdate** → Reset `userHasManuallySelected` when default changes
+2. **Keep handleCategoryClick** → Mark manual selection when user clicks
+3. **Enhanced Debug Logging** → Show configuration vs runtime mode
+
+### **📊 SUCCESS CRITERIA:**
+- ✅ Configuring user can test different defaults immediately
+- ✅ End user can freely select filters without interference
+- ✅ Configuration changes override user selections for testing
+- ✅ Runtime selections are preserved once user starts clicking
+
+### **🔄 IMPLEMENTATION STEPS:**
+1. **Document Plan** ✅ (This step)
+2. **Git Backup** - Save current state
+3. **Implement Fix** - Add smart state management
+4. **Test Fix** - Verify configuration and runtime modes
+5. **Git Backup** - Save working implementation
+
+---
+
 **Last Updated:** January 27, 2025  
-**Next Action:** Test the fix to verify user selections are preserved 
+**Next Action:** Git backup, then implement smart configuration vs runtime logic 
