@@ -109,3 +109,73 @@
 
 *Last Updated: 2025-01-27*
 *Document Version: 1.1* 
+
+## **🐛 KNOWN BUGS**
+
+### **Bug #1: Title Text Field Null Value Handling**
+- **Status**: ✅ **RESOLVED**
+- **Priority**: High
+- **Description**: Title text field doesn't allow empty/null values
+- **Solution**: Changed default from `'Fancy List'` to `''` (empty string)
+- **Testing**: ✅ Confirmed working
+
+### **Bug #2: Title Rendering Logic**
+- **Status**: ✅ **RESOLVED**
+- **Priority**: High
+- **Description**: Title renders "Fancy List" even when field is empty
+- **Solution**: Fixed rendering logic to only show title when text field has content
+- **Testing**: ✅ Confirmed working
+
+### **Bug #3: List Selection Title Update**
+- **Status**: ✅ **RESOLVED**
+- **Priority**: Medium
+- **Description**: List selection doesn't update title text intelligently
+- **Solution**: Enhanced logic to update title if field is empty OR if title matches previous list name
+- **Testing**: ✅ Confirmed working
+
+### **Bug #4: Filter Enabled Toggle Not Working**
+- **Status**: ✅ **RESOLVED**
+- **Priority**: Critical
+- **Description**: Filter toggle was not calling property change handler
+- **Solution**: Added missing `handlePropertyChange('enabled', checked || false)` call
+- **Testing**: ✅ Confirmed working
+
+### **Bug #5: Transparency Sliders Broken**
+- **Status**: ✅ **RESOLVED**
+- **Priority**: High
+- **Description**: Transparency sliders not working correctly (inverted alpha values)
+- **Solution**: Applied alpha inversion in background style functions
+- **Testing**: ✅ Confirmed working
+
+### **Bug #6: Image Background Broken**
+- **Status**: ✅ **RESOLVED**
+- **Priority**: Medium
+- **Description**: Image backgrounds not displaying correctly
+- **Solution**: Fixed property name from `imageUrl` to `image`
+- **Testing**: ✅ Confirmed working
+
+### **Bug #7: Shape Button Not Working**
+- **Status**: ✅ **RESOLVED**
+- **Priority**: Medium
+- **Description**: Shape control not affecting container properly
+- **Solution**: Moved shape control outside background box and applied to container
+- **Testing**: ✅ Confirmed working
+
+### **Bug #8: Filter Default Selection Overriding User Clicks**
+- **Status**: ✅ **RESOLVED**
+- **Priority**: Critical
+- **Description**: When default is set to specific category (not "All"), user clicks are overridden
+- **Root Cause**: Overriding logic in `componentDidUpdate` was forcing `selectedCategory` back to default value
+- **Solution**: Added `userHasManuallySelected` check to prevent default logic from overriding user selections
+- **Testing**: ✅ Confirmed working - User clicks now work correctly regardless of default setting
+
+### **Bug #9: Reset Filter Formatting Button Broken After Test Values**
+- **Status**: 🔄 **NEEDS INVESTIGATION**
+- **Priority**: Medium
+- **Description**: Reset button only resets some values, not all filter formatting properties
+- **Notes**: May be related to Test Values button implementation
+
+### **Bug #10: Online Test Value Button URL Issue**
+- **Status**: 🔄 **NEEDS INVESTIGATION**
+- **Priority**: Medium
+- **Description**: Test value button that puts in a URL was for description, could just be no other have a setting for that 

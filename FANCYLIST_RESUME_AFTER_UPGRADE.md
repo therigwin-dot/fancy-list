@@ -298,32 +298,17 @@ const handleTestValues = () => {
    - **Testing Confirmed**: All shape buttons work correctly for container and individual buttons
 
 6. **Reset Button Incomplete** ✅ **FIXED**
-   - **Root Cause**: Reset button only reset some properties, not all filter settings
-   - **Solution**: Added explicit property change calls for all filter settings
-   - **Technical Fix**:
-     - Modified `FilterModuleControl.tsx` reset button `onClick` handler
-     - Added explicit `handlePropertyChange` calls for all filter settings (font, colors, background, shapes, divider)
-     - Replaced `handleFontChange` call with individual property change calls
-     - Added `showAllCategories` reset to restore "All" filter toggle
-   - **Result**: Reset button now properly resets all filter settings to defaults
-   - **Testing Confirmed**: All controls reset to default values when reset button is clicked
 
-7. **Missing "All" Filter Button Toggle** ✅ **FIXED**
-   - **Root Cause**: No control to show/hide the "All" filter button
-   - **Solution**: Added "Default Filter Selection" section with toggle control
+7. **Filter Default Selection Overriding User Clicks** ✅ **FIXED**
+   - **Root Cause**: Overriding logic in `componentDidUpdate` was forcing `selectedCategory` back to default value
+   - **Solution**: Added `userHasManuallySelected` check to prevent default logic from overriding user selections
    - **Technical Fix**:
-     - Added new grey box container for "Default Filter Selection" in `FilterModuleControl.tsx`
-     - Added `Toggle` control for `showAllCategories` with proper state management
-     - Added `showAllCategories` to `FilterModuleControlProps` interface and default settings
-     - Added `showAllCategories` to `FilterSettings` interface in `IFancyListProps.ts`
-     - Added `showAllCategories` case to `onPropertyChange` in `FancyListWebPart.ts`
-     - Fixed property mapping to pass `showAllCategories` from `filterSettings` instead of top-level
-     - Added `useEffect` to keep local state synchronized with settings
-     - Fixed nullish coalescing operator (`??` instead of `||`) for proper false value handling
-   - **Result**: Toggle now properly controls "All" filter button visibility with persistence
-   - **Testing Confirmed**: Toggle works correctly, persists across navigation and page refresh
-   - **Result**: Title transparency sliders now work correctly for solid and gradient backgrounds with proper behavior
-   - **Testing Confirmed**: Title transparency sliders adjust visual appearance properly (0% opaque, 100% transparent)
+     - Modified overriding logic in `componentDidUpdate` method
+     - Added `!this.userHasManuallySelected` condition to the default application logic
+     - Enhanced debugging with additional console logging
+     - Now user selections are preserved once user starts clicking
+   - **Result**: Filter buttons work correctly regardless of default setting
+   - **Testing Confirmed**: User clicks work properly when default is set to any category (including "All")
 
 **Remaining Filter Issues:**
 2. **✅ Transparency Slider Not Working** - ✅ **FIXED** - Double-normalization in hexToRgba function corrected
