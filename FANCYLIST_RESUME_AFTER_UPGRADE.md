@@ -227,6 +227,50 @@ const handleTestValues = () => {
 
 ---
 
+### **🔄 EXPANDED SETTINGS FEATURE REQUEST - IN PROGRESS**
+**Date:** January 27, 2025
+**Status:** 🔄 **PLANNING PHASE** - Following IT process
+
+**Feature Request:**
+- **Request**: Clone the entire "Collapsed Settings" container with new "Expanded Settings" header
+- **Purpose**: Provide separate background and shape controls for expanded areas of sections
+- **Location**: Pages 4, 5, 6 (Category, Subject, Description sections)
+- **Permission**: NO UI wiring allowed - controls only, no rendering changes
+
+**Implementation Plan:**
+
+#### **Phase 1: Update DEFAULTS_CONFIG.ts**
+- Add `expandedSettings` object to each section configuration
+- Include background and shape properties for expanded state
+- Use appropriate default values for expanded areas
+
+#### **Phase 2: Update SectionModuleControl.tsx**
+- Clone entire "Collapsed Settings" container structure
+- Change header to "Expanded Settings"
+- Add property change handlers for expanded settings
+- Keep same control structure with expanded property paths
+
+#### **Phase 3: Update Interfaces**
+- Add `expandedSettings` to SectionSettings interface
+- Include background and shape properties for expanded state
+
+**Files to Modify:**
+1. `src/webparts/fancyList/DEFAULTS_CONFIG.ts` - Add expanded settings defaults
+2. `src/webparts/fancyList/propertyPane/SectionModuleControl.tsx` - Add expanded settings controls
+3. `src/webparts/fancyList/components/IFancyListProps.ts` - Update interfaces if needed
+
+**IT Process Status:**
+- ✅ **Phase 1**: Plan It - COMPLETE
+- 🔄 **Phase 2**: Document It - IN PROGRESS
+- ⏳ **Phase 3**: Git It - PENDING
+- ⏳ **Phase 4**: Code It - PENDING
+- ⏳ **Phase 5**: Bug Fix It - PENDING
+- ⏳ **Phase 6**: Redocument It - PENDING
+- ⏳ **Phase 7**: Git It - PENDING
+- ⏳ **Phase 8**: Test It - PENDING
+
+---
+
 ## **🔄 RECENT PROGRESS (Latest Updates)**
 
 ### **✅ Title Component Rendering - COMPLETED**
