@@ -498,8 +498,13 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
   }
 
   public render(): React.ReactElement<IFancyListProps> {
-    const { loading, error, categories, selectedCategory, expandedItems } = this.state;
-    const filteredItems = this.getFilteredItems();
+    const { selectedCategory, categories, items, loading, error } = this.state;
+    
+    // Debug logging for filter button state
+    console.log('🔍 FILTER BUTTON DEBUG: selectedCategory =', selectedCategory);
+    console.log('🔍 FILTER BUTTON DEBUG: categories =', categories);
+    console.log('🔍 FILTER BUTTON DEBUG: showAllCategories =', this.props.filterSettings?.showAllCategories);
+    console.log('🔍 FILTER BUTTON DEBUG: enableFilters =', this.props.filterSettings?.enableFilters);
     
     if (loading) {
       return (
@@ -679,19 +684,19 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
 
         {/* Collapsible Items */}
         <div className={styles.itemsContainer}>
-          {filteredItems.map(item => (
+          {this.getFilteredItems().map(item => (
             <div key={item.id} className={styles.itemPanel}>
               <button
                 className={styles.itemHeader}
                 onClick={() => this.handleItemToggle(item.id)}
-                aria-expanded={expandedItems.has(item.id) ? "true" : "false"}
+                aria-expanded={this.state.expandedItems.has(item.id) ? "true" : "false"}
               >
                 <span className={styles.itemSubject}>{item.subject}</span>
                 <span className={styles.expandIcon}>
-                  {expandedItems.has(item.id) ? '−' : '+'}
+                  {this.state.expandedItems.has(item.id) ? '−' : '+'}
                 </span>
               </button>
-              {expandedItems.has(item.id) && (
+              {this.state.expandedItems.has(item.id) && (
                 <div className={styles.itemContent}>
                   <div 
                     className={styles.itemDescription}
