@@ -529,4 +529,4 @@ Then when the Disabled Toggle is triggered the display changes to this:
 
 **Answer 2**: That is correct. Based on previous answer, just the Enable Toggle and the gray box with our header and only the dropdown for picking our default filter button.
 
-**Question 8**: Should the `defaultFilterSelection`
+**Answer 3**: It sets it to show all the items. Then if the user switches it to a different category, it will only show that category.
