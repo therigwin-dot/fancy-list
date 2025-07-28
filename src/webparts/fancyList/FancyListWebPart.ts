@@ -55,6 +55,7 @@ export interface IFancyListWebPartProps {
 
 export interface TitleSettings {
   resetButtonText: string;
+  testValuesButtonText: string;
   description: string;
   enabled: boolean;
   webPartTitle: string;
@@ -79,10 +80,35 @@ export interface TitleSettings {
   };
   shape: 'square' | 'rounded' | 'pill';
   showDivider: boolean;
+  testValues: {
+    webPartTitle: string;
+    font: {
+      family: string;
+      size: string;
+      color: string;
+      formatting: { bold: boolean; italic: boolean; underline: boolean; strikethrough: boolean; };
+      alignment?: 'left' | 'center' | 'right' | 'justify';
+    };
+    background: {
+      type: 'solid' | 'gradient' | 'image';
+      color: string;
+      alpha: number;
+      image: string;
+      imageAlpha: number;
+      gradientDirection: string;
+      gradientColor1: string;
+      gradientAlpha1: number;
+      gradientColor2: string;
+      gradientAlpha2: number;
+    };
+    shape: 'square' | 'rounded' | 'pill';
+    showDivider: boolean;
+  };
 }
 
 export interface FilterSettings {
   resetButtonText: string;
+  testValuesButtonText: string;
   description: string;
   enableFilters: boolean;
   showAllCategories: boolean;
@@ -116,11 +142,44 @@ export interface FilterSettings {
     gradientAlpha2: number;
   };
   showDivider: boolean;
+  testValues: {
+    font: {
+      family: string;
+      size: string;
+      formatting: { bold: boolean; italic: boolean; underline: boolean; strikethrough: boolean; };
+      alignment?: 'left' | 'center' | 'right' | 'justify';
+    };
+    activeColors: {
+      background: string;
+      font: string;
+    };
+    inactiveColors: {
+      background: string;
+      font: string;
+    };
+    shape: 'square' | 'rounded' | 'pill';
+    backgroundShape: 'square' | 'rounded' | 'pill';
+    defaultFilterSelection: string;
+    background: {
+      type: 'solid' | 'gradient' | 'image';
+      color: string;
+      alpha: number;
+      image: string;
+      imageAlpha: number;
+      gradientDirection: string;
+      gradientColor1: string;
+      gradientAlpha1: number;
+      gradientColor2: string;
+      gradientAlpha2: number;
+    };
+    showDivider: boolean;
+  };
 }
 
 export interface SectionSettings {
   sectionType: 'category' | 'subject' | 'description';
   resetButtonText: string;
+  testValuesButtonText: string;
   description: string;
   font: {
     family: string;
@@ -150,6 +209,37 @@ export interface SectionSettings {
     iconPosition: 'left' | 'right';
     collapsedIcon: string;
     expandedIcon: string;
+  };
+  testValues: {
+    font: {
+      family: string;
+      size: string;
+      color: string;
+      formatting: { bold: boolean; italic: boolean; underline: boolean; strikethrough: boolean; };
+      alignment?: 'left' | 'center' | 'right' | 'justify';
+    };
+    background: {
+      type: 'solid' | 'gradient' | 'image';
+      color: string;
+      alpha: number;
+      image: string;
+      imageAlpha: number;
+      gradientDirection: string;
+      gradientColor1: string;
+      gradientAlpha1: number;
+      gradientColor2: string;
+      gradientAlpha2: number;
+    };
+    shape: 'square' | 'rounded' | 'pill';
+    showDivider: boolean;
+    autoExpand: boolean;
+    hoverColor: string;
+    iconSettings: {
+      enabled: boolean;
+      iconPosition: 'left' | 'right';
+      collapsedIcon: string;
+      expandedIcon: string;
+    };
   };
 }
 
