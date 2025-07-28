@@ -369,7 +369,8 @@ var FancyList = /** @class */ (function (_super) {
             items: [],
             categories: [],
             selectedCategory: initialCategory,
-            expandedItems: new Set(),
+            expandedItems: new Set(), // For subject expansion within categories
+            expandedCategories: new Set(), // For category expansion
             loading: false,
             error: '',
             titleImageError: false,

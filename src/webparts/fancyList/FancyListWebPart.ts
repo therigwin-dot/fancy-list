@@ -273,6 +273,72 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
       }
     };
 
+    // Map subject section properties to the format expected by FancyList component
+    const subjectSectionSettings = {
+      sectionType: 'subject' as const,
+      resetButtonText: this.properties.subjectSectionSettings?.resetButtonText ?? DEFAULTS_CONFIG.subjectSectionSettings.resetButtonText,
+      description: this.properties.subjectSectionSettings?.description ?? DEFAULTS_CONFIG.subjectSectionSettings.description,
+      font: {
+        family: this.properties.subjectSectionSettings?.font?.family ?? DEFAULTS_CONFIG.subjectSectionSettings.font.family,
+        size: this.properties.subjectSectionSettings?.font?.size ?? DEFAULTS_CONFIG.subjectSectionSettings.font.size,
+        color: this.properties.subjectSectionSettings?.font?.color ?? DEFAULTS_CONFIG.subjectSectionSettings.font.color,
+        formatting: this.properties.subjectSectionSettings?.font?.formatting ?? DEFAULTS_CONFIG.subjectSectionSettings.font.formatting,
+        alignment: (this.properties.subjectSectionSettings?.font?.alignment ?? DEFAULTS_CONFIG.subjectSectionSettings.font.alignment) as 'left' | 'center' | 'right' | 'justify' | undefined
+      },
+      background: {
+        type: this.properties.subjectSectionSettings?.background?.type ?? DEFAULTS_CONFIG.subjectSectionSettings.background.type,
+        color: this.properties.subjectSectionSettings?.background?.color ?? DEFAULTS_CONFIG.subjectSectionSettings.background.color,
+        alpha: this.properties.subjectSectionSettings?.background?.alpha ?? DEFAULTS_CONFIG.subjectSectionSettings.background.alpha,
+        image: this.properties.subjectSectionSettings?.background?.image ?? DEFAULTS_CONFIG.subjectSectionSettings.background.image,
+        imageAlpha: this.properties.subjectSectionSettings?.background?.imageAlpha ?? DEFAULTS_CONFIG.subjectSectionSettings.background.imageAlpha,
+        gradientDirection: this.properties.subjectSectionSettings?.background?.gradientDirection ?? DEFAULTS_CONFIG.subjectSectionSettings.background.gradientDirection,
+        gradientColor1: this.properties.subjectSectionSettings?.background?.gradientColor1 ?? DEFAULTS_CONFIG.subjectSectionSettings.background.gradientColor1,
+        gradientAlpha1: this.properties.subjectSectionSettings?.background?.gradientAlpha1 ?? DEFAULTS_CONFIG.subjectSectionSettings.background.gradientAlpha1,
+        gradientColor2: this.properties.subjectSectionSettings?.background?.gradientColor2 ?? DEFAULTS_CONFIG.subjectSectionSettings.background.gradientColor2,
+        gradientAlpha2: this.properties.subjectSectionSettings?.background?.gradientAlpha2 ?? DEFAULTS_CONFIG.subjectSectionSettings.background.gradientAlpha2
+      },
+      shape: this.properties.subjectSectionSettings?.shape ?? DEFAULTS_CONFIG.subjectSectionSettings.shape,
+      showDivider: this.properties.subjectSectionSettings?.showDivider ?? DEFAULTS_CONFIG.subjectSectionSettings.showDivider,
+      autoExpand: this.properties.subjectSectionSettings?.autoExpand ?? DEFAULTS_CONFIG.subjectSectionSettings.autoExpand,
+      hoverColor: this.properties.subjectSectionSettings?.hoverColor ?? DEFAULTS_CONFIG.subjectSectionSettings.hoverColor,
+      icons: {
+        enabled: this.properties.subjectSectionSettings?.iconSettings?.enabled ?? DEFAULTS_CONFIG.subjectSectionSettings.iconSettings.enabled,
+        iconPosition: this.properties.subjectSectionSettings?.iconSettings?.iconPosition ?? DEFAULTS_CONFIG.subjectSectionSettings.iconSettings.iconPosition,
+        collapsedIcon: this.properties.subjectSectionSettings?.iconSettings?.collapsedIcon ?? DEFAULTS_CONFIG.subjectSectionSettings.iconSettings.collapsedIcon,
+        expandedIcon: this.properties.subjectSectionSettings?.iconSettings?.expandedIcon ?? DEFAULTS_CONFIG.subjectSectionSettings.iconSettings.expandedIcon
+      }
+    };
+
+    // Map description section properties to the format expected by FancyList component
+    const descriptionSectionSettings = {
+      sectionType: 'description' as const,
+      resetButtonText: this.properties.descriptionSectionSettings?.resetButtonText ?? DEFAULTS_CONFIG.descriptionSectionSettings.resetButtonText,
+      description: this.properties.descriptionSectionSettings?.description ?? DEFAULTS_CONFIG.descriptionSectionSettings.description,
+      font: {
+        family: this.properties.descriptionSectionSettings?.font?.family ?? DEFAULTS_CONFIG.descriptionSectionSettings.font.family,
+        size: this.properties.descriptionSectionSettings?.font?.size ?? DEFAULTS_CONFIG.descriptionSectionSettings.font.size,
+        color: this.properties.descriptionSectionSettings?.font?.color ?? DEFAULTS_CONFIG.descriptionSectionSettings.font.color,
+        formatting: this.properties.descriptionSectionSettings?.font?.formatting ?? DEFAULTS_CONFIG.descriptionSectionSettings.font.formatting,
+        alignment: (this.properties.descriptionSectionSettings?.font?.alignment ?? DEFAULTS_CONFIG.descriptionSectionSettings.font.alignment) as 'left' | 'center' | 'right' | 'justify' | undefined
+      },
+      background: {
+        type: this.properties.descriptionSectionSettings?.background?.type ?? DEFAULTS_CONFIG.descriptionSectionSettings.background.type,
+        color: this.properties.descriptionSectionSettings?.background?.color ?? DEFAULTS_CONFIG.descriptionSectionSettings.background.color,
+        alpha: this.properties.descriptionSectionSettings?.background?.alpha ?? DEFAULTS_CONFIG.descriptionSectionSettings.background.alpha,
+        image: this.properties.descriptionSectionSettings?.background?.image ?? DEFAULTS_CONFIG.descriptionSectionSettings.background.image,
+        imageAlpha: this.properties.descriptionSectionSettings?.background?.imageAlpha ?? DEFAULTS_CONFIG.descriptionSectionSettings.background.imageAlpha,
+        gradientDirection: this.properties.descriptionSectionSettings?.background?.gradientDirection ?? DEFAULTS_CONFIG.descriptionSectionSettings.background.gradientDirection,
+        gradientColor1: this.properties.descriptionSectionSettings?.background?.gradientColor1 ?? DEFAULTS_CONFIG.descriptionSectionSettings.background.gradientColor1,
+        gradientAlpha1: this.properties.descriptionSectionSettings?.background?.gradientAlpha1 ?? DEFAULTS_CONFIG.descriptionSectionSettings.background.gradientAlpha1,
+        gradientColor2: this.properties.descriptionSectionSettings?.background?.gradientColor2 ?? DEFAULTS_CONFIG.descriptionSectionSettings.background.gradientColor2,
+        gradientAlpha2: this.properties.descriptionSectionSettings?.background?.gradientAlpha2 ?? DEFAULTS_CONFIG.descriptionSectionSettings.background.gradientAlpha2
+      },
+      shape: this.properties.descriptionSectionSettings?.shape ?? DEFAULTS_CONFIG.descriptionSectionSettings.shape,
+      showDivider: this.properties.descriptionSectionSettings?.showDivider ?? DEFAULTS_CONFIG.descriptionSectionSettings.showDivider,
+      autoExpand: this.properties.descriptionSectionSettings?.autoExpand ?? DEFAULTS_CONFIG.descriptionSectionSettings.autoExpand,
+      hoverColor: this.properties.descriptionSectionSettings?.hoverColor ?? DEFAULTS_CONFIG.descriptionSectionSettings.hoverColor
+    };
+
     const element: React.ReactElement<IFancyListProps> = React.createElement(
       FancyList,
       {
@@ -289,7 +355,9 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
         context: this.context,
         titleSettings: titleSettings,
         filterSettings: filterSettings,
-        categorySectionSettings: categorySectionSettings
+        categorySectionSettings: categorySectionSettings,
+        subjectSectionSettings: subjectSectionSettings,
+        descriptionSectionSettings: descriptionSectionSettings
       }
     );
 

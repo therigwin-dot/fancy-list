@@ -8,7 +8,8 @@ interface IFancyListState {
   items: IListItem[];
   categories: string[];
   selectedCategory: string;
-  expandedItems: Set<number>;
+  expandedItems: Set<number>; // For subject expansion within categories
+  expandedCategories: Set<string>; // For category expansion
   loading: boolean;
   error: string;
   titleImageError: boolean;
@@ -39,7 +40,8 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
       items: [],
       categories: [],
       selectedCategory: initialCategory,
-      expandedItems: new Set(),
+      expandedItems: new Set(), // For subject expansion within categories
+      expandedCategories: new Set(), // For category expansion
       loading: false,
       error: '',
       titleImageError: false,
@@ -183,6 +185,16 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     this.setState({ expandedItems: newExpandedItems });
   }
 
+  private handleCategoryToggle = (category: string): void => {
+    const newExpandedCategories = new Set(this.state.expandedCategories);
+    if (newExpandedCategories.has(category)) {
+      newExpandedCategories.delete(category);
+    } else {
+      newExpandedCategories.add(category);
+    }
+    this.setState({ expandedCategories: newExpandedCategories });
+  }
+
   private getFilteredItems(): IListItem[] {
     if (this.state.selectedCategory === 'all') {
       return this.state.items;
@@ -299,6 +311,58 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
       textDecoration: this.getTextDecoration(fontSettings.formatting || { bold: false, italic: false, underline: false, strikethrough: false }),
       textAlign: fontSettings.alignment || 'left'
     };
+  }
+
+  // Helper function to get subject section font styles
+  private getSubjectSectionFontStyle(): React.CSSProperties {
+    const fontSettings = this.props.subjectSectionSettings?.font;
+    
+    if (!fontSettings) {
+      return {};
+    }
+
+    return {
+      fontFamily: fontSettings.family || 'inherit',
+      fontSize: fontSettings.size || '16px',
+      color: fontSettings.color || '#323130',
+      fontWeight: fontSettings.formatting?.bold ? 'bold' : 'normal',
+      fontStyle: fontSettings.formatting?.italic ? 'italic' : 'normal',
+      textDecoration: this.getTextDecoration(fontSettings.formatting || { bold: false, italic: false, underline: false, strikethrough: false }),
+      textAlign: fontSettings.alignment || 'left'
+    };
+  }
+
+  // Helper function to get description section font styles
+  private getDescriptionSectionFontStyle(): React.CSSProperties {
+    const fontSettings = this.props.descriptionSectionSettings?.font;
+    
+    if (!fontSettings) {
+      return {};
+    }
+
+    return {
+      fontFamily: fontSettings.family || 'inherit',
+      fontSize: fontSettings.size || '16px',
+      color: fontSettings.color || '#323130',
+      fontWeight: fontSettings.formatting?.bold ? 'bold' : 'normal',
+      fontStyle: fontSettings.formatting?.italic ? 'italic' : 'normal',
+      textDecoration: this.getTextDecoration(fontSettings.formatting || { bold: false, italic: false, underline: false, strikethrough: false }),
+      textAlign: fontSettings.alignment || 'left'
+    };
+  }
+
+  // Helper function to group items by category
+  private groupItemsByCategory(items: IListItem[]): { [category: string]: IListItem[] } {
+    const grouped: { [category: string]: IListItem[] } = {};
+    
+    items.forEach(item => {
+      if (!grouped[item.category]) {
+        grouped[item.category] = [];
+      }
+      grouped[item.category].push(item);
+    });
+    
+    return grouped;
   }
 
   private getFilterBackgroundStyle(filterSettings: any): React.CSSProperties {

@@ -6,6 +6,7 @@ interface IFancyListState {
     categories: string[];
     selectedCategory: string;
     expandedItems: Set<number>;
+    expandedCategories: Set<string>;
     loading: boolean;
     error: string;
     titleImageError: boolean;
@@ -21,6 +22,7 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     private loadListData;
     private handleCategoryClick;
     private handleItemToggle;
+    private handleCategoryToggle;
     private getFilteredItems;
     private getBackgroundStyle;
     private getShapeRadius;
@@ -28,6 +30,9 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     private getFilterBorderRadius;
     private getTextDecoration;
     private getCategorySectionFontStyle;
+    private getSubjectSectionFontStyle;
+    private getDescriptionSectionFontStyle;
+    private groupItemsByCategory;
     private getFilterBackgroundStyle;
     private checkFilterImage;
     private hexToRgba;
