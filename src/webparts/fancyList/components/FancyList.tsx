@@ -779,11 +779,15 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
-                  width: '100%',
-                  ...this.getCategorySectionFontStyle()
+                  width: '100%'
                 }}
               >
-                <span className={styles.itemSubject}>{category}</span>
+                <span 
+                  className={styles.itemSubject}
+                  style={this.getCategorySectionFontStyle()}
+                >
+                  {category}
+                </span>
                 {this.props.categorySectionSettings?.icons?.enabled && (
                   <span 
                     className={styles.expandIcon}
@@ -815,11 +819,15 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'space-between',
-                          width: '100%',
-                          ...this.getSubjectSectionFontStyle()
+                          width: '100%'
                         }}
                       >
-                        <span className={styles.itemSubject}>{item.subject}</span>
+                        <span 
+                          className={styles.itemSubject}
+                          style={this.getSubjectSectionFontStyle()}
+                        >
+                          {item.subject}
+                        </span>
                         {this.props.subjectSectionSettings?.icons?.enabled && (
                           <span 
                             className={styles.expandIcon}

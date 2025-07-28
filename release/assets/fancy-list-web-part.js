@@ -944,8 +944,13 @@ var FancyList = /** @class */ (function (_super) {
                 var _a, _b, _c, _d;
                 var items = _this.groupItemsByCategory(_this.getFilteredItems())[category];
                 return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { key: category, className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemPanel },
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemHeader, onClick: function () { return _this.handleCategoryToggle(category); }, "aria-expanded": _this.state.expandedCategories.has(category) ? "true" : "false", style: __assign({ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }, _this.getCategorySectionFontStyle()) },
-                        react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemSubject }, category),
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemHeader, onClick: function () { return _this.handleCategoryToggle(category); }, "aria-expanded": _this.state.expandedCategories.has(category) ? "true" : "false", style: {
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                            width: '100%'
+                        } },
+                        react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemSubject, style: _this.getCategorySectionFontStyle() }, category),
                         ((_b = (_a = _this.props.categorySectionSettings) === null || _a === void 0 ? void 0 : _a.icons) === null || _b === void 0 ? void 0 : _b.enabled) && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].expandIcon, style: {
                                 order: _this.props.categorySectionSettings.icons.iconPosition === 'left' ? -1 : 1,
                                 fontSize: ((_d = (_c = _this.props.categorySectionSettings) === null || _c === void 0 ? void 0 : _c.font) === null || _d === void 0 ? void 0 : _d.size) || '16px',
@@ -957,8 +962,13 @@ var FancyList = /** @class */ (function (_super) {
                     _this.state.expandedCategories.has(category) && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemContent }, items.map(function (item) {
                         var _a, _b, _c, _d;
                         return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { key: item.id, className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemPanel },
-                            react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemHeader, onClick: function () { return _this.handleItemToggle(item.id); }, "aria-expanded": _this.state.expandedItems.has(item.id) ? "true" : "false", style: __assign({ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }, _this.getSubjectSectionFontStyle()) },
-                                react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemSubject }, item.subject),
+                            react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemHeader, onClick: function () { return _this.handleItemToggle(item.id); }, "aria-expanded": _this.state.expandedItems.has(item.id) ? "true" : "false", style: {
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'space-between',
+                                    width: '100%'
+                                } },
+                                react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemSubject, style: _this.getSubjectSectionFontStyle() }, item.subject),
                                 ((_b = (_a = _this.props.subjectSectionSettings) === null || _a === void 0 ? void 0 : _a.icons) === null || _b === void 0 ? void 0 : _b.enabled) && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].expandIcon, style: {
                                         order: _this.props.subjectSectionSettings.icons.iconPosition === 'left' ? -1 : 1,
                                         fontSize: ((_d = (_c = _this.props.subjectSectionSettings) === null || _c === void 0 ? void 0 : _c.font) === null || _d === void 0 ? void 0 : _d.size) || '16px',
