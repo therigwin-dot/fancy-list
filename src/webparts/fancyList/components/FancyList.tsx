@@ -689,11 +689,28 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
                 className={styles.itemHeader}
                 onClick={() => this.handleItemToggle(item.id)}
                 aria-expanded={this.state.expandedItems.has(item.id) ? "true" : "false"}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  width: '100%'
+                }}
               >
                 <span className={styles.itemSubject}>{item.subject}</span>
                 {this.props.categorySectionSettings?.icons?.enabled && (
-                  <span className={styles.expandIcon}>
-                    {this.state.expandedItems.has(item.id) ? '−' : '+'}
+                  <span 
+                    className={styles.expandIcon}
+                    style={{
+                      order: this.props.categorySectionSettings.icons.iconPosition === 'left' ? -1 : 1,
+                      fontSize: this.props.categorySectionSettings?.font?.size || '16px',
+                      marginLeft: this.props.categorySectionSettings.icons.iconPosition === 'left' ? '0' : '8px',
+                      marginRight: this.props.categorySectionSettings.icons.iconPosition === 'left' ? '8px' : '0'
+                    }}
+                  >
+                    {this.state.expandedItems.has(item.id) 
+                      ? (this.props.categorySectionSettings.icons.expandedIcon || '−')
+                      : (this.props.categorySectionSettings.icons.collapsedIcon || '+')
+                    }
                   </span>
                 )}
               </button>

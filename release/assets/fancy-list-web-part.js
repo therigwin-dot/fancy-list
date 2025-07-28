@@ -868,11 +868,23 @@ var FancyList = /** @class */ (function (_super) {
                         marginBottom: '12px'
                     } })))),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemsContainer }, this.getFilteredItems().map(function (item) {
-                var _a, _b;
+                var _a, _b, _c, _d;
                 return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { key: item.id, className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemPanel },
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemHeader, onClick: function () { return _this.handleItemToggle(item.id); }, "aria-expanded": _this.state.expandedItems.has(item.id) ? "true" : "false" },
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemHeader, onClick: function () { return _this.handleItemToggle(item.id); }, "aria-expanded": _this.state.expandedItems.has(item.id) ? "true" : "false", style: {
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                            width: '100%'
+                        } },
                         react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemSubject }, item.subject),
-                        ((_b = (_a = _this.props.categorySectionSettings) === null || _a === void 0 ? void 0 : _a.icons) === null || _b === void 0 ? void 0 : _b.enabled) && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].expandIcon }, _this.state.expandedItems.has(item.id) ? '−' : '+'))),
+                        ((_b = (_a = _this.props.categorySectionSettings) === null || _a === void 0 ? void 0 : _a.icons) === null || _b === void 0 ? void 0 : _b.enabled) && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].expandIcon, style: {
+                                order: _this.props.categorySectionSettings.icons.iconPosition === 'left' ? -1 : 1,
+                                fontSize: ((_d = (_c = _this.props.categorySectionSettings) === null || _c === void 0 ? void 0 : _c.font) === null || _d === void 0 ? void 0 : _d.size) || '16px',
+                                marginLeft: _this.props.categorySectionSettings.icons.iconPosition === 'left' ? '0' : '8px',
+                                marginRight: _this.props.categorySectionSettings.icons.iconPosition === 'left' ? '8px' : '0'
+                            } }, _this.state.expandedItems.has(item.id)
+                            ? (_this.props.categorySectionSettings.icons.expandedIcon || '−')
+                            : (_this.props.categorySectionSettings.icons.collapsedIcon || '+')))),
                     _this.state.expandedItems.has(item.id) && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemContent },
                         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemDescription, dangerouslySetInnerHTML: { __html: item.description } })))));
             }))));
