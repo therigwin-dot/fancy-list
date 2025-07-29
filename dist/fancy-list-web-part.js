@@ -2341,7 +2341,7 @@ var FancyList = /** @class */ (function (_super) {
                     marginBottom: '12px'
                 } })),
             ((_e = this.props.filterSettings) === null || _e === void 0 ? void 0 : _e.enableFilters) && (react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null,
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].categoryFilters, style: __assign(__assign({}, this.getFilterBackgroundStyle(this.props.filterSettings)), { position: 'relative', padding: '12px', marginBottom: '12px', borderRadius: this.getShapeRadius(((_f = this.props.filterSettings) === null || _f === void 0 ? void 0 : _f.backgroundShape) || 'rounded') }) },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].categoryFilters, style: __assign(__assign({}, this.getFilterBackgroundStyle(this.props.filterSettings)), { position: 'relative', padding: '12px', marginBottom: '6px', borderRadius: this.getShapeRadius(((_f = this.props.filterSettings) === null || _f === void 0 ? void 0 : _f.backgroundShape) || 'rounded') }) },
                     ((_h = (_g = this.props.filterSettings) === null || _g === void 0 ? void 0 : _g.background) === null || _h === void 0 ? void 0 : _h.type) === 'image' &&
                         ((_k = (_j = this.props.filterSettings) === null || _j === void 0 ? void 0 : _j.background) === null || _k === void 0 ? void 0 : _k.image) &&
                         !this.state.filterImageValidationError &&

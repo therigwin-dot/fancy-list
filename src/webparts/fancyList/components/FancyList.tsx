@@ -779,7 +779,7 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
                 ...this.getFilterBackgroundStyle(this.props.filterSettings),
                 position: 'relative',
                 padding: '12px',
-                marginBottom: '12px',
+                marginBottom: '6px',
                 borderRadius: this.getShapeRadius(this.props.filterSettings?.backgroundShape || 'rounded')
               }}
             >
