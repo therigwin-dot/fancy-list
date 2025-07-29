@@ -377,64 +377,40 @@ export const SectionModuleControl: React.FC<SectionModuleControlProps> = ({
         />
       </div>
 
-      {/* 5. Collapsed Settings Container */}
+      {/* 5. Background Header with Type Dropdown */}
       <div style={{ 
-        backgroundColor: '#e1dfdd', 
-        padding: '12px', 
-        borderRadius: '4px',
-        marginBottom: 16 
+        display: 'flex', 
+        alignItems: 'flex-start', 
+        gap: '8px',
+        marginBottom: '12px'
       }}>
-        {/* Collapsed Settings Header */}
         <div style={{
           fontSize: '16px',
           fontWeight: '600',
-          color: '#323130',
-          marginBottom: '12px'
+          color: '#323130'
         }}>
-          Collapsed Settings
+          Background
         </div>
+        <Dropdown
+          label=""
+          options={backgroundTypeOptions}
+          selectedKey={sectionSettings.background.type}
+          onChange={(_, option) => handlePropertyChange('background.type', option?.key)}
+          styles={{ root: { minWidth: 120 } }}
+        />
+      </div>
 
-        {/* Background Controls Container */}
-        <div style={{ 
-          backgroundColor: '#f3f2f1', 
-          padding: '12px', 
-          borderRadius: '4px',
-          marginBottom: 16 
-        }}>
-          {/* Background Header with Type Dropdown */}
-          <div style={{ 
-            display: 'flex', 
-            alignItems: 'flex-start', 
-            gap: '8px',
-            marginBottom: '12px'
-          }}>
-            <div style={{
-              fontSize: '16px',
-              fontWeight: '600',
-              color: '#323130'
-            }}>
-              Background
-            </div>
-            <Dropdown
-              label=""
-              options={backgroundTypeOptions}
-              selectedKey={sectionSettings.background.type}
-              onChange={(_, option) => handlePropertyChange('background.type', option?.key)}
-              styles={{ root: { minWidth: 120 } }}
-            />
-          </div>
-
-          {/* 5. Solid Background Controls */}
-          {sectionSettings.background.type === 'solid' && (
-            <div style={{ marginBottom: 16 }}>
-              <ColorPickerControl
-                color={sectionSettings.background.color}
-                field="backgroundColor"
-                label=""
-                onChange={(field: string, newColor: string) => handlePropertyChange('background.color', newColor)}
-              />
-            </div>
-          )}
+      {/* 6. Solid Background Controls */}
+      {sectionSettings.background.type === 'solid' && (
+        <div style={{ marginBottom: 16 }}>
+          <ColorPickerControl
+            color={sectionSettings.background.color}
+            field="backgroundColor"
+            label=""
+            onChange={(field: string, newColor: string) => handlePropertyChange('background.color', newColor)}
+          />
+        </div>
+      )}
 
                 {/* 5. Gradient Background Controls */}
           {sectionSettings.background.type === 'gradient' && (
@@ -553,7 +529,6 @@ export const SectionModuleControl: React.FC<SectionModuleControlProps> = ({
               valueFormat={(value) => `${value}%`}
             />
           </div>
-        </div>
 
         {/* Shape Picker Control */}
         <div style={{ marginBottom: 0 }}>
@@ -563,8 +538,6 @@ export const SectionModuleControl: React.FC<SectionModuleControlProps> = ({
             onChange={(shape) => handlePropertyChange('shape', shape)}
           />
         </div>
-      </div>
-
 
       {/* Reset and Test Values Buttons */}
       <div style={{ marginTop: 16, display: 'flex', gap: '8px' }}>
@@ -573,14 +546,7 @@ export const SectionModuleControl: React.FC<SectionModuleControlProps> = ({
           onClick={handleReset}
         />
         <PrimaryButton 
-          text={(() => {
-            switch (sectionType) {
-              case 'category': return DEFAULTS_CONFIG.categorySectionSettings.testValuesButtonText;
-              case 'subject': return DEFAULTS_CONFIG.subjectSectionSettings.testValuesButtonText;
-              case 'description': return DEFAULTS_CONFIG.descriptionSectionSettings.testValuesButtonText;
-              default: return 'Test Values';
-            }
-          })()} 
+          text="Test Values"
           onClick={handleTestValues}
         />
       </div>

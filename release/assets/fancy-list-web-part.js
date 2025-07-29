@@ -3761,112 +3761,87 @@ var SectionModuleControl = function (_a) {
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_4__.ColorPickerControl, { color: sectionSettings.font.color, field: "fontColor", label: "", onChange: function (field, newColor) { return handlePropertyChange('font.color', newColor); } })),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
-                backgroundColor: '#e1dfdd',
-                padding: '12px',
-                borderRadius: '4px',
-                marginBottom: 16
+                display: 'flex',
+                alignItems: 'flex-start',
+                gap: '8px',
+                marginBottom: '12px'
             } },
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
                     fontSize: '16px',
                     fontWeight: '600',
-                    color: '#323130',
-                    marginBottom: '12px'
-                } }, "Collapsed Settings"),
+                    color: '#323130'
+                } }, "Background"),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_7__.Dropdown, { label: "", options: backgroundTypeOptions, selectedKey: sectionSettings.background.type, onChange: function (_, option) { return handlePropertyChange('background.type', option === null || option === void 0 ? void 0 : option.key); }, styles: { root: { minWidth: 120 } } })),
+        sectionSettings.background.type === 'solid' && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_4__.ColorPickerControl, { color: sectionSettings.background.color, field: "backgroundColor", label: "", onChange: function (field, newColor) { return handlePropertyChange('background.color', newColor); } }))),
+        sectionSettings.background.type === 'gradient' && (react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null,
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_7__.Dropdown, { label: "Direction", options: gradientDirectionOptions, selectedKey: sectionSettings.background.gradientDirection, onChange: function (_, option) { return handlePropertyChange('background.gradientDirection', option === null || option === void 0 ? void 0 : option.key); } })),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
-                    backgroundColor: '#f3f2f1',
-                    padding: '12px',
-                    borderRadius: '4px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    marginBottom: 8
+                } },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { type: "button", onClick: handleSwapColors, style: {
+                        padding: '4px 8px',
+                        border: '1px solid #0078d4',
+                        borderRadius: '4px',
+                        background: '#e5f1fb',
+                        color: '#0078d4',
+                        cursor: 'pointer',
+                        fontSize: '12px'
+                    } }, "Swap Colors"),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                        width: '190px',
+                        height: '32px',
+                        borderRadius: '4px',
+                        border: '1px solid #ccc',
+                        background: getGradientPreview(sectionSettings.background.gradientDirection, previewColor1, previewColor2)
+                    }, title: "Gradient direction preview (click Swap Colors to reverse)" })),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '8px',
                     marginBottom: 16
                 } },
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
-                        display: 'flex',
-                        alignItems: 'flex-start',
-                        gap: '8px',
-                        marginBottom: '12px'
-                    } },
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
-                            fontSize: '16px',
-                            fontWeight: '600',
-                            color: '#323130'
-                        } }, "Background"),
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_7__.Dropdown, { label: "", options: backgroundTypeOptions, selectedKey: sectionSettings.background.type, onChange: function (_, option) { return handlePropertyChange('background.type', option === null || option === void 0 ? void 0 : option.key); }, styles: { root: { minWidth: 120 } } })),
-                sectionSettings.background.type === 'solid' && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_4__.ColorPickerControl, { color: sectionSettings.background.color, field: "backgroundColor", label: "", onChange: function (field, newColor) { return handlePropertyChange('background.color', newColor); } }))),
-                sectionSettings.background.type === 'gradient' && (react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null,
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-                        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_7__.Dropdown, { label: "Direction", options: gradientDirectionOptions, selectedKey: sectionSettings.background.gradientDirection, onChange: function (_, option) { return handlePropertyChange('background.gradientDirection', option === null || option === void 0 ? void 0 : option.key); } })),
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '8px',
-                            marginBottom: 8
-                        } },
-                        react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { type: "button", onClick: handleSwapColors, style: {
-                                padding: '4px 8px',
-                                border: '1px solid #0078d4',
-                                borderRadius: '4px',
-                                background: '#e5f1fb',
-                                color: '#0078d4',
-                                cursor: 'pointer',
-                                fontSize: '12px'
-                            } }, "Swap Colors"),
-                        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
-                                width: '190px',
-                                height: '32px',
-                                borderRadius: '4px',
-                                border: '1px solid #ccc',
-                                background: getGradientPreview(sectionSettings.background.gradientDirection, previewColor1, previewColor2)
-                            }, title: "Gradient direction preview (click Swap Colors to reverse)" })),
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '8px',
-                            marginBottom: 16
-                        } },
-                        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_4__.ColorPickerControl, { color: sectionSettings.background.gradientColor1, field: "gradientColor1", label: "", onChange: function (field, newColor) { return handlePropertyChange('background.gradientColor1', newColor); } }),
-                        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_4__.ColorPickerControl, { color: sectionSettings.background.gradientColor2, field: "gradientColor2", label: "", onChange: function (field, newColor) { return handlePropertyChange('background.gradientColor2', newColor); } })))),
-                sectionSettings.background.type === 'image' && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: {
-                            fontSize: '14px',
-                            fontWeight: '600',
-                            color: '#323130',
-                            marginBottom: '8px',
-                            display: 'block'
-                        } }, "URL"),
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_8__.TextField, { value: sectionSettings.background.image, onChange: function (_, newValue) { return handlePropertyChange('background.image', newValue || ''); }, placeholder: "Enter image URL" }))),
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: {
-                            fontSize: '14px',
-                            fontWeight: '600',
-                            color: '#323130',
-                            marginBottom: '8px',
-                            display: 'block'
-                        } }, "Transparency"),
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Slider__WEBPACK_IMPORTED_MODULE_9__.Slider, { min: 0, max: 100, value: sectionSettings.background.type === 'solid' ? sectionSettings.background.alpha :
-                            sectionSettings.background.type === 'gradient' ? sectionSettings.background.gradientAlpha1 :
-                                sectionSettings.background.imageAlpha, onChange: function (value) {
-                            if (sectionSettings.background.type === 'solid') {
-                                handlePropertyChange('background.alpha', value);
-                            }
-                            else if (sectionSettings.background.type === 'gradient') {
-                                handlePropertyChange('background.gradientAlpha1', value);
-                            }
-                            else {
-                                handlePropertyChange('background.imageAlpha', value);
-                            }
-                        }, showValue: true, valueFormat: function (value) { return "".concat(value, "%"); } }))),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 0 } },
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ShapePickerControl__WEBPACK_IMPORTED_MODULE_2__.ShapePickerControl, { label: "", value: sectionSettings.shape, onChange: function (shape) { return handlePropertyChange('shape', shape); } }))),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_4__.ColorPickerControl, { color: sectionSettings.background.gradientColor1, field: "gradientColor1", label: "", onChange: function (field, newColor) { return handlePropertyChange('background.gradientColor1', newColor); } }),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_4__.ColorPickerControl, { color: sectionSettings.background.gradientColor2, field: "gradientColor2", label: "", onChange: function (field, newColor) { return handlePropertyChange('background.gradientColor2', newColor); } })))),
+        sectionSettings.background.type === 'image' && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: {
+                    fontSize: '14px',
+                    fontWeight: '600',
+                    color: '#323130',
+                    marginBottom: '8px',
+                    display: 'block'
+                } }, "URL"),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_8__.TextField, { value: sectionSettings.background.image, onChange: function (_, newValue) { return handlePropertyChange('background.image', newValue || ''); }, placeholder: "Enter image URL" }))),
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: {
+                    fontSize: '14px',
+                    fontWeight: '600',
+                    color: '#323130',
+                    marginBottom: '8px',
+                    display: 'block'
+                } }, "Transparency"),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Slider__WEBPACK_IMPORTED_MODULE_9__.Slider, { min: 0, max: 100, value: sectionSettings.background.type === 'solid' ? sectionSettings.background.alpha :
+                    sectionSettings.background.type === 'gradient' ? sectionSettings.background.gradientAlpha1 :
+                        sectionSettings.background.imageAlpha, onChange: function (value) {
+                    if (sectionSettings.background.type === 'solid') {
+                        handlePropertyChange('background.alpha', value);
+                    }
+                    else if (sectionSettings.background.type === 'gradient') {
+                        handlePropertyChange('background.gradientAlpha1', value);
+                    }
+                    else {
+                        handlePropertyChange('background.imageAlpha', value);
+                    }
+                }, showValue: true, valueFormat: function (value) { return "".concat(value, "%"); } })),
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 0 } },
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ShapePickerControl__WEBPACK_IMPORTED_MODULE_2__.ShapePickerControl, { label: "", value: sectionSettings.shape, onChange: function (shape) { return handlePropertyChange('shape', shape); } })),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginTop: 16, display: 'flex', gap: '8px' } },
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_10__.PrimaryButton, { text: sectionSettings.resetButtonText, onClick: handleReset }),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_10__.PrimaryButton, { text: (function () {
-                    switch (sectionType) {
-                        case 'category': return _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].categorySectionSettings.testValuesButtonText;
-                        case 'subject': return _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].subjectSectionSettings.testValuesButtonText;
-                        case 'description': return _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].descriptionSectionSettings.testValuesButtonText;
-                        default: return 'Test Values';
-                    }
-                })(), onClick: handleTestValues }))));
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_10__.PrimaryButton, { text: "Test Values", onClick: handleTestValues }))));
 };
 
 
