@@ -6,7 +6,6 @@ export interface TitleConfigurationProps {
         enabled: boolean;
         webPartTitle: string;
         shape: ShapeOption;
-        showDivider: boolean;
         backgroundType: 'solid' | 'gradient' | 'image';
         backgroundColor: string;
         backgroundAlpha: number;

@@ -15,7 +15,6 @@ export interface TitleConfigurationProps {
     enabled: boolean;
     webPartTitle: string;
     shape: ShapeOption;
-    showDivider: boolean;
     backgroundType: 'solid' | 'gradient' | 'image';
     backgroundColor: string;
     backgroundAlpha: number;
@@ -47,7 +46,6 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
     enabled: true,
     webPartTitle: '',
     shape: 'rounded',
-    showDivider: false,
     backgroundType: 'solid',
     backgroundColor: '#ffffff',
     backgroundAlpha: 100,
@@ -139,7 +137,6 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
   const handleReset = () => {
     // Do NOT reset webPartTitle (preserve current title text) per design
     handlePropertyChange('shape', DEFAULTS_CONFIG.titleSettings.shape);
-    handlePropertyChange('showDivider', DEFAULTS_CONFIG.titleSettings.showDivider);
     handlePropertyChange('backgroundType', DEFAULTS_CONFIG.titleSettings.background.type);
     handlePropertyChange('backgroundColor', DEFAULTS_CONFIG.titleSettings.background.color);
     handlePropertyChange('backgroundAlpha', DEFAULTS_CONFIG.titleSettings.background.alpha);
@@ -162,7 +159,6 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
     // Apply test values including webPartTitle
     handlePropertyChange('webPartTitle', DEFAULTS_CONFIG.titleSettings.testValues.webPartTitle);
     handlePropertyChange('shape', DEFAULTS_CONFIG.titleSettings.testValues.shape);
-    handlePropertyChange('showDivider', DEFAULTS_CONFIG.titleSettings.testValues.showDivider);
     handlePropertyChange('backgroundType', DEFAULTS_CONFIG.titleSettings.testValues.background.type);
     handlePropertyChange('backgroundColor', DEFAULTS_CONFIG.titleSettings.testValues.background.color);
     handlePropertyChange('backgroundAlpha', DEFAULTS_CONFIG.titleSettings.testValues.background.alpha);
@@ -420,18 +416,6 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
           value={settings.shape}
           label=""
           onChange={(newShape) => handlePropertyChange('shape', newShape)}
-        />
-      </div>
-
-      {/* 5. Show Divider Toggle */}
-      <div style={{ marginBottom: 16 }}>
-        <Toggle
-          label="Divider"
-          inlineLabel={true}
-          checked={settings.showDivider}
-          onText="On"
-          offText="Off"
-          onChange={(_, checked) => handlePropertyChange('showDivider', checked)}
         />
       </div>
 

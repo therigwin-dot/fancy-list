@@ -38,7 +38,6 @@ export const DEFAULTS_CONFIG = {
       gradientAlpha2: 0
     },
     shape: 'rounded' as const,
-    showDivider: false,
     // Test Values for Title Section
     testValues: {
       webPartTitle: 'Testing Fancy List',
@@ -61,8 +60,7 @@ export const DEFAULTS_CONFIG = {
         gradientColor2: '#00ff00',
         gradientAlpha2: 60
       },
-      shape: 'pill' as const,
-      showDivider: true
+      shape: 'pill' as const
     }
   } as TitleSettings,
 

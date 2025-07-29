@@ -38,8 +38,6 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     private getFilterBackgroundStyle;
     private checkFilterImage;
     private hexToRgba;
-    private getContrastingDividerColor;
-    private getTitleBackgroundColor;
     private validateImageFileType;
     private checkTitleImage;
     private getTitleStyle;

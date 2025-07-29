@@ -44,7 +44,6 @@ export interface IFancyListWebPartProps {
   webPartTitleBackgroundGradientAlpha1: number;
   webPartTitleBackgroundGradientColor2: string;
   webPartTitleBackgroundGradientAlpha2: number;
-  showTitleDivider: boolean;
   titleSettings: TitleSettings;
   filterSettings: FilterSettings;
   categorySectionSettings: SectionSettings;
@@ -79,7 +78,6 @@ export interface TitleSettings {
     gradientAlpha2: number;
   };
   shape: 'square' | 'rounded' | 'pill';
-  showDivider: boolean;
   testValues: {
     webPartTitle: string;
     font: {
@@ -102,7 +100,6 @@ export interface TitleSettings {
       gradientAlpha2: number;
     };
     shape: 'square' | 'rounded' | 'pill';
-    showDivider: boolean;
   };
 }
 
@@ -313,11 +310,11 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
   public render(): void {
     // Map individual properties to the format expected by FancyList component
     // Use default values if properties are undefined
+    // Map title properties to the format expected by FancyList component
     const titleSettings = {
       enabled: this.properties.titleSettings?.enabled ?? DEFAULTS_CONFIG.titleSettings.enabled,
       webPartTitle: this.properties.webPartTitle ?? '',
       shape: this.properties.titleSettings?.shape ?? DEFAULTS_CONFIG.titleSettings.shape,
-      showDivider: this.properties.showTitleDivider ?? DEFAULTS_CONFIG.titleSettings.showDivider,
       backgroundType: this.properties.webPartTitleBackgroundType ?? DEFAULTS_CONFIG.titleSettings.background.type,
       backgroundColor: this.properties.webPartTitleBackgroundColor ?? DEFAULTS_CONFIG.titleSettings.background.color,
       backgroundAlpha: this.properties.webPartTitleBackgroundAlpha ?? DEFAULTS_CONFIG.titleSettings.background.alpha,
@@ -918,7 +915,6 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
                             enabled: this.properties.titleSettings?.enabled || DEFAULTS_CONFIG.titleSettings.enabled,
                             webPartTitle: this.properties.webPartTitle || DEFAULTS_CONFIG.titleSettings.webPartTitle,
                             shape: this.properties.titleSettings?.shape || DEFAULTS_CONFIG.titleSettings.shape,
-                            showDivider: this.properties.showTitleDivider || DEFAULTS_CONFIG.titleSettings.showDivider,
                             backgroundType: this.properties.webPartTitleBackgroundType || DEFAULTS_CONFIG.titleSettings.background.type,
                             backgroundColor: this.properties.webPartTitleBackgroundColor || DEFAULTS_CONFIG.titleSettings.background.color,
                             backgroundAlpha: this.properties.webPartTitleBackgroundAlpha || DEFAULTS_CONFIG.titleSettings.background.alpha,
@@ -949,9 +945,6 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
                               case 'shape':
                                 if (!this.properties.titleSettings) this.properties.titleSettings = { ...DEFAULTS_CONFIG.titleSettings };
                                 this.properties.titleSettings.shape = newValue;
-                                break;
-                              case 'showDivider':
-                                this.properties.showTitleDivider = newValue;
                                 break;
                               case 'backgroundType':
                                 this.properties.webPartTitleBackgroundType = newValue;

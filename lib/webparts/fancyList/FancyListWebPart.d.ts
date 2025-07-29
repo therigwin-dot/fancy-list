@@ -31,7 +31,6 @@ export interface IFancyListWebPartProps {
     webPartTitleBackgroundGradientAlpha1: number;
     webPartTitleBackgroundGradientColor2: string;
     webPartTitleBackgroundGradientAlpha2: number;
-    showTitleDivider: boolean;
     titleSettings: TitleSettings;
     filterSettings: FilterSettings;
     categorySectionSettings: SectionSettings;
@@ -70,7 +69,6 @@ export interface TitleSettings {
         gradientAlpha2: number;
     };
     shape: 'square' | 'rounded' | 'pill';
-    showDivider: boolean;
     testValues: {
         webPartTitle: string;
         font: {
@@ -98,7 +96,6 @@ export interface TitleSettings {
             gradientAlpha2: number;
         };
         shape: 'square' | 'rounded' | 'pill';
-        showDivider: boolean;
     };
 }
 export interface FilterSettings {

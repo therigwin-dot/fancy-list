@@ -14,7 +14,6 @@ export interface IFancyListProps {
         enabled: boolean;
         webPartTitle: string;
         shape: 'square' | 'rounded' | 'pill';
-        showDivider: boolean;
         backgroundType: 'solid' | 'gradient' | 'image';
         backgroundColor: string;
         backgroundAlpha: number;
