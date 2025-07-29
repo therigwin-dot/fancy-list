@@ -38022,23 +38022,56 @@ var FancyListWebPart = /** @class */ (function (_super) {
                 },
                 // Page 7: About
                 {
-                    header: {
-                        description: 'About'
-                    },
                     groups: [
                         {
                             groupFields: [
+                                {
+                                    type: 1, // PropertyPaneFieldType.Custom
+                                    targetProperty: 'aboutInfo',
+                                    properties: {
+                                        key: 'aboutInfo',
+                                        onRender: function (elem, ctx, changeCallback) {
+                                            react_dom__WEBPACK_IMPORTED_MODULE_1__.render(react__WEBPACK_IMPORTED_MODULE_0__.createElement('div', {
+                                                style: {
+                                                    fontSize: '16px',
+                                                    fontWeight: '600',
+                                                    color: '#323130',
+                                                    marginBottom: '8px'
+                                                }
+                                            }, 'About'), elem);
+                                        },
+                                        onDispose: function (elem) {
+                                            react_dom__WEBPACK_IMPORTED_MODULE_1__.unmountComponentAtNode(elem);
+                                        }
+                                    }
+                                },
                                 (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('version', {
                                     text: "Version: ".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.version)
                                 }),
                                 (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('description', {
                                     text: _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.description
-                                })
-                            ]
-                        },
-                        {
-                            groupName: 'Features',
-                            groupFields: [
+                                }),
+                                {
+                                    type: 1, // PropertyPaneFieldType.Custom
+                                    targetProperty: 'featuresHeader',
+                                    properties: {
+                                        key: 'featuresHeader',
+                                        onRender: function (elem, ctx, changeCallback) {
+                                            react_dom__WEBPACK_IMPORTED_MODULE_1__.render(react__WEBPACK_IMPORTED_MODULE_0__.createElement('div', {
+                                                style: {
+                                                    fontSize: '16px',
+                                                    fontWeight: '600',
+                                                    color: '#323130',
+                                                    marginTop: '16px',
+                                                    marginBottom: '4px'
+                                                }
+                                            }, 'Features'), elem);
+                                        },
+                                        onDispose: function (elem) {
+                                            react_dom__WEBPACK_IMPORTED_MODULE_1__.unmountComponentAtNode(elem);
+                                        }
+                                    }
+                                },
                                 (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('features1', {
                                     text: "".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.features[0])
                                 }),
@@ -38065,12 +38098,28 @@ var FancyListWebPart = /** @class */ (function (_super) {
                                 }),
                                 (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('features9', {
                                     text: "".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.features[8])
-                                })
-                            ]
-                        },
-                        {
-                            groupName: 'Known Issues',
-                            groupFields: [
+                                }),
+                                {
+                                    type: 1, // PropertyPaneFieldType.Custom
+                                    targetProperty: 'knownIssuesHeader',
+                                    properties: {
+                                        key: 'knownIssuesHeader',
+                                        onRender: function (elem, ctx, changeCallback) {
+                                            react_dom__WEBPACK_IMPORTED_MODULE_1__.render(react__WEBPACK_IMPORTED_MODULE_0__.createElement('div', {
+                                                style: {
+                                                    fontSize: '16px',
+                                                    fontWeight: '600',
+                                                    color: '#323130',
+                                                    marginTop: '16px',
+                                                    marginBottom: '4px'
+                                                }
+                                            }, 'Known Issues'), elem);
+                                        },
+                                        onDispose: function (elem) {
+                                            react_dom__WEBPACK_IMPORTED_MODULE_1__.unmountComponentAtNode(elem);
+                                        }
+                                    }
+                                },
                                 (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('knownIssues1', {
                                     text: "".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.knownIssues[0])
                                 }),

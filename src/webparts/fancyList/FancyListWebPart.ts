@@ -1289,23 +1289,62 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
         },
         // Page 7: About
         {
-          header: {
-            description: 'About'
-          },
           groups: [
             {
               groupFields: [
+                {
+                  type: 1, // PropertyPaneFieldType.Custom
+                  targetProperty: 'aboutInfo',
+                  properties: {
+                    key: 'aboutInfo',
+                    onRender: (elem: HTMLElement, ctx: unknown, changeCallback?: () => void) => {
+                      ReactDom.render(
+                        React.createElement('div', {
+                          style: { 
+                            fontSize: '16px',
+                            fontWeight: '600',
+                            color: '#323130',
+                            marginBottom: '8px'
+                          }
+                        }, 'About'),
+                        elem
+                      );
+                    },
+                    onDispose: (elem: HTMLElement) => {
+                      ReactDom.unmountComponentAtNode(elem);
+                    }
+                  }
+                },
                 PropertyPaneLabel('version', {
                   text: `Version: ${DEFAULTS_CONFIG.aboutInfo.version}`
                 }),
                 PropertyPaneLabel('description', {
                   text: DEFAULTS_CONFIG.aboutInfo.description
-                })
-              ]
-            },
-            {
-              groupName: 'Features',
-              groupFields: [
+                }),
+                {
+                  type: 1, // PropertyPaneFieldType.Custom
+                  targetProperty: 'featuresHeader',
+                  properties: {
+                    key: 'featuresHeader',
+                    onRender: (elem: HTMLElement, ctx: unknown, changeCallback?: () => void) => {
+                      ReactDom.render(
+                        React.createElement('div', {
+                          style: { 
+                            fontSize: '16px',
+                            fontWeight: '600',
+                            color: '#323130',
+                            marginTop: '16px',
+                            marginBottom: '4px'
+                          }
+                        }, 'Features'),
+                        elem
+                      );
+                    },
+                    onDispose: (elem: HTMLElement) => {
+                      ReactDom.unmountComponentAtNode(elem);
+                    }
+                  }
+                },
                 PropertyPaneLabel('features1', {
                   text: `${DEFAULTS_CONFIG.aboutInfo.features[0]}`
                 }),
@@ -1332,12 +1371,31 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
                 }),
                 PropertyPaneLabel('features9', {
                   text: `${DEFAULTS_CONFIG.aboutInfo.features[8]}`
-                })
-              ]
-            },
-            {
-              groupName: 'Known Issues',
-              groupFields: [
+                }),
+                {
+                  type: 1, // PropertyPaneFieldType.Custom
+                  targetProperty: 'knownIssuesHeader',
+                  properties: {
+                    key: 'knownIssuesHeader',
+                    onRender: (elem: HTMLElement, ctx: unknown, changeCallback?: () => void) => {
+                      ReactDom.render(
+                        React.createElement('div', {
+                          style: { 
+                            fontSize: '16px',
+                            fontWeight: '600',
+                            color: '#323130',
+                            marginTop: '16px',
+                            marginBottom: '4px'
+                          }
+                        }, 'Known Issues'),
+                        elem
+                      );
+                    },
+                    onDispose: (elem: HTMLElement) => {
+                      ReactDom.unmountComponentAtNode(elem);
+                    }
+                  }
+                },
                 PropertyPaneLabel('knownIssues1', {
                   text: `${DEFAULTS_CONFIG.aboutInfo.knownIssues[0]}`
                 }),
