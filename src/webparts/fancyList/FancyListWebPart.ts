@@ -1338,52 +1338,138 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
                               marginBottom: '16px'
                             }
                           }, DEFAULTS_CONFIG.aboutInfo.description),
-                          // Features Header
+                          // Features Collapsible Section
                           React.createElement('div', {
-                            key: 'featuresHeader',
-                            style: { 
-                              fontSize: '16px',
-                              fontWeight: '600',
-                              color: '#323130',
+                            key: 'featuresSection',
+                            style: {
                               marginTop: '16px',
-                              marginBottom: '4px'
+                              border: '1px solid #e1dfdd',
+                              borderRadius: '4px',
+                              overflow: 'hidden'
                             }
-                          }, 'Features'),
-                          // Features List
-                          ...DEFAULTS_CONFIG.aboutInfo.features.map((feature, index) => 
+                          }, [
+                            // Features Header (Clickable)
                             React.createElement('div', {
-                              key: `feature${index}`,
+                              key: 'featuresHeader',
                               style: { 
-                                fontSize: '14px',
-                                fontWeight: '400',
+                                fontSize: '16px',
+                                fontWeight: '600',
                                 color: '#323130',
-                                marginBottom: '2px'
+                                padding: '8px 12px',
+                                backgroundColor: '#f3f2f1',
+                                cursor: 'pointer',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'space-between'
+                              },
+                              onClick: () => {
+                                const content = document.getElementById('featuresContent');
+                                const icon = document.getElementById('featuresIcon');
+                                if (content && icon) {
+                                  if (content.style.display === 'none') {
+                                    content.style.display = 'block';
+                                    icon.textContent = '▼';
+                                  } else {
+                                    content.style.display = 'none';
+                                    icon.textContent = '▶';
+                                  }
+                                }
                               }
-                            }, `• ${feature}`)
-                          ),
-                          // Known Issues Header
+                            }, [
+                              'Features',
+                              React.createElement('span', {
+                                key: 'featuresIcon',
+                                id: 'featuresIcon',
+                                style: { fontSize: '12px' }
+                              }, '▶')
+                            ]),
+                            // Features Content (Collapsed by default)
+                            React.createElement('div', {
+                              key: 'featuresContent',
+                              id: 'featuresContent',
+                              style: { 
+                                display: 'none',
+                                padding: '8px 12px',
+                                backgroundColor: '#ffffff'
+                              }
+                            }, DEFAULTS_CONFIG.aboutInfo.features.map((feature, index) => 
+                              React.createElement('div', {
+                                key: `feature${index}`,
+                                style: { 
+                                  fontSize: '14px',
+                                  fontWeight: '400',
+                                  color: '#323130',
+                                  marginBottom: '2px'
+                                }
+                              }, `• ${feature}`)
+                            ))
+                          ]),
+                          // Known Issues Collapsible Section
                           React.createElement('div', {
-                            key: 'knownIssuesHeader',
-                            style: { 
-                              fontSize: '16px',
-                              fontWeight: '600',
-                              color: '#323130',
+                            key: 'knownIssuesSection',
+                            style: {
                               marginTop: '16px',
-                              marginBottom: '4px'
+                              border: '1px solid #e1dfdd',
+                              borderRadius: '4px',
+                              overflow: 'hidden'
                             }
-                          }, 'Known Issues'),
-                          // Known Issues List
-                          ...DEFAULTS_CONFIG.aboutInfo.knownIssues.map((issue, index) => 
+                          }, [
+                            // Known Issues Header (Clickable)
                             React.createElement('div', {
-                              key: `issue${index}`,
+                              key: 'knownIssuesHeader',
                               style: { 
-                                fontSize: '14px',
-                                fontWeight: '400',
+                                fontSize: '16px',
+                                fontWeight: '600',
                                 color: '#323130',
-                                marginBottom: '2px'
+                                padding: '8px 12px',
+                                backgroundColor: '#f3f2f1',
+                                cursor: 'pointer',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'space-between'
+                              },
+                              onClick: () => {
+                                const content = document.getElementById('knownIssuesContent');
+                                const icon = document.getElementById('knownIssuesIcon');
+                                if (content && icon) {
+                                  if (content.style.display === 'none') {
+                                    content.style.display = 'block';
+                                    icon.textContent = '▼';
+                                  } else {
+                                    content.style.display = 'none';
+                                    icon.textContent = '▶';
+                                  }
+                                }
                               }
-                            }, `• ${issue}`)
-                          ),
+                            }, [
+                              'Known Issues',
+                              React.createElement('span', {
+                                key: 'knownIssuesIcon',
+                                id: 'knownIssuesIcon',
+                                style: { fontSize: '12px' }
+                              }, '▶')
+                            ]),
+                            // Known Issues Content (Collapsed by default)
+                            React.createElement('div', {
+                              key: 'knownIssuesContent',
+                              id: 'knownIssuesContent',
+                              style: { 
+                                display: 'none',
+                                padding: '8px 12px',
+                                backgroundColor: '#ffffff'
+                              }
+                            }, DEFAULTS_CONFIG.aboutInfo.knownIssues.map((issue, index) => 
+                              React.createElement('div', {
+                                key: `issue${index}`,
+                                style: { 
+                                  fontSize: '14px',
+                                  fontWeight: '400',
+                                  color: '#323130',
+                                  marginBottom: '2px'
+                                }
+                              }, `• ${issue}`)
+                            ))
+                          ]),
                           // Administrative Links Header
                           React.createElement('div', {
                             key: 'adminLinksHeader',
@@ -1469,7 +1555,7 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
                               marginTop: '16px',
                               marginBottom: '8px'
                             }
-                          }, 'Contact Information'),
+                          }, 'Internal Contact Information'),
                           // Developer Info
                           React.createElement('div', {
                             key: 'developerInfo',
@@ -1479,11 +1565,11 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
                               color: '#323130',
                               marginBottom: '4px'
                             }
-                          }, 'Developer: Therigwin\'s Fox Studios'),
+                          }, 'Developer: Tom Keyes'),
                           // Contact Email
                           React.createElement('a', {
                             key: 'contactEmail',
-                            href: 'mailto:therigwin+FoxShrineStudios@gmail.com',
+                            href: 'mailto:tkeyes@fbinmsi.com',
                             style: { 
                               fontSize: '14px',
                               fontWeight: '400',
@@ -1494,7 +1580,19 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
                             },
                             onMouseEnter: (e) => { (e.target as HTMLElement).style.textDecoration = 'underline'; },
                             onMouseLeave: (e) => { (e.target as HTMLElement).style.textDecoration = 'none'; }
-                          }, '📧 Contact: therigwin+FoxShrineStudios@gmail.com')
+                          }, '📧 Contact: tkeyes@fbinmsi.com'),
+                          // M365 Profile Note
+                          React.createElement('div', {
+                            key: 'm365Note',
+                            style: { 
+                              fontSize: '12px',
+                              fontWeight: '400',
+                              color: '#605e5c',
+                              fontStyle: 'italic',
+                              marginTop: '4px',
+                              marginBottom: '8px'
+                            }
+                          }, 'Note: Clicking the email will open your M365 profile card')
                         ]),
                         elem
                       );
