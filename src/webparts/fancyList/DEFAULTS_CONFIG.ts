@@ -62,7 +62,7 @@ export const DEFAULTS_CONFIG = {
         gradientAlpha2: 60
       },
       shape: 'pill' as const,
-      divideSpace: 0
+      divideSpace: 4
     }
   } as TitleSettings,
 

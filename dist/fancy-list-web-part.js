@@ -116,7 +116,7 @@ var DEFAULTS_CONFIG = {
                 gradientAlpha2: 60
             },
             shape: 'pill',
-            divideSpace: 0
+            divideSpace: 4
         }
     },
     // Page 3: Filter Settings
