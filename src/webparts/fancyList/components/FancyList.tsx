@@ -489,20 +489,19 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     // Base overrides to prevent CSS class conflicts
     const baseOverrides = {
       border: 'none',
-      boxShadow: 'none'
+      boxShadow: 'none',
+      borderRadius: this.getShapeRadius(shape) // Ensure shape takes precedence
     };
 
     switch (backgroundType) {
       case 'solid':
         return {
           backgroundColor: this.hexToRgba(backgroundColor, 1 - (backgroundAlpha / 100)), // Invert alpha: 0% = opaque (alpha 1), 100% = transparent (alpha 0)
-          borderRadius: this.getShapeRadius(shape),
           ...baseOverrides
         };
       case 'gradient':
         return {
           background: this.getGradientStyle(gradientDirection, gradientColor1, gradientColor2, 1 - (gradientAlpha / 100)), // Invert alpha: 0% = opaque (alpha 1), 100% = transparent (alpha 0)
-          borderRadius: this.getShapeRadius(shape),
           ...baseOverrides
         };
       case 'image':
@@ -511,13 +510,11 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
             background: `linear-gradient(rgba(255,255,255,${imageAlpha / 100}), rgba(255,255,255,${imageAlpha / 100})), url(${imageUrl})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            borderRadius: this.getShapeRadius(shape),
             ...baseOverrides
           };
         } else {
           return {
             backgroundColor: '#ffffff', // Simple white background for empty/invalid URLs
-            borderRadius: this.getShapeRadius(shape),
             ...baseOverrides
           };
         }
@@ -1002,6 +999,7 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
                           alignItems: 'center',
                           justifyContent: 'space-between',
                           width: '100%',
+                          padding: '1em', // Explicit padding to override CSS class
                           ...this.getSubjectSectionBackgroundStyle()
                         }}
                       >

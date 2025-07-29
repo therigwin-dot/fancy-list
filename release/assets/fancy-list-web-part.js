@@ -2138,19 +2138,20 @@ var FancyList = /** @class */ (function (_super) {
         // Base overrides to prevent CSS class conflicts
         var baseOverrides = {
             border: 'none',
-            boxShadow: 'none'
+            boxShadow: 'none',
+            borderRadius: this.getShapeRadius(shape) // Ensure shape takes precedence
         };
         switch (backgroundType) {
             case 'solid':
-                return __assign({ backgroundColor: this.hexToRgba(backgroundColor, 1 - (backgroundAlpha / 100)), borderRadius: this.getShapeRadius(shape) }, baseOverrides);
+                return __assign({ backgroundColor: this.hexToRgba(backgroundColor, 1 - (backgroundAlpha / 100)) }, baseOverrides);
             case 'gradient':
-                return __assign({ background: this.getGradientStyle(gradientDirection, gradientColor1, gradientColor2, 1 - (gradientAlpha / 100)), borderRadius: this.getShapeRadius(shape) }, baseOverrides);
+                return __assign({ background: this.getGradientStyle(gradientDirection, gradientColor1, gradientColor2, 1 - (gradientAlpha / 100)) }, baseOverrides);
             case 'image':
                 if (imageUrl) {
-                    return __assign({ background: "linear-gradient(rgba(255,255,255,".concat(imageAlpha / 100, "), rgba(255,255,255,").concat(imageAlpha / 100, ")), url(").concat(imageUrl, ")"), backgroundSize: 'cover', backgroundPosition: 'center', borderRadius: this.getShapeRadius(shape) }, baseOverrides);
+                    return __assign({ background: "linear-gradient(rgba(255,255,255,".concat(imageAlpha / 100, "), rgba(255,255,255,").concat(imageAlpha / 100, ")), url(").concat(imageUrl, ")"), backgroundSize: 'cover', backgroundPosition: 'center' }, baseOverrides);
                 }
                 else {
-                    return __assign({ backgroundColor: '#ffffff', borderRadius: this.getShapeRadius(shape) }, baseOverrides);
+                    return __assign({ backgroundColor: '#ffffff' }, baseOverrides);
                 }
             default:
                 return baseOverrides;
@@ -2473,7 +2474,7 @@ var FancyList = /** @class */ (function (_super) {
                         return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { key: item.id, className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemPanel, style: {
                                 marginBottom: "".concat(divideSpace, "px")
                             } },
-                            react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { className: "".concat(_FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemHeader, " ").concat(isItemExpanded ? _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].expanded : ''), onClick: function () { return _this.handleItemToggle(item.id); }, "aria-expanded": isItemExpanded ? "true" : "false", style: __assign({ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }, _this.getSubjectSectionBackgroundStyle()) },
+                            react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { className: "".concat(_FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemHeader, " ").concat(isItemExpanded ? _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].expanded : ''), onClick: function () { return _this.handleItemToggle(item.id); }, "aria-expanded": isItemExpanded ? "true" : "false", style: __assign({ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', padding: '1em' }, _this.getSubjectSectionBackgroundStyle()) },
                                 react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemSubject, style: _this.getSubjectSectionFontStyle() }, item.subject),
                                 ((_d = (_c = _this.props.subjectSectionSettings) === null || _c === void 0 ? void 0 : _c.icons) === null || _d === void 0 ? void 0 : _d.enabled) && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].expandIcon, style: {
                                         order: _this.props.subjectSectionSettings.icons.iconPosition === 'left' ? -1 : 1,
