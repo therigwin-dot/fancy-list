@@ -119,6 +119,7 @@ export interface IFancyListProps {
       gradientAlpha2: number;
     };
     shape: 'square' | 'rounded' | 'pill';
+    divideSpace?: number;
     autoExpand: boolean;
     hoverColor: string;
     icons: {

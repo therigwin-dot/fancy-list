@@ -40,6 +40,7 @@ export declare const DEFAULTS_CONFIG: {
             gradientAlpha2: number;
         };
         shape: "rounded";
+        divideSpace: number;
         autoExpand: boolean;
         hoverColor: string;
         iconSettings: {
@@ -74,6 +75,7 @@ export declare const DEFAULTS_CONFIG: {
                 gradientAlpha2: number;
             };
             shape: "pill";
+            divideSpace: number;
             autoExpand: boolean;
             hoverColor: string;
             iconSettings: {
@@ -114,7 +116,7 @@ export declare const DEFAULTS_CONFIG: {
             gradientAlpha2: number;
         };
         shape: "rounded";
-        showDivider: boolean;
+        divideSpace: number;
         autoExpand: boolean;
         hoverColor: string;
         iconSettings: {
@@ -149,7 +151,7 @@ export declare const DEFAULTS_CONFIG: {
                 gradientAlpha2: number;
             };
             shape: "square";
-            showDivider: boolean;
+            divideSpace: number;
             autoExpand: boolean;
             hoverColor: string;
             iconSettings: {
@@ -190,7 +192,7 @@ export declare const DEFAULTS_CONFIG: {
             gradientAlpha2: number;
         };
         shape: "rounded";
-        showDivider: boolean;
+        divideSpace: number;
         autoExpand: boolean;
         hoverColor: string;
         iconSettings: {
@@ -225,7 +227,7 @@ export declare const DEFAULTS_CONFIG: {
                 gradientAlpha2: number;
             };
             shape: "pill";
-            showDivider: boolean;
+            divideSpace: number;
             autoExpand: boolean;
             hoverColor: string;
             iconSettings: {

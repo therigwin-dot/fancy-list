@@ -8,6 +8,7 @@ import { IconControl } from './IconControl';
 import { ShapePickerControl } from './ShapePickerControl';
 import { FontControl } from './FontControl';
 import { ColorPickerControl } from './ColorPickerControl';
+import { DivideSpaceControl } from './DivideSpaceControl';
 import DEFAULTS_CONFIG from '../DEFAULTS_CONFIG';
 
 export type SectionType = 'category' | 'subject' | 'description';
@@ -43,6 +44,7 @@ export interface SectionSettings {
     gradientAlpha2: number;
   };
   shape: 'square' | 'rounded' | 'pill';
+  divideSpace: number;
   autoExpand: boolean;
   iconSettings: IconSettings;
 }
@@ -157,6 +159,9 @@ export const SectionModuleControl: React.FC<SectionModuleControlProps> = ({
         break;
       case 'shape':
         newSettings.shape = newValue;
+        break;
+      case 'divideSpace':
+        newSettings.divideSpace = newValue;
         break;
       case 'font.family':
         newSettings.font.family = newValue;
@@ -514,6 +519,15 @@ export const SectionModuleControl: React.FC<SectionModuleControlProps> = ({
             label=""
             value={sectionSettings.shape}
             onChange={(shape) => handlePropertyChange('shape', shape)}
+          />
+        </div>
+
+        {/* DivideSpace Control */}
+        <div style={{ marginBottom: 16 }}>
+          <DivideSpaceControl
+            label="Div Space"
+            value={sectionSettings.divideSpace}
+            onChange={(value) => handlePropertyChange('divideSpace', value)}
           />
         </div>
 

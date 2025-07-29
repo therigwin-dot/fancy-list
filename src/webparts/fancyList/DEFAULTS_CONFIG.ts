@@ -164,6 +164,7 @@ export const DEFAULTS_CONFIG = {
       gradientAlpha2: 0.6
     },
     shape: 'rounded' as const,
+    divideSpace: 0,
     autoExpand: false,
     hoverColor: '#f3f2f1',
     iconSettings: {
@@ -194,6 +195,7 @@ export const DEFAULTS_CONFIG = {
         gradientAlpha2: 40
       },
       shape: 'pill' as const,
+      divideSpace: 4,
       autoExpand: true,
       hoverColor: '#ff0000',
       iconSettings: {
@@ -231,7 +233,7 @@ export const DEFAULTS_CONFIG = {
       gradientAlpha2: 0.3
     },
     shape: 'rounded' as const,
-    showDivider: false,
+    divideSpace: 0,
     autoExpand: false,
     hoverColor: '#faf9f8',
     iconSettings: {
@@ -262,7 +264,7 @@ export const DEFAULTS_CONFIG = {
         gradientAlpha2: 50
       },
       shape: 'square' as const,
-      showDivider: true,
+      divideSpace: 4,
       autoExpand: true,
       hoverColor: '#ffcc99',
       iconSettings: {
@@ -300,7 +302,7 @@ export const DEFAULTS_CONFIG = {
       gradientAlpha2: 0.5
     },
     shape: 'rounded' as const,
-    showDivider: false,
+    divideSpace: 0,
     autoExpand: false,
     hoverColor: '#faf9f8',
     iconSettings: {
@@ -331,7 +333,7 @@ export const DEFAULTS_CONFIG = {
         gradientAlpha2: 50
       },
       shape: 'pill' as const,
-      showDivider: true,
+      divideSpace: 4,
       autoExpand: true,
       hoverColor: '#e6ccff',
       iconSettings: {

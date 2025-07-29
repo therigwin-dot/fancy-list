@@ -200,6 +200,7 @@ export interface SectionSettings {
     gradientAlpha2: number;
   };
   shape: 'square' | 'rounded' | 'pill';
+  divideSpace: number;
   autoExpand: boolean;
   hoverColor: string;
   iconSettings: {
@@ -229,6 +230,7 @@ export interface SectionSettings {
       gradientAlpha2: number;
     };
     shape: 'square' | 'rounded' | 'pill';
+    divideSpace: number;
     autoExpand: boolean;
     hoverColor: string;
     iconSettings: {
@@ -403,7 +405,8 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
         iconPosition: this.properties.categorySectionSettings?.iconSettings?.iconPosition ?? DEFAULTS_CONFIG.categorySectionSettings.iconSettings.iconPosition,
         collapsedIcon: this.properties.categorySectionSettings?.iconSettings?.collapsedIcon ?? DEFAULTS_CONFIG.categorySectionSettings.iconSettings.collapsedIcon,
         expandedIcon: this.properties.categorySectionSettings?.iconSettings?.expandedIcon ?? DEFAULTS_CONFIG.categorySectionSettings.iconSettings.expandedIcon
-      }
+      },
+      divideSpace: this.properties.categorySectionSettings?.divideSpace ?? DEFAULTS_CONFIG.categorySectionSettings.divideSpace
     };
 
     // Map subject section properties to the format expected by FancyList component
@@ -438,7 +441,8 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
         iconPosition: this.properties.subjectSectionSettings?.iconSettings?.iconPosition ?? DEFAULTS_CONFIG.subjectSectionSettings.iconSettings.iconPosition,
         collapsedIcon: this.properties.subjectSectionSettings?.iconSettings?.collapsedIcon ?? DEFAULTS_CONFIG.subjectSectionSettings.iconSettings.collapsedIcon,
         expandedIcon: this.properties.subjectSectionSettings?.iconSettings?.expandedIcon ?? DEFAULTS_CONFIG.subjectSectionSettings.iconSettings.expandedIcon
-      }
+      },
+      divideSpace: this.properties.subjectSectionSettings?.divideSpace ?? DEFAULTS_CONFIG.subjectSectionSettings.divideSpace
     };
 
     // Map description section properties to the format expected by FancyList component
@@ -473,7 +477,8 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
         iconPosition: this.properties.descriptionSectionSettings?.iconSettings?.iconPosition ?? DEFAULTS_CONFIG.descriptionSectionSettings.iconSettings.iconPosition,
         collapsedIcon: this.properties.descriptionSectionSettings?.iconSettings?.collapsedIcon ?? DEFAULTS_CONFIG.descriptionSectionSettings.iconSettings.collapsedIcon,
         expandedIcon: this.properties.descriptionSectionSettings?.iconSettings?.expandedIcon ?? DEFAULTS_CONFIG.descriptionSectionSettings.iconSettings.expandedIcon
-      }
+      },
+      divideSpace: this.properties.descriptionSectionSettings?.divideSpace ?? DEFAULTS_CONFIG.descriptionSectionSettings.divideSpace
     };
 
     const element: React.ReactElement<IFancyListProps> = React.createElement(
