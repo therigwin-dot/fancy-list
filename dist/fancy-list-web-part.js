@@ -2182,6 +2182,44 @@ var FancyList = /** @class */ (function (_super) {
                 return baseOverrides;
         }
     };
+    // Helper function to get description section background styles
+    FancyList.prototype.getDescriptionSectionBackgroundStyle = function () {
+        var _a, _b;
+        var backgroundSettings = (_a = this.props.descriptionSectionSettings) === null || _a === void 0 ? void 0 : _a.background;
+        if (!backgroundSettings)
+            return {};
+        // Safe property access with fallbacks
+        var backgroundType = backgroundSettings.type || 'solid';
+        var backgroundColor = backgroundSettings.color || '#ffffff';
+        var backgroundAlpha = backgroundSettings.alpha || 0;
+        var gradientDirection = backgroundSettings.gradientDirection || 'left-right';
+        var gradientColor1 = backgroundSettings.gradientColor1 || '#ffffff';
+        var gradientColor2 = backgroundSettings.gradientColor2 || '#000000';
+        var gradientAlpha = backgroundSettings.gradientAlpha1 || 0;
+        var imageUrl = backgroundSettings.image || '';
+        var imageAlpha = backgroundSettings.imageAlpha || 0;
+        var shape = ((_b = this.props.descriptionSectionSettings) === null || _b === void 0 ? void 0 : _b.shape) || 'rounded';
+        // Base overrides to prevent CSS class conflicts
+        var baseOverrides = {
+            border: 'none',
+            boxShadow: 'none'
+        };
+        switch (backgroundType) {
+            case 'solid':
+                return __assign({ backgroundColor: this.hexToRgba(backgroundColor, 1 - (backgroundAlpha / 100)), borderRadius: this.getShapeRadius(shape) }, baseOverrides);
+            case 'gradient':
+                return __assign({ background: this.getGradientStyle(gradientDirection, gradientColor1, gradientColor2, 1 - (gradientAlpha / 100)), borderRadius: this.getShapeRadius(shape) }, baseOverrides);
+            case 'image':
+                if (imageUrl) {
+                    return __assign({ background: "linear-gradient(rgba(255,255,255,".concat(imageAlpha / 100, "), rgba(255,255,255,").concat(imageAlpha / 100, ")), url(").concat(imageUrl, ")"), backgroundSize: 'cover', backgroundPosition: 'center', borderRadius: this.getShapeRadius(shape) }, baseOverrides);
+                }
+                else {
+                    return __assign({ backgroundColor: '#ffffff', borderRadius: this.getShapeRadius(shape) }, baseOverrides);
+                }
+            default:
+                return baseOverrides;
+        }
+    };
     // Helper function to group items by category
     FancyList.prototype.groupItemsByCategory = function (items) {
         var grouped = {};
@@ -2540,7 +2578,7 @@ var FancyList = /** @class */ (function (_super) {
                             ? (_this.props.categorySectionSettings.icons.expandedIcon || '−')
                             : (_this.props.categorySectionSettings.icons.collapsedIcon || '+')))),
                     isCategoryExpanded && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemContent }, items.map(function (item) {
-                        var _a, _b, _c, _d, _e, _f;
+                        var _a, _b, _c, _d, _e, _f, _g, _h;
                         var isItemExpanded = _this.state.expandedItems.has(item.id);
                         var divideSpace = (_b = (_a = _this.props.subjectSectionSettings) === null || _a === void 0 ? void 0 : _a.divideSpace) !== null && _b !== void 0 ? _b : 0;
                         return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { key: item.id, className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemPanel, style: __assign({ marginBottom: "".concat(divideSpace, "px"), border: 'none', borderRadius: '0', boxShadow: 'none' }, _this.getSubjectSectionBackgroundStyle() // Move background to wrapper div
@@ -2565,7 +2603,7 @@ var FancyList = /** @class */ (function (_super) {
                                     ? (_this.props.subjectSectionSettings.icons.expandedIcon || '−')
                                     : (_this.props.subjectSectionSettings.icons.collapsedIcon || '+')))),
                             isItemExpanded && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemContent },
-                                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemDescription, style: _this.getDescriptionSectionFontStyle(), dangerouslySetInnerHTML: { __html: item.description } })))));
+                                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemDescription, style: __assign(__assign(__assign({}, _this.getDescriptionSectionFontStyle()), _this.getDescriptionSectionBackgroundStyle()), { padding: '1em', marginBottom: "".concat((_h = (_g = _this.props.descriptionSectionSettings) === null || _g === void 0 ? void 0 : _g.divideSpace) !== null && _h !== void 0 ? _h : 0, "px") }), dangerouslySetInnerHTML: { __html: item.description } })))));
                     })))));
             }))));
     };
