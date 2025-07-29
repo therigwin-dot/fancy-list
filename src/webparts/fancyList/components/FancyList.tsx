@@ -680,6 +680,19 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     return grouped;
   }
 
+  private groupItemsBySubject(items: IListItem[]): { [subject: string]: IListItem[] } {
+    const grouped: { [subject: string]: IListItem[] } = {};
+    
+    items.forEach(item => {
+      if (!grouped[item.subject]) {
+        grouped[item.subject] = [];
+      }
+      grouped[item.subject].push(item);
+    });
+    
+    return grouped;
+  }
+
   private getFilterBackgroundStyle(filterSettings: any): React.CSSProperties {
     if (!filterSettings) return {};
 
@@ -1292,11 +1305,13 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
               {/* Subject Items within Category */}
               {isCategoryExpanded && (
                 <div className={styles.itemContent}>
-                  {items.map((item: IListItem) => {
-                    const isItemExpanded = this.state.expandedItems.has(item.id);
+                  {Object.keys(this.groupItemsBySubject(items)).map((subject) => {
+                    const subjectItems = this.groupItemsBySubject(items)[subject];
+                    const firstItem = subjectItems[0]; // Use first item for subject display
+                    const isItemExpanded = this.state.expandedItems.has(firstItem.id);
                     const divideSpace = this.props.subjectSectionSettings?.divideSpace ?? 0;
                     return (
-                    <div key={item.id} className={styles.itemPanel} style={{
+                    <div key={subject} className={styles.itemPanel} style={{
                       marginBottom: `${divideSpace}px`,
                       border: 'none', // Remove the white border
                       borderRadius: '0', // Remove rounded corners
@@ -1305,7 +1320,7 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
                     }}>
                       <button
                         className={`${styles.itemHeader} ${isItemExpanded ? styles.expanded : ''}`}
-                        onClick={() => this.handleItemToggle(item.id)}
+                        onClick={() => this.handleItemToggle(firstItem.id)}
                         aria-expanded={isItemExpanded ? "true" : "false"}
                         style={{
                           display: 'flex',
@@ -1321,7 +1336,7 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
                           className={styles.itemSubject}
                           style={this.getSubjectSectionFontStyle()}
                         >
-                          {item.subject}
+                          {subject}
                         </span>
                         {this.props.subjectSectionSettings?.icons?.enabled && (
                           <span 
@@ -1343,7 +1358,11 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
                       </button>
                       {isItemExpanded && (
                         <div className={styles.itemContent}>
-                          {this.renderDescriptionContent(item)}
+                          {subjectItems.map((item: IListItem) => (
+                            <div key={item.id}>
+                              {this.renderDescriptionContent(item)}
+                            </div>
+                          ))}
                         </div>
                       )}
                     </div>

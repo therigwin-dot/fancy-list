@@ -69,7 +69,7 @@ var DEFAULTS_CONFIG = {
     // Page 2: Title Settings
     titleSettings: {
         resetButtonText: "Reset Title Formatting",
-        testValuesButtonText: "Test Values",
+        testValuesButtonText: "Apply MFB Theme",
         description: 'Customize the web parts title text, font, color, background, and shape settings. Use the reset button to put the default look and feel back in place. Use the Back and Next buttons to switch to a different configuration page.',
         enabled: true,
         webPartTitle: '',
@@ -94,36 +94,36 @@ var DEFAULTS_CONFIG = {
         },
         shape: 'rounded',
         divideSpace: 0,
-        // Test Values for Title Section
+        // MFB Theme Values for Title Section
         testValues: {
-            webPartTitle: 'Testing Fancy List',
+            webPartTitle: 'Fancy List Web Part',
             font: {
                 family: 'Arial',
-                size: '32px',
-                color: '#ff0000',
-                formatting: { bold: true, italic: true, underline: true, strikethrough: false },
-                alignment: 'center'
+                size: '24px',
+                color: '#ffffff',
+                formatting: { bold: true, italic: true, underline: false, strikethrough: false },
+                alignment: 'left'
             },
             background: {
-                type: 'gradient',
-                color: '#ffffff',
-                alpha: 50,
+                type: 'solid',
+                color: '#D90E17',
+                alpha: 0,
                 image: '',
                 imageAlpha: 0,
-                gradientDirection: 'top-bottom',
-                gradientColor1: '#ff0000',
-                gradientAlpha1: 80,
-                gradientColor2: '#00ff00',
-                gradientAlpha2: 60
+                gradientDirection: 'left-right',
+                gradientColor1: '#D90E17',
+                gradientAlpha1: 0,
+                gradientColor2: '#D90E17',
+                gradientAlpha2: 0
             },
-            shape: 'pill',
-            divideSpace: 4
+            shape: 'square',
+            divideSpace: 0
         }
     },
     // Page 3: Filter Settings
     filterSettings: {
         resetButtonText: "Reset Filter Formatting",
-        testValuesButtonText: "Test Values",
+        testValuesButtonText: "Apply MFB Theme",
         description: "Use this to customise the look and feel of your filters for your list. From colors to shape and size. The reset button will trigger it back to defaults. You can also use the Enable toggle to completely remove and disable this part.",
         enableFilters: true,
         showAllCategories: true,
@@ -157,45 +157,45 @@ var DEFAULTS_CONFIG = {
             gradientAlpha2: 0
         },
         divideSpace: 0,
-        // Test Values for Filter Section
+        // MFB Theme Values for Filter Section
         testValues: {
             font: {
-                family: 'Comic Sans MS',
-                size: '16px',
-                formatting: { bold: true, italic: false, underline: true, strikethrough: false },
-                alignment: 'right'
+                family: 'Arial',
+                size: '14px',
+                formatting: { bold: false, italic: false, underline: false, strikethrough: false },
+                alignment: 'left'
             },
             activeColors: {
-                background: '#ff6600',
+                background: '#D90E17',
                 font: '#ffffff'
             },
             inactiveColors: {
-                background: '#ffff00',
+                background: '#ffffff',
                 font: '#000000'
             },
-            shape: 'square',
-            backgroundShape: 'pill',
-            defaultFilterSelection: 'Uncategorized',
+            shape: 'rounded',
+            backgroundShape: 'square',
+            defaultFilterSelection: 'All',
             background: {
                 type: 'gradient',
-                color: '#ffffff',
-                alpha: 30,
+                color: '#000000',
+                alpha: 0,
                 image: '',
                 imageAlpha: 0,
-                gradientDirection: 'diagonal',
-                gradientColor1: '#ff00ff',
-                gradientAlpha1: 70,
-                gradientColor2: '#00ffff',
-                gradientAlpha2: 50
+                gradientDirection: 'to bottom',
+                gradientColor1: '#000000',
+                gradientAlpha1: 0,
+                gradientColor2: '#58595B',
+                gradientAlpha2: 30
             },
-            divideSpace: 4
+            divideSpace: 0
         }
     },
     // Page 4: Category Section Settings
     categorySectionSettings: {
         sectionType: 'category',
         resetButtonText: "Reset Category Formatting",
-        testValuesButtonText: "Test Values",
+        testValuesButtonText: "Apply MFB Theme",
         description: "Customize the appearance of category sections including font, colors, shape, background, and icon settings.",
         font: {
             family: 'inherit',
@@ -226,36 +226,36 @@ var DEFAULTS_CONFIG = {
             collapsedIcon: '▶',
             expandedIcon: '▼'
         },
-        // Test Values for Category Section
+        // Hub Theme Values for Category Section
         testValues: {
             font: {
-                family: 'Impact',
-                size: '24px',
-                color: '#0000ff',
-                formatting: { bold: true, italic: true, underline: false, strikethrough: true },
-                alignment: 'center'
+                family: 'Arial',
+                size: '16px',
+                color: '#ffffff',
+                formatting: { bold: true, italic: false, underline: false, strikethrough: false },
+                alignment: 'left'
             },
             background: {
-                type: 'gradient',
-                color: '#f3f2f1',
-                alpha: 60,
+                type: 'solid',
+                color: '#58595B',
+                alpha: 0,
                 image: '',
                 imageAlpha: 0,
-                gradientDirection: 'radial',
-                gradientColor1: '#ff0000',
-                gradientAlpha1: 90,
-                gradientColor2: '#00ff00',
-                gradientAlpha2: 40
+                gradientDirection: 'left-right',
+                gradientColor1: '#58595B',
+                gradientAlpha1: 0,
+                gradientColor2: '#58595B',
+                gradientAlpha2: 0
             },
-            shape: 'pill',
-            divideSpace: 4,
-            autoExpand: true,
-            hoverColor: '#ff0000',
+            shape: 'square',
+            divideSpace: 0,
+            autoExpand: false,
+            hoverColor: '#58595B',
             iconSettings: {
                 enabled: true,
-                iconPosition: 'right',
-                collapsedIcon: '🔽',
-                expandedIcon: '🔼'
+                iconPosition: 'left',
+                collapsedIcon: '🚜',
+                expandedIcon: '🌾'
             }
         }
     },
@@ -263,7 +263,7 @@ var DEFAULTS_CONFIG = {
     subjectSectionSettings: {
         sectionType: 'subject',
         resetButtonText: "Reset Subject Formatting",
-        testValuesButtonText: "Test Values",
+        testValuesButtonText: "Apply MFB Theme",
         description: "Customize the appearance of subject sections including font, colors, shape, background, and icon settings.",
         font: {
             family: 'inherit',
@@ -294,36 +294,36 @@ var DEFAULTS_CONFIG = {
             collapsedIcon: '▶',
             expandedIcon: '▼'
         },
-        // Test Values for Subject Section
+        // Hub Theme Values for Subject Section
         testValues: {
             font: {
-                family: 'Courier New',
-                size: '20px',
-                color: '#ff6600',
-                formatting: { bold: false, italic: true, underline: true, strikethrough: false },
-                alignment: 'right'
+                family: 'Arial',
+                size: '16px',
+                color: '#ffffff',
+                formatting: { bold: false, italic: false, underline: true, strikethrough: false },
+                alignment: 'left'
             },
             background: {
                 type: 'solid',
-                color: '#ffffcc',
-                alpha: 70,
+                color: '#ffffff',
+                alpha: 100,
                 image: '',
                 imageAlpha: 0,
                 gradientDirection: 'left-right',
-                gradientColor1: '#ffffcc',
-                gradientAlpha1: 70,
-                gradientColor2: '#ffcc99',
-                gradientAlpha2: 50
+                gradientColor1: '#ffffff',
+                gradientAlpha1: 100,
+                gradientColor2: '#ffffff',
+                gradientAlpha2: 100
             },
             shape: 'square',
             divideSpace: 4,
-            autoExpand: true,
-            hoverColor: '#ffcc99',
+            autoExpand: false,
+            hoverColor: '#ffffff',
             iconSettings: {
                 enabled: true,
-                iconPosition: 'right',
-                collapsedIcon: '📁',
-                expandedIcon: '📂'
+                iconPosition: 'left',
+                collapsedIcon: '🌱',
+                expandedIcon: '🌳'
             }
         }
     },
@@ -331,7 +331,7 @@ var DEFAULTS_CONFIG = {
     descriptionSectionSettings: {
         sectionType: 'description',
         resetButtonText: "Reset Description Formatting",
-        testValuesButtonText: "Test Values",
+        testValuesButtonText: "Apply MFB Theme",
         description: "Customize the appearance of description sections including font, colors, shape, and background settings.",
         font: {
             family: 'inherit',
@@ -362,31 +362,31 @@ var DEFAULTS_CONFIG = {
             collapsedIcon: '▶',
             expandedIcon: '▼'
         },
-        // Test Values for Description Section
+        // Hub Theme Values for Description Section
         testValues: {
             font: {
-                family: 'Georgia',
-                size: '18px',
-                color: '#9932cc',
-                formatting: { bold: true, italic: false, underline: false, strikethrough: true },
-                alignment: 'justify'
+                family: 'Arial',
+                size: '14px',
+                color: '#000000',
+                formatting: { bold: false, italic: false, underline: false, strikethrough: false },
+                alignment: 'left'
             },
             background: {
-                type: 'image',
+                type: 'solid',
                 color: '#ffffff',
-                alpha: 20,
-                image: 'https://via.placeholder.com/400x200/cccccc/666666?text=Test+Background',
-                imageAlpha: 80,
+                alpha: 0,
+                image: '',
+                imageAlpha: 0,
                 gradientDirection: 'left-right',
                 gradientColor1: '#ffffff',
-                gradientAlpha1: 20,
-                gradientColor2: '#faf9f8',
-                gradientAlpha2: 50
+                gradientAlpha1: 0,
+                gradientColor2: '#ffffff',
+                gradientAlpha2: 0
             },
-            shape: 'pill',
-            divideSpace: 4,
-            autoExpand: true,
-            hoverColor: '#e6ccff',
+            shape: 'rounded',
+            divideSpace: 2,
+            autoExpand: false,
+            hoverColor: '#ffffff',
             iconSettings: {
                 enabled: false,
                 iconPosition: 'left',
@@ -2285,6 +2285,16 @@ var FancyList = /** @class */ (function (_super) {
         });
         return grouped;
     };
+    FancyList.prototype.groupItemsBySubject = function (items) {
+        var grouped = {};
+        items.forEach(function (item) {
+            if (!grouped[item.subject]) {
+                grouped[item.subject] = [];
+            }
+            grouped[item.subject].push(item);
+        });
+        return grouped;
+    };
     FancyList.prototype.getFilterBackgroundStyle = function (filterSettings) {
         if (!filterSettings)
             return {};
@@ -2698,13 +2708,15 @@ var FancyList = /** @class */ (function (_super) {
                             } }, isCategoryExpanded
                             ? (_this.props.categorySectionSettings.icons.expandedIcon || '−')
                             : (_this.props.categorySectionSettings.icons.collapsedIcon || '+')))),
-                    isCategoryExpanded && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemContent }, items.map(function (item) {
+                    isCategoryExpanded && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemContent }, Object.keys(_this.groupItemsBySubject(items)).map(function (subject) {
                         var _a, _b, _c, _d, _e, _f;
-                        var isItemExpanded = _this.state.expandedItems.has(item.id);
+                        var subjectItems = _this.groupItemsBySubject(items)[subject];
+                        var firstItem = subjectItems[0]; // Use first item for subject display
+                        var isItemExpanded = _this.state.expandedItems.has(firstItem.id);
                         var divideSpace = (_b = (_a = _this.props.subjectSectionSettings) === null || _a === void 0 ? void 0 : _a.divideSpace) !== null && _b !== void 0 ? _b : 0;
-                        return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { key: item.id, className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemPanel, style: __assign({ marginBottom: "".concat(divideSpace, "px"), border: 'none', borderRadius: '0', boxShadow: 'none' }, _this.getSubjectSectionBackgroundStyle() // Move background to wrapper div
+                        return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { key: subject, className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemPanel, style: __assign({ marginBottom: "".concat(divideSpace, "px"), border: 'none', borderRadius: '0', boxShadow: 'none' }, _this.getSubjectSectionBackgroundStyle() // Move background to wrapper div
                             ) },
-                            react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { className: "".concat(_FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemHeader, " ").concat(isItemExpanded ? _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].expanded : ''), onClick: function () { return _this.handleItemToggle(item.id); }, "aria-expanded": isItemExpanded ? "true" : "false", style: {
+                            react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { className: "".concat(_FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemHeader, " ").concat(isItemExpanded ? _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].expanded : ''), onClick: function () { return _this.handleItemToggle(firstItem.id); }, "aria-expanded": isItemExpanded ? "true" : "false", style: {
                                     display: 'flex',
                                     alignItems: 'center',
                                     justifyContent: 'space-between',
@@ -2713,7 +2725,7 @@ var FancyList = /** @class */ (function (_super) {
                                     background: 'transparent', // Remove background from button
                                     border: 'none' // Ensure no border on button
                                 } },
-                                react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemSubject, style: _this.getSubjectSectionFontStyle() }, item.subject),
+                                react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemSubject, style: _this.getSubjectSectionFontStyle() }, subject),
                                 ((_d = (_c = _this.props.subjectSectionSettings) === null || _c === void 0 ? void 0 : _c.icons) === null || _d === void 0 ? void 0 : _d.enabled) && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].expandIcon, style: {
                                         order: _this.props.subjectSectionSettings.icons.iconPosition === 'left' ? -1 : 1,
                                         fontSize: ((_f = (_e = _this.props.subjectSectionSettings) === null || _e === void 0 ? void 0 : _e.font) === null || _f === void 0 ? void 0 : _f.size) || '16px',
@@ -2723,7 +2735,7 @@ var FancyList = /** @class */ (function (_super) {
                                     } }, isItemExpanded
                                     ? (_this.props.subjectSectionSettings.icons.expandedIcon || '−')
                                     : (_this.props.subjectSectionSettings.icons.collapsedIcon || '+')))),
-                            isItemExpanded && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemContent }, _this.renderDescriptionContent(item)))));
+                            isItemExpanded && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemContent }, subjectItems.map(function (item) { return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { key: item.id }, _this.renderDescriptionContent(item))); })))));
                     })))));
             }))));
     };
@@ -4227,7 +4239,7 @@ var SectionModuleControl = function (_a) {
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_DivideSpaceControl__WEBPACK_IMPORTED_MODULE_5__.DivideSpaceControl, { label: "Div Space", value: sectionSettings.divideSpace, onChange: function (value) { return handlePropertyChange('divideSpace', value); } })),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginTop: 16, display: 'flex', gap: '8px' } },
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_11__.PrimaryButton, { text: sectionSettings.resetButtonText, onClick: handleReset }),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_11__.PrimaryButton, { text: "Test Values", onClick: handleTestValues }))));
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_11__.PrimaryButton, { text: "Apply MFB Theme", onClick: handleTestValues }))));
 };
 
 
@@ -38322,18 +38334,22 @@ var FancyListWebPart = /** @class */ (function (_super) {
                                                     onMouseEnter: function (e) { e.target.style.textDecoration = 'underline'; },
                                                     onMouseLeave: function (e) { e.target.style.textDecoration = 'none'; }
                                                 }, '📧 Contact: tkeyes@fbinmsi.com'),
-                                                // M365 Profile Note
-                                                react__WEBPACK_IMPORTED_MODULE_0__.createElement('div', {
-                                                    key: 'm365Note',
+                                                // Bookings Link
+                                                react__WEBPACK_IMPORTED_MODULE_0__.createElement('a', {
+                                                    key: 'bookingsLink',
+                                                    href: 'https://outlook.office365.com/owa/calendar/tkeyes@fbinmsi.com/bookings/',
+                                                    target: '_blank',
                                                     style: {
-                                                        fontSize: '12px',
+                                                        fontSize: '14px',
                                                         fontWeight: '400',
-                                                        color: '#605e5c',
-                                                        fontStyle: 'italic',
-                                                        marginTop: '4px',
-                                                        marginBottom: '8px'
-                                                    }
-                                                }, 'Note: Clicking the email will open your M365 profile card')
+                                                        color: '#0078d4',
+                                                        textDecoration: 'none',
+                                                        display: 'block',
+                                                        marginBottom: '4px'
+                                                    },
+                                                    onMouseEnter: function (e) { e.target.style.textDecoration = 'underline'; },
+                                                    onMouseLeave: function (e) { e.target.style.textDecoration = 'none'; }
+                                                }, '📅 Book Time with Tom')
                                             ]), elem);
                                         },
                                         onDispose: function (elem) {

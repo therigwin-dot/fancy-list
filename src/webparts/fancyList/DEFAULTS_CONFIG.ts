@@ -103,38 +103,38 @@ export const DEFAULTS_CONFIG = {
       gradientAlpha2: 0
     },
     divideSpace: 0,
-    // Hub Theme Values for Filter Section
+    // MFB Theme Values for Filter Section
     testValues: {
       font: {
-        family: 'Segoe UI',
+        family: 'Arial',
         size: '14px',
         formatting: { bold: false, italic: false, underline: false, strikethrough: false },
-        alignment: 'center'
+        alignment: 'left'
       },
       activeColors: {
-        background: '#006CBF',
+        background: '#D90E17',
         font: '#ffffff'
       },
       inactiveColors: {
-        background: '#9a9b9d',
-        font: '#ffffff'
+        background: '#ffffff',
+        font: '#000000'
       },
-      shape: 'pill' as const,
-      backgroundShape: 'rounded' as const,
+      shape: 'rounded' as const,
+      backgroundShape: 'square' as const,
       defaultFilterSelection: 'All',
       background: {
-        type: 'solid' as const,
-        color: '#58595b',
+        type: 'gradient' as const,
+        color: '#000000',
         alpha: 0,
         image: '',
         imageAlpha: 0,
-        gradientDirection: 'left-right',
-        gradientColor1: '#58595b',
+        gradientDirection: 'to bottom',
+        gradientColor1: '#000000',
         gradientAlpha1: 0,
-        gradientColor2: '#6c6d6f',
+        gradientColor2: '#58595B',
         gradientAlpha2: 30
       },
-      divideSpace: 8
+      divideSpace: 0
     }
   } as FilterSettings,
 
@@ -176,33 +176,33 @@ export const DEFAULTS_CONFIG = {
     // Hub Theme Values for Category Section
     testValues: {
       font: {
-        family: 'Segoe UI',
-        size: '20px',
+        family: 'Arial',
+        size: '16px',
         color: '#ffffff',
         formatting: { bold: true, italic: false, underline: false, strikethrough: false },
         alignment: 'left'
       },
       background: {
         type: 'solid' as const,
-        color: '#6c6d6f',
-        alpha: 80,
+        color: '#58595B',
+        alpha: 0,
         image: '',
         imageAlpha: 0,
         gradientDirection: 'left-right',
-        gradientColor1: '#6c6d6f',
-        gradientAlpha1: 80,
-        gradientColor2: '#9a9b9d',
-        gradientAlpha2: 60
+        gradientColor1: '#58595B',
+        gradientAlpha1: 0,
+        gradientColor2: '#58595B',
+        gradientAlpha2: 0
       },
-      shape: 'rounded' as const,
-      divideSpace: 8,
+      shape: 'square' as const,
+      divideSpace: 0,
       autoExpand: false,
-      hoverColor: '#9a9b9d',
+      hoverColor: '#58595B',
       iconSettings: {
         enabled: true,
-        iconPosition: 'right' as const,
-        collapsedIcon: '🔽',
-        expandedIcon: '🔼'
+        iconPosition: 'left' as const,
+        collapsedIcon: '🚜',
+        expandedIcon: '🌾'
       }
     }
   },
@@ -245,33 +245,33 @@ export const DEFAULTS_CONFIG = {
     // Hub Theme Values for Subject Section
     testValues: {
       font: {
-        family: 'Segoe UI',
+        family: 'Arial',
         size: '16px',
         color: '#ffffff',
-        formatting: { bold: false, italic: false, underline: false, strikethrough: false },
+        formatting: { bold: false, italic: false, underline: true, strikethrough: false },
         alignment: 'left'
       },
       background: {
         type: 'solid' as const,
-        color: '#58595b',
-        alpha: 0,
+        color: '#ffffff',
+        alpha: 100,
         image: '',
         imageAlpha: 0,
         gradientDirection: 'left-right',
-        gradientColor1: '#58595b',
-        gradientAlpha1: 0,
-        gradientColor2: '#6c6d6f',
-        gradientAlpha2: 30
+        gradientColor1: '#ffffff',
+        gradientAlpha1: 100,
+        gradientColor2: '#ffffff',
+        gradientAlpha2: 100
       },
-      shape: 'rounded' as const,
-      divideSpace: 8,
+      shape: 'square' as const,
+      divideSpace: 4,
       autoExpand: false,
-      hoverColor: '#6c6d6f',
+      hoverColor: '#ffffff',
       iconSettings: {
         enabled: true,
-        iconPosition: 'right' as const,
-        collapsedIcon: '📁',
-        expandedIcon: '📂'
+        iconPosition: 'left' as const,
+        collapsedIcon: '🌱',
+        expandedIcon: '🌳'
       }
     }
   },
@@ -314,28 +314,28 @@ export const DEFAULTS_CONFIG = {
     // Hub Theme Values for Description Section
     testValues: {
       font: {
-        family: 'Segoe UI',
+        family: 'Arial',
         size: '14px',
-        color: '#e1dfdd',
+        color: '#000000',
         formatting: { bold: false, italic: false, underline: false, strikethrough: false },
         alignment: 'left'
       },
       background: {
         type: 'solid' as const,
-        color: '#58595b',
+        color: '#ffffff',
         alpha: 0,
         image: '',
         imageAlpha: 0,
         gradientDirection: 'left-right',
-        gradientColor1: '#58595b',
+        gradientColor1: '#ffffff',
         gradientAlpha1: 0,
-        gradientColor2: '#6c6d6f',
-        gradientAlpha2: 50
+        gradientColor2: '#ffffff',
+        gradientAlpha2: 0
       },
       shape: 'rounded' as const,
-      divideSpace: 8,
+      divideSpace: 2,
       autoExpand: false,
-      hoverColor: '#6c6d6f',
+      hoverColor: '#ffffff',
       iconSettings: {
         enabled: false,
         iconPosition: 'left' as const,

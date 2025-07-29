@@ -538,7 +538,7 @@ export const SectionModuleControl: React.FC<SectionModuleControlProps> = ({
           onClick={handleReset}
         />
         <PrimaryButton 
-          text="Test Values"
+          text="Apply MFB Theme"
           onClick={handleTestValues}
         />
       </div>

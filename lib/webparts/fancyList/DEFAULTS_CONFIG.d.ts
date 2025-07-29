@@ -63,7 +63,7 @@ export declare const DEFAULTS_CONFIG: {
                 alignment: string;
             };
             background: {
-                type: "gradient";
+                type: "solid";
                 color: string;
                 alpha: number;
                 image: string;
@@ -74,13 +74,13 @@ export declare const DEFAULTS_CONFIG: {
                 gradientColor2: string;
                 gradientAlpha2: number;
             };
-            shape: "pill";
+            shape: "square";
             divideSpace: number;
             autoExpand: boolean;
             hoverColor: string;
             iconSettings: {
                 enabled: boolean;
-                iconPosition: "right";
+                iconPosition: "left";
                 collapsedIcon: string;
                 expandedIcon: string;
             };
@@ -156,7 +156,7 @@ export declare const DEFAULTS_CONFIG: {
             hoverColor: string;
             iconSettings: {
                 enabled: boolean;
-                iconPosition: "right";
+                iconPosition: "left";
                 collapsedIcon: string;
                 expandedIcon: string;
             };
@@ -215,7 +215,7 @@ export declare const DEFAULTS_CONFIG: {
                 alignment: string;
             };
             background: {
-                type: "image";
+                type: "solid";
                 color: string;
                 alpha: number;
                 image: string;
@@ -226,7 +226,7 @@ export declare const DEFAULTS_CONFIG: {
                 gradientColor2: string;
                 gradientAlpha2: number;
             };
-            shape: "pill";
+            shape: "rounded";
             divideSpace: number;
             autoExpand: boolean;
             hoverColor: string;
