@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fancy List Web Part - Deployment Guide</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #0078d4;
+            border-bottom: 2px solid #0078d4;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #323130;
+            margin-top: 30px;
+        }
+        .section {
+            margin-bottom: 25px;
+        }
+        .highlight {
+            background-color: #f0f8ff;
+            padding: 15px;
+            border-left: 4px solid #0078d4;
+            margin: 20px 0;
+        }
+        .warning {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        .success {
+            background-color: #d4edda;
+            padding: 15px;
+            border-left: 4px solid #28a745;
+            margin: 20px 0;
+        }
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e1dfdd;
+            font-size: 0.9em;
+            color: #666;
+        }
+        .back-link {
+            margin-bottom: 20px;
+        }
+        .back-link a {
+            color: #0078d4;
+            text-decoration: none;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        .step {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 10px 0;
+        }
+        .step-number {
+            background: #0078d4;
+            color: white;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="back-link">
+            <a href="index.html">← Back to Documentation</a>
+        </div>
+        
+        <h1>Fancy List Web Part - Deployment Guide</h1>
+        
+        <div class="section">
+            <p><strong>Version:</strong> 10.0</p>
+            <p><strong>Developer:</strong> Therigwin's Fox Studios</p>
+            <p><strong>Contact:</strong> <a href="mailto:therigwin@gmail.com">therigwin@gmail.com</a></p>
+        </div>
+
+        <div class="highlight">
+            <h3>📋 Pre-Deployment Checklist</h3>
+            <ul>
+                <li>SharePoint environment is accessible and properly configured</li>
+                <li>App catalog is set up and accessible</li>
+                <li>User has appropriate permissions for app deployment</li>
+                <li>Target lists are created and contain sample data</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>🚀 Deployment Steps</h2>
+            
+            <div class="step">
+                <span class="step-number">1</span>
+                <strong>Upload the Package</strong>
+                <ul>
+                    <li>Navigate to your SharePoint App Catalog</li>
+                    <li>Upload the Fancy List Web Part package (.sppkg file)</li>
+                    <li>When prompted, check "Make this solution available to all sites in the organization"</li>
+                    <li>Click "Deploy" to install the web part</li>
+                </ul>
+            </div>
+
+            <div class="step">
+                <span class="step-number">2</span>
+                <strong>Add to Site Collection</strong>
+                <ul>
+                    <li>Go to Site Settings → Site Collection App Catalog</li>
+                    <li>Find "Fancy List" in the available apps</li>
+                    <li>Click "Add it" to make it available in your site collection</li>
+                </ul>
+            </div>
+
+            <div class="step">
+                <span class="step-number">3</span>
+                <strong>Add to Page</strong>
+                <ul>
+                    <li>Edit the page where you want to add the web part</li>
+                    <li>Click the "+" button to add a new web part</li>
+                    <li>Search for "Fancy List" and select it</li>
+                    <li>The web part will appear on your page</li>
+                </ul>
+            </div>
+
+            <div class="step">
+                <span class="step-number">4</span>
+                <strong>Initial Configuration</strong>
+                <ul>
+                    <li>Click the web part to select it</li>
+                    <li>Click the pencil icon to open the property pane</li>
+                    <li>Configure the basic settings (List, Category Field, etc.)</li>
+                    <li>Save your changes</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>⚙️ Configuration Guide</h2>
+            
+            <h3>Page 1: Basic Configuration</h3>
+            <ul>
+                <li><strong>List/Document Library:</strong> Select the SharePoint list containing your data</li>
+                <li><strong>Category Field:</strong> Choose the field that will serve as the top-level grouping</li>
+                <li><strong>Subject Field:</strong> Select the field for the second-level grouping</li>
+                <li><strong>Description Field:</strong> Choose the field containing the detailed content</li>
+                <li><strong>Title:</strong> Set a custom title for the web part (optional)</li>
+            </ul>
+
+            <h3>Page 2: Title Section</h3>
+            <ul>
+                <li><strong>Background:</strong> Configure background color, gradient, or image</li>
+                <li><strong>Font Settings:</strong> Adjust font family, size, color, and formatting</li>
+                <li><strong>Shape:</strong> Choose between square, rounded, or pill shapes</li>
+                <li><strong>Transparency:</strong> Adjust background transparency</li>
+            </ul>
+
+            <h3>Page 3: Filter Section</h3>
+            <ul>
+                <li><strong>Enable Filters:</strong> Turn filtering on/off</li>
+                <li><strong>Default Filter:</strong> Set the default category to display</li>
+                <li><strong>Show All Button:</strong> Control visibility of the "All" filter option</li>
+                <li><strong>Styling:</strong> Configure filter button appearance</li>
+            </ul>
+
+            <h3>Pages 4-6: Section Styling</h3>
+            <ul>
+                <li><strong>Category Section (Page 4):</strong> Style the category headers</li>
+                <li><strong>Subject Section (Page 5):</strong> Style the subject items</li>
+                <li><strong>Description Section (Page 6):</strong> Style the description content</li>
+                <li><strong>Each section includes:</strong> Background, font, shape, and icon controls</li>
+            </ul>
+        </div>
+
+        <div class="warning">
+            <h3>⚠️ Important Notes</h3>
+            <ul>
+                <li><strong>Permissions:</strong> Users must have read access to the selected lists</li>
+                <li><strong>Field Types:</strong> The web part works best with text, choice, and lookup fields</li>
+                <li><strong>Data Structure:</strong> Ensure your list has appropriate data for the hierarchical display</li>
+                <li><strong>Testing:</strong> Always test in a development environment first</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>🔧 Troubleshooting</h2>
+            
+            <h3>Web Part Not Appearing</h3>
+            <ul>
+                <li>Check that the package was successfully deployed to the app catalog</li>
+                <li>Verify the web part was added to the site collection</li>
+                <li>Try refreshing the page or clearing browser cache</li>
+            </ul>
+
+            <h3>No Data Displaying</h3>
+            <ul>
+                <li>Verify the selected list exists and contains data</li>
+                <li>Check that the field selections are correct</li>
+                <li>Ensure you have read permissions for the list</li>
+            </ul>
+
+            <h3>Styling Not Applied</h3>
+            <ul>
+                <li>Save the property pane settings</li>
+                <li>Refresh the page to see changes</li>
+                <li>Check for any custom CSS conflicts</li>
+            </ul>
+        </div>
+
+        <div class="success">
+            <h3>✅ Best Practices</h3>
+            <ul>
+                <li><strong>Test First:</strong> Always deploy and test in a development environment</li>
+                <li><strong>Document Settings:</strong> Keep a record of your configuration settings</li>
+                <li><strong>User Training:</strong> Provide training to end users on how to use the web part</li>
+                <li><strong>Regular Updates:</strong> Keep the web part updated with the latest version</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>📞 Support</h2>
+            <p>If you encounter issues during deployment or configuration:</p>
+            <ul>
+                <li>Check the <a href="support.html">Support Information</a> page</li>
+                <li>Contact: <a href="mailto:therigwin@gmail.com">therigwin@gmail.com</a></li>
+                <li>Include detailed error messages and steps to reproduce issues</li>
+            </ul>
+        </div>
+
+        <div class="footer">
+            <p><strong>Fancy List Web Part v10.0</strong> | Deployment Guide</p>
+            <p>For deployment support, contact: <a href="mailto:therigwin@gmail.com">therigwin@gmail.com</a></p>
+        </div>
+    </div>
+</body>
+</html> 
