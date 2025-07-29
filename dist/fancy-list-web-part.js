@@ -92,6 +92,7 @@ var DEFAULTS_CONFIG = {
             gradientAlpha2: 0
         },
         shape: 'rounded',
+        divideSpace: 0,
         // Test Values for Title Section
         testValues: {
             webPartTitle: 'Testing Fancy List',
@@ -114,7 +115,8 @@ var DEFAULTS_CONFIG = {
                 gradientColor2: '#00ff00',
                 gradientAlpha2: 60
             },
-            shape: 'pill'
+            shape: 'pill',
+            divideSpace: 0
         }
     },
     // Page 3: Filter Settings
@@ -2628,6 +2630,125 @@ var ColorPickerControl = function (_a) {
 
 /***/ }),
 
+/***/ 7669:
+/*!*******************************************************************!*\
+  !*** ./lib/webparts/fancyList/propertyPane/DivideSpaceControl.js ***!
+  \*******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   DivideSpaceControl: () => (/* binding */ DivideSpaceControl)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ 5959);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _fluentui_react_lib_ComboBox__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fluentui/react/lib/ComboBox */ 3898);
+/* harmony import */ var _fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fluentui/react/lib/TextField */ 7102);
+/* harmony import */ var _fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @fluentui/react/lib/Button */ 9425);
+
+
+
+
+var DivideSpaceControl = function (_a) {
+    var _b = _a.label, label = _b === void 0 ? 'Divide Space' : _b, _c = _a.value, value = _c === void 0 ? 0 : _c, onChange = _a.onChange, onReset = _a.onReset, onTestValues = _a.onTestValues;
+    var _d = react__WEBPACK_IMPORTED_MODULE_0__.useState(''), customValue = _d[0], setCustomValue = _d[1];
+    var _e = react__WEBPACK_IMPORTED_MODULE_0__.useState(false), isCustom = _e[0], setIsCustom = _e[1];
+    // Preset options
+    var options = [
+        { key: 'small', text: 'Small (4px)', data: 4 },
+        { key: 'medium', text: 'Medium (8px)', data: 8 },
+        { key: 'large', text: 'Large (16px)', data: 16 },
+        { key: 'custom', text: 'Custom', data: -1 }
+    ];
+    // Validation function
+    var validateDivideSpace = function (value) {
+        if (!value)
+            return null;
+        var num = parseInt(value, 10);
+        if (isNaN(num))
+            return 'Please enter a valid number';
+        if (num < 0)
+            return 'Value must be 0 or greater';
+        if (num > 50)
+            return 'Value must be 50 or less';
+        return null;
+    };
+    // Normalization function
+    var normalizeDivideSpace = function (value) {
+        var num = parseInt(value, 10);
+        if (isNaN(num) || num < 0)
+            return 0;
+        if (num > 50)
+            return 50;
+        return num;
+    };
+    // Handle ComboBox change
+    var handleComboBoxChange = function (option) {
+        if (!option)
+            return;
+        if (option.key === 'custom') {
+            setIsCustom(true);
+            setCustomValue(value.toString());
+        }
+        else {
+            setIsCustom(false);
+            setCustomValue('');
+            var newValue = option.data;
+            if (onChange)
+                onChange(newValue);
+        }
+    };
+    // Handle custom value change
+    var handleCustomValueChange = function (newValue) {
+        setCustomValue(newValue);
+        var normalizedValue = normalizeDivideSpace(newValue);
+        if (onChange)
+            onChange(normalizedValue);
+    };
+    // Get selected option key
+    var getSelectedOptionKey = function () {
+        if (value === 4)
+            return 'small';
+        if (value === 8)
+            return 'medium';
+        if (value === 16)
+            return 'large';
+        return 'custom';
+    };
+    // Handle reset
+    var handleReset = function () {
+        setIsCustom(false);
+        setCustomValue('');
+        if (onReset)
+            onReset();
+    };
+    // Handle test values
+    var handleTestValues = function () {
+        setIsCustom(false);
+        setCustomValue('');
+        if (onTestValues)
+            onTestValues();
+    };
+    return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: {
+                fontSize: '14px',
+                fontWeight: '600',
+                color: '#323130',
+                marginBottom: '8px',
+                display: 'block'
+            } }, label),
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 8 } },
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_ComboBox__WEBPACK_IMPORTED_MODULE_1__.ComboBox, { selectedKey: getSelectedOptionKey(), options: options, onChange: function (_, option) { return handleComboBoxChange(option); }, placeholder: "Select spacing...", useComboBoxAsMenuWidth: true })),
+        isCustom && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 8 } },
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_2__.TextField, { label: "Custom Value (px)", value: customValue, onChange: function (_, newValue) { return handleCustomValueChange(newValue || ''); }, placeholder: "0-50", errorMessage: validateDivideSpace(customValue) || undefined, type: "number", min: 0, max: 50 }))),
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { display: 'flex', gap: '8px' } },
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_3__.PrimaryButton, { text: "Reset", onClick: handleReset }),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_3__.PrimaryButton, { text: "Test Values", onClick: handleTestValues }))));
+};
+
+
+/***/ }),
+
 /***/ 2696:
 /*!********************************************************************!*\
   !*** ./lib/webparts/fancyList/propertyPane/FilterModuleControl.js ***!
@@ -3901,15 +4022,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ 5959);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @fluentui/react/lib/TextField */ 7102);
-/* harmony import */ var _fluentui_react_lib_Toggle__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @fluentui/react/lib/Toggle */ 6264);
-/* harmony import */ var _fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @fluentui/react/lib/Dropdown */ 2042);
-/* harmony import */ var _fluentui_react_lib_Slider__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @fluentui/react/lib/Slider */ 1798);
-/* harmony import */ var _fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @fluentui/react/lib/Button */ 9425);
+/* harmony import */ var _fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @fluentui/react/lib/TextField */ 7102);
+/* harmony import */ var _fluentui_react_lib_Toggle__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @fluentui/react/lib/Toggle */ 6264);
+/* harmony import */ var _fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @fluentui/react/lib/Dropdown */ 2042);
+/* harmony import */ var _fluentui_react_lib_Slider__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @fluentui/react/lib/Slider */ 1798);
+/* harmony import */ var _fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @fluentui/react/lib/Button */ 9425);
 /* harmony import */ var _FontControl__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FontControl */ 8177);
 /* harmony import */ var _ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ColorPickerControl */ 9193);
 /* harmony import */ var _ShapePickerControl__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ShapePickerControl */ 4439);
-/* harmony import */ var _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../DEFAULTS_CONFIG */ 7702);
+/* harmony import */ var _DivideSpaceControl__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./DivideSpaceControl */ 7669);
+/* harmony import */ var _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../DEFAULTS_CONFIG */ 7702);
+
 
 
 
@@ -3934,6 +4057,7 @@ var TitleConfiguration = function (_a) {
         gradientAlpha: 100,
         imageUrl: '',
         imageAlpha: 100,
+        divideSpace: 0,
         font: {
             family: 'Segoe UI',
             size: '24px',
@@ -3999,44 +4123,44 @@ var TitleConfiguration = function (_a) {
     };
     var handleReset = function () {
         // Do NOT reset webPartTitle (preserve current title text) per design
-        handlePropertyChange('shape', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.shape);
-        handlePropertyChange('backgroundType', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.background.type);
-        handlePropertyChange('backgroundColor', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.background.color);
-        handlePropertyChange('backgroundAlpha', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.background.alpha);
-        handlePropertyChange('gradientDirection', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.background.gradientDirection);
-        handlePropertyChange('gradientColor1', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.background.gradientColor1);
-        handlePropertyChange('gradientColor2', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.background.gradientColor2);
-        handlePropertyChange('gradientAlpha', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.background.gradientAlpha1);
-        handlePropertyChange('imageUrl', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.background.image);
-        handlePropertyChange('imageAlpha', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.background.imageAlpha);
+        handlePropertyChange('shape', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].titleSettings.shape);
+        handlePropertyChange('backgroundType', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].titleSettings.background.type);
+        handlePropertyChange('backgroundColor', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].titleSettings.background.color);
+        handlePropertyChange('backgroundAlpha', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].titleSettings.background.alpha);
+        handlePropertyChange('gradientDirection', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].titleSettings.background.gradientDirection);
+        handlePropertyChange('gradientColor1', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].titleSettings.background.gradientColor1);
+        handlePropertyChange('gradientColor2', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].titleSettings.background.gradientColor2);
+        handlePropertyChange('gradientAlpha', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].titleSettings.background.gradientAlpha1);
+        handlePropertyChange('imageUrl', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].titleSettings.background.image);
+        handlePropertyChange('imageAlpha', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].titleSettings.background.imageAlpha);
         handleFontChange({
-            fontFamily: _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.font.family,
-            fontSize: _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.font.size,
-            formatting: _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.font.formatting,
-            alignment: _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.font.alignment
+            fontFamily: _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].titleSettings.font.family,
+            fontSize: _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].titleSettings.font.size,
+            formatting: _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].titleSettings.font.formatting,
+            alignment: _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].titleSettings.font.alignment
         });
-        handlePropertyChange('font.color', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.font.color);
+        handlePropertyChange('font.color', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].titleSettings.font.color);
     };
     var handleTestValues = function () {
         // Apply test values including webPartTitle
-        handlePropertyChange('webPartTitle', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.testValues.webPartTitle);
-        handlePropertyChange('shape', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.testValues.shape);
-        handlePropertyChange('backgroundType', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.testValues.background.type);
-        handlePropertyChange('backgroundColor', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.testValues.background.color);
-        handlePropertyChange('backgroundAlpha', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.testValues.background.alpha);
-        handlePropertyChange('gradientDirection', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.testValues.background.gradientDirection);
-        handlePropertyChange('gradientColor1', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.testValues.background.gradientColor1);
-        handlePropertyChange('gradientColor2', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.testValues.background.gradientColor2);
-        handlePropertyChange('gradientAlpha', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.testValues.background.gradientAlpha1);
-        handlePropertyChange('imageUrl', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.testValues.background.image);
-        handlePropertyChange('imageAlpha', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.testValues.background.imageAlpha);
+        handlePropertyChange('webPartTitle', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].titleSettings.testValues.webPartTitle);
+        handlePropertyChange('shape', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].titleSettings.testValues.shape);
+        handlePropertyChange('backgroundType', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].titleSettings.testValues.background.type);
+        handlePropertyChange('backgroundColor', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].titleSettings.testValues.background.color);
+        handlePropertyChange('backgroundAlpha', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].titleSettings.testValues.background.alpha);
+        handlePropertyChange('gradientDirection', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].titleSettings.testValues.background.gradientDirection);
+        handlePropertyChange('gradientColor1', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].titleSettings.testValues.background.gradientColor1);
+        handlePropertyChange('gradientColor2', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].titleSettings.testValues.background.gradientColor2);
+        handlePropertyChange('gradientAlpha', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].titleSettings.testValues.background.gradientAlpha1);
+        handlePropertyChange('imageUrl', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].titleSettings.testValues.background.image);
+        handlePropertyChange('imageAlpha', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].titleSettings.testValues.background.imageAlpha);
         handleFontChange({
-            fontFamily: _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.testValues.font.family,
-            fontSize: _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.testValues.font.size,
-            formatting: _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.testValues.font.formatting,
-            alignment: _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.testValues.font.alignment
+            fontFamily: _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].titleSettings.testValues.font.family,
+            fontSize: _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].titleSettings.testValues.font.size,
+            formatting: _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].titleSettings.testValues.font.formatting,
+            alignment: _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].titleSettings.testValues.font.alignment
         });
-        handlePropertyChange('font.color', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.testValues.font.color);
+        handlePropertyChange('font.color', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].titleSettings.testValues.font.color);
     };
     return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
@@ -4052,7 +4176,7 @@ var TitleConfiguration = function (_a) {
                 marginBottom: '16px'
             } }, "Customize the web parts title text, font, color, background, and shape settings. Use the reset button to put the default look and feel back in place. Use the Back and Next buttons to switch to a different configuration page."),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Toggle__WEBPACK_IMPORTED_MODULE_5__.Toggle, { label: "Enabled", inlineLabel: true, checked: enabled, onText: "On", offText: "Off", onChange: function (_, checked) {
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Toggle__WEBPACK_IMPORTED_MODULE_6__.Toggle, { label: "Enabled", inlineLabel: true, checked: enabled, onText: "On", offText: "Off", onChange: function (_, checked) {
                     setEnabled(checked || false);
                     handlePropertyChange('enabled', checked || false);
                 } })),
@@ -4065,7 +4189,7 @@ var TitleConfiguration = function (_a) {
                     gap: '8px',
                     marginBottom: 16
                 } },
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_6__.TextField, { value: settings.webPartTitle, onChange: function (_, newValue) { return handlePropertyChange('webPartTitle', newValue !== null && newValue !== void 0 ? newValue : ''); }, placeholder: "Enter title text", styles: { root: { flex: '1 1 auto' } } }),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_7__.TextField, { value: settings.webPartTitle, onChange: function (_, newValue) { return handlePropertyChange('webPartTitle', newValue !== null && newValue !== void 0 ? newValue : ''); }, placeholder: "Enter title text", styles: { root: { flex: '1 1 auto' } } }),
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__.ColorPickerControl, { color: settings.font.color, field: "titleColor", label: "", onChange: function (field, newColor) { return handlePropertyChange('font.color', newColor); } })),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
                     backgroundColor: '#f3f2f1',
@@ -4084,12 +4208,12 @@ var TitleConfiguration = function (_a) {
                             fontWeight: '600',
                             color: '#323130'
                         } }, "Background"),
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_7__.Dropdown, { label: "", options: backgroundTypeOptions, selectedKey: settings.backgroundType, onChange: function (_, option) { return handlePropertyChange('backgroundType', option === null || option === void 0 ? void 0 : option.key); }, styles: { root: { minWidth: 120 } } })),
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_8__.Dropdown, { label: "", options: backgroundTypeOptions, selectedKey: settings.backgroundType, onChange: function (_, option) { return handlePropertyChange('backgroundType', option === null || option === void 0 ? void 0 : option.key); }, styles: { root: { minWidth: 120 } } })),
                 settings.backgroundType === 'solid' && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
                     react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__.ColorPickerControl, { color: settings.backgroundColor, field: "backgroundColor", label: "", onChange: function (field, newColor) { return handlePropertyChange('backgroundColor', newColor); } }))),
                 settings.backgroundType === 'gradient' && (react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null,
                     react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-                        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_7__.Dropdown, { label: "Direction", options: gradientDirectionOptions, selectedKey: settings.gradientDirection, onChange: function (_, option) { return handlePropertyChange('gradientDirection', option === null || option === void 0 ? void 0 : option.key); } })),
+                        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_8__.Dropdown, { label: "Direction", options: gradientDirectionOptions, selectedKey: settings.gradientDirection, onChange: function (_, option) { return handlePropertyChange('gradientDirection', option === null || option === void 0 ? void 0 : option.key); } })),
                     react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
                             display: 'flex',
                             alignItems: 'center',
@@ -4128,7 +4252,7 @@ var TitleConfiguration = function (_a) {
                             marginBottom: '8px',
                             display: 'block'
                         } }, "URL"),
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_6__.TextField, { value: settings.imageUrl, onChange: function (_, newValue) { return handlePropertyChange('imageUrl', newValue || ''); }, placeholder: "Enter image URL" }))),
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_7__.TextField, { value: settings.imageUrl, onChange: function (_, newValue) { return handlePropertyChange('imageUrl', newValue || ''); }, placeholder: "Enter image URL" }))),
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
                     react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: {
                             fontSize: '14px',
@@ -4137,7 +4261,7 @@ var TitleConfiguration = function (_a) {
                             marginBottom: '8px',
                             display: 'block'
                         } }, "Transparency"),
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Slider__WEBPACK_IMPORTED_MODULE_8__.Slider, { min: 0, max: 100, value: settings.backgroundType === 'solid' ? settings.backgroundAlpha :
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Slider__WEBPACK_IMPORTED_MODULE_9__.Slider, { min: 0, max: 100, value: settings.backgroundType === 'solid' ? settings.backgroundAlpha :
                             settings.backgroundType === 'gradient' ? settings.gradientAlpha :
                                 settings.imageAlpha, onChange: function (value) {
                             if (settings.backgroundType === 'solid') {
@@ -4152,9 +4276,11 @@ var TitleConfiguration = function (_a) {
                         }, showValue: true, valueFormat: function (value) { return "".concat(value, "%"); } }))),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ShapePickerControl__WEBPACK_IMPORTED_MODULE_3__.ShapePickerControl, { value: settings.shape, label: "", onChange: function (newShape) { return handlePropertyChange('shape', newShape); } })),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_DivideSpaceControl__WEBPACK_IMPORTED_MODULE_4__.DivideSpaceControl, { label: "Divide Space", value: settings.divideSpace, onChange: function (value) { return handlePropertyChange('divideSpace', value); }, onReset: function () { return handlePropertyChange('divideSpace', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].titleSettings.divideSpace); }, onTestValues: function () { return handlePropertyChange('divideSpace', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].titleSettings.testValues.divideSpace); } })),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginTop: 16, display: 'flex', gap: '8px' } },
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_9__.PrimaryButton, { text: _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.resetButtonText, onClick: handleReset }),
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_9__.PrimaryButton, { text: _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].titleSettings.testValuesButtonText, onClick: handleTestValues }))))));
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_10__.PrimaryButton, { text: _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].titleSettings.resetButtonText, onClick: handleReset }),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_10__.PrimaryButton, { text: _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].titleSettings.testValuesButtonText, onClick: handleTestValues }))))));
 };
 
 
@@ -36636,7 +36762,7 @@ var FancyListWebPart = /** @class */ (function (_super) {
         });
     };
     FancyListWebPart.prototype.render = function () {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, _23, _24, _25, _26, _27, _28, _29, _30, _31, _32, _33, _34, _35, _36, _37, _38, _39, _40, _41, _42, _43, _44, _45, _46, _47, _48, _49, _50, _51, _52, _53, _54, _55, _56, _57, _58, _59, _60, _61, _62, _63, _64, _65, _66, _67, _68, _69, _70, _71, _72, _73, _74, _75, _76, _77, _78, _79, _80, _81, _82, _83, _84, _85, _86, _87, _88, _89, _90, _91, _92, _93, _94, _95, _96, _97, _98, _99, _100, _101, _102, _103, _104, _105, _106, _107, _108, _109, _110, _111, _112, _113, _114, _115, _116, _117, _118, _119, _120, _121, _122, _123, _124, _125, _126, _127, _128, _129, _130, _131, _132, _133, _134, _135, _136, _137, _138, _139, _140, _141, _142, _143, _144, _145, _146, _147, _148, _149, _150, _151, _152, _153, _154, _155, _156, _157, _158, _159, _160, _161, _162, _163, _164, _165, _166, _167, _168, _169, _170, _171, _172, _173, _174, _175, _176, _177, _178, _179, _180, _181, _182, _183, _184, _185, _186, _187, _188, _189, _190, _191, _192, _193, _194, _195, _196, _197, _198, _199, _200, _201, _202, _203, _204, _205, _206, _207, _208, _209, _210, _211, _212, _213, _214, _215, _216, _217, _218, _219, _220, _221, _222, _223, _224, _225, _226, _227, _228, _229, _230, _231, _232, _233, _234, _235, _236, _237, _238, _239, _240, _241, _242, _243, _244, _245, _246, _247, _248, _249, _250, _251, _252, _253, _254, _255, _256, _257;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, _23, _24, _25, _26, _27, _28, _29, _30, _31, _32, _33, _34, _35, _36, _37, _38, _39, _40, _41, _42, _43, _44, _45, _46, _47, _48, _49, _50, _51, _52, _53, _54, _55, _56, _57, _58, _59, _60, _61, _62, _63, _64, _65, _66, _67, _68, _69, _70, _71, _72, _73, _74, _75, _76, _77, _78, _79, _80, _81, _82, _83, _84, _85, _86, _87, _88, _89, _90, _91, _92, _93, _94, _95, _96, _97, _98, _99, _100, _101, _102, _103, _104, _105, _106, _107, _108, _109, _110, _111, _112, _113, _114, _115, _116, _117, _118, _119, _120, _121, _122, _123, _124, _125, _126, _127, _128, _129, _130, _131, _132, _133, _134, _135, _136, _137, _138, _139, _140, _141, _142, _143, _144, _145, _146, _147, _148, _149, _150, _151, _152, _153, _154, _155, _156, _157, _158, _159, _160, _161, _162, _163, _164, _165, _166, _167, _168, _169, _170, _171, _172, _173, _174, _175, _176, _177, _178, _179, _180, _181, _182, _183, _184, _185, _186, _187, _188, _189, _190, _191, _192, _193, _194, _195, _196, _197, _198, _199, _200, _201, _202, _203, _204, _205, _206, _207, _208, _209, _210, _211, _212, _213, _214, _215, _216, _217, _218, _219, _220, _221, _222, _223, _224, _225, _226, _227, _228, _229, _230, _231, _232, _233, _234, _235, _236, _237, _238, _239, _240, _241, _242, _243, _244, _245, _246, _247, _248, _249, _250, _251, _252, _253, _254, _255, _256, _257, _258, _259;
         // Map individual properties to the format expected by FancyList component
         // Use default values if properties are undefined
         // Map title properties to the format expected by FancyList component
@@ -36659,149 +36785,150 @@ var FancyListWebPart = /** @class */ (function (_super) {
                 color: (_s = this.properties.webPartTitleColor) !== null && _s !== void 0 ? _s : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.font.color,
                 formatting: (_t = this.properties.webPartTitleFormatting) !== null && _t !== void 0 ? _t : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.font.formatting,
                 alignment: (_u = this.properties.webPartTitleAlignment) !== null && _u !== void 0 ? _u : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.font.alignment
-            }
+            },
+            divideSpace: (_w = (_v = this.properties.titleSettings) === null || _v === void 0 ? void 0 : _v.divideSpace) !== null && _w !== void 0 ? _w : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.divideSpace
         };
         // Map filter properties to the format expected by FancyList component
         var filterSettings = {
-            enableFilters: (_w = (_v = this.properties.filterSettings) === null || _v === void 0 ? void 0 : _v.enableFilters) !== null && _w !== void 0 ? _w : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.enableFilters,
-            defaultFilterSelection: (_y = (_x = this.properties.filterSettings) === null || _x === void 0 ? void 0 : _x.defaultFilterSelection) !== null && _y !== void 0 ? _y : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.defaultFilterSelection,
+            enableFilters: (_y = (_x = this.properties.filterSettings) === null || _x === void 0 ? void 0 : _x.enableFilters) !== null && _y !== void 0 ? _y : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.enableFilters,
+            defaultFilterSelection: (_0 = (_z = this.properties.filterSettings) === null || _z === void 0 ? void 0 : _z.defaultFilterSelection) !== null && _0 !== void 0 ? _0 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.defaultFilterSelection,
             font: {
-                family: (_1 = (_0 = (_z = this.properties.filterSettings) === null || _z === void 0 ? void 0 : _z.font) === null || _0 === void 0 ? void 0 : _0.family) !== null && _1 !== void 0 ? _1 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.font.family,
-                size: (_4 = (_3 = (_2 = this.properties.filterSettings) === null || _2 === void 0 ? void 0 : _2.font) === null || _3 === void 0 ? void 0 : _3.size) !== null && _4 !== void 0 ? _4 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.font.size,
+                family: (_3 = (_2 = (_1 = this.properties.filterSettings) === null || _1 === void 0 ? void 0 : _1.font) === null || _2 === void 0 ? void 0 : _2.family) !== null && _3 !== void 0 ? _3 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.font.family,
+                size: (_6 = (_5 = (_4 = this.properties.filterSettings) === null || _4 === void 0 ? void 0 : _4.font) === null || _5 === void 0 ? void 0 : _5.size) !== null && _6 !== void 0 ? _6 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.font.size,
                 color: '#605e5c', // Default filter font color
-                formatting: (_7 = (_6 = (_5 = this.properties.filterSettings) === null || _5 === void 0 ? void 0 : _5.font) === null || _6 === void 0 ? void 0 : _6.formatting) !== null && _7 !== void 0 ? _7 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.font.formatting,
-                alignment: (_10 = (_9 = (_8 = this.properties.filterSettings) === null || _8 === void 0 ? void 0 : _8.font) === null || _9 === void 0 ? void 0 : _9.alignment) !== null && _10 !== void 0 ? _10 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.font.alignment
+                formatting: (_9 = (_8 = (_7 = this.properties.filterSettings) === null || _7 === void 0 ? void 0 : _7.font) === null || _8 === void 0 ? void 0 : _8.formatting) !== null && _9 !== void 0 ? _9 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.font.formatting,
+                alignment: (_12 = (_11 = (_10 = this.properties.filterSettings) === null || _10 === void 0 ? void 0 : _10.font) === null || _11 === void 0 ? void 0 : _11.alignment) !== null && _12 !== void 0 ? _12 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.font.alignment
             },
             activeColors: {
-                background: (_13 = (_12 = (_11 = this.properties.filterSettings) === null || _11 === void 0 ? void 0 : _11.activeColors) === null || _12 === void 0 ? void 0 : _12.background) !== null && _13 !== void 0 ? _13 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.activeColors.background,
-                font: (_16 = (_15 = (_14 = this.properties.filterSettings) === null || _14 === void 0 ? void 0 : _14.activeColors) === null || _15 === void 0 ? void 0 : _15.font) !== null && _16 !== void 0 ? _16 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.activeColors.font
+                background: (_15 = (_14 = (_13 = this.properties.filterSettings) === null || _13 === void 0 ? void 0 : _13.activeColors) === null || _14 === void 0 ? void 0 : _14.background) !== null && _15 !== void 0 ? _15 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.activeColors.background,
+                font: (_18 = (_17 = (_16 = this.properties.filterSettings) === null || _16 === void 0 ? void 0 : _16.activeColors) === null || _17 === void 0 ? void 0 : _17.font) !== null && _18 !== void 0 ? _18 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.activeColors.font
             },
             inactiveColors: {
-                background: (_19 = (_18 = (_17 = this.properties.filterSettings) === null || _17 === void 0 ? void 0 : _17.inactiveColors) === null || _18 === void 0 ? void 0 : _18.background) !== null && _19 !== void 0 ? _19 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.inactiveColors.background,
-                font: (_22 = (_21 = (_20 = this.properties.filterSettings) === null || _20 === void 0 ? void 0 : _20.inactiveColors) === null || _21 === void 0 ? void 0 : _21.font) !== null && _22 !== void 0 ? _22 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.inactiveColors.font
+                background: (_21 = (_20 = (_19 = this.properties.filterSettings) === null || _19 === void 0 ? void 0 : _19.inactiveColors) === null || _20 === void 0 ? void 0 : _20.background) !== null && _21 !== void 0 ? _21 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.inactiveColors.background,
+                font: (_24 = (_23 = (_22 = this.properties.filterSettings) === null || _22 === void 0 ? void 0 : _22.inactiveColors) === null || _23 === void 0 ? void 0 : _23.font) !== null && _24 !== void 0 ? _24 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.inactiveColors.font
             },
-            shape: (_24 = (_23 = this.properties.filterSettings) === null || _23 === void 0 ? void 0 : _23.shape) !== null && _24 !== void 0 ? _24 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.shape,
-            backgroundShape: (_26 = (_25 = this.properties.filterSettings) === null || _25 === void 0 ? void 0 : _25.backgroundShape) !== null && _26 !== void 0 ? _26 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.backgroundShape,
-            showAllCategories: (_28 = (_27 = this.properties.filterSettings) === null || _27 === void 0 ? void 0 : _27.showAllCategories) !== null && _28 !== void 0 ? _28 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.showAllCategories,
+            shape: (_26 = (_25 = this.properties.filterSettings) === null || _25 === void 0 ? void 0 : _25.shape) !== null && _26 !== void 0 ? _26 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.shape,
+            backgroundShape: (_28 = (_27 = this.properties.filterSettings) === null || _27 === void 0 ? void 0 : _27.backgroundShape) !== null && _28 !== void 0 ? _28 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.backgroundShape,
+            showAllCategories: (_30 = (_29 = this.properties.filterSettings) === null || _29 === void 0 ? void 0 : _29.showAllCategories) !== null && _30 !== void 0 ? _30 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.showAllCategories,
             background: {
-                type: (_31 = (_30 = (_29 = this.properties.filterSettings) === null || _29 === void 0 ? void 0 : _29.background) === null || _30 === void 0 ? void 0 : _30.type) !== null && _31 !== void 0 ? _31 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.type,
-                color: (_34 = (_33 = (_32 = this.properties.filterSettings) === null || _32 === void 0 ? void 0 : _32.background) === null || _33 === void 0 ? void 0 : _33.color) !== null && _34 !== void 0 ? _34 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.color,
-                alpha: (_37 = (_36 = (_35 = this.properties.filterSettings) === null || _35 === void 0 ? void 0 : _35.background) === null || _36 === void 0 ? void 0 : _36.alpha) !== null && _37 !== void 0 ? _37 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.alpha,
-                image: (_40 = (_39 = (_38 = this.properties.filterSettings) === null || _38 === void 0 ? void 0 : _38.background) === null || _39 === void 0 ? void 0 : _39.image) !== null && _40 !== void 0 ? _40 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.image,
-                imageAlpha: (_43 = (_42 = (_41 = this.properties.filterSettings) === null || _41 === void 0 ? void 0 : _41.background) === null || _42 === void 0 ? void 0 : _42.imageAlpha) !== null && _43 !== void 0 ? _43 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.imageAlpha,
-                gradientDirection: (_46 = (_45 = (_44 = this.properties.filterSettings) === null || _44 === void 0 ? void 0 : _44.background) === null || _45 === void 0 ? void 0 : _45.gradientDirection) !== null && _46 !== void 0 ? _46 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientDirection,
-                gradientColor1: (_49 = (_48 = (_47 = this.properties.filterSettings) === null || _47 === void 0 ? void 0 : _47.background) === null || _48 === void 0 ? void 0 : _48.gradientColor1) !== null && _49 !== void 0 ? _49 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientColor1,
-                gradientAlpha1: (_52 = (_51 = (_50 = this.properties.filterSettings) === null || _50 === void 0 ? void 0 : _50.background) === null || _51 === void 0 ? void 0 : _51.gradientAlpha1) !== null && _52 !== void 0 ? _52 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientAlpha1,
-                gradientColor2: (_55 = (_54 = (_53 = this.properties.filterSettings) === null || _53 === void 0 ? void 0 : _53.background) === null || _54 === void 0 ? void 0 : _54.gradientColor2) !== null && _55 !== void 0 ? _55 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientColor2,
-                gradientAlpha2: (_58 = (_57 = (_56 = this.properties.filterSettings) === null || _56 === void 0 ? void 0 : _56.background) === null || _57 === void 0 ? void 0 : _57.gradientAlpha2) !== null && _58 !== void 0 ? _58 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientAlpha2
+                type: (_33 = (_32 = (_31 = this.properties.filterSettings) === null || _31 === void 0 ? void 0 : _31.background) === null || _32 === void 0 ? void 0 : _32.type) !== null && _33 !== void 0 ? _33 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.type,
+                color: (_36 = (_35 = (_34 = this.properties.filterSettings) === null || _34 === void 0 ? void 0 : _34.background) === null || _35 === void 0 ? void 0 : _35.color) !== null && _36 !== void 0 ? _36 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.color,
+                alpha: (_39 = (_38 = (_37 = this.properties.filterSettings) === null || _37 === void 0 ? void 0 : _37.background) === null || _38 === void 0 ? void 0 : _38.alpha) !== null && _39 !== void 0 ? _39 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.alpha,
+                image: (_42 = (_41 = (_40 = this.properties.filterSettings) === null || _40 === void 0 ? void 0 : _40.background) === null || _41 === void 0 ? void 0 : _41.image) !== null && _42 !== void 0 ? _42 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.image,
+                imageAlpha: (_45 = (_44 = (_43 = this.properties.filterSettings) === null || _43 === void 0 ? void 0 : _43.background) === null || _44 === void 0 ? void 0 : _44.imageAlpha) !== null && _45 !== void 0 ? _45 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.imageAlpha,
+                gradientDirection: (_48 = (_47 = (_46 = this.properties.filterSettings) === null || _46 === void 0 ? void 0 : _46.background) === null || _47 === void 0 ? void 0 : _47.gradientDirection) !== null && _48 !== void 0 ? _48 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientDirection,
+                gradientColor1: (_51 = (_50 = (_49 = this.properties.filterSettings) === null || _49 === void 0 ? void 0 : _49.background) === null || _50 === void 0 ? void 0 : _50.gradientColor1) !== null && _51 !== void 0 ? _51 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientColor1,
+                gradientAlpha1: (_54 = (_53 = (_52 = this.properties.filterSettings) === null || _52 === void 0 ? void 0 : _52.background) === null || _53 === void 0 ? void 0 : _53.gradientAlpha1) !== null && _54 !== void 0 ? _54 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientAlpha1,
+                gradientColor2: (_57 = (_56 = (_55 = this.properties.filterSettings) === null || _55 === void 0 ? void 0 : _55.background) === null || _56 === void 0 ? void 0 : _56.gradientColor2) !== null && _57 !== void 0 ? _57 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientColor2,
+                gradientAlpha2: (_60 = (_59 = (_58 = this.properties.filterSettings) === null || _58 === void 0 ? void 0 : _58.background) === null || _59 === void 0 ? void 0 : _59.gradientAlpha2) !== null && _60 !== void 0 ? _60 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientAlpha2
             },
-            showDivider: (_60 = (_59 = this.properties.filterSettings) === null || _59 === void 0 ? void 0 : _59.showDivider) !== null && _60 !== void 0 ? _60 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.showDivider
+            showDivider: (_62 = (_61 = this.properties.filterSettings) === null || _61 === void 0 ? void 0 : _61.showDivider) !== null && _62 !== void 0 ? _62 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.showDivider
         };
         // Map category section properties to the format expected by FancyList component
         var categorySectionSettings = {
             sectionType: 'category',
-            resetButtonText: (_62 = (_61 = this.properties.categorySectionSettings) === null || _61 === void 0 ? void 0 : _61.resetButtonText) !== null && _62 !== void 0 ? _62 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.resetButtonText,
-            description: (_64 = (_63 = this.properties.categorySectionSettings) === null || _63 === void 0 ? void 0 : _63.description) !== null && _64 !== void 0 ? _64 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.description,
+            resetButtonText: (_64 = (_63 = this.properties.categorySectionSettings) === null || _63 === void 0 ? void 0 : _63.resetButtonText) !== null && _64 !== void 0 ? _64 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.resetButtonText,
+            description: (_66 = (_65 = this.properties.categorySectionSettings) === null || _65 === void 0 ? void 0 : _65.description) !== null && _66 !== void 0 ? _66 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.description,
             font: {
-                family: (_67 = (_66 = (_65 = this.properties.categorySectionSettings) === null || _65 === void 0 ? void 0 : _65.font) === null || _66 === void 0 ? void 0 : _66.family) !== null && _67 !== void 0 ? _67 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.font.family,
-                size: (_70 = (_69 = (_68 = this.properties.categorySectionSettings) === null || _68 === void 0 ? void 0 : _68.font) === null || _69 === void 0 ? void 0 : _69.size) !== null && _70 !== void 0 ? _70 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.font.size,
-                color: (_73 = (_72 = (_71 = this.properties.categorySectionSettings) === null || _71 === void 0 ? void 0 : _71.font) === null || _72 === void 0 ? void 0 : _72.color) !== null && _73 !== void 0 ? _73 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.font.color,
-                formatting: (_76 = (_75 = (_74 = this.properties.categorySectionSettings) === null || _74 === void 0 ? void 0 : _74.font) === null || _75 === void 0 ? void 0 : _75.formatting) !== null && _76 !== void 0 ? _76 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.font.formatting,
-                alignment: ((_79 = (_78 = (_77 = this.properties.categorySectionSettings) === null || _77 === void 0 ? void 0 : _77.font) === null || _78 === void 0 ? void 0 : _78.alignment) !== null && _79 !== void 0 ? _79 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.font.alignment)
+                family: (_69 = (_68 = (_67 = this.properties.categorySectionSettings) === null || _67 === void 0 ? void 0 : _67.font) === null || _68 === void 0 ? void 0 : _68.family) !== null && _69 !== void 0 ? _69 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.font.family,
+                size: (_72 = (_71 = (_70 = this.properties.categorySectionSettings) === null || _70 === void 0 ? void 0 : _70.font) === null || _71 === void 0 ? void 0 : _71.size) !== null && _72 !== void 0 ? _72 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.font.size,
+                color: (_75 = (_74 = (_73 = this.properties.categorySectionSettings) === null || _73 === void 0 ? void 0 : _73.font) === null || _74 === void 0 ? void 0 : _74.color) !== null && _75 !== void 0 ? _75 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.font.color,
+                formatting: (_78 = (_77 = (_76 = this.properties.categorySectionSettings) === null || _76 === void 0 ? void 0 : _76.font) === null || _77 === void 0 ? void 0 : _77.formatting) !== null && _78 !== void 0 ? _78 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.font.formatting,
+                alignment: ((_81 = (_80 = (_79 = this.properties.categorySectionSettings) === null || _79 === void 0 ? void 0 : _79.font) === null || _80 === void 0 ? void 0 : _80.alignment) !== null && _81 !== void 0 ? _81 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.font.alignment)
             },
             background: {
-                type: (_82 = (_81 = (_80 = this.properties.categorySectionSettings) === null || _80 === void 0 ? void 0 : _80.background) === null || _81 === void 0 ? void 0 : _81.type) !== null && _82 !== void 0 ? _82 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.background.type,
-                color: (_85 = (_84 = (_83 = this.properties.categorySectionSettings) === null || _83 === void 0 ? void 0 : _83.background) === null || _84 === void 0 ? void 0 : _84.color) !== null && _85 !== void 0 ? _85 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.background.color,
-                alpha: (_88 = (_87 = (_86 = this.properties.categorySectionSettings) === null || _86 === void 0 ? void 0 : _86.background) === null || _87 === void 0 ? void 0 : _87.alpha) !== null && _88 !== void 0 ? _88 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.background.alpha,
-                image: (_91 = (_90 = (_89 = this.properties.categorySectionSettings) === null || _89 === void 0 ? void 0 : _89.background) === null || _90 === void 0 ? void 0 : _90.image) !== null && _91 !== void 0 ? _91 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.background.image,
-                imageAlpha: (_94 = (_93 = (_92 = this.properties.categorySectionSettings) === null || _92 === void 0 ? void 0 : _92.background) === null || _93 === void 0 ? void 0 : _93.imageAlpha) !== null && _94 !== void 0 ? _94 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.background.imageAlpha,
-                gradientDirection: (_97 = (_96 = (_95 = this.properties.categorySectionSettings) === null || _95 === void 0 ? void 0 : _95.background) === null || _96 === void 0 ? void 0 : _96.gradientDirection) !== null && _97 !== void 0 ? _97 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.background.gradientDirection,
-                gradientColor1: (_100 = (_99 = (_98 = this.properties.categorySectionSettings) === null || _98 === void 0 ? void 0 : _98.background) === null || _99 === void 0 ? void 0 : _99.gradientColor1) !== null && _100 !== void 0 ? _100 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.background.gradientColor1,
-                gradientAlpha1: (_103 = (_102 = (_101 = this.properties.categorySectionSettings) === null || _101 === void 0 ? void 0 : _101.background) === null || _102 === void 0 ? void 0 : _102.gradientAlpha1) !== null && _103 !== void 0 ? _103 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.background.gradientAlpha1,
-                gradientColor2: (_106 = (_105 = (_104 = this.properties.categorySectionSettings) === null || _104 === void 0 ? void 0 : _104.background) === null || _105 === void 0 ? void 0 : _105.gradientColor2) !== null && _106 !== void 0 ? _106 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.background.gradientColor2,
-                gradientAlpha2: (_109 = (_108 = (_107 = this.properties.categorySectionSettings) === null || _107 === void 0 ? void 0 : _107.background) === null || _108 === void 0 ? void 0 : _108.gradientAlpha2) !== null && _109 !== void 0 ? _109 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.background.gradientAlpha2
+                type: (_84 = (_83 = (_82 = this.properties.categorySectionSettings) === null || _82 === void 0 ? void 0 : _82.background) === null || _83 === void 0 ? void 0 : _83.type) !== null && _84 !== void 0 ? _84 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.background.type,
+                color: (_87 = (_86 = (_85 = this.properties.categorySectionSettings) === null || _85 === void 0 ? void 0 : _85.background) === null || _86 === void 0 ? void 0 : _86.color) !== null && _87 !== void 0 ? _87 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.background.color,
+                alpha: (_90 = (_89 = (_88 = this.properties.categorySectionSettings) === null || _88 === void 0 ? void 0 : _88.background) === null || _89 === void 0 ? void 0 : _89.alpha) !== null && _90 !== void 0 ? _90 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.background.alpha,
+                image: (_93 = (_92 = (_91 = this.properties.categorySectionSettings) === null || _91 === void 0 ? void 0 : _91.background) === null || _92 === void 0 ? void 0 : _92.image) !== null && _93 !== void 0 ? _93 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.background.image,
+                imageAlpha: (_96 = (_95 = (_94 = this.properties.categorySectionSettings) === null || _94 === void 0 ? void 0 : _94.background) === null || _95 === void 0 ? void 0 : _95.imageAlpha) !== null && _96 !== void 0 ? _96 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.background.imageAlpha,
+                gradientDirection: (_99 = (_98 = (_97 = this.properties.categorySectionSettings) === null || _97 === void 0 ? void 0 : _97.background) === null || _98 === void 0 ? void 0 : _98.gradientDirection) !== null && _99 !== void 0 ? _99 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.background.gradientDirection,
+                gradientColor1: (_102 = (_101 = (_100 = this.properties.categorySectionSettings) === null || _100 === void 0 ? void 0 : _100.background) === null || _101 === void 0 ? void 0 : _101.gradientColor1) !== null && _102 !== void 0 ? _102 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.background.gradientColor1,
+                gradientAlpha1: (_105 = (_104 = (_103 = this.properties.categorySectionSettings) === null || _103 === void 0 ? void 0 : _103.background) === null || _104 === void 0 ? void 0 : _104.gradientAlpha1) !== null && _105 !== void 0 ? _105 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.background.gradientAlpha1,
+                gradientColor2: (_108 = (_107 = (_106 = this.properties.categorySectionSettings) === null || _106 === void 0 ? void 0 : _106.background) === null || _107 === void 0 ? void 0 : _107.gradientColor2) !== null && _108 !== void 0 ? _108 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.background.gradientColor2,
+                gradientAlpha2: (_111 = (_110 = (_109 = this.properties.categorySectionSettings) === null || _109 === void 0 ? void 0 : _109.background) === null || _110 === void 0 ? void 0 : _110.gradientAlpha2) !== null && _111 !== void 0 ? _111 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.background.gradientAlpha2
             },
-            shape: (_111 = (_110 = this.properties.categorySectionSettings) === null || _110 === void 0 ? void 0 : _110.shape) !== null && _111 !== void 0 ? _111 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.shape,
-            showDivider: (_113 = (_112 = this.properties.categorySectionSettings) === null || _112 === void 0 ? void 0 : _112.showDivider) !== null && _113 !== void 0 ? _113 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.showDivider,
-            autoExpand: (_115 = (_114 = this.properties.categorySectionSettings) === null || _114 === void 0 ? void 0 : _114.autoExpand) !== null && _115 !== void 0 ? _115 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.autoExpand,
-            hoverColor: (_117 = (_116 = this.properties.categorySectionSettings) === null || _116 === void 0 ? void 0 : _116.hoverColor) !== null && _117 !== void 0 ? _117 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.hoverColor,
+            shape: (_113 = (_112 = this.properties.categorySectionSettings) === null || _112 === void 0 ? void 0 : _112.shape) !== null && _113 !== void 0 ? _113 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.shape,
+            showDivider: (_115 = (_114 = this.properties.categorySectionSettings) === null || _114 === void 0 ? void 0 : _114.showDivider) !== null && _115 !== void 0 ? _115 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.showDivider,
+            autoExpand: (_117 = (_116 = this.properties.categorySectionSettings) === null || _116 === void 0 ? void 0 : _116.autoExpand) !== null && _117 !== void 0 ? _117 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.autoExpand,
+            hoverColor: (_119 = (_118 = this.properties.categorySectionSettings) === null || _118 === void 0 ? void 0 : _118.hoverColor) !== null && _119 !== void 0 ? _119 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.hoverColor,
             icons: {
-                enabled: (_120 = (_119 = (_118 = this.properties.categorySectionSettings) === null || _118 === void 0 ? void 0 : _118.iconSettings) === null || _119 === void 0 ? void 0 : _119.enabled) !== null && _120 !== void 0 ? _120 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.iconSettings.enabled,
-                iconPosition: (_123 = (_122 = (_121 = this.properties.categorySectionSettings) === null || _121 === void 0 ? void 0 : _121.iconSettings) === null || _122 === void 0 ? void 0 : _122.iconPosition) !== null && _123 !== void 0 ? _123 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.iconSettings.iconPosition,
-                collapsedIcon: (_126 = (_125 = (_124 = this.properties.categorySectionSettings) === null || _124 === void 0 ? void 0 : _124.iconSettings) === null || _125 === void 0 ? void 0 : _125.collapsedIcon) !== null && _126 !== void 0 ? _126 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.iconSettings.collapsedIcon,
-                expandedIcon: (_129 = (_128 = (_127 = this.properties.categorySectionSettings) === null || _127 === void 0 ? void 0 : _127.iconSettings) === null || _128 === void 0 ? void 0 : _128.expandedIcon) !== null && _129 !== void 0 ? _129 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.iconSettings.expandedIcon
+                enabled: (_122 = (_121 = (_120 = this.properties.categorySectionSettings) === null || _120 === void 0 ? void 0 : _120.iconSettings) === null || _121 === void 0 ? void 0 : _121.enabled) !== null && _122 !== void 0 ? _122 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.iconSettings.enabled,
+                iconPosition: (_125 = (_124 = (_123 = this.properties.categorySectionSettings) === null || _123 === void 0 ? void 0 : _123.iconSettings) === null || _124 === void 0 ? void 0 : _124.iconPosition) !== null && _125 !== void 0 ? _125 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.iconSettings.iconPosition,
+                collapsedIcon: (_128 = (_127 = (_126 = this.properties.categorySectionSettings) === null || _126 === void 0 ? void 0 : _126.iconSettings) === null || _127 === void 0 ? void 0 : _127.collapsedIcon) !== null && _128 !== void 0 ? _128 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.iconSettings.collapsedIcon,
+                expandedIcon: (_131 = (_130 = (_129 = this.properties.categorySectionSettings) === null || _129 === void 0 ? void 0 : _129.iconSettings) === null || _130 === void 0 ? void 0 : _130.expandedIcon) !== null && _131 !== void 0 ? _131 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].categorySectionSettings.iconSettings.expandedIcon
             }
         };
         // Map subject section properties to the format expected by FancyList component
         var subjectSectionSettings = {
             sectionType: 'subject',
-            resetButtonText: (_131 = (_130 = this.properties.subjectSectionSettings) === null || _130 === void 0 ? void 0 : _130.resetButtonText) !== null && _131 !== void 0 ? _131 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].subjectSectionSettings.resetButtonText,
-            description: (_133 = (_132 = this.properties.subjectSectionSettings) === null || _132 === void 0 ? void 0 : _132.description) !== null && _133 !== void 0 ? _133 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].subjectSectionSettings.description,
+            resetButtonText: (_133 = (_132 = this.properties.subjectSectionSettings) === null || _132 === void 0 ? void 0 : _132.resetButtonText) !== null && _133 !== void 0 ? _133 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].subjectSectionSettings.resetButtonText,
+            description: (_135 = (_134 = this.properties.subjectSectionSettings) === null || _134 === void 0 ? void 0 : _134.description) !== null && _135 !== void 0 ? _135 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].subjectSectionSettings.description,
             font: {
-                family: (_136 = (_135 = (_134 = this.properties.subjectSectionSettings) === null || _134 === void 0 ? void 0 : _134.font) === null || _135 === void 0 ? void 0 : _135.family) !== null && _136 !== void 0 ? _136 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].subjectSectionSettings.font.family,
-                size: (_139 = (_138 = (_137 = this.properties.subjectSectionSettings) === null || _137 === void 0 ? void 0 : _137.font) === null || _138 === void 0 ? void 0 : _138.size) !== null && _139 !== void 0 ? _139 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].subjectSectionSettings.font.size,
-                color: (_142 = (_141 = (_140 = this.properties.subjectSectionSettings) === null || _140 === void 0 ? void 0 : _140.font) === null || _141 === void 0 ? void 0 : _141.color) !== null && _142 !== void 0 ? _142 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].subjectSectionSettings.font.color,
-                formatting: (_145 = (_144 = (_143 = this.properties.subjectSectionSettings) === null || _143 === void 0 ? void 0 : _143.font) === null || _144 === void 0 ? void 0 : _144.formatting) !== null && _145 !== void 0 ? _145 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].subjectSectionSettings.font.formatting,
-                alignment: ((_148 = (_147 = (_146 = this.properties.subjectSectionSettings) === null || _146 === void 0 ? void 0 : _146.font) === null || _147 === void 0 ? void 0 : _147.alignment) !== null && _148 !== void 0 ? _148 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].subjectSectionSettings.font.alignment)
+                family: (_138 = (_137 = (_136 = this.properties.subjectSectionSettings) === null || _136 === void 0 ? void 0 : _136.font) === null || _137 === void 0 ? void 0 : _137.family) !== null && _138 !== void 0 ? _138 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].subjectSectionSettings.font.family,
+                size: (_141 = (_140 = (_139 = this.properties.subjectSectionSettings) === null || _139 === void 0 ? void 0 : _139.font) === null || _140 === void 0 ? void 0 : _140.size) !== null && _141 !== void 0 ? _141 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].subjectSectionSettings.font.size,
+                color: (_144 = (_143 = (_142 = this.properties.subjectSectionSettings) === null || _142 === void 0 ? void 0 : _142.font) === null || _143 === void 0 ? void 0 : _143.color) !== null && _144 !== void 0 ? _144 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].subjectSectionSettings.font.color,
+                formatting: (_147 = (_146 = (_145 = this.properties.subjectSectionSettings) === null || _145 === void 0 ? void 0 : _145.font) === null || _146 === void 0 ? void 0 : _146.formatting) !== null && _147 !== void 0 ? _147 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].subjectSectionSettings.font.formatting,
+                alignment: ((_150 = (_149 = (_148 = this.properties.subjectSectionSettings) === null || _148 === void 0 ? void 0 : _148.font) === null || _149 === void 0 ? void 0 : _149.alignment) !== null && _150 !== void 0 ? _150 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].subjectSectionSettings.font.alignment)
             },
             background: {
-                type: (_151 = (_150 = (_149 = this.properties.subjectSectionSettings) === null || _149 === void 0 ? void 0 : _149.background) === null || _150 === void 0 ? void 0 : _150.type) !== null && _151 !== void 0 ? _151 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].subjectSectionSettings.background.type,
-                color: (_154 = (_153 = (_152 = this.properties.subjectSectionSettings) === null || _152 === void 0 ? void 0 : _152.background) === null || _153 === void 0 ? void 0 : _153.color) !== null && _154 !== void 0 ? _154 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].subjectSectionSettings.background.color,
-                alpha: (_157 = (_156 = (_155 = this.properties.subjectSectionSettings) === null || _155 === void 0 ? void 0 : _155.background) === null || _156 === void 0 ? void 0 : _156.alpha) !== null && _157 !== void 0 ? _157 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].subjectSectionSettings.background.alpha,
-                image: (_160 = (_159 = (_158 = this.properties.subjectSectionSettings) === null || _158 === void 0 ? void 0 : _158.background) === null || _159 === void 0 ? void 0 : _159.image) !== null && _160 !== void 0 ? _160 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].subjectSectionSettings.background.image,
-                imageAlpha: (_163 = (_162 = (_161 = this.properties.subjectSectionSettings) === null || _161 === void 0 ? void 0 : _161.background) === null || _162 === void 0 ? void 0 : _162.imageAlpha) !== null && _163 !== void 0 ? _163 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].subjectSectionSettings.background.imageAlpha,
-                gradientDirection: (_166 = (_165 = (_164 = this.properties.subjectSectionSettings) === null || _164 === void 0 ? void 0 : _164.background) === null || _165 === void 0 ? void 0 : _165.gradientDirection) !== null && _166 !== void 0 ? _166 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].subjectSectionSettings.background.gradientDirection,
-                gradientColor1: (_169 = (_168 = (_167 = this.properties.subjectSectionSettings) === null || _167 === void 0 ? void 0 : _167.background) === null || _168 === void 0 ? void 0 : _168.gradientColor1) !== null && _169 !== void 0 ? _169 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].subjectSectionSettings.background.gradientColor1,
-                gradientAlpha1: (_172 = (_171 = (_170 = this.properties.subjectSectionSettings) === null || _170 === void 0 ? void 0 : _170.background) === null || _171 === void 0 ? void 0 : _171.gradientAlpha1) !== null && _172 !== void 0 ? _172 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].subjectSectionSettings.background.gradientAlpha1,
-                gradientColor2: (_175 = (_174 = (_173 = this.properties.subjectSectionSettings) === null || _173 === void 0 ? void 0 : _173.background) === null || _174 === void 0 ? void 0 : _174.gradientColor2) !== null && _175 !== void 0 ? _175 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].subjectSectionSettings.background.gradientColor2,
-                gradientAlpha2: (_178 = (_177 = (_176 = this.properties.subjectSectionSettings) === null || _176 === void 0 ? void 0 : _176.background) === null || _177 === void 0 ? void 0 : _177.gradientAlpha2) !== null && _178 !== void 0 ? _178 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].subjectSectionSettings.background.gradientAlpha2
+                type: (_153 = (_152 = (_151 = this.properties.subjectSectionSettings) === null || _151 === void 0 ? void 0 : _151.background) === null || _152 === void 0 ? void 0 : _152.type) !== null && _153 !== void 0 ? _153 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].subjectSectionSettings.background.type,
+                color: (_156 = (_155 = (_154 = this.properties.subjectSectionSettings) === null || _154 === void 0 ? void 0 : _154.background) === null || _155 === void 0 ? void 0 : _155.color) !== null && _156 !== void 0 ? _156 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].subjectSectionSettings.background.color,
+                alpha: (_159 = (_158 = (_157 = this.properties.subjectSectionSettings) === null || _157 === void 0 ? void 0 : _157.background) === null || _158 === void 0 ? void 0 : _158.alpha) !== null && _159 !== void 0 ? _159 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].subjectSectionSettings.background.alpha,
+                image: (_162 = (_161 = (_160 = this.properties.subjectSectionSettings) === null || _160 === void 0 ? void 0 : _160.background) === null || _161 === void 0 ? void 0 : _161.image) !== null && _162 !== void 0 ? _162 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].subjectSectionSettings.background.image,
+                imageAlpha: (_165 = (_164 = (_163 = this.properties.subjectSectionSettings) === null || _163 === void 0 ? void 0 : _163.background) === null || _164 === void 0 ? void 0 : _164.imageAlpha) !== null && _165 !== void 0 ? _165 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].subjectSectionSettings.background.imageAlpha,
+                gradientDirection: (_168 = (_167 = (_166 = this.properties.subjectSectionSettings) === null || _166 === void 0 ? void 0 : _166.background) === null || _167 === void 0 ? void 0 : _167.gradientDirection) !== null && _168 !== void 0 ? _168 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].subjectSectionSettings.background.gradientDirection,
+                gradientColor1: (_171 = (_170 = (_169 = this.properties.subjectSectionSettings) === null || _169 === void 0 ? void 0 : _169.background) === null || _170 === void 0 ? void 0 : _170.gradientColor1) !== null && _171 !== void 0 ? _171 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].subjectSectionSettings.background.gradientColor1,
+                gradientAlpha1: (_174 = (_173 = (_172 = this.properties.subjectSectionSettings) === null || _172 === void 0 ? void 0 : _172.background) === null || _173 === void 0 ? void 0 : _173.gradientAlpha1) !== null && _174 !== void 0 ? _174 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].subjectSectionSettings.background.gradientAlpha1,
+                gradientColor2: (_177 = (_176 = (_175 = this.properties.subjectSectionSettings) === null || _175 === void 0 ? void 0 : _175.background) === null || _176 === void 0 ? void 0 : _176.gradientColor2) !== null && _177 !== void 0 ? _177 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].subjectSectionSettings.background.gradientColor2,
+                gradientAlpha2: (_180 = (_179 = (_178 = this.properties.subjectSectionSettings) === null || _178 === void 0 ? void 0 : _178.background) === null || _179 === void 0 ? void 0 : _179.gradientAlpha2) !== null && _180 !== void 0 ? _180 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].subjectSectionSettings.background.gradientAlpha2
             },
-            shape: (_180 = (_179 = this.properties.subjectSectionSettings) === null || _179 === void 0 ? void 0 : _179.shape) !== null && _180 !== void 0 ? _180 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].subjectSectionSettings.shape,
-            showDivider: (_182 = (_181 = this.properties.subjectSectionSettings) === null || _181 === void 0 ? void 0 : _181.showDivider) !== null && _182 !== void 0 ? _182 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].subjectSectionSettings.showDivider,
-            autoExpand: (_184 = (_183 = this.properties.subjectSectionSettings) === null || _183 === void 0 ? void 0 : _183.autoExpand) !== null && _184 !== void 0 ? _184 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].subjectSectionSettings.autoExpand,
-            hoverColor: (_186 = (_185 = this.properties.subjectSectionSettings) === null || _185 === void 0 ? void 0 : _185.hoverColor) !== null && _186 !== void 0 ? _186 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].subjectSectionSettings.hoverColor,
+            shape: (_182 = (_181 = this.properties.subjectSectionSettings) === null || _181 === void 0 ? void 0 : _181.shape) !== null && _182 !== void 0 ? _182 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].subjectSectionSettings.shape,
+            showDivider: (_184 = (_183 = this.properties.subjectSectionSettings) === null || _183 === void 0 ? void 0 : _183.showDivider) !== null && _184 !== void 0 ? _184 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].subjectSectionSettings.showDivider,
+            autoExpand: (_186 = (_185 = this.properties.subjectSectionSettings) === null || _185 === void 0 ? void 0 : _185.autoExpand) !== null && _186 !== void 0 ? _186 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].subjectSectionSettings.autoExpand,
+            hoverColor: (_188 = (_187 = this.properties.subjectSectionSettings) === null || _187 === void 0 ? void 0 : _187.hoverColor) !== null && _188 !== void 0 ? _188 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].subjectSectionSettings.hoverColor,
             icons: {
-                enabled: (_189 = (_188 = (_187 = this.properties.subjectSectionSettings) === null || _187 === void 0 ? void 0 : _187.iconSettings) === null || _188 === void 0 ? void 0 : _188.enabled) !== null && _189 !== void 0 ? _189 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].subjectSectionSettings.iconSettings.enabled,
-                iconPosition: (_192 = (_191 = (_190 = this.properties.subjectSectionSettings) === null || _190 === void 0 ? void 0 : _190.iconSettings) === null || _191 === void 0 ? void 0 : _191.iconPosition) !== null && _192 !== void 0 ? _192 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].subjectSectionSettings.iconSettings.iconPosition,
-                collapsedIcon: (_195 = (_194 = (_193 = this.properties.subjectSectionSettings) === null || _193 === void 0 ? void 0 : _193.iconSettings) === null || _194 === void 0 ? void 0 : _194.collapsedIcon) !== null && _195 !== void 0 ? _195 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].subjectSectionSettings.iconSettings.collapsedIcon,
-                expandedIcon: (_198 = (_197 = (_196 = this.properties.subjectSectionSettings) === null || _196 === void 0 ? void 0 : _196.iconSettings) === null || _197 === void 0 ? void 0 : _197.expandedIcon) !== null && _198 !== void 0 ? _198 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].subjectSectionSettings.iconSettings.expandedIcon
+                enabled: (_191 = (_190 = (_189 = this.properties.subjectSectionSettings) === null || _189 === void 0 ? void 0 : _189.iconSettings) === null || _190 === void 0 ? void 0 : _190.enabled) !== null && _191 !== void 0 ? _191 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].subjectSectionSettings.iconSettings.enabled,
+                iconPosition: (_194 = (_193 = (_192 = this.properties.subjectSectionSettings) === null || _192 === void 0 ? void 0 : _192.iconSettings) === null || _193 === void 0 ? void 0 : _193.iconPosition) !== null && _194 !== void 0 ? _194 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].subjectSectionSettings.iconSettings.iconPosition,
+                collapsedIcon: (_197 = (_196 = (_195 = this.properties.subjectSectionSettings) === null || _195 === void 0 ? void 0 : _195.iconSettings) === null || _196 === void 0 ? void 0 : _196.collapsedIcon) !== null && _197 !== void 0 ? _197 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].subjectSectionSettings.iconSettings.collapsedIcon,
+                expandedIcon: (_200 = (_199 = (_198 = this.properties.subjectSectionSettings) === null || _198 === void 0 ? void 0 : _198.iconSettings) === null || _199 === void 0 ? void 0 : _199.expandedIcon) !== null && _200 !== void 0 ? _200 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].subjectSectionSettings.iconSettings.expandedIcon
             }
         };
         // Map description section properties to the format expected by FancyList component
         var descriptionSectionSettings = {
             sectionType: 'description',
-            resetButtonText: (_200 = (_199 = this.properties.descriptionSectionSettings) === null || _199 === void 0 ? void 0 : _199.resetButtonText) !== null && _200 !== void 0 ? _200 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].descriptionSectionSettings.resetButtonText,
-            description: (_202 = (_201 = this.properties.descriptionSectionSettings) === null || _201 === void 0 ? void 0 : _201.description) !== null && _202 !== void 0 ? _202 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].descriptionSectionSettings.description,
+            resetButtonText: (_202 = (_201 = this.properties.descriptionSectionSettings) === null || _201 === void 0 ? void 0 : _201.resetButtonText) !== null && _202 !== void 0 ? _202 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].descriptionSectionSettings.resetButtonText,
+            description: (_204 = (_203 = this.properties.descriptionSectionSettings) === null || _203 === void 0 ? void 0 : _203.description) !== null && _204 !== void 0 ? _204 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].descriptionSectionSettings.description,
             font: {
-                family: (_205 = (_204 = (_203 = this.properties.descriptionSectionSettings) === null || _203 === void 0 ? void 0 : _203.font) === null || _204 === void 0 ? void 0 : _204.family) !== null && _205 !== void 0 ? _205 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].descriptionSectionSettings.font.family,
-                size: (_208 = (_207 = (_206 = this.properties.descriptionSectionSettings) === null || _206 === void 0 ? void 0 : _206.font) === null || _207 === void 0 ? void 0 : _207.size) !== null && _208 !== void 0 ? _208 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].descriptionSectionSettings.font.size,
-                color: (_211 = (_210 = (_209 = this.properties.descriptionSectionSettings) === null || _209 === void 0 ? void 0 : _209.font) === null || _210 === void 0 ? void 0 : _210.color) !== null && _211 !== void 0 ? _211 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].descriptionSectionSettings.font.color,
-                formatting: (_214 = (_213 = (_212 = this.properties.descriptionSectionSettings) === null || _212 === void 0 ? void 0 : _212.font) === null || _213 === void 0 ? void 0 : _213.formatting) !== null && _214 !== void 0 ? _214 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].descriptionSectionSettings.font.formatting,
-                alignment: ((_217 = (_216 = (_215 = this.properties.descriptionSectionSettings) === null || _215 === void 0 ? void 0 : _215.font) === null || _216 === void 0 ? void 0 : _216.alignment) !== null && _217 !== void 0 ? _217 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].descriptionSectionSettings.font.alignment)
+                family: (_207 = (_206 = (_205 = this.properties.descriptionSectionSettings) === null || _205 === void 0 ? void 0 : _205.font) === null || _206 === void 0 ? void 0 : _206.family) !== null && _207 !== void 0 ? _207 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].descriptionSectionSettings.font.family,
+                size: (_210 = (_209 = (_208 = this.properties.descriptionSectionSettings) === null || _208 === void 0 ? void 0 : _208.font) === null || _209 === void 0 ? void 0 : _209.size) !== null && _210 !== void 0 ? _210 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].descriptionSectionSettings.font.size,
+                color: (_213 = (_212 = (_211 = this.properties.descriptionSectionSettings) === null || _211 === void 0 ? void 0 : _211.font) === null || _212 === void 0 ? void 0 : _212.color) !== null && _213 !== void 0 ? _213 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].descriptionSectionSettings.font.color,
+                formatting: (_216 = (_215 = (_214 = this.properties.descriptionSectionSettings) === null || _214 === void 0 ? void 0 : _214.font) === null || _215 === void 0 ? void 0 : _215.formatting) !== null && _216 !== void 0 ? _216 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].descriptionSectionSettings.font.formatting,
+                alignment: ((_219 = (_218 = (_217 = this.properties.descriptionSectionSettings) === null || _217 === void 0 ? void 0 : _217.font) === null || _218 === void 0 ? void 0 : _218.alignment) !== null && _219 !== void 0 ? _219 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].descriptionSectionSettings.font.alignment)
             },
             background: {
-                type: (_220 = (_219 = (_218 = this.properties.descriptionSectionSettings) === null || _218 === void 0 ? void 0 : _218.background) === null || _219 === void 0 ? void 0 : _219.type) !== null && _220 !== void 0 ? _220 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].descriptionSectionSettings.background.type,
-                color: (_223 = (_222 = (_221 = this.properties.descriptionSectionSettings) === null || _221 === void 0 ? void 0 : _221.background) === null || _222 === void 0 ? void 0 : _222.color) !== null && _223 !== void 0 ? _223 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].descriptionSectionSettings.background.color,
-                alpha: (_226 = (_225 = (_224 = this.properties.descriptionSectionSettings) === null || _224 === void 0 ? void 0 : _224.background) === null || _225 === void 0 ? void 0 : _225.alpha) !== null && _226 !== void 0 ? _226 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].descriptionSectionSettings.background.alpha,
-                image: (_229 = (_228 = (_227 = this.properties.descriptionSectionSettings) === null || _227 === void 0 ? void 0 : _227.background) === null || _228 === void 0 ? void 0 : _228.image) !== null && _229 !== void 0 ? _229 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].descriptionSectionSettings.background.image,
-                imageAlpha: (_232 = (_231 = (_230 = this.properties.descriptionSectionSettings) === null || _230 === void 0 ? void 0 : _230.background) === null || _231 === void 0 ? void 0 : _231.imageAlpha) !== null && _232 !== void 0 ? _232 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].descriptionSectionSettings.background.imageAlpha,
-                gradientDirection: (_235 = (_234 = (_233 = this.properties.descriptionSectionSettings) === null || _233 === void 0 ? void 0 : _233.background) === null || _234 === void 0 ? void 0 : _234.gradientDirection) !== null && _235 !== void 0 ? _235 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].descriptionSectionSettings.background.gradientDirection,
-                gradientColor1: (_238 = (_237 = (_236 = this.properties.descriptionSectionSettings) === null || _236 === void 0 ? void 0 : _236.background) === null || _237 === void 0 ? void 0 : _237.gradientColor1) !== null && _238 !== void 0 ? _238 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].descriptionSectionSettings.background.gradientColor1,
-                gradientAlpha1: (_241 = (_240 = (_239 = this.properties.descriptionSectionSettings) === null || _239 === void 0 ? void 0 : _239.background) === null || _240 === void 0 ? void 0 : _240.gradientAlpha1) !== null && _241 !== void 0 ? _241 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].descriptionSectionSettings.background.gradientAlpha1,
-                gradientColor2: (_244 = (_243 = (_242 = this.properties.descriptionSectionSettings) === null || _242 === void 0 ? void 0 : _242.background) === null || _243 === void 0 ? void 0 : _243.gradientColor2) !== null && _244 !== void 0 ? _244 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].descriptionSectionSettings.background.gradientColor2,
-                gradientAlpha2: (_247 = (_246 = (_245 = this.properties.descriptionSectionSettings) === null || _245 === void 0 ? void 0 : _245.background) === null || _246 === void 0 ? void 0 : _246.gradientAlpha2) !== null && _247 !== void 0 ? _247 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].descriptionSectionSettings.background.gradientAlpha2
+                type: (_222 = (_221 = (_220 = this.properties.descriptionSectionSettings) === null || _220 === void 0 ? void 0 : _220.background) === null || _221 === void 0 ? void 0 : _221.type) !== null && _222 !== void 0 ? _222 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].descriptionSectionSettings.background.type,
+                color: (_225 = (_224 = (_223 = this.properties.descriptionSectionSettings) === null || _223 === void 0 ? void 0 : _223.background) === null || _224 === void 0 ? void 0 : _224.color) !== null && _225 !== void 0 ? _225 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].descriptionSectionSettings.background.color,
+                alpha: (_228 = (_227 = (_226 = this.properties.descriptionSectionSettings) === null || _226 === void 0 ? void 0 : _226.background) === null || _227 === void 0 ? void 0 : _227.alpha) !== null && _228 !== void 0 ? _228 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].descriptionSectionSettings.background.alpha,
+                image: (_231 = (_230 = (_229 = this.properties.descriptionSectionSettings) === null || _229 === void 0 ? void 0 : _229.background) === null || _230 === void 0 ? void 0 : _230.image) !== null && _231 !== void 0 ? _231 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].descriptionSectionSettings.background.image,
+                imageAlpha: (_234 = (_233 = (_232 = this.properties.descriptionSectionSettings) === null || _232 === void 0 ? void 0 : _232.background) === null || _233 === void 0 ? void 0 : _233.imageAlpha) !== null && _234 !== void 0 ? _234 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].descriptionSectionSettings.background.imageAlpha,
+                gradientDirection: (_237 = (_236 = (_235 = this.properties.descriptionSectionSettings) === null || _235 === void 0 ? void 0 : _235.background) === null || _236 === void 0 ? void 0 : _236.gradientDirection) !== null && _237 !== void 0 ? _237 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].descriptionSectionSettings.background.gradientDirection,
+                gradientColor1: (_240 = (_239 = (_238 = this.properties.descriptionSectionSettings) === null || _238 === void 0 ? void 0 : _238.background) === null || _239 === void 0 ? void 0 : _239.gradientColor1) !== null && _240 !== void 0 ? _240 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].descriptionSectionSettings.background.gradientColor1,
+                gradientAlpha1: (_243 = (_242 = (_241 = this.properties.descriptionSectionSettings) === null || _241 === void 0 ? void 0 : _241.background) === null || _242 === void 0 ? void 0 : _242.gradientAlpha1) !== null && _243 !== void 0 ? _243 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].descriptionSectionSettings.background.gradientAlpha1,
+                gradientColor2: (_246 = (_245 = (_244 = this.properties.descriptionSectionSettings) === null || _244 === void 0 ? void 0 : _244.background) === null || _245 === void 0 ? void 0 : _245.gradientColor2) !== null && _246 !== void 0 ? _246 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].descriptionSectionSettings.background.gradientColor2,
+                gradientAlpha2: (_249 = (_248 = (_247 = this.properties.descriptionSectionSettings) === null || _247 === void 0 ? void 0 : _247.background) === null || _248 === void 0 ? void 0 : _248.gradientAlpha2) !== null && _249 !== void 0 ? _249 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].descriptionSectionSettings.background.gradientAlpha2
             },
-            shape: (_249 = (_248 = this.properties.descriptionSectionSettings) === null || _248 === void 0 ? void 0 : _248.shape) !== null && _249 !== void 0 ? _249 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].descriptionSectionSettings.shape,
-            showDivider: (_251 = (_250 = this.properties.descriptionSectionSettings) === null || _250 === void 0 ? void 0 : _250.showDivider) !== null && _251 !== void 0 ? _251 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].descriptionSectionSettings.showDivider,
-            autoExpand: (_253 = (_252 = this.properties.descriptionSectionSettings) === null || _252 === void 0 ? void 0 : _252.autoExpand) !== null && _253 !== void 0 ? _253 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].descriptionSectionSettings.autoExpand,
-            hoverColor: (_255 = (_254 = this.properties.descriptionSectionSettings) === null || _254 === void 0 ? void 0 : _254.hoverColor) !== null && _255 !== void 0 ? _255 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].descriptionSectionSettings.hoverColor
+            shape: (_251 = (_250 = this.properties.descriptionSectionSettings) === null || _250 === void 0 ? void 0 : _250.shape) !== null && _251 !== void 0 ? _251 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].descriptionSectionSettings.shape,
+            showDivider: (_253 = (_252 = this.properties.descriptionSectionSettings) === null || _252 === void 0 ? void 0 : _252.showDivider) !== null && _253 !== void 0 ? _253 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].descriptionSectionSettings.showDivider,
+            autoExpand: (_255 = (_254 = this.properties.descriptionSectionSettings) === null || _254 === void 0 ? void 0 : _254.autoExpand) !== null && _255 !== void 0 ? _255 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].descriptionSectionSettings.autoExpand,
+            hoverColor: (_257 = (_256 = this.properties.descriptionSectionSettings) === null || _256 === void 0 ? void 0 : _256.hoverColor) !== null && _257 !== void 0 ? _257 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].descriptionSectionSettings.hoverColor
         };
         var element = react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_FancyList__WEBPACK_IMPORTED_MODULE_7__["default"], {
             selectedListId: this.properties.selectedListId,
             categoryField: this.properties.categoryField,
             subjectField: this.properties.subjectField,
             descriptionField: this.properties.descriptionField,
-            showAllCategories: (_257 = (_256 = this.properties.filterSettings) === null || _256 === void 0 ? void 0 : _256.showAllCategories) !== null && _257 !== void 0 ? _257 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.showAllCategories,
+            showAllCategories: (_259 = (_258 = this.properties.filterSettings) === null || _258 === void 0 ? void 0 : _258.showAllCategories) !== null && _259 !== void 0 ? _259 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.showAllCategories,
             defaultExpanded: this.properties.defaultExpanded,
             isDarkTheme: this._isDarkTheme,
             environmentMessage: this._environmentMessage,
@@ -37262,7 +37389,7 @@ var FancyListWebPart = /** @class */ (function (_super) {
                                     properties: {
                                         key: 'titleConfiguration',
                                         onRender: function (elem, ctx, changeCallback) {
-                                            var _a, _b;
+                                            var _a, _b, _c, _d;
                                             react_dom__WEBPACK_IMPORTED_MODULE_1__.render(react__WEBPACK_IMPORTED_MODULE_0__.createElement(_propertyPane_TitleConfiguration__WEBPACK_IMPORTED_MODULE_9__.TitleConfiguration, {
                                                 label: 'Title Configuration',
                                                 settings: {
@@ -37284,7 +37411,8 @@ var FancyListWebPart = /** @class */ (function (_super) {
                                                         formatting: _this.properties.webPartTitleFormatting || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.font.formatting,
                                                         color: _this.properties.webPartTitleColor || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.font.color,
                                                         alignment: _this.properties.webPartTitleAlignment || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.font.alignment
-                                                    }
+                                                    },
+                                                    divideSpace: (_d = (_c = _this.properties.titleSettings) === null || _c === void 0 ? void 0 : _c.divideSpace) !== null && _d !== void 0 ? _d : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].titleSettings.divideSpace
                                                 },
                                                 onPropertyChange: function (propertyPath, newValue) {
                                                     // Handle property changes and update the web part properties
@@ -37343,6 +37471,9 @@ var FancyListWebPart = /** @class */ (function (_super) {
                                                             break;
                                                         case 'font.alignment':
                                                             _this.properties.webPartTitleAlignment = newValue;
+                                                            break;
+                                                        case 'divideSpace':
+                                                            _this.properties.titleSettings.divideSpace = newValue;
                                                             break;
                                                     }
                                                     if (changeCallback)

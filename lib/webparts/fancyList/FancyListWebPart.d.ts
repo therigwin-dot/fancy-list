@@ -69,6 +69,7 @@ export interface TitleSettings {
         gradientAlpha2: number;
     };
     shape: 'square' | 'rounded' | 'pill';
+    divideSpace: number;
     testValues: {
         webPartTitle: string;
         font: {
@@ -96,6 +97,7 @@ export interface TitleSettings {
             gradientAlpha2: number;
         };
         shape: 'square' | 'rounded' | 'pill';
+        divideSpace: number;
     };
 }
 export interface FilterSettings {

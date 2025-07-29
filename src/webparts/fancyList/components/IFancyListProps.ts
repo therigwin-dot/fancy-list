@@ -32,6 +32,7 @@ export interface IFancyListProps {
     gradientAlpha: number;
     imageUrl: string;
     imageAlpha: number;
+    divideSpace: number;
     font: {
       family: string;
       size: string;

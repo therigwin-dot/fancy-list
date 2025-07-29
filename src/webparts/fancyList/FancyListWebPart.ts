@@ -78,6 +78,7 @@ export interface TitleSettings {
     gradientAlpha2: number;
   };
   shape: 'square' | 'rounded' | 'pill';
+  divideSpace: number;
   testValues: {
     webPartTitle: string;
     font: {
@@ -100,6 +101,7 @@ export interface TitleSettings {
       gradientAlpha2: number;
     };
     shape: 'square' | 'rounded' | 'pill';
+    divideSpace: number;
   };
 }
 
@@ -330,7 +332,8 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
         color: this.properties.webPartTitleColor ?? DEFAULTS_CONFIG.titleSettings.font.color,
         formatting: this.properties.webPartTitleFormatting ?? DEFAULTS_CONFIG.titleSettings.font.formatting,
         alignment: this.properties.webPartTitleAlignment ?? DEFAULTS_CONFIG.titleSettings.font.alignment
-      }
+      },
+      divideSpace: this.properties.titleSettings?.divideSpace ?? DEFAULTS_CONFIG.titleSettings.divideSpace
     };
 
     // Map filter properties to the format expected by FancyList component
@@ -930,7 +933,8 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
                               formatting: this.properties.webPartTitleFormatting || DEFAULTS_CONFIG.titleSettings.font.formatting,
                               color: this.properties.webPartTitleColor || DEFAULTS_CONFIG.titleSettings.font.color,
                               alignment: this.properties.webPartTitleAlignment || DEFAULTS_CONFIG.titleSettings.font.alignment
-                            }
+                            },
+                            divideSpace: this.properties.titleSettings?.divideSpace ?? DEFAULTS_CONFIG.titleSettings.divideSpace
                           },
                           onPropertyChange: (propertyPath: string, newValue: any) => {
                             // Handle property changes and update the web part properties
@@ -987,6 +991,9 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
                                 break;
                               case 'font.alignment':
                                 this.properties.webPartTitleAlignment = newValue;
+                                break;
+                              case 'divideSpace':
+                                this.properties.titleSettings.divideSpace = newValue;
                                 break;
                             }
                             if (changeCallback) changeCallback();

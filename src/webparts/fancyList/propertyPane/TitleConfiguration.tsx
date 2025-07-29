@@ -7,6 +7,7 @@ import { PrimaryButton } from '@fluentui/react/lib/Button';
 import { FontControl } from './FontControl';
 import { ColorPickerControl } from './ColorPickerControl';
 import { ShapePickerControl, ShapeOption } from './ShapePickerControl';
+import { DivideSpaceControl } from './DivideSpaceControl';
 import DEFAULTS_CONFIG from '../DEFAULTS_CONFIG';
 
 export interface TitleConfigurationProps {
@@ -24,6 +25,7 @@ export interface TitleConfigurationProps {
     gradientAlpha: number;
     imageUrl: string;
     imageAlpha: number;
+    divideSpace: number;
     font: {
       family: string;
       size: string;
@@ -55,6 +57,7 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
     gradientAlpha: 100,
     imageUrl: '',
     imageAlpha: 100,
+    divideSpace: 0,
     font: {
       family: 'Segoe UI',
       size: '24px',
@@ -416,6 +419,17 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
           value={settings.shape}
           label=""
           onChange={(newShape) => handlePropertyChange('shape', newShape)}
+        />
+      </div>
+
+      {/* 5. Divide Space Control */}
+      <div style={{ marginBottom: 16 }}>
+        <DivideSpaceControl
+          label="Divide Space"
+          value={settings.divideSpace}
+          onChange={(value) => handlePropertyChange('divideSpace', value)}
+          onReset={() => handlePropertyChange('divideSpace', DEFAULTS_CONFIG.titleSettings.divideSpace)}
+          onTestValues={() => handlePropertyChange('divideSpace', DEFAULTS_CONFIG.titleSettings.testValues.divideSpace)}
         />
       </div>
 
