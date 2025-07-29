@@ -604,7 +604,14 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
   private applyCategoryAutoExpand(): void {
     if (this.props.categorySectionSettings?.autoExpand && this.state.items.length > 0) {
       const allCategories = Object.keys(this.groupItemsByCategory(this.state.items));
-      this.setState({ expandedCategories: new Set(allCategories) });
+      this.setState({ expandedCategories: new Set(allCategories) }, () => {
+        // After categories are expanded, apply subject auto-expand for each category
+        if (this.props.subjectSectionSettings?.autoExpand) {
+          allCategories.forEach(category => {
+            this.applySubjectAutoExpand(category);
+          });
+        }
+      });
     }
   }
 
