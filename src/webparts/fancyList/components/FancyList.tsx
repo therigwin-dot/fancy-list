@@ -470,6 +470,62 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     }
   }
 
+  private getSubjectSectionBackgroundStyle(): React.CSSProperties {
+    const backgroundSettings = this.props.subjectSectionSettings?.background;
+    if (!backgroundSettings) return {};
+
+    // Safe property access with fallbacks
+    const backgroundType = backgroundSettings.type || 'solid';
+    const backgroundColor = backgroundSettings.color || '#ffffff';
+    const backgroundAlpha = backgroundSettings.alpha || 0;
+    const gradientDirection = backgroundSettings.gradientDirection || 'left-right';
+    const gradientColor1 = backgroundSettings.gradientColor1 || '#ffffff';
+    const gradientColor2 = backgroundSettings.gradientColor2 || '#000000';
+    const gradientAlpha = backgroundSettings.gradientAlpha1 || 0;
+    const imageUrl = backgroundSettings.image || '';
+    const imageAlpha = backgroundSettings.imageAlpha || 0;
+    const shape = this.props.subjectSectionSettings?.shape || 'rounded';
+
+    // Base overrides to prevent CSS class conflicts
+    const baseOverrides = {
+      border: 'none',
+      boxShadow: 'none'
+    };
+
+    switch (backgroundType) {
+      case 'solid':
+        return {
+          backgroundColor: this.hexToRgba(backgroundColor, 1 - (backgroundAlpha / 100)), // Invert alpha: 0% = opaque (alpha 1), 100% = transparent (alpha 0)
+          borderRadius: this.getShapeRadius(shape),
+          ...baseOverrides
+        };
+      case 'gradient':
+        return {
+          background: this.getGradientStyle(gradientDirection, gradientColor1, gradientColor2, 1 - (gradientAlpha / 100)), // Invert alpha: 0% = opaque (alpha 1), 100% = transparent (alpha 0)
+          borderRadius: this.getShapeRadius(shape),
+          ...baseOverrides
+        };
+      case 'image':
+        if (imageUrl) {
+          return {
+            background: `linear-gradient(rgba(255,255,255,${imageAlpha / 100}), rgba(255,255,255,${imageAlpha / 100})), url(${imageUrl})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            borderRadius: this.getShapeRadius(shape),
+            ...baseOverrides
+          };
+        } else {
+          return {
+            backgroundColor: '#ffffff', // Simple white background for empty/invalid URLs
+            borderRadius: this.getShapeRadius(shape),
+            ...baseOverrides
+          };
+        }
+      default:
+        return baseOverrides;
+    }
+  }
+
   // Helper function to group items by category
   private groupItemsByCategory(items: IListItem[]): { [category: string]: IListItem[] } {
     const grouped: { [category: string]: IListItem[] } = {};
@@ -945,7 +1001,8 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'space-between',
-                          width: '100%'
+                          width: '100%',
+                          ...this.getSubjectSectionBackgroundStyle()
                         }}
                       >
                         <span 
