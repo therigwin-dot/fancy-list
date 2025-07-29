@@ -2264,7 +2264,9 @@ var FancyList = /** @class */ (function (_super) {
                 decoration += 'line-through';
             return decoration.trim() || 'none';
         };
-        return __assign(__assign({}, this.getBackgroundStyle()), { fontFamily: font.family, fontSize: font.size, color: font.color, fontWeight: font.formatting.bold ? 'bold' : 'normal', fontStyle: font.formatting.italic ? 'italic' : 'normal', textDecoration: getTextDecoration(font.formatting), textAlign: font.alignment || 'left', marginBottom: '0.5em', lineHeight: 1.2, position: 'relative' });
+        return __assign(__assign({}, this.getBackgroundStyle()), { fontFamily: font.family, fontSize: font.size, color: font.color, fontWeight: font.formatting.bold ? 'bold' : 'normal', fontStyle: font.formatting.italic ? 'italic' : 'normal', textDecoration: getTextDecoration(font.formatting), textAlign: font.alignment || 'left', marginBottom: '0.5em', lineHeight: 1.2, position: 'relative', 
+            // Add internal padding to give title text breathing room
+            padding: '12px 16px' });
     };
     FancyList.prototype.renderTitle = function () {
         var titleSettings = this.props.titleSettings;
@@ -2287,7 +2289,8 @@ var FancyList = /** @class */ (function (_super) {
             return null;
         }
         return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: __assign(__assign({}, this.getTitleStyle()), (titleSettings.showDivider ? {
-                borderBottom: '2px solid var(--neutralLight, #edebe9)'
+                borderBottom: '3px solid var(--neutralLight, #edebe9)',
+                marginBottom: '8px'
             } : {})) },
             backgroundType === 'image' && imageUrl && !titleImageError &&
                 imageAlpha !== undefined && imageAlpha > 0 && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {

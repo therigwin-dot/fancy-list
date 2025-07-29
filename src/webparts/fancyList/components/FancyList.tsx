@@ -647,7 +647,9 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
       textAlign: font.alignment || 'left',
       marginBottom: '0.5em',
       lineHeight: 1.2,
-      position: 'relative'
+      position: 'relative',
+      // Add internal padding to give title text breathing room
+      padding: '12px 16px'
     };
   }
 
@@ -685,8 +687,10 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     return (
       <div style={{
         ...this.getTitleStyle(),
+        // Add space above divider when enabled
         ...(titleSettings.showDivider ? {
-          borderBottom: '2px solid var(--neutralLight, #edebe9)'
+          borderBottom: '3px solid var(--neutralLight, #edebe9)',
+          marginBottom: '8px'
         } : {})
       }}>
         {/* Layer 1: Transparency overlay for valid images */}
