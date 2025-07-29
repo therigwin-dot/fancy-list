@@ -149,6 +149,7 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
     handlePropertyChange('gradientAlpha', DEFAULTS_CONFIG.titleSettings.background.gradientAlpha1);
     handlePropertyChange('imageUrl', DEFAULTS_CONFIG.titleSettings.background.image);
     handlePropertyChange('imageAlpha', DEFAULTS_CONFIG.titleSettings.background.imageAlpha);
+    handlePropertyChange('divideSpace', DEFAULTS_CONFIG.titleSettings.divideSpace);
     handleFontChange({
       fontFamily: DEFAULTS_CONFIG.titleSettings.font.family,
       fontSize: DEFAULTS_CONFIG.titleSettings.font.size,
@@ -171,6 +172,7 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
     handlePropertyChange('gradientAlpha', DEFAULTS_CONFIG.titleSettings.testValues.background.gradientAlpha1);
     handlePropertyChange('imageUrl', DEFAULTS_CONFIG.titleSettings.testValues.background.image);
     handlePropertyChange('imageAlpha', DEFAULTS_CONFIG.titleSettings.testValues.background.imageAlpha);
+    handlePropertyChange('divideSpace', DEFAULTS_CONFIG.titleSettings.testValues.divideSpace);
     handleFontChange({
       fontFamily: DEFAULTS_CONFIG.titleSettings.testValues.font.family,
       fontSize: DEFAULTS_CONFIG.titleSettings.testValues.font.size,

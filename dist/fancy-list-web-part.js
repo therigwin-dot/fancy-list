@@ -4130,6 +4130,7 @@ var TitleConfiguration = function (_a) {
         handlePropertyChange('gradientAlpha', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].titleSettings.background.gradientAlpha1);
         handlePropertyChange('imageUrl', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].titleSettings.background.image);
         handlePropertyChange('imageAlpha', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].titleSettings.background.imageAlpha);
+        handlePropertyChange('divideSpace', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].titleSettings.divideSpace);
         handleFontChange({
             fontFamily: _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].titleSettings.font.family,
             fontSize: _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].titleSettings.font.size,
@@ -4151,6 +4152,7 @@ var TitleConfiguration = function (_a) {
         handlePropertyChange('gradientAlpha', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].titleSettings.testValues.background.gradientAlpha1);
         handlePropertyChange('imageUrl', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].titleSettings.testValues.background.image);
         handlePropertyChange('imageAlpha', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].titleSettings.testValues.background.imageAlpha);
+        handlePropertyChange('divideSpace', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].titleSettings.testValues.divideSpace);
         handleFontChange({
             fontFamily: _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].titleSettings.testValues.font.family,
             fontSize: _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].titleSettings.testValues.font.size,
