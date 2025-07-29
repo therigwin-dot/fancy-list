@@ -1200,4 +1200,54 @@ Everything else hidden
 3. **Update Known Bugs**: Remove from bug list once fully tested
 
 #### **📁 Files to Modify Tomorrow:**
-- `
+- `src/webparts/fancyList/propertyPane/FilterModuleControl.tsx` - Fix UI layout and visibility logic
+
+---
+
+### **🧹 UI CLEANUP - CONTAINER BOXES REMOVED**
+
+**Date:** January 27, 2025  
+**Status:** ✅ **COMPLETED** - Clean UI without problematic container boxes
+
+**Issue:** The "Collapsed Settings" and "Expanded Settings" container boxes were causing UI layout issues and making the property pane confusing.
+
+**Solution:** Removed all container boxes and kept controls directly accessible:
+- ✅ **Removed "Collapsed Settings" container** - Background controls now appear directly
+- ✅ **Removed "Expanded Settings" container** - No more confusing nested boxes
+- ✅ **Kept all functionality** - Background controls, shape picker, and all other controls work normally
+- ✅ **Clean, simple layout** - No more gray boxes cluttering the interface
+
+**Files Modified:**
+1. ✅ `src/webparts/fancyList/propertyPane/SectionModuleControl.tsx` - Removed container boxes, kept controls direct
+
+**Git Backups Created:**
+- `FancyList_Clean_UI_Without_Container_Boxes_20250127`
+
+**Result:** Clean, simple property pane interface with all controls directly accessible without confusing container boxes.
+
+---
+
+### **📋 NEW PLAN: Expanded Settings Implementation (PENDING)**
+
+**Approach:** Simple, incremental implementation without UI complications.
+
+#### **Phase 1: Data Structure Only**
+- Add `expandedSettings` to interfaces
+- Add default values to `DEFAULTS_CONFIG.ts`
+- **No UI changes** - just the data foundation
+
+#### **Phase 2: Minimal UI Integration**
+- Add **simple controls** inline with existing background controls
+- Use **existing patterns** - no new containers
+- Keep UI **clean and simple**
+
+#### **Phase 3: Display Integration**
+- Add **one method** for expanded background styles
+- Apply to **expanded content div** only
+- **Incremental testing** at each step
+
+**Key Principles:**
+- ✅ **Keep it simple** - no complex UI restructuring
+- ✅ **Use existing patterns** - don't reinvent the wheel
+- ✅ **Test incrementally** - each step should work
+- ✅ **Preserve UI stability** - don't break what's working
