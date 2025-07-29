@@ -558,7 +558,41 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     return `rgba(${r},${g},${b},${normalizedAlpha})`;
   }
 
+  // Dynamic Contrast Detection Functions
+  private getContrastingDividerColor(backgroundColor: string): string {
+    // Convert hex to RGB
+    const hex = backgroundColor.replace('#', '');
+    const r = parseInt(hex.substr(0, 2), 16);
+    const g = parseInt(hex.substr(2, 2), 16);
+    const b = parseInt(hex.substr(4, 2), 16);
+    
+    // Calculate luminance (brightness)
+    const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+    
+    // Return dark divider for light backgrounds, light divider for dark backgrounds
+    return luminance > 0.5 ? '#605e5c' : '#ffffff';
+  }
 
+  private getTitleBackgroundColor(): string {
+    const { titleSettings } = this.props;
+    
+    if (!titleSettings) return '#ffffff'; // Default fallback
+    
+    const backgroundType = titleSettings.backgroundType || 'solid';
+    
+    switch (backgroundType) {
+      case 'solid':
+        return titleSettings.backgroundColor || '#ffffff';
+      case 'gradient':
+        // Use first gradient color for analysis
+        return titleSettings.gradientColor1 || '#ffffff';
+      case 'image':
+        // For images, use fallback dark divider
+        return '#ffffff'; // This will result in dark divider
+      default:
+        return '#ffffff';
+    }
+  }
 
   private validateImageFileType(url: string): string | null {
     if (!url) return null;
@@ -684,12 +718,16 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
       return null;
     }
 
+    // Get dynamic contrast divider color
+    const backgroundColor = this.getTitleBackgroundColor();
+    const dividerColor = this.getContrastingDividerColor(backgroundColor);
+
     return (
       <div style={{
         ...this.getTitleStyle(),
-        // Add space above divider when enabled
+        // Add space above divider when enabled with dynamic contrast color
         ...(titleSettings.showDivider ? {
-          borderBottom: '3px solid var(--neutralLight, #edebe9)',
+          borderBottom: `3px solid ${dividerColor}`,
           marginBottom: '8px'
         } : {})
       }}>
