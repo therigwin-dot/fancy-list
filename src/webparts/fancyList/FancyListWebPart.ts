@@ -1383,7 +1383,118 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
                                 marginBottom: '2px'
                               }
                             }, `• ${issue}`)
-                          )
+                          ),
+                          // Administrative Links Header
+                          React.createElement('div', {
+                            key: 'adminLinksHeader',
+                            style: { 
+                              fontSize: '16px',
+                              fontWeight: '600',
+                              color: '#323130',
+                              marginTop: '16px',
+                              marginBottom: '8px'
+                            }
+                          }, 'Administrative Resources'),
+                          // Documentation Link
+                          React.createElement('a', {
+                            key: 'docsLink',
+                            href: 'https://therigwin-dot.github.io/fancy-list/',
+                            target: '_blank',
+                            style: { 
+                              fontSize: '14px',
+                              fontWeight: '400',
+                              color: '#0078d4',
+                              textDecoration: 'none',
+                              display: 'block',
+                              marginBottom: '4px'
+                            },
+                            onMouseEnter: (e) => { e.target.style.textDecoration = 'underline'; },
+                            onMouseLeave: (e) => { e.target.style.textDecoration = 'none'; }
+                          }, '📋 Documentation & Support'),
+                          // Terms of Use Link
+                          React.createElement('a', {
+                            key: 'termsLink',
+                            href: 'https://therigwin-dot.github.io/fancy-list/terms-of-use.html',
+                            target: '_blank',
+                            style: { 
+                              fontSize: '14px',
+                              fontWeight: '400',
+                              color: '#0078d4',
+                              textDecoration: 'none',
+                              display: 'block',
+                              marginBottom: '4px'
+                            },
+                            onMouseEnter: (e) => { e.target.style.textDecoration = 'underline'; },
+                            onMouseLeave: (e) => { e.target.style.textDecoration = 'none'; }
+                          }, '📄 Terms of Use'),
+                          // Privacy Policy Link
+                          React.createElement('a', {
+                            key: 'privacyLink',
+                            href: 'https://therigwin-dot.github.io/fancy-list/privacy-policy.html',
+                            target: '_blank',
+                            style: { 
+                              fontSize: '14px',
+                              fontWeight: '400',
+                              color: '#0078d4',
+                              textDecoration: 'none',
+                              display: 'block',
+                              marginBottom: '4px'
+                            },
+                            onMouseEnter: (e) => { e.target.style.textDecoration = 'underline'; },
+                            onMouseLeave: (e) => { e.target.style.textDecoration = 'none'; }
+                          }, '🔒 Privacy Policy'),
+                          // Deployment Guide Link
+                          React.createElement('a', {
+                            key: 'deploymentLink',
+                            href: 'https://therigwin-dot.github.io/fancy-list/deployment-guide.html',
+                            target: '_blank',
+                            style: { 
+                              fontSize: '14px',
+                              fontWeight: '400',
+                              color: '#0078d4',
+                              textDecoration: 'none',
+                              display: 'block',
+                              marginBottom: '4px'
+                            },
+                            onMouseEnter: (e) => { e.target.style.textDecoration = 'underline'; },
+                            onMouseLeave: (e) => { e.target.style.textDecoration = 'none'; }
+                          }, '🚀 Deployment Guide'),
+                          // Contact Information
+                          React.createElement('div', {
+                            key: 'contactHeader',
+                            style: { 
+                              fontSize: '16px',
+                              fontWeight: '600',
+                              color: '#323130',
+                              marginTop: '16px',
+                              marginBottom: '8px'
+                            }
+                          }, 'Contact Information'),
+                          // Developer Info
+                          React.createElement('div', {
+                            key: 'developerInfo',
+                            style: { 
+                              fontSize: '14px',
+                              fontWeight: '400',
+                              color: '#323130',
+                              marginBottom: '4px'
+                            }
+                          }, 'Developer: Therigwin\'s Fox Studios'),
+                          // Contact Email
+                          React.createElement('a', {
+                            key: 'contactEmail',
+                            href: 'mailto:therigwin+FoxShrineStudios@gmail.com',
+                            style: { 
+                              fontSize: '14px',
+                              fontWeight: '400',
+                              color: '#0078d4',
+                              textDecoration: 'none',
+                              display: 'block',
+                              marginBottom: '4px'
+                            },
+                            onMouseEnter: (e) => { e.target.style.textDecoration = 'underline'; },
+                            onMouseLeave: (e) => { e.target.style.textDecoration = 'none'; }
+                          }, '📧 Contact: therigwin+FoxShrineStudios@gmail.com')
                         ]),
                         elem
                       );
