@@ -275,13 +275,14 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     
     if (isExpanding) {
       newExpandedCategories.add(category);
-      // Apply subject auto-expand when category expands
-      this.applySubjectAutoExpand(category);
+      this.setState({ expandedCategories: newExpandedCategories }, () => {
+        // Apply subject auto-expand after category state is updated
+        this.applySubjectAutoExpand(category);
+      });
     } else {
       newExpandedCategories.delete(category);
+      this.setState({ expandedCategories: newExpandedCategories });
     }
-    
-    this.setState({ expandedCategories: newExpandedCategories });
   }
 
   private getFilteredItems(): IListItem[] {
@@ -608,9 +609,23 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
   }
 
   private applySubjectAutoExpand(category: string): void {
+    console.log('🔍 Subject Auto-Expand Debug:', {
+      category,
+      subjectAutoExpand: this.props.subjectSectionSettings?.autoExpand,
+      items: this.state.items.length,
+      categoryItems: this.groupItemsByCategory(this.state.items)[category]?.length || 0
+    });
+    
     if (this.props.subjectSectionSettings?.autoExpand) {
       const items = this.groupItemsByCategory(this.state.items)[category] || [];
       const subjectIds = items.map(item => item.id);
+      
+      console.log('🔍 Subject Auto-Expand - Applying:', {
+        category,
+        subjectIds,
+        currentExpandedItems: Array.from(this.state.expandedItems)
+      });
+      
       this.setState(prevState => ({
         expandedItems: new Set(Array.from(prevState.expandedItems).concat(subjectIds))
       }));
