@@ -36922,6 +36922,15 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __spreadArray = (undefined && undefined.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+};
 
 
 
@@ -38027,145 +38036,97 @@ var FancyListWebPart = /** @class */ (function (_super) {
                             groupFields: [
                                 {
                                     type: 1, // PropertyPaneFieldType.Custom
-                                    targetProperty: 'aboutInfo',
+                                    targetProperty: 'aboutPage',
                                     properties: {
-                                        key: 'aboutInfo',
-                                        onRender: function (elem, ctx, changeCallback) {
-                                            react_dom__WEBPACK_IMPORTED_MODULE_1__.render(react__WEBPACK_IMPORTED_MODULE_0__.createElement('div', {
-                                                style: {
-                                                    fontSize: '16px',
-                                                    fontWeight: '600',
-                                                    color: '#323130',
-                                                    marginBottom: '8px'
-                                                }
-                                            }, 'About'), elem);
-                                        },
-                                        onDispose: function (elem) {
-                                            react_dom__WEBPACK_IMPORTED_MODULE_1__.unmountComponentAtNode(elem);
-                                        }
-                                    }
-                                },
-                                (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('version', {
-                                    text: "Version: ".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.version)
-                                }),
-                                (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('description', {
-                                    text: _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.description
-                                }),
-                                {
-                                    type: 1, // PropertyPaneFieldType.Custom
-                                    targetProperty: 'version',
-                                    properties: {
-                                        key: 'version',
+                                        key: 'aboutPage',
                                         onRender: function (elem, ctx, changeCallback) {
                                             react_dom__WEBPACK_IMPORTED_MODULE_1__.render(react__WEBPACK_IMPORTED_MODULE_0__.createElement('div', {
                                                 style: {
                                                     fontSize: '14px',
-                                                    fontWeight: '400',
                                                     color: '#323130',
-                                                    marginBottom: '4px'
+                                                    lineHeight: '1.4'
                                                 }
-                                            }, "Version: ".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.version)), elem);
+                                            }, __spreadArray(__spreadArray(__spreadArray([
+                                                // About Header
+                                                react__WEBPACK_IMPORTED_MODULE_0__.createElement('div', {
+                                                    key: 'aboutHeader',
+                                                    style: {
+                                                        fontSize: '16px',
+                                                        fontWeight: '600',
+                                                        color: '#323130',
+                                                        marginBottom: '8px'
+                                                    }
+                                                }, 'About'),
+                                                // Version
+                                                react__WEBPACK_IMPORTED_MODULE_0__.createElement('div', {
+                                                    key: 'version',
+                                                    style: {
+                                                        fontSize: '14px',
+                                                        fontWeight: '400',
+                                                        color: '#323130',
+                                                        marginBottom: '4px'
+                                                    }
+                                                }, "Version: ".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.version)),
+                                                // Description
+                                                react__WEBPACK_IMPORTED_MODULE_0__.createElement('div', {
+                                                    key: 'description',
+                                                    style: {
+                                                        fontSize: '14px',
+                                                        fontWeight: '400',
+                                                        color: '#323130',
+                                                        marginBottom: '16px'
+                                                    }
+                                                }, _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.description),
+                                                // Features Header
+                                                react__WEBPACK_IMPORTED_MODULE_0__.createElement('div', {
+                                                    key: 'featuresHeader',
+                                                    style: {
+                                                        fontSize: '16px',
+                                                        fontWeight: '600',
+                                                        color: '#323130',
+                                                        marginTop: '16px',
+                                                        marginBottom: '4px'
+                                                    }
+                                                }, 'Features')
+                                            ], _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.features.map(function (feature, index) {
+                                                return react__WEBPACK_IMPORTED_MODULE_0__.createElement('div', {
+                                                    key: "feature".concat(index),
+                                                    style: {
+                                                        fontSize: '14px',
+                                                        fontWeight: '400',
+                                                        color: '#323130',
+                                                        marginBottom: '2px'
+                                                    }
+                                                }, feature);
+                                            }), true), [
+                                                // Known Issues Header
+                                                react__WEBPACK_IMPORTED_MODULE_0__.createElement('div', {
+                                                    key: 'knownIssuesHeader',
+                                                    style: {
+                                                        fontSize: '16px',
+                                                        fontWeight: '600',
+                                                        color: '#323130',
+                                                        marginTop: '16px',
+                                                        marginBottom: '4px'
+                                                    }
+                                                }, 'Known Issues')
+                                            ], false), _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.knownIssues.map(function (issue, index) {
+                                                return react__WEBPACK_IMPORTED_MODULE_0__.createElement('div', {
+                                                    key: "issue".concat(index),
+                                                    style: {
+                                                        fontSize: '14px',
+                                                        fontWeight: '400',
+                                                        color: '#323130',
+                                                        marginBottom: '2px'
+                                                    }
+                                                }, issue);
+                                            }), true)), elem);
                                         },
                                         onDispose: function (elem) {
                                             react_dom__WEBPACK_IMPORTED_MODULE_1__.unmountComponentAtNode(elem);
                                         }
                                     }
-                                },
-                                {
-                                    type: 1, // PropertyPaneFieldType.Custom
-                                    targetProperty: 'description',
-                                    properties: {
-                                        key: 'description',
-                                        onRender: function (elem, ctx, changeCallback) {
-                                            react_dom__WEBPACK_IMPORTED_MODULE_1__.render(react__WEBPACK_IMPORTED_MODULE_0__.createElement('div', {
-                                                style: {
-                                                    fontSize: '14px',
-                                                    fontWeight: '400',
-                                                    color: '#323130',
-                                                    marginBottom: '16px'
-                                                }
-                                            }, _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.description), elem);
-                                        },
-                                        onDispose: function (elem) {
-                                            react_dom__WEBPACK_IMPORTED_MODULE_1__.unmountComponentAtNode(elem);
-                                        }
-                                    }
-                                },
-                                {
-                                    type: 1, // PropertyPaneFieldType.Custom
-                                    targetProperty: 'featuresHeader',
-                                    properties: {
-                                        key: 'featuresHeader',
-                                        onRender: function (elem, ctx, changeCallback) {
-                                            react_dom__WEBPACK_IMPORTED_MODULE_1__.render(react__WEBPACK_IMPORTED_MODULE_0__.createElement('div', {
-                                                style: {
-                                                    fontSize: '16px',
-                                                    fontWeight: '600',
-                                                    color: '#323130',
-                                                    marginTop: '16px',
-                                                    marginBottom: '4px'
-                                                }
-                                            }, 'Features'), elem);
-                                        },
-                                        onDispose: function (elem) {
-                                            react_dom__WEBPACK_IMPORTED_MODULE_1__.unmountComponentAtNode(elem);
-                                        }
-                                    }
-                                },
-                                (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('features1', {
-                                    text: "".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.features[0])
-                                }),
-                                (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('features2', {
-                                    text: "".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.features[1])
-                                }),
-                                (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('features3', {
-                                    text: "".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.features[2])
-                                }),
-                                (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('features4', {
-                                    text: "".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.features[3])
-                                }),
-                                (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('features5', {
-                                    text: "".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.features[4])
-                                }),
-                                (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('features6', {
-                                    text: "".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.features[5])
-                                }),
-                                (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('features7', {
-                                    text: "".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.features[6])
-                                }),
-                                (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('features8', {
-                                    text: "".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.features[7])
-                                }),
-                                (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('features9', {
-                                    text: "".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.features[8])
-                                }),
-                                {
-                                    type: 1, // PropertyPaneFieldType.Custom
-                                    targetProperty: 'knownIssuesHeader',
-                                    properties: {
-                                        key: 'knownIssuesHeader',
-                                        onRender: function (elem, ctx, changeCallback) {
-                                            react_dom__WEBPACK_IMPORTED_MODULE_1__.render(react__WEBPACK_IMPORTED_MODULE_0__.createElement('div', {
-                                                style: {
-                                                    fontSize: '16px',
-                                                    fontWeight: '600',
-                                                    color: '#323130',
-                                                    marginTop: '16px',
-                                                    marginBottom: '4px'
-                                                }
-                                            }, 'Known Issues'), elem);
-                                        },
-                                        onDispose: function (elem) {
-                                            react_dom__WEBPACK_IMPORTED_MODULE_1__.unmountComponentAtNode(elem);
-                                        }
-                                    }
-                                },
-                                (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('knownIssues1', {
-                                    text: "".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.knownIssues[0])
-                                }),
-                                (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('knownIssues2', {
-                                    text: "".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.knownIssues[1])
-                                })
+                                }
                             ]
                         }
                     ]
