@@ -1,25 +1,25 @@
 
 require("./FancyList.module.css");
 const styles = {
-  fancyList: 'fancyList_2b400fc6',
-  categoryFilters: 'categoryFilters_2b400fc6',
-  categoryPill: 'categoryPill_2b400fc6',
-  active: 'active_2b400fc6',
-  itemsContainer: 'itemsContainer_2b400fc6',
-  itemPanel: 'itemPanel_2b400fc6',
-  itemHeader: 'itemHeader_2b400fc6',
-  itemSubject: 'itemSubject_2b400fc6',
-  expandIcon: 'expandIcon_2b400fc6',
-  itemContent: 'itemContent_2b400fc6',
-  itemDescription: 'itemDescription_2b400fc6',
-  loading: 'loading_2b400fc6',
-  error: 'error_2b400fc6',
-  titleContainer: 'titleContainer_2b400fc6',
-  titleText: 'titleText_2b400fc6',
-  titleError: 'titleError_2b400fc6',
-  errorTitle: 'errorTitle_2b400fc6',
-  errorMessage: 'errorMessage_2b400fc6',
-  titleDivider: 'titleDivider_2b400fc6'
+  fancyList: 'fancyList_528a5b18',
+  categoryFilters: 'categoryFilters_528a5b18',
+  categoryPill: 'categoryPill_528a5b18',
+  active: 'active_528a5b18',
+  itemsContainer: 'itemsContainer_528a5b18',
+  itemPanel: 'itemPanel_528a5b18',
+  itemHeader: 'itemHeader_528a5b18',
+  itemSubject: 'itemSubject_528a5b18',
+  expandIcon: 'expandIcon_528a5b18',
+  itemContent: 'itemContent_528a5b18',
+  itemDescription: 'itemDescription_528a5b18',
+  loading: 'loading_528a5b18',
+  error: 'error_528a5b18',
+  titleContainer: 'titleContainer_528a5b18',
+  titleText: 'titleText_528a5b18',
+  titleError: 'titleError_528a5b18',
+  errorTitle: 'errorTitle_528a5b18',
+  errorMessage: 'errorMessage_528a5b18',
+  titleDivider: 'titleDivider_528a5b18'
 };
 
 export default styles;
