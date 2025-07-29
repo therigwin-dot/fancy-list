@@ -1333,39 +1333,6 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
                 }),
                 PropertyPaneLabel('features9', {
                   text: `• ${DEFAULTS_CONFIG.aboutInfo.features[8]}`
-                }),
-                PropertyPaneLabel('features10', {
-                  text: `• ${DEFAULTS_CONFIG.aboutInfo.features[9]}`
-                }),
-                PropertyPaneLabel('features11', {
-                  text: `• ${DEFAULTS_CONFIG.aboutInfo.features[10]}`
-                }),
-                PropertyPaneLabel('features12', {
-                  text: `• ${DEFAULTS_CONFIG.aboutInfo.features[11]}`
-                }),
-                PropertyPaneLabel('features13', {
-                  text: `• ${DEFAULTS_CONFIG.aboutInfo.features[12]}`
-                }),
-                PropertyPaneLabel('features14', {
-                  text: `• ${DEFAULTS_CONFIG.aboutInfo.features[13]}`
-                }),
-                PropertyPaneLabel('features15', {
-                  text: `• ${DEFAULTS_CONFIG.aboutInfo.features[14]}`
-                }),
-                PropertyPaneLabel('features16', {
-                  text: `• ${DEFAULTS_CONFIG.aboutInfo.features[15]}`
-                }),
-                PropertyPaneLabel('features17', {
-                  text: `• ${DEFAULTS_CONFIG.aboutInfo.features[16]}`
-                }),
-                PropertyPaneLabel('features18', {
-                  text: `• ${DEFAULTS_CONFIG.aboutInfo.features[17]}`
-                }),
-                PropertyPaneLabel('features19', {
-                  text: `• ${DEFAULTS_CONFIG.aboutInfo.features[18]}`
-                }),
-                PropertyPaneLabel('features20', {
-                  text: `• ${DEFAULTS_CONFIG.aboutInfo.features[19]}`
                 })
               ]
             },
@@ -1377,15 +1344,6 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
                 }),
                 PropertyPaneLabel('knownIssues2', {
                   text: `• ${DEFAULTS_CONFIG.aboutInfo.knownIssues[1]}`
-                }),
-                PropertyPaneLabel('knownIssues3', {
-                  text: `• ${DEFAULTS_CONFIG.aboutInfo.knownIssues[2]}`
-                }),
-                PropertyPaneLabel('knownIssues4', {
-                  text: `• ${DEFAULTS_CONFIG.aboutInfo.knownIssues[3]}`
-                }),
-                PropertyPaneLabel('knownIssues5', {
-                  text: `• ${DEFAULTS_CONFIG.aboutInfo.knownIssues[4]}`
                 })
               ]
             }

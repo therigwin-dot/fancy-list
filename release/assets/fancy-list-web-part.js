@@ -400,33 +400,19 @@ var DEFAULTS_CONFIG = {
         version: '1.0.0.0',
         description: 'Beta Basic Version - Display items from any SharePoint list with category filtering and collapsible panels',
         features: [
-            'Complete 7-page configuration framework with property pane controls',
-            'List selection with automatic field mapping (Category, Subject, Description)',
-            'Title section with font controls, background styling, and spacing options',
-            'Filter section with category filtering, styling, and background controls',
-            'Category section with full styling, auto-expand, and icon controls',
-            'Subject section with hierarchical display, styling, and auto-expand',
-            'Description section with content type detection and background styling',
-            'Advanced spacing controls (DivideSpace) with preset and custom options',
-            'Background system supporting solid colors, gradients, and images with transparency',
-            'Font controls with family, size, color, formatting, and alignment options',
-            'Shape controls (square, rounded, pill) for all sections',
-            'Icon controls with custom icons and positioning (left/right)',
-            'Auto-expand functionality with hierarchical coordination',
-            'Hover effects with multi-effect behavior and visual feedback',
-            'Test Defaults button for rapid configuration testing',
-            'Responsive design with theme integration',
-            'Attachment support for SharePoint list files',
-            'Rich text content type detection and rendering',
-            'Image URL detection and display capabilities',
-            'Document Library filtering (Lists only, no Document Libraries)'
+            'Fully Configurable Title - Look and Feel for your needs.',
+            'Category Filtering - Filter items by category with custom styling',
+            'Collapsible Sections - Click to expand/collapse categories and subjects',
+            'Full Styling - All parts have easy controls to customize it to your look and feel',
+            'Auto-Expand - Automatically open categories and subjects when enabled',
+            'File Attachments - Display and download files attached to list items',
+            'Rich Text Support - Display formatted text from SharePoint',
+            'Image Display - Show images from URLs in description fields',
+            'Reset Options - Reset individual sections or entire web part'
         ],
         knownIssues: [
-            'Color picker may show deprecation warnings in browser console (cosmetic only)',
             'Font size ComboBox may retain focus after Enter key press (minor UX issue)',
-            'Some browser deprecation warnings for -ms-high-contrast CSS (cosmetic only)',
-            'Image background transparency requires manual alpha adjustment',
-            'Rich text content may need manual font styling override'
+            'Color picker dropdown may be cut off when positioned near the right edge of the screen'
         ]
     },
     // Structured Testing Values for Test Defaults Button
@@ -38080,39 +38066,6 @@ var FancyListWebPart = /** @class */ (function (_super) {
                                 }),
                                 (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('features9', {
                                     text: "\u2022 ".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.features[8])
-                                }),
-                                (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('features10', {
-                                    text: "\u2022 ".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.features[9])
-                                }),
-                                (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('features11', {
-                                    text: "\u2022 ".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.features[10])
-                                }),
-                                (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('features12', {
-                                    text: "\u2022 ".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.features[11])
-                                }),
-                                (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('features13', {
-                                    text: "\u2022 ".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.features[12])
-                                }),
-                                (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('features14', {
-                                    text: "\u2022 ".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.features[13])
-                                }),
-                                (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('features15', {
-                                    text: "\u2022 ".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.features[14])
-                                }),
-                                (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('features16', {
-                                    text: "\u2022 ".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.features[15])
-                                }),
-                                (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('features17', {
-                                    text: "\u2022 ".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.features[16])
-                                }),
-                                (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('features18', {
-                                    text: "\u2022 ".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.features[17])
-                                }),
-                                (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('features19', {
-                                    text: "\u2022 ".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.features[18])
-                                }),
-                                (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('features20', {
-                                    text: "\u2022 ".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.features[19])
                                 })
                             ]
                         },
@@ -38124,15 +38077,6 @@ var FancyListWebPart = /** @class */ (function (_super) {
                                 }),
                                 (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('knownIssues2', {
                                     text: "\u2022 ".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.knownIssues[1])
-                                }),
-                                (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('knownIssues3', {
-                                    text: "\u2022 ".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.knownIssues[2])
-                                }),
-                                (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('knownIssues4', {
-                                    text: "\u2022 ".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.knownIssues[3])
-                                }),
-                                (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('knownIssues5', {
-                                    text: "\u2022 ".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.knownIssues[4])
                                 })
                             ]
                         }

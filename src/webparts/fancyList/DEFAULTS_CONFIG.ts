@@ -350,33 +350,19 @@ export const DEFAULTS_CONFIG = {
     version: '1.0.0.0',
     description: 'Beta Basic Version - Display items from any SharePoint list with category filtering and collapsible panels',
     features: [
-      'Complete 7-page configuration framework with property pane controls',
-      'List selection with automatic field mapping (Category, Subject, Description)',
-      'Title section with font controls, background styling, and spacing options',
-      'Filter section with category filtering, styling, and background controls',
-      'Category section with full styling, auto-expand, and icon controls',
-      'Subject section with hierarchical display, styling, and auto-expand',
-      'Description section with content type detection and background styling',
-      'Advanced spacing controls (DivideSpace) with preset and custom options',
-      'Background system supporting solid colors, gradients, and images with transparency',
-      'Font controls with family, size, color, formatting, and alignment options',
-      'Shape controls (square, rounded, pill) for all sections',
-      'Icon controls with custom icons and positioning (left/right)',
-      'Auto-expand functionality with hierarchical coordination',
-      'Hover effects with multi-effect behavior and visual feedback',
-      'Test Defaults button for rapid configuration testing',
-      'Responsive design with theme integration',
-      'Attachment support for SharePoint list files',
-      'Rich text content type detection and rendering',
-      'Image URL detection and display capabilities',
-      'Document Library filtering (Lists only, no Document Libraries)'
+      'Fully Configurable Title - Look and Feel for your needs.',
+      'Category Filtering - Filter items by category with custom styling',
+      'Collapsible Sections - Click to expand/collapse categories and subjects',
+      'Full Styling - All parts have easy controls to customize it to your look and feel',
+      'Auto-Expand - Automatically open categories and subjects when enabled',
+      'File Attachments - Display and download files attached to list items',
+      'Rich Text Support - Display formatted text from SharePoint',
+      'Image Display - Show images from URLs in description fields',
+      'Reset Options - Reset individual sections or entire web part'
     ],
     knownIssues: [
-      'Color picker may show deprecation warnings in browser console (cosmetic only)',
       'Font size ComboBox may retain focus after Enter key press (minor UX issue)',
-      'Some browser deprecation warnings for -ms-high-contrast CSS (cosmetic only)',
-      'Image background transparency requires manual alpha adjustment',
-      'Rich text content may need manual font styling override'
+      'Color picker dropdown may be cut off when positioned near the right edge of the screen'
     ]
   },
 
