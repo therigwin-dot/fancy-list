@@ -683,7 +683,12 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     }
 
     return (
-      <div style={this.getTitleStyle()}>
+      <div style={{
+        ...this.getTitleStyle(),
+        ...(titleSettings.showDivider ? {
+          borderBottom: '2px solid var(--neutralLight, #edebe9)'
+        } : {})
+      }}>
         {/* Layer 1: Transparency overlay for valid images */}
         {backgroundType === 'image' && imageUrl && !titleImageError && 
          imageAlpha !== undefined && imageAlpha > 0 && (
@@ -761,15 +766,6 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
           </div>
         )}
         
-        {/* Title Divider - positioned between title and filters */}
-        {this.props.titleSettings?.showDivider && (
-          <div style={{ 
-            height: '2px', 
-            backgroundColor: 'var(--neutralLight, #edebe9)', 
-            marginTop: '12px',
-            marginBottom: '12px'
-          }} />
-        )}
         {/* Category Filter Pills */}
         {this.props.filterSettings?.enableFilters && (
           <>
