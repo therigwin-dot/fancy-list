@@ -417,29 +417,29 @@ var DEFAULTS_CONFIG = {
             controls: [
                 {
                     control: "selectedListId",
-                    value: "Events",
-                    description: "Set list to Events for testing",
+                    value: "FancyList_TestData_List_Quoted",
+                    description: "Set list to FancyList_TestData_List_Quoted for testing",
                     timing: 2000, // Long wait for API call
                     dependency: null
                 },
                 {
                     control: "categoryField",
-                    value: "Location",
-                    description: "Set category field to Location",
+                    value: "field_1",
+                    description: "Set category field to field_1 (Category)",
                     timing: 2000, // Long wait for field loading
                     dependency: "selectedListId"
                 },
                 {
                     control: "subjectField",
-                    value: "Title",
-                    description: "Set subject field to Title",
+                    value: "field_2",
+                    description: "Set subject field to field_2 (Subject)",
                     timing: 2000, // Long wait for field loading
                     dependency: "categoryField"
                 },
                 {
                     control: "descriptionField",
-                    value: "Description",
-                    description: "Set description field to Description",
+                    value: "field_3",
+                    description: "Set description field to field_3 (Description)",
                     timing: 2000, // Long wait for field loading
                     dependency: "subjectField"
                 }
@@ -36869,6 +36869,7 @@ var FancyListWebPart = /** @class */ (function (_super) {
                     case 4:
                         _c._fields = _d.sent();
                         this._fieldsLoadedForList = control.value;
+                        console.log('🔍 Test Defaults - Available fields after list selection:', this._fields);
                         return [3 /*break*/, 6];
                     case 5:
                         error_1 = _d.sent();
@@ -36877,12 +36878,15 @@ var FancyListWebPart = /** @class */ (function (_super) {
                     case 6: return [3 /*break*/, 13];
                     case 7:
                         this.properties.categoryField = control.value;
+                        console.log('🔍 Test Defaults - Available fields for Category dropdown:', this._getAvailableFieldsForCategory());
                         return [3 /*break*/, 13];
                     case 8:
                         this.properties.subjectField = control.value;
+                        console.log('🔍 Test Defaults - Available fields for Subject dropdown:', this._getAvailableFieldsForSubject());
                         return [3 /*break*/, 13];
                     case 9:
                         this.properties.descriptionField = control.value;
+                        console.log('🔍 Test Defaults - Available fields for Description dropdown:', this._getAvailableFieldsForDescription());
                         return [3 /*break*/, 13];
                     case 10:
                         this.properties.showAllCategories = control.value;

@@ -277,18 +277,22 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
           try {
             this._fields = await this._loadFields(control.value as string);
             this._fieldsLoadedForList = control.value as string;
+            console.log('🔍 Test Defaults - Available fields after list selection:', this._fields);
           } catch (error) {
             console.error('Error loading fields:', error);
           }
           break;
         case 'categoryField':
           this.properties.categoryField = control.value as string;
+          console.log('🔍 Test Defaults - Available fields for Category dropdown:', this._getAvailableFieldsForCategory());
           break;
         case 'subjectField':
           this.properties.subjectField = control.value as string;
+          console.log('🔍 Test Defaults - Available fields for Subject dropdown:', this._getAvailableFieldsForSubject());
           break;
         case 'descriptionField':
           this.properties.descriptionField = control.value as string;
+          console.log('🔍 Test Defaults - Available fields for Description dropdown:', this._getAvailableFieldsForDescription());
           break;
         case 'showAllCategories':
           this.properties.showAllCategories = control.value as boolean;
