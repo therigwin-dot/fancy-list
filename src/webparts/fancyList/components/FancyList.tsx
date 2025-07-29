@@ -430,16 +430,24 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     const imageAlpha = backgroundSettings.imageAlpha || 0;
     const shape = this.props.categorySectionSettings?.shape || 'rounded';
 
+    // Base overrides to prevent CSS class conflicts (without !important)
+    const baseOverrides = {
+      border: 'none',
+      boxShadow: 'none'
+    };
+
     switch (backgroundType) {
       case 'solid':
         return {
           backgroundColor: this.hexToRgba(backgroundColor, 1 - (backgroundAlpha / 100)), // Invert alpha: 0% = opaque (alpha 1), 100% = transparent (alpha 0)
-          borderRadius: this.getShapeRadius(shape)
+          borderRadius: this.getShapeRadius(shape),
+          ...baseOverrides
         };
       case 'gradient':
         return {
           background: this.getGradientStyle(gradientDirection, gradientColor1, gradientColor2, 1 - (gradientAlpha / 100)), // Invert alpha: 0% = opaque (alpha 1), 100% = transparent (alpha 0)
-          borderRadius: this.getShapeRadius(shape)
+          borderRadius: this.getShapeRadius(shape),
+          ...baseOverrides
         };
       case 'image':
         if (imageUrl) {
@@ -447,16 +455,18 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
             background: `linear-gradient(rgba(255,255,255,${imageAlpha / 100}), rgba(255,255,255,${imageAlpha / 100})), url(${imageUrl})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            borderRadius: this.getShapeRadius(shape)
+            borderRadius: this.getShapeRadius(shape),
+            ...baseOverrides
           };
         } else {
           return {
             backgroundColor: '#ffffff', // Simple white background for empty/invalid URLs
-            borderRadius: this.getShapeRadius(shape)
+            borderRadius: this.getShapeRadius(shape),
+            ...baseOverrides
           };
         }
       default:
-        return {};
+        return baseOverrides;
     }
   }
 
