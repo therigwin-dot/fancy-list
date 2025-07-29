@@ -12,10 +12,9 @@
   - Font controls: Family, size, color, formatting, alignment
   - Shape controls: Square, rounded, pill shapes
   - Icon controls: Expand/collapse icons with positioning
-  - Auto-expand toggle: Automatic expansion of subjects
-  - Hover effects: Multi-effect hover behavior with light blue background, border, and blue icons
-  - Property pane integration: Full functionality with reset/test buttons
-- **Status**: ✅ **COMPLETE** - Complete feature parity with Category section
+  - Auto-expand toggle: Automatic expansion of subject items
+  - **Background Wrapping**: Subject background now wraps around both subject button and description content (similar to category behavior)
+- **Status**: ✅ **COMPLETED** - All functionality working as expected
 - **Styling Fixes**: Fixed shape button conflicts, padding issues, white border removal
 - **Impact**: High - Complete Subject section functionality
 
