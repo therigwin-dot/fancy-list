@@ -8,27 +8,27 @@
     "skipFeatureDeployment": true,
     "isDomainIsolated": false,
     "developer": {
-      "name": "",
-      "websiteUrl": "",
-      "privacyUrl": "",
-      "termsOfUseUrl": "",
+      "name": "Therigwin's Fox Studios",
+      "websiteUrl": "https://therigwin-dot.github.io/fancy-list/",
+      "privacyUrl": "https://therigwin-dot.github.io/fancy-list/privacy-policy.html",
+      "termsOfUseUrl": "https://therigwin-dot.github.io/fancy-list/terms-of-use.html",
       "mpnId": "Undefined-1.21.1"
     },
     "metadata": {
       "shortDescription": {
-        "default": "fancy-list description"
+        "default": "Transform SharePoint lists into hierarchical displays with advanced filtering and styling"
       },
       "longDescription": {
-        "default": "fancy-list description"
+        "default": "The Fancy List Web Part transforms standard SharePoint lists into visually appealing, hierarchical displays with advanced filtering and styling capabilities. Features include 3-level hierarchy (Category → Subject → Description), dynamic filtering, custom backgrounds, fonts, shapes, and auto-expand functionality. Perfect for organizing and displaying complex list data in an intuitive, user-friendly format."
       },
       "screenshotPaths": [],
       "videoUrl": "",
-      "categories": []
+      "categories": ["Content", "Lists and Libraries", "User Experience"]
     },
     "features": [
       {
-        "title": "fancy-list Feature",
-        "description": "The feature that activates elements of the fancy-list solution.",
+        "title": "Fancy List Web Part",
+        "description": "The Fancy List Web Part feature that provides hierarchical list display with advanced filtering and styling capabilities.",
         "id": "fb8b6b54-c888-4c55-b231-6b883e701f59",
         "version": "1.0.0.0"
       }
