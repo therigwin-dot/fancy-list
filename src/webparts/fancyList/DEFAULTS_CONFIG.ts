@@ -43,26 +43,26 @@ export const DEFAULTS_CONFIG = {
     testValues: {
       webPartTitle: 'Fancy List Web Part',
       font: {
-        family: 'Segoe UI',
-        size: '28px',
-        color: '#323130',
-        formatting: { bold: true, italic: false, underline: false, strikethrough: false },
-        alignment: 'center'
+        family: 'Arial',
+        size: '24px',
+        color: '#ffffff',
+        formatting: { bold: true, italic: true, underline: false, strikethrough: false },
+        alignment: 'left'
       },
       background: {
-        type: 'gradient' as const,
-        color: '#ffffff',
+        type: 'solid' as const,
+        color: '#D90E17',
         alpha: 0,
         image: '',
         imageAlpha: 0,
-        gradientDirection: 'top-bottom',
-        gradientColor1: '#0078d4',
-        gradientAlpha1: 90,
-        gradientColor2: '#106ebe',
-        gradientAlpha2: 70
+        gradientDirection: 'left-right',
+        gradientColor1: '#D90E17',
+        gradientAlpha1: 0,
+        gradientColor2: '#D90E17',
+        gradientAlpha2: 0
       },
-      shape: 'rounded' as const,
-      divideSpace: 8
+      shape: 'square' as const,
+      divideSpace: 0
     }
   } as TitleSettings,
 
@@ -103,7 +103,7 @@ export const DEFAULTS_CONFIG = {
       gradientAlpha2: 0
     },
     divideSpace: 0,
-    // MFB Theme Values for Filter Section
+    // Hub Theme Values for Filter Section
     testValues: {
       font: {
         family: 'Segoe UI',
@@ -112,26 +112,26 @@ export const DEFAULTS_CONFIG = {
         alignment: 'center'
       },
       activeColors: {
-        background: '#0078d4',
+        background: '#006CBF',
         font: '#ffffff'
       },
       inactiveColors: {
-        background: '#f3f2f1',
-        font: '#323130'
+        background: '#9a9b9d',
+        font: '#ffffff'
       },
       shape: 'pill' as const,
       backgroundShape: 'rounded' as const,
       defaultFilterSelection: 'All',
       background: {
         type: 'solid' as const,
-        color: '#ffffff',
+        color: '#58595b',
         alpha: 0,
         image: '',
         imageAlpha: 0,
         gradientDirection: 'left-right',
-        gradientColor1: '#ffffff',
+        gradientColor1: '#58595b',
         gradientAlpha1: 0,
-        gradientColor2: '#f3f2f1',
+        gradientColor2: '#6c6d6f',
         gradientAlpha2: 30
       },
       divideSpace: 8
@@ -173,31 +173,31 @@ export const DEFAULTS_CONFIG = {
       collapsedIcon: '▶',
       expandedIcon: '▼'
     },
-    // MFB Theme Values for Category Section
+    // Hub Theme Values for Category Section
     testValues: {
       font: {
         family: 'Segoe UI',
         size: '20px',
-        color: '#323130',
+        color: '#ffffff',
         formatting: { bold: true, italic: false, underline: false, strikethrough: false },
         alignment: 'left'
       },
       background: {
         type: 'solid' as const,
-        color: '#f3f2f1',
+        color: '#6c6d6f',
         alpha: 80,
         image: '',
         imageAlpha: 0,
         gradientDirection: 'left-right',
-        gradientColor1: '#f3f2f1',
+        gradientColor1: '#6c6d6f',
         gradientAlpha1: 80,
-        gradientColor2: '#e1dfdd',
+        gradientColor2: '#9a9b9d',
         gradientAlpha2: 60
       },
       shape: 'rounded' as const,
       divideSpace: 8,
       autoExpand: false,
-      hoverColor: '#e1dfdd',
+      hoverColor: '#9a9b9d',
       iconSettings: {
         enabled: true,
         iconPosition: 'right' as const,
@@ -242,31 +242,31 @@ export const DEFAULTS_CONFIG = {
       collapsedIcon: '▶',
       expandedIcon: '▼'
     },
-    // MFB Theme Values for Subject Section
+    // Hub Theme Values for Subject Section
     testValues: {
       font: {
         family: 'Segoe UI',
         size: '16px',
-        color: '#323130',
+        color: '#ffffff',
         formatting: { bold: false, italic: false, underline: false, strikethrough: false },
         alignment: 'left'
       },
       background: {
         type: 'solid' as const,
-        color: '#ffffff',
+        color: '#58595b',
         alpha: 0,
         image: '',
         imageAlpha: 0,
         gradientDirection: 'left-right',
-        gradientColor1: '#ffffff',
+        gradientColor1: '#58595b',
         gradientAlpha1: 0,
-        gradientColor2: '#f3f2f1',
+        gradientColor2: '#6c6d6f',
         gradientAlpha2: 30
       },
       shape: 'rounded' as const,
       divideSpace: 8,
       autoExpand: false,
-      hoverColor: '#faf9f8',
+      hoverColor: '#6c6d6f',
       iconSettings: {
         enabled: true,
         iconPosition: 'right' as const,
@@ -311,31 +311,31 @@ export const DEFAULTS_CONFIG = {
       collapsedIcon: '▶',
       expandedIcon: '▼'
     },
-    // MFB Theme Values for Description Section
+    // Hub Theme Values for Description Section
     testValues: {
       font: {
         family: 'Segoe UI',
         size: '14px',
-        color: '#605e5c',
+        color: '#e1dfdd',
         formatting: { bold: false, italic: false, underline: false, strikethrough: false },
         alignment: 'left'
       },
       background: {
         type: 'solid' as const,
-        color: '#ffffff',
+        color: '#58595b',
         alpha: 0,
         image: '',
         imageAlpha: 0,
         gradientDirection: 'left-right',
-        gradientColor1: '#ffffff',
+        gradientColor1: '#58595b',
         gradientAlpha1: 0,
-        gradientColor2: '#faf9f8',
+        gradientColor2: '#6c6d6f',
         gradientAlpha2: 50
       },
       shape: 'rounded' as const,
       divideSpace: 8,
       autoExpand: false,
-      hoverColor: '#faf9f8',
+      hoverColor: '#6c6d6f',
       iconSettings: {
         enabled: false,
         iconPosition: 'left' as const,
