@@ -23,6 +23,7 @@ export const DivideSpaceControl: React.FC<DivideSpaceControlProps> = ({
 
   // Preset options
   const options: IComboBoxOption[] = [
+    { key: 'touching', text: 'Touching (0px)', data: 0 },
     { key: 'small', text: 'Small (4px)', data: 4 },
     { key: 'medium', text: 'Medium (8px)', data: 8 },
     { key: 'large', text: 'Large (16px)', data: 16 },
@@ -71,6 +72,7 @@ export const DivideSpaceControl: React.FC<DivideSpaceControlProps> = ({
 
   // Get selected option key
   const getSelectedOptionKey = (): string => {
+    if (value === 0) return 'touching';
     if (value === 4) return 'small';
     if (value === 8) return 'medium';
     if (value === 16) return 'large';

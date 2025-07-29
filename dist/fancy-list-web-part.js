@@ -2655,6 +2655,7 @@ var DivideSpaceControl = function (_a) {
     var _e = react__WEBPACK_IMPORTED_MODULE_0__.useState(false), isCustom = _e[0], setIsCustom = _e[1];
     // Preset options
     var options = [
+        { key: 'touching', text: 'Touching (0px)', data: 0 },
         { key: 'small', text: 'Small (4px)', data: 4 },
         { key: 'medium', text: 'Medium (8px)', data: 8 },
         { key: 'large', text: 'Large (16px)', data: 16 },
@@ -2707,6 +2708,8 @@ var DivideSpaceControl = function (_a) {
     };
     // Get selected option key
     var getSelectedOptionKey = function () {
+        if (value === 0)
+            return 'touching';
         if (value === 4)
             return 'small';
         if (value === 8)
