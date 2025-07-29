@@ -348,7 +348,7 @@ export const DEFAULTS_CONFIG = {
   // Page 7: About Information
   aboutInfo: {
     version: '1.0.0.0',
-    description: 'Beta Basic Version - Display items from any SharePoint list with category filtering and collapsible panels',
+    description: 'Display items from any SharePoint list with category filtering and collapsible panels',
     features: [
       'Fully Configurable Title - Look and Feel for your needs.',
       'Category Filtering - Filter items by category with custom styling',

@@ -398,7 +398,7 @@ var DEFAULTS_CONFIG = {
     // Page 7: About Information
     aboutInfo: {
         version: '1.0.0.0',
-        description: 'Beta Basic Version - Display items from any SharePoint list with category filtering and collapsible panels',
+        description: 'Display items from any SharePoint list with category filtering and collapsible panels',
         features: [
             'Fully Configurable Title - Look and Feel for your needs.',
             'Category Filtering - Filter items by category with custom styling',
@@ -38097,7 +38097,7 @@ var FancyListWebPart = /** @class */ (function (_super) {
                                                         color: '#323130',
                                                         marginBottom: '2px'
                                                     }
-                                                }, feature);
+                                                }, "\u2022 ".concat(feature));
                                             }), true), [
                                                 // Known Issues Header
                                                 react__WEBPACK_IMPORTED_MODULE_0__.createElement('div', {
@@ -38119,7 +38119,7 @@ var FancyListWebPart = /** @class */ (function (_super) {
                                                         color: '#323130',
                                                         marginBottom: '2px'
                                                     }
-                                                }, issue);
+                                                }, "\u2022 ".concat(issue));
                                             }), true)), elem);
                                         },
                                         onDispose: function (elem) {

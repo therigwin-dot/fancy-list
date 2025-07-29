@@ -1356,7 +1356,7 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
                                 color: '#323130',
                                 marginBottom: '2px'
                               }
-                            }, feature)
+                            }, `• ${feature}`)
                           ),
                           // Known Issues Header
                           React.createElement('div', {
@@ -1379,7 +1379,7 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
                                 color: '#323130',
                                 marginBottom: '2px'
                               }
-                            }, issue)
+                            }, `• ${issue}`)
                           )
                         ]),
                         elem
