@@ -1408,8 +1408,8 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
                               display: 'block',
                               marginBottom: '4px'
                             },
-                            onMouseEnter: (e) => { e.target.style.textDecoration = 'underline'; },
-                            onMouseLeave: (e) => { e.target.style.textDecoration = 'none'; }
+                            onMouseEnter: (e) => { (e.target as HTMLElement).style.textDecoration = 'underline'; },
+                            onMouseLeave: (e) => { (e.target as HTMLElement).style.textDecoration = 'none'; }
                           }, '📋 Documentation & Support'),
                           // Terms of Use Link
                           React.createElement('a', {
@@ -1424,8 +1424,8 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
                               display: 'block',
                               marginBottom: '4px'
                             },
-                            onMouseEnter: (e) => { e.target.style.textDecoration = 'underline'; },
-                            onMouseLeave: (e) => { e.target.style.textDecoration = 'none'; }
+                            onMouseEnter: (e) => { (e.target as HTMLElement).style.textDecoration = 'underline'; },
+                            onMouseLeave: (e) => { (e.target as HTMLElement).style.textDecoration = 'none'; }
                           }, '📄 Terms of Use'),
                           // Privacy Policy Link
                           React.createElement('a', {
@@ -1440,8 +1440,8 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
                               display: 'block',
                               marginBottom: '4px'
                             },
-                            onMouseEnter: (e) => { e.target.style.textDecoration = 'underline'; },
-                            onMouseLeave: (e) => { e.target.style.textDecoration = 'none'; }
+                            onMouseEnter: (e) => { (e.target as HTMLElement).style.textDecoration = 'underline'; },
+                            onMouseLeave: (e) => { (e.target as HTMLElement).style.textDecoration = 'none'; }
                           }, '🔒 Privacy Policy'),
                           // Deployment Guide Link
                           React.createElement('a', {
@@ -1456,8 +1456,8 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
                               display: 'block',
                               marginBottom: '4px'
                             },
-                            onMouseEnter: (e) => { e.target.style.textDecoration = 'underline'; },
-                            onMouseLeave: (e) => { e.target.style.textDecoration = 'none'; }
+                            onMouseEnter: (e) => { (e.target as HTMLElement).style.textDecoration = 'underline'; },
+                            onMouseLeave: (e) => { (e.target as HTMLElement).style.textDecoration = 'none'; }
                           }, '🚀 Deployment Guide'),
                           // Contact Information
                           React.createElement('div', {
@@ -1492,8 +1492,8 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
                               display: 'block',
                               marginBottom: '4px'
                             },
-                            onMouseEnter: (e) => { e.target.style.textDecoration = 'underline'; },
-                            onMouseLeave: (e) => { e.target.style.textDecoration = 'none'; }
+                            onMouseEnter: (e) => { (e.target as HTMLElement).style.textDecoration = 'underline'; },
+                            onMouseLeave: (e) => { (e.target as HTMLElement).style.textDecoration = 'none'; }
                           }, '📧 Contact: therigwin+FoxShrineStudios@gmail.com')
                         ]),
                         elem
