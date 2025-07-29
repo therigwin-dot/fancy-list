@@ -676,6 +676,7 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     const backgroundType = titleSettings.backgroundType || 'solid';
     const imageUrl = titleSettings.imageUrl || '';
     const imageAlpha = titleSettings.imageAlpha || 0;
+    const divideSpace = titleSettings.divideSpace ?? 0;
     
     // Don't render title if webPartTitle is null, undefined, or empty
     if (!webPartTitle || webPartTitle.trim() === '') {
@@ -684,7 +685,8 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
 
     return (
       <div style={{
-        ...this.getTitleStyle()
+        ...this.getTitleStyle(),
+        marginBottom: `${divideSpace}px`
       }}>
         {/* Layer 1: Transparency overlay for valid images */}
         {backgroundType === 'image' && imageUrl && !titleImageError && 
