@@ -96,7 +96,7 @@ var DEFAULTS_CONFIG = {
         divideSpace: 0,
         // MFB Theme Values for Title Section
         testValues: {
-            webPartTitle: 'Fancy List Web Part',
+            webPartTitle: '', // Don't change the title text - preserve user's current title
             font: {
                 family: 'Arial',
                 size: '24px',
@@ -3673,11 +3673,15 @@ var IconControl = function (_a) {
         '📁': '📂', // Folder closed/open
         '📂': '📁', // Folder open/closed
         '😐': '😊', // Straight/smiling face
+        '🚜': '🌾', // MFB Tractor/Wheat
+        '🌱': '🌳', // MFB Seedling/Tree
         '🔽': '▶️', // Reverse mapping
         '▼': '▶', // Reverse mapping
         '-': '+', // Reverse mapping
         '➖': '➕', // Reverse mapping
-        '😊': '😐' // Reverse mapping
+        '😊': '😐', // Reverse mapping
+        '🌾': '🚜', // Reverse mapping
+        '🌳': '🌱' // Reverse mapping
     };
     // Predefined icon options for collapsed state
     var collapsedIconOptions = [
@@ -3687,7 +3691,9 @@ var IconControl = function (_a) {
         { key: '➕', text: '➕ Plus (Emoji)' },
         { key: '📁', text: '📁 Folder' },
         { key: '📂', text: '📂 Folder (Open)' },
-        { key: '😐', text: '😐 Straight Face' }
+        { key: '😐', text: '😐 Straight Face' },
+        { key: '🚜', text: '🚜 MFB Tractor' },
+        { key: '🌱', text: '🌱 MFB Seedling' }
     ];
     // Predefined icon options for expanded state
     var expandedIconOptions = [
@@ -3697,7 +3703,9 @@ var IconControl = function (_a) {
         { key: '➖', text: '➖ Minus (Emoji)' },
         { key: '📂', text: '📂 Folder (Open)' },
         { key: '📁', text: '📁 Folder (Closed)' },
-        { key: '😊', text: '😊 Smiling Face' }
+        { key: '😊', text: '😊 Smiling Face' },
+        { key: '🌾', text: '🌾 MFB Wheat' },
+        { key: '🌳', text: '🌳 MFB Tree' }
     ];
     // Auto-pairing function
     var handleCollapsedIconChange = function (newCollapsedIcon) {
@@ -3730,7 +3738,7 @@ var IconControl = function (_a) {
         },
         nature: {
             name: 'Nature',
-            emojis: ['🌱', '🌿', '🍀', '🌺', '🌸', '🌼', '🌻', '🌹', '🌷', '🌙', '⭐', '🌟', '✨', '💫', '⚡', '🔥', '💧', '🌊']
+            emojis: ['🌱', '🌿', '🍀', '🌺', '🌸', '🌼', '🌻', '🌹', '🌷', '🌙', '⭐', '🌟', '✨', '💫', '⚡', '🔥', '💧', '🌊', '🚜', '🌾', '🌳']
         }
     };
     var selectEmoji = function (emoji) {

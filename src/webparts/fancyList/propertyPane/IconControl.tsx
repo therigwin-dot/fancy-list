@@ -44,11 +44,15 @@ export const IconControl: React.FC<IconControlProps> = ({
     '📁': '📂', // Folder closed/open
     '📂': '📁', // Folder open/closed
     '😐': '😊', // Straight/smiling face
+    '🚜': '🌾', // MFB Tractor/Wheat
+    '🌱': '🌳', // MFB Seedling/Tree
     '🔽': '▶️', // Reverse mapping
     '▼': '▶',   // Reverse mapping
     '-': '+',   // Reverse mapping
     '➖': '➕', // Reverse mapping
-    '😊': '😐'  // Reverse mapping
+    '😊': '😐', // Reverse mapping
+    '🌾': '🚜', // Reverse mapping
+    '🌳': '🌱'  // Reverse mapping
   };
 
   // Predefined icon options for collapsed state
@@ -59,7 +63,9 @@ export const IconControl: React.FC<IconControlProps> = ({
     { key: '➕', text: '➕ Plus (Emoji)' },
     { key: '📁', text: '📁 Folder' },
     { key: '📂', text: '📂 Folder (Open)' },
-    { key: '😐', text: '😐 Straight Face' }
+    { key: '😐', text: '😐 Straight Face' },
+    { key: '🚜', text: '🚜 MFB Tractor' },
+    { key: '🌱', text: '🌱 MFB Seedling' }
   ];
 
   // Predefined icon options for expanded state
@@ -70,7 +76,9 @@ export const IconControl: React.FC<IconControlProps> = ({
     { key: '➖', text: '➖ Minus (Emoji)' },
     { key: '📂', text: '📂 Folder (Open)' },
     { key: '📁', text: '📁 Folder (Closed)' },
-    { key: '😊', text: '😊 Smiling Face' }
+    { key: '😊', text: '😊 Smiling Face' },
+    { key: '🌾', text: '🌾 MFB Wheat' },
+    { key: '🌳', text: '🌳 MFB Tree' }
   ];
 
   // Auto-pairing function
@@ -112,7 +120,7 @@ export const IconControl: React.FC<IconControlProps> = ({
     },
     nature: {
       name: 'Nature',
-      emojis: ['🌱', '🌿', '🍀', '🌺', '🌸', '🌼', '🌻', '🌹', '🌷', '🌙', '⭐', '🌟', '✨', '💫', '⚡', '🔥', '💧', '🌊']
+      emojis: ['🌱', '🌿', '🍀', '🌺', '🌸', '🌼', '🌻', '🌹', '🌷', '🌙', '⭐', '🌟', '✨', '💫', '⚡', '🔥', '💧', '🌊', '🚜', '🌾', '🌳']
     }
   };
 

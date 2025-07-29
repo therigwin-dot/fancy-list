@@ -1,18 +1,19 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
   "solution": {
-    "name": "fancy-list-client-side-solution",
+    "name": "Fancy List",
     "id": "5be53945-0746-4e8e-8c2d-4ee2982ee67e",
     "version": "1.0.0.0",
     "includeClientSideAssets": true,
     "skipFeatureDeployment": true,
     "isDomainIsolated": false,
     "developer": {
-      "name": "Therigwin's Fox Studios",
+      "name": "Michigan Farm Bureau",
       "websiteUrl": "https://therigwin-dot.github.io/fancy-list/",
       "privacyUrl": "https://therigwin-dot.github.io/fancy-list/privacy-policy.html",
       "termsOfUseUrl": "https://therigwin-dot.github.io/fancy-list/terms-of-use.html",
-      "mpnId": "Undefined-1.21.1"
+      "supportUrl": "https://therigwin-dot.github.io/fancy-list/support.html",
+      "mpnId": "MFB-FancyList-1.0.0"
     },
     "metadata": {
       "shortDescription": {
@@ -21,9 +22,9 @@
       "longDescription": {
         "default": "The Fancy List Web Part transforms standard SharePoint lists into visually appealing, hierarchical displays with advanced filtering and styling capabilities. Features include 3-level hierarchy (Category → Subject → Description), dynamic filtering, custom backgrounds, fonts, shapes, and auto-expand functionality. Perfect for organizing and displaying complex list data in an intuitive, user-friendly format."
       },
-      "screenshotPaths": [],
+      "screenshotPaths": ["https://therigwin-dot.github.io/fancy-list/assets/fancy-list-preview.png"],
       "videoUrl": "",
-      "categories": ["Content", "Lists and Libraries", "User Experience"]
+      "categories": []
     },
     "features": [
       {

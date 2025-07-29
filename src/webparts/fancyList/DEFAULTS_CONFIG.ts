@@ -41,7 +41,7 @@ export const DEFAULTS_CONFIG = {
     divideSpace: 0,
     // MFB Theme Values for Title Section
     testValues: {
-      webPartTitle: 'Fancy List Web Part',
+      webPartTitle: '', // Don't change the title text - preserve user's current title
       font: {
         family: 'Arial',
         size: '24px',

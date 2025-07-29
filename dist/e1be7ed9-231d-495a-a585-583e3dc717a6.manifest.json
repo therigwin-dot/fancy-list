@@ -7,8 +7,6 @@
   "requiresCustomScript": false,
   "supportedHosts": [
     "SharePointWebPart",
-    "TeamsPersonalApp",
-    "TeamsTab",
     "SharePointFullPage"
   ],
   "supportsThemeVariants": true,
@@ -22,10 +20,10 @@
         "default": "Fancy List"
       },
       "description": {
-        "default": "Display items from any SharePoint list with category filtering and collapsible panels"
+        "default": "Transform SharePoint lists into hierarchical displays with advanced filtering and styling capabilities. Features include 3-level hierarchy (Category → Subject → Description), dynamic filtering, custom backgrounds, fonts, shapes, and auto-expand functionality."
       },
       "officeFabricIconFontName": "BulletedTreeList",
-      "imageUrl": "https://therigwin-dot.github.io/fancy-list/assets/fancy-list-icon.png",
+      "iconImageUrl": "https://therigwin-dot.github.io/fancy-list/assets/fancy-list-icon.png",
       "properties": {
         "description": "Fancy List"
       }
