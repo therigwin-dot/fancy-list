@@ -1315,12 +1315,52 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
                     }
                   }
                 },
-                PropertyPaneLabel('version', {
-                  text: `Version: ${DEFAULTS_CONFIG.aboutInfo.version}`
-                }),
-                PropertyPaneLabel('description', {
-                  text: DEFAULTS_CONFIG.aboutInfo.description
-                }),
+                {
+                  type: 1, // PropertyPaneFieldType.Custom
+                  targetProperty: 'version',
+                  properties: {
+                    key: 'version',
+                    onRender: (elem: HTMLElement, ctx: unknown, changeCallback?: () => void) => {
+                      ReactDom.render(
+                        React.createElement('div', {
+                          style: { 
+                            fontSize: '14px',
+                            fontWeight: '400',
+                            color: '#323130',
+                            marginBottom: '4px'
+                          }
+                        }, `Version: ${DEFAULTS_CONFIG.aboutInfo.version}`),
+                        elem
+                      );
+                    },
+                    onDispose: (elem: HTMLElement) => {
+                      ReactDom.unmountComponentAtNode(elem);
+                    }
+                  }
+                },
+                {
+                  type: 1, // PropertyPaneFieldType.Custom
+                  targetProperty: 'description',
+                  properties: {
+                    key: 'description',
+                    onRender: (elem: HTMLElement, ctx: unknown, changeCallback?: () => void) => {
+                      ReactDom.render(
+                        React.createElement('div', {
+                          style: { 
+                            fontSize: '14px',
+                            fontWeight: '400',
+                            color: '#323130',
+                            marginBottom: '16px'
+                          }
+                        }, DEFAULTS_CONFIG.aboutInfo.description),
+                        elem
+                      );
+                    },
+                    onDispose: (elem: HTMLElement) => {
+                      ReactDom.unmountComponentAtNode(elem);
+                    }
+                  }
+                },
                 {
                   type: 1, // PropertyPaneFieldType.Custom
                   targetProperty: 'featuresHeader',
@@ -1345,33 +1385,213 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
                     }
                   }
                 },
-                PropertyPaneLabel('features1', {
-                  text: `${DEFAULTS_CONFIG.aboutInfo.features[0]}`
-                }),
-                PropertyPaneLabel('features2', {
-                  text: `${DEFAULTS_CONFIG.aboutInfo.features[1]}`
-                }),
-                PropertyPaneLabel('features3', {
-                  text: `${DEFAULTS_CONFIG.aboutInfo.features[2]}`
-                }),
-                PropertyPaneLabel('features4', {
-                  text: `${DEFAULTS_CONFIG.aboutInfo.features[3]}`
-                }),
-                PropertyPaneLabel('features5', {
-                  text: `${DEFAULTS_CONFIG.aboutInfo.features[4]}`
-                }),
-                PropertyPaneLabel('features6', {
-                  text: `${DEFAULTS_CONFIG.aboutInfo.features[5]}`
-                }),
-                PropertyPaneLabel('features7', {
-                  text: `${DEFAULTS_CONFIG.aboutInfo.features[6]}`
-                }),
-                PropertyPaneLabel('features8', {
-                  text: `${DEFAULTS_CONFIG.aboutInfo.features[7]}`
-                }),
-                PropertyPaneLabel('features9', {
-                  text: `${DEFAULTS_CONFIG.aboutInfo.features[8]}`
-                }),
+                {
+                  type: 1, // PropertyPaneFieldType.Custom
+                  targetProperty: 'features1',
+                  properties: {
+                    key: 'features1',
+                    onRender: (elem: HTMLElement, ctx: unknown, changeCallback?: () => void) => {
+                      ReactDom.render(
+                        React.createElement('div', {
+                          style: { 
+                            fontSize: '14px',
+                            fontWeight: '400',
+                            color: '#323130',
+                            marginBottom: '2px'
+                          }
+                        }, DEFAULTS_CONFIG.aboutInfo.features[0]),
+                        elem
+                      );
+                    },
+                    onDispose: (elem: HTMLElement) => {
+                      ReactDom.unmountComponentAtNode(elem);
+                    }
+                  }
+                },
+                {
+                  type: 1, // PropertyPaneFieldType.Custom
+                  targetProperty: 'features2',
+                  properties: {
+                    key: 'features2',
+                    onRender: (elem: HTMLElement, ctx: unknown, changeCallback?: () => void) => {
+                      ReactDom.render(
+                        React.createElement('div', {
+                          style: { 
+                            fontSize: '14px',
+                            fontWeight: '400',
+                            color: '#323130',
+                            marginBottom: '2px'
+                          }
+                        }, DEFAULTS_CONFIG.aboutInfo.features[1]),
+                        elem
+                      );
+                    },
+                    onDispose: (elem: HTMLElement) => {
+                      ReactDom.unmountComponentAtNode(elem);
+                    }
+                  }
+                },
+                {
+                  type: 1, // PropertyPaneFieldType.Custom
+                  targetProperty: 'features3',
+                  properties: {
+                    key: 'features3',
+                    onRender: (elem: HTMLElement, ctx: unknown, changeCallback?: () => void) => {
+                      ReactDom.render(
+                        React.createElement('div', {
+                          style: { 
+                            fontSize: '14px',
+                            fontWeight: '400',
+                            color: '#323130',
+                            marginBottom: '2px'
+                          }
+                        }, DEFAULTS_CONFIG.aboutInfo.features[2]),
+                        elem
+                      );
+                    },
+                    onDispose: (elem: HTMLElement) => {
+                      ReactDom.unmountComponentAtNode(elem);
+                    }
+                  }
+                },
+                {
+                  type: 1, // PropertyPaneFieldType.Custom
+                  targetProperty: 'features4',
+                  properties: {
+                    key: 'features4',
+                    onRender: (elem: HTMLElement, ctx: unknown, changeCallback?: () => void) => {
+                      ReactDom.render(
+                        React.createElement('div', {
+                          style: { 
+                            fontSize: '14px',
+                            fontWeight: '400',
+                            color: '#323130',
+                            marginBottom: '2px'
+                          }
+                        }, DEFAULTS_CONFIG.aboutInfo.features[3]),
+                        elem
+                      );
+                    },
+                    onDispose: (elem: HTMLElement) => {
+                      ReactDom.unmountComponentAtNode(elem);
+                    }
+                  }
+                },
+                {
+                  type: 1, // PropertyPaneFieldType.Custom
+                  targetProperty: 'features5',
+                  properties: {
+                    key: 'features5',
+                    onRender: (elem: HTMLElement, ctx: unknown, changeCallback?: () => void) => {
+                      ReactDom.render(
+                        React.createElement('div', {
+                          style: { 
+                            fontSize: '14px',
+                            fontWeight: '400',
+                            color: '#323130',
+                            marginBottom: '2px'
+                          }
+                        }, DEFAULTS_CONFIG.aboutInfo.features[4]),
+                        elem
+                      );
+                    },
+                    onDispose: (elem: HTMLElement) => {
+                      ReactDom.unmountComponentAtNode(elem);
+                    }
+                  }
+                },
+                {
+                  type: 1, // PropertyPaneFieldType.Custom
+                  targetProperty: 'features6',
+                  properties: {
+                    key: 'features6',
+                    onRender: (elem: HTMLElement, ctx: unknown, changeCallback?: () => void) => {
+                      ReactDom.render(
+                        React.createElement('div', {
+                          style: { 
+                            fontSize: '14px',
+                            fontWeight: '400',
+                            color: '#323130',
+                            marginBottom: '2px'
+                          }
+                        }, DEFAULTS_CONFIG.aboutInfo.features[5]),
+                        elem
+                      );
+                    },
+                    onDispose: (elem: HTMLElement) => {
+                      ReactDom.unmountComponentAtNode(elem);
+                    }
+                  }
+                },
+                {
+                  type: 1, // PropertyPaneFieldType.Custom
+                  targetProperty: 'features7',
+                  properties: {
+                    key: 'features7',
+                    onRender: (elem: HTMLElement, ctx: unknown, changeCallback?: () => void) => {
+                      ReactDom.render(
+                        React.createElement('div', {
+                          style: { 
+                            fontSize: '14px',
+                            fontWeight: '400',
+                            color: '#323130',
+                            marginBottom: '2px'
+                          }
+                        }, DEFAULTS_CONFIG.aboutInfo.features[6]),
+                        elem
+                      );
+                    },
+                    onDispose: (elem: HTMLElement) => {
+                      ReactDom.unmountComponentAtNode(elem);
+                    }
+                  }
+                },
+                {
+                  type: 1, // PropertyPaneFieldType.Custom
+                  targetProperty: 'features8',
+                  properties: {
+                    key: 'features8',
+                    onRender: (elem: HTMLElement, ctx: unknown, changeCallback?: () => void) => {
+                      ReactDom.render(
+                        React.createElement('div', {
+                          style: { 
+                            fontSize: '14px',
+                            fontWeight: '400',
+                            color: '#323130',
+                            marginBottom: '2px'
+                          }
+                        }, DEFAULTS_CONFIG.aboutInfo.features[7]),
+                        elem
+                      );
+                    },
+                    onDispose: (elem: HTMLElement) => {
+                      ReactDom.unmountComponentAtNode(elem);
+                    }
+                  }
+                },
+                {
+                  type: 1, // PropertyPaneFieldType.Custom
+                  targetProperty: 'features9',
+                  properties: {
+                    key: 'features9',
+                    onRender: (elem: HTMLElement, ctx: unknown, changeCallback?: () => void) => {
+                      ReactDom.render(
+                        React.createElement('div', {
+                          style: { 
+                            fontSize: '14px',
+                            fontWeight: '400',
+                            color: '#323130',
+                            marginBottom: '2px'
+                          }
+                        }, DEFAULTS_CONFIG.aboutInfo.features[8]),
+                        elem
+                      );
+                    },
+                    onDispose: (elem: HTMLElement) => {
+                      ReactDom.unmountComponentAtNode(elem);
+                    }
+                  }
+                },
                 {
                   type: 1, // PropertyPaneFieldType.Custom
                   targetProperty: 'knownIssuesHeader',
@@ -1396,12 +1616,52 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
                     }
                   }
                 },
-                PropertyPaneLabel('knownIssues1', {
-                  text: `${DEFAULTS_CONFIG.aboutInfo.knownIssues[0]}`
-                }),
-                PropertyPaneLabel('knownIssues2', {
-                  text: `${DEFAULTS_CONFIG.aboutInfo.knownIssues[1]}`
-                })
+                {
+                  type: 1, // PropertyPaneFieldType.Custom
+                  targetProperty: 'knownIssues1',
+                  properties: {
+                    key: 'knownIssues1',
+                    onRender: (elem: HTMLElement, ctx: unknown, changeCallback?: () => void) => {
+                      ReactDom.render(
+                        React.createElement('div', {
+                          style: { 
+                            fontSize: '14px',
+                            fontWeight: '400',
+                            color: '#323130',
+                            marginBottom: '2px'
+                          }
+                        }, DEFAULTS_CONFIG.aboutInfo.knownIssues[0]),
+                        elem
+                      );
+                    },
+                    onDispose: (elem: HTMLElement) => {
+                      ReactDom.unmountComponentAtNode(elem);
+                    }
+                  }
+                },
+                {
+                  type: 1, // PropertyPaneFieldType.Custom
+                  targetProperty: 'knownIssues2',
+                  properties: {
+                    key: 'knownIssues2',
+                    onRender: (elem: HTMLElement, ctx: unknown, changeCallback?: () => void) => {
+                      ReactDom.render(
+                        React.createElement('div', {
+                          style: { 
+                            fontSize: '14px',
+                            fontWeight: '400',
+                            color: '#323130',
+                            marginBottom: '2px'
+                          }
+                        }, DEFAULTS_CONFIG.aboutInfo.knownIssues[1]),
+                        elem
+                      );
+                    },
+                    onDispose: (elem: HTMLElement) => {
+                      ReactDom.unmountComponentAtNode(elem);
+                    }
+                  }
+                }
               ]
             }
           ]

@@ -38053,6 +38053,46 @@ var FancyListWebPart = /** @class */ (function (_super) {
                                 }),
                                 {
                                     type: 1, // PropertyPaneFieldType.Custom
+                                    targetProperty: 'version',
+                                    properties: {
+                                        key: 'version',
+                                        onRender: function (elem, ctx, changeCallback) {
+                                            react_dom__WEBPACK_IMPORTED_MODULE_1__.render(react__WEBPACK_IMPORTED_MODULE_0__.createElement('div', {
+                                                style: {
+                                                    fontSize: '14px',
+                                                    fontWeight: '400',
+                                                    color: '#323130',
+                                                    marginBottom: '4px'
+                                                }
+                                            }, "Version: ".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.version)), elem);
+                                        },
+                                        onDispose: function (elem) {
+                                            react_dom__WEBPACK_IMPORTED_MODULE_1__.unmountComponentAtNode(elem);
+                                        }
+                                    }
+                                },
+                                {
+                                    type: 1, // PropertyPaneFieldType.Custom
+                                    targetProperty: 'description',
+                                    properties: {
+                                        key: 'description',
+                                        onRender: function (elem, ctx, changeCallback) {
+                                            react_dom__WEBPACK_IMPORTED_MODULE_1__.render(react__WEBPACK_IMPORTED_MODULE_0__.createElement('div', {
+                                                style: {
+                                                    fontSize: '14px',
+                                                    fontWeight: '400',
+                                                    color: '#323130',
+                                                    marginBottom: '16px'
+                                                }
+                                            }, _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.description), elem);
+                                        },
+                                        onDispose: function (elem) {
+                                            react_dom__WEBPACK_IMPORTED_MODULE_1__.unmountComponentAtNode(elem);
+                                        }
+                                    }
+                                },
+                                {
+                                    type: 1, // PropertyPaneFieldType.Custom
                                     targetProperty: 'featuresHeader',
                                     properties: {
                                         key: 'featuresHeader',
