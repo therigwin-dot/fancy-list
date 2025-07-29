@@ -988,7 +988,10 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
                     const divideSpace = this.props.subjectSectionSettings?.divideSpace ?? 0;
                     return (
                     <div key={item.id} className={styles.itemPanel} style={{
-                      marginBottom: `${divideSpace}px`
+                      marginBottom: `${divideSpace}px`,
+                      border: 'none', // Remove the white border
+                      borderRadius: '0', // Remove rounded corners
+                      boxShadow: 'none' // Remove the shadow
                     }}>
                       <button
                         className={`${styles.itemHeader} ${isItemExpanded ? styles.expanded : ''}`}

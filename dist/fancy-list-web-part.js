@@ -2472,7 +2472,10 @@ var FancyList = /** @class */ (function (_super) {
                         var isItemExpanded = _this.state.expandedItems.has(item.id);
                         var divideSpace = (_b = (_a = _this.props.subjectSectionSettings) === null || _a === void 0 ? void 0 : _a.divideSpace) !== null && _b !== void 0 ? _b : 0;
                         return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { key: item.id, className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemPanel, style: {
-                                marginBottom: "".concat(divideSpace, "px")
+                                marginBottom: "".concat(divideSpace, "px"),
+                                border: 'none', // Remove the white border
+                                borderRadius: '0', // Remove rounded corners
+                                boxShadow: 'none' // Remove the shadow
                             } },
                             react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { className: "".concat(_FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemHeader, " ").concat(isItemExpanded ? _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].expanded : ''), onClick: function () { return _this.handleItemToggle(item.id); }, "aria-expanded": isItemExpanded ? "true" : "false", style: __assign({ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', padding: '1em' }, _this.getSubjectSectionBackgroundStyle()) },
                                 react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemSubject, style: _this.getSubjectSectionFontStyle() }, item.subject),
