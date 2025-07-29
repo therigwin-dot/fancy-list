@@ -2653,6 +2653,17 @@ var DivideSpaceControl = function (_a) {
     var _b = _a.label, label = _b === void 0 ? 'Divide Space' : _b, _c = _a.value, value = _c === void 0 ? 0 : _c, onChange = _a.onChange, onReset = _a.onReset, onTestValues = _a.onTestValues;
     var _d = react__WEBPACK_IMPORTED_MODULE_0__.useState(''), customValue = _d[0], setCustomValue = _d[1];
     var _e = react__WEBPACK_IMPORTED_MODULE_0__.useState(false), isCustom = _e[0], setIsCustom = _e[1];
+    // Initialize custom state based on value
+    react__WEBPACK_IMPORTED_MODULE_0__.useEffect(function () {
+        if (value !== 0 && value !== 4 && value !== 8 && value !== 16) {
+            setIsCustom(true);
+            setCustomValue(value.toString());
+        }
+        else {
+            setIsCustom(false);
+            setCustomValue('');
+        }
+    }, [value]);
     // Preset options
     var options = [
         { key: 'touching', text: 'Touching (0px)', data: 0 },
@@ -2737,17 +2748,17 @@ var DivideSpaceControl = function (_a) {
                 display: 'flex',
                 alignItems: 'center',
                 gap: '8px',
-                flexWrap: 'wrap'
+                flexWrap: 'nowrap'
             } },
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: {
                     fontSize: '14px',
                     fontWeight: '600',
                     color: '#323130',
-                    minWidth: '60px'
+                    minWidth: '70px'
                 } }, "Div Space"),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { flex: 1, minWidth: '120px' } },
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { width: '140px' } },
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_ComboBox__WEBPACK_IMPORTED_MODULE_1__.ComboBox, { selectedKey: getSelectedOptionKey(), options: options, onChange: function (_, option) { return handleComboBoxChange(option); }, placeholder: "Select spacing...", useComboBoxAsMenuWidth: true })),
-            isCustom && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { minWidth: '100px' } },
+            isCustom && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { width: '60px' } },
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_2__.TextField, { label: "", value: customValue, onChange: function (_, newValue) { return handleCustomValueChange(newValue || ''); }, placeholder: "0-50", errorMessage: validateDivideSpace(customValue) || undefined, type: "number", min: 0, max: 50 })))),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { display: 'flex', gap: '8px', marginTop: '8px' } },
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_3__.PrimaryButton, { text: "Reset", onClick: handleReset }),

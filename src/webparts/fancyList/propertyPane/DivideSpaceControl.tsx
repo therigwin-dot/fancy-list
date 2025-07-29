@@ -21,6 +21,17 @@ export const DivideSpaceControl: React.FC<DivideSpaceControlProps> = ({
   const [customValue, setCustomValue] = React.useState<string>('');
   const [isCustom, setIsCustom] = React.useState<boolean>(false);
 
+  // Initialize custom state based on value
+  React.useEffect(() => {
+    if (value !== 0 && value !== 4 && value !== 8 && value !== 16) {
+      setIsCustom(true);
+      setCustomValue(value.toString());
+    } else {
+      setIsCustom(false);
+      setCustomValue('');
+    }
+  }, [value]);
+
   // Preset options
   const options: IComboBoxOption[] = [
     { key: 'touching', text: 'Touching (0px)', data: 0 },
@@ -99,18 +110,18 @@ export const DivideSpaceControl: React.FC<DivideSpaceControlProps> = ({
         display: 'flex', 
         alignItems: 'center', 
         gap: '8px',
-        flexWrap: 'wrap'
+        flexWrap: 'nowrap'
       }}>
         <label style={{
           fontSize: '14px',
           fontWeight: '600',
           color: '#323130',
-          minWidth: '60px'
+          minWidth: '70px'
         }}>
           Div Space
         </label>
         
-        <div style={{ flex: 1, minWidth: '120px' }}>
+        <div style={{ width: '140px' }}>
           <ComboBox
             selectedKey={getSelectedOptionKey()}
             options={options}
@@ -121,7 +132,7 @@ export const DivideSpaceControl: React.FC<DivideSpaceControlProps> = ({
         </div>
 
         {isCustom && (
-          <div style={{ minWidth: '100px' }}>
+          <div style={{ width: '60px' }}>
             <TextField
               label=""
               value={customValue}
