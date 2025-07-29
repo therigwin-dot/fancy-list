@@ -2640,13 +2640,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _fluentui_react_lib_ComboBox__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fluentui/react/lib/ComboBox */ 3898);
 /* harmony import */ var _fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fluentui/react/lib/TextField */ 7102);
-/* harmony import */ var _fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @fluentui/react/lib/Button */ 9425);
-
 
 
 
 var DivideSpaceControl = function (_a) {
-    var _b = _a.label, label = _b === void 0 ? 'Divide Space' : _b, _c = _a.value, value = _c === void 0 ? 0 : _c, onChange = _a.onChange, onReset = _a.onReset, onTestValues = _a.onTestValues;
+    var _b = _a.label, label = _b === void 0 ? 'Divide Space' : _b, _c = _a.value, value = _c === void 0 ? 0 : _c, onChange = _a.onChange;
     var _d = react__WEBPACK_IMPORTED_MODULE_0__.useState(''), customValue = _d[0], setCustomValue = _d[1];
     var _e = react__WEBPACK_IMPORTED_MODULE_0__.useState(false), isCustom = _e[0], setIsCustom = _e[1];
     // Initialize custom state based on value
@@ -2725,20 +2723,6 @@ var DivideSpaceControl = function (_a) {
             return 'large';
         return 'custom';
     };
-    // Handle reset
-    var handleReset = function () {
-        setIsCustom(false);
-        setCustomValue('');
-        if (onReset)
-            onReset();
-    };
-    // Handle test values
-    var handleTestValues = function () {
-        setIsCustom(false);
-        setCustomValue('');
-        if (onTestValues)
-            onTestValues();
-    };
     return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
                 display: 'flex',
@@ -2755,10 +2739,7 @@ var DivideSpaceControl = function (_a) {
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { width: '140px' } },
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_ComboBox__WEBPACK_IMPORTED_MODULE_1__.ComboBox, { selectedKey: getSelectedOptionKey(), options: options, onChange: function (_, option) { return handleComboBoxChange(option); }, placeholder: "Select spacing...", useComboBoxAsMenuWidth: true })),
             isCustom && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { width: '60px' } },
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_2__.TextField, { label: "", value: customValue, onChange: function (_, newValue) { return handleCustomValueChange(newValue || ''); }, placeholder: "0-50", errorMessage: validateDivideSpace(customValue) || undefined, type: "number", min: 0, max: 50 })))),
-        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { display: 'flex', gap: '8px', marginTop: '8px' } },
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_3__.PrimaryButton, { text: "Reset", onClick: handleReset }),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_3__.PrimaryButton, { text: "Test Values", onClick: handleTestValues }))));
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_2__.TextField, { label: "", value: customValue, onChange: function (_, newValue) { return handleCustomValueChange(newValue || ''); }, placeholder: "0-50", errorMessage: validateDivideSpace(customValue) || undefined, type: "number", min: 0, max: 50 }))))));
 };
 
 
@@ -3096,7 +3077,7 @@ var FilterModuleControl = function (_a) {
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ShapePickerControl__WEBPACK_IMPORTED_MODULE_3__.ShapePickerControl, { value: settings.backgroundShape, label: "", onChange: function (newShape) { return handlePropertyChange('backgroundShape', newShape); } }),
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", { style: { fontSize: '12px', color: '#666', marginTop: '4px', display: 'block' } }, "Choose the shape style for the entire filter section container")),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_DivideSpaceControl__WEBPACK_IMPORTED_MODULE_4__.DivideSpaceControl, { label: "Div Space", value: settings.divideSpace, onChange: function (value) { return handlePropertyChange('divideSpace', value); }, onReset: function () { return handlePropertyChange('divideSpace', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].filterSettings.divideSpace); }, onTestValues: function () { return handlePropertyChange('divideSpace', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].filterSettings.testValues.divideSpace); } }),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_DivideSpaceControl__WEBPACK_IMPORTED_MODULE_4__.DivideSpaceControl, { label: "Div Space", value: settings.divideSpace, onChange: function (value) { return handlePropertyChange('divideSpace', value); } }),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginTop: 16, display: 'flex', gap: '8px' } },
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_10__.PrimaryButton, { text: _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].filterSettings.resetButtonText, onClick: function () {
                         // Reset all filter settings to defaults
@@ -4293,7 +4274,7 @@ var TitleConfiguration = function (_a) {
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ShapePickerControl__WEBPACK_IMPORTED_MODULE_3__.ShapePickerControl, { value: settings.shape, label: "", onChange: function (newShape) { return handlePropertyChange('shape', newShape); } })),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_DivideSpaceControl__WEBPACK_IMPORTED_MODULE_4__.DivideSpaceControl, { label: "Divide Space", value: settings.divideSpace, onChange: function (value) { return handlePropertyChange('divideSpace', value); }, onReset: function () { return handlePropertyChange('divideSpace', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].titleSettings.divideSpace); }, onTestValues: function () { return handlePropertyChange('divideSpace', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].titleSettings.testValues.divideSpace); } })),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_DivideSpaceControl__WEBPACK_IMPORTED_MODULE_4__.DivideSpaceControl, { label: "Divide Space", value: settings.divideSpace, onChange: function (value) { return handlePropertyChange('divideSpace', value); } })),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginTop: 16, display: 'flex', gap: '8px' } },
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_10__.PrimaryButton, { text: _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].titleSettings.resetButtonText, onClick: handleReset }),
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_10__.PrimaryButton, { text: _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].titleSettings.testValuesButtonText, onClick: handleTestValues }))))));

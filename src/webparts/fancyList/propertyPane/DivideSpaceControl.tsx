@@ -1,22 +1,17 @@
 import * as React from 'react';
 import { ComboBox, IComboBoxOption } from '@fluentui/react/lib/ComboBox';
 import { TextField } from '@fluentui/react/lib/TextField';
-import { PrimaryButton } from '@fluentui/react/lib/Button';
 
 export interface DivideSpaceControlProps {
   label?: string;
   value?: number;
   onChange?: (value: number) => void;
-  onReset?: () => void;
-  onTestValues?: () => void;
 }
 
 export const DivideSpaceControl: React.FC<DivideSpaceControlProps> = ({
   label = 'Divide Space',
   value = 0,
-  onChange,
-  onReset,
-  onTestValues
+  onChange
 }) => {
   const [customValue, setCustomValue] = React.useState<string>('');
   const [isCustom, setIsCustom] = React.useState<boolean>(false);
@@ -90,20 +85,6 @@ export const DivideSpaceControl: React.FC<DivideSpaceControlProps> = ({
     return 'custom';
   };
 
-  // Handle reset
-  const handleReset = () => {
-    setIsCustom(false);
-    setCustomValue('');
-    if (onReset) onReset();
-  };
-
-  // Handle test values
-  const handleTestValues = () => {
-    setIsCustom(false);
-    setCustomValue('');
-    if (onTestValues) onTestValues();
-  };
-
   return (
     <div style={{ marginBottom: 16 }}>
       <div style={{ 
@@ -145,17 +126,6 @@ export const DivideSpaceControl: React.FC<DivideSpaceControlProps> = ({
             />
           </div>
         )}
-      </div>
-
-      <div style={{ display: 'flex', gap: '8px', marginTop: '8px' }}>
-        <PrimaryButton 
-          text="Reset" 
-          onClick={handleReset}
-        />
-        <PrimaryButton 
-          text="Test Values" 
-          onClick={handleTestValues}
-        />
       </div>
     </div>
   );

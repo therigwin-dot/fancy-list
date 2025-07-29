@@ -551,8 +551,6 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
             label="Div Space"
             value={settings.divideSpace}
             onChange={(value) => handlePropertyChange('divideSpace', value)}
-            onReset={() => handlePropertyChange('divideSpace', DEFAULTS_CONFIG.filterSettings.divideSpace)}
-            onTestValues={() => handlePropertyChange('divideSpace', DEFAULTS_CONFIG.filterSettings.testValues.divideSpace)}
           />
 
           {/* 10. Reset and Test Values Buttons */}

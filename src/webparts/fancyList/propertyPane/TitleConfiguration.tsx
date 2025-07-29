@@ -428,8 +428,6 @@ export const TitleConfiguration: React.FC<TitleConfigurationProps> = ({
           label="Divide Space"
           value={settings.divideSpace}
           onChange={(value) => handlePropertyChange('divideSpace', value)}
-          onReset={() => handlePropertyChange('divideSpace', DEFAULTS_CONFIG.titleSettings.divideSpace)}
-          onTestValues={() => handlePropertyChange('divideSpace', DEFAULTS_CONFIG.titleSettings.testValues.divideSpace)}
         />
       </div>
 
