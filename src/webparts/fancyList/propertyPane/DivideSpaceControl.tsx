@@ -95,42 +95,48 @@ export const DivideSpaceControl: React.FC<DivideSpaceControlProps> = ({
 
   return (
     <div style={{ marginBottom: 16 }}>
-      <label style={{
-        fontSize: '14px',
-        fontWeight: '600',
-        color: '#323130',
-        marginBottom: '8px',
-        display: 'block'
+      <div style={{ 
+        display: 'flex', 
+        alignItems: 'center', 
+        gap: '8px',
+        flexWrap: 'wrap'
       }}>
-        {label}
-      </label>
-      
-      <div style={{ marginBottom: 8 }}>
-        <ComboBox
-          selectedKey={getSelectedOptionKey()}
-          options={options}
-          onChange={(_, option) => handleComboBoxChange(option)}
-          placeholder="Select spacing..."
-          useComboBoxAsMenuWidth
-        />
-      </div>
-
-      {isCustom && (
-        <div style={{ marginBottom: 8 }}>
-          <TextField
-            label="Custom Value (px)"
-            value={customValue}
-            onChange={(_, newValue) => handleCustomValueChange(newValue || '')}
-            placeholder="0-50"
-            errorMessage={validateDivideSpace(customValue) || undefined}
-            type="number"
-            min={0}
-            max={50}
+        <label style={{
+          fontSize: '14px',
+          fontWeight: '600',
+          color: '#323130',
+          minWidth: '60px'
+        }}>
+          Divide
+        </label>
+        
+        <div style={{ flex: 1, minWidth: '120px' }}>
+          <ComboBox
+            selectedKey={getSelectedOptionKey()}
+            options={options}
+            onChange={(_, option) => handleComboBoxChange(option)}
+            placeholder="Select spacing..."
+            useComboBoxAsMenuWidth
           />
         </div>
-      )}
 
-      <div style={{ display: 'flex', gap: '8px' }}>
+        {isCustom && (
+          <div style={{ minWidth: '100px' }}>
+            <TextField
+              label=""
+              value={customValue}
+              onChange={(_, newValue) => handleCustomValueChange(newValue || '')}
+              placeholder="0-50"
+              errorMessage={validateDivideSpace(customValue) || undefined}
+              type="number"
+              min={0}
+              max={50}
+            />
+          </div>
+        )}
+      </div>
+
+      <div style={{ display: 'flex', gap: '8px', marginTop: '8px' }}>
         <PrimaryButton 
           text="Reset" 
           onClick={handleReset}

@@ -2733,18 +2733,23 @@ var DivideSpaceControl = function (_a) {
             onTestValues();
     };
     return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-        react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: {
-                fontSize: '14px',
-                fontWeight: '600',
-                color: '#323130',
-                marginBottom: '8px',
-                display: 'block'
-            } }, label),
-        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 8 } },
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_ComboBox__WEBPACK_IMPORTED_MODULE_1__.ComboBox, { selectedKey: getSelectedOptionKey(), options: options, onChange: function (_, option) { return handleComboBoxChange(option); }, placeholder: "Select spacing...", useComboBoxAsMenuWidth: true })),
-        isCustom && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 8 } },
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_2__.TextField, { label: "Custom Value (px)", value: customValue, onChange: function (_, newValue) { return handleCustomValueChange(newValue || ''); }, placeholder: "0-50", errorMessage: validateDivideSpace(customValue) || undefined, type: "number", min: 0, max: 50 }))),
-        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { display: 'flex', gap: '8px' } },
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                flexWrap: 'wrap'
+            } },
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: {
+                    fontSize: '14px',
+                    fontWeight: '600',
+                    color: '#323130',
+                    minWidth: '60px'
+                } }, "Divide"),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { flex: 1, minWidth: '120px' } },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_ComboBox__WEBPACK_IMPORTED_MODULE_1__.ComboBox, { selectedKey: getSelectedOptionKey(), options: options, onChange: function (_, option) { return handleComboBoxChange(option); }, placeholder: "Select spacing...", useComboBoxAsMenuWidth: true })),
+            isCustom && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { minWidth: '100px' } },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_2__.TextField, { label: "", value: customValue, onChange: function (_, newValue) { return handleCustomValueChange(newValue || ''); }, placeholder: "0-50", errorMessage: validateDivideSpace(customValue) || undefined, type: "number", min: 0, max: 50 })))),
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { display: 'flex', gap: '8px', marginTop: '8px' } },
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_3__.PrimaryButton, { text: "Reset", onClick: handleReset }),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_3__.PrimaryButton, { text: "Test Values", onClick: handleTestValues }))));
 };
