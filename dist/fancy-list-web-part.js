@@ -2430,9 +2430,12 @@ var FancyList = /** @class */ (function (_super) {
                             ? (_this.props.categorySectionSettings.icons.expandedIcon || '−')
                             : (_this.props.categorySectionSettings.icons.collapsedIcon || '+')))),
                     isCategoryExpanded && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemContent }, items.map(function (item) {
-                        var _a, _b, _c, _d;
+                        var _a, _b, _c, _d, _e, _f;
                         var isItemExpanded = _this.state.expandedItems.has(item.id);
-                        return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { key: item.id, className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemPanel },
+                        var divideSpace = (_b = (_a = _this.props.subjectSectionSettings) === null || _a === void 0 ? void 0 : _a.divideSpace) !== null && _b !== void 0 ? _b : 0;
+                        return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { key: item.id, className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemPanel, style: {
+                                marginBottom: "".concat(divideSpace, "px")
+                            } },
                             react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { className: "".concat(_FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemHeader, " ").concat(isItemExpanded ? _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].expanded : ''), onClick: function () { return _this.handleItemToggle(item.id); }, "aria-expanded": isItemExpanded ? "true" : "false", style: {
                                     display: 'flex',
                                     alignItems: 'center',
@@ -2440,9 +2443,9 @@ var FancyList = /** @class */ (function (_super) {
                                     width: '100%'
                                 } },
                                 react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemSubject, style: _this.getSubjectSectionFontStyle() }, item.subject),
-                                ((_b = (_a = _this.props.subjectSectionSettings) === null || _a === void 0 ? void 0 : _a.icons) === null || _b === void 0 ? void 0 : _b.enabled) && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].expandIcon, style: {
+                                ((_d = (_c = _this.props.subjectSectionSettings) === null || _c === void 0 ? void 0 : _c.icons) === null || _d === void 0 ? void 0 : _d.enabled) && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].expandIcon, style: {
                                         order: _this.props.subjectSectionSettings.icons.iconPosition === 'left' ? -1 : 1,
-                                        fontSize: ((_d = (_c = _this.props.subjectSectionSettings) === null || _c === void 0 ? void 0 : _c.font) === null || _d === void 0 ? void 0 : _d.size) || '16px',
+                                        fontSize: ((_f = (_e = _this.props.subjectSectionSettings) === null || _e === void 0 ? void 0 : _e.font) === null || _f === void 0 ? void 0 : _f.size) || '16px',
                                         marginLeft: _this.props.subjectSectionSettings.icons.iconPosition === 'left' ? '0' : '8px',
                                         marginRight: _this.props.subjectSectionSettings.icons.iconPosition === 'left' ? '8px' : '0',
                                         color: isItemExpanded ? 'var(--themePrimary, #0078d4)' : 'var(--themePrimary, #0078d4)'

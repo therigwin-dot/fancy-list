@@ -932,8 +932,11 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
                 <div className={styles.itemContent}>
                   {items.map((item: IListItem) => {
                     const isItemExpanded = this.state.expandedItems.has(item.id);
+                    const divideSpace = this.props.subjectSectionSettings?.divideSpace ?? 0;
                     return (
-                    <div key={item.id} className={styles.itemPanel}>
+                    <div key={item.id} className={styles.itemPanel} style={{
+                      marginBottom: `${divideSpace}px`
+                    }}>
                       <button
                         className={`${styles.itemHeader} ${isItemExpanded ? styles.expanded : ''}`}
                         onClick={() => this.handleItemToggle(item.id)}
