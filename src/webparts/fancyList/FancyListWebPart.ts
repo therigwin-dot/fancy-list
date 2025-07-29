@@ -1290,11 +1290,10 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
         // Page 7: About
         {
           header: {
-            description: 'About the Fancy List Web Part'
+            description: 'About'
           },
           groups: [
             {
-              groupName: 'Version Information',
               groupFields: [
                 PropertyPaneLabel('version', {
                   text: `Version: ${DEFAULTS_CONFIG.aboutInfo.version}`
@@ -1308,31 +1307,31 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
               groupName: 'Features',
               groupFields: [
                 PropertyPaneLabel('features1', {
-                  text: `• ${DEFAULTS_CONFIG.aboutInfo.features[0]}`
+                  text: `${DEFAULTS_CONFIG.aboutInfo.features[0]}`
                 }),
                 PropertyPaneLabel('features2', {
-                  text: `• ${DEFAULTS_CONFIG.aboutInfo.features[1]}`
+                  text: `${DEFAULTS_CONFIG.aboutInfo.features[1]}`
                 }),
                 PropertyPaneLabel('features3', {
-                  text: `• ${DEFAULTS_CONFIG.aboutInfo.features[2]}`
+                  text: `${DEFAULTS_CONFIG.aboutInfo.features[2]}`
                 }),
                 PropertyPaneLabel('features4', {
-                  text: `• ${DEFAULTS_CONFIG.aboutInfo.features[3]}`
+                  text: `${DEFAULTS_CONFIG.aboutInfo.features[3]}`
                 }),
                 PropertyPaneLabel('features5', {
-                  text: `• ${DEFAULTS_CONFIG.aboutInfo.features[4]}`
+                  text: `${DEFAULTS_CONFIG.aboutInfo.features[4]}`
                 }),
                 PropertyPaneLabel('features6', {
-                  text: `• ${DEFAULTS_CONFIG.aboutInfo.features[5]}`
+                  text: `${DEFAULTS_CONFIG.aboutInfo.features[5]}`
                 }),
                 PropertyPaneLabel('features7', {
-                  text: `• ${DEFAULTS_CONFIG.aboutInfo.features[6]}`
+                  text: `${DEFAULTS_CONFIG.aboutInfo.features[6]}`
                 }),
                 PropertyPaneLabel('features8', {
-                  text: `• ${DEFAULTS_CONFIG.aboutInfo.features[7]}`
+                  text: `${DEFAULTS_CONFIG.aboutInfo.features[7]}`
                 }),
                 PropertyPaneLabel('features9', {
-                  text: `• ${DEFAULTS_CONFIG.aboutInfo.features[8]}`
+                  text: `${DEFAULTS_CONFIG.aboutInfo.features[8]}`
                 })
               ]
             },
@@ -1340,10 +1339,10 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
               groupName: 'Known Issues',
               groupFields: [
                 PropertyPaneLabel('knownIssues1', {
-                  text: `• ${DEFAULTS_CONFIG.aboutInfo.knownIssues[0]}`
+                  text: `${DEFAULTS_CONFIG.aboutInfo.knownIssues[0]}`
                 }),
                 PropertyPaneLabel('knownIssues2', {
-                  text: `• ${DEFAULTS_CONFIG.aboutInfo.knownIssues[1]}`
+                  text: `${DEFAULTS_CONFIG.aboutInfo.knownIssues[1]}`
                 })
               ]
             }
