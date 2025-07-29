@@ -2424,8 +2424,15 @@ var FancyList = /** @class */ (function (_super) {
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemsContainer }, Object.keys(this.groupItemsByCategory(this.getFilteredItems())).map(function (category) {
                 var _a, _b, _c, _d;
                 var items = _this.groupItemsByCategory(_this.getFilteredItems())[category];
-                return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { key: category, className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemPanel },
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemHeader, onClick: function () { return _this.handleCategoryToggle(category); }, "aria-expanded": _this.state.expandedCategories.has(category) ? "true" : "false", style: __assign({ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }, _this.getCategorySectionBackgroundStyle()) },
+                return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { key: category, className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemPanel, style: __assign({}, _this.getCategorySectionBackgroundStyle()) },
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemHeader, onClick: function () { return _this.handleCategoryToggle(category); }, "aria-expanded": _this.state.expandedCategories.has(category) ? "true" : "false", style: {
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                            width: '100%',
+                            background: 'transparent',
+                            border: 'none'
+                        } },
                         react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemSubject, style: _this.getCategorySectionFontStyle() }, category),
                         ((_b = (_a = _this.props.categorySectionSettings) === null || _a === void 0 ? void 0 : _a.icons) === null || _b === void 0 ? void 0 : _b.enabled) && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].expandIcon, style: {
                                 order: _this.props.categorySectionSettings.icons.iconPosition === 'left' ? -1 : 1,

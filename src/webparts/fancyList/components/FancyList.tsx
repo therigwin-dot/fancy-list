@@ -886,7 +886,9 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
           {Object.keys(this.groupItemsByCategory(this.getFilteredItems())).map((category) => {
             const items = this.groupItemsByCategory(this.getFilteredItems())[category];
             return (
-            <div key={category} className={styles.itemPanel}>
+            <div key={category} className={styles.itemPanel} style={{
+              ...this.getCategorySectionBackgroundStyle()
+            }}>
               {/* Category Header */}
               <button
                 className={styles.itemHeader}
@@ -897,7 +899,8 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
                   alignItems: 'center',
                   justifyContent: 'space-between',
                   width: '100%',
-                  ...this.getCategorySectionBackgroundStyle()
+                  background: 'transparent',
+                  border: 'none'
                 }}
               >
                 <span 
