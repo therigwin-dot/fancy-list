@@ -37,6 +37,8 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     private getSubjectSectionBackgroundStyle;
     private groupItemsByCategory;
     private getFilterBackgroundStyle;
+    private applyCategoryAutoExpand;
+    private applySubjectAutoExpand;
     private checkFilterImage;
     private hexToRgba;
     private validateImageFileType;

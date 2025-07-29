@@ -64,6 +64,9 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     this.loadListData();
     this.checkTitleImage();
     this.checkFilterImage();
+    
+    // Apply category auto-expand on initial load
+    this.applyCategoryAutoExpand();
   }
 
   public componentDidUpdate(prevProps: IFancyListProps): void {
@@ -150,6 +153,22 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
       }));
     }
 
+    // Handle category auto-expand settings changes
+    if (prevProps.categorySectionSettings?.autoExpand !== this.props.categorySectionSettings?.autoExpand) {
+      if (this.props.categorySectionSettings?.autoExpand) {
+        this.applyCategoryAutoExpand();
+      } else {
+        this.setState({ expandedCategories: new Set() });
+      }
+    }
+
+    // Handle subject auto-expand settings changes
+    if (prevProps.subjectSectionSettings?.autoExpand !== this.props.subjectSectionSettings?.autoExpand) {
+      if (!this.props.subjectSectionSettings?.autoExpand) {
+        this.setState({ expandedItems: new Set() });
+      }
+    }
+
     // Image loading detection for title section
     if (prevProps.titleSettings?.imageUrl !== this.props.titleSettings?.imageUrl ||
         prevProps.titleSettings?.backgroundType !== this.props.titleSettings?.backgroundType) {
@@ -207,6 +226,9 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
         items,
         categories,
         expandedItems: this.props.defaultExpanded ? new Set(Array.from(items, item => item.id)) : new Set()
+      }, () => {
+        // Apply category auto-expand after data is loaded
+        this.applyCategoryAutoExpand();
       });
     } catch (error) {
       this.setState({ error: `Error loading data: ${error.message}` });
@@ -249,11 +271,16 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
 
   private handleCategoryToggle = (category: string): void => {
     const newExpandedCategories = new Set(this.state.expandedCategories);
-    if (newExpandedCategories.has(category)) {
-      newExpandedCategories.delete(category);
-    } else {
+    const isExpanding = !newExpandedCategories.has(category);
+    
+    if (isExpanding) {
       newExpandedCategories.add(category);
+      // Apply subject auto-expand when category expands
+      this.applySubjectAutoExpand(category);
+    } else {
+      newExpandedCategories.delete(category);
     }
+    
     this.setState({ expandedCategories: newExpandedCategories });
   }
 
@@ -538,29 +565,56 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
   }
 
   private getFilterBackgroundStyle(filterSettings: any): React.CSSProperties {
-    const { background } = filterSettings;
+    if (!filterSettings) return {};
 
-    if (background.type === 'solid') {
+    const background = filterSettings.background || {};
+    const type = background.type || 'solid';
+    
+    if (type === 'solid') {
+      const color = background.color || '#ffffff';
+      const alpha = background.alpha || 0;
       return {
-        background: this.hexToRgba(background.color, 1 - (background.alpha / 100)) // Invert alpha: 0% = opaque (alpha 1), 100% = transparent (alpha 0)
+        background: alpha > 0 ? this.hexToRgba(color, alpha / 100) : color
       };
-    } else if (background.type === 'gradient') {
+    } else if (type === 'gradient') {
+      const direction = background.gradientDirection || 'left-right';
+      const color1 = background.gradientColor1 || '#ffffff';
+      const color2 = background.gradientColor2 || '#0f46d1';
+      
+      const gradientStyle = this.getGradientStyle(direction, color1, color2, 1);
       return {
-        background: this.getGradientStyle(
-          background.gradientDirection,
-          background.gradientColor1,
-          background.gradientColor2,
-          1 - (background.gradientAlpha1 / 100) // Invert alpha: 0% = opaque (alpha 1), 100% = transparent (alpha 0)
-        )
+        background: gradientStyle
       };
-    } else if (background.type === 'image') {
-      return {
-        background: `linear-gradient(rgba(0,0,0,${background.alpha / 100}), rgba(0,0,0,${background.alpha / 100})), url(${background.image})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center'
-      };
+    } else if (type === 'image') {
+      const imageUrl = background.image || '';
+      
+      if (imageUrl) {
+        return {
+          background: `url('${imageUrl}') center center / cover`
+        };
+      }
     }
+    
     return {};
+  }
+
+  // Auto-Expand Helper Methods
+
+  private applyCategoryAutoExpand(): void {
+    if (this.props.categorySectionSettings?.autoExpand && this.state.items.length > 0) {
+      const allCategories = Object.keys(this.groupItemsByCategory(this.state.items));
+      this.setState({ expandedCategories: new Set(allCategories) });
+    }
+  }
+
+  private applySubjectAutoExpand(category: string): void {
+    if (this.props.subjectSectionSettings?.autoExpand) {
+      const items = this.groupItemsByCategory(this.state.items)[category] || [];
+      const subjectIds = items.map(item => item.id);
+      this.setState(prevState => ({
+        expandedItems: new Set(Array.from(prevState.expandedItems).concat(subjectIds))
+      }));
+    }
   }
 
   // Add filter image error state management (like Title component)

@@ -1747,11 +1747,14 @@ var FancyList = /** @class */ (function (_super) {
         };
         _this.handleCategoryToggle = function (category) {
             var newExpandedCategories = new Set(_this.state.expandedCategories);
-            if (newExpandedCategories.has(category)) {
-                newExpandedCategories.delete(category);
+            var isExpanding = !newExpandedCategories.has(category);
+            if (isExpanding) {
+                newExpandedCategories.add(category);
+                // Apply subject auto-expand when category expands
+                _this.applySubjectAutoExpand(category);
             }
             else {
-                newExpandedCategories.add(category);
+                newExpandedCategories.delete(category);
             }
             _this.setState({ expandedCategories: newExpandedCategories });
         };
@@ -1793,10 +1796,12 @@ var FancyList = /** @class */ (function (_super) {
         this.loadListData();
         this.checkTitleImage();
         this.checkFilterImage();
+        // Apply category auto-expand on initial load
+        this.applyCategoryAutoExpand();
     };
     FancyList.prototype.componentDidUpdate = function (prevProps) {
         var _this = this;
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2;
         if (prevProps.selectedListId !== this.props.selectedListId ||
             prevProps.categoryField !== this.props.categoryField ||
             prevProps.subjectField !== this.props.subjectField ||
@@ -1871,14 +1876,29 @@ var FancyList = /** @class */ (function (_super) {
                     new Set()
             }); });
         }
+        // Handle category auto-expand settings changes
+        if (((_k = prevProps.categorySectionSettings) === null || _k === void 0 ? void 0 : _k.autoExpand) !== ((_l = this.props.categorySectionSettings) === null || _l === void 0 ? void 0 : _l.autoExpand)) {
+            if ((_m = this.props.categorySectionSettings) === null || _m === void 0 ? void 0 : _m.autoExpand) {
+                this.applyCategoryAutoExpand();
+            }
+            else {
+                this.setState({ expandedCategories: new Set() });
+            }
+        }
+        // Handle subject auto-expand settings changes
+        if (((_o = prevProps.subjectSectionSettings) === null || _o === void 0 ? void 0 : _o.autoExpand) !== ((_p = this.props.subjectSectionSettings) === null || _p === void 0 ? void 0 : _p.autoExpand)) {
+            if (!((_q = this.props.subjectSectionSettings) === null || _q === void 0 ? void 0 : _q.autoExpand)) {
+                this.setState({ expandedItems: new Set() });
+            }
+        }
         // Image loading detection for title section
-        if (((_k = prevProps.titleSettings) === null || _k === void 0 ? void 0 : _k.imageUrl) !== ((_l = this.props.titleSettings) === null || _l === void 0 ? void 0 : _l.imageUrl) ||
-            ((_m = prevProps.titleSettings) === null || _m === void 0 ? void 0 : _m.backgroundType) !== ((_o = this.props.titleSettings) === null || _o === void 0 ? void 0 : _o.backgroundType)) {
+        if (((_r = prevProps.titleSettings) === null || _r === void 0 ? void 0 : _r.imageUrl) !== ((_s = this.props.titleSettings) === null || _s === void 0 ? void 0 : _s.imageUrl) ||
+            ((_t = prevProps.titleSettings) === null || _t === void 0 ? void 0 : _t.backgroundType) !== ((_u = this.props.titleSettings) === null || _u === void 0 ? void 0 : _u.backgroundType)) {
             this.checkTitleImage();
         }
         // Image loading detection for filter section
-        if (((_q = (_p = prevProps.filterSettings) === null || _p === void 0 ? void 0 : _p.background) === null || _q === void 0 ? void 0 : _q.image) !== ((_s = (_r = this.props.filterSettings) === null || _r === void 0 ? void 0 : _r.background) === null || _s === void 0 ? void 0 : _s.image) ||
-            ((_u = (_t = prevProps.filterSettings) === null || _t === void 0 ? void 0 : _t.background) === null || _u === void 0 ? void 0 : _u.type) !== ((_w = (_v = this.props.filterSettings) === null || _v === void 0 ? void 0 : _v.background) === null || _w === void 0 ? void 0 : _w.type)) {
+        if (((_w = (_v = prevProps.filterSettings) === null || _v === void 0 ? void 0 : _v.background) === null || _w === void 0 ? void 0 : _w.image) !== ((_y = (_x = this.props.filterSettings) === null || _x === void 0 ? void 0 : _x.background) === null || _y === void 0 ? void 0 : _y.image) ||
+            ((_0 = (_z = prevProps.filterSettings) === null || _z === void 0 ? void 0 : _z.background) === null || _0 === void 0 ? void 0 : _0.type) !== ((_2 = (_1 = this.props.filterSettings) === null || _1 === void 0 ? void 0 : _1.background) === null || _2 === void 0 ? void 0 : _2.type)) {
             this.checkFilterImage();
         }
     };
@@ -1929,6 +1949,9 @@ var FancyList = /** @class */ (function (_super) {
                             items: items,
                             categories: categories,
                             expandedItems: this.props.defaultExpanded ? new Set(Array.from(items, function (item) { return item.id; })) : new Set()
+                        }, function () {
+                            // Apply category auto-expand after data is loaded
+                            _this.applyCategoryAutoExpand();
                         });
                         return [3 /*break*/, 6];
                     case 4:
@@ -2169,26 +2192,53 @@ var FancyList = /** @class */ (function (_super) {
         return grouped;
     };
     FancyList.prototype.getFilterBackgroundStyle = function (filterSettings) {
-        var background = filterSettings.background;
-        if (background.type === 'solid') {
+        if (!filterSettings)
+            return {};
+        var background = filterSettings.background || {};
+        var type = background.type || 'solid';
+        if (type === 'solid') {
+            var color = background.color || '#ffffff';
+            var alpha = background.alpha || 0;
             return {
-                background: this.hexToRgba(background.color, 1 - (background.alpha / 100)) // Invert alpha: 0% = opaque (alpha 1), 100% = transparent (alpha 0)
+                background: alpha > 0 ? this.hexToRgba(color, alpha / 100) : color
             };
         }
-        else if (background.type === 'gradient') {
+        else if (type === 'gradient') {
+            var direction = background.gradientDirection || 'left-right';
+            var color1 = background.gradientColor1 || '#ffffff';
+            var color2 = background.gradientColor2 || '#0f46d1';
+            var gradientStyle = this.getGradientStyle(direction, color1, color2, 1);
             return {
-                background: this.getGradientStyle(background.gradientDirection, background.gradientColor1, background.gradientColor2, 1 - (background.gradientAlpha1 / 100) // Invert alpha: 0% = opaque (alpha 1), 100% = transparent (alpha 0)
-                )
+                background: gradientStyle
             };
         }
-        else if (background.type === 'image') {
-            return {
-                background: "linear-gradient(rgba(0,0,0,".concat(background.alpha / 100, "), rgba(0,0,0,").concat(background.alpha / 100, ")), url(").concat(background.image, ")"),
-                backgroundSize: 'cover',
-                backgroundPosition: 'center'
-            };
+        else if (type === 'image') {
+            var imageUrl = background.image || '';
+            if (imageUrl) {
+                return {
+                    background: "url('".concat(imageUrl, "') center center / cover")
+                };
+            }
         }
         return {};
+    };
+    // Auto-Expand Helper Methods
+    FancyList.prototype.applyCategoryAutoExpand = function () {
+        var _a;
+        if (((_a = this.props.categorySectionSettings) === null || _a === void 0 ? void 0 : _a.autoExpand) && this.state.items.length > 0) {
+            var allCategories = Object.keys(this.groupItemsByCategory(this.state.items));
+            this.setState({ expandedCategories: new Set(allCategories) });
+        }
+    };
+    FancyList.prototype.applySubjectAutoExpand = function (category) {
+        var _a;
+        if ((_a = this.props.subjectSectionSettings) === null || _a === void 0 ? void 0 : _a.autoExpand) {
+            var items = this.groupItemsByCategory(this.state.items)[category] || [];
+            var subjectIds_1 = items.map(function (item) { return item.id; });
+            this.setState(function (prevState) { return ({
+                expandedItems: new Set(Array.from(prevState.expandedItems).concat(subjectIds_1))
+            }); });
+        }
     };
     // Add filter image error state management (like Title component)
     FancyList.prototype.checkFilterImage = function () {
