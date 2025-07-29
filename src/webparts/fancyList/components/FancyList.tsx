@@ -915,7 +915,8 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
                       order: this.props.categorySectionSettings.icons.iconPosition === 'left' ? -1 : 1,
                       fontSize: this.props.categorySectionSettings?.font?.size || '16px',
                       marginLeft: this.props.categorySectionSettings.icons.iconPosition === 'left' ? '0' : '8px',
-                      marginRight: this.props.categorySectionSettings.icons.iconPosition === 'left' ? '8px' : '0'
+                      marginRight: this.props.categorySectionSettings.icons.iconPosition === 'left' ? '8px' : '0',
+                      color: isCategoryExpanded ? 'var(--themePrimary, #0078d4)' : 'var(--themePrimary, #0078d4)'
                     }}
                   >
                     {isCategoryExpanded 
@@ -957,7 +958,8 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
                               order: this.props.subjectSectionSettings.icons.iconPosition === 'left' ? -1 : 1,
                               fontSize: this.props.subjectSectionSettings?.font?.size || '16px',
                               marginLeft: this.props.subjectSectionSettings.icons.iconPosition === 'left' ? '0' : '8px',
-                              marginRight: this.props.subjectSectionSettings.icons.iconPosition === 'left' ? '8px' : '0'
+                              marginRight: this.props.subjectSectionSettings.icons.iconPosition === 'left' ? '8px' : '0',
+                              color: isItemExpanded ? 'var(--themePrimary, #0078d4)' : 'var(--themePrimary, #0078d4)'
                             }}
                           >
                             {isItemExpanded 
