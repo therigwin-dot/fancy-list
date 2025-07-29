@@ -855,35 +855,38 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
                             textAlign: 'center' as const
                           }
                         }, [
-                          React.createElement('button', {
-                            key: 'testDefaultsBtn',
-                            style: {
-                              backgroundColor: '#0078d4',
-                              color: 'white',
-                              border: 'none',
-                              padding: '8px 16px',
-                              borderRadius: '4px',
-                              cursor: 'pointer',
-                              fontSize: '14px',
-                              fontWeight: '600',
-                              marginRight: '8px'
-                            },
-                            onClick: async () => {
-                              try {
-                                // Process Page 1 controls using structured data
-                                await this.processPage1Controls();
-                                
-                                // Set the title text to "Testing Fancy List" (from Page 2 data)
-                                this.properties.webPartTitle = 'Testing Fancy List';
-                                if (changeCallback) changeCallback();
-                                this.context.propertyPane.refresh();
-                                
-                                console.log('Page 1 testing completed successfully');
-                              } catch (error) {
-                                console.error('Error during Page 1 testing:', error);
+                          // Only show Test Defaults button in workbench environment
+                          ...(window.location.href.includes('workbench.aspx') ? [
+                            React.createElement('button', {
+                              key: 'testDefaultsBtn',
+                              style: {
+                                backgroundColor: '#0078d4',
+                                color: 'white',
+                                border: 'none',
+                                padding: '8px 16px',
+                                borderRadius: '4px',
+                                cursor: 'pointer',
+                                fontSize: '14px',
+                                fontWeight: '600',
+                                marginRight: '8px'
+                              },
+                              onClick: async () => {
+                                try {
+                                  // Process Page 1 controls using structured data
+                                  await this.processPage1Controls();
+                                  
+                                  // Set the title text to "Testing Fancy List" (from Page 2 data)
+                                  this.properties.webPartTitle = 'Testing Fancy List';
+                                  if (changeCallback) changeCallback();
+                                  this.context.propertyPane.refresh();
+                                  
+                                  console.log('Page 1 testing completed successfully');
+                                } catch (error) {
+                                  console.error('Error during Page 1 testing:', error);
+                                }
                               }
-                            }
-                          }, 'Test Defaults')
+                            }, 'Test Defaults')
+                          ] : [])
                         ]),
                         elem
                       );

@@ -24,7 +24,7 @@
       "description": {
         "default": "Display items from any SharePoint list with category filtering and collapsible panels"
       },
-      "officeFabricIconFontName": "Page",
+      "officeFabricIconFontName": "BulletedTreeList",
       "properties": {
         "description": "Fancy List"
       }

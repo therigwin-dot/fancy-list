@@ -37598,7 +37598,7 @@ var FancyListWebPart = /** @class */ (function (_super) {
                                                     borderTop: '1px solid #e1dfdd',
                                                     textAlign: 'center'
                                                 }
-                                            }, [
+                                            }, __spreadArray([], (window.location.href.includes('workbench.aspx') ? [
                                                 react__WEBPACK_IMPORTED_MODULE_0__.createElement('button', {
                                                     key: 'testDefaultsBtn',
                                                     style: {
@@ -37639,7 +37639,7 @@ var FancyListWebPart = /** @class */ (function (_super) {
                                                         });
                                                     }); }
                                                 }, 'Test Defaults')
-                                            ]), elem);
+                                            ] : []), true)), elem);
                                         },
                                         onDispose: function (elem) {
                                             react_dom__WEBPACK_IMPORTED_MODULE_1__.unmountComponentAtNode(elem);
