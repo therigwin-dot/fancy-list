@@ -14,7 +14,7 @@ export const DEFAULTS_CONFIG = {
   // Page 2: Title Settings
   titleSettings: {
     resetButtonText: "Reset Title Formatting",
-    testValuesButtonText: "Test Values",
+    testValuesButtonText: "Apply MFB Theme",
     description: 'Customize the web parts title text, font, color, background, and shape settings. Use the reset button to put the default look and feel back in place. Use the Back and Next buttons to switch to a different configuration page.',
     enabled: true,
     webPartTitle: '',
@@ -39,37 +39,37 @@ export const DEFAULTS_CONFIG = {
     },
     shape: 'rounded' as const,
     divideSpace: 0,
-    // Test Values for Title Section
+    // MFB Theme Values for Title Section
     testValues: {
-      webPartTitle: 'Testing Fancy List',
+      webPartTitle: 'Fancy List Web Part',
       font: {
-        family: 'Arial',
-        size: '32px',
-        color: '#ff0000',
-        formatting: { bold: true, italic: true, underline: true, strikethrough: false },
+        family: 'Segoe UI',
+        size: '28px',
+        color: '#323130',
+        formatting: { bold: true, italic: false, underline: false, strikethrough: false },
         alignment: 'center'
       },
       background: {
         type: 'gradient' as const,
         color: '#ffffff',
-        alpha: 50,
+        alpha: 0,
         image: '',
         imageAlpha: 0,
         gradientDirection: 'top-bottom',
-        gradientColor1: '#ff0000',
-        gradientAlpha1: 80,
-        gradientColor2: '#00ff00',
-        gradientAlpha2: 60
+        gradientColor1: '#0078d4',
+        gradientAlpha1: 90,
+        gradientColor2: '#106ebe',
+        gradientAlpha2: 70
       },
-      shape: 'pill' as const,
-      divideSpace: 4
+      shape: 'rounded' as const,
+      divideSpace: 8
     }
   } as TitleSettings,
 
   // Page 3: Filter Settings
   filterSettings: {
     resetButtonText: "Reset Filter Formatting",
-    testValuesButtonText: "Test Values",
+    testValuesButtonText: "Apply MFB Theme",
     description: "Use this to customise the look and feel of your filters for your list. From colors to shape and size. The reset button will trigger it back to defaults. You can also use the Enable toggle to completely remove and disable this part.",
     enableFilters: true,
     showAllCategories: true,
@@ -103,38 +103,38 @@ export const DEFAULTS_CONFIG = {
       gradientAlpha2: 0
     },
     divideSpace: 0,
-    // Test Values for Filter Section
+    // MFB Theme Values for Filter Section
     testValues: {
       font: {
-        family: 'Comic Sans MS',
-        size: '16px',
-        formatting: { bold: true, italic: false, underline: true, strikethrough: false },
-        alignment: 'right'
+        family: 'Segoe UI',
+        size: '14px',
+        formatting: { bold: false, italic: false, underline: false, strikethrough: false },
+        alignment: 'center'
       },
       activeColors: {
-        background: '#ff6600',
+        background: '#0078d4',
         font: '#ffffff'
       },
       inactiveColors: {
-        background: '#ffff00',
-        font: '#000000'
+        background: '#f3f2f1',
+        font: '#323130'
       },
-      shape: 'square' as const,
-      backgroundShape: 'pill' as const,
-      defaultFilterSelection: 'Uncategorized',
+      shape: 'pill' as const,
+      backgroundShape: 'rounded' as const,
+      defaultFilterSelection: 'All',
       background: {
-        type: 'gradient' as const,
+        type: 'solid' as const,
         color: '#ffffff',
-        alpha: 30,
+        alpha: 0,
         image: '',
         imageAlpha: 0,
-        gradientDirection: 'diagonal',
-        gradientColor1: '#ff00ff',
-        gradientAlpha1: 70,
-        gradientColor2: '#00ffff',
-        gradientAlpha2: 50
+        gradientDirection: 'left-right',
+        gradientColor1: '#ffffff',
+        gradientAlpha1: 0,
+        gradientColor2: '#f3f2f1',
+        gradientAlpha2: 30
       },
-      divideSpace: 4
+      divideSpace: 8
     }
   } as FilterSettings,
 
@@ -142,7 +142,7 @@ export const DEFAULTS_CONFIG = {
   categorySectionSettings: {
     sectionType: 'category' as const,
     resetButtonText: "Reset Category Formatting",
-    testValuesButtonText: "Test Values",
+    testValuesButtonText: "Apply MFB Theme",
     description: "Customize the appearance of category sections including font, colors, shape, background, and icon settings.",
     font: {
       family: 'inherit',
@@ -173,31 +173,31 @@ export const DEFAULTS_CONFIG = {
       collapsedIcon: '▶',
       expandedIcon: '▼'
     },
-    // Test Values for Category Section
+    // MFB Theme Values for Category Section
     testValues: {
       font: {
-        family: 'Impact',
-        size: '24px',
-        color: '#0000ff',
-        formatting: { bold: true, italic: true, underline: false, strikethrough: true },
-        alignment: 'center'
+        family: 'Segoe UI',
+        size: '20px',
+        color: '#323130',
+        formatting: { bold: true, italic: false, underline: false, strikethrough: false },
+        alignment: 'left'
       },
       background: {
-        type: 'gradient' as const,
+        type: 'solid' as const,
         color: '#f3f2f1',
-        alpha: 60,
+        alpha: 80,
         image: '',
         imageAlpha: 0,
-        gradientDirection: 'radial',
-        gradientColor1: '#ff0000',
-        gradientAlpha1: 90,
-        gradientColor2: '#00ff00',
-        gradientAlpha2: 40
+        gradientDirection: 'left-right',
+        gradientColor1: '#f3f2f1',
+        gradientAlpha1: 80,
+        gradientColor2: '#e1dfdd',
+        gradientAlpha2: 60
       },
-      shape: 'pill' as const,
-      divideSpace: 4,
-      autoExpand: true,
-      hoverColor: '#ff0000',
+      shape: 'rounded' as const,
+      divideSpace: 8,
+      autoExpand: false,
+      hoverColor: '#e1dfdd',
       iconSettings: {
         enabled: true,
         iconPosition: 'right' as const,
@@ -211,7 +211,7 @@ export const DEFAULTS_CONFIG = {
   subjectSectionSettings: {
     sectionType: 'subject' as const,
     resetButtonText: "Reset Subject Formatting",
-    testValuesButtonText: "Test Values",
+    testValuesButtonText: "Apply MFB Theme",
     description: "Customize the appearance of subject sections including font, colors, shape, background, and icon settings.",
     font: {
       family: 'inherit',
@@ -242,31 +242,31 @@ export const DEFAULTS_CONFIG = {
       collapsedIcon: '▶',
       expandedIcon: '▼'
     },
-    // Test Values for Subject Section
+    // MFB Theme Values for Subject Section
     testValues: {
       font: {
-        family: 'Courier New',
-        size: '20px',
-        color: '#ff6600',
-        formatting: { bold: false, italic: true, underline: true, strikethrough: false },
-        alignment: 'right'
+        family: 'Segoe UI',
+        size: '16px',
+        color: '#323130',
+        formatting: { bold: false, italic: false, underline: false, strikethrough: false },
+        alignment: 'left'
       },
       background: {
         type: 'solid' as const,
-        color: '#ffffcc',
-        alpha: 70,
+        color: '#ffffff',
+        alpha: 0,
         image: '',
         imageAlpha: 0,
         gradientDirection: 'left-right',
-        gradientColor1: '#ffffcc',
-        gradientAlpha1: 70,
-        gradientColor2: '#ffcc99',
-        gradientAlpha2: 50
+        gradientColor1: '#ffffff',
+        gradientAlpha1: 0,
+        gradientColor2: '#f3f2f1',
+        gradientAlpha2: 30
       },
-      shape: 'square' as const,
-      divideSpace: 4,
-      autoExpand: true,
-      hoverColor: '#ffcc99',
+      shape: 'rounded' as const,
+      divideSpace: 8,
+      autoExpand: false,
+      hoverColor: '#faf9f8',
       iconSettings: {
         enabled: true,
         iconPosition: 'right' as const,
@@ -280,7 +280,7 @@ export const DEFAULTS_CONFIG = {
   descriptionSectionSettings: {
     sectionType: 'description' as const,
     resetButtonText: "Reset Description Formatting",
-    testValuesButtonText: "Test Values",
+    testValuesButtonText: "Apply MFB Theme",
     description: "Customize the appearance of description sections including font, colors, shape, and background settings.",
     font: {
       family: 'inherit',
@@ -311,31 +311,31 @@ export const DEFAULTS_CONFIG = {
       collapsedIcon: '▶',
       expandedIcon: '▼'
     },
-    // Test Values for Description Section
+    // MFB Theme Values for Description Section
     testValues: {
       font: {
-        family: 'Georgia',
-        size: '18px',
-        color: '#9932cc',
-        formatting: { bold: true, italic: false, underline: false, strikethrough: true },
-        alignment: 'justify'
+        family: 'Segoe UI',
+        size: '14px',
+        color: '#605e5c',
+        formatting: { bold: false, italic: false, underline: false, strikethrough: false },
+        alignment: 'left'
       },
       background: {
-        type: 'image' as const,
+        type: 'solid' as const,
         color: '#ffffff',
-        alpha: 20,
-        image: 'https://via.placeholder.com/400x200/cccccc/666666?text=Test+Background',
-        imageAlpha: 80,
+        alpha: 0,
+        image: '',
+        imageAlpha: 0,
         gradientDirection: 'left-right',
         gradientColor1: '#ffffff',
-        gradientAlpha1: 20,
+        gradientAlpha1: 0,
         gradientColor2: '#faf9f8',
         gradientAlpha2: 50
       },
-      shape: 'pill' as const,
-      divideSpace: 4,
-      autoExpand: true,
-      hoverColor: '#e6ccff',
+      shape: 'rounded' as const,
+      divideSpace: 8,
+      autoExpand: false,
+      hoverColor: '#faf9f8',
       iconSettings: {
         enabled: false,
         iconPosition: 'left' as const,
