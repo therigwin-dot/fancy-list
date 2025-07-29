@@ -205,6 +205,17 @@
 #### **Other Bugs**:
 8. **FontControl Enter Key Focus** - 🟢 **Low** - Acceptable for current phase
 
+9. **🔴 Auto-Expand Toggle Positioning** - 🟢 **Low** - Auto-expand toggle in Section Control needs to be moved (acceptable back burner bug)
+
+**Bug Description:**
+- **Component**: SectionModuleControl (Category and Subject sections)
+- **Issue**: Auto-expand toggle positioning in the property pane needs adjustment
+- **Expected**: Better positioning for improved UX flow
+- **Current**: Toggle is positioned where it may not be optimal for user workflow
+- **Impact**: Low - UX improvement, not functional issue
+- **Priority**: Low - Acceptable back burner bug
+- **Status**: 🟢 **BACK BURNER** - Will address positioning in future iteration
+
 ---
 
 *Last Updated: 2025-01-27*
