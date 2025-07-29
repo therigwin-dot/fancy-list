@@ -19,14 +19,14 @@
         "default": "Advanced"
       },
       "title": {
-        "default": "Fancy List Basic"
+        "default": "Fancy List"
       },
       "description": {
-        "default": "Beta Basic Version - Display items from any SharePoint list or library with category filtering and collapsible panels"
+        "default": "Display items from any SharePoint list with category filtering and collapsible panels"
       },
       "officeFabricIconFontName": "Page",
       "properties": {
-        "description": "Fancy List Basic"
+        "description": "Fancy List"
       }
     }
   ],

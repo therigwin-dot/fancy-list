@@ -18,11 +18,11 @@
   "preconfiguredEntries": [{
     "groupId": "5c03119e-3074-46fd-976b-c60198311f70", // Advanced
     "group": { "default": "Advanced" },
-    "title": { "default": "Fancy List Basic" },
-    "description": { "default": "Beta Basic Version - Display items from any SharePoint list or library with category filtering and collapsible panels" },
+    "title": { "default": "Fancy List" },
+    "description": { "default": "Display items from any SharePoint list with category filtering and collapsible panels" },
     "officeFabricIconFontName": "Page",
     "properties": {
-      "description": "Fancy List Basic"
+      "description": "Fancy List"
     }
   }]
 }
