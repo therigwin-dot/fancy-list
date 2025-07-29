@@ -764,8 +764,8 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
         {/* Title Divider - positioned between title and filters */}
         {this.props.titleSettings?.showDivider && (
           <div style={{ 
-            height: '1px', 
-            backgroundColor: 'rgba(0, 0, 0, 0.1)', 
+            height: '2px', 
+            backgroundColor: 'var(--neutralLight, #edebe9)', 
             marginTop: '12px',
             marginBottom: '12px'
           }} />
@@ -780,7 +780,10 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
                 position: 'relative',
                 padding: '12px',
                 marginBottom: '12px',
-                borderRadius: this.getShapeRadius(this.props.filterSettings?.backgroundShape || 'rounded')
+                borderRadius: this.getShapeRadius(this.props.filterSettings?.backgroundShape || 'rounded'),
+                ...(this.props.filterSettings?.showDivider ? {
+                  borderBottom: 'none'  // Remove border when divider is enabled
+                } : {})
               }}
             >
               {/* Layer 1: Transparency overlay for image backgrounds */}
@@ -882,8 +885,8 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
             {/* Filter Divider - positioned between filters and list items */}
             {this.props.filterSettings?.showDivider && (
               <div style={{
-                height: '1px',
-                backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                height: '2px',
+                backgroundColor: 'var(--neutralLight, #edebe9)',
                 marginTop: '12px',
                 marginBottom: '12px'
               }} />
