@@ -16,29 +16,29 @@ __webpack_require__.r(__webpack_exports__);
 // Imports
 
 
-_node_modules_microsoft_sp_css_loader_node_modules_microsoft_load_themed_styles_lib_es6_index_js__WEBPACK_IMPORTED_MODULE_0__.loadStyles(".fancyList_0ec8ae44{background:var(--background,#fff);color:var(--bodyText,#323130);font-family:Segoe UI,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;padding:1em}.categoryFilters_0ec8ae44{border-bottom:2px solid var(--neutralLight,#edebe9);display:flex;flex-wrap:nowrap;gap:.5em;margin-bottom:1em;overflow-x:auto;padding-bottom:.5em}.categoryPill_0ec8ae44{background:var(--neutralLighter,#f3f2f1);border:1px solid var(--neutralLight,#edebe9);border-radius:999px;color:var(--bodyText,#323130);cursor:pointer;display:inline-block;font-weight:500;outline:0;padding:.4em 1.2em;transition:background .2s,color .2s,border .2s}.categoryPill_0ec8ae44:focus,.categoryPill_0ec8ae44:hover{background:var(--themeLighter,#e5f1fb);border-color:var(--themePrimary,#0078d4);color:var(--themePrimary,#0078d4)}.categoryPill_0ec8ae44.active_0ec8ae44{background:var(--themePrimary,#0078d4);border-color:var(--themePrimary,#0078d4);color:var(--white,#fff)}.itemsContainer_0ec8ae44{display:flex;flex-direction:column;gap:.7em}.itemPanel_0ec8ae44{border:1px solid var(--neutralLight,#edebe9);border-radius:6px;box-shadow:0 1px 3px rgba(0,0,0,.04);overflow:hidden}.itemHeader_0ec8ae44{align-items:center;background:0 0;border:none;color:var(--bodyText,#323130);cursor:pointer;display:flex;font-size:1.1em;font-weight:600;justify-content:space-between;outline:0;padding:1em;text-align:left;transition:background .2s;width:100%}.itemHeader_0ec8ae44:focus,.itemHeader_0ec8ae44:hover{background:var(--neutralLighter,#f3f2f1)}.itemSubject_0ec8ae44{flex:1 1 auto}.expandIcon_0ec8ae44{color:var(--themePrimary,#0078d4);font-size:1.3em;margin-left:1em}.itemContent_0ec8ae44{border-top:2px solid var(--neutralLight,#edebe9);padding:1em}.itemDescription_0ec8ae44{color:var(--bodyText,#323130);font-size:1em}.error_0ec8ae44,.loading_0ec8ae44{color:var(--themePrimary,#0078d4);font-size:1.1em;padding:2em 0;text-align:center}.titleContainer_0ec8ae44{border-radius:4px;margin-bottom:16px;padding:12px 16px;position:relative}.titleText_0ec8ae44{line-height:1.4;margin:0;padding:0}.titleError_0ec8ae44{padding:8px;text-align:center}.errorTitle_0ec8ae44{color:#d13438;font-weight:700;margin-bottom:4px}.errorMessage_0ec8ae44{color:#605e5c;font-size:12px;line-height:1.3}.titleDivider_0ec8ae44{background-color:var(--neutralLight,#edebe9);height:2px;margin-top:12px}@media (max-width:600px){.categoryFilters_0ec8ae44{font-size:.95em;gap:.2em}.itemContent_0ec8ae44,.itemHeader_0ec8ae44{padding:.7em}}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImZpbGU6Ly8vb3B0L2N1cnNvci1wcm9qZWN0cy9GYW5jeUxpc3Qvc3JjL3dlYnBhcnRzL2ZhbmN5TGlzdC9jb21wb25lbnRzL0ZhbmN5TGlzdC5tb2R1bGUuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFFQSxvQkFHRSxpQ0FBQSxDQURBLDZCQUFBLENBRUEsc0ZBQUEsQ0FIQSxXQUdBLENBR0YsMEJBT0UsbURBQUEsQ0FOQSxZQUFBLENBQ0EsZ0JBQUEsQ0FFQSxRQUFBLENBQ0EsaUJBQUEsQ0FGQSxlQUFBLENBR0EsbUJBQ0EsQ0FHRix1QkFLRSx3Q0FBQSxDQURBLDRDQUFBLENBREEsbUJBQUEsQ0FHQSw2QkFBQSxDQUVBLGNBQUEsQ0FQQSxvQkFBQSxDQU1BLGVBQUEsQ0FHQSxTQUFBLENBUkEsa0JBQUEsQ0FPQSw4Q0FDQSxDQUNBLDBEQUNFLHNDQUFBLENBQ0Esd0NBQUEsQ0FDQSxpQ0FBQSxDQUVGLHVDQUNFLHNDQUFBLENBRUEsd0NBQUEsQ0FEQSx1QkFDQSxDQUlKLHlCQUNFLFlBQUEsQ0FDQSxxQkFBQSxDQUNBLFFBQUEsQ0FHRixvQkFFRSw0Q0FBQSxDQURBLGlCQUFBLENBRUEsb0NBQUEsQ0FDQSxlQUFBLENBR0YscUJBVUUsa0JBQUEsQ0FSQSxjQUFBLENBQ0EsV0FBQSxDQUtBLDZCQUFBLENBSUEsY0FBQSxDQUhBLFlBQUEsQ0FIQSxlQUFBLENBQ0EsZUFBQSxDQUlBLDZCQUFBLENBRUEsU0FBQSxDQVRBLFdBQUEsQ0FDQSxlQUFBLENBU0EseUJBQUEsQ0FiQSxVQWFBLENBQ0Esc0RBQ0Usd0NBQUEsQ0FJSixzQkFDRSxhQUFBLENBR0YscUJBR0UsaUNBQUEsQ0FGQSxlQUFBLENBQ0EsZUFDQSxDQUdGLHNCQUVFLGdEQUFBLENBREEsV0FDQSxDQUdGLDBCQUVFLDZCQUFBLENBREEsYUFDQSxDQUdGLGtDQUdFLGlDQUFBLENBQ0EsZUFBQSxDQUZBLGFBQUEsQ0FEQSxpQkFHQSxDQUlGLHlCQUdFLGlCQUFBLENBRkEsa0JBQUEsQ0FDQSxpQkFBQSxDQUVBLGlCQUFBLENBR0Ysb0JBR0UsZUFBQSxDQUZBLFFBQUEsQ0FDQSxTQUNBLENBR0YscUJBRUUsV0FBQSxDQURBLGlCQUNBLENBR0YscUJBQ0UsYUFBQSxDQUNBLGVBQUEsQ0FDQSxpQkFBQSxDQUdGLHVCQUNFLGFBQUEsQ0FDQSxjQUFBLENBQ0EsZUFBQSxDQUdGLHVCQUVFLDRDQUFBLENBREEsVUFBQSxDQUVBLGVBQUEsQ0FHRix5QkFDRSwwQkFFRSxlQUFBLENBREEsUUFDQSxDQUVGLDJDQUNFLFlBQUEsQ0FBQSIsImZpbGUiOiJGYW5jeUxpc3QubW9kdWxlLmNzcyJ9 */", true);
+_node_modules_microsoft_sp_css_loader_node_modules_microsoft_load_themed_styles_lib_es6_index_js__WEBPACK_IMPORTED_MODULE_0__.loadStyles(".fancyList_41ce5048{background:var(--background,#fff);color:var(--bodyText,#323130);font-family:Segoe UI,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;padding:1em}.categoryFilters_41ce5048{display:flex;flex-wrap:nowrap;gap:.5em;margin-bottom:1em;overflow-x:auto;padding-bottom:.5em}.categoryPill_41ce5048{background:var(--neutralLighter,#f3f2f1);border:1px solid var(--neutralLight,#edebe9);border-radius:999px;color:var(--bodyText,#323130);cursor:pointer;display:inline-block;font-weight:500;outline:0;padding:.4em 1.2em;transition:background .2s,color .2s,border .2s}.categoryPill_41ce5048:focus,.categoryPill_41ce5048:hover{background:var(--themeLighter,#e5f1fb);border-color:var(--themePrimary,#0078d4);color:var(--themePrimary,#0078d4)}.categoryPill_41ce5048.active_41ce5048{background:var(--themePrimary,#0078d4);border-color:var(--themePrimary,#0078d4);color:var(--white,#fff)}.itemsContainer_41ce5048{display:flex;flex-direction:column;gap:.7em}.itemPanel_41ce5048{border:1px solid var(--neutralLight,#edebe9);border-radius:6px;box-shadow:0 1px 3px rgba(0,0,0,.04);overflow:hidden}.itemHeader_41ce5048{align-items:center;background:0 0;border:none;color:var(--bodyText,#323130);cursor:pointer;display:flex;font-size:1.1em;font-weight:600;justify-content:space-between;outline:0;padding:1em;text-align:left;transition:background .2s;width:100%}.itemHeader_41ce5048:focus,.itemHeader_41ce5048:hover{background:var(--neutralLighter,#f3f2f1)}.itemSubject_41ce5048{flex:1 1 auto}.expandIcon_41ce5048{color:var(--themePrimary,#0078d4);font-size:1.3em;margin-left:1em}.itemContent_41ce5048{border-top:2px solid var(--neutralLight,#edebe9);padding:1em}.itemDescription_41ce5048{color:var(--bodyText,#323130);font-size:1em}.error_41ce5048,.loading_41ce5048{color:var(--themePrimary,#0078d4);font-size:1.1em;padding:2em 0;text-align:center}.titleContainer_41ce5048{border-radius:4px;margin-bottom:16px;padding:12px 16px;position:relative}.titleText_41ce5048{line-height:1.4;margin:0;padding:0}.titleError_41ce5048{padding:8px;text-align:center}.errorTitle_41ce5048{color:#d13438;font-weight:700;margin-bottom:4px}.errorMessage_41ce5048{color:#605e5c;font-size:12px;line-height:1.3}.titleDivider_41ce5048{background-color:var(--neutralLight,#edebe9);height:2px;margin-top:12px}@media (max-width:600px){.categoryFilters_41ce5048{font-size:.95em;gap:.2em}.itemContent_41ce5048,.itemHeader_41ce5048{padding:.7em}}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImZpbGU6Ly8vb3B0L2N1cnNvci1wcm9qZWN0cy9GYW5jeUxpc3Qvc3JjL3dlYnBhcnRzL2ZhbmN5TGlzdC9jb21wb25lbnRzL0ZhbmN5TGlzdC5tb2R1bGUuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFFQSxvQkFHRSxpQ0FBQSxDQURBLDZCQUFBLENBRUEsc0ZBQUEsQ0FIQSxXQUdBLENBR0YsMEJBQ0UsWUFBQSxDQUNBLGdCQUFBLENBRUEsUUFBQSxDQUNBLGlCQUFBLENBRkEsZUFBQSxDQUdBLG1CQUFBLENBR0YsdUJBS0Usd0NBQUEsQ0FEQSw0Q0FBQSxDQURBLG1CQUFBLENBR0EsNkJBQUEsQ0FFQSxjQUFBLENBUEEsb0JBQUEsQ0FNQSxlQUFBLENBR0EsU0FBQSxDQVJBLGtCQUFBLENBT0EsOENBQ0EsQ0FDQSwwREFDRSxzQ0FBQSxDQUNBLHdDQUFBLENBQ0EsaUNBQUEsQ0FFRix1Q0FDRSxzQ0FBQSxDQUVBLHdDQUFBLENBREEsdUJBQ0EsQ0FJSix5QkFDRSxZQUFBLENBQ0EscUJBQUEsQ0FDQSxRQUFBLENBR0Ysb0JBRUUsNENBQUEsQ0FEQSxpQkFBQSxDQUVBLG9DQUFBLENBQ0EsZUFBQSxDQUdGLHFCQVVFLGtCQUFBLENBUkEsY0FBQSxDQUNBLFdBQUEsQ0FLQSw2QkFBQSxDQUlBLGNBQUEsQ0FIQSxZQUFBLENBSEEsZUFBQSxDQUNBLGVBQUEsQ0FJQSw2QkFBQSxDQUVBLFNBQUEsQ0FUQSxXQUFBLENBQ0EsZUFBQSxDQVNBLHlCQUFBLENBYkEsVUFhQSxDQUNBLHNEQUNFLHdDQUFBLENBSUosc0JBQ0UsYUFBQSxDQUdGLHFCQUdFLGlDQUFBLENBRkEsZUFBQSxDQUNBLGVBQ0EsQ0FHRixzQkFFRSxnREFBQSxDQURBLFdBQ0EsQ0FHRiwwQkFFRSw2QkFBQSxDQURBLGFBQ0EsQ0FHRixrQ0FHRSxpQ0FBQSxDQUNBLGVBQUEsQ0FGQSxhQUFBLENBREEsaUJBR0EsQ0FJRix5QkFHRSxpQkFBQSxDQUZBLGtCQUFBLENBQ0EsaUJBQUEsQ0FFQSxpQkFBQSxDQUdGLG9CQUdFLGVBQUEsQ0FGQSxRQUFBLENBQ0EsU0FDQSxDQUdGLHFCQUVFLFdBQUEsQ0FEQSxpQkFDQSxDQUdGLHFCQUNFLGFBQUEsQ0FDQSxlQUFBLENBQ0EsaUJBQUEsQ0FHRix1QkFDRSxhQUFBLENBQ0EsY0FBQSxDQUNBLGVBQUEsQ0FHRix1QkFFRSw0Q0FBQSxDQURBLFVBQUEsQ0FFQSxlQUFBLENBR0YseUJBQ0UsMEJBRUUsZUFBQSxDQURBLFFBQ0EsQ0FFRiwyQ0FDRSxZQUFBLENBQUEiLCJmaWxlIjoiRmFuY3lMaXN0Lm1vZHVsZS5jc3MifQ== */", true);
 
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  fancyList_0ec8ae44: "fancyList_0ec8ae44",
-  categoryFilters_0ec8ae44: "categoryFilters_0ec8ae44",
-  categoryPill_0ec8ae44: "categoryPill_0ec8ae44",
-  active_0ec8ae44: "active_0ec8ae44",
-  itemsContainer_0ec8ae44: "itemsContainer_0ec8ae44",
-  itemPanel_0ec8ae44: "itemPanel_0ec8ae44",
-  itemHeader_0ec8ae44: "itemHeader_0ec8ae44",
-  itemSubject_0ec8ae44: "itemSubject_0ec8ae44",
-  expandIcon_0ec8ae44: "expandIcon_0ec8ae44",
-  itemContent_0ec8ae44: "itemContent_0ec8ae44",
-  itemDescription_0ec8ae44: "itemDescription_0ec8ae44",
-  error_0ec8ae44: "error_0ec8ae44",
-  loading_0ec8ae44: "loading_0ec8ae44",
-  titleContainer_0ec8ae44: "titleContainer_0ec8ae44",
-  titleText_0ec8ae44: "titleText_0ec8ae44",
-  titleError_0ec8ae44: "titleError_0ec8ae44",
-  errorTitle_0ec8ae44: "errorTitle_0ec8ae44",
-  errorMessage_0ec8ae44: "errorMessage_0ec8ae44",
-  titleDivider_0ec8ae44: "titleDivider_0ec8ae44"
+  fancyList_41ce5048: "fancyList_41ce5048",
+  categoryFilters_41ce5048: "categoryFilters_41ce5048",
+  categoryPill_41ce5048: "categoryPill_41ce5048",
+  active_41ce5048: "active_41ce5048",
+  itemsContainer_41ce5048: "itemsContainer_41ce5048",
+  itemPanel_41ce5048: "itemPanel_41ce5048",
+  itemHeader_41ce5048: "itemHeader_41ce5048",
+  itemSubject_41ce5048: "itemSubject_41ce5048",
+  expandIcon_41ce5048: "expandIcon_41ce5048",
+  itemContent_41ce5048: "itemContent_41ce5048",
+  itemDescription_41ce5048: "itemDescription_41ce5048",
+  error_41ce5048: "error_41ce5048",
+  loading_41ce5048: "loading_41ce5048",
+  titleContainer_41ce5048: "titleContainer_41ce5048",
+  titleText_41ce5048: "titleText_41ce5048",
+  titleError_41ce5048: "titleError_41ce5048",
+  errorTitle_41ce5048: "errorTitle_41ce5048",
+  errorMessage_41ce5048: "errorMessage_41ce5048",
+  titleDivider_41ce5048: "titleDivider_41ce5048"
 });
 
 
@@ -2302,8 +2302,8 @@ var FancyList = /** @class */ (function (_super) {
     };
     FancyList.prototype.render = function () {
         var _this = this;
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21;
-        var _22 = this.state, selectedCategory = _22.selectedCategory, categories = _22.categories, loading = _22.loading, error = _22.error;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20;
+        var _21 = this.state, selectedCategory = _21.selectedCategory, categories = _21.categories, loading = _21.loading, error = _21.error;
         // Debug logging for render method
         console.log('🔍 Filter Debug - Render Method:', {
             selectedCategory: selectedCategory,
@@ -2341,38 +2341,36 @@ var FancyList = /** @class */ (function (_super) {
                     marginBottom: '12px'
                 } })),
             ((_e = this.props.filterSettings) === null || _e === void 0 ? void 0 : _e.enableFilters) && (react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null,
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].categoryFilters, style: __assign(__assign(__assign({}, this.getFilterBackgroundStyle(this.props.filterSettings)), { position: 'relative', padding: '12px', marginBottom: '12px', borderRadius: this.getShapeRadius(((_f = this.props.filterSettings) === null || _f === void 0 ? void 0 : _f.backgroundShape) || 'rounded') }), (((_g = this.props.filterSettings) === null || _g === void 0 ? void 0 : _g.showDivider) ? {
-                        borderBottom: 'none' // Remove border when divider is enabled
-                    } : {})) },
-                    ((_j = (_h = this.props.filterSettings) === null || _h === void 0 ? void 0 : _h.background) === null || _j === void 0 ? void 0 : _j.type) === 'image' &&
-                        ((_l = (_k = this.props.filterSettings) === null || _k === void 0 ? void 0 : _k.background) === null || _l === void 0 ? void 0 : _l.image) &&
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].categoryFilters, style: __assign(__assign({}, this.getFilterBackgroundStyle(this.props.filterSettings)), { position: 'relative', padding: '12px', marginBottom: '12px', borderRadius: this.getShapeRadius(((_f = this.props.filterSettings) === null || _f === void 0 ? void 0 : _f.backgroundShape) || 'rounded') }) },
+                    ((_h = (_g = this.props.filterSettings) === null || _g === void 0 ? void 0 : _g.background) === null || _h === void 0 ? void 0 : _h.type) === 'image' &&
+                        ((_k = (_j = this.props.filterSettings) === null || _j === void 0 ? void 0 : _j.background) === null || _k === void 0 ? void 0 : _k.image) &&
                         !this.state.filterImageValidationError &&
                         !this.state.filterImageLoadError &&
-                        ((_o = (_m = this.props.filterSettings) === null || _m === void 0 ? void 0 : _m.background) === null || _o === void 0 ? void 0 : _o.imageAlpha) !== undefined &&
-                        ((_q = (_p = this.props.filterSettings) === null || _p === void 0 ? void 0 : _p.background) === null || _q === void 0 ? void 0 : _q.imageAlpha) > 0 && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                        ((_m = (_l = this.props.filterSettings) === null || _l === void 0 ? void 0 : _l.background) === null || _m === void 0 ? void 0 : _m.imageAlpha) !== undefined &&
+                        ((_p = (_o = this.props.filterSettings) === null || _o === void 0 ? void 0 : _o.background) === null || _p === void 0 ? void 0 : _p.imageAlpha) > 0 && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
                             position: 'absolute',
                             top: 0,
                             left: 0,
                             right: 0,
                             bottom: 0,
-                            background: "rgba(255,255,255,".concat((((_s = (_r = this.props.filterSettings) === null || _r === void 0 ? void 0 : _r.background) === null || _s === void 0 ? void 0 : _s.imageAlpha) || 0) / 100, ")"),
+                            background: "rgba(255,255,255,".concat((((_r = (_q = this.props.filterSettings) === null || _q === void 0 ? void 0 : _q.background) === null || _r === void 0 ? void 0 : _r.imageAlpha) || 0) / 100, ")"),
                             pointerEvents: 'none',
                             zIndex: 1
                         } })),
                     react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
                             position: 'relative',
                             zIndex: 2,
-                            textAlign: ((_u = (_t = this.props.filterSettings) === null || _t === void 0 ? void 0 : _t.font) === null || _u === void 0 ? void 0 : _u.alignment) || 'left'
+                            textAlign: ((_t = (_s = this.props.filterSettings) === null || _s === void 0 ? void 0 : _s.font) === null || _t === void 0 ? void 0 : _t.alignment) || 'left'
                         } },
-                        ((_v = this.props.filterSettings) === null || _v === void 0 ? void 0 : _v.showAllCategories) && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { className: "".concat(_FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].categoryPill, " ").concat(selectedCategory === 'all' ? _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].active : ''), style: {
-                                background: selectedCategory === 'all' ? (_x = (_w = this.props.filterSettings) === null || _w === void 0 ? void 0 : _w.activeColors) === null || _x === void 0 ? void 0 : _x.background : (_z = (_y = this.props.filterSettings) === null || _y === void 0 ? void 0 : _y.inactiveColors) === null || _z === void 0 ? void 0 : _z.background,
-                                color: selectedCategory === 'all' ? (_1 = (_0 = this.props.filterSettings) === null || _0 === void 0 ? void 0 : _0.activeColors) === null || _1 === void 0 ? void 0 : _1.font : (_3 = (_2 = this.props.filterSettings) === null || _2 === void 0 ? void 0 : _2.inactiveColors) === null || _3 === void 0 ? void 0 : _3.font,
-                                fontFamily: (_5 = (_4 = this.props.filterSettings) === null || _4 === void 0 ? void 0 : _4.font) === null || _5 === void 0 ? void 0 : _5.family,
-                                fontSize: (_7 = (_6 = this.props.filterSettings) === null || _6 === void 0 ? void 0 : _6.font) === null || _7 === void 0 ? void 0 : _7.size,
-                                fontWeight: ((_10 = (_9 = (_8 = this.props.filterSettings) === null || _8 === void 0 ? void 0 : _8.font) === null || _9 === void 0 ? void 0 : _9.formatting) === null || _10 === void 0 ? void 0 : _10.bold) ? 'bold' : 'normal',
-                                fontStyle: ((_13 = (_12 = (_11 = this.props.filterSettings) === null || _11 === void 0 ? void 0 : _11.font) === null || _12 === void 0 ? void 0 : _12.formatting) === null || _13 === void 0 ? void 0 : _13.italic) ? 'italic' : 'normal',
-                                textDecoration: this.getTextDecoration(((_15 = (_14 = this.props.filterSettings) === null || _14 === void 0 ? void 0 : _14.font) === null || _15 === void 0 ? void 0 : _15.formatting) || { bold: false, italic: false, underline: false, strikethrough: false }),
-                                borderRadius: this.getFilterBorderRadius(((_16 = this.props.filterSettings) === null || _16 === void 0 ? void 0 : _16.shape) || 'rounded'),
+                        ((_u = this.props.filterSettings) === null || _u === void 0 ? void 0 : _u.showAllCategories) && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { className: "".concat(_FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].categoryPill, " ").concat(selectedCategory === 'all' ? _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].active : ''), style: {
+                                background: selectedCategory === 'all' ? (_w = (_v = this.props.filterSettings) === null || _v === void 0 ? void 0 : _v.activeColors) === null || _w === void 0 ? void 0 : _w.background : (_y = (_x = this.props.filterSettings) === null || _x === void 0 ? void 0 : _x.inactiveColors) === null || _y === void 0 ? void 0 : _y.background,
+                                color: selectedCategory === 'all' ? (_0 = (_z = this.props.filterSettings) === null || _z === void 0 ? void 0 : _z.activeColors) === null || _0 === void 0 ? void 0 : _0.font : (_2 = (_1 = this.props.filterSettings) === null || _1 === void 0 ? void 0 : _1.inactiveColors) === null || _2 === void 0 ? void 0 : _2.font,
+                                fontFamily: (_4 = (_3 = this.props.filterSettings) === null || _3 === void 0 ? void 0 : _3.font) === null || _4 === void 0 ? void 0 : _4.family,
+                                fontSize: (_6 = (_5 = this.props.filterSettings) === null || _5 === void 0 ? void 0 : _5.font) === null || _6 === void 0 ? void 0 : _6.size,
+                                fontWeight: ((_9 = (_8 = (_7 = this.props.filterSettings) === null || _7 === void 0 ? void 0 : _7.font) === null || _8 === void 0 ? void 0 : _8.formatting) === null || _9 === void 0 ? void 0 : _9.bold) ? 'bold' : 'normal',
+                                fontStyle: ((_12 = (_11 = (_10 = this.props.filterSettings) === null || _10 === void 0 ? void 0 : _10.font) === null || _11 === void 0 ? void 0 : _11.formatting) === null || _12 === void 0 ? void 0 : _12.italic) ? 'italic' : 'normal',
+                                textDecoration: this.getTextDecoration(((_14 = (_13 = this.props.filterSettings) === null || _13 === void 0 ? void 0 : _13.font) === null || _14 === void 0 ? void 0 : _14.formatting) || { bold: false, italic: false, underline: false, strikethrough: false }),
+                                borderRadius: this.getFilterBorderRadius(((_15 = this.props.filterSettings) === null || _15 === void 0 ? void 0 : _15.shape) || 'rounded'),
                                 border: 'none',
                                 padding: '8px 16px',
                                 margin: '4px',
@@ -2398,7 +2396,7 @@ var FancyList = /** @class */ (function (_super) {
                                 }, onClick: function () { return _this.handleCategoryClick(category); } }, category));
                         }))),
                 (this.state.filterImageValidationError || this.state.filterImageLoadError ||
-                    (((_18 = (_17 = this.props.filterSettings) === null || _17 === void 0 ? void 0 : _17.background) === null || _18 === void 0 ? void 0 : _18.type) === 'image' && !((_20 = (_19 = this.props.filterSettings) === null || _19 === void 0 ? void 0 : _19.background) === null || _20 === void 0 ? void 0 : _20.image))) && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                    (((_17 = (_16 = this.props.filterSettings) === null || _16 === void 0 ? void 0 : _16.background) === null || _17 === void 0 ? void 0 : _17.type) === 'image' && !((_19 = (_18 = this.props.filterSettings) === null || _18 === void 0 ? void 0 : _18.background) === null || _19 === void 0 ? void 0 : _19.image))) && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
                         fontSize: '12px',
                         fontFamily: 'Arial, sans-serif',
                         color: '#000000',
@@ -2408,7 +2406,7 @@ var FancyList = /** @class */ (function (_super) {
                     } }, this.state.filterImageValidationError ||
                     (this.state.filterImageLoadError ? 'Unable to access URL' : '') ||
                     'Please enter an image URL')),
-                ((_21 = this.props.filterSettings) === null || _21 === void 0 ? void 0 : _21.showDivider) && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                ((_20 = this.props.filterSettings) === null || _20 === void 0 ? void 0 : _20.showDivider) && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
                         height: '2px',
                         backgroundColor: 'var(--neutralLight, #edebe9)',
                         marginTop: '12px',
@@ -2483,25 +2481,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 __webpack_require__(/*! ./FancyList.module.css */ 6837);
 var styles = {
-    fancyList: 'fancyList_0ec8ae44',
-    categoryFilters: 'categoryFilters_0ec8ae44',
-    categoryPill: 'categoryPill_0ec8ae44',
-    active: 'active_0ec8ae44',
-    itemsContainer: 'itemsContainer_0ec8ae44',
-    itemPanel: 'itemPanel_0ec8ae44',
-    itemHeader: 'itemHeader_0ec8ae44',
-    itemSubject: 'itemSubject_0ec8ae44',
-    expandIcon: 'expandIcon_0ec8ae44',
-    itemContent: 'itemContent_0ec8ae44',
-    itemDescription: 'itemDescription_0ec8ae44',
-    loading: 'loading_0ec8ae44',
-    error: 'error_0ec8ae44',
-    titleContainer: 'titleContainer_0ec8ae44',
-    titleText: 'titleText_0ec8ae44',
-    titleError: 'titleError_0ec8ae44',
-    errorTitle: 'errorTitle_0ec8ae44',
-    errorMessage: 'errorMessage_0ec8ae44',
-    titleDivider: 'titleDivider_0ec8ae44'
+    fancyList: 'fancyList_41ce5048',
+    categoryFilters: 'categoryFilters_41ce5048',
+    categoryPill: 'categoryPill_41ce5048',
+    active: 'active_41ce5048',
+    itemsContainer: 'itemsContainer_41ce5048',
+    itemPanel: 'itemPanel_41ce5048',
+    itemHeader: 'itemHeader_41ce5048',
+    itemSubject: 'itemSubject_41ce5048',
+    expandIcon: 'expandIcon_41ce5048',
+    itemContent: 'itemContent_41ce5048',
+    itemDescription: 'itemDescription_41ce5048',
+    loading: 'loading_41ce5048',
+    error: 'error_41ce5048',
+    titleContainer: 'titleContainer_41ce5048',
+    titleText: 'titleText_41ce5048',
+    titleError: 'titleError_41ce5048',
+    errorTitle: 'errorTitle_41ce5048',
+    errorMessage: 'errorMessage_41ce5048',
+    titleDivider: 'titleDivider_41ce5048'
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (styles);
 

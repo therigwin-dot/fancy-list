@@ -780,10 +780,7 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
                 position: 'relative',
                 padding: '12px',
                 marginBottom: '12px',
-                borderRadius: this.getShapeRadius(this.props.filterSettings?.backgroundShape || 'rounded'),
-                ...(this.props.filterSettings?.showDivider ? {
-                  borderBottom: 'none'  // Remove border when divider is enabled
-                } : {})
+                borderRadius: this.getShapeRadius(this.props.filterSettings?.backgroundShape || 'rounded')
               }}
             >
               {/* Layer 1: Transparency overlay for image backgrounds */}
