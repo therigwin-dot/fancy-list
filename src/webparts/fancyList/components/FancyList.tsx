@@ -881,9 +881,11 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
         <div className={styles.itemsContainer}>
           {Object.keys(this.groupItemsByCategory(this.getFilteredItems())).map((category) => {
             const items = this.groupItemsByCategory(this.getFilteredItems())[category];
+            const divideSpace = this.props.categorySectionSettings?.divideSpace ?? 0;
             return (
             <div key={category} className={styles.itemPanel} style={{
-              ...this.getCategorySectionBackgroundStyle()
+              ...this.getCategorySectionBackgroundStyle(),
+              marginBottom: `${divideSpace}px`
             }}>
               {/* Category Header */}
               <button
