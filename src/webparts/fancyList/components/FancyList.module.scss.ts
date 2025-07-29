@@ -1,25 +1,25 @@
 
 require("./FancyList.module.css");
 const styles = {
-  fancyList: 'fancyList_85f5a1aa',
-  categoryFilters: 'categoryFilters_85f5a1aa',
-  categoryPill: 'categoryPill_85f5a1aa',
-  active: 'active_85f5a1aa',
-  itemsContainer: 'itemsContainer_85f5a1aa',
-  itemPanel: 'itemPanel_85f5a1aa',
-  itemHeader: 'itemHeader_85f5a1aa',
-  itemSubject: 'itemSubject_85f5a1aa',
-  expandIcon: 'expandIcon_85f5a1aa',
-  itemContent: 'itemContent_85f5a1aa',
-  itemDescription: 'itemDescription_85f5a1aa',
-  loading: 'loading_85f5a1aa',
-  error: 'error_85f5a1aa',
-  titleContainer: 'titleContainer_85f5a1aa',
-  titleText: 'titleText_85f5a1aa',
-  titleError: 'titleError_85f5a1aa',
-  errorTitle: 'errorTitle_85f5a1aa',
-  errorMessage: 'errorMessage_85f5a1aa',
-  titleDivider: 'titleDivider_85f5a1aa'
+  fancyList: 'fancyList_2b400fc6',
+  categoryFilters: 'categoryFilters_2b400fc6',
+  categoryPill: 'categoryPill_2b400fc6',
+  active: 'active_2b400fc6',
+  itemsContainer: 'itemsContainer_2b400fc6',
+  itemPanel: 'itemPanel_2b400fc6',
+  itemHeader: 'itemHeader_2b400fc6',
+  itemSubject: 'itemSubject_2b400fc6',
+  expandIcon: 'expandIcon_2b400fc6',
+  itemContent: 'itemContent_2b400fc6',
+  itemDescription: 'itemDescription_2b400fc6',
+  loading: 'loading_2b400fc6',
+  error: 'error_2b400fc6',
+  titleContainer: 'titleContainer_2b400fc6',
+  titleText: 'titleText_2b400fc6',
+  titleError: 'titleError_2b400fc6',
+  errorTitle: 'errorTitle_2b400fc6',
+  errorMessage: 'errorMessage_2b400fc6',
+  titleDivider: 'titleDivider_2b400fc6'
 };
 
 export default styles;
