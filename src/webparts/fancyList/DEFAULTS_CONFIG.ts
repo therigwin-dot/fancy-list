@@ -164,7 +164,6 @@ export const DEFAULTS_CONFIG = {
       gradientAlpha2: 0.6
     },
     shape: 'rounded' as const,
-    showDivider: true,
     autoExpand: false,
     hoverColor: '#f3f2f1',
     iconSettings: {
@@ -195,7 +194,6 @@ export const DEFAULTS_CONFIG = {
         gradientAlpha2: 40
       },
       shape: 'pill' as const,
-      showDivider: false,
       autoExpand: true,
       hoverColor: '#ff0000',
       iconSettings: {

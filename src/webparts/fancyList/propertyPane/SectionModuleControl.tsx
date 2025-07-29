@@ -43,7 +43,6 @@ export interface SectionSettings {
     gradientAlpha2: number;
   };
   shape: 'square' | 'rounded' | 'pill';
-  showDivider: boolean;
   autoExpand: boolean;
   iconSettings: IconSettings;
 }
@@ -155,9 +154,6 @@ export const SectionModuleControl: React.FC<SectionModuleControlProps> = ({
     switch (propertyPath) {
       case 'autoExpand':
         newSettings.autoExpand = newValue;
-        break;
-      case 'showDivider':
-        newSettings.showDivider = newValue;
         break;
       case 'shape':
         newSettings.shape = newValue;
@@ -332,24 +328,6 @@ export const SectionModuleControl: React.FC<SectionModuleControlProps> = ({
               onText="On"
               offText="Off"
               onChange={(_, checked) => handlePropertyChange('autoExpand', checked)}
-            />
-          </div>
-          <div style={{ flex: 1 }}>
-            <div style={{
-              fontSize: '14px',
-              fontWeight: '600',
-              color: '#323130',
-              marginBottom: '8px'
-            }}>
-              Divider
-            </div>
-            <Toggle
-              label=""
-              inlineLabel={true}
-              checked={sectionSettings.showDivider}
-              onText="On"
-              offText="Off"
-              onChange={(_, checked) => handlePropertyChange('showDivider', checked)}
             />
           </div>
         </div>

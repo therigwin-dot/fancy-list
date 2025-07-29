@@ -119,7 +119,6 @@ export interface IFancyListProps {
       gradientAlpha2: number;
     };
     shape: 'square' | 'rounded' | 'pill';
-    showDivider: boolean;
     autoExpand: boolean;
     hoverColor: string;
     icons: {
@@ -160,7 +159,6 @@ export interface IFancyListProps {
       gradientAlpha2: number;
     };
     shape: 'square' | 'rounded' | 'pill';
-    showDivider: boolean;
     autoExpand: boolean;
     hoverColor: string;
     icons: {
@@ -201,8 +199,13 @@ export interface IFancyListProps {
       gradientAlpha2: number;
     };
     shape: 'square' | 'rounded' | 'pill';
-    showDivider: boolean;
     autoExpand: boolean;
     hoverColor: string;
+    icons: {
+      enabled: boolean;
+      iconPosition: 'left' | 'right';
+      collapsedIcon: string;
+      expandedIcon: string;
+    };
   };
 }

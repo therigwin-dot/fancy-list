@@ -209,7 +209,6 @@ export interface SectionSettings {
         gradientAlpha2: number;
     };
     shape: 'square' | 'rounded' | 'pill';
-    showDivider: boolean;
     autoExpand: boolean;
     hoverColor: string;
     iconSettings: {
@@ -244,7 +243,6 @@ export interface SectionSettings {
             gradientAlpha2: number;
         };
         shape: 'square' | 'rounded' | 'pill';
-        showDivider: boolean;
         autoExpand: boolean;
         hoverColor: string;
         iconSettings: {

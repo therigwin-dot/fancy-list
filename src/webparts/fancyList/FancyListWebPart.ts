@@ -200,7 +200,6 @@ export interface SectionSettings {
     gradientAlpha2: number;
   };
   shape: 'square' | 'rounded' | 'pill';
-  showDivider: boolean;
   autoExpand: boolean;
   hoverColor: string;
   iconSettings: {
@@ -230,7 +229,6 @@ export interface SectionSettings {
       gradientAlpha2: number;
     };
     shape: 'square' | 'rounded' | 'pill';
-    showDivider: boolean;
     autoExpand: boolean;
     hoverColor: string;
     iconSettings: {
@@ -398,7 +396,6 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
         gradientAlpha2: this.properties.categorySectionSettings?.background?.gradientAlpha2 ?? DEFAULTS_CONFIG.categorySectionSettings.background.gradientAlpha2
       },
       shape: this.properties.categorySectionSettings?.shape ?? DEFAULTS_CONFIG.categorySectionSettings.shape,
-      showDivider: this.properties.categorySectionSettings?.showDivider ?? DEFAULTS_CONFIG.categorySectionSettings.showDivider,
       autoExpand: this.properties.categorySectionSettings?.autoExpand ?? DEFAULTS_CONFIG.categorySectionSettings.autoExpand,
       hoverColor: this.properties.categorySectionSettings?.hoverColor ?? DEFAULTS_CONFIG.categorySectionSettings.hoverColor,
       icons: {
@@ -434,7 +431,6 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
         gradientAlpha2: this.properties.subjectSectionSettings?.background?.gradientAlpha2 ?? DEFAULTS_CONFIG.subjectSectionSettings.background.gradientAlpha2
       },
       shape: this.properties.subjectSectionSettings?.shape ?? DEFAULTS_CONFIG.subjectSectionSettings.shape,
-      showDivider: this.properties.subjectSectionSettings?.showDivider ?? DEFAULTS_CONFIG.subjectSectionSettings.showDivider,
       autoExpand: this.properties.subjectSectionSettings?.autoExpand ?? DEFAULTS_CONFIG.subjectSectionSettings.autoExpand,
       hoverColor: this.properties.subjectSectionSettings?.hoverColor ?? DEFAULTS_CONFIG.subjectSectionSettings.hoverColor,
       icons: {
@@ -470,9 +466,14 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
         gradientAlpha2: this.properties.descriptionSectionSettings?.background?.gradientAlpha2 ?? DEFAULTS_CONFIG.descriptionSectionSettings.background.gradientAlpha2
       },
       shape: this.properties.descriptionSectionSettings?.shape ?? DEFAULTS_CONFIG.descriptionSectionSettings.shape,
-      showDivider: this.properties.descriptionSectionSettings?.showDivider ?? DEFAULTS_CONFIG.descriptionSectionSettings.showDivider,
       autoExpand: this.properties.descriptionSectionSettings?.autoExpand ?? DEFAULTS_CONFIG.descriptionSectionSettings.autoExpand,
-      hoverColor: this.properties.descriptionSectionSettings?.hoverColor ?? DEFAULTS_CONFIG.descriptionSectionSettings.hoverColor
+      hoverColor: this.properties.descriptionSectionSettings?.hoverColor ?? DEFAULTS_CONFIG.descriptionSectionSettings.hoverColor,
+      icons: {
+        enabled: this.properties.descriptionSectionSettings?.iconSettings?.enabled ?? DEFAULTS_CONFIG.descriptionSectionSettings.iconSettings.enabled,
+        iconPosition: this.properties.descriptionSectionSettings?.iconSettings?.iconPosition ?? DEFAULTS_CONFIG.descriptionSectionSettings.iconSettings.iconPosition,
+        collapsedIcon: this.properties.descriptionSectionSettings?.iconSettings?.collapsedIcon ?? DEFAULTS_CONFIG.descriptionSectionSettings.iconSettings.collapsedIcon,
+        expandedIcon: this.properties.descriptionSectionSettings?.iconSettings?.expandedIcon ?? DEFAULTS_CONFIG.descriptionSectionSettings.iconSettings.expandedIcon
+      }
     };
 
     const element: React.ReactElement<IFancyListProps> = React.createElement(

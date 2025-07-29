@@ -40,7 +40,6 @@ export declare const DEFAULTS_CONFIG: {
             gradientAlpha2: number;
         };
         shape: "rounded";
-        showDivider: boolean;
         autoExpand: boolean;
         hoverColor: string;
         iconSettings: {
@@ -75,7 +74,6 @@ export declare const DEFAULTS_CONFIG: {
                 gradientAlpha2: number;
             };
             shape: "pill";
-            showDivider: boolean;
             autoExpand: boolean;
             hoverColor: string;
             iconSettings: {

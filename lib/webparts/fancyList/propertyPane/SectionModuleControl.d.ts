@@ -35,7 +35,6 @@ export interface SectionSettings {
         gradientAlpha2: number;
     };
     shape: 'square' | 'rounded' | 'pill';
-    showDivider: boolean;
     autoExpand: boolean;
     iconSettings: IconSettings;
 }
