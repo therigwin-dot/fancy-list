@@ -1,40 +1,31 @@
-# FancyList Project Workflow Definitions
+# Workflow Definitions
 
-This document defines the standardized meanings and procedures for common workflow requests in the FancyList project.
+## **🔄 "Process It" Workflow**
 
----
+### **📋 4-Step Control Change Process**
+1. **Add Setting** - Add the setting in the default settings TS file
+2. **Create Control** - Create the control in the module (not attached to the UI)
+3. **Test Manipulation** - Test manipulation and the reset button
+4. **Link to UI** - Link the control to the UI after user testing
 
-## SectionModuleControl (Unified Section Styling)
-- All Category and Subject section styling is now managed by a single, reusable SectionModuleControl.
-- Controls include: Background (with mode, color, gradient, image, transparency, etc.), Font, Shape, Expand/Collapse, Hover Color, Divider Toggle.
-- Default values differ for Category and Subject, but the control set is identical.
+### **🛠️ Detailed Implementation Workflow**
+**"Process It" Method:**
+1. **Plan It** - Create detailed plan for the feature/change
+2. **Document It** - Document the plan in MD files
+3. **Git Backup** - Create git backup before coding
+4. **Code It** - Implement the code changes
+5. **Bug Fix It** - Fix any issues that arise
+6. **Document Fixes** - Document the actual changes and fixes
+7. **Git Backup** - Create git backup after fixes
+8. **Test It** - User tests if needed in the phase, otherwise proceed to next phase
 
----
+### **🎯 Phase-Based Testing Strategy**
+- **Phase 1**: Implement data structure changes, test with console output
+- **Phase 2**: Implement detection methods, test with console logs
+- **Phase 3**: Implement rendering methods, **MAIN VISUAL TESTING POINT**
+- **Phase 4**: Implement error handling, test error scenarios
 
-## 1. Fix Code
-- **Definition:**
-  - The AI will fix code files as needed.
-  - All changes will be presented for user approval (using the keep button).
-
----
-
-## 2. Fix Bugs
-- **Definition:**
-  - The AI will run `gulp build` to build/test the project.
-  - Any bugs or errors found will be fixed.
-  - The process will be repeated until no bugs remain and the build is clean.
-
----
-
-### Benchmark Test (Updated July 2025)
-- Do NOT kill or restart gulp serve automatically. The user will confirm if it is stopped.
-- Only start gulp serve if needed.
-- You may restart Microsoft Edge and launch it to the SharePoint Online Workbench as part of the test procedure.
-- This replaces the previous step to always kill gulp serve before starting.
-
----
-
-## Notes
-- These definitions are followed consistently for all future requests.
-- If you want to update or clarify any workflow, update this document and notify the AI.
-- See SectionModuleControl documentation for all section styling options. 
+### **📊 Testing Checkpoints**
+- **Console Testing**: Check for proper data loading and detection
+- **Visual Testing**: Verify different content types render correctly
+- **Error Testing**: Verify error handling works appropriately 
