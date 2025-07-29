@@ -56,6 +56,25 @@
 - **Status**: ✅ **COMPLETE** - Applied to all major sections
 - **Impact**: High - Advanced spacing control replacing simple toggles
 
+### **✅ Auto-Expand Implementation**
+- **Feature**: Complete auto-expand functionality for Category and Subject sections
+- **Scope**: Category and Subject sections with hierarchical behavior coordination
+- **Components**: 
+  - `applyCategoryAutoExpand()` - Handles category auto-expand logic
+  - `applySubjectAutoExpand()` - Handles subject auto-expand logic
+  - Category auto-expand: All categories start expanded when enabled
+  - Subject auto-expand: Subjects expand when category opens (if enabled)
+  - Hierarchical coordination: Category and subject auto-expand work together
+  - Manual override: User clicks override auto-expand behavior
+  - Settings changes: Auto-expand responds to property pane changes
+- **Status**: ✅ **COMPLETED** - All functionality working as expected
+- **Behavior Matrix**:
+  - Category OFF + Subject OFF: Everything collapsed (default)
+  - Category ON + Subject OFF: Categories expanded, subjects collapsed
+  - Category OFF + Subject ON: Categories collapsed, subjects expand when category opened
+  - Category ON + Subject ON: Everything expanded
+- **Impact**: High - Complete auto-expand functionality with hierarchical coordination
+
 ---
 
 ## **FontControl - Enter Key Focus Issue**
