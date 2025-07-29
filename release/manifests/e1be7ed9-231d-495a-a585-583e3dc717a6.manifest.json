@@ -25,6 +25,7 @@
         "default": "Display items from any SharePoint list with category filtering and collapsible panels"
       },
       "officeFabricIconFontName": "BulletedTreeList",
+      "imageUrl": "https://therigwin-dot.github.io/fancy-list/assets/fancy-list-preview.png",
       "properties": {
         "description": "Fancy List"
       }

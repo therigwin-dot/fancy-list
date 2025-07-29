@@ -38046,7 +38046,7 @@ var FancyListWebPart = /** @class */ (function (_super) {
                                                     color: '#323130',
                                                     lineHeight: '1.4'
                                                 }
-                                            }, __spreadArray(__spreadArray(__spreadArray([
+                                            }, [
                                                 // About Header
                                                 react__WEBPACK_IMPORTED_MODULE_0__.createElement('div', {
                                                     key: 'aboutHeader',
@@ -38077,50 +38077,264 @@ var FancyListWebPart = /** @class */ (function (_super) {
                                                         marginBottom: '16px'
                                                     }
                                                 }, _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.description),
-                                                // Features Header
+                                                // Features Collapsible Section
                                                 react__WEBPACK_IMPORTED_MODULE_0__.createElement('div', {
-                                                    key: 'featuresHeader',
+                                                    key: 'featuresSection',
+                                                    style: {
+                                                        marginTop: '16px',
+                                                        border: '1px solid #e1dfdd',
+                                                        borderRadius: '4px',
+                                                        overflow: 'hidden'
+                                                    }
+                                                }, [
+                                                    // Features Header (Clickable)
+                                                    react__WEBPACK_IMPORTED_MODULE_0__.createElement('div', {
+                                                        key: 'featuresHeader',
+                                                        style: {
+                                                            fontSize: '16px',
+                                                            fontWeight: '600',
+                                                            color: '#323130',
+                                                            padding: '8px 12px',
+                                                            backgroundColor: '#f3f2f1',
+                                                            cursor: 'pointer',
+                                                            display: 'flex',
+                                                            alignItems: 'center',
+                                                            justifyContent: 'space-between'
+                                                        },
+                                                        onClick: function () {
+                                                            var content = document.getElementById('featuresContent');
+                                                            var icon = document.getElementById('featuresIcon');
+                                                            if (content && icon) {
+                                                                if (content.style.display === 'none') {
+                                                                    content.style.display = 'block';
+                                                                    icon.textContent = '▼';
+                                                                }
+                                                                else {
+                                                                    content.style.display = 'none';
+                                                                    icon.textContent = '▶';
+                                                                }
+                                                            }
+                                                        }
+                                                    }, [
+                                                        'Features',
+                                                        react__WEBPACK_IMPORTED_MODULE_0__.createElement('span', {
+                                                            key: 'featuresIcon',
+                                                            id: 'featuresIcon',
+                                                            style: { fontSize: '12px' }
+                                                        }, '▶')
+                                                    ]),
+                                                    // Features Content (Collapsed by default)
+                                                    react__WEBPACK_IMPORTED_MODULE_0__.createElement('div', {
+                                                        key: 'featuresContent',
+                                                        id: 'featuresContent',
+                                                        style: {
+                                                            display: 'none',
+                                                            padding: '8px 12px',
+                                                            backgroundColor: '#ffffff'
+                                                        }
+                                                    }, _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.features.map(function (feature, index) {
+                                                        return react__WEBPACK_IMPORTED_MODULE_0__.createElement('div', {
+                                                            key: "feature".concat(index),
+                                                            style: {
+                                                                fontSize: '14px',
+                                                                fontWeight: '400',
+                                                                color: '#323130',
+                                                                marginBottom: '2px'
+                                                            }
+                                                        }, "\u2022 ".concat(feature));
+                                                    }))
+                                                ]),
+                                                // Known Issues Collapsible Section
+                                                react__WEBPACK_IMPORTED_MODULE_0__.createElement('div', {
+                                                    key: 'knownIssuesSection',
+                                                    style: {
+                                                        marginTop: '16px',
+                                                        border: '1px solid #e1dfdd',
+                                                        borderRadius: '4px',
+                                                        overflow: 'hidden'
+                                                    }
+                                                }, [
+                                                    // Known Issues Header (Clickable)
+                                                    react__WEBPACK_IMPORTED_MODULE_0__.createElement('div', {
+                                                        key: 'knownIssuesHeader',
+                                                        style: {
+                                                            fontSize: '16px',
+                                                            fontWeight: '600',
+                                                            color: '#323130',
+                                                            padding: '8px 12px',
+                                                            backgroundColor: '#f3f2f1',
+                                                            cursor: 'pointer',
+                                                            display: 'flex',
+                                                            alignItems: 'center',
+                                                            justifyContent: 'space-between'
+                                                        },
+                                                        onClick: function () {
+                                                            var content = document.getElementById('knownIssuesContent');
+                                                            var icon = document.getElementById('knownIssuesIcon');
+                                                            if (content && icon) {
+                                                                if (content.style.display === 'none') {
+                                                                    content.style.display = 'block';
+                                                                    icon.textContent = '▼';
+                                                                }
+                                                                else {
+                                                                    content.style.display = 'none';
+                                                                    icon.textContent = '▶';
+                                                                }
+                                                            }
+                                                        }
+                                                    }, [
+                                                        'Known Issues',
+                                                        react__WEBPACK_IMPORTED_MODULE_0__.createElement('span', {
+                                                            key: 'knownIssuesIcon',
+                                                            id: 'knownIssuesIcon',
+                                                            style: { fontSize: '12px' }
+                                                        }, '▶')
+                                                    ]),
+                                                    // Known Issues Content (Collapsed by default)
+                                                    react__WEBPACK_IMPORTED_MODULE_0__.createElement('div', {
+                                                        key: 'knownIssuesContent',
+                                                        id: 'knownIssuesContent',
+                                                        style: {
+                                                            display: 'none',
+                                                            padding: '8px 12px',
+                                                            backgroundColor: '#ffffff'
+                                                        }
+                                                    }, _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.knownIssues.map(function (issue, index) {
+                                                        return react__WEBPACK_IMPORTED_MODULE_0__.createElement('div', {
+                                                            key: "issue".concat(index),
+                                                            style: {
+                                                                fontSize: '14px',
+                                                                fontWeight: '400',
+                                                                color: '#323130',
+                                                                marginBottom: '2px'
+                                                            }
+                                                        }, "\u2022 ".concat(issue));
+                                                    }))
+                                                ]),
+                                                // Administrative Links Header
+                                                react__WEBPACK_IMPORTED_MODULE_0__.createElement('div', {
+                                                    key: 'adminLinksHeader',
                                                     style: {
                                                         fontSize: '16px',
                                                         fontWeight: '600',
                                                         color: '#323130',
                                                         marginTop: '16px',
-                                                        marginBottom: '4px'
+                                                        marginBottom: '8px'
                                                     }
-                                                }, 'Features')
-                                            ], _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.features.map(function (feature, index) {
-                                                return react__WEBPACK_IMPORTED_MODULE_0__.createElement('div', {
-                                                    key: "feature".concat(index),
+                                                }, 'Administrative Resources'),
+                                                // Documentation Link
+                                                react__WEBPACK_IMPORTED_MODULE_0__.createElement('a', {
+                                                    key: 'docsLink',
+                                                    href: 'https://therigwin-dot.github.io/fancy-list/',
+                                                    target: '_blank',
                                                     style: {
                                                         fontSize: '14px',
                                                         fontWeight: '400',
-                                                        color: '#323130',
-                                                        marginBottom: '2px'
-                                                    }
-                                                }, "\u2022 ".concat(feature));
-                                            }), true), [
-                                                // Known Issues Header
+                                                        color: '#0078d4',
+                                                        textDecoration: 'none',
+                                                        display: 'block',
+                                                        marginBottom: '4px'
+                                                    },
+                                                    onMouseEnter: function (e) { e.target.style.textDecoration = 'underline'; },
+                                                    onMouseLeave: function (e) { e.target.style.textDecoration = 'none'; }
+                                                }, '📋 Documentation & Support'),
+                                                // Terms of Use Link
+                                                react__WEBPACK_IMPORTED_MODULE_0__.createElement('a', {
+                                                    key: 'termsLink',
+                                                    href: 'https://therigwin-dot.github.io/fancy-list/terms-of-use.html',
+                                                    target: '_blank',
+                                                    style: {
+                                                        fontSize: '14px',
+                                                        fontWeight: '400',
+                                                        color: '#0078d4',
+                                                        textDecoration: 'none',
+                                                        display: 'block',
+                                                        marginBottom: '4px'
+                                                    },
+                                                    onMouseEnter: function (e) { e.target.style.textDecoration = 'underline'; },
+                                                    onMouseLeave: function (e) { e.target.style.textDecoration = 'none'; }
+                                                }, '📄 Terms of Use'),
+                                                // Privacy Policy Link
+                                                react__WEBPACK_IMPORTED_MODULE_0__.createElement('a', {
+                                                    key: 'privacyLink',
+                                                    href: 'https://therigwin-dot.github.io/fancy-list/privacy-policy.html',
+                                                    target: '_blank',
+                                                    style: {
+                                                        fontSize: '14px',
+                                                        fontWeight: '400',
+                                                        color: '#0078d4',
+                                                        textDecoration: 'none',
+                                                        display: 'block',
+                                                        marginBottom: '4px'
+                                                    },
+                                                    onMouseEnter: function (e) { e.target.style.textDecoration = 'underline'; },
+                                                    onMouseLeave: function (e) { e.target.style.textDecoration = 'none'; }
+                                                }, '🔒 Privacy Policy'),
+                                                // Deployment Guide Link
+                                                react__WEBPACK_IMPORTED_MODULE_0__.createElement('a', {
+                                                    key: 'deploymentLink',
+                                                    href: 'https://therigwin-dot.github.io/fancy-list/deployment-guide.html',
+                                                    target: '_blank',
+                                                    style: {
+                                                        fontSize: '14px',
+                                                        fontWeight: '400',
+                                                        color: '#0078d4',
+                                                        textDecoration: 'none',
+                                                        display: 'block',
+                                                        marginBottom: '4px'
+                                                    },
+                                                    onMouseEnter: function (e) { e.target.style.textDecoration = 'underline'; },
+                                                    onMouseLeave: function (e) { e.target.style.textDecoration = 'none'; }
+                                                }, '🚀 Deployment Guide'),
+                                                // Contact Information
                                                 react__WEBPACK_IMPORTED_MODULE_0__.createElement('div', {
-                                                    key: 'knownIssuesHeader',
+                                                    key: 'contactHeader',
                                                     style: {
                                                         fontSize: '16px',
                                                         fontWeight: '600',
                                                         color: '#323130',
                                                         marginTop: '16px',
-                                                        marginBottom: '4px'
+                                                        marginBottom: '8px'
                                                     }
-                                                }, 'Known Issues')
-                                            ], false), _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.knownIssues.map(function (issue, index) {
-                                                return react__WEBPACK_IMPORTED_MODULE_0__.createElement('div', {
-                                                    key: "issue".concat(index),
+                                                }, 'Internal Contact Information'),
+                                                // Developer Info
+                                                react__WEBPACK_IMPORTED_MODULE_0__.createElement('div', {
+                                                    key: 'developerInfo',
                                                     style: {
                                                         fontSize: '14px',
                                                         fontWeight: '400',
                                                         color: '#323130',
-                                                        marginBottom: '2px'
+                                                        marginBottom: '4px'
                                                     }
-                                                }, "\u2022 ".concat(issue));
-                                            }), true)), elem);
+                                                }, 'Developer: Tom Keyes'),
+                                                // Contact Email
+                                                react__WEBPACK_IMPORTED_MODULE_0__.createElement('a', {
+                                                    key: 'contactEmail',
+                                                    href: 'mailto:tkeyes@fbinmsi.com',
+                                                    style: {
+                                                        fontSize: '14px',
+                                                        fontWeight: '400',
+                                                        color: '#0078d4',
+                                                        textDecoration: 'none',
+                                                        display: 'block',
+                                                        marginBottom: '4px'
+                                                    },
+                                                    onMouseEnter: function (e) { e.target.style.textDecoration = 'underline'; },
+                                                    onMouseLeave: function (e) { e.target.style.textDecoration = 'none'; }
+                                                }, '📧 Contact: tkeyes@fbinmsi.com'),
+                                                // M365 Profile Note
+                                                react__WEBPACK_IMPORTED_MODULE_0__.createElement('div', {
+                                                    key: 'm365Note',
+                                                    style: {
+                                                        fontSize: '12px',
+                                                        fontWeight: '400',
+                                                        color: '#605e5c',
+                                                        fontStyle: 'italic',
+                                                        marginTop: '4px',
+                                                        marginBottom: '8px'
+                                                    }
+                                                }, 'Note: Clicking the email will open your M365 profile card')
+                                            ]), elem);
                                         },
                                         onDispose: function (elem) {
                                             react_dom__WEBPACK_IMPORTED_MODULE_1__.unmountComponentAtNode(elem);
