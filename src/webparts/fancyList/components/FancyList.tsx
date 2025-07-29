@@ -991,7 +991,8 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
                       marginBottom: `${divideSpace}px`,
                       border: 'none', // Remove the white border
                       borderRadius: '0', // Remove rounded corners
-                      boxShadow: 'none' // Remove the shadow
+                      boxShadow: 'none', // Remove the shadow
+                      ...this.getSubjectSectionBackgroundStyle() // Move background to wrapper div
                     }}>
                       <button
                         className={`${styles.itemHeader} ${isItemExpanded ? styles.expanded : ''}`}
@@ -1003,7 +1004,8 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
                           justifyContent: 'space-between',
                           width: '100%',
                           padding: '1em', // Explicit padding to override CSS class
-                          ...this.getSubjectSectionBackgroundStyle()
+                          background: 'transparent', // Remove background from button
+                          border: 'none' // Ensure no border on button
                         }}
                       >
                         <span 
