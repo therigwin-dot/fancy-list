@@ -439,28 +439,28 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     switch (backgroundType) {
       case 'solid':
         return {
-          backgroundColor: this.hexToRgba(backgroundColor, 1 - (backgroundAlpha / 100)), // Invert alpha: 0% = opaque (alpha 1), 100% = transparent (alpha 0)
+          backgroundColor: `${this.hexToRgba(backgroundColor, 1 - (backgroundAlpha / 100))} !important`, // Invert alpha: 0% = opaque (alpha 1), 100% = transparent (alpha 0)
           borderRadius: this.getShapeRadius(shape),
           ...baseOverrides
         };
       case 'gradient':
         return {
-          background: this.getGradientStyle(gradientDirection, gradientColor1, gradientColor2, 1 - (gradientAlpha / 100)), // Invert alpha: 0% = opaque (alpha 1), 100% = transparent (alpha 0)
+          background: `${this.getGradientStyle(gradientDirection, gradientColor1, gradientColor2, 1 - (gradientAlpha / 100))} !important`, // Invert alpha: 0% = opaque (alpha 1), 100% = transparent (alpha 0)
           borderRadius: this.getShapeRadius(shape),
           ...baseOverrides
         };
       case 'image':
         if (imageUrl) {
           return {
-            background: `linear-gradient(rgba(255,255,255,${imageAlpha / 100}), rgba(255,255,255,${imageAlpha / 100})), url(${imageUrl})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
+            background: `linear-gradient(rgba(255,255,255,${imageAlpha / 100}), rgba(255,255,255,${imageAlpha / 100})), url(${imageUrl}) !important`,
+            backgroundSize: 'cover !important',
+            backgroundPosition: 'center !important',
             borderRadius: this.getShapeRadius(shape),
             ...baseOverrides
           };
         } else {
           return {
-            backgroundColor: '#ffffff', // Simple white background for empty/invalid URLs
+            backgroundColor: '#ffffff !important', // Simple white background for empty/invalid URLs
             borderRadius: this.getShapeRadius(shape),
             ...baseOverrides
           };
