@@ -882,6 +882,7 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
           {Object.keys(this.groupItemsByCategory(this.getFilteredItems())).map((category) => {
             const items = this.groupItemsByCategory(this.getFilteredItems())[category];
             const divideSpace = this.props.categorySectionSettings?.divideSpace ?? 0;
+            const isCategoryExpanded = this.state.expandedCategories.has(category);
             return (
             <div key={category} className={styles.itemPanel} style={{
               ...this.getCategorySectionBackgroundStyle(),
@@ -889,9 +890,9 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
             }}>
               {/* Category Header */}
               <button
-                className={styles.itemHeader}
+                className={`${styles.itemHeader} ${isCategoryExpanded ? styles.expanded : ''}`}
                 onClick={() => this.handleCategoryToggle(category)}
-                aria-expanded={this.state.expandedCategories.has(category) ? "true" : "false"}
+                aria-expanded={isCategoryExpanded ? "true" : "false"}
                 style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -917,7 +918,7 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
                       marginRight: this.props.categorySectionSettings.icons.iconPosition === 'left' ? '8px' : '0'
                     }}
                   >
-                    {this.state.expandedCategories.has(category) 
+                    {isCategoryExpanded 
                       ? (this.props.categorySectionSettings.icons.expandedIcon || '−')
                       : (this.props.categorySectionSettings.icons.collapsedIcon || '+')
                     }
@@ -926,14 +927,16 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
               </button>
               
               {/* Subject Items within Category */}
-              {this.state.expandedCategories.has(category) && (
+              {isCategoryExpanded && (
                 <div className={styles.itemContent}>
-                  {items.map((item: IListItem) => (
+                  {items.map((item: IListItem) => {
+                    const isItemExpanded = this.state.expandedItems.has(item.id);
+                    return (
                     <div key={item.id} className={styles.itemPanel}>
                       <button
-                        className={styles.itemHeader}
+                        className={`${styles.itemHeader} ${isItemExpanded ? styles.expanded : ''}`}
                         onClick={() => this.handleItemToggle(item.id)}
-                        aria-expanded={this.state.expandedItems.has(item.id) ? "true" : "false"}
+                        aria-expanded={isItemExpanded ? "true" : "false"}
                         style={{
                           display: 'flex',
                           alignItems: 'center',
@@ -957,14 +960,14 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
                               marginRight: this.props.subjectSectionSettings.icons.iconPosition === 'left' ? '8px' : '0'
                             }}
                           >
-                            {this.state.expandedItems.has(item.id) 
+                            {isItemExpanded 
                               ? (this.props.subjectSectionSettings.icons.expandedIcon || '−')
                               : (this.props.subjectSectionSettings.icons.collapsedIcon || '+')
                             }
                           </span>
                         )}
                       </button>
-                      {this.state.expandedItems.has(item.id) && (
+                      {isItemExpanded && (
                         <div className={styles.itemContent}>
                           <div 
                             className={styles.itemDescription}
@@ -974,7 +977,7 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
                         </div>
                       )}
                     </div>
-                  ))}
+                  )})}
                 </div>
               )}
             </div>

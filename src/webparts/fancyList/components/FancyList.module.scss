@@ -71,6 +71,13 @@
     transform: scale(1.02);
     box-shadow: 0 4px 12px rgba(0, 120, 212, 0.3), 0 2px 4px rgba(0, 0, 0, 0.1);
   }
+  &.expanded {
+    &:hover, &:focus {
+      background: var(--neutralLighter, #f3f2f1);
+      transform: scale(1.02);
+      box-shadow: 0 4px 12px rgba(0, 120, 212, 0.3), 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+  }
 }
 
 .itemSubject {

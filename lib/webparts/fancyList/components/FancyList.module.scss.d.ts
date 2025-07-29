@@ -6,6 +6,7 @@ declare const styles: {
     itemsContainer: string;
     itemPanel: string;
     itemHeader: string;
+    expanded: string;
     itemSubject: string;
     expandIcon: string;
     itemContent: string;
