@@ -54,6 +54,32 @@
 - ✅ **Button is transparent** - No border, no background, clean appearance
 - ✅ **Better separation of concerns** - Background on container, functionality on button
 - ✅ **Cleaner styling** - No button styling conflicts with background
+- ✅ **Shape Control integration** - Border-radius styling applied to container div instead of button
+
+---
+
+### **🎯 SHAPE CONTROL INTEGRATION**
+
+#### **Current Shape Control Behavior:**
+- **Shape settings** (square, rounded, pill) currently affect button border-radius
+- **Button** gets the border-radius styling from shape control
+- **Container div** has no shape styling applied
+
+#### **Target Shape Control Behavior:**
+- **Shape settings** (square, rounded, pill) should affect container div border-radius
+- **Container div** gets the border-radius styling from shape control
+- **Button** remains transparent with no border-radius styling
+
+#### **Shape Control Values:**
+- **Square**: `border-radius: 0px` (or no border-radius)
+- **Rounded**: `border-radius: 4px` (or similar small radius)
+- **Pill**: `border-radius: 20px` (or large radius for pill shape)
+
+#### **Implementation Requirements:**
+1. **Move border-radius from button to container** - Apply shape styling to container div
+2. **Update shape control logic** - Ensure shape settings target container div
+3. **Preserve button transparency** - Button should have no border-radius styling
+4. **Test all shape options** - Verify square, rounded, and pill shapes work correctly
 
 ---
 
@@ -80,6 +106,8 @@
 1. **Remove background from button** - Clear all background-related styles
 2. **Add background to container div** - Apply the same background styling to `itemPanel_85f5a1aa`
 3. **Make button transparent** - Add `background: transparent; border: none;`
+4. **Move border-radius to container** - Apply shape control border-radius to container div
+5. **Remove border-radius from button** - Clear border-radius styling from button
 
 #### **Phase 3: Test and Verify**
 **Goal:** Ensure functionality remains intact while styling is moved
@@ -90,6 +118,8 @@
 3. **Text visibility** - Text remains visible and properly styled
 4. **Icon display** - Expand/collapse icon displays correctly
 5. **Responsive behavior** - Layout works on different screen sizes
+6. **Shape control testing** - Square, rounded, and pill shapes apply to container div
+7. **Shape control interaction** - Changing shape in property pane updates container border-radius
 
 ---
 
@@ -135,6 +165,8 @@
 - ✅ Button appears transparent with no border
 - ✅ Text and icon remain visible and properly positioned
 - ✅ Overall layout looks clean and professional
+- ✅ Shape control affects container div border-radius correctly
+- ✅ All shape options (square, rounded, pill) work properly
 
 #### **Functional Success:**
 - ✅ Expand/collapse functionality works correctly
