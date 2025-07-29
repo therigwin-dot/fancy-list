@@ -897,7 +897,10 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
             const items = this.groupItemsByCategory(this.getFilteredItems())[category];
             return (
             <div key={category} className={styles.itemPanel} style={{
-              ...this.getCategorySectionBackgroundStyle()
+              ...this.getCategorySectionBackgroundStyle(),
+              ...(this.props.categorySectionSettings?.showDivider ? {
+                borderBottom: '2px solid var(--neutralLight, #edebe9)'
+              } : {})
             }}>
               {/* Category Header */}
               <button
@@ -939,7 +942,13 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
               
               {/* Subject Items within Category */}
               {this.state.expandedCategories.has(category) && (
-                <div className={styles.itemContent}>
+                <div className={styles.itemContent} style={{
+                  ...(this.props.categorySectionSettings?.showDivider ? {
+                    borderTop: '2px solid var(--neutralLight, #edebe9)'
+                  } : {
+                    borderTop: 'none'
+                  })
+                }}>
                   {items.map((item: IListItem) => (
                     <div key={item.id} className={styles.itemPanel}>
                       <button

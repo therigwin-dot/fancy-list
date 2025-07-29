@@ -14,7 +14,7 @@
   gap: 0.5em;
   margin-bottom: 1em;
   padding-bottom: 0.5em;
-  border-bottom: 1px solid var(--neutralLight, #edebe9);
+  border-bottom: 2px solid var(--neutralLight, #edebe9);
 }
 
 .categoryPill {
@@ -85,7 +85,7 @@
 
 .itemContent {
   padding: 1em;
-  border-top: 1px solid var(--neutralLight, #edebe9);
+  border-top: 2px solid var(--neutralLight, #edebe9);
 }
 
 .itemDescription {
@@ -132,8 +132,8 @@
 }
 
 .titleDivider {
-  height: 1px;
-  background-color: rgba(0, 0, 0, 0.1);
+  height: 2px;
+  background-color: var(--neutralLight, #edebe9);
   margin-top: 12px;
 }
 

@@ -16,29 +16,29 @@ __webpack_require__.r(__webpack_exports__);
 // Imports
 
 
-_node_modules_microsoft_sp_css_loader_node_modules_microsoft_load_themed_styles_lib_es6_index_js__WEBPACK_IMPORTED_MODULE_0__.loadStyles(".fancyList_528a5b18{background:var(--background,#fff);color:var(--bodyText,#323130);font-family:Segoe UI,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;padding:1em}.categoryFilters_528a5b18{border-bottom:1px solid var(--neutralLight,#edebe9);display:flex;flex-wrap:nowrap;gap:.5em;margin-bottom:1em;overflow-x:auto;padding-bottom:.5em}.categoryPill_528a5b18{background:var(--neutralLighter,#f3f2f1);border:1px solid var(--neutralLight,#edebe9);border-radius:999px;color:var(--bodyText,#323130);cursor:pointer;display:inline-block;font-weight:500;outline:0;padding:.4em 1.2em;transition:background .2s,color .2s,border .2s}.categoryPill_528a5b18:focus,.categoryPill_528a5b18:hover{background:var(--themeLighter,#e5f1fb);border-color:var(--themePrimary,#0078d4);color:var(--themePrimary,#0078d4)}.categoryPill_528a5b18.active_528a5b18{background:var(--themePrimary,#0078d4);border-color:var(--themePrimary,#0078d4);color:var(--white,#fff)}.itemsContainer_528a5b18{display:flex;flex-direction:column;gap:.7em}.itemPanel_528a5b18{border:1px solid var(--neutralLight,#edebe9);border-radius:6px;box-shadow:0 1px 3px rgba(0,0,0,.04);overflow:hidden}.itemHeader_528a5b18{align-items:center;background:0 0;border:none;color:var(--bodyText,#323130);cursor:pointer;display:flex;font-size:1.1em;font-weight:600;justify-content:space-between;outline:0;padding:1em;text-align:left;transition:background .2s;width:100%}.itemHeader_528a5b18:focus,.itemHeader_528a5b18:hover{background:var(--neutralLighter,#f3f2f1)}.itemSubject_528a5b18{flex:1 1 auto}.expandIcon_528a5b18{color:var(--themePrimary,#0078d4);font-size:1.3em;margin-left:1em}.itemContent_528a5b18{border-top:1px solid var(--neutralLight,#edebe9);padding:1em}.itemDescription_528a5b18{color:var(--bodyText,#323130);font-size:1em}.error_528a5b18,.loading_528a5b18{color:var(--themePrimary,#0078d4);font-size:1.1em;padding:2em 0;text-align:center}.titleContainer_528a5b18{border-radius:4px;margin-bottom:16px;padding:12px 16px;position:relative}.titleText_528a5b18{line-height:1.4;margin:0;padding:0}.titleError_528a5b18{padding:8px;text-align:center}.errorTitle_528a5b18{color:#d13438;font-weight:700;margin-bottom:4px}.errorMessage_528a5b18{color:#605e5c;font-size:12px;line-height:1.3}.titleDivider_528a5b18{background-color:rgba(0,0,0,.1);height:1px;margin-top:12px}@media (max-width:600px){.categoryFilters_528a5b18{font-size:.95em;gap:.2em}.itemContent_528a5b18,.itemHeader_528a5b18{padding:.7em}}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImZpbGU6Ly8vb3B0L2N1cnNvci1wcm9qZWN0cy9GYW5jeUxpc3Qvc3JjL3dlYnBhcnRzL2ZhbmN5TGlzdC9jb21wb25lbnRzL0ZhbmN5TGlzdC5tb2R1bGUuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFFQSxvQkFHRSxpQ0FBQSxDQURBLDZCQUFBLENBRUEsc0ZBQUEsQ0FIQSxXQUdBLENBR0YsMEJBT0UsbURBQUEsQ0FOQSxZQUFBLENBQ0EsZ0JBQUEsQ0FFQSxRQUFBLENBQ0EsaUJBQUEsQ0FGQSxlQUFBLENBR0EsbUJBQ0EsQ0FHRix1QkFLRSx3Q0FBQSxDQURBLDRDQUFBLENBREEsbUJBQUEsQ0FHQSw2QkFBQSxDQUVBLGNBQUEsQ0FQQSxvQkFBQSxDQU1BLGVBQUEsQ0FHQSxTQUFBLENBUkEsa0JBQUEsQ0FPQSw4Q0FDQSxDQUNBLDBEQUNFLHNDQUFBLENBQ0Esd0NBQUEsQ0FDQSxpQ0FBQSxDQUVGLHVDQUNFLHNDQUFBLENBRUEsd0NBQUEsQ0FEQSx1QkFDQSxDQUlKLHlCQUNFLFlBQUEsQ0FDQSxxQkFBQSxDQUNBLFFBQUEsQ0FHRixvQkFFRSw0Q0FBQSxDQURBLGlCQUFBLENBRUEsb0NBQUEsQ0FDQSxlQUFBLENBR0YscUJBVUUsa0JBQUEsQ0FSQSxjQUFBLENBQ0EsV0FBQSxDQUtBLDZCQUFBLENBSUEsY0FBQSxDQUhBLFlBQUEsQ0FIQSxlQUFBLENBQ0EsZUFBQSxDQUlBLDZCQUFBLENBRUEsU0FBQSxDQVRBLFdBQUEsQ0FDQSxlQUFBLENBU0EseUJBQUEsQ0FiQSxVQWFBLENBQ0Esc0RBQ0Usd0NBQUEsQ0FJSixzQkFDRSxhQUFBLENBR0YscUJBR0UsaUNBQUEsQ0FGQSxlQUFBLENBQ0EsZUFDQSxDQUdGLHNCQUVFLGdEQUFBLENBREEsV0FDQSxDQUdGLDBCQUVFLDZCQUFBLENBREEsYUFDQSxDQUdGLGtDQUdFLGlDQUFBLENBQ0EsZUFBQSxDQUZBLGFBQUEsQ0FEQSxpQkFHQSxDQUlGLHlCQUdFLGlCQUFBLENBRkEsa0JBQUEsQ0FDQSxpQkFBQSxDQUVBLGlCQUFBLENBR0Ysb0JBR0UsZUFBQSxDQUZBLFFBQUEsQ0FDQSxTQUNBLENBR0YscUJBRUUsV0FBQSxDQURBLGlCQUNBLENBR0YscUJBQ0UsYUFBQSxDQUNBLGVBQUEsQ0FDQSxpQkFBQSxDQUdGLHVCQUNFLGFBQUEsQ0FDQSxjQUFBLENBQ0EsZUFBQSxDQUdGLHVCQUVFLCtCQUFBLENBREEsVUFBQSxDQUVBLGVBQUEsQ0FHRix5QkFDRSwwQkFFRSxlQUFBLENBREEsUUFDQSxDQUVGLDJDQUNFLFlBQUEsQ0FBQSIsImZpbGUiOiJGYW5jeUxpc3QubW9kdWxlLmNzcyJ9 */", true);
+_node_modules_microsoft_sp_css_loader_node_modules_microsoft_load_themed_styles_lib_es6_index_js__WEBPACK_IMPORTED_MODULE_0__.loadStyles(".fancyList_0ec8ae44{background:var(--background,#fff);color:var(--bodyText,#323130);font-family:Segoe UI,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;padding:1em}.categoryFilters_0ec8ae44{border-bottom:2px solid var(--neutralLight,#edebe9);display:flex;flex-wrap:nowrap;gap:.5em;margin-bottom:1em;overflow-x:auto;padding-bottom:.5em}.categoryPill_0ec8ae44{background:var(--neutralLighter,#f3f2f1);border:1px solid var(--neutralLight,#edebe9);border-radius:999px;color:var(--bodyText,#323130);cursor:pointer;display:inline-block;font-weight:500;outline:0;padding:.4em 1.2em;transition:background .2s,color .2s,border .2s}.categoryPill_0ec8ae44:focus,.categoryPill_0ec8ae44:hover{background:var(--themeLighter,#e5f1fb);border-color:var(--themePrimary,#0078d4);color:var(--themePrimary,#0078d4)}.categoryPill_0ec8ae44.active_0ec8ae44{background:var(--themePrimary,#0078d4);border-color:var(--themePrimary,#0078d4);color:var(--white,#fff)}.itemsContainer_0ec8ae44{display:flex;flex-direction:column;gap:.7em}.itemPanel_0ec8ae44{border:1px solid var(--neutralLight,#edebe9);border-radius:6px;box-shadow:0 1px 3px rgba(0,0,0,.04);overflow:hidden}.itemHeader_0ec8ae44{align-items:center;background:0 0;border:none;color:var(--bodyText,#323130);cursor:pointer;display:flex;font-size:1.1em;font-weight:600;justify-content:space-between;outline:0;padding:1em;text-align:left;transition:background .2s;width:100%}.itemHeader_0ec8ae44:focus,.itemHeader_0ec8ae44:hover{background:var(--neutralLighter,#f3f2f1)}.itemSubject_0ec8ae44{flex:1 1 auto}.expandIcon_0ec8ae44{color:var(--themePrimary,#0078d4);font-size:1.3em;margin-left:1em}.itemContent_0ec8ae44{border-top:2px solid var(--neutralLight,#edebe9);padding:1em}.itemDescription_0ec8ae44{color:var(--bodyText,#323130);font-size:1em}.error_0ec8ae44,.loading_0ec8ae44{color:var(--themePrimary,#0078d4);font-size:1.1em;padding:2em 0;text-align:center}.titleContainer_0ec8ae44{border-radius:4px;margin-bottom:16px;padding:12px 16px;position:relative}.titleText_0ec8ae44{line-height:1.4;margin:0;padding:0}.titleError_0ec8ae44{padding:8px;text-align:center}.errorTitle_0ec8ae44{color:#d13438;font-weight:700;margin-bottom:4px}.errorMessage_0ec8ae44{color:#605e5c;font-size:12px;line-height:1.3}.titleDivider_0ec8ae44{background-color:var(--neutralLight,#edebe9);height:2px;margin-top:12px}@media (max-width:600px){.categoryFilters_0ec8ae44{font-size:.95em;gap:.2em}.itemContent_0ec8ae44,.itemHeader_0ec8ae44{padding:.7em}}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImZpbGU6Ly8vb3B0L2N1cnNvci1wcm9qZWN0cy9GYW5jeUxpc3Qvc3JjL3dlYnBhcnRzL2ZhbmN5TGlzdC9jb21wb25lbnRzL0ZhbmN5TGlzdC5tb2R1bGUuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFFQSxvQkFHRSxpQ0FBQSxDQURBLDZCQUFBLENBRUEsc0ZBQUEsQ0FIQSxXQUdBLENBR0YsMEJBT0UsbURBQUEsQ0FOQSxZQUFBLENBQ0EsZ0JBQUEsQ0FFQSxRQUFBLENBQ0EsaUJBQUEsQ0FGQSxlQUFBLENBR0EsbUJBQ0EsQ0FHRix1QkFLRSx3Q0FBQSxDQURBLDRDQUFBLENBREEsbUJBQUEsQ0FHQSw2QkFBQSxDQUVBLGNBQUEsQ0FQQSxvQkFBQSxDQU1BLGVBQUEsQ0FHQSxTQUFBLENBUkEsa0JBQUEsQ0FPQSw4Q0FDQSxDQUNBLDBEQUNFLHNDQUFBLENBQ0Esd0NBQUEsQ0FDQSxpQ0FBQSxDQUVGLHVDQUNFLHNDQUFBLENBRUEsd0NBQUEsQ0FEQSx1QkFDQSxDQUlKLHlCQUNFLFlBQUEsQ0FDQSxxQkFBQSxDQUNBLFFBQUEsQ0FHRixvQkFFRSw0Q0FBQSxDQURBLGlCQUFBLENBRUEsb0NBQUEsQ0FDQSxlQUFBLENBR0YscUJBVUUsa0JBQUEsQ0FSQSxjQUFBLENBQ0EsV0FBQSxDQUtBLDZCQUFBLENBSUEsY0FBQSxDQUhBLFlBQUEsQ0FIQSxlQUFBLENBQ0EsZUFBQSxDQUlBLDZCQUFBLENBRUEsU0FBQSxDQVRBLFdBQUEsQ0FDQSxlQUFBLENBU0EseUJBQUEsQ0FiQSxVQWFBLENBQ0Esc0RBQ0Usd0NBQUEsQ0FJSixzQkFDRSxhQUFBLENBR0YscUJBR0UsaUNBQUEsQ0FGQSxlQUFBLENBQ0EsZUFDQSxDQUdGLHNCQUVFLGdEQUFBLENBREEsV0FDQSxDQUdGLDBCQUVFLDZCQUFBLENBREEsYUFDQSxDQUdGLGtDQUdFLGlDQUFBLENBQ0EsZUFBQSxDQUZBLGFBQUEsQ0FEQSxpQkFHQSxDQUlGLHlCQUdFLGlCQUFBLENBRkEsa0JBQUEsQ0FDQSxpQkFBQSxDQUVBLGlCQUFBLENBR0Ysb0JBR0UsZUFBQSxDQUZBLFFBQUEsQ0FDQSxTQUNBLENBR0YscUJBRUUsV0FBQSxDQURBLGlCQUNBLENBR0YscUJBQ0UsYUFBQSxDQUNBLGVBQUEsQ0FDQSxpQkFBQSxDQUdGLHVCQUNFLGFBQUEsQ0FDQSxjQUFBLENBQ0EsZUFBQSxDQUdGLHVCQUVFLDRDQUFBLENBREEsVUFBQSxDQUVBLGVBQUEsQ0FHRix5QkFDRSwwQkFFRSxlQUFBLENBREEsUUFDQSxDQUVGLDJDQUNFLFlBQUEsQ0FBQSIsImZpbGUiOiJGYW5jeUxpc3QubW9kdWxlLmNzcyJ9 */", true);
 
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  fancyList_528a5b18: "fancyList_528a5b18",
-  categoryFilters_528a5b18: "categoryFilters_528a5b18",
-  categoryPill_528a5b18: "categoryPill_528a5b18",
-  active_528a5b18: "active_528a5b18",
-  itemsContainer_528a5b18: "itemsContainer_528a5b18",
-  itemPanel_528a5b18: "itemPanel_528a5b18",
-  itemHeader_528a5b18: "itemHeader_528a5b18",
-  itemSubject_528a5b18: "itemSubject_528a5b18",
-  expandIcon_528a5b18: "expandIcon_528a5b18",
-  itemContent_528a5b18: "itemContent_528a5b18",
-  itemDescription_528a5b18: "itemDescription_528a5b18",
-  error_528a5b18: "error_528a5b18",
-  loading_528a5b18: "loading_528a5b18",
-  titleContainer_528a5b18: "titleContainer_528a5b18",
-  titleText_528a5b18: "titleText_528a5b18",
-  titleError_528a5b18: "titleError_528a5b18",
-  errorTitle_528a5b18: "errorTitle_528a5b18",
-  errorMessage_528a5b18: "errorMessage_528a5b18",
-  titleDivider_528a5b18: "titleDivider_528a5b18"
+  fancyList_0ec8ae44: "fancyList_0ec8ae44",
+  categoryFilters_0ec8ae44: "categoryFilters_0ec8ae44",
+  categoryPill_0ec8ae44: "categoryPill_0ec8ae44",
+  active_0ec8ae44: "active_0ec8ae44",
+  itemsContainer_0ec8ae44: "itemsContainer_0ec8ae44",
+  itemPanel_0ec8ae44: "itemPanel_0ec8ae44",
+  itemHeader_0ec8ae44: "itemHeader_0ec8ae44",
+  itemSubject_0ec8ae44: "itemSubject_0ec8ae44",
+  expandIcon_0ec8ae44: "expandIcon_0ec8ae44",
+  itemContent_0ec8ae44: "itemContent_0ec8ae44",
+  itemDescription_0ec8ae44: "itemDescription_0ec8ae44",
+  error_0ec8ae44: "error_0ec8ae44",
+  loading_0ec8ae44: "loading_0ec8ae44",
+  titleContainer_0ec8ae44: "titleContainer_0ec8ae44",
+  titleText_0ec8ae44: "titleText_0ec8ae44",
+  titleError_0ec8ae44: "titleError_0ec8ae44",
+  errorTitle_0ec8ae44: "errorTitle_0ec8ae44",
+  errorMessage_0ec8ae44: "errorMessage_0ec8ae44",
+  titleDivider_0ec8ae44: "titleDivider_0ec8ae44"
 });
 
 
@@ -2413,9 +2413,11 @@ var FancyList = /** @class */ (function (_super) {
                         marginBottom: '12px'
                     } })))),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemsContainer }, Object.keys(this.groupItemsByCategory(this.getFilteredItems())).map(function (category) {
-                var _a, _b, _c, _d;
+                var _a, _b, _c, _d, _e, _f;
                 var items = _this.groupItemsByCategory(_this.getFilteredItems())[category];
-                return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { key: category, className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemPanel, style: __assign({}, _this.getCategorySectionBackgroundStyle()) },
+                return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { key: category, className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemPanel, style: __assign(__assign({}, _this.getCategorySectionBackgroundStyle()), (((_a = _this.props.categorySectionSettings) === null || _a === void 0 ? void 0 : _a.showDivider) ? {
+                        borderBottom: '2px solid var(--neutralLight, #edebe9)'
+                    } : {})) },
                     react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemHeader, onClick: function () { return _this.handleCategoryToggle(category); }, "aria-expanded": _this.state.expandedCategories.has(category) ? "true" : "false", style: {
                             display: 'flex',
                             alignItems: 'center',
@@ -2425,15 +2427,19 @@ var FancyList = /** @class */ (function (_super) {
                             border: 'none'
                         } },
                         react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemSubject, style: _this.getCategorySectionFontStyle() }, category),
-                        ((_b = (_a = _this.props.categorySectionSettings) === null || _a === void 0 ? void 0 : _a.icons) === null || _b === void 0 ? void 0 : _b.enabled) && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].expandIcon, style: {
+                        ((_c = (_b = _this.props.categorySectionSettings) === null || _b === void 0 ? void 0 : _b.icons) === null || _c === void 0 ? void 0 : _c.enabled) && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].expandIcon, style: {
                                 order: _this.props.categorySectionSettings.icons.iconPosition === 'left' ? -1 : 1,
-                                fontSize: ((_d = (_c = _this.props.categorySectionSettings) === null || _c === void 0 ? void 0 : _c.font) === null || _d === void 0 ? void 0 : _d.size) || '16px',
+                                fontSize: ((_e = (_d = _this.props.categorySectionSettings) === null || _d === void 0 ? void 0 : _d.font) === null || _e === void 0 ? void 0 : _e.size) || '16px',
                                 marginLeft: _this.props.categorySectionSettings.icons.iconPosition === 'left' ? '0' : '8px',
                                 marginRight: _this.props.categorySectionSettings.icons.iconPosition === 'left' ? '8px' : '0'
                             } }, _this.state.expandedCategories.has(category)
                             ? (_this.props.categorySectionSettings.icons.expandedIcon || '−')
                             : (_this.props.categorySectionSettings.icons.collapsedIcon || '+')))),
-                    _this.state.expandedCategories.has(category) && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemContent }, items.map(function (item) {
+                    _this.state.expandedCategories.has(category) && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemContent, style: __assign({}, (((_f = _this.props.categorySectionSettings) === null || _f === void 0 ? void 0 : _f.showDivider) ? {
+                            borderTop: '2px solid var(--neutralLight, #edebe9)'
+                        } : {
+                            borderTop: 'none'
+                        })) }, items.map(function (item) {
                         var _a, _b, _c, _d;
                         return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { key: item.id, className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemPanel },
                             react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemHeader, onClick: function () { return _this.handleItemToggle(item.id); }, "aria-expanded": _this.state.expandedItems.has(item.id) ? "true" : "false", style: {
@@ -2475,25 +2481,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 __webpack_require__(/*! ./FancyList.module.css */ 6837);
 var styles = {
-    fancyList: 'fancyList_528a5b18',
-    categoryFilters: 'categoryFilters_528a5b18',
-    categoryPill: 'categoryPill_528a5b18',
-    active: 'active_528a5b18',
-    itemsContainer: 'itemsContainer_528a5b18',
-    itemPanel: 'itemPanel_528a5b18',
-    itemHeader: 'itemHeader_528a5b18',
-    itemSubject: 'itemSubject_528a5b18',
-    expandIcon: 'expandIcon_528a5b18',
-    itemContent: 'itemContent_528a5b18',
-    itemDescription: 'itemDescription_528a5b18',
-    loading: 'loading_528a5b18',
-    error: 'error_528a5b18',
-    titleContainer: 'titleContainer_528a5b18',
-    titleText: 'titleText_528a5b18',
-    titleError: 'titleError_528a5b18',
-    errorTitle: 'errorTitle_528a5b18',
-    errorMessage: 'errorMessage_528a5b18',
-    titleDivider: 'titleDivider_528a5b18'
+    fancyList: 'fancyList_0ec8ae44',
+    categoryFilters: 'categoryFilters_0ec8ae44',
+    categoryPill: 'categoryPill_0ec8ae44',
+    active: 'active_0ec8ae44',
+    itemsContainer: 'itemsContainer_0ec8ae44',
+    itemPanel: 'itemPanel_0ec8ae44',
+    itemHeader: 'itemHeader_0ec8ae44',
+    itemSubject: 'itemSubject_0ec8ae44',
+    expandIcon: 'expandIcon_0ec8ae44',
+    itemContent: 'itemContent_0ec8ae44',
+    itemDescription: 'itemDescription_0ec8ae44',
+    loading: 'loading_0ec8ae44',
+    error: 'error_0ec8ae44',
+    titleContainer: 'titleContainer_0ec8ae44',
+    titleText: 'titleText_0ec8ae44',
+    titleError: 'titleError_0ec8ae44',
+    errorTitle: 'errorTitle_0ec8ae44',
+    errorMessage: 'errorMessage_0ec8ae44',
+    titleDivider: 'titleDivider_0ec8ae44'
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (styles);
 
