@@ -86,7 +86,7 @@ export interface IFancyListProps {
       gradientColor2: string;
       gradientAlpha2: number;
     };
-    showDivider: boolean;
+    divideSpace?: number;
   };
 
   // Category Section Settings

@@ -140,7 +140,7 @@ export interface FilterSettings {
         gradientColor2: string;
         gradientAlpha2: number;
     };
-    showDivider: boolean;
+    divideSpace: number;
     testValues: {
         font: {
             family: string;
@@ -176,7 +176,7 @@ export interface FilterSettings {
             gradientColor2: string;
             gradientAlpha2: number;
         };
-        showDivider: boolean;
+        divideSpace: number;
     };
 }
 export interface SectionSettings {

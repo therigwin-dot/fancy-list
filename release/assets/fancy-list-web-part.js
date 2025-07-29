@@ -155,7 +155,7 @@ var DEFAULTS_CONFIG = {
             gradientColor2: '#0f46d1',
             gradientAlpha2: 0
         },
-        showDivider: false,
+        divideSpace: 0,
         // Test Values for Filter Section
         testValues: {
             font: {
@@ -187,7 +187,7 @@ var DEFAULTS_CONFIG = {
                 gradientColor2: '#00ffff',
                 gradientAlpha2: 50
             },
-            showDivider: true
+            divideSpace: 4
         }
     },
     // Page 4: Category Section Settings
@@ -2306,8 +2306,8 @@ var FancyList = /** @class */ (function (_super) {
     };
     FancyList.prototype.render = function () {
         var _this = this;
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19;
-        var _20 = this.state, selectedCategory = _20.selectedCategory, categories = _20.categories, loading = _20.loading, error = _20.error;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20;
+        var _21 = this.state, selectedCategory = _21.selectedCategory, categories = _21.categories, loading = _21.loading, error = _21.error;
         // Debug logging for render method
         console.log('🔍 Filter Debug - Render Method:', {
             selectedCategory: selectedCategory,
@@ -2339,36 +2339,36 @@ var FancyList = /** @class */ (function (_super) {
                 (this.state.titleImageLoadError ? 'Unable to access URL' : '') ||
                 'Please enter an image URL')),
             ((_d = this.props.filterSettings) === null || _d === void 0 ? void 0 : _d.enableFilters) && (react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null,
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].categoryFilters, style: __assign(__assign({}, this.getFilterBackgroundStyle(this.props.filterSettings)), { position: 'relative', padding: '12px', marginBottom: '6px', borderRadius: this.getShapeRadius(((_e = this.props.filterSettings) === null || _e === void 0 ? void 0 : _e.backgroundShape) || 'rounded') }) },
-                    ((_g = (_f = this.props.filterSettings) === null || _f === void 0 ? void 0 : _f.background) === null || _g === void 0 ? void 0 : _g.type) === 'image' &&
-                        ((_j = (_h = this.props.filterSettings) === null || _h === void 0 ? void 0 : _h.background) === null || _j === void 0 ? void 0 : _j.image) &&
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].categoryFilters, style: __assign(__assign({}, this.getFilterBackgroundStyle(this.props.filterSettings)), { position: 'relative', padding: '12px', marginBottom: "".concat((_f = (_e = this.props.filterSettings) === null || _e === void 0 ? void 0 : _e.divideSpace) !== null && _f !== void 0 ? _f : 0, "px"), borderRadius: this.getShapeRadius(((_g = this.props.filterSettings) === null || _g === void 0 ? void 0 : _g.backgroundShape) || 'rounded') }) },
+                    ((_j = (_h = this.props.filterSettings) === null || _h === void 0 ? void 0 : _h.background) === null || _j === void 0 ? void 0 : _j.type) === 'image' &&
+                        ((_l = (_k = this.props.filterSettings) === null || _k === void 0 ? void 0 : _k.background) === null || _l === void 0 ? void 0 : _l.image) &&
                         !this.state.filterImageValidationError &&
                         !this.state.filterImageLoadError &&
-                        ((_l = (_k = this.props.filterSettings) === null || _k === void 0 ? void 0 : _k.background) === null || _l === void 0 ? void 0 : _l.imageAlpha) !== undefined &&
-                        ((_o = (_m = this.props.filterSettings) === null || _m === void 0 ? void 0 : _m.background) === null || _o === void 0 ? void 0 : _o.imageAlpha) > 0 && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                        ((_o = (_m = this.props.filterSettings) === null || _m === void 0 ? void 0 : _m.background) === null || _o === void 0 ? void 0 : _o.imageAlpha) !== undefined &&
+                        ((_q = (_p = this.props.filterSettings) === null || _p === void 0 ? void 0 : _p.background) === null || _q === void 0 ? void 0 : _q.imageAlpha) > 0 && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
                             position: 'absolute',
                             top: 0,
                             left: 0,
                             right: 0,
                             bottom: 0,
-                            background: "rgba(255,255,255,".concat((((_q = (_p = this.props.filterSettings) === null || _p === void 0 ? void 0 : _p.background) === null || _q === void 0 ? void 0 : _q.imageAlpha) || 0) / 100, ")"),
+                            background: "rgba(255,255,255,".concat((((_s = (_r = this.props.filterSettings) === null || _r === void 0 ? void 0 : _r.background) === null || _s === void 0 ? void 0 : _s.imageAlpha) || 0) / 100, ")"),
                             pointerEvents: 'none',
                             zIndex: 1
                         } })),
                     react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
                             position: 'relative',
                             zIndex: 2,
-                            textAlign: ((_s = (_r = this.props.filterSettings) === null || _r === void 0 ? void 0 : _r.font) === null || _s === void 0 ? void 0 : _s.alignment) || 'left'
+                            textAlign: ((_u = (_t = this.props.filterSettings) === null || _t === void 0 ? void 0 : _t.font) === null || _u === void 0 ? void 0 : _u.alignment) || 'left'
                         } },
-                        ((_t = this.props.filterSettings) === null || _t === void 0 ? void 0 : _t.showAllCategories) && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { className: "".concat(_FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].categoryPill, " ").concat(selectedCategory === 'all' ? _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].active : ''), style: {
-                                background: selectedCategory === 'all' ? (_v = (_u = this.props.filterSettings) === null || _u === void 0 ? void 0 : _u.activeColors) === null || _v === void 0 ? void 0 : _v.background : (_x = (_w = this.props.filterSettings) === null || _w === void 0 ? void 0 : _w.inactiveColors) === null || _x === void 0 ? void 0 : _x.background,
-                                color: selectedCategory === 'all' ? (_z = (_y = this.props.filterSettings) === null || _y === void 0 ? void 0 : _y.activeColors) === null || _z === void 0 ? void 0 : _z.font : (_1 = (_0 = this.props.filterSettings) === null || _0 === void 0 ? void 0 : _0.inactiveColors) === null || _1 === void 0 ? void 0 : _1.font,
-                                fontFamily: (_3 = (_2 = this.props.filterSettings) === null || _2 === void 0 ? void 0 : _2.font) === null || _3 === void 0 ? void 0 : _3.family,
-                                fontSize: (_5 = (_4 = this.props.filterSettings) === null || _4 === void 0 ? void 0 : _4.font) === null || _5 === void 0 ? void 0 : _5.size,
-                                fontWeight: ((_8 = (_7 = (_6 = this.props.filterSettings) === null || _6 === void 0 ? void 0 : _6.font) === null || _7 === void 0 ? void 0 : _7.formatting) === null || _8 === void 0 ? void 0 : _8.bold) ? 'bold' : 'normal',
-                                fontStyle: ((_11 = (_10 = (_9 = this.props.filterSettings) === null || _9 === void 0 ? void 0 : _9.font) === null || _10 === void 0 ? void 0 : _10.formatting) === null || _11 === void 0 ? void 0 : _11.italic) ? 'italic' : 'normal',
-                                textDecoration: this.getTextDecoration(((_13 = (_12 = this.props.filterSettings) === null || _12 === void 0 ? void 0 : _12.font) === null || _13 === void 0 ? void 0 : _13.formatting) || { bold: false, italic: false, underline: false, strikethrough: false }),
-                                borderRadius: this.getFilterBorderRadius(((_14 = this.props.filterSettings) === null || _14 === void 0 ? void 0 : _14.shape) || 'rounded'),
+                        ((_v = this.props.filterSettings) === null || _v === void 0 ? void 0 : _v.showAllCategories) && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { className: "".concat(_FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].categoryPill, " ").concat(selectedCategory === 'all' ? _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].active : ''), style: {
+                                background: selectedCategory === 'all' ? (_x = (_w = this.props.filterSettings) === null || _w === void 0 ? void 0 : _w.activeColors) === null || _x === void 0 ? void 0 : _x.background : (_z = (_y = this.props.filterSettings) === null || _y === void 0 ? void 0 : _y.inactiveColors) === null || _z === void 0 ? void 0 : _z.background,
+                                color: selectedCategory === 'all' ? (_1 = (_0 = this.props.filterSettings) === null || _0 === void 0 ? void 0 : _0.activeColors) === null || _1 === void 0 ? void 0 : _1.font : (_3 = (_2 = this.props.filterSettings) === null || _2 === void 0 ? void 0 : _2.inactiveColors) === null || _3 === void 0 ? void 0 : _3.font,
+                                fontFamily: (_5 = (_4 = this.props.filterSettings) === null || _4 === void 0 ? void 0 : _4.font) === null || _5 === void 0 ? void 0 : _5.family,
+                                fontSize: (_7 = (_6 = this.props.filterSettings) === null || _6 === void 0 ? void 0 : _6.font) === null || _7 === void 0 ? void 0 : _7.size,
+                                fontWeight: ((_10 = (_9 = (_8 = this.props.filterSettings) === null || _8 === void 0 ? void 0 : _8.font) === null || _9 === void 0 ? void 0 : _9.formatting) === null || _10 === void 0 ? void 0 : _10.bold) ? 'bold' : 'normal',
+                                fontStyle: ((_13 = (_12 = (_11 = this.props.filterSettings) === null || _11 === void 0 ? void 0 : _11.font) === null || _12 === void 0 ? void 0 : _12.formatting) === null || _13 === void 0 ? void 0 : _13.italic) ? 'italic' : 'normal',
+                                textDecoration: this.getTextDecoration(((_15 = (_14 = this.props.filterSettings) === null || _14 === void 0 ? void 0 : _14.font) === null || _15 === void 0 ? void 0 : _15.formatting) || { bold: false, italic: false, underline: false, strikethrough: false }),
+                                borderRadius: this.getFilterBorderRadius(((_16 = this.props.filterSettings) === null || _16 === void 0 ? void 0 : _16.shape) || 'rounded'),
                                 border: 'none',
                                 padding: '8px 16px',
                                 margin: '4px',
@@ -2394,7 +2394,7 @@ var FancyList = /** @class */ (function (_super) {
                                 }, onClick: function () { return _this.handleCategoryClick(category); } }, category));
                         }))),
                 (this.state.filterImageValidationError || this.state.filterImageLoadError ||
-                    (((_16 = (_15 = this.props.filterSettings) === null || _15 === void 0 ? void 0 : _15.background) === null || _16 === void 0 ? void 0 : _16.type) === 'image' && !((_18 = (_17 = this.props.filterSettings) === null || _17 === void 0 ? void 0 : _17.background) === null || _18 === void 0 ? void 0 : _18.image))) && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
+                    (((_18 = (_17 = this.props.filterSettings) === null || _17 === void 0 ? void 0 : _17.background) === null || _18 === void 0 ? void 0 : _18.type) === 'image' && !((_20 = (_19 = this.props.filterSettings) === null || _19 === void 0 ? void 0 : _19.background) === null || _20 === void 0 ? void 0 : _20.image))) && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
                         fontSize: '12px',
                         fontFamily: 'Arial, sans-serif',
                         color: '#000000',
@@ -2403,13 +2403,7 @@ var FancyList = /** @class */ (function (_super) {
                         marginBottom: '8px'
                     } }, this.state.filterImageValidationError ||
                     (this.state.filterImageLoadError ? 'Unable to access URL' : '') ||
-                    'Please enter an image URL')),
-                ((_19 = this.props.filterSettings) === null || _19 === void 0 ? void 0 : _19.showDivider) && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
-                        height: '2px',
-                        backgroundColor: 'var(--neutralLight, #edebe9)',
-                        marginTop: '12px',
-                        marginBottom: '12px'
-                    } })))),
+                    'Please enter an image URL')))),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemsContainer }, Object.keys(this.groupItemsByCategory(this.getFilteredItems())).map(function (category) {
                 var _a, _b, _c, _d, _e, _f;
                 var items = _this.groupItemsByCategory(_this.getFilteredItems())[category];
@@ -2782,15 +2776,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ 5959);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @fluentui/react/lib/TextField */ 7102);
-/* harmony import */ var _fluentui_react_lib_Toggle__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @fluentui/react/lib/Toggle */ 6264);
-/* harmony import */ var _fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @fluentui/react/lib/Dropdown */ 2042);
-/* harmony import */ var _fluentui_react_lib_Slider__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @fluentui/react/lib/Slider */ 1798);
-/* harmony import */ var _fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @fluentui/react/lib/Button */ 9425);
+/* harmony import */ var _fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @fluentui/react/lib/TextField */ 7102);
+/* harmony import */ var _fluentui_react_lib_Toggle__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @fluentui/react/lib/Toggle */ 6264);
+/* harmony import */ var _fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @fluentui/react/lib/Dropdown */ 2042);
+/* harmony import */ var _fluentui_react_lib_Slider__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @fluentui/react/lib/Slider */ 1798);
+/* harmony import */ var _fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @fluentui/react/lib/Button */ 9425);
 /* harmony import */ var _FontControl__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FontControl */ 8177);
 /* harmony import */ var _ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ColorPickerControl */ 9193);
 /* harmony import */ var _ShapePickerControl__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ShapePickerControl */ 4439);
-/* harmony import */ var _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../DEFAULTS_CONFIG */ 7702);
+/* harmony import */ var _DivideSpaceControl__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./DivideSpaceControl */ 7669);
+/* harmony import */ var _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../DEFAULTS_CONFIG */ 7702);
 var __spreadArray = (undefined && undefined.__spreadArray) || function (to, from, pack) {
     if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
         if (ar || !(i in from)) {
@@ -2800,6 +2795,7 @@ var __spreadArray = (undefined && undefined.__spreadArray) || function (to, from
     }
     return to.concat(ar || Array.prototype.slice.call(from));
 };
+
 
 
 
@@ -2834,7 +2830,6 @@ var FilterModuleControl = function (_a) {
             font: '#323130'
         },
         shape: 'pill',
-        showDivider: false,
         showAllCategories: true,
         defaultFilterSelection: 'All',
         backgroundType: 'solid',
@@ -2846,7 +2841,8 @@ var FilterModuleControl = function (_a) {
         gradientAlpha: 0,
         imageUrl: '',
         imageAlpha: 0,
-        backgroundShape: 'rounded'
+        backgroundShape: 'rounded',
+        divideSpace: 0
     } : _e, _f = _a.availableCategories, availableCategories = _f === void 0 ? [] : _f, onPropertyChange = _a.onPropertyChange;
     var _g = react__WEBPACK_IMPORTED_MODULE_0__.useState((_b = settings === null || settings === void 0 ? void 0 : settings.enableFilters) !== null && _b !== void 0 ? _b : true), enabled = _g[0], setEnabled = _g[1];
     var _h = react__WEBPACK_IMPORTED_MODULE_0__.useState((_c = settings === null || settings === void 0 ? void 0 : settings.showAllCategories) !== null && _c !== void 0 ? _c : true), showAllToggle = _h[0], setShowAllToggle = _h[1];
@@ -2919,9 +2915,9 @@ var FilterModuleControl = function (_a) {
                 color: '#666',
                 lineHeight: '1.4',
                 marginBottom: '16px'
-            } }, _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.description),
+            } }, _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].filterSettings.description),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Toggle__WEBPACK_IMPORTED_MODULE_5__.Toggle, { label: "Enabled", inlineLabel: true, checked: enabled, onText: "On", offText: "Off", onChange: function (_, checked) {
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Toggle__WEBPACK_IMPORTED_MODULE_6__.Toggle, { label: "Enabled", inlineLabel: true, checked: enabled, onText: "On", offText: "Off", onChange: function (_, checked) {
                     setEnabled(checked || false);
                     handlePropertyChange('enabled', checked || false);
                 } })),
@@ -2938,7 +2934,7 @@ var FilterModuleControl = function (_a) {
                     marginBottom: '12px'
                 } }, "Default Filter Selection"),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_6__.Dropdown, { selectedKey: defaultFilterDropdown, options: (function () {
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_7__.Dropdown, { selectedKey: defaultFilterDropdown, options: (function () {
                         console.log('🔄 DROPDOWN DEBUG: Show all toggle:', showAllToggle);
                         console.log('🔄 DROPDOWN DEBUG: Available categories:', availableCategories);
                         if (showAllToggle) {
@@ -2959,7 +2955,7 @@ var FilterModuleControl = function (_a) {
                         handlePropertyChange('defaultFilterSelection', (option === null || option === void 0 ? void 0 : option.key) || 'All');
                     } })),
             enabled && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Toggle__WEBPACK_IMPORTED_MODULE_5__.Toggle, { label: "Show 'All' Filter Button", inlineLabel: true, checked: showAllToggle, onText: "On", offText: "Off", onChange: function (_, checked) {
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Toggle__WEBPACK_IMPORTED_MODULE_6__.Toggle, { label: "Show 'All' Filter Button", inlineLabel: true, checked: showAllToggle, onText: "On", offText: "Off", onChange: function (_, checked) {
                         console.log('🔄 STEP 3 DEBUG: Toggle clicked, new value:', checked);
                         setShowAllToggle(checked || false);
                         handlePropertyChange('showAllCategories', checked);
@@ -3024,12 +3020,12 @@ var FilterModuleControl = function (_a) {
                             fontWeight: '600',
                             color: '#323130'
                         } }, "Background"),
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_6__.Dropdown, { label: "", options: backgroundTypeOptions, selectedKey: settings.backgroundType, onChange: function (_, option) { return handlePropertyChange('backgroundType', option === null || option === void 0 ? void 0 : option.key); }, styles: { root: { minWidth: 120 } } })),
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_7__.Dropdown, { label: "", options: backgroundTypeOptions, selectedKey: settings.backgroundType, onChange: function (_, option) { return handlePropertyChange('backgroundType', option === null || option === void 0 ? void 0 : option.key); }, styles: { root: { minWidth: 120 } } })),
                 settings.backgroundType === 'solid' && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
                     react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ColorPickerControl__WEBPACK_IMPORTED_MODULE_2__.ColorPickerControl, { color: settings.backgroundColor, field: "backgroundColor", label: "", onChange: function (field, newColor) { return handlePropertyChange('backgroundColor', newColor); } }))),
                 settings.backgroundType === 'gradient' && (react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null,
                     react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-                        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_6__.Dropdown, { label: "Direction", options: gradientDirectionOptions, selectedKey: settings.gradientDirection, onChange: function (_, option) { return handlePropertyChange('gradientDirection', option === null || option === void 0 ? void 0 : option.key); } })),
+                        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Dropdown__WEBPACK_IMPORTED_MODULE_7__.Dropdown, { label: "Direction", options: gradientDirectionOptions, selectedKey: settings.gradientDirection, onChange: function (_, option) { return handlePropertyChange('gradientDirection', option === null || option === void 0 ? void 0 : option.key); } })),
                     react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: {
                             display: 'flex',
                             alignItems: 'center',
@@ -3068,7 +3064,7 @@ var FilterModuleControl = function (_a) {
                             marginBottom: '8px',
                             display: 'block'
                         } }, "URL"),
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_7__.TextField, { value: settings.imageUrl, onChange: function (_, newValue) { return handlePropertyChange('imageUrl', newValue || ''); }, placeholder: "Enter image URL" }))),
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_TextField__WEBPACK_IMPORTED_MODULE_8__.TextField, { value: settings.imageUrl, onChange: function (_, newValue) { return handlePropertyChange('imageUrl', newValue || ''); }, placeholder: "Enter image URL" }))),
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
                     react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", { style: {
                             fontSize: '14px',
@@ -3077,7 +3073,7 @@ var FilterModuleControl = function (_a) {
                             marginBottom: '8px',
                             display: 'block'
                         } }, "Transparency"),
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Slider__WEBPACK_IMPORTED_MODULE_8__.Slider, { min: 0, max: 100, value: settings.backgroundType === 'solid' ? settings.backgroundAlpha :
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Slider__WEBPACK_IMPORTED_MODULE_9__.Slider, { min: 0, max: 100, value: settings.backgroundType === 'solid' ? settings.backgroundAlpha :
                             settings.backgroundType === 'gradient' ? settings.gradientAlpha :
                                 settings.imageAlpha, onChange: function (value) {
                             console.log('🎨 TRANSPARENCY SLIDER:', {
@@ -3100,76 +3096,75 @@ var FilterModuleControl = function (_a) {
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ShapePickerControl__WEBPACK_IMPORTED_MODULE_3__.ShapePickerControl, { value: settings.backgroundShape, label: "", onChange: function (newShape) { return handlePropertyChange('backgroundShape', newShape); } }),
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", { style: { fontSize: '12px', color: '#666', marginTop: '4px', display: 'block' } }, "Choose the shape style for the entire filter section container")),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginBottom: 16 } },
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Toggle__WEBPACK_IMPORTED_MODULE_5__.Toggle, { label: "Divider", inlineLabel: true, checked: settings.showDivider, onText: "On", offText: "Off", onChange: function (_, checked) { return handlePropertyChange('showDivider', checked); } })),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_DivideSpaceControl__WEBPACK_IMPORTED_MODULE_4__.DivideSpaceControl, { label: "Div Space", value: settings.divideSpace, onChange: function (value) { return handlePropertyChange('divideSpace', value); }, onReset: function () { return handlePropertyChange('divideSpace', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].filterSettings.divideSpace); }, onTestValues: function () { return handlePropertyChange('divideSpace', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].filterSettings.testValues.divideSpace); } }),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginTop: 16, display: 'flex', gap: '8px' } },
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_9__.PrimaryButton, { text: _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.resetButtonText, onClick: function () {
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_10__.PrimaryButton, { text: _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].filterSettings.resetButtonText, onClick: function () {
                         // Reset all filter settings to defaults
                         console.log('🔄 RESET BUTTON: Resetting all filter settings to defaults');
                         // Reset font settings
-                        handlePropertyChange('font.family', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.font.family);
-                        handlePropertyChange('font.size', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.font.size);
-                        handlePropertyChange('font.formatting', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.font.formatting);
-                        handlePropertyChange('font.alignment', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.font.alignment);
+                        handlePropertyChange('font.family', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].filterSettings.font.family);
+                        handlePropertyChange('font.size', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].filterSettings.font.size);
+                        handlePropertyChange('font.formatting', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].filterSettings.font.formatting);
+                        handlePropertyChange('font.alignment', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].filterSettings.font.alignment);
                         // Reset color settings
-                        handlePropertyChange('activeColors.background', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.activeColors.background);
-                        handlePropertyChange('activeColors.font', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.activeColors.font);
-                        handlePropertyChange('inactiveColors.background', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.inactiveColors.background);
-                        handlePropertyChange('inactiveColors.font', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.inactiveColors.font);
+                        handlePropertyChange('activeColors.background', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].filterSettings.activeColors.background);
+                        handlePropertyChange('activeColors.font', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].filterSettings.activeColors.font);
+                        handlePropertyChange('inactiveColors.background', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].filterSettings.inactiveColors.background);
+                        handlePropertyChange('inactiveColors.font', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].filterSettings.inactiveColors.font);
                         // Reset shape settings
-                        handlePropertyChange('shape', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.shape);
-                        handlePropertyChange('backgroundShape', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.backgroundShape);
+                        handlePropertyChange('shape', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].filterSettings.shape);
+                        handlePropertyChange('backgroundShape', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].filterSettings.backgroundShape);
                         // Reset showAllCategories
-                        handlePropertyChange('showAllCategories', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.showAllCategories);
-                        setShowAllToggle(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.showAllCategories);
+                        handlePropertyChange('showAllCategories', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].filterSettings.showAllCategories);
+                        setShowAllToggle(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].filterSettings.showAllCategories);
                         // Reset defaultFilterSelection
-                        handlePropertyChange('defaultFilterSelection', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.defaultFilterSelection);
-                        setDefaultFilterDropdown(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.defaultFilterSelection);
+                        handlePropertyChange('defaultFilterSelection', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].filterSettings.defaultFilterSelection);
+                        setDefaultFilterDropdown(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].filterSettings.defaultFilterSelection);
                         // Reset background settings
-                        handlePropertyChange('backgroundType', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.background.type);
-                        handlePropertyChange('backgroundColor', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.background.color);
-                        handlePropertyChange('backgroundAlpha', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.background.alpha);
-                        handlePropertyChange('gradientDirection', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.background.gradientDirection);
-                        handlePropertyChange('gradientColor1', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.background.gradientColor1);
-                        handlePropertyChange('gradientColor2', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.background.gradientColor2);
-                        handlePropertyChange('gradientAlpha', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.background.gradientAlpha1);
-                        handlePropertyChange('imageUrl', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.background.image);
-                        handlePropertyChange('imageAlpha', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.background.imageAlpha);
-                        // Reset divider
-                        handlePropertyChange('showDivider', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.showDivider);
+                        handlePropertyChange('backgroundType', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].filterSettings.background.type);
+                        handlePropertyChange('backgroundColor', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].filterSettings.background.color);
+                        handlePropertyChange('backgroundAlpha', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].filterSettings.background.alpha);
+                        handlePropertyChange('gradientDirection', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].filterSettings.background.gradientDirection);
+                        handlePropertyChange('gradientColor1', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].filterSettings.background.gradientColor1);
+                        handlePropertyChange('gradientColor2', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].filterSettings.background.gradientColor2);
+                        handlePropertyChange('gradientAlpha', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].filterSettings.background.gradientAlpha1);
+                        handlePropertyChange('imageUrl', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].filterSettings.background.image);
+                        handlePropertyChange('imageAlpha', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].filterSettings.background.imageAlpha);
+                        // Reset divideSpace
+                        handlePropertyChange('divideSpace', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].filterSettings.divideSpace);
                         console.log('✅ RESET BUTTON: All properties reset to defaults');
                     } }),
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_9__.PrimaryButton, { text: _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.testValuesButtonText, onClick: function () {
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_Button__WEBPACK_IMPORTED_MODULE_10__.PrimaryButton, { text: _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].filterSettings.testValuesButtonText, onClick: function () {
                         // Apply test values
                         console.log('🧪 TEST VALUES BUTTON: Applying test values');
                         // Apply font test values
-                        handlePropertyChange('font.family', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.testValues.font.family);
-                        handlePropertyChange('font.size', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.testValues.font.size);
-                        handlePropertyChange('font.formatting', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.testValues.font.formatting);
-                        handlePropertyChange('font.alignment', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.testValues.font.alignment);
+                        handlePropertyChange('font.family', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].filterSettings.testValues.font.family);
+                        handlePropertyChange('font.size', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].filterSettings.testValues.font.size);
+                        handlePropertyChange('font.formatting', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].filterSettings.testValues.font.formatting);
+                        handlePropertyChange('font.alignment', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].filterSettings.testValues.font.alignment);
                         // Apply color test values
-                        handlePropertyChange('activeColors.background', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.testValues.activeColors.background);
-                        handlePropertyChange('activeColors.font', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.testValues.activeColors.font);
-                        handlePropertyChange('inactiveColors.background', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.testValues.inactiveColors.background);
-                        handlePropertyChange('inactiveColors.font', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.testValues.inactiveColors.font);
+                        handlePropertyChange('activeColors.background', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].filterSettings.testValues.activeColors.background);
+                        handlePropertyChange('activeColors.font', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].filterSettings.testValues.activeColors.font);
+                        handlePropertyChange('inactiveColors.background', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].filterSettings.testValues.inactiveColors.background);
+                        handlePropertyChange('inactiveColors.font', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].filterSettings.testValues.inactiveColors.font);
                         // Apply shape test values
-                        handlePropertyChange('shape', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.testValues.shape);
-                        handlePropertyChange('backgroundShape', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.testValues.backgroundShape);
+                        handlePropertyChange('shape', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].filterSettings.testValues.shape);
+                        handlePropertyChange('backgroundShape', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].filterSettings.testValues.backgroundShape);
                         // Apply defaultFilterSelection test value
-                        handlePropertyChange('defaultFilterSelection', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.testValues.defaultFilterSelection);
-                        setDefaultFilterDropdown(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.testValues.defaultFilterSelection);
+                        handlePropertyChange('defaultFilterSelection', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].filterSettings.testValues.defaultFilterSelection);
+                        setDefaultFilterDropdown(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].filterSettings.testValues.defaultFilterSelection);
                         // Apply background test values
-                        handlePropertyChange('backgroundType', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.testValues.background.type);
-                        handlePropertyChange('backgroundColor', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.testValues.background.color);
-                        handlePropertyChange('backgroundAlpha', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.testValues.background.alpha);
-                        handlePropertyChange('gradientDirection', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.testValues.background.gradientDirection);
-                        handlePropertyChange('gradientColor1', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.testValues.background.gradientColor1);
-                        handlePropertyChange('gradientColor2', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.testValues.background.gradientColor2);
-                        handlePropertyChange('gradientAlpha', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.testValues.background.gradientAlpha1);
-                        handlePropertyChange('imageUrl', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.testValues.background.image);
-                        handlePropertyChange('imageAlpha', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.testValues.background.imageAlpha);
-                        // Apply divider test value
-                        handlePropertyChange('showDivider', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_4__["default"].filterSettings.testValues.showDivider);
+                        handlePropertyChange('backgroundType', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].filterSettings.testValues.background.type);
+                        handlePropertyChange('backgroundColor', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].filterSettings.testValues.background.color);
+                        handlePropertyChange('backgroundAlpha', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].filterSettings.testValues.background.alpha);
+                        handlePropertyChange('gradientDirection', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].filterSettings.testValues.background.gradientDirection);
+                        handlePropertyChange('gradientColor1', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].filterSettings.testValues.background.gradientColor1);
+                        handlePropertyChange('gradientColor2', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].filterSettings.testValues.background.gradientColor2);
+                        handlePropertyChange('gradientAlpha', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].filterSettings.testValues.background.gradientAlpha1);
+                        handlePropertyChange('imageUrl', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].filterSettings.testValues.background.image);
+                        handlePropertyChange('imageAlpha', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].filterSettings.testValues.background.imageAlpha);
+                        // Apply divideSpace test value
+                        handlePropertyChange('divideSpace', _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_5__["default"].filterSettings.testValues.divideSpace);
                         console.log('✅ TEST VALUES BUTTON: All test values applied');
                     } }))))));
 };
@@ -36843,7 +36838,7 @@ var FancyListWebPart = /** @class */ (function (_super) {
                 gradientColor2: (_57 = (_56 = (_55 = this.properties.filterSettings) === null || _55 === void 0 ? void 0 : _55.background) === null || _56 === void 0 ? void 0 : _56.gradientColor2) !== null && _57 !== void 0 ? _57 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientColor2,
                 gradientAlpha2: (_60 = (_59 = (_58 = this.properties.filterSettings) === null || _58 === void 0 ? void 0 : _58.background) === null || _59 === void 0 ? void 0 : _59.gradientAlpha2) !== null && _60 !== void 0 ? _60 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientAlpha2
             },
-            showDivider: (_62 = (_61 = this.properties.filterSettings) === null || _61 === void 0 ? void 0 : _61.showDivider) !== null && _62 !== void 0 ? _62 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.showDivider
+            divideSpace: (_62 = (_61 = this.properties.filterSettings) === null || _61 === void 0 ? void 0 : _61.divideSpace) !== null && _62 !== void 0 ? _62 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.divideSpace
         };
         // Map category section properties to the format expected by FancyList component
         var categorySectionSettings = {
@@ -37525,7 +37520,7 @@ var FancyListWebPart = /** @class */ (function (_super) {
                                         onRender: function (elem, ctx, changeCallback) {
                                             // Load categories asynchronously and re-render when ready
                                             _this._getAvailableCategories().then(function (availableCategories) {
-                                                var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1;
+                                                var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2;
                                                 react_dom__WEBPACK_IMPORTED_MODULE_1__.render(react__WEBPACK_IMPORTED_MODULE_0__.createElement(_propertyPane_FilterModuleControl__WEBPACK_IMPORTED_MODULE_10__.FilterModuleControl, {
                                                     label: 'Filter Configuration',
                                                     settings: {
@@ -37548,16 +37543,16 @@ var FancyListWebPart = /** @class */ (function (_super) {
                                                         backgroundShape: ((_m = _this.properties.filterSettings) === null || _m === void 0 ? void 0 : _m.backgroundShape) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.backgroundShape,
                                                         showAllCategories: (_p = (_o = _this.properties.filterSettings) === null || _o === void 0 ? void 0 : _o.showAllCategories) !== null && _p !== void 0 ? _p : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.showAllCategories,
                                                         defaultFilterSelection: (_r = (_q = _this.properties.filterSettings) === null || _q === void 0 ? void 0 : _q.defaultFilterSelection) !== null && _r !== void 0 ? _r : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.defaultFilterSelection,
-                                                        showDivider: ((_s = _this.properties.filterSettings) === null || _s === void 0 ? void 0 : _s.showDivider) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.showDivider,
-                                                        backgroundType: ((_t = _this.properties.filterSettings) === null || _t === void 0 ? void 0 : _t.background.type) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.type,
-                                                        backgroundColor: ((_u = _this.properties.filterSettings) === null || _u === void 0 ? void 0 : _u.background.color) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.color,
-                                                        backgroundAlpha: ((_v = _this.properties.filterSettings) === null || _v === void 0 ? void 0 : _v.background.alpha) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.alpha,
-                                                        gradientDirection: ((_w = _this.properties.filterSettings) === null || _w === void 0 ? void 0 : _w.background.gradientDirection) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientDirection,
-                                                        gradientColor1: ((_x = _this.properties.filterSettings) === null || _x === void 0 ? void 0 : _x.background.gradientColor1) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientColor1,
-                                                        gradientColor2: ((_y = _this.properties.filterSettings) === null || _y === void 0 ? void 0 : _y.background.gradientColor2) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientColor2,
-                                                        gradientAlpha: ((_z = _this.properties.filterSettings) === null || _z === void 0 ? void 0 : _z.background.gradientAlpha1) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientAlpha1,
-                                                        imageUrl: ((_0 = _this.properties.filterSettings) === null || _0 === void 0 ? void 0 : _0.background.image) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.image,
-                                                        imageAlpha: ((_1 = _this.properties.filterSettings) === null || _1 === void 0 ? void 0 : _1.background.imageAlpha) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.imageAlpha
+                                                        backgroundType: ((_s = _this.properties.filterSettings) === null || _s === void 0 ? void 0 : _s.background.type) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.type,
+                                                        backgroundColor: ((_t = _this.properties.filterSettings) === null || _t === void 0 ? void 0 : _t.background.color) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.color,
+                                                        backgroundAlpha: ((_u = _this.properties.filterSettings) === null || _u === void 0 ? void 0 : _u.background.alpha) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.alpha,
+                                                        gradientDirection: ((_v = _this.properties.filterSettings) === null || _v === void 0 ? void 0 : _v.background.gradientDirection) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientDirection,
+                                                        gradientColor1: ((_w = _this.properties.filterSettings) === null || _w === void 0 ? void 0 : _w.background.gradientColor1) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientColor1,
+                                                        gradientColor2: ((_x = _this.properties.filterSettings) === null || _x === void 0 ? void 0 : _x.background.gradientColor2) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientColor2,
+                                                        gradientAlpha: ((_y = _this.properties.filterSettings) === null || _y === void 0 ? void 0 : _y.background.gradientAlpha1) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.gradientAlpha1,
+                                                        imageUrl: ((_z = _this.properties.filterSettings) === null || _z === void 0 ? void 0 : _z.background.image) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.image,
+                                                        imageAlpha: ((_0 = _this.properties.filterSettings) === null || _0 === void 0 ? void 0 : _0.background.imageAlpha) || _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.background.imageAlpha,
+                                                        divideSpace: (_2 = (_1 = _this.properties.filterSettings) === null || _1 === void 0 ? void 0 : _1.divideSpace) !== null && _2 !== void 0 ? _2 : _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].filterSettings.divideSpace
                                                     },
                                                     availableCategories: availableCategories,
                                                     onPropertyChange: function (propertyPath, newValue) {
@@ -37574,9 +37569,6 @@ var FancyListWebPart = /** @class */ (function (_super) {
                                                                 break;
                                                             case 'backgroundShape':
                                                                 _this.properties.filterSettings.backgroundShape = newValue;
-                                                                break;
-                                                            case 'showDivider':
-                                                                _this.properties.filterSettings.showDivider = newValue;
                                                                 break;
                                                             case 'backgroundType':
                                                                 _this.properties.filterSettings.background.type = newValue;
@@ -37636,6 +37628,10 @@ var FancyListWebPart = /** @class */ (function (_super) {
                                                             case 'defaultFilterSelection':
                                                                 console.log('🔄 WEBPART DEBUG: defaultFilterSelection property changed to:', newValue);
                                                                 _this.properties.filterSettings.defaultFilterSelection = newValue;
+                                                                break;
+                                                            case 'divideSpace':
+                                                                console.log('🔄 WEBPART DEBUG: divideSpace property changed to:', newValue);
+                                                                _this.properties.filterSettings.divideSpace = newValue;
                                                                 break;
                                                         }
                                                         if (changeCallback)

@@ -140,7 +140,7 @@ export interface FilterSettings {
     gradientColor2: string;
     gradientAlpha2: number;
   };
-  showDivider: boolean;
+  divideSpace: number;
   testValues: {
     font: {
       family: string;
@@ -171,7 +171,7 @@ export interface FilterSettings {
       gradientColor2: string;
       gradientAlpha2: number;
     };
-    showDivider: boolean;
+    divideSpace: number;
   };
 }
 
@@ -370,7 +370,7 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
         gradientColor2: this.properties.filterSettings?.background?.gradientColor2 ?? DEFAULTS_CONFIG.filterSettings.background.gradientColor2,
         gradientAlpha2: this.properties.filterSettings?.background?.gradientAlpha2 ?? DEFAULTS_CONFIG.filterSettings.background.gradientAlpha2
       },
-      showDivider: this.properties.filterSettings?.showDivider ?? DEFAULTS_CONFIG.filterSettings.showDivider
+      divideSpace: this.properties.filterSettings?.divideSpace ?? DEFAULTS_CONFIG.filterSettings.divideSpace
     };
 
     // Map category section properties to the format expected by FancyList component
@@ -1048,7 +1048,6 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
                               backgroundShape: this.properties.filterSettings?.backgroundShape || DEFAULTS_CONFIG.filterSettings.backgroundShape,
                               showAllCategories: this.properties.filterSettings?.showAllCategories ?? DEFAULTS_CONFIG.filterSettings.showAllCategories,
                               defaultFilterSelection: this.properties.filterSettings?.defaultFilterSelection ?? DEFAULTS_CONFIG.filterSettings.defaultFilterSelection,
-                              showDivider: this.properties.filterSettings?.showDivider || DEFAULTS_CONFIG.filterSettings.showDivider,
                               backgroundType: this.properties.filterSettings?.background.type || DEFAULTS_CONFIG.filterSettings.background.type,
                               backgroundColor: this.properties.filterSettings?.background.color || DEFAULTS_CONFIG.filterSettings.background.color,
                               backgroundAlpha: this.properties.filterSettings?.background.alpha || DEFAULTS_CONFIG.filterSettings.background.alpha,
@@ -1057,7 +1056,8 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
                               gradientColor2: this.properties.filterSettings?.background.gradientColor2 || DEFAULTS_CONFIG.filterSettings.background.gradientColor2,
                               gradientAlpha: this.properties.filterSettings?.background.gradientAlpha1 || DEFAULTS_CONFIG.filterSettings.background.gradientAlpha1,
                               imageUrl: this.properties.filterSettings?.background.image || DEFAULTS_CONFIG.filterSettings.background.image,
-                              imageAlpha: this.properties.filterSettings?.background.imageAlpha || DEFAULTS_CONFIG.filterSettings.background.imageAlpha
+                              imageAlpha: this.properties.filterSettings?.background.imageAlpha || DEFAULTS_CONFIG.filterSettings.background.imageAlpha,
+                              divideSpace: this.properties.filterSettings?.divideSpace ?? DEFAULTS_CONFIG.filterSettings.divideSpace
                             },
                             availableCategories: availableCategories,
                             onPropertyChange: (propertyPath: string, newValue: any) => {
@@ -1075,9 +1075,6 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
                                   break;
                                 case 'backgroundShape':
                                   this.properties.filterSettings.backgroundShape = newValue;
-                                  break;
-                                case 'showDivider':
-                                  this.properties.filterSettings.showDivider = newValue;
                                   break;
                                 case 'backgroundType':
                                   this.properties.filterSettings.background.type = newValue;
@@ -1137,6 +1134,10 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
                                 case 'defaultFilterSelection':
                                   console.log('🔄 WEBPART DEBUG: defaultFilterSelection property changed to:', newValue);
                                   this.properties.filterSettings.defaultFilterSelection = newValue;
+                                  break;
+                                case 'divideSpace':
+                                  console.log('🔄 WEBPART DEBUG: divideSpace property changed to:', newValue);
+                                  this.properties.filterSettings.divideSpace = newValue;
                                   break;
                               }
                               if (changeCallback) changeCallback();

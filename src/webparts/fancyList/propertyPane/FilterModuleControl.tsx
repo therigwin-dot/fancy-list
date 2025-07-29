@@ -8,6 +8,7 @@ import { PrimaryButton } from '@fluentui/react/lib/Button';
 import { FontControl } from './FontControl';
 import { ColorPickerControl } from './ColorPickerControl';
 import { ShapePickerControl, ShapeOption } from './ShapePickerControl';
+import { DivideSpaceControl } from './DivideSpaceControl';
 import DEFAULTS_CONFIG from '../DEFAULTS_CONFIG';
 
 export interface FilterModuleControlProps {
@@ -34,7 +35,6 @@ export interface FilterModuleControlProps {
       font: string;
     };
     shape: ShapeOption;
-    showDivider: boolean;
     showAllCategories: boolean;
     defaultFilterSelection: string;
     backgroundType: 'solid' | 'gradient' | 'image';
@@ -47,6 +47,7 @@ export interface FilterModuleControlProps {
     imageUrl: string;
     imageAlpha: number;
     backgroundShape: ShapeOption;
+    divideSpace: number;
   };
   availableCategories?: string[];
   onPropertyChange?: (propertyPath: string, newValue: any) => void;
@@ -76,7 +77,6 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
       font: '#323130'
     },
     shape: 'pill',
-    showDivider: false,
     showAllCategories: true,
     defaultFilterSelection: 'All',
     backgroundType: 'solid',
@@ -88,7 +88,8 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
     gradientAlpha: 0,
     imageUrl: '',
     imageAlpha: 0,
-    backgroundShape: 'rounded'
+    backgroundShape: 'rounded',
+    divideSpace: 0
   },
   availableCategories = [],
   onPropertyChange 
@@ -545,17 +546,14 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
             </span>
           </div>
 
-          {/* 9. Divider Toggle */}
-          <div style={{ marginBottom: 16 }}>
-            <Toggle
-              label="Divider"
-              inlineLabel={true}
-              checked={settings.showDivider}
-              onText="On"
-              offText="Off"
-              onChange={(_, checked) => handlePropertyChange('showDivider', checked)}
-            />
-          </div>
+          {/* 9. Divide Space Control */}
+          <DivideSpaceControl
+            label="Div Space"
+            value={settings.divideSpace}
+            onChange={(value) => handlePropertyChange('divideSpace', value)}
+            onReset={() => handlePropertyChange('divideSpace', DEFAULTS_CONFIG.filterSettings.divideSpace)}
+            onTestValues={() => handlePropertyChange('divideSpace', DEFAULTS_CONFIG.filterSettings.testValues.divideSpace)}
+          />
 
           {/* 10. Reset and Test Values Buttons */}
           <div style={{ marginTop: 16, display: 'flex', gap: '8px' }}>
@@ -600,8 +598,8 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
                 handlePropertyChange('imageUrl', DEFAULTS_CONFIG.filterSettings.background.image);
                 handlePropertyChange('imageAlpha', DEFAULTS_CONFIG.filterSettings.background.imageAlpha);
                 
-                // Reset divider
-                handlePropertyChange('showDivider', DEFAULTS_CONFIG.filterSettings.showDivider);
+                // Reset divideSpace
+                handlePropertyChange('divideSpace', DEFAULTS_CONFIG.filterSettings.divideSpace);
                 
                 console.log('✅ RESET BUTTON: All properties reset to defaults');
               }}
@@ -643,8 +641,8 @@ export const FilterModuleControl: React.FC<FilterModuleControlProps> = ({
                 handlePropertyChange('imageUrl', DEFAULTS_CONFIG.filterSettings.testValues.background.image);
                 handlePropertyChange('imageAlpha', DEFAULTS_CONFIG.filterSettings.testValues.background.imageAlpha);
                 
-                // Apply divider test value
-                handlePropertyChange('showDivider', DEFAULTS_CONFIG.filterSettings.testValues.showDivider);
+                // Apply divideSpace test value
+                handlePropertyChange('divideSpace', DEFAULTS_CONFIG.filterSettings.testValues.divideSpace);
                 
                 console.log('✅ TEST VALUES BUTTON: All test values applied');
               }}

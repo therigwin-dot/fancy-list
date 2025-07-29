@@ -774,7 +774,7 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
                 ...this.getFilterBackgroundStyle(this.props.filterSettings),
                 position: 'relative',
                 padding: '12px',
-                marginBottom: '6px',
+                marginBottom: `${this.props.filterSettings?.divideSpace ?? 0}px`,
                 borderRadius: this.getShapeRadius(this.props.filterSettings?.backgroundShape || 'rounded')
               }}
             >
@@ -874,15 +874,6 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
               </div>
             )}
 
-            {/* Filter Divider - positioned between filters and list items */}
-            {this.props.filterSettings?.showDivider && (
-              <div style={{
-                height: '2px',
-                backgroundColor: 'var(--neutralLight, #edebe9)',
-                marginTop: '12px',
-                marginBottom: '12px'
-              }} />
-            )}
           </>
         )}
 

@@ -75,7 +75,7 @@ export interface IFancyListProps {
             gradientColor2: string;
             gradientAlpha2: number;
         };
-        showDivider: boolean;
+        divideSpace?: number;
     };
     categorySectionSettings?: {
         sectionType: 'category';

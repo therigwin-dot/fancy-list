@@ -24,7 +24,6 @@ export interface FilterModuleControlProps {
             font: string;
         };
         shape: ShapeOption;
-        showDivider: boolean;
         showAllCategories: boolean;
         defaultFilterSelection: string;
         backgroundType: 'solid' | 'gradient' | 'image';
@@ -37,6 +36,7 @@ export interface FilterModuleControlProps {
         imageUrl: string;
         imageAlpha: number;
         backgroundShape: ShapeOption;
+        divideSpace: number;
     };
     availableCategories?: string[];
     onPropertyChange?: (propertyPath: string, newValue: any) => void;

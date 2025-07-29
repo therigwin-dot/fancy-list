@@ -102,7 +102,7 @@ export const DEFAULTS_CONFIG = {
       gradientColor2: '#0f46d1',
       gradientAlpha2: 0
     },
-    showDivider: false,
+    divideSpace: 0,
     // Test Values for Filter Section
     testValues: {
       font: {
@@ -134,7 +134,7 @@ export const DEFAULTS_CONFIG = {
         gradientColor2: '#00ffff',
         gradientAlpha2: 50
       },
-      showDivider: true
+      divideSpace: 4
     }
   } as FilterSettings,
 
