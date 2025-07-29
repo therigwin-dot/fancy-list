@@ -21,6 +21,9 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     componentDidMount(): void;
     componentDidUpdate(prevProps: IFancyListProps): void;
     private loadListData;
+    private detectDescriptionType;
+    private isImageUrl;
+    private isRichText;
     private handleCategoryClick;
     private handleItemToggle;
     private handleCategoryToggle;
@@ -46,6 +49,11 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     private checkTitleImage;
     private getTitleStyle;
     private renderTitle;
+    private renderDescriptionContent;
+    private renderTextDescription;
+    private renderImageDescription;
+    private renderRichTextDescription;
+    private renderAttachments;
     render(): React.ReactElement<IFancyListProps>;
 }
 export {};

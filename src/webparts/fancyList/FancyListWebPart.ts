@@ -640,10 +640,31 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
   }
 
   private async _loadLists(): Promise<{ key: string, text: string }[]> {
-    const url = `${this.context.pageContext.web.absoluteUrl}/_api/web/lists?$filter=Hidden eq false and BaseTemplate ne 544&$select=Id,Title`;
+    // Filter for Lists only - exclude Document Libraries (BaseTemplate 101) and Page Libraries (BaseTemplate 119)
+    // Include only regular Lists (BaseTemplate 100) and Event Lists (BaseTemplate 106)
+    const url = `${this.context.pageContext.web.absoluteUrl}/_api/web/lists?$filter=Hidden eq false and (BaseTemplate eq 100 or BaseTemplate eq 106)&$select=Id,Title,BaseTemplate,TemplateFeatureId`;
+    console.log('🔍 LIST DEBUG - Loading lists from URL:', url);
+    
     const response = await this.context.spHttpClient.get(url, SPHttpClient.configurations.v1);
     const data = await response.json();
-    return data.value.map((list: any) => ({ key: list.Title, text: list.Title }));
+    
+    console.log('🔍 LIST DEBUG - Raw API response:', data);
+    console.log('🔍 LIST DEBUG - Total items returned:', data.value.length);
+    
+    // Log each list with its template info
+    data.value.forEach((list: any, index: number) => {
+      console.log(`🔍 LIST DEBUG - Item ${index + 1}:`, {
+        Title: list.Title,
+        Id: list.Id,
+        BaseTemplate: list.BaseTemplate,
+        TemplateFeatureId: list.TemplateFeatureId
+      });
+    });
+    
+    const filteredLists = data.value.map((list: any) => ({ key: list.Title, text: list.Title }));
+    console.log('🔍 LIST DEBUG - Final filtered lists:', filteredLists);
+    
+    return filteredLists;
   }
 
   private async _loadFields(listTitle: string): Promise<{ key: string, text: string }[]> {
@@ -797,7 +818,7 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
                   }
                 },
                 PropertyPaneDropdown('selectedListId', {
-                  label: 'Select List or Library',
+                  label: 'Select List',
                   options: this._lists.length ? this._lists : [{ key: '', text: this._loadingLists ? 'Loading...' : 'No lists found' }],
                   selectedKey: this.properties.selectedListId
                 }),
@@ -1284,14 +1305,6 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
               ]
             },
             {
-              groupName: 'User Story',
-              groupFields: [
-                PropertyPaneLabel('userStory', {
-                  text: DEFAULTS_CONFIG.aboutInfo.userStory
-                })
-              ]
-            },
-            {
               groupName: 'Features',
               groupFields: [
                 PropertyPaneLabel('features1', {
@@ -1308,6 +1321,71 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
                 }),
                 PropertyPaneLabel('features5', {
                   text: `• ${DEFAULTS_CONFIG.aboutInfo.features[4]}`
+                }),
+                PropertyPaneLabel('features6', {
+                  text: `• ${DEFAULTS_CONFIG.aboutInfo.features[5]}`
+                }),
+                PropertyPaneLabel('features7', {
+                  text: `• ${DEFAULTS_CONFIG.aboutInfo.features[6]}`
+                }),
+                PropertyPaneLabel('features8', {
+                  text: `• ${DEFAULTS_CONFIG.aboutInfo.features[7]}`
+                }),
+                PropertyPaneLabel('features9', {
+                  text: `• ${DEFAULTS_CONFIG.aboutInfo.features[8]}`
+                }),
+                PropertyPaneLabel('features10', {
+                  text: `• ${DEFAULTS_CONFIG.aboutInfo.features[9]}`
+                }),
+                PropertyPaneLabel('features11', {
+                  text: `• ${DEFAULTS_CONFIG.aboutInfo.features[10]}`
+                }),
+                PropertyPaneLabel('features12', {
+                  text: `• ${DEFAULTS_CONFIG.aboutInfo.features[11]}`
+                }),
+                PropertyPaneLabel('features13', {
+                  text: `• ${DEFAULTS_CONFIG.aboutInfo.features[12]}`
+                }),
+                PropertyPaneLabel('features14', {
+                  text: `• ${DEFAULTS_CONFIG.aboutInfo.features[13]}`
+                }),
+                PropertyPaneLabel('features15', {
+                  text: `• ${DEFAULTS_CONFIG.aboutInfo.features[14]}`
+                }),
+                PropertyPaneLabel('features16', {
+                  text: `• ${DEFAULTS_CONFIG.aboutInfo.features[15]}`
+                }),
+                PropertyPaneLabel('features17', {
+                  text: `• ${DEFAULTS_CONFIG.aboutInfo.features[16]}`
+                }),
+                PropertyPaneLabel('features18', {
+                  text: `• ${DEFAULTS_CONFIG.aboutInfo.features[17]}`
+                }),
+                PropertyPaneLabel('features19', {
+                  text: `• ${DEFAULTS_CONFIG.aboutInfo.features[18]}`
+                }),
+                PropertyPaneLabel('features20', {
+                  text: `• ${DEFAULTS_CONFIG.aboutInfo.features[19]}`
+                })
+              ]
+            },
+            {
+              groupName: 'Known Issues',
+              groupFields: [
+                PropertyPaneLabel('knownIssues1', {
+                  text: `• ${DEFAULTS_CONFIG.aboutInfo.knownIssues[0]}`
+                }),
+                PropertyPaneLabel('knownIssues2', {
+                  text: `• ${DEFAULTS_CONFIG.aboutInfo.knownIssues[1]}`
+                }),
+                PropertyPaneLabel('knownIssues3', {
+                  text: `• ${DEFAULTS_CONFIG.aboutInfo.knownIssues[2]}`
+                }),
+                PropertyPaneLabel('knownIssues4', {
+                  text: `• ${DEFAULTS_CONFIG.aboutInfo.knownIssues[3]}`
+                }),
+                PropertyPaneLabel('knownIssues5', {
+                  text: `• ${DEFAULTS_CONFIG.aboutInfo.knownIssues[4]}`
                 })
               ]
             }

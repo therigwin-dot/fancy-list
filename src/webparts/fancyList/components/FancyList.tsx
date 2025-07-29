@@ -183,42 +183,59 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
   }
 
   private async loadListData(): Promise<void> {
-    if (!this.props.selectedListId) {
-      this.setState({ items: [], categories: [], error: 'Please select a list in the web part properties.' });
-      return;
-    }
-    if (!this.props.categoryField) {
-      this.setState({ items: [], categories: [], error: 'Please select a Category field in the web part properties.' });
-      return;
-    }
-    if (!this.props.subjectField) {
-      this.setState({ items: [], categories: [], error: 'Please select a Subject field in the web part properties.' });
-      return;
-    }
-    if (!this.props.descriptionField) {
-      this.setState({ items: [], categories: [], error: 'Please select a Description field in the web part properties.' });
+    if (!this.props.selectedListId || !this.props.categoryField || !this.props.subjectField || !this.props.descriptionField) {
+      this.setState({ items: [], categories: [], error: 'Please select all required fields in the web part properties.' });
       return;
     }
 
     this.setState({ loading: true, error: '' });
 
     try {
+      // Enhanced query to fetch attachments
+      const apiUrl = `${this.props.context.pageContext.web.absoluteUrl}/_api/web/lists/getbytitle('${this.props.selectedListId}')/items?$select=${this.props.categoryField},${this.props.subjectField},${this.props.descriptionField},Attachments,AttachmentFiles&$expand=AttachmentFiles&$orderby=${this.props.categoryField},${this.props.subjectField}`;
+      
+      console.log('🔍 LoadListData Debug - API URL:', apiUrl);
+      console.log('🔍 LoadListData Debug - Field names being used:', {
+        categoryField: this.props.categoryField,
+        subjectField: this.props.subjectField,
+        descriptionField: this.props.descriptionField
+      });
+
       const response: SPHttpClientResponse = await this.props.context.spHttpClient.get(
-        `${this.props.context.pageContext.web.absoluteUrl}/_api/web/lists/getbytitle('${this.props.selectedListId}')/items?$select=${this.props.categoryField},${this.props.subjectField},${this.props.descriptionField}&$orderby=${this.props.categoryField},${this.props.subjectField}`,
+        apiUrl,
         SPHttpClient.configurations.v1
       );
 
       if (!response.ok) {
+        console.error('🔍 LoadListData Debug - API Response Error:', {
+          status: response.status,
+          statusText: response.statusText,
+          url: apiUrl
+        });
         throw new Error(`Failed to load list data: ${response.statusText}`);
       }
 
       const data = await response.json();
-      const items: IListItem[] = data.value.map((item: any, index: number) => ({
-        id: item.Id || index,
-        category: item[this.props.categoryField] || 'Uncategorized',
-        subject: item[this.props.subjectField] || 'No Subject',
-        description: item[this.props.descriptionField] || ''
-      }));
+      console.log('🔍 LoadListData Debug - Raw data sample:', data.value.slice(0, 2));
+      
+      const items: IListItem[] = data.value.map((item: any, index: number) => {
+        const descriptionValue = item[this.props.descriptionField];
+        const descriptionType = this.detectDescriptionType(descriptionValue);
+        
+        return {
+          id: item.Id || index,
+          category: item[this.props.categoryField] || 'Uncategorized',
+          subject: item[this.props.subjectField] || 'No Subject',
+          description: descriptionValue || '',
+          descriptionType,
+          rawDescription: descriptionValue,
+          attachments: item.AttachmentFiles ? item.AttachmentFiles.map((file: any) => ({
+            fileName: file.FileName,
+            serverRelativeUrl: file.ServerRelativeUrl,
+            fileSize: file.Length
+          })) : []
+        };
+      });
 
       const categories = Array.from(new Set(items.map(item => item.category))).sort();
       
@@ -235,6 +252,47 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     } finally {
       this.setState({ loading: false });
     }
+  }
+
+  // Content Type Detection Methods
+  private detectDescriptionType(content: any): 'text' | 'image' | 'richtext' {
+    if (!content) return 'text';
+    
+    const contentStr = String(content).trim();
+    
+    // Check if it's an image URL
+    if (this.isImageUrl(contentStr)) {
+      return 'image';
+    }
+    
+    // Check if it's rich text (contains HTML)
+    if (this.isRichText(contentStr)) {
+      return 'richtext';
+    }
+    
+    // Default to text
+    return 'text';
+  }
+
+  private isImageUrl(content: string): boolean {
+    const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.webp', '.svg'];
+    const urlPattern = /^https?:\/\/.+/i;
+    
+    if (!urlPattern.test(content)) return false;
+    
+    try {
+      const url = new URL(content);
+      const pathname = url.pathname.toLowerCase();
+      return imageExtensions.some(ext => pathname.endsWith(ext));
+    } catch {
+      return false;
+    }
+  }
+
+  private isRichText(content: string): boolean {
+    // Check for HTML tags
+    const htmlTagPattern = /<[^>]*>/;
+    return htmlTagPattern.test(content);
   }
 
   private handleCategoryClick = (category: string): void => {
@@ -899,6 +957,124 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
     );
   }
 
+  // Content-Specific Rendering Methods
+  private renderDescriptionContent(item: IListItem): React.ReactElement {
+    const baseStyle = {
+      ...this.getDescriptionSectionBackgroundStyle(),
+      padding: '1em',
+      marginBottom: `${this.props.descriptionSectionSettings?.divideSpace ?? 0}px`
+    };
+
+    switch (item.descriptionType) {
+      case 'image':
+        return this.renderImageDescription(item, baseStyle);
+      case 'richtext':
+        return this.renderRichTextDescription(item, baseStyle);
+      default:
+        return this.renderTextDescription(item, baseStyle);
+    }
+  }
+
+  private renderTextDescription(item: IListItem, baseStyle: React.CSSProperties): React.ReactElement {
+    return (
+      <div 
+        className={styles.itemDescription}
+        style={{
+          ...baseStyle,
+          ...this.getDescriptionSectionFontStyle()
+        }}
+      >
+        {item.description}
+        {this.renderAttachments(item)}
+      </div>
+    );
+  }
+
+  private renderImageDescription(item: IListItem, baseStyle: React.CSSProperties): React.ReactElement {
+    return (
+      <div 
+        className={styles.itemDescription}
+        style={baseStyle}
+      >
+        <img 
+          src={item.description}
+          alt="Description Image"
+          style={{
+            maxWidth: '100%',
+            height: 'auto',
+            display: 'block'
+          }}
+          onError={(e) => {
+            e.currentTarget.style.display = 'none';
+            const errorDiv = e.currentTarget.nextElementSibling as HTMLElement;
+            if (errorDiv) errorDiv.style.display = 'block';
+          }}
+        />
+        <div style={{ display: 'none', color: 'red' }}>
+          Failed to load image: {item.description}
+        </div>
+        {this.renderAttachments(item)}
+      </div>
+    );
+  }
+
+  private renderRichTextDescription(item: IListItem, baseStyle: React.CSSProperties): React.ReactElement {
+    return (
+      <div 
+        className={styles.itemDescription}
+        style={baseStyle}
+      >
+        <div 
+          dangerouslySetInnerHTML={{ __html: item.description }}
+          style={{
+            // Reset font styling for rich text
+            fontFamily: 'inherit',
+            fontSize: 'inherit',
+            color: 'inherit',
+            fontWeight: 'inherit',
+            fontStyle: 'inherit',
+            textDecoration: 'inherit'
+          }}
+        />
+        {this.renderAttachments(item)}
+      </div>
+    );
+  }
+
+  private renderAttachments(item: IListItem): React.ReactElement | null {
+    if (!item.attachments || item.attachments.length === 0) {
+      return null;
+    }
+
+    return (
+      <div style={{ marginTop: '1em', paddingTop: '1em', borderTop: '1px solid #e1e1e1' }}>
+        <div style={{ fontWeight: 'bold', marginBottom: '0.5em' }}>Attachments:</div>
+        {item.attachments.map((attachment, index) => (
+          <div key={index} style={{ marginBottom: '0.25em' }}>
+            <a 
+              href={`${this.props.context.pageContext.web.absoluteUrl}${attachment.serverRelativeUrl}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ 
+                color: 'var(--themePrimary, #0078d4)',
+                textDecoration: 'none'
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.textDecoration = 'underline'}
+              onMouseLeave={(e) => e.currentTarget.style.textDecoration = 'none'}
+            >
+              📎 {attachment.fileName}
+              {attachment.fileSize && (
+                <span style={{ color: '#666', fontSize: '0.9em', marginLeft: '0.5em' }}>
+                  ({(attachment.fileSize / 1024).toFixed(1)} KB)
+                </span>
+              )}
+            </a>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
   public render(): React.ReactElement<IFancyListProps> {
     const { selectedCategory, categories, loading, error } = this.state;
     
@@ -1167,16 +1343,7 @@ export default class FancyList extends React.Component<IFancyListProps, IFancyLi
                       </button>
                       {isItemExpanded && (
                         <div className={styles.itemContent}>
-                          <div 
-                            className={styles.itemDescription}
-                            style={{
-                              ...this.getDescriptionSectionFontStyle(),
-                              ...this.getDescriptionSectionBackgroundStyle(),
-                              padding: '1em',
-                              marginBottom: `${this.props.descriptionSectionSettings?.divideSpace ?? 0}px`
-                            }}
-                            dangerouslySetInnerHTML={{ __html: item.description }}
-                          />
+                          {this.renderDescriptionContent(item)}
                         </div>
                       )}
                     </div>

@@ -241,8 +241,8 @@ export declare const DEFAULTS_CONFIG: {
     aboutInfo: {
         version: string;
         description: string;
-        userStory: string;
         features: string[];
+        knownIssues: string[];
     };
     TESTING_VALUES: ({
         page: number;

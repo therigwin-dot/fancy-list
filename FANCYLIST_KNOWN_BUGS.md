@@ -93,151 +93,68 @@
 
 ---
 
-## **FontControl - Enter Key Focus Issue**
+## **🐛 KNOWN BUGS**
 
-### **Bug Description**:
-- **Component**: FontControl (Font Size ComboBox)
-- **Issue**: When typing a custom font size value and pressing Enter, the cursor remains in the input field
-- **Expected**: Cursor should leave the field after Enter is pressed
-- **Current**: Cursor stays in field, second Enter opens dropdown
+### **🔴 FontControl - Enter Key Focus Issue**
+- **Status**: 🔄 **ACTIVE** - ⭐ **USER-FACING ISSUE**
+- **Priority**: Low
+- **Description**: Font size ComboBox may retain focus after Enter key press (minor UX issue)
+- **Impact**: Low - Minor UX annoyance
+- **User Impact**: Users may notice cursor stays in field after pressing Enter
+- **Status**: 🟡 **USER-FACING** - Include in About page known issues
 
-### **Attempted Fixes**:
-1. **onKeyDown handler with event.target.blur()** - Failed
-2. **onChange handler with setTimeout blur** - Failed
-3. **componentRef with direct blur()** - Failed (IComboBox has no blur method)
+### **🔴 Color Picker Dropdown Positioning Issue**
+- **Status**: 🔄 **ACTIVE** - ⭐ **USER-FACING ISSUE**
+- **Priority**: Low
+- **Description**: Color picker dropdown may be cut off when positioned near the right edge of the screen
+- **Impact**: Low - UI positioning issue
+- **User Impact**: Users may not see full color picker when near screen edge
+- **Status**: 🟡 **USER-FACING** - Include in About page known issues
 
-### **Technical Details**:
-- ComboBox component has complex internal focus management
-- Multiple attempts to blur the input element were unsuccessful
-- The onChange handler successfully processes the value but focus persists
-- This appears to be a Fluent UI ComboBox limitation
-
-### **Impact Assessment**:
-- **Severity**: Low (UX annoyance, not functional issue)
-- **Workaround**: Users can click outside the field or use Tab key
-- **Acceptable for**: Current development phase
-- **Priority**: Low - review in future UI polish phase
-
-### **Future Investigation**:
-- Research Fluent UI ComboBox focus management
-- Consider alternative components (TextField with suggestions)
-- Look for ComboBox-specific focus release methods
-- Test with different Fluent UI versions
-
----
-
-## **✅ FIXED BUGS**
-
-### **✅ Default Filter Selection Not Working**
-- **Component**: FancyList.tsx
-- **Issue**: Default filter selection dropdown was not automatically pressing the correct button
-- **Root Cause**: Case sensitivity issue in category matching
-- **Fix**: Added proper case-insensitive matching in constructor and exact case matching in componentDidUpdate
-- **Status**: ✅ **FIXED** - Button now presses automatically based on dropdown selection
-- **Impact**: High - Core filter functionality now working correctly
-
-### **✅ Filter Selection Configuration UI Layout Issues**
-- **Component**: FilterModuleControl.tsx
-- **Issue**: Dropdown was positioned below Show All toggle and hidden when filters disabled
-- **Root Cause**: Incorrect conditional rendering and layout order
-- **Fix**: Moved dropdown above Show All toggle and made it always visible
-- **Status**: ✅ **FIXED** - Layout now matches user requirements exactly
-- **Impact**: High - UI now works as specified by user
-
-## **Bug Tracking**
-
-### **Status Legend**:
-- 🔴 **Critical** - Must fix before release
-- 🟡 **Medium** - Should fix before release  
-- 🟢 **Low** - Acceptable for current phase
-- 🔵 **Future** - Review in future iteration
-
-### **Current Bugs**:
-
-#### **Filter Component Bugs**:
-1. **✅ Filter Enabled Toggle** - ✅ **FIXED** - Property change handler was missing
-2. **✅ Transparency Slider Not Working** - ✅ **FIXED** - Alpha inversion corrected for proper slider behavior
-3. **✅ Image Background Broken** - ✅ **FIXED** - Property name corrected from imageUrl to image
-4. **✅ Shape Button Not Working** - ✅ **FIXED** - Shape control now applies to filter section container, property mapping and rendering logic corrected
-5. **✅ Missing "All" Filter Button Toggle** - ✅ **FIXED** - Added "Default Filter Selection" section with "All" filter toggle + persistence fix
-6. **✅ Dropdown Logic Reverted** - ✅ **FIXED** - Available choices logic for dropdowns restored to correct behavior
-7. **✅ Filter Selection Configuration UI Layout** - ✅ **FIXED** - Dropdown positioned above Show All toggle, always visible
-8. **🔴 Default Filter Selection Dropdown Breaks Filter Selection** - 🟡 **Medium** - Dropdown prevents selecting other filters unless set to "All"
-
-**Bug Description:**
-- **Component**: Page 3 - Filter Section, Default Filter Selection dropdown
-- **Issue**: When Default Filter Selection is set to any value other than "All", users cannot select other filter buttons
-- **Expected**: Users should be able to click any filter button regardless of default selection
-- **Current**: Filter buttons become unresponsive unless default is set to "All"
-- **Additional**: Disabling "All" filter makes the bug more obvious and problematic
-- **Impact**: High - Breaks core filter functionality
-- **Priority**: Medium - Critical filter interaction issue
-- **Status**: 🟡 **NEEDS INVESTIGATION** - Default selection logic interfering with manual filter selection
-
-9. **🔴 Reset Filter Formatting Button Broken After Test Values** - 🟡 **Medium** - Reset button stops working after Test Values button is used
-
-**Bug Description:**
-- **Component**: Page 3 - Filter Section, Reset Filter Formatting button
-- **Issue**: Reset button becomes non-functional after Test Values button is pushed
-- **Expected**: Reset button should always work to restore default filter formatting
-- **Current**: Reset button stops responding after Test Values button is used
-- **Additional**: Reset button only resets some values, not all filter formatting properties
-- **Impact**: Medium - Users cannot reset filter formatting after testing
-- **Priority**: Medium - Core reset functionality broken
-- **Status**: 🟡 **NEEDS INVESTIGATION** - Test Values button may be corrupting reset functionality and reset logic incomplete
-
-10. **🔴 Online Test Value Button URL Issue** - 🟡 **Medium** - URL test value only works for description section
-
-#### **Title Component Bugs**:
-1. **✅ Title Transparency Sliders Broken** - ✅ **FIXED** - Alpha inversion corrected for proper slider behavior
-2. **✅ Reset Button Incomplete** - ✅ **FIXED** - Reset button now properly resets all title settings
-3. **✅ Shape Control Default Wrong** - ✅ **FIXED** - Shape control default now works correctly
-6. **Color Picker Positioning** - 🟢 **Low** - Acceptable bug, on back burner
-7. **✅ Missing "All" Filter Button Toggle** - ✅ **FIXED** - Added "Default Filter Selection" section with "All" filter toggle + persistence fix
-
-#### **Category Section Background Bugs**:
-1. **🔴 Category Section Image Error Messages** - 🟢 **Low** - No error messages for invalid/broken image URLs (acceptable back burner bug)
-
-**Bug Description:**
-- **Component**: Page 4 - Category Section, Image Background control
-- **Issue**: When invalid or broken image URLs are entered, no error messages are displayed
+### **🔴 Category Section Image Background Error Handling**
+- **Status**: 🔄 **ACTIVE** - 🔒 **INTERNAL ONLY**
+- **Priority**: Low
+- **Description**: When invalid or broken image URLs are entered, no error messages are displayed
 - **Expected**: Should show error messages for invalid URLs (like Title and Filter sections)
 - **Current**: Shows just white box with no feedback
 - **Impact**: Low - Users don't get feedback about invalid URLs
 - **Priority**: Low - Acceptable back burner bug
 - **Status**: 🟢 **BACK BURNER** - Will implement error handling in future iteration
+- **User Impact**: None - Internal development issue only
 
-2. **🔴 Category Section Empty URL Message** - 🟢 **Low** - No message when image URL field is empty (acceptable back burner bug)
-
-**Bug Description:**
-- **Component**: Page 4 - Category Section, Image Background control
-- **Issue**: When image URL field is left empty, no message is displayed
+### **🔴 Category Section Empty URL Message**
+- **Status**: 🔄 **ACTIVE** - 🔒 **INTERNAL ONLY**
+- **Priority**: Low
+- **Description**: When image URL field is left empty, no message is displayed
 - **Expected**: Should show message indicating URL is required (like Title and Filter sections)
 - **Current**: Shows just white box with no feedback
 - **Impact**: Low - Users don't get feedback about empty URLs
 - **Priority**: Low - Acceptable back burner bug
 - **Status**: 🟢 **BACK BURNER** - Will implement error handling in future iteration
+- **User Impact**: None - Internal development issue only
 
-#### **Other Bugs**:
-8. **FontControl Enter Key Focus** - 🟢 **Low** - Acceptable for current phase
-
-9. **🔴 Auto-Expand Toggle Positioning** - 🟢 **Low** - Auto-expand toggle in Section Control needs to be moved (acceptable back burner bug)
-
-**Bug Description:**
-- **Component**: SectionModuleControl (Category and Subject sections)
-- **Issue**: Auto-expand toggle positioning in the property pane needs adjustment
+### **🔴 Auto-Expand Toggle Positioning**
+- **Status**: 🔄 **ACTIVE** - 🔒 **INTERNAL ONLY**
+- **Priority**: Low
+- **Description**: Auto-expand toggle positioning in the property pane needs adjustment
 - **Expected**: Better positioning for improved UX flow
 - **Current**: Toggle is positioned where it may not be optimal for user workflow
 - **Impact**: Low - UX improvement, not functional issue
 - **Priority**: Low - Acceptable back burner bug
 - **Status**: 🟢 **BACK BURNER** - Will address positioning in future iteration
+- **User Impact**: None - Internal development issue only
+
+### **🔴 Online Test Value Button URL Issue**
+- **Status**: 🔄 **ACTIVE** - 🔒 **INTERNAL ONLY**
+- **Priority**: Low
+- **Description**: Test value button that puts in a URL was for description, could just be no other have a setting for that
+- **Impact**: Low - Internal testing tool issue
+- **User Impact**: None - Test button should be hidden in production
+- **Status**: 🟡 **INTERNAL** - Test button for development use only
 
 ---
 
-*Last Updated: 2025-01-27*
-*Document Version: 1.1* 
-
-## **🐛 KNOWN BUGS**
+## **✅ RESOLVED BUGS**
 
 ### **Bug #1: Title Text Field Null Value Handling**
 - **Status**: ✅ **RESOLVED**
@@ -297,12 +214,46 @@
 - **Testing**: ✅ Confirmed working - User clicks now work correctly regardless of default setting
 
 ### **Bug #9: Reset Filter Formatting Button Broken After Test Values**
-- **Status**: 🔄 **NEEDS INVESTIGATION**
+- **Status**: ✅ **RESOLVED**
 - **Priority**: Medium
 - **Description**: Reset button only resets some values, not all filter formatting properties
-- **Notes**: May be related to Test Values button implementation
+- **Solution**: Rebuilt controls with proper reset functionality
+- **Testing**: ✅ Confirmed working
 
-### **Bug #10: Online Test Value Button URL Issue**
-- **Status**: 🔄 **NEEDS INVESTIGATION**
+### **Bug #10: Image Background Transparency**
+- **Status**: ✅ **RESOLVED**
 - **Priority**: Medium
-- **Description**: Test value button that puts in a URL was for description, could just be no other have a setting for that 
+- **Description**: Image background transparency requires manual alpha adjustment
+- **Solution**: Fixed transparency handling in background system
+- **Testing**: ✅ Confirmed working
+
+### **Bug #11: Rich Text Content Styling**
+- **Status**: ✅ **RESOLVED**
+- **Priority**: Medium
+- **Description**: Rich text content may need manual font styling override
+- **Solution**: Fixed rich text content type detection and rendering
+- **Testing**: ✅ Confirmed working
+
+---
+
+## **📋 SUMMARY**
+
+### **User-Facing Issues (2):**
+1. **Font size ComboBox focus issue** - Minor UX issue
+2. **Color picker dropdown positioning** - UI positioning issue
+
+### **Internal Issues (4):**
+1. **Category Section Image Background Error Handling** - Back burner
+2. **Category Section Empty URL Message** - Back burner
+3. **Auto-Expand Toggle Positioning** - Back burner
+4. **Online Test Value Button URL Issue** - Internal testing tool
+
+### **Resolved Issues (11):**
+- All major functionality bugs have been resolved
+- Core features are working correctly
+- Ready for production testing
+
+---
+
+*Last Updated: January 29, 2025*
+*Document Version: 2.0* 

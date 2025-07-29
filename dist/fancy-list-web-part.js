@@ -398,14 +398,35 @@ var DEFAULTS_CONFIG = {
     // Page 7: About Information
     aboutInfo: {
         version: '1.0.0.0',
-        description: 'Beta Basic Version - Display items from any SharePoint list or library with category filtering and collapsible panels',
-        userStory: 'As a site owner, I want to configure a custom web part that displays items from any SharePoint list or document library with comprehensive styling options including customizable collapse/expand icons and intelligent document attachment support, so that I can organize content by categories and present subjects with rich descriptions and associated files in an engaging, collapsible layout that adapts to my site\'s theme or custom styling preferences.',
+        description: 'Beta Basic Version - Display items from any SharePoint list with category filtering and collapsible panels',
         features: [
-            'Category filtering with collapsible panels',
-            'Only Individual Elements mode for styling (all other modes removed)',
-            'Intelligent document attachment support',
+            'Complete 7-page configuration framework with property pane controls',
+            'List selection with automatic field mapping (Category, Subject, Description)',
+            'Title section with font controls, background styling, and spacing options',
+            'Filter section with category filtering, styling, and background controls',
+            'Category section with full styling, auto-expand, and icon controls',
+            'Subject section with hierarchical display, styling, and auto-expand',
+            'Description section with content type detection and background styling',
+            'Advanced spacing controls (DivideSpace) with preset and custom options',
+            'Background system supporting solid colors, gradients, and images with transparency',
+            'Font controls with family, size, color, formatting, and alignment options',
+            'Shape controls (square, rounded, pill) for all sections',
+            'Icon controls with custom icons and positioning (left/right)',
+            'Auto-expand functionality with hierarchical coordination',
+            'Hover effects with multi-effect behavior and visual feedback',
+            'Test Defaults button for rapid configuration testing',
             'Responsive design with theme integration',
-            'Customizable icons and styling options'
+            'Attachment support for SharePoint list files',
+            'Rich text content type detection and rendering',
+            'Image URL detection and display capabilities',
+            'Document Library filtering (Lists only, no Document Libraries)'
+        ],
+        knownIssues: [
+            'Color picker may show deprecation warnings in browser console (cosmetic only)',
+            'Font size ComboBox may retain focus after Enter key press (minor UX issue)',
+            'Some browser deprecation warnings for -ms-high-contrast CSS (cosmetic only)',
+            'Image background transparency requires manual alpha adjustment',
+            'Rich text content may need manual font styling override'
         ]
     },
     // Structured Testing Values for Test Defaults Button
@@ -1595,7 +1616,7 @@ var DEFAULTS_CONFIG = {
                 },
                 {
                     control: "description",
-                    value: "Beta Basic Version - Display items from any SharePoint list or library with category filtering and collapsible panels",
+                    value: "Beta Basic Version - Display items from any SharePoint list with category filtering and collapsible panels",
                     description: "Set description for about info",
                     timing: 500,
                     dependency: null
@@ -1906,46 +1927,58 @@ var FancyList = /** @class */ (function (_super) {
     };
     FancyList.prototype.loadListData = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, items, categories, error_1;
+            var apiUrl, response, data, items, categories, error_1;
             var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        if (!this.props.selectedListId) {
-                            this.setState({ items: [], categories: [], error: 'Please select a list in the web part properties.' });
-                            return [2 /*return*/];
-                        }
-                        if (!this.props.categoryField) {
-                            this.setState({ items: [], categories: [], error: 'Please select a Category field in the web part properties.' });
-                            return [2 /*return*/];
-                        }
-                        if (!this.props.subjectField) {
-                            this.setState({ items: [], categories: [], error: 'Please select a Subject field in the web part properties.' });
-                            return [2 /*return*/];
-                        }
-                        if (!this.props.descriptionField) {
-                            this.setState({ items: [], categories: [], error: 'Please select a Description field in the web part properties.' });
+                        if (!this.props.selectedListId || !this.props.categoryField || !this.props.subjectField || !this.props.descriptionField) {
+                            this.setState({ items: [], categories: [], error: 'Please select all required fields in the web part properties.' });
                             return [2 /*return*/];
                         }
                         this.setState({ loading: true, error: '' });
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 4, 5, 6]);
-                        return [4 /*yield*/, this.props.context.spHttpClient.get("".concat(this.props.context.pageContext.web.absoluteUrl, "/_api/web/lists/getbytitle('").concat(this.props.selectedListId, "')/items?$select=").concat(this.props.categoryField, ",").concat(this.props.subjectField, ",").concat(this.props.descriptionField, "&$orderby=").concat(this.props.categoryField, ",").concat(this.props.subjectField), _microsoft_sp_http__WEBPACK_IMPORTED_MODULE_2__.SPHttpClient.configurations.v1)];
+                        apiUrl = "".concat(this.props.context.pageContext.web.absoluteUrl, "/_api/web/lists/getbytitle('").concat(this.props.selectedListId, "')/items?$select=").concat(this.props.categoryField, ",").concat(this.props.subjectField, ",").concat(this.props.descriptionField, ",Attachments,AttachmentFiles&$expand=AttachmentFiles&$orderby=").concat(this.props.categoryField, ",").concat(this.props.subjectField);
+                        console.log('🔍 LoadListData Debug - API URL:', apiUrl);
+                        console.log('🔍 LoadListData Debug - Field names being used:', {
+                            categoryField: this.props.categoryField,
+                            subjectField: this.props.subjectField,
+                            descriptionField: this.props.descriptionField
+                        });
+                        return [4 /*yield*/, this.props.context.spHttpClient.get(apiUrl, _microsoft_sp_http__WEBPACK_IMPORTED_MODULE_2__.SPHttpClient.configurations.v1)];
                     case 2:
                         response = _a.sent();
                         if (!response.ok) {
+                            console.error('🔍 LoadListData Debug - API Response Error:', {
+                                status: response.status,
+                                statusText: response.statusText,
+                                url: apiUrl
+                            });
                             throw new Error("Failed to load list data: ".concat(response.statusText));
                         }
                         return [4 /*yield*/, response.json()];
                     case 3:
                         data = _a.sent();
-                        items = data.value.map(function (item, index) { return ({
-                            id: item.Id || index,
-                            category: item[_this.props.categoryField] || 'Uncategorized',
-                            subject: item[_this.props.subjectField] || 'No Subject',
-                            description: item[_this.props.descriptionField] || ''
-                        }); });
+                        console.log('🔍 LoadListData Debug - Raw data sample:', data.value.slice(0, 2));
+                        items = data.value.map(function (item, index) {
+                            var descriptionValue = item[_this.props.descriptionField];
+                            var descriptionType = _this.detectDescriptionType(descriptionValue);
+                            return {
+                                id: item.Id || index,
+                                category: item[_this.props.categoryField] || 'Uncategorized',
+                                subject: item[_this.props.subjectField] || 'No Subject',
+                                description: descriptionValue || '',
+                                descriptionType: descriptionType,
+                                rawDescription: descriptionValue,
+                                attachments: item.AttachmentFiles ? item.AttachmentFiles.map(function (file) { return ({
+                                    fileName: file.FileName,
+                                    serverRelativeUrl: file.ServerRelativeUrl,
+                                    fileSize: file.Length
+                                }); }) : []
+                            };
+                        });
                         categories = Array.from(new Set(items.map(function (item) { return item.category; }))).sort();
                         this.setState({
                             items: items,
@@ -1967,6 +2000,41 @@ var FancyList = /** @class */ (function (_super) {
                 }
             });
         });
+    };
+    // Content Type Detection Methods
+    FancyList.prototype.detectDescriptionType = function (content) {
+        if (!content)
+            return 'text';
+        var contentStr = String(content).trim();
+        // Check if it's an image URL
+        if (this.isImageUrl(contentStr)) {
+            return 'image';
+        }
+        // Check if it's rich text (contains HTML)
+        if (this.isRichText(contentStr)) {
+            return 'richtext';
+        }
+        // Default to text
+        return 'text';
+    };
+    FancyList.prototype.isImageUrl = function (content) {
+        var imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.webp', '.svg'];
+        var urlPattern = /^https?:\/\/.+/i;
+        if (!urlPattern.test(content))
+            return false;
+        try {
+            var url = new URL(content);
+            var pathname_1 = url.pathname.toLowerCase();
+            return imageExtensions.some(function (ext) { return pathname_1.endsWith(ext); });
+        }
+        catch (_a) {
+            return false;
+        }
+    };
+    FancyList.prototype.isRichText = function (content) {
+        // Check for HTML tags
+        var htmlTagPattern = /<[^>]*>/;
+        return htmlTagPattern.test(content);
     };
     FancyList.prototype.getFilteredItems = function () {
         var _this = this;
@@ -2453,6 +2521,73 @@ var FancyList = /** @class */ (function (_super) {
                 } })),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { position: 'relative', zIndex: 2 } }, webPartTitle)));
     };
+    // Content-Specific Rendering Methods
+    FancyList.prototype.renderDescriptionContent = function (item) {
+        var _a, _b;
+        var baseStyle = __assign(__assign({}, this.getDescriptionSectionBackgroundStyle()), { padding: '1em', marginBottom: "".concat((_b = (_a = this.props.descriptionSectionSettings) === null || _a === void 0 ? void 0 : _a.divideSpace) !== null && _b !== void 0 ? _b : 0, "px") });
+        switch (item.descriptionType) {
+            case 'image':
+                return this.renderImageDescription(item, baseStyle);
+            case 'richtext':
+                return this.renderRichTextDescription(item, baseStyle);
+            default:
+                return this.renderTextDescription(item, baseStyle);
+        }
+    };
+    FancyList.prototype.renderTextDescription = function (item, baseStyle) {
+        return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemDescription, style: __assign(__assign({}, baseStyle), this.getDescriptionSectionFontStyle()) },
+            item.description,
+            this.renderAttachments(item)));
+    };
+    FancyList.prototype.renderImageDescription = function (item, baseStyle) {
+        return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemDescription, style: baseStyle },
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", { src: item.description, alt: "Description Image", style: {
+                    maxWidth: '100%',
+                    height: 'auto',
+                    display: 'block'
+                }, onError: function (e) {
+                    e.currentTarget.style.display = 'none';
+                    var errorDiv = e.currentTarget.nextElementSibling;
+                    if (errorDiv)
+                        errorDiv.style.display = 'block';
+                } }),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { display: 'none', color: 'red' } },
+                "Failed to load image: ",
+                item.description),
+            this.renderAttachments(item)));
+    };
+    FancyList.prototype.renderRichTextDescription = function (item, baseStyle) {
+        return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemDescription, style: baseStyle },
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { dangerouslySetInnerHTML: { __html: item.description }, style: {
+                    // Reset font styling for rich text
+                    fontFamily: 'inherit',
+                    fontSize: 'inherit',
+                    color: 'inherit',
+                    fontWeight: 'inherit',
+                    fontStyle: 'inherit',
+                    textDecoration: 'inherit'
+                } }),
+            this.renderAttachments(item)));
+    };
+    FancyList.prototype.renderAttachments = function (item) {
+        var _this = this;
+        if (!item.attachments || item.attachments.length === 0) {
+            return null;
+        }
+        return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { marginTop: '1em', paddingTop: '1em', borderTop: '1px solid #e1e1e1' } },
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { fontWeight: 'bold', marginBottom: '0.5em' } }, "Attachments:"),
+            item.attachments.map(function (attachment, index) { return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { key: index, style: { marginBottom: '0.25em' } },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", { href: "".concat(_this.props.context.pageContext.web.absoluteUrl).concat(attachment.serverRelativeUrl), target: "_blank", rel: "noopener noreferrer", style: {
+                        color: 'var(--themePrimary, #0078d4)',
+                        textDecoration: 'none'
+                    }, onMouseEnter: function (e) { return e.currentTarget.style.textDecoration = 'underline'; }, onMouseLeave: function (e) { return e.currentTarget.style.textDecoration = 'none'; } },
+                    "\uD83D\uDCCE ",
+                    attachment.fileName,
+                    attachment.fileSize && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", { style: { color: '#666', fontSize: '0.9em', marginLeft: '0.5em' } },
+                        "(",
+                        (attachment.fileSize / 1024).toFixed(1),
+                        " KB)"))))); })));
+    };
     FancyList.prototype.render = function () {
         var _this = this;
         var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20;
@@ -2578,7 +2713,7 @@ var FancyList = /** @class */ (function (_super) {
                             ? (_this.props.categorySectionSettings.icons.expandedIcon || '−')
                             : (_this.props.categorySectionSettings.icons.collapsedIcon || '+')))),
                     isCategoryExpanded && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemContent }, items.map(function (item) {
-                        var _a, _b, _c, _d, _e, _f, _g, _h;
+                        var _a, _b, _c, _d, _e, _f;
                         var isItemExpanded = _this.state.expandedItems.has(item.id);
                         var divideSpace = (_b = (_a = _this.props.subjectSectionSettings) === null || _a === void 0 ? void 0 : _a.divideSpace) !== null && _b !== void 0 ? _b : 0;
                         return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { key: item.id, className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemPanel, style: __assign({ marginBottom: "".concat(divideSpace, "px"), border: 'none', borderRadius: '0', boxShadow: 'none' }, _this.getSubjectSectionBackgroundStyle() // Move background to wrapper div
@@ -2602,8 +2737,7 @@ var FancyList = /** @class */ (function (_super) {
                                     } }, isItemExpanded
                                     ? (_this.props.subjectSectionSettings.icons.expandedIcon || '−')
                                     : (_this.props.subjectSectionSettings.icons.collapsedIcon || '+')))),
-                            isItemExpanded && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemContent },
-                                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemDescription, style: __assign(__assign(__assign({}, _this.getDescriptionSectionFontStyle()), _this.getDescriptionSectionBackgroundStyle()), { padding: '1em', marginBottom: "".concat((_h = (_g = _this.props.descriptionSectionSettings) === null || _g === void 0 ? void 0 : _g.divideSpace) !== null && _h !== void 0 ? _h : 0, "px") }), dangerouslySetInnerHTML: { __html: item.description } })))));
+                            isItemExpanded && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: _FancyList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].itemContent }, _this.renderDescriptionContent(item)))));
                     })))));
             }))));
     };
@@ -37244,18 +37378,32 @@ var FancyListWebPart = /** @class */ (function (_super) {
     });
     FancyListWebPart.prototype._loadLists = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var url, response, data;
+            var url, response, data, filteredLists;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        url = "".concat(this.context.pageContext.web.absoluteUrl, "/_api/web/lists?$filter=Hidden eq false and BaseTemplate ne 544&$select=Id,Title");
+                        url = "".concat(this.context.pageContext.web.absoluteUrl, "/_api/web/lists?$filter=Hidden eq false and (BaseTemplate eq 100 or BaseTemplate eq 106)&$select=Id,Title,BaseTemplate,TemplateFeatureId");
+                        console.log('🔍 LIST DEBUG - Loading lists from URL:', url);
                         return [4 /*yield*/, this.context.spHttpClient.get(url, _microsoft_sp_http__WEBPACK_IMPORTED_MODULE_5__.SPHttpClient.configurations.v1)];
                     case 1:
                         response = _a.sent();
                         return [4 /*yield*/, response.json()];
                     case 2:
                         data = _a.sent();
-                        return [2 /*return*/, data.value.map(function (list) { return ({ key: list.Title, text: list.Title }); })];
+                        console.log('🔍 LIST DEBUG - Raw API response:', data);
+                        console.log('🔍 LIST DEBUG - Total items returned:', data.value.length);
+                        // Log each list with its template info
+                        data.value.forEach(function (list, index) {
+                            console.log("\uD83D\uDD0D LIST DEBUG - Item ".concat(index + 1, ":"), {
+                                Title: list.Title,
+                                Id: list.Id,
+                                BaseTemplate: list.BaseTemplate,
+                                TemplateFeatureId: list.TemplateFeatureId
+                            });
+                        });
+                        filteredLists = data.value.map(function (list) { return ({ key: list.Title, text: list.Title }); });
+                        console.log('🔍 LIST DEBUG - Final filtered lists:', filteredLists);
+                        return [2 /*return*/, filteredLists];
                 }
             });
         });
@@ -37420,7 +37568,7 @@ var FancyListWebPart = /** @class */ (function (_super) {
                                     }
                                 },
                                 (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneDropdown)('selectedListId', {
-                                    label: 'Select List or Library',
+                                    label: 'Select List',
                                     options: this._lists.length ? this._lists : [{ key: '', text: this._loadingLists ? 'Loading...' : 'No lists found' }],
                                     selectedKey: this.properties.selectedListId
                                 }),
@@ -37904,14 +38052,6 @@ var FancyListWebPart = /** @class */ (function (_super) {
                             ]
                         },
                         {
-                            groupName: 'User Story',
-                            groupFields: [
-                                (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('userStory', {
-                                    text: _DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.userStory
-                                })
-                            ]
-                        },
-                        {
                             groupName: 'Features',
                             groupFields: [
                                 (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('features1', {
@@ -37928,6 +38068,71 @@ var FancyListWebPart = /** @class */ (function (_super) {
                                 }),
                                 (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('features5', {
                                     text: "\u2022 ".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.features[4])
+                                }),
+                                (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('features6', {
+                                    text: "\u2022 ".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.features[5])
+                                }),
+                                (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('features7', {
+                                    text: "\u2022 ".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.features[6])
+                                }),
+                                (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('features8', {
+                                    text: "\u2022 ".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.features[7])
+                                }),
+                                (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('features9', {
+                                    text: "\u2022 ".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.features[8])
+                                }),
+                                (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('features10', {
+                                    text: "\u2022 ".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.features[9])
+                                }),
+                                (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('features11', {
+                                    text: "\u2022 ".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.features[10])
+                                }),
+                                (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('features12', {
+                                    text: "\u2022 ".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.features[11])
+                                }),
+                                (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('features13', {
+                                    text: "\u2022 ".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.features[12])
+                                }),
+                                (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('features14', {
+                                    text: "\u2022 ".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.features[13])
+                                }),
+                                (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('features15', {
+                                    text: "\u2022 ".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.features[14])
+                                }),
+                                (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('features16', {
+                                    text: "\u2022 ".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.features[15])
+                                }),
+                                (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('features17', {
+                                    text: "\u2022 ".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.features[16])
+                                }),
+                                (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('features18', {
+                                    text: "\u2022 ".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.features[17])
+                                }),
+                                (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('features19', {
+                                    text: "\u2022 ".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.features[18])
+                                }),
+                                (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('features20', {
+                                    text: "\u2022 ".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.features[19])
+                                })
+                            ]
+                        },
+                        {
+                            groupName: 'Known Issues',
+                            groupFields: [
+                                (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('knownIssues1', {
+                                    text: "\u2022 ".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.knownIssues[0])
+                                }),
+                                (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('knownIssues2', {
+                                    text: "\u2022 ".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.knownIssues[1])
+                                }),
+                                (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('knownIssues3', {
+                                    text: "\u2022 ".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.knownIssues[2])
+                                }),
+                                (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('knownIssues4', {
+                                    text: "\u2022 ".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.knownIssues[3])
+                                }),
+                                (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneLabel)('knownIssues5', {
+                                    text: "\u2022 ".concat(_DEFAULTS_CONFIG__WEBPACK_IMPORTED_MODULE_8__["default"].aboutInfo.knownIssues[4])
                                 })
                             ]
                         }
