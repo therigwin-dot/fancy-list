@@ -2744,7 +2744,7 @@ var DivideSpaceControl = function (_a) {
                     fontWeight: '600',
                     color: '#323130',
                     minWidth: '60px'
-                } }, "Divide"),
+                } }, "Div Space"),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { flex: 1, minWidth: '120px' } },
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fluentui_react_lib_ComboBox__WEBPACK_IMPORTED_MODULE_1__.ComboBox, { selectedKey: getSelectedOptionKey(), options: options, onChange: function (_, option) { return handleComboBoxChange(option); }, placeholder: "Select spacing...", useComboBoxAsMenuWidth: true })),
             isCustom && (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { minWidth: '100px' } },

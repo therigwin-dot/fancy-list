@@ -107,7 +107,7 @@ export const DivideSpaceControl: React.FC<DivideSpaceControlProps> = ({
           color: '#323130',
           minWidth: '60px'
         }}>
-          Divide
+          Div Space
         </label>
         
         <div style={{ flex: 1, minWidth: '120px' }}>
