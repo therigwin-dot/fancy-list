@@ -1294,366 +1294,95 @@ export default class FancyListWebPart extends BaseClientSideWebPart<IFancyListWe
               groupFields: [
                 {
                   type: 1, // PropertyPaneFieldType.Custom
-                  targetProperty: 'aboutInfo',
+                  targetProperty: 'aboutPage',
                   properties: {
-                    key: 'aboutInfo',
-                    onRender: (elem: HTMLElement, ctx: unknown, changeCallback?: () => void) => {
-                      ReactDom.render(
-                        React.createElement('div', {
-                          style: { 
-                            fontSize: '16px',
-                            fontWeight: '600',
-                            color: '#323130',
-                            marginBottom: '8px'
-                          }
-                        }, 'About'),
-                        elem
-                      );
-                    },
-                    onDispose: (elem: HTMLElement) => {
-                      ReactDom.unmountComponentAtNode(elem);
-                    }
-                  }
-                },
-                {
-                  type: 1, // PropertyPaneFieldType.Custom
-                  targetProperty: 'version',
-                  properties: {
-                    key: 'version',
+                    key: 'aboutPage',
                     onRender: (elem: HTMLElement, ctx: unknown, changeCallback?: () => void) => {
                       ReactDom.render(
                         React.createElement('div', {
                           style: { 
                             fontSize: '14px',
-                            fontWeight: '400',
                             color: '#323130',
-                            marginBottom: '4px'
+                            lineHeight: '1.4'
                           }
-                        }, `Version: ${DEFAULTS_CONFIG.aboutInfo.version}`),
-                        elem
-                      );
-                    },
-                    onDispose: (elem: HTMLElement) => {
-                      ReactDom.unmountComponentAtNode(elem);
-                    }
-                  }
-                },
-                {
-                  type: 1, // PropertyPaneFieldType.Custom
-                  targetProperty: 'description',
-                  properties: {
-                    key: 'description',
-                    onRender: (elem: HTMLElement, ctx: unknown, changeCallback?: () => void) => {
-                      ReactDom.render(
-                        React.createElement('div', {
-                          style: { 
-                            fontSize: '14px',
-                            fontWeight: '400',
-                            color: '#323130',
-                            marginBottom: '16px'
-                          }
-                        }, DEFAULTS_CONFIG.aboutInfo.description),
-                        elem
-                      );
-                    },
-                    onDispose: (elem: HTMLElement) => {
-                      ReactDom.unmountComponentAtNode(elem);
-                    }
-                  }
-                },
-                {
-                  type: 1, // PropertyPaneFieldType.Custom
-                  targetProperty: 'featuresHeader',
-                  properties: {
-                    key: 'featuresHeader',
-                    onRender: (elem: HTMLElement, ctx: unknown, changeCallback?: () => void) => {
-                      ReactDom.render(
-                        React.createElement('div', {
-                          style: { 
-                            fontSize: '16px',
-                            fontWeight: '600',
-                            color: '#323130',
-                            marginTop: '16px',
-                            marginBottom: '4px'
-                          }
-                        }, 'Features'),
-                        elem
-                      );
-                    },
-                    onDispose: (elem: HTMLElement) => {
-                      ReactDom.unmountComponentAtNode(elem);
-                    }
-                  }
-                },
-                {
-                  type: 1, // PropertyPaneFieldType.Custom
-                  targetProperty: 'features1',
-                  properties: {
-                    key: 'features1',
-                    onRender: (elem: HTMLElement, ctx: unknown, changeCallback?: () => void) => {
-                      ReactDom.render(
-                        React.createElement('div', {
-                          style: { 
-                            fontSize: '14px',
-                            fontWeight: '400',
-                            color: '#323130',
-                            marginBottom: '2px'
-                          }
-                        }, DEFAULTS_CONFIG.aboutInfo.features[0]),
-                        elem
-                      );
-                    },
-                    onDispose: (elem: HTMLElement) => {
-                      ReactDom.unmountComponentAtNode(elem);
-                    }
-                  }
-                },
-                {
-                  type: 1, // PropertyPaneFieldType.Custom
-                  targetProperty: 'features2',
-                  properties: {
-                    key: 'features2',
-                    onRender: (elem: HTMLElement, ctx: unknown, changeCallback?: () => void) => {
-                      ReactDom.render(
-                        React.createElement('div', {
-                          style: { 
-                            fontSize: '14px',
-                            fontWeight: '400',
-                            color: '#323130',
-                            marginBottom: '2px'
-                          }
-                        }, DEFAULTS_CONFIG.aboutInfo.features[1]),
-                        elem
-                      );
-                    },
-                    onDispose: (elem: HTMLElement) => {
-                      ReactDom.unmountComponentAtNode(elem);
-                    }
-                  }
-                },
-                {
-                  type: 1, // PropertyPaneFieldType.Custom
-                  targetProperty: 'features3',
-                  properties: {
-                    key: 'features3',
-                    onRender: (elem: HTMLElement, ctx: unknown, changeCallback?: () => void) => {
-                      ReactDom.render(
-                        React.createElement('div', {
-                          style: { 
-                            fontSize: '14px',
-                            fontWeight: '400',
-                            color: '#323130',
-                            marginBottom: '2px'
-                          }
-                        }, DEFAULTS_CONFIG.aboutInfo.features[2]),
-                        elem
-                      );
-                    },
-                    onDispose: (elem: HTMLElement) => {
-                      ReactDom.unmountComponentAtNode(elem);
-                    }
-                  }
-                },
-                {
-                  type: 1, // PropertyPaneFieldType.Custom
-                  targetProperty: 'features4',
-                  properties: {
-                    key: 'features4',
-                    onRender: (elem: HTMLElement, ctx: unknown, changeCallback?: () => void) => {
-                      ReactDom.render(
-                        React.createElement('div', {
-                          style: { 
-                            fontSize: '14px',
-                            fontWeight: '400',
-                            color: '#323130',
-                            marginBottom: '2px'
-                          }
-                        }, DEFAULTS_CONFIG.aboutInfo.features[3]),
-                        elem
-                      );
-                    },
-                    onDispose: (elem: HTMLElement) => {
-                      ReactDom.unmountComponentAtNode(elem);
-                    }
-                  }
-                },
-                {
-                  type: 1, // PropertyPaneFieldType.Custom
-                  targetProperty: 'features5',
-                  properties: {
-                    key: 'features5',
-                    onRender: (elem: HTMLElement, ctx: unknown, changeCallback?: () => void) => {
-                      ReactDom.render(
-                        React.createElement('div', {
-                          style: { 
-                            fontSize: '14px',
-                            fontWeight: '400',
-                            color: '#323130',
-                            marginBottom: '2px'
-                          }
-                        }, DEFAULTS_CONFIG.aboutInfo.features[4]),
-                        elem
-                      );
-                    },
-                    onDispose: (elem: HTMLElement) => {
-                      ReactDom.unmountComponentAtNode(elem);
-                    }
-                  }
-                },
-                {
-                  type: 1, // PropertyPaneFieldType.Custom
-                  targetProperty: 'features6',
-                  properties: {
-                    key: 'features6',
-                    onRender: (elem: HTMLElement, ctx: unknown, changeCallback?: () => void) => {
-                      ReactDom.render(
-                        React.createElement('div', {
-                          style: { 
-                            fontSize: '14px',
-                            fontWeight: '400',
-                            color: '#323130',
-                            marginBottom: '2px'
-                          }
-                        }, DEFAULTS_CONFIG.aboutInfo.features[5]),
-                        elem
-                      );
-                    },
-                    onDispose: (elem: HTMLElement) => {
-                      ReactDom.unmountComponentAtNode(elem);
-                    }
-                  }
-                },
-                {
-                  type: 1, // PropertyPaneFieldType.Custom
-                  targetProperty: 'features7',
-                  properties: {
-                    key: 'features7',
-                    onRender: (elem: HTMLElement, ctx: unknown, changeCallback?: () => void) => {
-                      ReactDom.render(
-                        React.createElement('div', {
-                          style: { 
-                            fontSize: '14px',
-                            fontWeight: '400',
-                            color: '#323130',
-                            marginBottom: '2px'
-                          }
-                        }, DEFAULTS_CONFIG.aboutInfo.features[6]),
-                        elem
-                      );
-                    },
-                    onDispose: (elem: HTMLElement) => {
-                      ReactDom.unmountComponentAtNode(elem);
-                    }
-                  }
-                },
-                {
-                  type: 1, // PropertyPaneFieldType.Custom
-                  targetProperty: 'features8',
-                  properties: {
-                    key: 'features8',
-                    onRender: (elem: HTMLElement, ctx: unknown, changeCallback?: () => void) => {
-                      ReactDom.render(
-                        React.createElement('div', {
-                          style: { 
-                            fontSize: '14px',
-                            fontWeight: '400',
-                            color: '#323130',
-                            marginBottom: '2px'
-                          }
-                        }, DEFAULTS_CONFIG.aboutInfo.features[7]),
-                        elem
-                      );
-                    },
-                    onDispose: (elem: HTMLElement) => {
-                      ReactDom.unmountComponentAtNode(elem);
-                    }
-                  }
-                },
-                {
-                  type: 1, // PropertyPaneFieldType.Custom
-                  targetProperty: 'features9',
-                  properties: {
-                    key: 'features9',
-                    onRender: (elem: HTMLElement, ctx: unknown, changeCallback?: () => void) => {
-                      ReactDom.render(
-                        React.createElement('div', {
-                          style: { 
-                            fontSize: '14px',
-                            fontWeight: '400',
-                            color: '#323130',
-                            marginBottom: '2px'
-                          }
-                        }, DEFAULTS_CONFIG.aboutInfo.features[8]),
-                        elem
-                      );
-                    },
-                    onDispose: (elem: HTMLElement) => {
-                      ReactDom.unmountComponentAtNode(elem);
-                    }
-                  }
-                },
-                {
-                  type: 1, // PropertyPaneFieldType.Custom
-                  targetProperty: 'knownIssuesHeader',
-                  properties: {
-                    key: 'knownIssuesHeader',
-                    onRender: (elem: HTMLElement, ctx: unknown, changeCallback?: () => void) => {
-                      ReactDom.render(
-                        React.createElement('div', {
-                          style: { 
-                            fontSize: '16px',
-                            fontWeight: '600',
-                            color: '#323130',
-                            marginTop: '16px',
-                            marginBottom: '4px'
-                          }
-                        }, 'Known Issues'),
-                        elem
-                      );
-                    },
-                    onDispose: (elem: HTMLElement) => {
-                      ReactDom.unmountComponentAtNode(elem);
-                    }
-                  }
-                },
-                {
-                  type: 1, // PropertyPaneFieldType.Custom
-                  targetProperty: 'knownIssues1',
-                  properties: {
-                    key: 'knownIssues1',
-                    onRender: (elem: HTMLElement, ctx: unknown, changeCallback?: () => void) => {
-                      ReactDom.render(
-                        React.createElement('div', {
-                          style: { 
-                            fontSize: '14px',
-                            fontWeight: '400',
-                            color: '#323130',
-                            marginBottom: '2px'
-                          }
-                        }, DEFAULTS_CONFIG.aboutInfo.knownIssues[0]),
-                        elem
-                      );
-                    },
-                    onDispose: (elem: HTMLElement) => {
-                      ReactDom.unmountComponentAtNode(elem);
-                    }
-                  }
-                },
-                {
-                  type: 1, // PropertyPaneFieldType.Custom
-                  targetProperty: 'knownIssues2',
-                  properties: {
-                    key: 'knownIssues2',
-                    onRender: (elem: HTMLElement, ctx: unknown, changeCallback?: () => void) => {
-                      ReactDom.render(
-                        React.createElement('div', {
-                          style: { 
-                            fontSize: '14px',
-                            fontWeight: '400',
-                            color: '#323130',
-                            marginBottom: '2px'
-                          }
-                        }, DEFAULTS_CONFIG.aboutInfo.knownIssues[1]),
+                        }, [
+                          // About Header
+                          React.createElement('div', {
+                            key: 'aboutHeader',
+                            style: { 
+                              fontSize: '16px',
+                              fontWeight: '600',
+                              color: '#323130',
+                              marginBottom: '8px'
+                            }
+                          }, 'About'),
+                          // Version
+                          React.createElement('div', {
+                            key: 'version',
+                            style: { 
+                              fontSize: '14px',
+                              fontWeight: '400',
+                              color: '#323130',
+                              marginBottom: '4px'
+                            }
+                          }, `Version: ${DEFAULTS_CONFIG.aboutInfo.version}`),
+                          // Description
+                          React.createElement('div', {
+                            key: 'description',
+                            style: { 
+                              fontSize: '14px',
+                              fontWeight: '400',
+                              color: '#323130',
+                              marginBottom: '16px'
+                            }
+                          }, DEFAULTS_CONFIG.aboutInfo.description),
+                          // Features Header
+                          React.createElement('div', {
+                            key: 'featuresHeader',
+                            style: { 
+                              fontSize: '16px',
+                              fontWeight: '600',
+                              color: '#323130',
+                              marginTop: '16px',
+                              marginBottom: '4px'
+                            }
+                          }, 'Features'),
+                          // Features List
+                          ...DEFAULTS_CONFIG.aboutInfo.features.map((feature, index) => 
+                            React.createElement('div', {
+                              key: `feature${index}`,
+                              style: { 
+                                fontSize: '14px',
+                                fontWeight: '400',
+                                color: '#323130',
+                                marginBottom: '2px'
+                              }
+                            }, feature)
+                          ),
+                          // Known Issues Header
+                          React.createElement('div', {
+                            key: 'knownIssuesHeader',
+                            style: { 
+                              fontSize: '16px',
+                              fontWeight: '600',
+                              color: '#323130',
+                              marginTop: '16px',
+                              marginBottom: '4px'
+                            }
+                          }, 'Known Issues'),
+                          // Known Issues List
+                          ...DEFAULTS_CONFIG.aboutInfo.knownIssues.map((issue, index) => 
+                            React.createElement('div', {
+                              key: `issue${index}`,
+                              style: { 
+                                fontSize: '14px',
+                                fontWeight: '400',
+                                color: '#323130',
+                                marginBottom: '2px'
+                              }
+                            }, issue)
+                          )
+                        ]),
                         elem
                       );
                     },
